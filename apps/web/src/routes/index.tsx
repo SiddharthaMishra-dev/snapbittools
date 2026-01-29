@@ -225,7 +225,7 @@ function App() {
           <p className="text-gray-400 text-xs">
             Crafted with care by{" "}
             <a
-              href="https://sidme.vercel.app/"
+              href="https://sidme.dev/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-brand-primary hover:text-brand-hover transition-colors"

@@ -15,21 +15,45 @@ import RelatedTools from "@/components/RelatedTools";
 
 import { getSeoMetadata } from "@/lib/seo";
 
+const faqs = [
+  {
+    question: "Is there a limit on image resolution for cropping?",
+    answer:
+      "Our tool can handle high-resolution images, but the experience depends on your device's memory since all processing happens locally. For extremely large files, you might experience slight delays.",
+  },
+  {
+    question: "Can I maintain a specific aspect ratio?",
+    answer:
+      "Yes, you can choose from preset aspect ratios like 1:1, 4:3, or 16:9, or use a custom freeform selection to crop exactly as you need.",
+  },
+  {
+    question: "Does cropping reduce image quality?",
+    answer:
+      "Cropping by itself doesn't reduce quality. However, when you save the cropped image, you can choose the output quality level to balance file size and clarity.",
+  },
+  {
+    question: "What happens to my original image file?",
+    answer:
+      "Nothing! Your original file remains untouched on your device. The tool creates a new cropped version that you can download separately.",
+  },
+];
+
 export const Route = createFileRoute("/image-cropper")({
   head: () =>
     getSeoMetadata({
-      title: "Image Cropper | Crop, Rotate & Resize Images Online | JS DevTools",
+      title: "Image Cropper | Crop & Resize Images Online | JS DevTools",
       description:
-        "Edit your images with precision. Crop, rotate, and flip images instantly in your browser. No uploads, total privacy, and pixel-perfect previews.",
+        "Crop, rotate, and resize your images with pixel-perfect precision. 100% private, client-side, and works offline.",
       keywords: [
         "image cropper",
         "crop photos online",
+        "resize images",
         "rotate image",
-        "flip image",
-        "image editor",
+        "photo editor",
       ],
       url: "/image-cropper",
       type: "software",
+      faqs,
     }),
   component: RouteComponent,
 });
@@ -37,11 +61,6 @@ export const Route = createFileRoute("/image-cropper")({
 interface CropArea {
   x: number;
   y: number;
-  width: number;
-  height: number;
-}
-
-interface ImageDimensions {
   width: number;
   height: number;
 }
@@ -738,9 +757,10 @@ function RouteComponent() {
             {
               title: "Save & Download",
               description:
-                "Once satisfied, click the download button to save your perfectly cropped image.",
+                "Configure your export options like format or quality and download your final cropped image.",
             },
           ]}
+          faqs={faqs}
         />
       </div>
 
@@ -753,7 +773,7 @@ function RouteComponent() {
         <p className="text-gray-400 text-xs text-center">
           Crafted with care by{" "}
           <a
-            href="https://sidme.vercel.app/"
+            href="https://sidme.dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-primary hover:text-brand-hover transition-colors"

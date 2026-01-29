@@ -22,21 +22,45 @@ interface ImageItem {
 
 import { getSeoMetadata } from "@/lib/seo";
 
+const faqs = [
+  {
+    question: "Can I choose the order of images in the PDF?",
+    answer:
+      "Yes! After adding your images, you can drag and drop them to reorder exactly how you want them to appear in the final PDF document.",
+  },
+  {
+    question: "Is there a limit to how many images I can merge?",
+    answer:
+      "There's no hard limit, but the performance depends on your browser's memory. For the best experience, we recommend merging up to 50 images at a time.",
+  },
+  {
+    question: "Are my images compressed when converted to PDF?",
+    answer:
+      "The tool attempts to maintain high quality, but creating a PDF inherently involves some compression to keep the file size manageable. You can expect a good balance between quality and file size.",
+  },
+  {
+    question: "Is it safe to merge sensitive documents here?",
+    answer:
+      "Absolutely. Since the tool runs entirely in your browser, your documents never leave your computer. This makes it safer than using online PDF services that require file uploads.",
+  },
+];
+
 export const Route = createFileRoute("/image-to-pdf")({
   head: () =>
     getSeoMetadata({
-      title: "Image to PDF Converter | Combine Images to PDF | JS DevTools",
+      title: "Image to PDF Converter | Merge Images into PDF | JS DevTools",
       description:
-        "Merge multiple images into a single PDF document perfectly. Drag and drop to reorder pages. 100% private and client-side PDF generation.",
+        "Combine multiple JPG, PNG, and WebP images into a single PDF document. Rearrange pages, 100% private and works in your browser.",
       keywords: [
         "image to pdf",
-        "combine images to pdf",
-        "png to pdf",
-        "jpg to pdf",
-        "offline pdf converter",
+        "merge images",
+        "convert png to pdf",
+        "jpg to pdf converter",
+        "offline pdf tools",
       ],
       url: "/image-to-pdf",
       type: "software",
+      faqs,
     }),
   component: RouteComponent,
 });
@@ -377,6 +401,7 @@ function RouteComponent() {
               "Your browser will automatically prompt you to save the newly created PDF document.",
           },
         ]}
+        faqs={faqs}
       />
 
       <RelatedTools
@@ -388,7 +413,7 @@ function RouteComponent() {
         <p className="text-gray-400 text-xs">
           Crafted with care by{" "}
           <a
-            href="https://sidme.vercel.app/"
+            href="https://sidme.dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:text-blue-300 transition-colors"

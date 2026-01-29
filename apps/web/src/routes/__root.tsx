@@ -10,7 +10,7 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       {
-        title: "JS DevTools | Privacy First | 100% Client-Side Utilities",
+        title: "JS DevTools | Privacy First | 100% Private and Fast Utilities",
       },
       {
         charSet: "utf-8",
@@ -30,10 +30,6 @@ export const Route = createRootRoute({
           "image to base64, image converter, json formatter, image compressor, csv to xlsx, online tools, offline tools, privacy first",
       },
       {
-        name: "robots",
-        content: "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1",
-      },
-      {
         property: "og:type",
         content: "website",
       },
@@ -43,7 +39,7 @@ export const Route = createRootRoute({
       },
       {
         property: "og:title",
-        content: "JS DevTools | Privacy First | 100% Client-Side Utilities",
+        content: "JS DevTools | Privacy First | 100% Private and Fast Utilities",
       },
       {
         property: "og:description",

@@ -14,6 +14,29 @@ import { useEffect, useRef, useState } from "react";
 
 import { getSeoMetadata } from "@/lib/seo";
 
+const faqs = [
+  {
+    question: "How does the image compressor work?",
+    answer:
+      "The compressor uses advanced browser-based algorithms to optimize your images. It reduces the file size by adjusting the quality level and dimensions while maintaining visual clarity, all right in your browser.",
+  },
+  {
+    question: "Is my privacy protected when compressing images?",
+    answer:
+      "Yes! Unlike other online tools, our compressor is 100% client-side. Your images are never uploaded to a server—they remain on your device throughout the entire process.",
+  },
+  {
+    question: "Can I compress multiple images at once?",
+    answer:
+      "Absolutely. You can drop multiple images into the tool, adjust the settings globally, and download the entire batch as a ZIP file.",
+  },
+  {
+    question: "What is the best format for compression?",
+    answer:
+      "JPEG typically offers the best compression for photographs, while PNG is better for images with text or transparency. Our tool can also convert images to JPEG to maximize space savings.",
+  },
+];
+
 export const Route = createFileRoute("/image-compressor")({
   head: () =>
     getSeoMetadata({
@@ -29,6 +52,7 @@ export const Route = createFileRoute("/image-compressor")({
       ],
       url: "/image-compressor",
       type: "software",
+      faqs,
     }),
   component: RouteComponent,
 });
@@ -584,6 +608,7 @@ function RouteComponent() {
                 "Download individual optimized images or grab the entire batch as a ZIP archive.",
             },
           ]}
+          faqs={faqs}
         />
       </div>
 
@@ -596,7 +621,7 @@ function RouteComponent() {
         <p className="text-gray-400 text-xs text-center">
           Crafted with care by{" "}
           <a
-            href="https://sidme.vercel.app/"
+            href="https://sidme.dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-primary hover:text-brand-hover transition-colors"

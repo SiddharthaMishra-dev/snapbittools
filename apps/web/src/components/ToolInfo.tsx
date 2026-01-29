@@ -1,4 +1,5 @@
 import { IconLock } from "@tabler/icons-react";
+import FAQ from "./FAQ";
 
 interface Feature {
   title: string;
@@ -17,6 +18,7 @@ interface ToolInfoProps {
   features: Feature[];
   steps: Step[];
   privacyInfo?: string;
+  faqs?: { question: string; answer: string }[];
 }
 
 export default function ToolInfo({
@@ -25,6 +27,7 @@ export default function ToolInfo({
   features,
   steps,
   privacyInfo,
+  faqs,
 }: ToolInfoProps) {
   return (
     <div className="w-full max-w-5xl mx-auto mt-20 space-y-16 pb-16">
@@ -76,6 +79,9 @@ export default function ToolInfo({
           ))}
         </div>
       </div>
+
+      {/* FAQs */}
+      {faqs && faqs.length > 0 && <FAQ faqs={faqs} />}
 
       {/* Privacy & Security */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-8 p-8 bg-brand-dark/10 border border-brand-dark/20 rounded-2xl">

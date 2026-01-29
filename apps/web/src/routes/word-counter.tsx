@@ -17,21 +17,45 @@ import RelatedTools from "@/components/RelatedTools";
 
 import { getSeoMetadata } from "@/lib/seo";
 
+const faqs = [
+  {
+    question: "Is my text saved anywhere when I use the Word Counter?",
+    answer:
+      "No, never. All calculations are done locally in your browser. Your text is never sent to any server, making this tool completely private and secure for sensitive drafts.",
+  },
+  {
+    question: "How is reading time calculated?",
+    answer:
+      "We use an average reading speed of 200 words per minute to estimate how long it would take to read your text, providing a helpful metric for content creators and students.",
+  },
+  {
+    question: "Does it count spaces and special characters?",
+    answer:
+      "Yes, the tool provides both a total character count (including spaces) and a character count without spaces, giving you the detailed metrics needed for platform-specific character limits.",
+  },
+  {
+    question: "Can I use this tool offline?",
+    answer:
+      "Yes! Since the logic is entirely client-side, once the page is loaded, you can continue to use the Word Counter even without an active internet connection.",
+  },
+];
+
 export const Route = createFileRoute("/word-counter")({
   head: () =>
     getSeoMetadata({
-      title: "Word Counter | Count Words, Characters & Sentences | JS DevTools",
+      title: "Word Counter Online | Character Count & Reading Time | JS DevTools",
       description:
-        "Analyze your text instantly with our privacy-first Word Counter. Get word, character, and sentence counts plus reading time estimation. 100% client-side.",
+        "Count words, characters, and sentences in real-time. Estimate reading time and analyze text density. 100% private and client-side.",
       keywords: [
         "word counter",
-        "character counter",
-        "sentence counter",
-        "reading time estimator",
-        "online text analyzer",
+        "character count",
+        "reading time calculator",
+        "text analyzer",
+        "offline word count",
       ],
       url: "/word-counter",
       type: "software",
+      faqs,
     }),
   component: WordCounterComponent,
 });
@@ -282,6 +306,7 @@ function WordCounterComponent() {
                 "Use the Copy button to take your analyzed or transformed text back to your project.",
             },
           ]}
+          faqs={faqs}
         />
       </div>
 
@@ -294,7 +319,7 @@ function WordCounterComponent() {
         <p className="text-gray-400 text-xs">
           Crafted with care by{" "}
           <a
-            href="https://sidme.vercel.app/"
+            href="https://sidme.dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-primary hover:text-brand-hover transition-colors font-medium"

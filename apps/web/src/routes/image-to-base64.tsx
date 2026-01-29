@@ -13,6 +13,28 @@ import RelatedTools from "@/components/RelatedTools";
 
 import { getSeoMetadata } from "@/lib/seo";
 
+const faqs = [
+  {
+    question: "Is it safe to convert my images to Base64 here?",
+    answer:
+      "Yes, absolutely! The conversion happens entirely in your browser using JavaScript. Your images are never uploaded to our servers, ensuring 100% privacy and security.",
+  },
+  {
+    question: "What is a Base64 string used for?",
+    answer:
+      "Base64 strings (Data URIs) are used to embed images directly into HTML, CSS, or JSON. This can reduce the number of HTTP requests a browser needs to make, which is great for small icons or critical UI elements.",
+  },
+  {
+    question: "Are there any size limits for the images?",
+    answer:
+      "Technically, no. However, since the string is stored in memory, extremely large images might slow down your browser. We recommend using this tool for images under 1MB for the best experience.",
+  },
+  {
+    question: "Which image formats are supported?",
+    answer: "The tool supports all common web formats including PNG, JPG, WebP, SVG, and GIF.",
+  },
+];
+
 export const Route = createFileRoute("/image-to-base64")({
   head: () =>
     getSeoMetadata({
@@ -22,6 +44,7 @@ export const Route = createFileRoute("/image-to-base64")({
       keywords: ["image to base64", "base64 encoder", "data uri converter", "privacy-first tools"],
       url: "/image-to-base64",
       type: "software",
+      faqs,
     }),
   component: RouteComponent,
 });
@@ -227,6 +250,7 @@ function RouteComponent() {
             description: "Paste the string into your HTML src, CSS url(), or JSON data as needed.",
           },
         ]}
+        faqs={faqs}
       />
 
       <RelatedTools
@@ -238,7 +262,7 @@ function RouteComponent() {
         <p className="text-gray-400 text-xs text-center">
           Crafted with care by{" "}
           <a
-            href="https://sidme.vercel.app/"
+            href="https://sidme.dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-primary hover:text-brand-hover transition-colors"

@@ -21,15 +21,39 @@ interface Token {
 
 import { getSeoMetadata } from "@/lib/seo";
 
+const faqs = [
+  {
+    question: "Is it safe to paste my JSON data here?",
+    answer:
+      "Yes! Your data never leaves your browser. All formatting, validation, and minification are done locally using JavaScript. We don't have a backend to store or even see your data.",
+  },
+  {
+    question: "What is the difference between formatting and minifying?",
+    answer:
+      "Formatting (or 'beautifying') adds whitespace and indentation to make JSON human-readable. Minifying removes all unnecessary whitespace to reduce the character count, which is better for API responses and storage.",
+  },
+  {
+    question: "Can I validate invalid JSON here?",
+    answer:
+      "Yes, the tool will immediately highlight syntax errors and provide details on what's wrong, helping you fix your JSON structure quickly.",
+  },
+  {
+    question: "Does it support large JSON files?",
+    answer:
+      "The tool can handle JSON files of several megabytes quite easily. However, extremely large files (50MB+) might cause your browser to lag during formatting.",
+  },
+];
+
 export const Route = createFileRoute("/json-formatter")({
   head: () =>
     getSeoMetadata({
-      title: "JSON Formatter & Validator Online | JS DevTools",
+      title: "JSON Formatter & Validator | Beautify JSON | JS DevTools",
       description:
-        "Format, minify, and validate JSON data instantly. Support for single quotes and CSV export. 100% private, client-side, and secure.",
-      keywords: ["json formatter", "json validator", "minify json", "json to csv", "beautify json"],
+        "Format, validate, and minify JSON strings instantly. Privacy-focused, 100% client-side, and works offline.",
+      keywords: ["json formatter", "json validator", "beautify json", "minify json", "json editor"],
       url: "/json-formatter",
       type: "software",
+      faqs,
     }),
   component: RouteComponent,
 });
@@ -487,11 +511,12 @@ function RouteComponent() {
                 'Switch between "Formatted" and "Minified" views to see your data in different contexts.',
             },
             {
-              title: "Export Data",
+              title: "Export & Copy",
               description:
-                "Copy the result to your clipboard or download the data as a CSV file for external use.",
+                "Copy your formatted JSON to the clipboard or download the result as a file.",
             },
           ]}
+          faqs={faqs}
         />
       </div>
 
@@ -504,7 +529,7 @@ function RouteComponent() {
         <p className="text-gray-400 text-xs">
           Crafted with care by{" "}
           <a
-            href="https://sidme.vercel.app/"
+            href="https://sidme.dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-primary hover:text-brand-hover transition-colors"

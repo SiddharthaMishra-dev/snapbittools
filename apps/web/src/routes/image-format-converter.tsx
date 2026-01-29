@@ -16,6 +16,29 @@ import { ConversionItem } from "@/types/ImageTypes";
 
 import { getSeoMetadata } from "@/lib/seo";
 
+const faqs = [
+  {
+    question: "Which image formats are supported?",
+    answer:
+      "You can convert between all major web formats including PNG, JPEG, WebP, and AVIF. The tool also supports common image types like BMP and ICO.",
+  },
+  {
+    question: "Does converting to WebP or AVIF save space?",
+    answer:
+      "Yes, significantly! WebP and AVIF are modern formats designed for the web. Converting standard JPEGs or PNGs to these formats can often reduce file size by 30% to 50% without quality loss.",
+  },
+  {
+    question: "Can I convert images back to standard formats?",
+    answer:
+      "Absolutely. You can convert modern formats like WebP or AVIF back to widely compatible formats like JPEG or PNG for use in older applications.",
+  },
+  {
+    question: "Is there a limit on the number of conversions?",
+    answer:
+      "No, you can convert as many images as you want. There are no daily limits, and you don't even need to create an account.",
+  },
+];
+
 export const Route = createFileRoute("/image-format-converter")({
   head: () =>
     getSeoMetadata({
@@ -31,6 +54,7 @@ export const Route = createFileRoute("/image-format-converter")({
       ],
       url: "/image-format-converter",
       type: "software",
+      faqs,
     }),
   component: RouteComponent,
 });
@@ -514,6 +538,7 @@ function RouteComponent() {
               "Download individual converted images or grab everything at once as a ZIP archive.",
           },
         ]}
+        faqs={faqs}
       />
 
       <RelatedTools
@@ -526,7 +551,7 @@ function RouteComponent() {
         <p className="text-gray-400 text-xs text-center">
           Crafted with care by{" "}
           <a
-            href="https://sidme.vercel.app/"
+            href="https://sidme.dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-primary hover:text-brand-hover transition-colors"

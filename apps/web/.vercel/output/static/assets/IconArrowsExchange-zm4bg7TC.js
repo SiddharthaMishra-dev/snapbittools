@@ -1,1 +1,0 @@
-import{c as o}from"./main-IubavCFv.js";const e=[["path",{d:"M7 10h14l-4 -4",key:"svg-0"}],["path",{d:"M17 14h-14l4 4",key:"svg-1"}]],c=o("outline","arrows-exchange","ArrowsExchange",e);export{c as I};

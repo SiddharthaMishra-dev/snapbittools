@@ -15,21 +15,45 @@ import RelatedTools from "@/components/RelatedTools";
 
 import { getSeoMetadata } from "@/lib/seo";
 
+const faqs = [
+  {
+    question: "Is it safe to convert my business spreadsheets here?",
+    answer:
+      "Yes, 100%. All processing happens locally in your browser. Your spreadsheets and their data are never uploaded to any server, keeping your financial and business data completely private.",
+  },
+  {
+    question: "Does it support batch conversion?",
+    answer:
+      "Yes, you can upload multiple CSV files and convert them all to XLSX at once, or vice versa. The results can be downloaded individually or as a ZIP file.",
+  },
+  {
+    question: "Are there any file size limits?",
+    answer:
+      "Since the tool runs in your browser, it is limited by your computer's memory. Most standard spreadsheets will work perfectly, but extremely large files (above 100MB) might slow down the conversion.",
+  },
+  {
+    question: "Is the Excel formatting preserved?",
+    answer:
+      "When converting from XLSX to CSV, only the raw data is preserved as CSV is a plain-text format. When converting from CSV to XLSX, we create a clean, modern Excel file with your data.",
+  },
+];
+
 export const Route = createFileRoute("/csv-xlsx-converter")({
   head: () =>
     getSeoMetadata({
-      title: "CSV to Excel (XLSX) Converter Online | JS DevTools",
+      title: "CSV ↔ XLSX Converter | Convert Excel to CSV Online | JS DevTools",
       description:
-        "Convert CSV to Excel and XLSX to CSV instantly in your browser. Batch support and 100% private. No data uploads, secure and fast.",
+        "Fast and secure batch conversion between CSV and XLSX formats. 100% private, client-side, and no data uploads required.",
       keywords: [
         "csv to xlsx",
-        "excel to csv",
-        "csv to excel",
-        "convert xlsx to csv",
-        "online spreadsheed converter",
+        "xlsx to csv",
+        "convert excel to csv",
+        "batch converter",
+        "offline office tools",
       ],
       url: "/csv-xlsx-converter",
       type: "software",
+      faqs,
     }),
   component: RouteComponent,
 });
@@ -385,10 +409,12 @@ function RouteComponent() {
             description: "Conversion starts immediately. No waiting for server response.",
           },
           {
-            title: "Download Results",
-            description: "Download your converted files individually with a single click.",
+            title: "Export & Save",
+            description:
+              "Download your newly converted files individually or as a complete ZIP archive.",
           },
         ]}
+        faqs={faqs}
       />
 
       <RelatedTools
@@ -400,7 +426,7 @@ function RouteComponent() {
         <p className="text-gray-400 text-xs text-center">
           Crafted with care by{" "}
           <a
-            href="https://sidme.vercel.app/"
+            href="https://sidme.dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-primary hover:text-brand-hover transition-colors"
