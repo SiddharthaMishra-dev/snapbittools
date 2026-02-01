@@ -15,7 +15,7 @@ export function getSeoMetadata(config: SeoMetadata) {
     keywords,
     url,
     image = "https://js-devtools.sidme.dev/screenshot.png",
-    type = "website",
+    type = "website",   
     faqs,
   } = config;
 

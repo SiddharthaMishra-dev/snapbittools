@@ -19,9 +19,9 @@ const featuredTools = tools.slice(0, 6);
 export const Route = createFileRoute("/")({
   head: () =>
     getSeoMetadata({
-      title: "Free Online Image & Data Tools | 100% Private, Client-Side Processing | JS DevTools",
+      title: "JS DevTools | Private & Fast Image and Data Tools",
       description:
-        "Free online tools for developers and creators: Convert images to Base64, compress images, format JSON, convert CSV to Excel, and more. All processing happens in your browser—no uploads, no tracking, complete privacy. Fast, secure, and open-source.",
+        "Private browser tools: Convert images to Base64, compress photos, format JSON, and convert CSV to Excel. 100% secure—your data never leaves your browser.",
       keywords: [
         "free online tools",
         "image to base64 converter",
@@ -105,9 +105,6 @@ function App() {
         <section className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
             <div>
-              <p className="text-sm text-brand-light font-semibold uppercase tracking-wide">
-                Popular Tools
-              </p>
               <h2 className="text-2xl font-bold text-gray-100">
                 Most Used Image & Data Conversion Tools
               </h2>
@@ -193,8 +190,7 @@ function App() {
         </section>
 
         <section className="max-w-5xl mx-auto mt-16 bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-          <p className="text-sm text-brand-light uppercase tracking-wide">All-In-One Tool Suite</p>
-          <h3 className="text-2xl font-semibold text-gray-100 mt-2">
+          <h3 className="text-2xl font-semibold text-brand-primary text-gray-100 mt-2">
             Everything You Need for Image Processing & Data Conversion
           </h3>
           <p className="text-gray-300 mt-3">

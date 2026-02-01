@@ -46,9 +46,6 @@ function ToolsPage() {
 
       <section className="pt-24 pb-10 px-4 relative z-10">
         <div className="max-w-5xl mx-auto text-center space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand-light">
-            Tool catalog
-          </p>
           <h1 className="text-4xl font-bold text-gray-100">
             All JS DevTools utilities in one place
           </h1>
@@ -83,9 +80,6 @@ function ToolsPage() {
             >
               <div className="flex items-center justify-between gap-3 flex-wrap">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-light">
-                    {category}
-                  </p>
                   <h2 className="text-xl font-bold text-gray-100">{category} tools</h2>
                   <p className="text-sm text-gray-300">
                     Optimized copy and internal links help each tool page index cleanly.

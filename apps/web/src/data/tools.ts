@@ -1,4 +1,4 @@
-import { type TablerIconsProps, IconBolt, IconBraces, IconCrop, IconFileSpreadsheet, IconFileTypePdf, IconNumber64Small, IconPhoto, IconTypography } from "@tabler/icons-react";
+import { type TablerIconsProps, IconBolt, IconBraces, IconCrop, IconFileSpreadsheet, IconFileTypePdf, IconNumber64Small, IconPhoto, IconSearch, IconTypography } from "@tabler/icons-react";
 
 export type ToolDefinition = {
   slug: string;
@@ -83,4 +83,13 @@ export const tools: ToolDefinition[] = [
     category: "Data",
     keywords: ["word count", "character count", "letters", "reading time"],
   },
+  {
+    slug: "diff-checker",
+    name: "Diff Checker",
+    href: "/diff-checker",
+    description: "Compare two text files or code snippets side-by-side. 100% private, browser-based diff tool with support for additions and deletions.",
+    icon: IconSearch,
+    category: "Data",
+    keywords: ["diff checker", "text comparison", "compare code online", "online diff tool", "file comparison"],
+  }
 ];
