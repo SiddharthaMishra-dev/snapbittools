@@ -8,6 +8,7 @@ import {
   IconSearch,
 } from "@tabler/icons-react";
 import { Link, createFileRoute } from "@tanstack/react-router";
+import Antigravity from "@/components/Antigravity";
 
 import GlowCard from "@/components/ui/GlowCard";
 import { tools } from "@/data/tools";
@@ -46,12 +47,42 @@ export const Route = createFileRoute("/")({
 function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 flex flex-col font-sans relative overflow-hidden">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 blur-lg opacity-40">
         <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+        <Antigravity
+          count={300}
+          magnetRadius={6}
+          ringRadius={7}
+          waveSpeed={0.4}
+          waveAmplitude={1}
+          particleSize={1.5}
+          lerpSpeed={0.05}
+          color="#2563eb"
+          autoAnimate
+          particleVariance={1}
+          rotationSpeed={0}
+          depthFactor={1}
+          pulseSpeed={3}
+          particleShape="capsule"
+          fieldStrength={10}
+        />
       </div>
 
-      <section className="pt-24 pb-12 px-4 relative z-10">
+      <section className="pt-24 pb-12 px-4 relative z-10 h-screen flex items-center">
         <div className="max-w-5xl mx-auto text-center space-y-6">
+          <a
+            className="flex justify-center"
+            href="https://www.producthunt.com/products/js-devtools?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-js-devtools"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              alt="JS DevTools - Free Online Tools for Image Processing &amp; Data Formatting | Product Hunt"
+              width="250"
+              height="54"
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1071802&amp;theme=light&amp;t=1770132279046"
+            ></img>
+          </a>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-100 leading-tight">
             Free Online Tools for Image Conversion, Compression & Data Formatting
           </h1>
@@ -132,7 +163,7 @@ function App() {
                 >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-brand-dark rounded-lg flex items-center justify-center group-hover:bg-brand-primary transition-colors ease-in-out">
+                      <div className="w-12 h-12 bg-brand-dark/10 rounded-lg flex items-center justify-center group-hover:bg-brand-primary transition-colors ease-in-out">
                         <Icon className="text-brand-light" />
                       </div>
                     </div>
