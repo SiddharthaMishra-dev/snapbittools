@@ -7,7 +7,7 @@ const navItems = [{ path: "/tools", label: "Tools", icon: <IconApps size={18} />
 
 const Header: React.FC = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/70 backdrop-blur-xl border-b border-white/5 shadow-lg">
+    <nav className="max-w-5xl w-[95%] mx-auto rounded-lg  fixed top-2 left-0 right-0 z-50 bg-slate-900/30 backdrop-blur-xl border-b border-white/5 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16">
           <Link
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
               alt="Logo"
               className="inline-block mr-2 w-8 h-8"
             />
-            JS<span className="text-blue-400">DevTools</span>
+            <span className="text-blue-400">DevTools</span>
           </Link>
 
           {/* Desktop Navigation */}

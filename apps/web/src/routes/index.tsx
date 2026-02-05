@@ -9,6 +9,7 @@ import {
 } from "@tabler/icons-react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import Antigravity from "@/components/Antigravity";
+import Aurora from "@/components/Aurora";
 
 import GlowCard from "@/components/ui/GlowCard";
 import { tools } from "@/data/tools";
@@ -20,7 +21,7 @@ const featuredTools = tools.slice(0, 6);
 export const Route = createFileRoute("/")({
   head: () =>
     getSeoMetadata({
-      title: "JS DevTools | Private & Fast Image and Data Tools",
+      title: "DevTools | Private & Fast Image and Data Tools",
       description:
         "Private browser tools: Convert images to Base64, compress photos, format JSON, and convert CSV to Excel. 100% secure—your data never leaves your browser.",
       keywords: [
@@ -49,22 +50,12 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 flex flex-col font-sans relative overflow-hidden">
       <div className="absolute inset-0 blur-lg opacity-40">
         <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-        <Antigravity
-          count={300}
-          magnetRadius={6}
-          ringRadius={7}
-          waveSpeed={0.4}
-          waveAmplitude={1}
-          particleSize={1.5}
-          lerpSpeed={0.05}
-          color="#2563eb"
-          autoAnimate
-          particleVariance={1}
-          rotationSpeed={0}
-          depthFactor={1}
-          pulseSpeed={3}
-          particleShape="capsule"
-          fieldStrength={10}
+
+        <Aurora
+          colorStops={["#2563eb", "#B19EEF", "#5227FF"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={1}
         />
       </div>
 
