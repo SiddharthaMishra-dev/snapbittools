@@ -91,5 +91,14 @@ export const tools: ToolDefinition[] = [
     icon: IconSearch,
     category: "Data",
     keywords: ["diff checker", "text comparison", "compare code online", "online diff tool", "file comparison"],
+  },
+  {
+    slug: "lorem-ipsum-generator",
+    name: "Lorem Ipsum",
+    href: "/lorem-ipsum-generator",
+    description: "Generate placeholder text with custom paragraphs, words, and sentences.",
+    icon: IconTypography,
+    category: "Data",
+    keywords: ["lorem ipsum", "placeholder text", "dummy text", "text generator"],
   }
 ];

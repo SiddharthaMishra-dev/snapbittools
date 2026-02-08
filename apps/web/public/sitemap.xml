@@ -1,64 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://js-devtools.sidme.dev/</loc>
+    <loc>https://snapbittools.com/</loc>
     <lastmod>2026-01-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://js-devtools.sidme.dev/image-to-base64</loc>
+    <loc>https://snapbittools.com/image-to-base64</loc>
     <lastmod>2026-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://js-devtools.sidme.dev/image-format-converter</loc>
+    <loc>https://snapbittools.com/image-format-converter</loc>
     <lastmod>2026-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://js-devtools.sidme.dev/image-compressor</loc>
+    <loc>https://snapbittools.com/image-compressor</loc>
     <lastmod>2026-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://js-devtools.sidme.dev/image-cropper</loc>
+    <loc>https://snapbittools.com/image-cropper</loc>
     <lastmod>2026-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://js-devtools.sidme.dev/json-formatter</loc>
+    <loc>https://snapbittools.com/json-formatter</loc>
     <lastmod>2026-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://js-devtools.sidme.dev/image-to-pdf</loc>
+    <loc>https://snapbittools.com/image-to-pdf</loc>
     <lastmod>2026-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://js-devtools.sidme.dev/csv-xlsx-converter</loc>
+    <loc>https://snapbittools.com/csv-xlsx-converter</loc>
     <lastmod>2026-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://js-devtools.sidme.dev/word-counter</loc>
+    <loc>https://snapbittools.com/word-counter</loc>
     <lastmod>2026-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://js-devtools.sidme.dev/diff-checker</loc>
+    <loc>https://snapbittools.com/diff-checker</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+   <url>
+    <loc>https://snapbittools.com/lorem-ipsum-generator</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

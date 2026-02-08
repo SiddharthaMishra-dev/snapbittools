@@ -19,7 +19,7 @@ const Header: React.FC = () => {
               alt="Logo"
               className="inline-block mr-2 w-8 h-8"
             />
-            <span className="text-blue-400">DevTools</span>
+            <span className="text-blue-400">SnapBit Tools</span>
           </Link>
 
           {/* Desktop Navigation */}

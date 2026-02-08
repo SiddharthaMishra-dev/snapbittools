@@ -2,4 +2,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://js-devtools.sidme.dev/sitemap.xml
+Sitemap: https://snapbittools.com/sitemap.xml

@@ -47,7 +47,7 @@ const faqs = [
 export const Route = createFileRoute("/json-formatter")({
   head: () =>
     getSeoMetadata({
-      title: "JSON Formatter & Validator | Beautify JSON | JS DevTools",
+      title: "JSON Formatter & Validator | Beautify JSON | SnapBit Tools",
       description:
         "Format, validate, and minify JSON strings instantly. Privacy-focused, 100% client-side, and works offline.",
       keywords: ["json formatter", "json validator", "beautify json", "minify json", "json editor"],

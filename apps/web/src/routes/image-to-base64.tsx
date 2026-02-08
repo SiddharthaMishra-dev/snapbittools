@@ -38,7 +38,7 @@ const faqs = [
 export const Route = createFileRoute("/image-to-base64")({
   head: () =>
     getSeoMetadata({
-      title: "Image to Base64 Converter | JS DevTools",
+      title: "Image to Base64 Converter | SnapBit Tools",
       description:
         "Convert any image file to a Base64 encoded string instantly and securely in your browser. No uploads, 100% private.",
       keywords: ["image to base64", "base64 encoder", "data uri converter", "privacy-first tools"],

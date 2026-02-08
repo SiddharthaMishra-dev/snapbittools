@@ -14,12 +14,12 @@ export function getSeoMetadata(config: SeoMetadata) {
     description,
     keywords,
     url,
-    image = "https://js-devtools.sidme.dev/screenshot.png",
+    image = "https://snapbittools.com/screenshot.png",
     type = "website",   
     faqs,
   } = config;
 
-  const baseUrl = "https://js-devtools.sidme.dev";
+  const baseUrl = "https://snapbittools.com";
   const fullUrl = url.startsWith("http") ? url : `${baseUrl}${url}`;
 
   const meta: any[] = [

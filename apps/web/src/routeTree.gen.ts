@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WordCounterRouteImport } from './routes/word-counter'
 import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as LoremIpsumGeneratorRouteImport } from './routes/lorem-ipsum-generator'
 import { Route as JsonFormatterRouteImport } from './routes/json-formatter'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as ImageToBase64RouteImport } from './routes/image-to-base64'
@@ -29,6 +30,11 @@ const WordCounterRoute = WordCounterRouteImport.update({
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoremIpsumGeneratorRoute = LoremIpsumGeneratorRouteImport.update({
+  id: '/lorem-ipsum-generator',
+  path: '/lorem-ipsum-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JsonFormatterRoute = JsonFormatterRouteImport.update({
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/lorem-ipsum-generator': typeof LoremIpsumGeneratorRoute
   '/tools': typeof ToolsRoute
   '/word-counter': typeof WordCounterRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/lorem-ipsum-generator': typeof LoremIpsumGeneratorRoute
   '/tools': typeof ToolsRoute
   '/word-counter': typeof WordCounterRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/lorem-ipsum-generator': typeof LoremIpsumGeneratorRoute
   '/tools': typeof ToolsRoute
   '/word-counter': typeof WordCounterRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/json-formatter'
+    | '/lorem-ipsum-generator'
     | '/tools'
     | '/word-counter'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/json-formatter'
+    | '/lorem-ipsum-generator'
     | '/tools'
     | '/word-counter'
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/json-formatter'
+    | '/lorem-ipsum-generator'
     | '/tools'
     | '/word-counter'
   fileRoutesById: FileRoutesById
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   ImageToBase64Route: typeof ImageToBase64Route
   ImageToPdfRoute: typeof ImageToPdfRoute
   JsonFormatterRoute: typeof JsonFormatterRoute
+  LoremIpsumGeneratorRoute: typeof LoremIpsumGeneratorRoute
   ToolsRoute: typeof ToolsRoute
   WordCounterRoute: typeof WordCounterRoute
 }
@@ -187,6 +200,13 @@ declare module '@tanstack/react-router' {
       path: '/tools'
       fullPath: '/tools'
       preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lorem-ipsum-generator': {
+      id: '/lorem-ipsum-generator'
+      path: '/lorem-ipsum-generator'
+      fullPath: '/lorem-ipsum-generator'
+      preLoaderRoute: typeof LoremIpsumGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/json-formatter': {
@@ -265,6 +285,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImageToBase64Route: ImageToBase64Route,
   ImageToPdfRoute: ImageToPdfRoute,
   JsonFormatterRoute: JsonFormatterRoute,
+  LoremIpsumGeneratorRoute: LoremIpsumGeneratorRoute,
   ToolsRoute: ToolsRoute,
   WordCounterRoute: WordCounterRoute,
 }

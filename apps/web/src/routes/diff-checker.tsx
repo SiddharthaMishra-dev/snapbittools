@@ -42,7 +42,7 @@ const faqs = [
 export const Route = createFileRoute("/diff-checker")({
   head: () =>
     getSeoMetadata({
-      title: "Diff Checker | Compare Text Online | JS DevTools",
+      title: "Diff Checker | Compare Text Online | SnapBit Tools",
       description:
         "Easily compare two text files or code snippets side-by-side. 100% private, browser-based diff tool with support for additions and deletions.",
       keywords: [

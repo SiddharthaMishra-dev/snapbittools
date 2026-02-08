@@ -40,14 +40,16 @@ const faqs = [
 export const Route = createFileRoute("/image-compressor")({
   head: () =>
     getSeoMetadata({
-      title: "Image Compressor | Reduce Image Size Online | JS DevTools",
+      title: "Compress Images Online - Free Online Tool",
       description:
-        "Shrink image file sizes by up to 80% without losing quality. Support for PNG, JPEG, and WebP. 100% private, client-side, and free.",
+        "Compress JPG, PNG, WebP and AVIF images for free. Shrink image file sizes by up to 80% without losing quality. 100% private, client-side, and free.",
       keywords: [
-        "image compressor",
-        "reduce image size",
         "compress png",
         "compress jpeg",
+        "compress webp",
+        "compress avif",
+        "image compressor",
+        "reduce image size",
         "online image optimizer",
       ],
       url: "/image-compressor",
@@ -326,12 +328,12 @@ function RouteComponent() {
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center justify-between">
       <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-100 mb-2">
-            Image <span className="text-brand-primary">Compressor</span>
+          <h1 className="text-3xl font-bold text-gray-100 mb-2">
+            Compress <span className="text-brand-primary">Images</span>
           </h1>
-          <p className="text-md text-gray-200">
-            Reduce file size up to 80% while preserving quality. 100% client-side—your files never
-            leave.
+          <p className="text-lg text-gray-200">
+            Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while
+            preserving quality. 100% client-side—your files never leave.
           </p>
         </div>
 
@@ -384,8 +386,6 @@ function RouteComponent() {
             <>
               <div className="">
                 <h3 className="text-lg font-semibold text-gray-100 mb-4">Compression Settings</h3>
-
-                {/* Format Preservation Toggle */}
                 <div className="mb-4">
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input

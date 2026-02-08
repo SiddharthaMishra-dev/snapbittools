@@ -41,7 +41,7 @@ const faqs = [
 export const Route = createFileRoute("/image-cropper")({
   head: () =>
     getSeoMetadata({
-      title: "Image Cropper | Crop & Resize Images Online | JS DevTools",
+      title: "Image Cropper | Crop & Resize Images Online | SnapBit Tools",
       description:
         "Crop, rotate, and resize your images with pixel-perfect precision. 100% private, client-side, and works offline.",
       keywords: [

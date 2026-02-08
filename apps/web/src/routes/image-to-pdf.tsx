@@ -48,7 +48,7 @@ const faqs = [
 export const Route = createFileRoute("/image-to-pdf")({
   head: () =>
     getSeoMetadata({
-      title: "Image to PDF Converter | Merge Images into PDF | JS DevTools",
+      title: "Image to PDF Converter | Merge Images into PDF | SnapBit Tools",
       description:
         "Combine multiple JPG, PNG, and WebP images into a single PDF document. Rearrange pages, 100% private and works in your browser.",
       keywords: [

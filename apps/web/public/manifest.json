@@ -1,7 +1,7 @@
 {
-  "name": "JS DevTools - Developer Utilities",
-  "short_name": "JS DevTools",
-  "description": "Free online image processing tools for developers. Convert images to Base64, compress files, change formats, crop images, and format JSON with 100% client-side processing.",
+  "name": "SnapBit Tools - Developer Utilities",
+  "short_name": "SnapBit Tools",
+  "description": "Free online image processing tools. Convert images to Base64, compress files, change formats, crop images, and format JSON with 100% client-side processing.",
   "icons": [
     {
       "src": "favicon.ico",

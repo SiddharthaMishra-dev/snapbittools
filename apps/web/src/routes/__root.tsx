@@ -12,7 +12,7 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       {
-        title: "JS DevTools | Privacy First | 100% Private and Fast Utilities",
+        title: "SnapBit Tools | Privacy First | 100% Private and Fast Utilities",
       },
       {
         charSet: "utf-8",
@@ -37,11 +37,11 @@ export const Route = createRootRoute({
       },
       {
         property: "og:url",
-        content: "https://js-devtools.sidme.dev/",
+        content: "https://snapbittools.com/",
       },
       {
         property: "og:title",
-        content: "JS DevTools | Privacy First | 100% Private and Fast Utilities",
+        content: "SnapBit Tools | Privacy First | 100% Private and Fast Utilities",
       },
       {
         property: "og:description",
@@ -50,7 +50,7 @@ export const Route = createRootRoute({
       },
       {
         property: "og:image",
-        content: "https://js-devtools.sidme.dev/og.png",
+        content: "https://snapbittools.com/og.png",
       },
       {
         name: "twitter:card",
@@ -58,7 +58,7 @@ export const Route = createRootRoute({
       },
       {
         name: "twitter:title",
-        content: "JS DevTools | Privacy First | 100% Client-Side Utilities",
+        content: "SnapBit Tools | Privacy First | 100% Client-Side Utilities",
       },
       {
         name: "twitter:description",
@@ -67,7 +67,7 @@ export const Route = createRootRoute({
       },
       {
         name: "twitter:image",
-        content: "https://js-devtools.sidme.dev/og.png",
+        content: "https://snapbittools.com/og.png",
       },
       {
         name: "theme-color",

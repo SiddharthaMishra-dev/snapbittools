@@ -43,7 +43,7 @@ const faqs = [
 export const Route = createFileRoute("/word-counter")({
   head: () =>
     getSeoMetadata({
-      title: "Word Counter Online | Character Count & Reading Time | JS DevTools",
+      title: "Word Counter Online | Character Count & Reading Time | SnapBit Tools",
       description:
         "Count words, characters, and sentences in real-time. Estimate reading time and analyze text density. 100% private and client-side.",
       keywords: [

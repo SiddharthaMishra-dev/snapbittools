@@ -21,7 +21,7 @@ const featuredTools = tools.slice(0, 6);
 export const Route = createFileRoute("/")({
   head: () =>
     getSeoMetadata({
-      title: "DevTools | Private & Fast Image and Data Tools",
+      title: "SnapBit Tools | Private & Fast Image and Data Tools",
       description:
         "Private browser tools: Convert images to Base64, compress photos, format JSON, and convert CSV to Excel. 100% secure—your data never leaves your browser.",
       keywords: [
@@ -63,12 +63,12 @@ function App() {
         <div className="max-w-5xl mx-auto text-center space-y-6">
           <a
             className="flex justify-center"
-            href="https://www.producthunt.com/products/js-devtools?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-js-devtools"
+            href="https://snapbittools.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img
-              alt="JS DevTools - Free Online Tools for Image Processing &amp; Data Formatting | Product Hunt"
+              alt="SnapBit Tools - Free Online Tools for Image Processing &amp; Data Formatting"
               width="250"
               height="54"
               src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1071802&amp;theme=light&amp;t=1770132279046"

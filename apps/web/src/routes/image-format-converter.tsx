@@ -42,7 +42,7 @@ const faqs = [
 export const Route = createFileRoute("/image-format-converter")({
   head: () =>
     getSeoMetadata({
-      title: "Image Format Converter | PNG, JPG, WebP, AVIF | JS DevTools",
+      title: "Image Format Converter | PNG, JPG, WebP, AVIF | SnapBit Tools",
       description:
         "Convert images between PNG, JPEG, WebP, and AVIF formats instantly. Supports batch processing and ZIP downloads. 100% private and client-side.",
       keywords: [

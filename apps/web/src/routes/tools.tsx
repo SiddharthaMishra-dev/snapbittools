@@ -10,9 +10,9 @@ import { getSeoMetadata } from "@/lib/seo";
 export const Route = createFileRoute("/tools")({
   head: () =>
     getSeoMetadata({
-      title: "All Tools | JS DevTools",
+      title: "All Tools | SnapBit Tools",
       description:
-        "Browse every JS DevTools utility in one place. Image converters, compressors, croppers, JSON formatter, CSV to XLSX, and more—private and client-side.",
+        "Browse every SnapBit Tools utility in one place. Image converters, compressors, croppers, JSON formatter, CSV to XLSX, and more—private and client-side.",
       keywords: [
         "online tools",
         "image tools",
@@ -47,11 +47,11 @@ function ToolsPage() {
       <section className="pt-24 pb-10 px-4 relative z-10">
         <div className="max-w-5xl mx-auto text-center space-y-4">
           <h1 className="text-4xl font-bold text-gray-100">
-            All JS DevTools utilities in one place
+            All SnapBit Tools utilities in one place
           </h1>
           <p className="text-lg text-gray-200 max-w-3xl mx-auto">
-            A crawlable, SEO-friendly index for privacy-first tools. Use it as your launchpad or
-            share individual tools directly.
+            Browse all SnapBit Tools in one place. Image converters, compressors, croppers, JSON
+            formatter, CSV to XLSX and many more.
           </p>
           <div className="flex justify-center gap-3">
             <Link

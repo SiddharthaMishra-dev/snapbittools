@@ -41,7 +41,7 @@ const faqs = [
 export const Route = createFileRoute("/csv-xlsx-converter")({
   head: () =>
     getSeoMetadata({
-      title: "CSV ↔ XLSX Converter | Convert Excel to CSV Online | JS DevTools",
+      title: "CSV ↔ XLSX Converter | Convert Excel to CSV Online | SnapBit Tools",
       description:
         "Fast and secure batch conversion between CSV and XLSX formats. 100% private, client-side, and no data uploads required.",
       keywords: [
