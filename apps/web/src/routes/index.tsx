@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import Aurora from "@/components/Aurora";
 import {
   IconBolt,
   IconBrandGithub,
@@ -8,8 +9,6 @@ import {
   IconSearch,
 } from "@tabler/icons-react";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import Antigravity from "@/components/Antigravity";
-import Aurora from "@/components/Aurora";
 
 import GlowCard from "@/components/ui/GlowCard";
 import { tools } from "@/data/tools";
@@ -74,10 +73,13 @@ function App() {
               src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1071802&amp;theme=light&amp;t=1770132279046"
             ></img>
           </a>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-100 leading-tight">
-            Free Online Tools for Image Conversion, Compression & Data Formatting
+          <h1 className="text-2xl md:text-5xl font-bold text-gray-100 leading-tight">
+            Free Online <span className="text-brand-primary">Tools for</span> Image{" "}
+            <span className="text-brand-primary">Conversion</span>,{" "}
+            <span className="text-brand-primary">Compression</span> & Data
+            <span className="text-brand-primary"> Formatting</span>
           </h1>
-          <p className="text-lg text-gray-200 max-w-3xl mx-auto">
+          <p className="text-md md:text-lg text-gray-200 max-w-3xl mx-auto">
             Professional-grade online tools that work entirely in your browser. Convert images to
             Base64, compress photos, format JSON, convert CSV to Excel, and more—all without
             uploading files to any server. Fast, secure, and 100% free.
@@ -186,7 +188,9 @@ function App() {
         </section>
 
         <section className="max-w-6xl mx-auto mt-16 text-center">
-          <h2 className="text-2xl font-bold text-gray-100 mb-8">Why Choose Our Online Tools?</h2>
+          <h2 className="text-2xl font-bold text-gray-100 mb-8">
+            Why Choose <span className="text-brand-primary">SnapBit</span> Tools?
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureCard
               icon={<IconBolt className="text-brand-light w-6 h-6" />}
@@ -215,7 +219,7 @@ function App() {
           <h3 className="text-2xl font-semibold text-brand-primary text-gray-100 mt-2">
             Everything You Need for Image Processing & Data Conversion
           </h3>
-          <p className="text-gray-300 mt-3">
+          <p className="text-gray-400 mt-3">
             From converting images to Base64 encoding, compressing photos to reduce file size,
             formatting JSON data, to converting spreadsheets—our comprehensive suite handles all
             your file conversion and processing needs with professional results, all in your
@@ -276,12 +280,12 @@ function FeatureCard({
   description: string;
 }) {
   return (
-    <div className="space-y-3 bg-white/5 border border-white/10 rounded-xl p-4">
-      <div className="w-12 h-12 bg-brand-dark rounded-lg flex items-center justify-center mx-auto">
+    <div className="space-y-3 bg-white/5 border border-white/10 rounded-xl p-4 group">
+      <div className="w-12 h-12  rounded-lg flex items-center justify-center mx-auto group-hover:animate-[wiggle_300ms_ease-in-out] transition-transform duration-300">
         {icon}
       </div>
       <h4 className="text-lg font-semibold text-gray-100">{title}</h4>
-      <p className="text-sm text-gray-300">{description}</p>
+      <p className="text-sm text-gray-400">{description}</p>
     </div>
   );
 }

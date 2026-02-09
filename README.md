@@ -1,23 +1,26 @@
 <!-- Add Home page Screenshot -->
 
-[![JS Dev Tools Screenshot](/apps/web/public/screenshot.png)](https://js-devtools.sidme.dev/)
+[![SnapBit Tools Screenshot](/apps/web/public/screenshot.png)](https://snapbittools.com/)
 
-Try it out: [https://js-devtools.sidme.dev/](https://js-devtools.sidme.dev/)
+Try it out: [https://snapbittools.com/](https://snapbittools.com/)
 
-## JS Dev Tools
+## SnapBit Tools
 
-Combination of multiple small tools for JavaScript developers.
+A powerful suite of privacy-first online tools for developers and creators. All processing happens
+100% in your browser.
 
 ## Why This Project?
 
 Tired of jumping between different websites for simple image tasks? Me too!
 
-- Need to compress images? → CompressJPG
-- Convert to Base64? → Base64 Guru
-- Change formats? → Convertio
-- Crop images? → iLoveIMG
-- Format JSON? → JSON Formatter
-- Convert images to PDF? → Image to PDF
+- Need to compress images? → SnapBit Tools
+- Convert to Base64? → SnapBit Tools
+- Change formats? → SnapBit Tools
+- Crop images? → SnapBit Tools
+- Format JSON? → SnapBit Tools
+- Convert images to PDF? → SnapBit Tools
+- Compare text/code? → SnapBit Tools
+- Generate placeholder text? → SnapBit Tools
 
 So I built them ALL in one place!
 
@@ -28,7 +31,6 @@ So I built them ALL in one place!
 - Drag & drop or click to upload
 - Instant Base64 conversion with data URI
 - One-click copy to clipboard
-- File size display
 - Supports all image formats
 
 ### Image Format Converter
@@ -36,77 +38,88 @@ So I built them ALL in one place!
 - Convert between PNG, JPEG, WebP, AVIF
 - Batch processing support
 - Individual or bulk downloads
-- Format preservation options
-- Visual conversion progress
+- Image quality preservation
 
 ### Image Compressor
 
 - Adjustable quality control (10%-100%)
 - Custom dimension limits
-- Format preservation or JPEG conversion
 - Real-time compression ratio display
 - Batch compression with progress tracking
 
 ### Image Cropper
 
-- Crop and resize images with precision controls and transforms
+- Precision cropping and resizing
 - Aspect ratio locking
 - Flip and rotate options
 - Real-time preview
-- Download cropped images in original format
 
 ### JSON Formatter
 
 - Format, minify, and validate JSON online
 - Syntax highlighting with bracket matching
-- Convert JSON to CSV
-- Real-time syntax highlighting
 - Download formatted JSON
 
 ### Image to PDF
 
-- Convert images to PDF format
-- Multiple images support
-- Downloadable PDF file
+- Convert multiple images to a single PDF
+- Reorder images before conversion
+- Fast, client-side PDF generation
+
+### Word Counter
+
+- Real-time word, character, and sentence counting
+- Reading time estimation
+- Text case transformations (UPPERCASE, lowercase, Title Case)
+
+### Diff Checker
+
+- Side-by-side text and code comparison
+- Split and Unified view modes
+- Smart line-by-line alignment
+
+### CSV ↔ XLSX Converter
+
+- Convert CSV to Excel (.xlsx) and back
+- Batch support and zero uploads
+- Privacy-first spreadsheet processing
+
+### Lorem Ipsum Generator
+
+- Generate custom paragraphs, sentences, or words
+- Instantly refresh for new random text
+- Easy copy-to-clipboard functionality
 
 ## Tech Stack
 
-- React with TypeScript
-- React Router DOM for routing
-- Tailwind CSS for styling
-- RsBuild as the build tool
+- **Frontend**: React 19 with TypeScript
+- **Routing**: TanStack Router
+- **Styling**: Tailwind CSS
+- **Icons**: Tabler Icons
+- **Build Tool**: Vite
 
 ## Project Structure
 
-- `src/routes/ImageConverter.tsx`: Image format conversion component.
-- `src/routes/ImageCompressor.tsx`: Image compression component.
-- `src/routes/ImageCropper.tsx`: Image cropping component.
-- `src/routes/JsonFormatter.tsx`: JSON formatting component.
-- `src/routes/ImageToBase64.tsx`: Image to Base64 conversion component.
-- `src/routes/ImageToPdf.tsx`: Image to PDF conversion component.
-- `src/components`: Reusable UI components.
-- `public`: Static assets.
+- `apps/web/src/routes/*.tsx`: Individual tool implementations and routes.
+- `apps/web/src/components`: Shared UI components.
+- `apps/web/src/data/tools.ts`: Tool registration and metadata.
+- `public`: Static assets and icons.
 
-## How to Install Chrome Extension Locally
+## How to Run Locally
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/SiddharthaMishra-dev/js-dev-tools
-    cd js-dev-tools
+   cd js-dev-tools
    ```
 2. Install dependencies:
    ```bash
-   npm install
+   bun install
    ```
-3. Build the project:
+3. Start the dev server:
    ```bash
-   npm run build
+   bun dev
    ```
-4. Load the extension in Chrome:
-   - Open Chrome and navigate to `chrome://extensions/`
-   - Enable "Developer mode" (toggle in the top right)
-   - Click "Load unpacked" and select the `chrome-extension` folder in the project directory
-5. The extension should now be loaded and ready to use!
 
 ## Contributing
 
@@ -115,5 +128,4 @@ fixes.
 
 - Report Bugs
 - Suggest Features
-- Submit Pull Requests
 - Star the Repository if you find it useful!

@@ -3,11 +3,28 @@ import React from "react";
 import { IconApps } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 
-const navItems = [{ path: "/tools", label: "Tools", icon: <IconApps size={18} /> }];
+const navItems = [{ path: "/tools", label: "All Tools", icon: <IconApps size={18} /> }];
 
 const Header: React.FC = () => {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="max-w-5xl w-[95%] mx-auto rounded-lg  fixed top-2 left-0 right-0 z-50 bg-slate-900/30 backdrop-blur-xl border-b border-white/5 shadow-lg">
+    <nav
+      className={`max-w-5xl w-[95%] mx-auto rounded-lg fixed top-2 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-gray-900/90 backdrop-blur-md border-gray-800 shadow-lg"
+          : "bg-transparent border-transparent"
+      } border-b`}
+    >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16">
           <Link
