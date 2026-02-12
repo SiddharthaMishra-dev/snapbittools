@@ -9,6 +9,7 @@ import {
   IconSearch,
 } from "@tabler/icons-react";
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { easeInOut, motion } from "motion/react";
 
 import GlowCard from "@/components/ui/GlowCard";
 import { tools } from "@/data/tools";
@@ -45,6 +46,32 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
+  // Add fading and staggered animation variants for the main container and items
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 flex flex-col font-sans relative overflow-hidden">
       <div className="absolute inset-0 blur-lg opacity-40">
@@ -59,8 +86,14 @@ function App() {
       </div>
 
       <section className="pt-24 pb-12 px-4 relative z-10 h-screen flex items-center">
-        <div className="max-w-5xl mx-auto text-center space-y-6">
-          <a
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-5xl mx-auto text-center space-y-6"
+        >
+          <motion.a
+            variants={itemVariants}
             className="flex justify-center"
             href="https://snapbittools.com"
             target="_blank"
@@ -72,20 +105,29 @@ function App() {
               height="54"
               src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1071802&amp;theme=light&amp;t=1770132279046"
             ></img>
-          </a>
-          <h1 className="text-2xl md:text-5xl font-bold text-gray-100 leading-tight">
+          </motion.a>
+          <motion.h1
+            variants={itemVariants}
+            className="text-2xl md:text-5xl font-bold text-gray-100 leading-tight"
+          >
             Free Online <span className="text-brand-primary">Tools for</span> Image{" "}
             <span className="text-brand-primary">Conversion</span>,{" "}
-            <span className="text-brand-primary">Compression</span> & Data
-            <span className="text-brand-primary"> Formatting</span>
-          </h1>
-          <p className="text-md md:text-lg text-gray-200 max-w-3xl mx-auto">
+            <span className="text-brand-primary">Compression</span> & Data{" "}
+            <span className="text-brand-primary">Formatting</span>
+          </motion.h1>
+          <motion.p
+            variants={itemVariants}
+            className="text-md md:text-lg text-gray-200 max-w-3xl mx-auto"
+          >
             Professional-grade online tools that work entirely in your browser. Convert images to
             Base64, compress photos, format JSON, convert CSV to Excel, and more—all without
             uploading files to any server. Fast, secure, and 100% free.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3"
+          >
             <Link
               to="/tools"
               className=" inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 text-sm font-medium"
@@ -103,9 +145,12 @@ function App() {
               <IconBrandGithub className="w-4 h-4" />
               <span>Star on GitHub</span>
             </a>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-2 text-xs text-gray-300">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap justify-center gap-2 text-xs text-gray-300"
+          >
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
               ✓ 100% Browser-Based Processing
             </span>
@@ -118,8 +163,8 @@ function App() {
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
               ✓ Free & Open Source
             </span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       <main
@@ -146,7 +191,12 @@ function App() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {featuredTools.map((tool) => {
               const Icon = tool.icon;
               return (
@@ -184,7 +234,7 @@ function App() {
                 </GlowCard>
               );
             })}
-          </div>
+          </motion.div>
         </section>
 
         <section className="max-w-6xl mx-auto mt-16 text-center">

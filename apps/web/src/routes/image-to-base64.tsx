@@ -8,6 +8,7 @@ import {
 } from "@tabler/icons-react";
 import { useCallback, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { motion, easeInOut } from "motion/react";
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
 
@@ -107,19 +108,74 @@ function RouteComponent() {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
+  const resultVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: easeInOut,
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center justify-between">
-      <div className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto">
-        <div className="text-center mb-8">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto"
+      >
+        <motion.div
+          variants={itemVariants}
+          className="text-center mb-8"
+        >
           <h1 className="text-4xl font-bold text-gray-100 mb-2">
             Image to <span className="text-blue-400">Base64</span> Converter
           </h1>
           <p className="text-md text-gray-200">
             Convert images to Base64 instantly. 100% private—no uploads, ever.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6">
+        <motion.div
+          variants={itemVariants}
+          className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6"
+        >
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -159,10 +215,16 @@ function RouteComponent() {
             className="hidden"
             onChange={handleFileChange}
           />
-        </div>
+        </motion.div>
 
         {base64Result && (
-          <div className="bg-gray-800 w-full max-w-4xl rounded-xl shadow-lg p-6">
+          <motion.div
+            variants={resultVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="bg-gray-800 w-full max-w-4xl rounded-xl shadow-lg p-6"
+          >
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-semibold text-gray-100">Base64 Data URI</h3>
               <button
@@ -196,15 +258,18 @@ function RouteComponent() {
             <p className="text-sm text-gray-400 mt-2">
               Data size: {new Blob([base64Result]).size.toLocaleString()} bytes
             </p>
-          </div>
+          </motion.div>
         )}
 
-        <div className="text-center mt-2">
+        <motion.div
+          variants={itemVariants}
+          className="text-center mt-2"
+        >
           <p className="text-gray-400 text-xs">
             <sup>*</sup>All major formats supported: JPG, PNG, GIF, SVG, WebP & more.
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <ToolInfo
         title="Image to Base64"

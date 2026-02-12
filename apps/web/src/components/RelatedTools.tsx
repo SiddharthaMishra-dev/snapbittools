@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { IconChevronRight } from "@tabler/icons-react";
+import { motion, easeInOut } from "motion/react";
 import { tools, type ToolDefinition } from "@/data/tools";
 
 interface RelatedToolsProps {
@@ -30,9 +31,42 @@ export default function RelatedTools({
     return null;
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
   return (
-    <section className="mt-12 mx-auto w-full max-w-5xl">
-      <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+    <motion.section
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="mt-12 mx-auto w-full max-w-5xl"
+    >
+      <motion.div
+        variants={itemVariants}
+        className="bg-white/5 border border-white/10 rounded-xl p-6"
+      >
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-100">
@@ -51,14 +85,19 @@ export default function RelatedTools({
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <motion.div
+          variants={containerVariants}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+        >
           {relatedTools.map((tool) => (
-            <RelatedToolCard
+            <motion.div
               key={tool.slug}
-              tool={tool}
-            />
+              variants={itemVariants}
+            >
+              <RelatedToolCard tool={tool} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <Link
           to="/tools"
@@ -67,8 +106,8 @@ export default function RelatedTools({
           View all tools
           <IconChevronRight className="h-4 w-4" />
         </Link>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }
 

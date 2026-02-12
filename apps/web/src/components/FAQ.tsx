@@ -1,5 +1,6 @@
 import { IconChevronDown } from "@tabler/icons-react";
 import { useState } from "react";
+import { motion, easeInOut } from "motion/react";
 
 interface FAQItemProps {
   question: string;
@@ -59,19 +60,53 @@ interface FAQProps {
 export default function FAQ({ faqs }: FAQProps) {
   if (!faqs || faqs.length === 0) return null;
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
   return (
-    <div
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
       className="mt-16 space-y-8"
       itemScope
       itemType="https://schema.org/FAQPage"
     >
-      <div className="flex items-center space-x-3">
+      <motion.div
+        variants={itemVariants}
+        className="flex items-center space-x-3"
+      >
         <div className="w-10 h-10 bg-brand-dark/20 rounded-full flex items-center justify-center text-brand-primary font-bold border border-brand-primary/20">
           ?
         </div>
         <h2 className="text-2xl font-bold text-gray-100">Frequently Asked Questions</h2>
-      </div>
-      <div className="bg-gray-800/20 border border-gray-700/50 rounded-2xl px-6 md:px-8">
+      </motion.div>
+      <motion.div
+        variants={itemVariants}
+        className="bg-gray-800/20 border border-gray-700/50 rounded-2xl px-6 md:px-8"
+      >
         {faqs.map((faq, index) => (
           <FAQItem
             key={index}
@@ -79,7 +114,7 @@ export default function FAQ({ faqs }: FAQProps) {
             answer={faq.answer}
           />
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

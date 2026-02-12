@@ -2,6 +2,7 @@ import React from "react";
 
 import { IconApps } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
+import { motion, easeInOut } from "motion/react";
 
 const navItems = [{ path: "/tools", label: "All Tools", icon: <IconApps size={18} /> }];
 
@@ -18,7 +19,14 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 0.8,
+        ease: easeInOut,
+        delay: 0.2,
+      }}
       className={`max-w-5xl w-[95%] mx-auto rounded-lg fixed top-2 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-gray-900/90 backdrop-blur-md border-gray-800 shadow-lg"
@@ -79,7 +87,7 @@ const Header: React.FC = () => {
           </div>
         )} */}
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
