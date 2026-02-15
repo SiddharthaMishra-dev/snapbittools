@@ -100,5 +100,14 @@ export const tools: ToolDefinition[] = [
     icon: IconTypography,
     category: "Data",
     keywords: ["lorem ipsum", "placeholder text", "dummy text", "text generator"],
+  },
+  {
+    slug: "json-to-csv",
+    name: "JSON to CSV",
+    href: "/json-to-csv",
+    description: "Convert nested JSON arrays to CSV instantly. Flatten objects and handle large files.",
+    icon: IconFileSpreadsheet,
+    category: "Data",
+    keywords: ["json to csv", "convert json", "csv generator", "data tables"],
   }
 ];

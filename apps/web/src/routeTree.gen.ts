@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WordCounterRouteImport } from './routes/word-counter'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as LoremIpsumGeneratorRouteImport } from './routes/lorem-ipsum-generator'
+import { Route as JsonToCsvRouteImport } from './routes/json-to-csv'
 import { Route as JsonFormatterRouteImport } from './routes/json-formatter'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as ImageToBase64RouteImport } from './routes/image-to-base64'
@@ -35,6 +36,11 @@ const ToolsRoute = ToolsRouteImport.update({
 const LoremIpsumGeneratorRoute = LoremIpsumGeneratorRouteImport.update({
   id: '/lorem-ipsum-generator',
   path: '/lorem-ipsum-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JsonToCsvRoute = JsonToCsvRouteImport.update({
+  id: '/json-to-csv',
+  path: '/json-to-csv',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JsonFormatterRoute = JsonFormatterRouteImport.update({
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/json-to-csv': typeof JsonToCsvRoute
   '/lorem-ipsum-generator': typeof LoremIpsumGeneratorRoute
   '/tools': typeof ToolsRoute
   '/word-counter': typeof WordCounterRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/json-to-csv': typeof JsonToCsvRoute
   '/lorem-ipsum-generator': typeof LoremIpsumGeneratorRoute
   '/tools': typeof ToolsRoute
   '/word-counter': typeof WordCounterRoute
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/json-to-csv': typeof JsonToCsvRoute
   '/lorem-ipsum-generator': typeof LoremIpsumGeneratorRoute
   '/tools': typeof ToolsRoute
   '/word-counter': typeof WordCounterRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/json-formatter'
+    | '/json-to-csv'
     | '/lorem-ipsum-generator'
     | '/tools'
     | '/word-counter'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/json-formatter'
+    | '/json-to-csv'
     | '/lorem-ipsum-generator'
     | '/tools'
     | '/word-counter'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/json-formatter'
+    | '/json-to-csv'
     | '/lorem-ipsum-generator'
     | '/tools'
     | '/word-counter'
@@ -181,6 +193,7 @@ export interface RootRouteChildren {
   ImageToBase64Route: typeof ImageToBase64Route
   ImageToPdfRoute: typeof ImageToPdfRoute
   JsonFormatterRoute: typeof JsonFormatterRoute
+  JsonToCsvRoute: typeof JsonToCsvRoute
   LoremIpsumGeneratorRoute: typeof LoremIpsumGeneratorRoute
   ToolsRoute: typeof ToolsRoute
   WordCounterRoute: typeof WordCounterRoute
@@ -207,6 +220,13 @@ declare module '@tanstack/react-router' {
       path: '/lorem-ipsum-generator'
       fullPath: '/lorem-ipsum-generator'
       preLoaderRoute: typeof LoremIpsumGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/json-to-csv': {
+      id: '/json-to-csv'
+      path: '/json-to-csv'
+      fullPath: '/json-to-csv'
+      preLoaderRoute: typeof JsonToCsvRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/json-formatter': {
@@ -285,6 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImageToBase64Route: ImageToBase64Route,
   ImageToPdfRoute: ImageToPdfRoute,
   JsonFormatterRoute: JsonFormatterRoute,
+  JsonToCsvRoute: JsonToCsvRoute,
   LoremIpsumGeneratorRoute: LoremIpsumGeneratorRoute,
   ToolsRoute: ToolsRoute,
   WordCounterRoute: WordCounterRoute,

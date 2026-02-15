@@ -16,7 +16,11 @@ import { tools } from "@/data/tools";
 
 import { getSeoMetadata } from "@/lib/seo";
 
-const featuredTools = tools.slice(0, 6);
+const jsonToCsvTool = tools.find((tool) => tool.slug === "json-to-csv");
+const featuredTools = [
+  ...(jsonToCsvTool ? [jsonToCsvTool] : []),
+  ...tools.filter((tool) => tool.slug !== "json-to-csv"),
+].slice(0, 6);
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -32,6 +36,7 @@ export const Route = createFileRoute("/")({
         "json formatter validator",
         "csv to xlsx converter",
         "image to pdf converter",
+        "json to csv converter",
         "privacy-first tools",
         "client-side processing",
         "offline image tools",
