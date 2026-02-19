@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useMemo, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import {
   IconCheck,
   IconCopy,
@@ -8,6 +8,7 @@ import {
   IconTrash,
   IconAlertCircle,
   IconTable,
+  IconUpload,
 } from "@tabler/icons-react";
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
@@ -53,10 +54,20 @@ export const Route = createFileRoute("/csv-to-json")({
 });
 
 function RouteComponent() {
+  const MAX_UPLOAD_SIZE_MB = 5;
+  const MAX_UPLOAD_BYTES = MAX_UPLOAD_SIZE_MB * 1024 * 1024;
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const workerRef = useRef<Worker | null>(null);
+  const requestIdRef = useRef(0);
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);
   const [hasHeader, setHasHeader] = useState(true);
+  const [sanitizeJson, setSanitizeJson] = useState(false);
+  const [jsonOutput, setJsonOutput] = useState("");
+  const [stats, setStats] = useState({ rows: 0, columns: 0 });
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const loadSampleData = () => {
     const sample = `id,name,email,city,roles
@@ -67,116 +78,92 @@ function RouteComponent() {
     setError(null);
   };
 
-  const { jsonOutput, stats } = useMemo(() => {
-    if (!input.trim()) {
-      return { jsonOutput: "", stats: { rows: 0, columns: 0 } };
-    }
+  const handleFileUpload = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
 
-    try {
-      // Robust CSV Parser
-      const parseCSV = (text: string) => {
-        const result = [];
-        let row = [];
-        let cell = "";
-        let inQuotes = false;
-
-        for (let i = 0; i < text.length; i++) {
-          const char = text[i];
-          const nextChar = text[i + 1];
-
-          if (inQuotes) {
-            if (char === '"') {
-              if (nextChar === '"') {
-                cell += '"';
-                i++; // Skip next quote
-              } else {
-                inQuotes = false;
-              }
-            } else {
-              cell += char;
-            }
-          } else {
-            if (char === '"') {
-              inQuotes = true;
-            } else if (char === ",") {
-              row.push(cell.trim());
-              cell = "";
-            } else if (char === "\n" || char === "\r") {
-              row.push(cell.trim());
-              if (row.length > 0 && (row.length > 1 || row[0] !== "")) {
-                result.push(row);
-              }
-              row = [];
-              cell = "";
-              if (char === "\r" && nextChar === "\n") i++; // Handle CRLF
-            } else {
-              cell += char;
-            }
-          }
-        }
-
-        // Handle last cell/row
-        if (cell || row.length > 0) {
-          row.push(cell.trim());
-          result.push(row);
-        }
-
-        return result;
-      };
-
-      const rows = parseCSV(input);
-      if (rows.length === 0) {
-        return { jsonOutput: "", stats: { rows: 0, columns: 0 } };
+      if (file.size > MAX_UPLOAD_BYTES) {
+        setError(
+          `File is too large (${(file.size / (1024 * 1024)).toFixed(2)} MB). Maximum supported upload size is ${MAX_UPLOAD_SIZE_MB} MB to keep the page responsive.`,
+        );
+        event.target.value = "";
+        return;
       }
 
-      let result;
-      let headerCount = 0;
+      try {
+        const content = await file.text();
+        setInput(content);
+        setError(null);
+      } catch {
+        setError("Failed to read CSV file. Please try another file.");
+      } finally {
+        event.target.value = "";
+      }
+    },
+    [MAX_UPLOAD_BYTES, MAX_UPLOAD_SIZE_MB],
+  );
 
-      if (hasHeader) {
-        const headers = rows[0];
-        headerCount = headers.length;
-        const dataRows = rows.slice(1);
+  useEffect(() => {
+    const worker = new Worker(new URL("../workers/csvToJson.worker.ts", import.meta.url), {
+      type: "module",
+    });
 
-        result = dataRows.map((row) => {
-          const obj: any = {};
-          headers.forEach((header, index) => {
-            let value: any = row[index] !== undefined ? row[index] : null;
+    workerRef.current = worker;
 
-            // Try to parse numbers and booleans
-            if (typeof value === "string") {
-              if (value.toLowerCase() === "true") value = true;
-              else if (value.toLowerCase() === "false") value = false;
-              else if (!isNaN(Number(value)) && value !== "") value = Number(value);
-            }
+    worker.onmessage = (
+      event: MessageEvent<
+        | { requestId: number; jsonOutput: string; stats: { rows: number; columns: number } }
+        | { requestId: number; error: string }
+      >,
+    ) => {
+      const payload = event.data;
+      if (payload.requestId !== requestIdRef.current) return;
 
-            obj[header || `column${index + 1}`] = value;
-          });
-          return obj;
-        });
-      } else {
-        headerCount = rows[0].length;
-        result = rows.map((row) => {
-          return row.map((cell) => {
-            let value = cell;
-            if (value.toLowerCase() === "true") return true;
-            if (value.toLowerCase() === "false") return false;
-            if (!isNaN(Number(value)) && value !== "") return Number(value);
-            return value;
-          });
-        });
+      setIsProcessing(false);
+      if ("error" in payload) {
+        setError(payload.error);
+        setJsonOutput("");
+        setStats({ rows: 0, columns: 0 });
+        return;
       }
 
-      const output = JSON.stringify(result, null, 2);
       setError(null);
-      return {
-        jsonOutput: output,
-        stats: { rows: result.length, columns: headerCount },
-      };
-    } catch (e) {
-      setError((e as Error).message);
-      return { jsonOutput: "", stats: { rows: 0, columns: 0 } };
+      setJsonOutput(payload.jsonOutput);
+      setStats(payload.stats);
+    };
+
+    return () => {
+      worker.terminate();
+      workerRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!input.trim()) {
+      requestIdRef.current += 1;
+      setJsonOutput("");
+      setStats({ rows: 0, columns: 0 });
+      setError(null);
+      setIsProcessing(false);
+      return;
     }
-  }, [input, hasHeader]);
+
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+    setIsProcessing(true);
+
+    const timeout = window.setTimeout(() => {
+      workerRef.current?.postMessage({
+        input,
+        hasHeader,
+        sanitizeJson,
+        requestId,
+      });
+    }, 150);
+
+    return () => window.clearTimeout(timeout);
+  }, [input, hasHeader, sanitizeJson]);
 
   const copyToClipboard = useCallback(async () => {
     if (!jsonOutput) return;
@@ -214,6 +201,22 @@ function RouteComponent() {
       <div className="flex-1 max-w-9xl w-full mx-auto">
         <div className="bg-gray-800 rounded-xl shadow-lg p-4 mb-6">
           <div className="flex flex-wrap gap-3 justify-center items-center">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".csv,text/csv"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
+            >
+              <IconUpload className="w-4 h-4" />
+              <span>Upload CSV</span>
+            </button>
+
             <button
               onClick={loadSampleData}
               className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
@@ -231,6 +234,16 @@ function RouteComponent() {
                 className="rounded border-gray-600 text-brand-primary focus:ring-offset-0 focus:ring-brand-primary bg-gray-700"
               />
               <span>First row as header</span>
+            </label>
+
+            <label className="flex items-center space-x-2 text-gray-200 text-sm cursor-pointer select-none bg-gray-700/50 px-3 py-2 rounded-lg hover:bg-gray-700 transition">
+              <input
+                type="checkbox"
+                checked={sanitizeJson}
+                onChange={(e) => setSanitizeJson(e.target.checked)}
+                className="rounded border-gray-600 text-brand-primary focus:ring-offset-0 focus:ring-brand-primary bg-gray-700"
+              />
+              <span>Sanitize JSON strings</span>
             </label>
 
             <button
@@ -320,6 +333,7 @@ function RouteComponent() {
                   {stats.rows} objects • {stats.columns} fields
                 </span>
               )}
+              {isProcessing && <span className="text-xs text-gray-400">Processing...</span>}
             </div>
             <textarea
               readOnly
