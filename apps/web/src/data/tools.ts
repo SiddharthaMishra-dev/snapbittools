@@ -1,5 +1,5 @@
 import {
-    type TablerIconsProps,
+    type IconProps,
     IconBolt,
     IconBraces,
     IconCrop,
@@ -10,13 +10,14 @@ import {
     IconSearch,
     IconTypography,
 } from "@tabler/icons-react";
+import type React from "react";
 
 export type ToolDefinition = {
     slug: string;
     name: string;
     href: string;
     description: string;
-    icon: (props: TablerIconsProps) => JSX.Element;
+    icon: (props: IconProps) => React.ReactNode;
     category: "Images" | "Data";
     keywords: string[];
 };
@@ -121,5 +122,14 @@ export const tools: ToolDefinition[] = [
         icon: IconFileSpreadsheet,
         category: "Data",
         keywords: ["json to csv", "convert json", "csv generator", "data tables"],
+    },
+    {
+        slug: "csv-to-json",
+        name: "CSV to JSON",
+        href: "/csv-to-json",
+        description: "Convert CSV data to structured JSON objects instantly. Handle headers and quoted fields.",
+        icon: IconBraces,
+        category: "Data",
+        keywords: ["csv to json", "convert csv", "json generator", "data extraction"],
     },
 ];

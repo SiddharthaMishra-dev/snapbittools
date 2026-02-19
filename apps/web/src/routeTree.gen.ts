@@ -21,6 +21,7 @@ import { Route as ImageCropperRouteImport } from './routes/image-cropper'
 import { Route as ImageCompressorRouteImport } from './routes/image-compressor'
 import { Route as DiffCheckerRouteImport } from './routes/diff-checker'
 import { Route as CsvXlsxConverterRouteImport } from './routes/csv-xlsx-converter'
+import { Route as CsvToJsonRouteImport } from './routes/csv-to-json'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WordCounterRoute = WordCounterRouteImport.update({
@@ -83,6 +84,11 @@ const CsvXlsxConverterRoute = CsvXlsxConverterRouteImport.update({
   path: '/csv-xlsx-converter',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CsvToJsonRoute = CsvToJsonRouteImport.update({
+  id: '/csv-to-json',
+  path: '/csv-to-json',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -91,6 +97,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/csv-to-json': typeof CsvToJsonRoute
   '/csv-xlsx-converter': typeof CsvXlsxConverterRoute
   '/diff-checker': typeof DiffCheckerRoute
   '/image-compressor': typeof ImageCompressorRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/csv-to-json': typeof CsvToJsonRoute
   '/csv-xlsx-converter': typeof CsvXlsxConverterRoute
   '/diff-checker': typeof DiffCheckerRoute
   '/image-compressor': typeof ImageCompressorRoute
@@ -122,6 +130,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/csv-to-json': typeof CsvToJsonRoute
   '/csv-xlsx-converter': typeof CsvXlsxConverterRoute
   '/diff-checker': typeof DiffCheckerRoute
   '/image-compressor': typeof ImageCompressorRoute
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/csv-to-json'
     | '/csv-xlsx-converter'
     | '/diff-checker'
     | '/image-compressor'
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/csv-to-json'
     | '/csv-xlsx-converter'
     | '/diff-checker'
     | '/image-compressor'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/csv-to-json'
     | '/csv-xlsx-converter'
     | '/diff-checker'
     | '/image-compressor'
@@ -185,6 +197,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CsvToJsonRoute: typeof CsvToJsonRoute
   CsvXlsxConverterRoute: typeof CsvXlsxConverterRoute
   DiffCheckerRoute: typeof DiffCheckerRoute
   ImageCompressorRoute: typeof ImageCompressorRoute
@@ -285,6 +298,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CsvXlsxConverterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/csv-to-json': {
+      id: '/csv-to-json'
+      path: '/csv-to-json'
+      fullPath: '/csv-to-json'
+      preLoaderRoute: typeof CsvToJsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -297,6 +317,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CsvToJsonRoute: CsvToJsonRoute,
   CsvXlsxConverterRoute: CsvXlsxConverterRoute,
   DiffCheckerRoute: DiffCheckerRoute,
   ImageCompressorRoute: ImageCompressorRoute,
