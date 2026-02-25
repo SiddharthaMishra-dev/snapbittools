@@ -1,5 +1,7 @@
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
+import ToolContentDisplay from "@/components/ToolContentDisplay";
+import { toolContent } from "@/data/toolContent";
 import {
   IconArrowsMinimize,
   IconBolt,
@@ -314,18 +316,18 @@ function RouteComponent() {
   const completedCount = files.filter((f) => f.status === "completed").length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center justify-between">
-      <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-100 mb-2">
-            Compress <span className="text-brand-primary">Images</span>
-          </h1>
-          <p className="text-lg text-gray-200">
-            Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while
-            preserving quality. 100% client-side—your files never leave.
-          </p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center">
+      <div className="text-center mb-8 max-w-5xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-100 mb-2">
+          Compress <span className="text-brand-primary">Images</span>
+        </h1>
+        <p className="text-lg text-gray-200">
+          Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while
+          preserving quality. 100% client-side—your files never leave.
+        </p>
+      </div>
 
+      <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
         <div className="bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
           {files.length === 0 ? (
             <>
@@ -550,6 +552,24 @@ function RouteComponent() {
               )}
             </>
           )}
+        </div>
+
+        <div className="max-w-5xl mx-auto mb-16 w-full mt-8">
+          <ToolContentDisplay
+            title={toolContent["image-compressor"].title}
+            intro={toolContent["image-compressor"].intro}
+            benefits={toolContent["image-compressor"].benefits}
+            useCases={toolContent["image-compressor"].useCases}
+          />
+        </div>
+
+        <div className="max-w-5xl mx-auto mb-16 w-full">
+          <ToolContentDisplay
+            title={toolContent["image-compressor"].title}
+            intro={toolContent["image-compressor"].intro}
+            benefits={toolContent["image-compressor"].benefits}
+            useCases={toolContent["image-compressor"].useCases}
+          />
         </div>
 
         <ToolInfo

@@ -12,24 +12,41 @@ import {
 } from "@tabler/icons-react";
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
+import ToolContentDisplay from "@/components/ToolContentDisplay";
+import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
 
 const faqs = [
   {
-    question: "Is my data secure?",
+    question: "Is my data secure when converting CSV to JSON?",
     answer:
-      "Yes, absolutely. The conversion process is entirely client-side, meaning your CSV data never leaves your browser. No servers are involved.",
+      "Yes, absolutely secure. The conversion process is entirely client-side, meaning your CSV data never leaves your browser. No servers are involved, and no data is stored after your session ends.",
   },
   {
-    question: "Can I handle CSVs with newlines in cells?",
+    question: "How does the tool handle special characters and quoted fields?",
     answer:
-      "Yes, the parser correctly handles quoted fields containing newlines, commas, or escaped quotes.",
+      "The parser correctly handles CSV complexity including quoted fields containing newlines, commas, escaped quotes, and special Unicode characters. Headers are auto-detected from the first row and used as JSON object keys.",
   },
   {
-    question: "Is there a limit on file size?",
+    question: "Is there a file size limit?",
     answer:
-      "The limit depends on your browser's memory, as processing happens locally. For very large files (50MB+), performance may slow down.",
+      "The limit depends on your browser's memory, as processing happens locally. Most CSV files up to 50MB work efficiently. Extremely large files (100MB+) may experience slight performance degradation.",
+  },
+  {
+    question: "What happens to empty fields or inconsistent rows?",
+    answer:
+      "Empty fields are preserved in the JSON output (as empty strings or null depending on context). If rows have different numbers of columns, the tool adapts by including all detected headers and leaving missing cell values empty.",
+  },
+  {
+    question: "Can I customize field names or remove specific columns?",
+    answer:
+      "The tool auto-detects headers from your CSV's first row. You can manually adjust the output by editing the CSV data before conversion or post-processing the generated JSON.",
+  },
+  {
+    question: "What's the best way to handle dates in CSV to JSON conversion?",
+    answer:
+      "Dates are preserved as strings in the JSON output. This ensures compatibility across systems. For date calculations or formatting, process the JSON string values in your application with a date library like Moment.js or the native Date object.",
   },
 ];
 
@@ -189,9 +206,9 @@ function RouteComponent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col">
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-100 mb-2">
-          CSV to <span className="text-brand-primary">JSON</span> Converter
+          CSV to <span className="text-brand-primary">JSON</span>
         </h1>
         <p className="text-md text-gray-200">
           Transform CSV data into JSON format securely in your browser.
@@ -343,6 +360,15 @@ function RouteComponent() {
               spellCheck={false}
             />
           </div>
+        </div>
+
+        <div className="max-w-5xl mx-auto mb-16 w-full">
+          <ToolContentDisplay
+            title={toolContent["csv-to-json"].title}
+            intro={toolContent["csv-to-json"].intro}
+            benefits={toolContent["csv-to-json"].benefits}
+            useCases={toolContent["csv-to-json"].useCases}
+          />
         </div>
 
         <div className="mt-8">

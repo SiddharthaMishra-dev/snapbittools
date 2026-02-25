@@ -12,6 +12,8 @@ import JSZip from "jszip";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ToolInfo from "../components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
+import ToolContentDisplay from "@/components/ToolContentDisplay";
+import { toolContent } from "@/data/toolContent";
 import { ConversionItem } from "@/types/ImageTypes";
 
 import { getSeoMetadata } from "@/lib/seo";
@@ -312,18 +314,17 @@ function RouteComponent() {
   const completedCount = conversions.filter((item) => item.status === "completed").length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center justify-between">
-      <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-100 mb-2">
-            Image <span className="text-brand-primary">Format</span> Converter
-          </h1>
-          <p className="text-md text-gray-200">
-            Convert images between formats instantly. Batch support. No uploads—100% private.
-          </p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center">
+      <div className="text-center mb-8 max-w-5xl mx-auto">
+        <h1 className="text-2xl font-bold text-gray-100 mb-2">
+          Image <span className="text-brand-primary">Format</span> Converter
+        </h1>
+        <p className="text-md text-gray-200">
+          Convert images between formats instantly. Batch support. No uploads—100% private.
+        </p>
+      </div>
 
+      <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
         <div className="bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
           {conversions.length === 0 ? (
             <>
@@ -507,6 +508,15 @@ function RouteComponent() {
             <sup>*</sup>All major formats supported: JPG, PNG, GIF, SVG, WebP & AVIF.
           </p>
         </div>
+      </div>
+
+      <div className="max-w-5xl mx-auto mb-16 w-full">
+        <ToolContentDisplay
+          title={toolContent["image-format-converter"].title}
+          intro={toolContent["image-format-converter"].intro}
+          benefits={toolContent["image-format-converter"].benefits}
+          useCases={toolContent["image-format-converter"].useCases}
+        />
       </div>
 
       <ToolInfo

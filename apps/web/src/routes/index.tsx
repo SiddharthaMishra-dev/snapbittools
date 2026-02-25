@@ -272,11 +272,83 @@ function App() {
           </div>
         </section>
 
-        <section className="max-w-5xl mx-auto mt-16 bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-          <h3 className="text-2xl font-semibold text-brand-primary text-gray-100 mt-2">
+        <section className="max-w-5xl mx-auto mt-16 bg-white/5 border border-white/10 rounded-2xl p-8">
+          <h3 className="text-2xl font-bold text-gray-100 mb-8 text-center">
+            Who Uses <span className="text-brand-primary">SnapBit</span> Tools?
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <UseCaseCard
+              title="Web Developers"
+              description="Convert images to Base64 for embedded assets, format JSON API responses, convert between data formats, and validate code—all without leaving your browser."
+            />
+            <UseCaseCard
+              title="Content Creators"
+              description="Compress images for web publishing, crop photos for social media, convert between formats for different platforms, and analyze reading time for blog content."
+            />
+            <UseCaseCard
+              title="Designers & Creatives"
+              description="Optimize images for web projects, generate lorem ipsum placeholder text for mockups, resize images for different aspect ratios, and process batch conversions."
+            />
+            <UseCaseCard
+              title="Data Professionals"
+              description="Convert CSV to JSON and vice versa, format and validate JSON data, work with spreadsheets offline, and process data migrations—all securely in your browser."
+            />
+          </div>
+        </section>
+
+        <section className="max-w-5xl mx-auto mt-16 bg-gradient-to-r from-brand-primary/10 to-blue-500/10 border border-brand-primary/20 rounded-2xl p-8">
+          <h3 className="text-2xl font-bold text-gray-100 mb-6">
+            Why Browser-Based Processing Matters
+          </h3>
+          <ul className="space-y-4">
+            <li className="flex items-start gap-4">
+              <span className="text-brand-primary font-bold text-xl mt-1">✓</span>
+              <div>
+                <h4 className="text-gray-100 font-semibold mb-1">Privacy First</h4>
+                <p className="text-gray-300 text-sm">
+                  No file uploads to servers, no data collection, no tracking. Your files never
+                  leave your device.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-brand-primary font-bold text-xl mt-1">✓</span>
+              <div>
+                <h4 className="text-gray-100 font-semibold mb-1">Lightning Fast</h4>
+                <p className="text-gray-300 text-sm">
+                  Real-time processing without server latency. Convert, format, and optimize files
+                  instantly.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-brand-primary font-bold text-xl mt-1">✓</span>
+              <div>
+                <h4 className="text-gray-100 font-semibold mb-1">Works Offline</h4>
+                <p className="text-gray-300 text-sm">
+                  After initial page load, all tools work without internet connection. Perfect for
+                  airplane mode and disconnected environments.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-brand-primary font-bold text-xl mt-1">✓</span>
+              <div>
+                <h4 className="text-gray-100 font-semibold mb-1">No Limits</h4>
+                <p className="text-gray-300 text-sm">
+                  No file size restrictions, no daily conversion limits, no watermarks—unlimited
+                  usage forever free.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section className="max-w-5xl mx-auto mt-16 text-center bg-white/5 border border-white/10 rounded-2xl p-8">
+          <h3 className="text-2xl font-semibold text-gray-100 mb-2">
             Everything You Need for Image Processing & Data Conversion
           </h3>
-          <p className="text-gray-400 mt-3">
+          <p className="text-gray-400 mt-3 mb-6">
             From converting images to Base64 encoding, compressing photos to reduce file size,
             formatting JSON data, to converting spreadsheets—our comprehensive suite handles all
             your file conversion and processing needs with professional results, all in your
@@ -343,6 +415,15 @@ function FeatureCard({
       </div>
       <h4 className="text-lg font-semibold text-gray-100">{title}</h4>
       <p className="text-sm text-gray-400">{description}</p>
+    </div>
+  );
+}
+
+function UseCaseCard({ title, description }: { title: string; description: string }) {
+  return (
+    <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-brand-primary/50 transition-all">
+      <h4 className="text-lg font-bold text-gray-100 mb-2">{title}</h4>
+      <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
     </div>
   );
 }
