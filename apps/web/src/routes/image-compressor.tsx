@@ -554,15 +554,6 @@ function RouteComponent() {
           )}
         </div>
 
-        <div className="max-w-5xl mx-auto mb-16 w-full mt-8">
-          <ToolContentDisplay
-            title={toolContent["image-compressor"].title}
-            intro={toolContent["image-compressor"].intro}
-            benefits={toolContent["image-compressor"].benefits}
-            useCases={toolContent["image-compressor"].useCases}
-          />
-        </div>
-
         <div className="max-w-5xl mx-auto mb-16 w-full">
           <ToolContentDisplay
             title={toolContent["image-compressor"].title}

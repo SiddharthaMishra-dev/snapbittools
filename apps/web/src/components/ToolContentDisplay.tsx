@@ -48,17 +48,16 @@ export default function ToolContentDisplay({
       {/* H1 Title */}
       <motion.h1
         variants={itemVariants}
-        className="text-4xl md:text-5xl font-bold text-gray-100 leading-tight"
+        className="text-4xl md:text-2xl font-bold text-gray-100 leading-tight"
       >
         {title}
       </motion.h1>
 
-      {/* Introduction */}
       <motion.div
         variants={itemVariants}
         className="prose prose-invert max-w-none"
       >
-        <p className="text-lg text-gray-300 leading-relaxed whitespace-pre-wrap">{intro}</p>
+        <p className="text-md text-gray-400 leading-relaxed whitespace-pre-wrap">{intro}</p>
       </motion.div>
 
       {/* Key Benefits */}
@@ -67,15 +66,15 @@ export default function ToolContentDisplay({
           variants={itemVariants}
           className="space-y-4"
         >
-          <h2 className="text-2xl font-bold text-gray-100">Key Benefits</h2>
+          <h2 className="text-lg font-bold text-gray-100">Key Benefits</h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {benefits.map((benefit, index) => (
               <li
                 key={index}
-                className="flex items-start space-x-3 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
+                className="flex items-center space-x-3 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
               >
-                <span className="text-brand-primary font-bold text-lg pt-0.5">✓</span>
-                <span className="text-gray-200">{benefit}</span>
+                <span className="text-brand-primary font-bold text-sm pt-0.5">✓</span>
+                <span className="text-gray-300 text-sm">{benefit}</span>
               </li>
             ))}
           </ul>

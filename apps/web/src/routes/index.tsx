@@ -158,18 +158,14 @@ function App() {
             variants={itemVariants}
             className="flex flex-wrap justify-center gap-2 text-xs text-gray-300"
           >
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+            <span className="rounded-full font-semibold px-3 py-1">
               ✓ 100% Browser-Based Processing
             </span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-              ✓ No File Uploads Required
-            </span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+            <span className="rounded-full font-semibold px-3 py-1">✓ No File Uploads Required</span>
+            <span className="rounded-full font-semibold px-3 py-1">
               ✓ Complete Privacy Protection
             </span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-              ✓ Free & Open Source
-            </span>
+            <span className="rounded-full font-semibold px-3 py-1">✓ Free & Open Source</span>
           </motion.div>
         </motion.div>
       </section>
@@ -248,27 +244,27 @@ function App() {
           <h2 className="text-2xl font-bold text-gray-100 mb-8">
             Why Choose <span className="text-brand-primary">SnapBit</span> Tools?
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1  lg:grid-cols-3 gap-6 divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-brand-primary/20">
             <FeatureCard
               icon={<IconBolt className="text-brand-light w-6 h-6" />}
               title="Lightning-Fast Performance"
-              description="All processing happens instantly in your browser—no server delays, no waiting for uploads."
+              description="All processing happens instantly in your browser—no server delays."
             />
             <FeatureCard
               icon={<IconLock className="text-brand-light w-6 h-6" />}
               title="Complete Privacy & Security"
-              description="Your files never leave your device. No uploads, no cloud storage, no data collection."
+              description="Your files never leave your device. "
             />
             <FeatureCard
               icon={<IconBrandGithub className="text-brand-light w-6 h-6" />}
               title="100% Free & Open Source"
-              description="All tools are free to use forever. Inspect the code, contribute, or fork on GitHub."
+              description="All tools are free to use forever."
             />
-            <FeatureCard
+            {/* <FeatureCard
               icon={<IconSearch className="text-brand-light w-6 h-6" />}
               title="Works Offline"
               description="Client-side processing means tools work without internet connection after initial load."
-            />
+            /> */}
           </div>
         </section>
 
@@ -409,12 +405,14 @@ function FeatureCard({
   description: string;
 }) {
   return (
-    <div className="space-y-3 bg-white/5 border border-white/10 rounded-xl p-4 group">
-      <div className="w-12 h-12  rounded-lg flex items-center justify-center mx-auto group-hover:animate-[wiggle_300ms_ease-in-out] transition-transform duration-300">
+    <div className="flex items-center justify-start gap-x-2 space-y-3  p-4 group">
+      <div className="  rounded-lg flex items-center justify-center  group-hover:animate-[wiggle_300ms_ease-in-out] transition-transform duration-300">
         {icon}
       </div>
-      <h4 className="text-lg font-semibold text-gray-100">{title}</h4>
-      <p className="text-sm text-gray-400">{description}</p>
+      <div className="text-left space-y-1">
+        <h4 className="text-sm font-semibold text-gray-100">{title}</h4>
+        <p className="text-sm text-gray-400">{description}</p>
+      </div>
     </div>
   );
 }
