@@ -15,6 +15,7 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
   {
@@ -236,216 +237,219 @@ function RouteComponent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col">
-      {/* Header */}
-      <div className="text-center mb-8 max-w-5xl mx-auto">
-        <h1 className="text-2xl font-bold text-gray-100 mb-2">
-          JSON to <span className="text-brand-primary">CSV</span> Converter
-        </h1>
-        <p className="text-md text-gray-200">
-          Transform JSON data into CSV content securely in your browser.
-        </p>
-      </div>
+      <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
+        <Breadcrumbs />
+        {/* Header */}
+        <div className="text-center mb-8 max-w-5xl mx-auto">
+          <h1 className="text-2xl font-bold text-gray-100 mb-2">
+            JSON to <span className="text-brand-primary">CSV</span> Converter
+          </h1>
+          <p className="text-md text-gray-200">
+            Transform JSON data into CSV content securely in your browser.
+          </p>
+        </div>
 
-      {/* Main Content */}
-      <div className="flex-1 max-w-9xl w-full mx-auto">
-        {/* Toolbar */}
-        <div className="bg-gray-800 rounded-xl shadow-lg p-4 mb-6">
-          <div className="flex flex-wrap gap-3 justify-center items-center">
-            <button
-              onClick={loadSampleData}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
-            >
-              <IconTable className="w-4 h-4" />
-              <span>Sample Data</span>
-            </button>
-            <div className="h-6 w-px bg-gray-600 mx-2 hidden sm:block"></div>
+        {/* Main Content */}
+        <div className="flex-1 max-w-9xl w-full mx-auto">
+          {/* Toolbar */}
+          <div className="bg-gray-800 rounded-xl shadow-lg p-4 mb-6">
+            <div className="flex flex-wrap gap-3 justify-center items-center">
+              <button
+                onClick={loadSampleData}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
+              >
+                <IconTable className="w-4 h-4" />
+                <span>Sample Data</span>
+              </button>
+              <div className="h-6 w-px bg-gray-600 mx-2 hidden sm:block"></div>
 
-            <label className="flex items-center space-x-2 text-gray-200 text-sm cursor-pointer select-none bg-gray-700/50 px-3 py-2 rounded-lg hover:bg-gray-700 transition">
-              <input
-                type="checkbox"
-                checked={flatten}
-                onChange={(e) => setFlatten(e.target.checked)}
-                className="rounded border-gray-600 text-brand-primary focus:ring-offset-0 focus:ring-brand-primary bg-gray-700"
+              <label className="flex items-center space-x-2 text-gray-200 text-sm cursor-pointer select-none bg-gray-700/50 px-3 py-2 rounded-lg hover:bg-gray-700 transition">
+                <input
+                  type="checkbox"
+                  checked={flatten}
+                  onChange={(e) => setFlatten(e.target.checked)}
+                  className="rounded border-gray-600 text-brand-primary focus:ring-offset-0 focus:ring-brand-primary bg-gray-700"
+                />
+                <span>Flatten nested objects</span>
+              </label>
+
+              <button
+                onClick={downloadCSV}
+                disabled={!csvOutput}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
+              >
+                <IconDownload className="w-4 h-4" />
+                <span>Download CSV</span>
+              </button>
+
+              <button
+                onClick={copyToClipboard}
+                disabled={!csvOutput}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+                  copySuccess
+                    ? "bg-green-800 text-green-200"
+                    : "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                }`}
+              >
+                {copySuccess ? (
+                  <>
+                    <IconCheck className="w-4 h-4" />
+                    <span>Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <IconCopy className="w-4 h-4" />
+                    <span>Copy CSV</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                onClick={() => {
+                  setInput("");
+                  setError(null);
+                }}
+                disabled={!input}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-red-900/50 text-red-200 rounded-lg hover:bg-red-800/70 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <IconTrash className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-900/30 border border-red-700 rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
+              <IconAlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+              <div className="text-red-300">
+                <p className="font-medium">Parse Error</p>
+                <p className="text-sm opacity-80">{error}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Editor Panels */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
+            {/* Input Panel */}
+            <div className="bg-gray-800 rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
+              <div className="px-4 py-3 bg-gray-800 border-b border-gray-700 flex justify-between items-center">
+                <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                  Input JSON
+                </h3>
+                {input && (
+                  <span className="text-xs text-gray-500">
+                    {(new Blob([input]).size / 1024).toFixed(2)} KB
+                  </span>
+                )}
+              </div>
+              <textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder='Paste JSON array here, e.g. [{"name": "Neo", "role": "One"}]'
+                className={`flex-1 w-full p-4 bg-gray-900/50 text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0 ${
+                  error ? "bg-red-900/10" : ""
+                }`}
+                spellCheck={false}
               />
-              <span>Flatten nested objects</span>
-            </label>
+            </div>
 
-            <button
-              onClick={downloadCSV}
-              disabled={!csvOutput}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
-            >
-              <IconDownload className="w-4 h-4" />
-              <span>Download CSV</span>
-            </button>
-
-            <button
-              onClick={copyToClipboard}
-              disabled={!csvOutput}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-                copySuccess
-                  ? "bg-green-800 text-green-200"
-                  : "bg-gray-700 text-gray-100 hover:bg-gray-600"
-              }`}
-            >
-              {copySuccess ? (
-                <>
-                  <IconCheck className="w-4 h-4" />
-                  <span>Copied!</span>
-                </>
-              ) : (
-                <>
-                  <IconCopy className="w-4 h-4" />
-                  <span>Copy CSV</span>
-                </>
-              )}
-            </button>
-
-            <button
-              onClick={() => {
-                setInput("");
-                setError(null);
-              }}
-              disabled={!input}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-red-900/50 text-red-200 rounded-lg hover:bg-red-800/70 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <IconTrash className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Error Message */}
-        {error && (
-          <div className="bg-red-900/30 border border-red-700 rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
-            <IconAlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-            <div className="text-red-300">
-              <p className="font-medium">Parse Error</p>
-              <p className="text-sm opacity-80">{error}</p>
+            {/* Output Panel */}
+            <div className="bg-gray-800 rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
+              <div className="px-4 py-3 bg-gray-800 border-b border-gray-700 flex justify-between items-center">
+                <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                  Output CSV
+                </h3>
+                {stats.rows > 0 && (
+                  <span className="text-xs text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-full">
+                    {stats.rows} rows • {stats.columns} cols
+                  </span>
+                )}
+              </div>
+              <textarea
+                readOnly
+                value={csvOutput}
+                placeholder="CSV output will appear here..."
+                className="flex-1 w-full p-4 bg-gray-900/50 text-green-400 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0"
+                spellCheck={false}
+              />
             </div>
           </div>
-        )}
 
-        {/* Editor Panels */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
-          {/* Input Panel */}
-          <div className="bg-gray-800 rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-            <div className="px-4 py-3 bg-gray-800 border-b border-gray-700 flex justify-between items-center">
-              <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
-                Input JSON
-              </h3>
-              {input && (
-                <span className="text-xs text-gray-500">
-                  {(new Blob([input]).size / 1024).toFixed(2)} KB
-                </span>
-              )}
-            </div>
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder='Paste JSON array here, e.g. [{"name": "Neo", "role": "One"}]'
-              className={`flex-1 w-full p-4 bg-gray-900/50 text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0 ${
-                error ? "bg-red-900/10" : ""
-              }`}
-              spellCheck={false}
+          <div className="max-w-5xl mx-auto mb-16 w-full">
+            <ToolContentDisplay
+              title={toolContent["json-to-csv"].title}
+              intro={toolContent["json-to-csv"].intro}
+              benefits={toolContent["json-to-csv"].benefits}
+              useCases={toolContent["json-to-csv"].useCases}
             />
           </div>
 
-          {/* Output Panel */}
-          <div className="bg-gray-800 rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-            <div className="px-4 py-3 bg-gray-800 border-b border-gray-700 flex justify-between items-center">
-              <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
-                Output CSV
-              </h3>
-              {stats.rows > 0 && (
-                <span className="text-xs text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-full">
-                  {stats.rows} rows • {stats.columns} cols
-                </span>
-              )}
-            </div>
-            <textarea
-              readOnly
-              value={csvOutput}
-              placeholder="CSV output will appear here..."
-              className="flex-1 w-full p-4 bg-gray-900/50 text-green-400 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0"
-              spellCheck={false}
+          <div className="mt-8">
+            <ToolInfo
+              title="JSON to CSV Converter"
+              description="Our JSON to CSV Converter is the perfect tool for data analysts and developers who need to transform structured JSON data into spreadsheet-friendly CSV format. Whether you're migrating data, preparing reports, or just need to view JSON in Excel, this tool handles it all locally on your device."
+              features={[
+                {
+                  title: "Flatten Nested Objects",
+                  description:
+                    "Automatically converts nested JSON objects into flattened dot-notation columns.",
+                  icon: IconTable,
+                },
+                {
+                  title: "Privacy First",
+                  description:
+                    "All conversion happens in your browser. No data is ever sent to a server.",
+                  icon: IconFileSpreadsheet,
+                },
+                {
+                  title: "Large File Support",
+                  description:
+                    "Efficiently handles large JSON datasets without crashing your browser.",
+                  icon: IconDownload,
+                },
+              ]}
+              steps={[
+                {
+                  title: "Paste JSON",
+                  description: "Paste your JSON array or object into the left input panel.",
+                },
+                {
+                  title: "Configure",
+                  description: "Toggle 'Flatten nested objects' based on your needs.",
+                },
+                {
+                  title: "Convert",
+                  description: "The CSV output is generated instantly as you type.",
+                },
+                {
+                  title: "Download",
+                  description: "Copy the CSV text or download it as a .csv file.",
+                },
+              ]}
+              faqs={faqs}
             />
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto mb-16 w-full">
-          <ToolContentDisplay
-            title={toolContent["json-to-csv"].title}
-            intro={toolContent["json-to-csv"].intro}
-            benefits={toolContent["json-to-csv"].benefits}
-            useCases={toolContent["json-to-csv"].useCases}
-          />
-        </div>
+        <RelatedTools
+          currentToolSlug="json-to-csv"
+          category="Data"
+        />
 
-        <div className="mt-8">
-          <ToolInfo
-            title="JSON to CSV Converter"
-            description="Our JSON to CSV Converter is the perfect tool for data analysts and developers who need to transform structured JSON data into spreadsheet-friendly CSV format. Whether you're migrating data, preparing reports, or just need to view JSON in Excel, this tool handles it all locally on your device."
-            features={[
-              {
-                title: "Flatten Nested Objects",
-                description:
-                  "Automatically converts nested JSON objects into flattened dot-notation columns.",
-                icon: IconTable,
-              },
-              {
-                title: "Privacy First",
-                description:
-                  "All conversion happens in your browser. No data is ever sent to a server.",
-                icon: IconFileSpreadsheet,
-              },
-              {
-                title: "Large File Support",
-                description:
-                  "Efficiently handles large JSON datasets without crashing your browser.",
-                icon: IconDownload,
-              },
-            ]}
-            steps={[
-              {
-                title: "Paste JSON",
-                description: "Paste your JSON array or object into the left input panel.",
-              },
-              {
-                title: "Configure",
-                description: "Toggle 'Flatten nested objects' based on your needs.",
-              },
-              {
-                title: "Convert",
-                description: "The CSV output is generated instantly as you type.",
-              },
-              {
-                title: "Download",
-                description: "Copy the CSV text or download it as a .csv file.",
-              },
-            ]}
-            faqs={faqs}
-          />
-        </div>
+        <footer className="mt-8 text-center">
+          <p className="text-gray-400 text-xs">
+            Crafted with care by{" "}
+            <a
+              href="https://sidme.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-primary hover:text-brand-hover transition-colors"
+            >
+              sidme
+            </a>
+          </p>
+        </footer>
       </div>
-
-      <RelatedTools
-        currentToolSlug="json-to-csv"
-        category="Data"
-      />
-
-      <footer className="mt-8 text-center">
-        <p className="text-gray-400 text-xs">
-          Crafted with care by{" "}
-          <a
-            href="https://sidme.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-primary hover:text-brand-hover transition-colors"
-          >
-            sidme
-          </a>
-        </p>
-      </footer>
     </div>
   );
 }

@@ -16,6 +16,7 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const LOREM_WORDS = [
   "lorem",
@@ -198,175 +199,193 @@ function LoremIpsumComponent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col font-sans">
-      <div className="text-center mb-8 max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-100 mb-2">
-          Lorem <span className="text-brand-primary">Ipsum</span> Generator
-        </h1>
-        <p className="text-md text-gray-200">Instant placeholder text for your next big project.</p>
-      </div>
+      <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
+        <Breadcrumbs />
+        <div className="text-center mb-8 max-w-5xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-100 mb-2">
+            Lorem <span className="text-brand-primary">Ipsum</span> Generator
+          </h1>
+          <p className="text-md text-gray-200">
+            Instant placeholder text for your next big project.
+          </p>
+        </div>
 
-      <div className="flex-1 max-w-6xl w-full mx-auto space-y-6">
-        <div className="bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-700">
-          <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
-            <div className="flex flex-wrap items-center gap-4">
-              <div className="flex flex-col">
-                <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                  Quantity
-                </label>
-                <input
-                  type="number"
-                  min="1"
-                  max="100"
-                  value={count}
-                  onChange={(e) => setCount(parseInt(e.target.value) || 1)}
-                  className="w-24 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                />
-              </div>
+        <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
+          <div className="bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-700">
+            <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-col">
+                  <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    Quantity
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="100"
+                    value={count}
+                    onChange={(e) => setCount(parseInt(e.target.value) || 1)}
+                    className="w-24 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                  />
+                </div>
 
-              <div className="flex flex-col">
-                <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                  Type
-                </label>
-                <div className="flex p-1 bg-gray-900 rounded-lg">
-                  {(["paragraphs", "sentences", "words"] as const).map((t) => (
-                    <button
-                      key={t}
-                      onClick={() => setType(t)}
-                      className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                        type === t
-                          ? "bg-brand-primary text-white shadow-sm"
-                          : "text-gray-400 hover:text-gray-200"
-                      }`}
-                    >
-                      {t.charAt(0).toUpperCase() + t.slice(1)}
-                    </button>
-                  ))}
+                <div className="flex flex-col">
+                  <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    Type
+                  </label>
+                  <div className="flex p-1 bg-gray-900 rounded-lg">
+                    {(["paragraphs", "sentences", "words"] as const).map((t) => (
+                      <button
+                        key={t}
+                        onClick={() => setType(t)}
+                        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+                          type === t
+                            ? "bg-brand-primary text-white shadow-sm"
+                            : "text-gray-400 hover:text-gray-200"
+                        }`}
+                      >
+                        {t.charAt(0).toUpperCase() + t.slice(1)}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="flex items-center gap-3">
-              <button
-                onClick={generateText}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium"
-              >
-                <IconRefresh className="w-5 h-5" />
-                <span>Regenerate</span>
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={generateText}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium"
+                >
+                  <IconRefresh className="w-5 h-5" />
+                  <span>Regenerate</span>
+                </button>
 
-              <button
-                onClick={copyToClipboard}
-                disabled={!generatedText}
-                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-                  copySuccess
-                    ? "bg-green-800 text-green-200"
-                    : "bg-brand-primary text-white hover:bg-brand-hover"
-                }`}
-              >
-                {copySuccess ? (
-                  <>
-                    <IconCheck className="w-5 h-5" />
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <IconCopy className="w-5 h-5" />
-                    <span>Copy All</span>
-                  </>
-                )}
-              </button>
+                <button
+                  onClick={copyToClipboard}
+                  disabled={!generatedText}
+                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+                    copySuccess
+                      ? "bg-green-800 text-green-200"
+                      : "bg-brand-primary text-white hover:bg-brand-hover"
+                  }`}
+                >
+                  {copySuccess ? (
+                    <>
+                      <IconCheck className="w-5 h-5" />
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <IconCopy className="w-5 h-5" />
+                      <span>Copy All</span>
+                    </>
+                  )}
+                </button>
 
-              <button
-                onClick={clearText}
-                className="p-2.5 text-red-400 hover:bg-red-400/10 rounded-lg transition-colors border border-transparent hover:border-red-400/20"
-                title="Clear"
-              >
-                <IconTrash className="w-5 h-5" />
-              </button>
+                <button
+                  onClick={clearText}
+                  className="p-2.5 text-red-400 hover:bg-red-400/10 rounded-lg transition-colors border border-transparent hover:border-red-400/20"
+                  title="Clear"
+                >
+                  <IconTrash className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-700 min-h-[400px]">
-          {generatedText ? (
-            <div className="prose prose-invert max-w-none">
-              {generatedText.split("\n\n").map((para, i) => (
-                <p
-                  key={i}
-                  className="text-gray-200 text-lg leading-relaxed mb-6 last:mb-0"
-                >
-                  {para}
-                </p>
-              ))}
-            </div>
-          ) : (
-            <div className="h-full flex flex-col items-center justify-center text-gray-500 py-20">
-              <IconTypography className="w-16 h-16 opacity-10 mb-4" />
-              <p>Generate some magic text above...</p>
-            </div>
-          )}
-        </div>
+          <div className="bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-700 min-h-[400px]">
+            {generatedText ? (
+              <div className="prose prose-invert max-w-none">
+                {generatedText.split("\n\n").map((para, i) => (
+                  <p
+                    key={i}
+                    className="text-gray-200 text-lg leading-relaxed mb-6 last:mb-0"
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center text-gray-500 py-20">
+                <IconTypography className="w-16 h-16 opacity-10 mb-4" />
+                <p>Generate some magic text above...</p>
+              </div>
+            )}
+          </div>
 
-        <div className="max-w-5xl mx-auto mb-16 w-full">
-          <ToolContentDisplay
-            title={toolContent["lorem-ipsum-generator"].title}
-            intro={toolContent["lorem-ipsum-generator"].intro}
-            benefits={toolContent["lorem-ipsum-generator"].benefits}
-            useCases={toolContent["lorem-ipsum-generator"].useCases}
+          <div className="max-w-7xl mx-auto mb-16 w-full">
+            <ToolContentDisplay
+              title={toolContent["lorem-ipsum-generator"].title}
+              intro={toolContent["lorem-ipsum-generator"].intro}
+              benefits={toolContent["lorem-ipsum-generator"].benefits}
+              useCases={toolContent["lorem-ipsum-generator"].useCases}
+            />
+          </div>
+
+          <ToolInfo
+            title="Lorem Ipsum Generator"
+            description="A quick and easy way to generate standard dummy text for your mockups, websites, and design projects. Customize the output to fit your specific needs with options for paragraphs, sentences, and words."
+            features={[
+              {
+                title: "Custom Sizes",
+                description:
+                  "Generate exactly as much text as you need, from a single word to 100 paragraphs.",
+                icon: IconBolt,
+              },
+              {
+                title: "Smart Formatting",
+                description:
+                  "Sentences are properly capitalized and punctuated, and paragraphs are spaced correctly.",
+                icon: IconSearch,
+              },
+              {
+                title: "Privacy First",
+                description:
+                  "The generation logic runs entirely in your browser. No cookies, no tracking, no server calls.",
+                icon: IconLock,
+              },
+            ]}
+            steps={[
+              {
+                title: "Select Quantity",
+                description: "Choose how many items you want to generate (up to 100).",
+              },
+              {
+                title: "Choose Type",
+                description: "Pick between paragraphs, sentences, or individual words.",
+              },
+              {
+                title: "Copy & Use",
+                description:
+                  "Preview the text and use the Copy All button to take it to your project.",
+              },
+              {
+                title: "Regenerate",
+                description:
+                  "Want something different? Click regenerate to create a new set of random words.",
+              },
+            ]}
+            faqs={faqs}
           />
         </div>
 
-        <ToolInfo
-          title="Lorem Ipsum Generator"
-          description="A quick and easy way to generate standard dummy text for your mockups, websites, and design projects. Customize the output to fit your specific needs with options for paragraphs, sentences, and words."
-          features={[
-            {
-              title: "Custom Sizes",
-              description:
-                "Generate exactly as much text as you need, from a single word to 100 paragraphs.",
-              icon: IconBolt,
-            },
-            {
-              title: "Smart Formatting",
-              description:
-                "Sentences are properly capitalized and punctuated, and paragraphs are spaced correctly.",
-              icon: IconSearch,
-            },
-            {
-              title: "Privacy First",
-              description:
-                "The generation logic runs entirely in your browser. No cookies, no tracking, no server calls.",
-              icon: IconLock,
-            },
-          ]}
-          steps={[
-            {
-              title: "Select Quantity",
-              description: "Choose how many items you want to generate (up to 100).",
-            },
-            {
-              title: "Choose Type",
-              description: "Pick between paragraphs, sentences, or individual words.",
-            },
-            {
-              title: "Copy & Use",
-              description:
-                "Preview the text and use the Copy All button to take it to your project.",
-            },
-            {
-              title: "Regenerate",
-              description:
-                "Want something different? Click regenerate to create a new set of random words.",
-            },
-          ]}
-          faqs={faqs}
+        <RelatedTools
+          currentToolSlug="lorem-ipsum-generator"
+          category="Data"
         />
+        <footer className="mt-12 text-center">
+          <p className="text-gray-400 text-xs">
+            Crafted with care by{" "}
+            <a
+              href="https://sidme.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-primary hover:text-brand-hover transition-colors font-medium"
+            >
+              sidme
+            </a>
+          </p>
+        </footer>
       </div>
-
-      <RelatedTools
-        currentToolSlug="lorem-ipsum-generator"
-        category="Data"
-      />
     </div>
   );
 }

@@ -1,13 +1,7 @@
 import type { ReactNode } from "react";
 
 import Aurora from "@/components/Aurora";
-import {
-  IconBolt,
-  IconBrandGithub,
-  IconChevronRight,
-  IconLock,
-  IconSearch,
-} from "@tabler/icons-react";
+import { IconBolt, IconBrandGithub, IconChevronRight, IconLock } from "@tabler/icons-react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { easeInOut, motion } from "motion/react";
 
@@ -218,7 +212,7 @@ function App() {
                         {tool.name}
                       </h3>
                       <p className="text-gray-200 text-sm leading-relaxed">{tool.description}</p>
-                      <div className="mt-3 flex flex-wrap gap-2">
+                      {/* <div className="mt-3 flex flex-wrap gap-2">
                         {tool.keywords.slice(0, 2).map((keyword) => (
                           <span
                             key={keyword}
@@ -227,10 +221,10 @@ function App() {
                             {keyword}
                           </span>
                         ))}
-                      </div>
+                      </div> */}
                       <div className="mt-4 flex items-center text-brand-primary text-sm font-medium">
-                        <span>Open tool</span>
-                        <IconChevronRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />
+                        <span>Try it</span>
+                        <IconChevronRight className="h-5 w-5 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
                   </div>
@@ -240,21 +234,27 @@ function App() {
           </motion.div>
         </section>
 
-        <section className="max-w-6xl mx-auto mt-16 text-center">
+        <section className="max-w-6xl mx-auto my-16 md:my-32 text-center">
           <h2 className="text-2xl font-bold text-gray-100 mb-8">
             Why Choose <span className="text-brand-primary">SnapBit</span> Tools?
           </h2>
-          <div className="grid grid-cols-1  lg:grid-cols-3 gap-6 divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-brand-primary/20">
-            <FeatureCard
-              icon={<IconBolt className="text-brand-light w-6 h-6" />}
-              title="Lightning-Fast Performance"
-              description="All processing happens instantly in your browser—no server delays."
-            />
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
             <FeatureCard
               icon={<IconLock className="text-brand-light w-6 h-6" />}
               title="Complete Privacy & Security"
               description="Your files never leave your device. "
             />
+            <div className="flex items-center justify-center">
+              <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-500"></div>
+            </div>
+            <FeatureCard
+              icon={<IconBolt className="text-brand-light w-6 h-6" />}
+              title="Lightning-Fast Performance"
+              description="All processing happens instantly in your browser—no server delays."
+            />
+            <div className="flex items-center justify-center">
+              <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-500"></div>
+            </div>
             <FeatureCard
               icon={<IconBrandGithub className="text-brand-light w-6 h-6" />}
               title="100% Free & Open Source"
@@ -268,7 +268,7 @@ function App() {
           </div>
         </section>
 
-        <section className="max-w-5xl mx-auto mt-16 bg-white/5 border border-white/10 rounded-2xl p-8">
+        <section className="max-w-5xl mx-auto my-16 md:my-32  rounded-2xl p-8">
           <h3 className="text-2xl font-bold text-gray-100 mb-8 text-center">
             Who Uses <span className="text-brand-primary">SnapBit</span> Tools?
           </h3>
@@ -292,59 +292,11 @@ function App() {
           </div>
         </section>
 
-        <section className="max-w-5xl mx-auto mt-16 bg-gradient-to-r from-brand-primary/10 to-blue-500/10 border border-brand-primary/20 rounded-2xl p-8">
-          <h3 className="text-2xl font-bold text-gray-100 mb-6">
-            Why Browser-Based Processing Matters
-          </h3>
-          <ul className="space-y-4">
-            <li className="flex items-start gap-4">
-              <span className="text-brand-primary font-bold text-xl mt-1">✓</span>
-              <div>
-                <h4 className="text-gray-100 font-semibold mb-1">Privacy First</h4>
-                <p className="text-gray-300 text-sm">
-                  No file uploads to servers, no data collection, no tracking. Your files never
-                  leave your device.
-                </p>
-              </div>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="text-brand-primary font-bold text-xl mt-1">✓</span>
-              <div>
-                <h4 className="text-gray-100 font-semibold mb-1">Lightning Fast</h4>
-                <p className="text-gray-300 text-sm">
-                  Real-time processing without server latency. Convert, format, and optimize files
-                  instantly.
-                </p>
-              </div>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="text-brand-primary font-bold text-xl mt-1">✓</span>
-              <div>
-                <h4 className="text-gray-100 font-semibold mb-1">Works Offline</h4>
-                <p className="text-gray-300 text-sm">
-                  After initial page load, all tools work without internet connection. Perfect for
-                  airplane mode and disconnected environments.
-                </p>
-              </div>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="text-brand-primary font-bold text-xl mt-1">✓</span>
-              <div>
-                <h4 className="text-gray-100 font-semibold mb-1">No Limits</h4>
-                <p className="text-gray-300 text-sm">
-                  No file size restrictions, no daily conversion limits, no watermarks—unlimited
-                  usage forever free.
-                </p>
-              </div>
-            </li>
-          </ul>
-        </section>
-
         <section className="max-w-5xl mx-auto mt-16 text-center bg-white/5 border border-white/10 rounded-2xl p-8">
           <h3 className="text-2xl font-semibold text-gray-100 mb-2">
             Everything You Need for Image Processing & Data Conversion
           </h3>
-          <p className="text-gray-400 mt-3 mb-6">
+          <p className="text-gray-400 tracking-normal leading-5 text-sm mt-3 mb-6">
             From converting images to Base64 encoding, compressing photos to reduce file size,
             formatting JSON data, to converting spreadsheets—our comprehensive suite handles all
             your file conversion and processing needs with professional results, all in your
@@ -419,7 +371,7 @@ function FeatureCard({
 
 function UseCaseCard({ title, description }: { title: string; description: string }) {
   return (
-    <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-brand-primary/50 transition-all">
+    <div className="bg-white/ rounded-xl p-6 hover:bg-white/10  transition-all">
       <h4 className="text-lg font-bold text-gray-100 mb-2">{title}</h4>
       <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
     </div>

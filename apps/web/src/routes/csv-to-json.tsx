@@ -16,6 +16,7 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
   {
@@ -206,6 +207,7 @@ function RouteComponent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col">
+      <Breadcrumbs />
       <div className="text-center mb-8 max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-100 mb-2">
           CSV to <span className="text-brand-primary">JSON</span>
@@ -215,7 +217,7 @@ function RouteComponent() {
         </p>
       </div>
 
-      <div className="flex-1 max-w-9xl w-full mx-auto">
+      <div className="flex-1 max-w-7xl w-full mx-auto">
         <div className="bg-gray-800 rounded-xl shadow-lg p-4 mb-6">
           <div className="flex flex-wrap gap-3 justify-center items-center">
             <input
@@ -362,7 +364,7 @@ function RouteComponent() {
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto mb-16 w-full">
+        <div className="max-w-7xl mx-auto mb-16 w-full">
           <ToolContentDisplay
             title={toolContent["csv-to-json"].title}
             intro={toolContent["csv-to-json"].intro}

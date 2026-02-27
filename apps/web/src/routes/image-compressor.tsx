@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { getSeoMetadata } from "@/lib/seo";
 import ImageCompressorWorker from "../workers/imageCompressor.worker.ts?worker";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
   {
@@ -317,321 +318,325 @@ function RouteComponent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center">
-      <div className="text-center mb-8 max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-100 mb-2">
-          Compress <span className="text-brand-primary">Images</span>
-        </h1>
-        <p className="text-lg text-gray-200">
-          Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while
-          preserving quality. 100% client-side—your files never leave.
-        </p>
-      </div>
-
-      <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
-        <div className="bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
-          {files.length === 0 ? (
-            <>
-              <div
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                  isDragging
-                    ? "border-brand-primary bg-brand-primary/20"
-                    : "border-gray-600 hover:border-brand-primary/40 hover:bg-gray-700"
-                }`}
-              >
-                <div className="flex flex-col items-center space-y-4">
-                  <IconCloudUpload
-                    className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`}
-                  />
-                  <div>
-                    <p className="text-xl font-medium text-gray-100 mb-2">
-                      {isDragging ? "Drop your images here" : "Drag & drop your images here"}
-                    </p>
-                    <p className="text-gray-400 mb-4">or</p>
-                    <button
-                      onClick={() => fileInputRef.current?.click()}
-                      className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
-                    >
-                      Choose Files
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
-                <IconLock className="w-4 h-4" /> Your files stay on your device. Nothing is uploaded
-                to any server.
-              </p>
-
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                ref={fileInputRef}
-                className="hidden"
-                onChange={handleFileChange}
-              />
-            </>
-          ) : (
-            <>
-              <div className="">
-                <h3 className="text-lg font-semibold text-gray-100 mb-4">Compression Settings</h3>
-                <div className="mb-4">
-                  <label className="flex items-center space-x-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={preserveFormat}
-                      onChange={(e) => setPreserveFormat(e.target.checked)}
-                      className="w-4 h-4 text-brand-primary bg-gray-700 border-gray-600 rounded focus:ring-brand-primary"
-                    />
-                    <span className="text-sm font-medium text-gray-200">
-                      Preserve original format
-                    </span>
-                  </label>
-                  <p className="text-xs text-gray-400 mt-1">
-                    {preserveFormat
-                      ? "Keep original file formats (PNG, JPEG, etc.)"
-                      : "Convert all images to JPEG for better compression"}
-                  </p>
-                </div>
-
-                {(!preserveFormat || files.some((f) => f.mimeType === "image/jpeg")) && (
-                  <div className="mb-4">
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="text-sm font-medium text-gray-200">
-                        Quality {!preserveFormat ? "" : "(JPEG only)"}
-                      </label>
-                      <span className="text-sm text-brand-primary font-medium">
-                        {Math.round(quality * 100)}%
-                      </span>
-                    </div>
-                    <input
-                      type="range"
-                      min="0.1"
-                      max="1"
-                      step="0.05"
-                      value={quality}
-                      onChange={(e) => setQuality(parseFloat(e.target.value))}
-                      className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
-                    />
-                    <div className="flex justify-between text-xs text-gray-400 mt-1">
-                      <span>Lower quality</span>
-                      <span>Higher quality</span>
-                    </div>
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-200 mb-1">
-                      Max Width (px)
-                    </label>
-                    <input
-                      type="number"
-                      value={maxWidth}
-                      onChange={(e) => setMaxWidth(parseInt(e.target.value) || 1920)}
-                      min="100"
-                      max="4000"
-                      className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-200 mb-1">
-                      Max Height (px)
-                    </label>
-                    <input
-                      type="number"
-                      value={maxHeight}
-                      onChange={(e) => setMaxHeight(parseInt(e.target.value) || 1080)}
-                      min="100"
-                      max="4000"
-                      className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="w-full flex justify-between items-center mb-3">
-                <h3 className="text-xl font-semibold text-gray-100 mb-4">Files ({files.length})</h3>
-                {files.length > 0 && (
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={clearAll}
-                      className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200"
-                    >
-                      Clear All
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-3">
-                {files.map((file) => (
-                  <div
-                    key={file.id}
-                    className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700"
-                  >
-                    <div className="mr-4 flex-shrink-0">
-                      <img
-                        src={file.preview}
-                        alt={file.name}
-                        className="w-16 h-16 object-contain rounded-md"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <p className="font-medium text-gray-100 truncate">{file.name}</p>
-                      </div>
-                      <div className="flex items-center space-x-4 mt-1 flex-wrap">
-                        <span className="text-xs text-gray-400">
-                          {formatFileSize(file.originalSize)} &rarr;
-                          {file.compressedSize && (
-                            <>
-                              <span className="text-xs bg-green-900 text-green-300">
-                                {formatFileSize(file.compressedSize)}
-                              </span>
-                            </>
-                          )}
-                        </span>
-
-                        {file.error && <span className="text-xs text-red-400">{file.error}</span>}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center space-x-3 ml-4">
-                      {file.status === "ready" && (
-                        <span className="text-gray-400 text-sm">Ready</span>
-                      )}
-                      {file.status === "compressing" && (
-                        <div className="flex items-center space-x-2">
-                          <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
-                          <span className="text-brand-primary text-sm">Compressing...</span>
-                        </div>
-                      )}
-                      {file.status === "completed" && (
-                        <div className="flex items-center space-x-2">
-                          {/* <IconCheck className="w-4 h-4 text-green-400" /> */}
-                          <button
-                            onClick={() => downloadFile(file)}
-                            className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
-                          >
-                            <IconDownload className="w-4 h-4" />
-                          </button>
-                        </div>
-                      )}
-                      {file.status === "error" && (
-                        <div className="flex items-center space-x-2">
-                          <IconCircleX className="w-4 h-4 text-red-400" />
-                          <span className="text-red-400 text-sm">Failed</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {completedCount > 0 && (
-                <div className="mt-6 w-full flex justify-end">
-                  <button
-                    onClick={downloadAllAsZip}
-                    disabled={isDownloadingZip}
-                    className="px-4 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
-                  >
-                    {isDownloadingZip ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-green-300 border-t-transparent rounded-full animate-spin"></div>
-                        <span>Creating ZIP...</span>
-                      </>
-                    ) : (
-                      <>
-                        <IconDownload className="w-4 h-4" />
-                        <span>Download ZIP ({completedCount})</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              )}
-            </>
-          )}
+      <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
+        <Breadcrumbs />
+        <div className="text-center mb-8 max-w-5xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-100 mb-2">
+            Compress <span className="text-brand-primary">Images</span>
+          </h1>
+          <p className="text-lg text-gray-200">
+            Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while
+            preserving quality. 100% client-side—your files never leave.
+          </p>
         </div>
 
-        <div className="max-w-5xl mx-auto mb-16 w-full">
-          <ToolContentDisplay
-            title={toolContent["image-compressor"].title}
-            intro={toolContent["image-compressor"].intro}
-            benefits={toolContent["image-compressor"].benefits}
-            useCases={toolContent["image-compressor"].useCases}
+        <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
+          <div className="bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
+            {files.length === 0 ? (
+              <>
+                <div
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
+                    isDragging
+                      ? "border-brand-primary bg-brand-primary/20"
+                      : "border-gray-600 hover:border-brand-primary/40 hover:bg-gray-700"
+                  }`}
+                >
+                  <div className="flex flex-col items-center space-y-4">
+                    <IconCloudUpload
+                      className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`}
+                    />
+                    <div>
+                      <p className="text-xl font-medium text-gray-100 mb-2">
+                        {isDragging ? "Drop your images here" : "Drag & drop your images here"}
+                      </p>
+                      <p className="text-gray-400 mb-4">or</p>
+                      <button
+                        onClick={() => fileInputRef.current?.click()}
+                        className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                      >
+                        Choose Files
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
+                  <IconLock className="w-4 h-4" /> Your files stay on your device. Nothing is
+                  uploaded to any server.
+                </p>
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  ref={fileInputRef}
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </>
+            ) : (
+              <>
+                <div className="">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-4">Compression Settings</h3>
+                  <div className="mb-4">
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={preserveFormat}
+                        onChange={(e) => setPreserveFormat(e.target.checked)}
+                        className="w-4 h-4 text-brand-primary bg-gray-700 border-gray-600 rounded focus:ring-brand-primary"
+                      />
+                      <span className="text-sm font-medium text-gray-200">
+                        Preserve original format
+                      </span>
+                    </label>
+                    <p className="text-xs text-gray-400 mt-1">
+                      {preserveFormat
+                        ? "Keep original file formats (PNG, JPEG, etc.)"
+                        : "Convert all images to JPEG for better compression"}
+                    </p>
+                  </div>
+
+                  {(!preserveFormat || files.some((f) => f.mimeType === "image/jpeg")) && (
+                    <div className="mb-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <label className="text-sm font-medium text-gray-200">
+                          Quality {!preserveFormat ? "" : "(JPEG only)"}
+                        </label>
+                        <span className="text-sm text-brand-primary font-medium">
+                          {Math.round(quality * 100)}%
+                        </span>
+                      </div>
+                      <input
+                        type="range"
+                        min="0.1"
+                        max="1"
+                        step="0.05"
+                        value={quality}
+                        onChange={(e) => setQuality(parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
+                      />
+                      <div className="flex justify-between text-xs text-gray-400 mt-1">
+                        <span>Lower quality</span>
+                        <span>Higher quality</span>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-200 mb-1">
+                        Max Width (px)
+                      </label>
+                      <input
+                        type="number"
+                        value={maxWidth}
+                        onChange={(e) => setMaxWidth(parseInt(e.target.value) || 1920)}
+                        min="100"
+                        max="4000"
+                        className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-200 mb-1">
+                        Max Height (px)
+                      </label>
+                      <input
+                        type="number"
+                        value={maxHeight}
+                        onChange={(e) => setMaxHeight(parseInt(e.target.value) || 1080)}
+                        min="100"
+                        max="4000"
+                        className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full flex justify-between items-center mb-3">
+                  <h3 className="text-xl font-semibold text-gray-100 mb-4">
+                    Files ({files.length})
+                  </h3>
+                  {files.length > 0 && (
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={clearAll}
+                        className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200"
+                      >
+                        Clear All
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-3">
+                  {files.map((file) => (
+                    <div
+                      key={file.id}
+                      className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700"
+                    >
+                      <div className="mr-4 flex-shrink-0">
+                        <img
+                          src={file.preview}
+                          alt={file.name}
+                          className="w-16 h-16 object-contain rounded-md"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center space-x-2 mb-1">
+                          <p className="font-medium text-gray-100 truncate">{file.name}</p>
+                        </div>
+                        <div className="flex items-center space-x-4 mt-1 flex-wrap">
+                          <span className="text-xs text-gray-400">
+                            {formatFileSize(file.originalSize)} &rarr;
+                            {file.compressedSize && (
+                              <>
+                                <span className="text-xs bg-green-900 text-green-300">
+                                  {formatFileSize(file.compressedSize)}
+                                </span>
+                              </>
+                            )}
+                          </span>
+
+                          {file.error && <span className="text-xs text-red-400">{file.error}</span>}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-3 ml-4">
+                        {file.status === "ready" && (
+                          <span className="text-gray-400 text-sm">Ready</span>
+                        )}
+                        {file.status === "compressing" && (
+                          <div className="flex items-center space-x-2">
+                            <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
+                            <span className="text-brand-primary text-sm">Compressing...</span>
+                          </div>
+                        )}
+                        {file.status === "completed" && (
+                          <div className="flex items-center space-x-2">
+                            {/* <IconCheck className="w-4 h-4 text-green-400" /> */}
+                            <button
+                              onClick={() => downloadFile(file)}
+                              className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
+                            >
+                              <IconDownload className="w-4 h-4" />
+                            </button>
+                          </div>
+                        )}
+                        {file.status === "error" && (
+                          <div className="flex items-center space-x-2">
+                            <IconCircleX className="w-4 h-4 text-red-400" />
+                            <span className="text-red-400 text-sm">Failed</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {completedCount > 0 && (
+                  <div className="mt-6 w-full flex justify-end">
+                    <button
+                      onClick={downloadAllAsZip}
+                      disabled={isDownloadingZip}
+                      className="px-4 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
+                    >
+                      {isDownloadingZip ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-green-300 border-t-transparent rounded-full animate-spin"></div>
+                          <span>Creating ZIP...</span>
+                        </>
+                      ) : (
+                        <>
+                          <IconDownload className="w-4 h-4" />
+                          <span>Download ZIP ({completedCount})</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+
+          <div className="max-w-7xl mx-auto mb-16 w-full">
+            <ToolContentDisplay
+              title={toolContent["image-compressor"].title}
+              intro={toolContent["image-compressor"].intro}
+              benefits={toolContent["image-compressor"].benefits}
+              useCases={toolContent["image-compressor"].useCases}
+            />
+          </div>
+
+          <ToolInfo
+            title="Image Compressor"
+            description="Our Image Compressor helps you significantly reduce the file size of your images without sacrificing visible quality. By utilizing advanced browser-based compression algorithms, you can optimize your PNG, JPEG, and WebP files for faster web loading and reduced storage usage."
+            features={[
+              {
+                title: "Quality Control",
+                description:
+                  "Fine-tune the compression level to find the perfect balance between file size and image clarity.",
+                icon: IconBolt,
+              },
+              {
+                title: "Privacy Guaranteed",
+                description:
+                  "Processing happens entirely in your browser. No images are ever uploaded to a server.",
+                icon: IconLock,
+              },
+              {
+                title: "Bulk Compression",
+                description:
+                  "Compress dozens of images simultaneously and download them all at once in a ZIP file.",
+                icon: IconArrowsMinimize,
+              },
+            ]}
+            steps={[
+              {
+                title: "Add Images",
+                description:
+                  "Drop your images into the compression zone or use the file picker to select them.",
+              },
+              {
+                title: "Adjust Settings",
+                description:
+                  "Set your desired quality and maximum dimensions to optimize your images further.",
+              },
+              {
+                title: "Review Savings",
+                description:
+                  "Instantly see how much space you have saved for each image after compression.",
+              },
+              {
+                title: "Download All",
+                description:
+                  "Download individual optimized images or grab the entire batch as a ZIP archive.",
+              },
+            ]}
+            faqs={faqs}
           />
         </div>
 
-        <ToolInfo
-          title="Image Compressor"
-          description="Our Image Compressor helps you significantly reduce the file size of your images without sacrificing visible quality. By utilizing advanced browser-based compression algorithms, you can optimize your PNG, JPEG, and WebP files for faster web loading and reduced storage usage."
-          features={[
-            {
-              title: "Quality Control",
-              description:
-                "Fine-tune the compression level to find the perfect balance between file size and image clarity.",
-              icon: IconBolt,
-            },
-            {
-              title: "Privacy Guaranteed",
-              description:
-                "Processing happens entirely in your browser. No images are ever uploaded to a server.",
-              icon: IconLock,
-            },
-            {
-              title: "Bulk Compression",
-              description:
-                "Compress dozens of images simultaneously and download them all at once in a ZIP file.",
-              icon: IconArrowsMinimize,
-            },
-          ]}
-          steps={[
-            {
-              title: "Add Images",
-              description:
-                "Drop your images into the compression zone or use the file picker to select them.",
-            },
-            {
-              title: "Adjust Settings",
-              description:
-                "Set your desired quality and maximum dimensions to optimize your images further.",
-            },
-            {
-              title: "Review Savings",
-              description:
-                "Instantly see how much space you have saved for each image after compression.",
-            },
-            {
-              title: "Download All",
-              description:
-                "Download individual optimized images or grab the entire batch as a ZIP archive.",
-            },
-          ]}
-          faqs={faqs}
+        <RelatedTools
+          currentToolSlug="image-compressor"
+          category="Images"
         />
-      </div>
 
-      <RelatedTools
-        currentToolSlug="image-compressor"
-        category="Images"
-      />
+        <div className="mt-8">
+          <p className="text-gray-400 text-xs text-center">
+            Crafted with care by{" "}
+            <a
+              href="https://sidme.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-primary hover:text-brand-hover transition-colors"
+            >
+              sidme
+            </a>
+          </p>
+        </div>
 
-      <div className="mt-8">
-        <p className="text-gray-400 text-xs text-center">
-          Crafted with care by{" "}
-          <a
-            href="https://sidme.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-primary hover:text-brand-hover transition-colors"
-          >
-            sidme
-          </a>
-        </p>
-      </div>
-
-      <style>{`
+        <style>{`
         .slider::-webkit-slider-thumb {
           appearance: none;
           height: 20px;
@@ -649,6 +654,7 @@ function RouteComponent() {
           border: none;
         }
       `}</style>
+      </div>
     </div>
   );
 }

@@ -43,7 +43,7 @@ export default function ToolContentDisplay({
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="w-full max-w-5xl mx-auto mt-8 mb-12 space-y-8"
+      className="w-full max-w-7xl mx-auto mt-8 mb-12 space-y-8"
     >
       {/* H1 Title */}
       <motion.h1

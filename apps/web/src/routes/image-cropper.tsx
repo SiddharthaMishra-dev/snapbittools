@@ -16,6 +16,7 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
   {
@@ -521,277 +522,280 @@ function RouteComponent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center">
-      <div className="text-center mb-8 max-w-5xl mx-auto">
-        <h1 className="text-2xl font-bold text-gray-100 mb-2">
-          Image <span className="text-brand-primary">Cropper</span>
-        </h1>
-        <p className="text-md text-gray-200">
-          Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.
-        </p>
-      </div>
-
-      <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
-        <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl">
-          {!image ? (
-            <>
-              <div
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                  isDragging
-                    ? "border-brand-primary bg-brand-primary/20"
-                    : "border-gray-600 hover:border-brand-primary/40 hover:bg-gray-700"
-                }`}
-              >
-                <div className="flex flex-col items-center space-y-4">
-                  <IconCloudUpload
-                    className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`}
-                  />
-                  <div>
-                    <p className="text-xl font-medium text-gray-100 mb-2">
-                      {isDragging ? "Drop your image here" : "Drag & drop your image here"}
-                    </p>
-                    <p className="text-gray-400 mb-4">or</p>
-                    <button
-                      onClick={() => fileInputRef.current?.click()}
-                      disabled={isUploading}
-                      className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover disabled:opacity-50 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
-                    >
-                      {isUploading ? "Loading..." : "Choose Image"}
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
-                🔒 Your files stay on your device. Nothing is uploaded to any server.
-              </p>
-
-              <input
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                className="hidden"
-                onChange={handleFileUpload}
-              />
-            </>
-          ) : (
-            <>
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-100 mb-4">Crop Controls</h3>
-
-                <div className="flex flex-wrap items-center gap-4 mb-4">
-                  <button
-                    onClick={() => setRotation((prev) => (prev + 90) % 360)}
-                    className="flex items-center space-x-2 px-3 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors"
-                  >
-                    <IconRotateClockwise className="w-4 h-4" />
-                    <span>Rotate</span>
-                  </button>
-
-                  <button
-                    onClick={() => setFlipHorizontal(!flipHorizontal)}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                      flipHorizontal
-                        ? "bg-brand-primary text-white"
-                        : "bg-gray-700 text-gray-100 hover:bg-gray-600"
-                    }`}
-                  >
-                    <IconFlipHorizontal className="w-4 h-4" />
-                    <span>Flip H</span>
-                  </button>
-
-                  <button
-                    onClick={() => setFlipVertical(!flipVertical)}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                      flipVertical
-                        ? "bg-brand-primary text-white"
-                        : "bg-gray-700 text-gray-100 hover:bg-gray-600"
-                    }`}
-                  >
-                    <IconFlipVertical className="w-4 h-4" />
-                    <span>Flip V</span>
-                  </button>
-                  <button
-                    onClick={handleCropVisible}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                      isCrop
-                        ? "bg-brand-primary text-white"
-                        : "bg-gray-700 text-gray-100 hover:bg-gray-600"
-                    }`}
-                  >
-                    <IconCrop className="w-4 h-4" />
-                    <span>{isCrop ? "Hide Crop" : "Show Crop"}</span>
-                  </button>
-                </div>
-
-                {isCrop && (
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                    <div>
-                      <label className="block text-gray-300 mb-1">X Position</label>
-                      <input
-                        type="number"
-                        value={Math.round(cropArea.x)}
-                        onChange={(e) =>
-                          setCropArea({
-                            ...cropArea,
-                            x: Math.max(0, parseInt(e.target.value) || 0),
-                          })
-                        }
-                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-gray-300 mb-1">Y Position</label>
-                      <input
-                        type="number"
-                        value={Math.round(cropArea.y)}
-                        onChange={(e) =>
-                          setCropArea({
-                            ...cropArea,
-                            y: Math.max(0, parseInt(e.target.value) || 0),
-                          })
-                        }
-                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-gray-300 mb-1">Width</label>
-                      <input
-                        type="number"
-                        value={Math.round(cropArea.width)}
-                        onChange={(e) =>
-                          setCropArea({
-                            ...cropArea,
-                            width: Math.max(20, parseInt(e.target.value) || 20),
-                          })
-                        }
-                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-gray-300 mb-1">Height</label>
-                      <input
-                        type="number"
-                        value={Math.round(cropArea.height)}
-                        onChange={(e) =>
-                          setCropArea({
-                            ...cropArea,
-                            height: Math.max(20, parseInt(e.target.value) || 20),
-                          })
-                        }
-                        className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <div className="mb-6 flex justify-center">
-                <canvas
-                  ref={canvasRef}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
-                  className="border-2 border-gray-600 rounded-lg cursor-default"
-                />
-              </div>
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={resetImage}
-                  className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200"
-                >
-                  Clear Image
-                </button>
-
-                <button
-                  onClick={downloadCroppedImage}
-                  disabled={!isCrop}
-                  className="px-6 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
-                >
-                  <IconDownload className="w-4 h-4" />
-                  <span>Download Cropped Image</span>
-                </button>
-              </div>
-            </>
-          )}
+      <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
+        <Breadcrumbs />
+        <div className="text-center mb-8 max-w-5xl mx-auto">
+          <h1 className="text-2xl font-bold text-gray-100 mb-2">
+            Image <span className="text-brand-primary">Cropper</span>
+          </h1>
+          <p className="text-md text-gray-200">
+            Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.
+          </p>
         </div>
 
-        <div className="max-w-5xl mx-auto mb-16 w-full">
-          <ToolContentDisplay
-            title={toolContent["image-cropper"].title}
-            intro={toolContent["image-cropper"].intro}
-            benefits={toolContent["image-cropper"].benefits}
-            useCases={toolContent["image-cropper"].useCases}
+        <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
+          <div className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl">
+            {!image ? (
+              <>
+                <div
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
+                    isDragging
+                      ? "border-brand-primary bg-brand-primary/20"
+                      : "border-gray-600 hover:border-brand-primary/40 hover:bg-gray-700"
+                  }`}
+                >
+                  <div className="flex flex-col items-center space-y-4">
+                    <IconCloudUpload
+                      className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`}
+                    />
+                    <div>
+                      <p className="text-xl font-medium text-gray-100 mb-2">
+                        {isDragging ? "Drop your image here" : "Drag & drop your image here"}
+                      </p>
+                      <p className="text-gray-400 mb-4">or</p>
+                      <button
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={isUploading}
+                        className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover disabled:opacity-50 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                      >
+                        {isUploading ? "Loading..." : "Choose Image"}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
+                  🔒 Your files stay on your device. Nothing is uploaded to any server.
+                </p>
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  className="hidden"
+                  onChange={handleFileUpload}
+                />
+              </>
+            ) : (
+              <>
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-4">Crop Controls</h3>
+
+                  <div className="flex flex-wrap items-center gap-4 mb-4">
+                    <button
+                      onClick={() => setRotation((prev) => (prev + 90) % 360)}
+                      className="flex items-center space-x-2 px-3 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors"
+                    >
+                      <IconRotateClockwise className="w-4 h-4" />
+                      <span>Rotate</span>
+                    </button>
+
+                    <button
+                      onClick={() => setFlipHorizontal(!flipHorizontal)}
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                        flipHorizontal
+                          ? "bg-brand-primary text-white"
+                          : "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                      }`}
+                    >
+                      <IconFlipHorizontal className="w-4 h-4" />
+                      <span>Flip H</span>
+                    </button>
+
+                    <button
+                      onClick={() => setFlipVertical(!flipVertical)}
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                        flipVertical
+                          ? "bg-brand-primary text-white"
+                          : "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                      }`}
+                    >
+                      <IconFlipVertical className="w-4 h-4" />
+                      <span>Flip V</span>
+                    </button>
+                    <button
+                      onClick={handleCropVisible}
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                        isCrop
+                          ? "bg-brand-primary text-white"
+                          : "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                      }`}
+                    >
+                      <IconCrop className="w-4 h-4" />
+                      <span>{isCrop ? "Hide Crop" : "Show Crop"}</span>
+                    </button>
+                  </div>
+
+                  {isCrop && (
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                      <div>
+                        <label className="block text-gray-300 mb-1">X Position</label>
+                        <input
+                          type="number"
+                          value={Math.round(cropArea.x)}
+                          onChange={(e) =>
+                            setCropArea({
+                              ...cropArea,
+                              x: Math.max(0, parseInt(e.target.value) || 0),
+                            })
+                          }
+                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-gray-300 mb-1">Y Position</label>
+                        <input
+                          type="number"
+                          value={Math.round(cropArea.y)}
+                          onChange={(e) =>
+                            setCropArea({
+                              ...cropArea,
+                              y: Math.max(0, parseInt(e.target.value) || 0),
+                            })
+                          }
+                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-gray-300 mb-1">Width</label>
+                        <input
+                          type="number"
+                          value={Math.round(cropArea.width)}
+                          onChange={(e) =>
+                            setCropArea({
+                              ...cropArea,
+                              width: Math.max(20, parseInt(e.target.value) || 20),
+                            })
+                          }
+                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-gray-300 mb-1">Height</label>
+                        <input
+                          type="number"
+                          value={Math.round(cropArea.height)}
+                          onChange={(e) =>
+                            setCropArea({
+                              ...cropArea,
+                              height: Math.max(20, parseInt(e.target.value) || 20),
+                            })
+                          }
+                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mb-6 flex justify-center">
+                  <canvas
+                    ref={canvasRef}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                    className="border-2 border-gray-600 rounded-lg cursor-default"
+                  />
+                </div>
+                <div className="flex justify-between items-center">
+                  <button
+                    onClick={resetImage}
+                    className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200"
+                  >
+                    Clear Image
+                  </button>
+
+                  <button
+                    onClick={downloadCroppedImage}
+                    disabled={!isCrop}
+                    className="px-6 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
+                  >
+                    <IconDownload className="w-4 h-4" />
+                    <span>Download Cropped Image</span>
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="max-w-7xl mx-auto mb-16 w-full">
+            <ToolContentDisplay
+              title={toolContent["image-cropper"].title}
+              intro={toolContent["image-cropper"].intro}
+              benefits={toolContent["image-cropper"].benefits}
+              useCases={toolContent["image-cropper"].useCases}
+            />
+          </div>
+
+          <ToolInfo
+            title="Image Cropper"
+            description="Our Image Cropper provides professional-grade image editing capabilities directly in your browser. Easily crop to specific aspect ratios, rotate images for better alignment, or flip them horizontally and vertically to get the perfect composition."
+            features={[
+              {
+                title: "Precision Editing",
+                description:
+                  "Manually adjust crop coordinates and dimensions or use the intuitive on-canvas handles for visual editing.",
+                icon: IconCrop,
+              },
+              {
+                title: "Transformation Tools",
+                description:
+                  "Rotate images in 90-degree increments and flip them along both axes with a single click.",
+                icon: IconArrowsMaximize,
+              },
+              {
+                title: "Zero Uploads",
+                description:
+                  "Edit your photos with full confidence in your privacy. No data ever leaves your device.",
+                icon: IconLock,
+              },
+            ]}
+            steps={[
+              {
+                title: "Upload Image",
+                description:
+                  "Select an image from your device or use drag and drop to start editing.",
+              },
+              {
+                title: "Toggle Crop",
+                description: 'Click "Show Crop" to activate the cropping boundary on your image.',
+              },
+              {
+                title: "Adjust Boundary",
+                description:
+                  "Drag the crop box or use the corner handles to select the area you want to keep.",
+              },
+              {
+                title: "Save & Download",
+                description:
+                  "Configure your export options like format or quality and download your final cropped image.",
+              },
+            ]}
+            faqs={faqs}
           />
         </div>
 
-        <ToolInfo
-          title="Image Cropper"
-          description="Our Image Cropper provides professional-grade image editing capabilities directly in your browser. Easily crop to specific aspect ratios, rotate images for better alignment, or flip them horizontally and vertically to get the perfect composition."
-          features={[
-            {
-              title: "Precision Editing",
-              description:
-                "Manually adjust crop coordinates and dimensions or use the intuitive on-canvas handles for visual editing.",
-              icon: IconCrop,
-            },
-            {
-              title: "Transformation Tools",
-              description:
-                "Rotate images in 90-degree increments and flip them along both axes with a single click.",
-              icon: IconArrowsMaximize,
-            },
-            {
-              title: "Zero Uploads",
-              description:
-                "Edit your photos with full confidence in your privacy. No data ever leaves your device.",
-              icon: IconLock,
-            },
-          ]}
-          steps={[
-            {
-              title: "Upload Image",
-              description:
-                "Select an image from your device or use drag and drop to start editing.",
-            },
-            {
-              title: "Toggle Crop",
-              description: 'Click "Show Crop" to activate the cropping boundary on your image.',
-            },
-            {
-              title: "Adjust Boundary",
-              description:
-                "Drag the crop box or use the corner handles to select the area you want to keep.",
-            },
-            {
-              title: "Save & Download",
-              description:
-                "Configure your export options like format or quality and download your final cropped image.",
-            },
-          ]}
-          faqs={faqs}
+        <RelatedTools
+          currentToolSlug="image-cropper"
+          category="Images"
         />
-      </div>
 
-      <RelatedTools
-        currentToolSlug="image-cropper"
-        category="Images"
-      />
-
-      <div className="mt-8">
-        <p className="text-gray-400 text-xs text-center">
-          Crafted with care by{" "}
-          <a
-            href="https://sidme.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-primary hover:text-brand-hover transition-colors"
-          >
-            sidme
-          </a>
-        </p>
+        <div className="mt-8">
+          <p className="text-gray-400 text-xs text-center">
+            Crafted with care by{" "}
+            <a
+              href="https://sidme.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-primary hover:text-brand-hover transition-colors"
+            >
+              sidme
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

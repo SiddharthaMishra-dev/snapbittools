@@ -17,6 +17,7 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
 import { computeDiff, DiffLine } from "@/lib/diffFn";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
   {
@@ -95,6 +96,7 @@ function RouteComponent() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
+        <Breadcrumbs />
         <div className="text-center mb-10 max-w-5xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-100 mb-3">
             Diff <span className="text-brand-primary">Checker</span>

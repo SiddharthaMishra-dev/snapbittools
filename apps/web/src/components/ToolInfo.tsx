@@ -72,7 +72,7 @@ export default function ToolInfo({
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="w-full max-w-5xl mx-auto mt-2 space-y-16 pb-16"
+      className="w-full max-w-7xl mx-auto mt-2 space-y-16 pb-16"
     >
       {/* <motion.div variants={itemVariants} className="text-center space-y-4">
                 <h2 className="text-3xl font-bold text-gray-100">What is {title}?</h2>
