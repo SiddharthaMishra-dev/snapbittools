@@ -11,9 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WordCounterRouteImport } from './routes/word-counter'
 import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as PngToWebpRouteImport } from './routes/png-to-webp'
+import { Route as PngToJpgRouteImport } from './routes/png-to-jpg'
 import { Route as LoremIpsumGeneratorRouteImport } from './routes/lorem-ipsum-generator'
 import { Route as JsonToCsvRouteImport } from './routes/json-to-csv'
+import { Route as JsonPrettyPrintRouteImport } from './routes/json-pretty-print'
 import { Route as JsonFormatterRouteImport } from './routes/json-formatter'
+import { Route as JpgToPngRouteImport } from './routes/jpg-to-png'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as ImageToBase64RouteImport } from './routes/image-to-base64'
 import { Route as ImageFormatConverterRouteImport } from './routes/image-format-converter'
@@ -22,6 +26,7 @@ import { Route as ImageCompressorRouteImport } from './routes/image-compressor'
 import { Route as DiffCheckerRouteImport } from './routes/diff-checker'
 import { Route as CsvXlsxConverterRouteImport } from './routes/csv-xlsx-converter'
 import { Route as CsvToJsonRouteImport } from './routes/csv-to-json'
+import { Route as CompressImageTo100kbRouteImport } from './routes/compress-image-to-100kb'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WordCounterRoute = WordCounterRouteImport.update({
@@ -34,6 +39,16 @@ const ToolsRoute = ToolsRouteImport.update({
   path: '/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PngToWebpRoute = PngToWebpRouteImport.update({
+  id: '/png-to-webp',
+  path: '/png-to-webp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PngToJpgRoute = PngToJpgRouteImport.update({
+  id: '/png-to-jpg',
+  path: '/png-to-jpg',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoremIpsumGeneratorRoute = LoremIpsumGeneratorRouteImport.update({
   id: '/lorem-ipsum-generator',
   path: '/lorem-ipsum-generator',
@@ -44,9 +59,19 @@ const JsonToCsvRoute = JsonToCsvRouteImport.update({
   path: '/json-to-csv',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JsonPrettyPrintRoute = JsonPrettyPrintRouteImport.update({
+  id: '/json-pretty-print',
+  path: '/json-pretty-print',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JsonFormatterRoute = JsonFormatterRouteImport.update({
   id: '/json-formatter',
   path: '/json-formatter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JpgToPngRoute = JpgToPngRouteImport.update({
+  id: '/jpg-to-png',
+  path: '/jpg-to-png',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImageToPdfRoute = ImageToPdfRouteImport.update({
@@ -89,6 +114,11 @@ const CsvToJsonRoute = CsvToJsonRouteImport.update({
   path: '/csv-to-json',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompressImageTo100kbRoute = CompressImageTo100kbRouteImport.update({
+  id: '/compress-image-to-100kb',
+  path: '/compress-image-to-100kb',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -97,6 +127,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compress-image-to-100kb': typeof CompressImageTo100kbRoute
   '/csv-to-json': typeof CsvToJsonRoute
   '/csv-xlsx-converter': typeof CsvXlsxConverterRoute
   '/diff-checker': typeof DiffCheckerRoute
@@ -105,14 +136,19 @@ export interface FileRoutesByFullPath {
   '/image-format-converter': typeof ImageFormatConverterRoute
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
+  '/jpg-to-png': typeof JpgToPngRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/json-pretty-print': typeof JsonPrettyPrintRoute
   '/json-to-csv': typeof JsonToCsvRoute
   '/lorem-ipsum-generator': typeof LoremIpsumGeneratorRoute
+  '/png-to-jpg': typeof PngToJpgRoute
+  '/png-to-webp': typeof PngToWebpRoute
   '/tools': typeof ToolsRoute
   '/word-counter': typeof WordCounterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compress-image-to-100kb': typeof CompressImageTo100kbRoute
   '/csv-to-json': typeof CsvToJsonRoute
   '/csv-xlsx-converter': typeof CsvXlsxConverterRoute
   '/diff-checker': typeof DiffCheckerRoute
@@ -121,15 +157,20 @@ export interface FileRoutesByTo {
   '/image-format-converter': typeof ImageFormatConverterRoute
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
+  '/jpg-to-png': typeof JpgToPngRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/json-pretty-print': typeof JsonPrettyPrintRoute
   '/json-to-csv': typeof JsonToCsvRoute
   '/lorem-ipsum-generator': typeof LoremIpsumGeneratorRoute
+  '/png-to-jpg': typeof PngToJpgRoute
+  '/png-to-webp': typeof PngToWebpRoute
   '/tools': typeof ToolsRoute
   '/word-counter': typeof WordCounterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/compress-image-to-100kb': typeof CompressImageTo100kbRoute
   '/csv-to-json': typeof CsvToJsonRoute
   '/csv-xlsx-converter': typeof CsvXlsxConverterRoute
   '/diff-checker': typeof DiffCheckerRoute
@@ -138,9 +179,13 @@ export interface FileRoutesById {
   '/image-format-converter': typeof ImageFormatConverterRoute
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
+  '/jpg-to-png': typeof JpgToPngRoute
   '/json-formatter': typeof JsonFormatterRoute
+  '/json-pretty-print': typeof JsonPrettyPrintRoute
   '/json-to-csv': typeof JsonToCsvRoute
   '/lorem-ipsum-generator': typeof LoremIpsumGeneratorRoute
+  '/png-to-jpg': typeof PngToJpgRoute
+  '/png-to-webp': typeof PngToWebpRoute
   '/tools': typeof ToolsRoute
   '/word-counter': typeof WordCounterRoute
 }
@@ -148,6 +193,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/compress-image-to-100kb'
     | '/csv-to-json'
     | '/csv-xlsx-converter'
     | '/diff-checker'
@@ -156,14 +202,19 @@ export interface FileRouteTypes {
     | '/image-format-converter'
     | '/image-to-base64'
     | '/image-to-pdf'
+    | '/jpg-to-png'
     | '/json-formatter'
+    | '/json-pretty-print'
     | '/json-to-csv'
     | '/lorem-ipsum-generator'
+    | '/png-to-jpg'
+    | '/png-to-webp'
     | '/tools'
     | '/word-counter'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/compress-image-to-100kb'
     | '/csv-to-json'
     | '/csv-xlsx-converter'
     | '/diff-checker'
@@ -172,14 +223,19 @@ export interface FileRouteTypes {
     | '/image-format-converter'
     | '/image-to-base64'
     | '/image-to-pdf'
+    | '/jpg-to-png'
     | '/json-formatter'
+    | '/json-pretty-print'
     | '/json-to-csv'
     | '/lorem-ipsum-generator'
+    | '/png-to-jpg'
+    | '/png-to-webp'
     | '/tools'
     | '/word-counter'
   id:
     | '__root__'
     | '/'
+    | '/compress-image-to-100kb'
     | '/csv-to-json'
     | '/csv-xlsx-converter'
     | '/diff-checker'
@@ -188,15 +244,20 @@ export interface FileRouteTypes {
     | '/image-format-converter'
     | '/image-to-base64'
     | '/image-to-pdf'
+    | '/jpg-to-png'
     | '/json-formatter'
+    | '/json-pretty-print'
     | '/json-to-csv'
     | '/lorem-ipsum-generator'
+    | '/png-to-jpg'
+    | '/png-to-webp'
     | '/tools'
     | '/word-counter'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompressImageTo100kbRoute: typeof CompressImageTo100kbRoute
   CsvToJsonRoute: typeof CsvToJsonRoute
   CsvXlsxConverterRoute: typeof CsvXlsxConverterRoute
   DiffCheckerRoute: typeof DiffCheckerRoute
@@ -205,9 +266,13 @@ export interface RootRouteChildren {
   ImageFormatConverterRoute: typeof ImageFormatConverterRoute
   ImageToBase64Route: typeof ImageToBase64Route
   ImageToPdfRoute: typeof ImageToPdfRoute
+  JpgToPngRoute: typeof JpgToPngRoute
   JsonFormatterRoute: typeof JsonFormatterRoute
+  JsonPrettyPrintRoute: typeof JsonPrettyPrintRoute
   JsonToCsvRoute: typeof JsonToCsvRoute
   LoremIpsumGeneratorRoute: typeof LoremIpsumGeneratorRoute
+  PngToJpgRoute: typeof PngToJpgRoute
+  PngToWebpRoute: typeof PngToWebpRoute
   ToolsRoute: typeof ToolsRoute
   WordCounterRoute: typeof WordCounterRoute
 }
@@ -228,6 +293,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/png-to-webp': {
+      id: '/png-to-webp'
+      path: '/png-to-webp'
+      fullPath: '/png-to-webp'
+      preLoaderRoute: typeof PngToWebpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/png-to-jpg': {
+      id: '/png-to-jpg'
+      path: '/png-to-jpg'
+      fullPath: '/png-to-jpg'
+      preLoaderRoute: typeof PngToJpgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lorem-ipsum-generator': {
       id: '/lorem-ipsum-generator'
       path: '/lorem-ipsum-generator'
@@ -242,11 +321,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JsonToCsvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/json-pretty-print': {
+      id: '/json-pretty-print'
+      path: '/json-pretty-print'
+      fullPath: '/json-pretty-print'
+      preLoaderRoute: typeof JsonPrettyPrintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/json-formatter': {
       id: '/json-formatter'
       path: '/json-formatter'
       fullPath: '/json-formatter'
       preLoaderRoute: typeof JsonFormatterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jpg-to-png': {
+      id: '/jpg-to-png'
+      path: '/jpg-to-png'
+      fullPath: '/jpg-to-png'
+      preLoaderRoute: typeof JpgToPngRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/image-to-pdf': {
@@ -305,6 +398,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CsvToJsonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compress-image-to-100kb': {
+      id: '/compress-image-to-100kb'
+      path: '/compress-image-to-100kb'
+      fullPath: '/compress-image-to-100kb'
+      preLoaderRoute: typeof CompressImageTo100kbRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -317,6 +417,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompressImageTo100kbRoute: CompressImageTo100kbRoute,
   CsvToJsonRoute: CsvToJsonRoute,
   CsvXlsxConverterRoute: CsvXlsxConverterRoute,
   DiffCheckerRoute: DiffCheckerRoute,
@@ -325,9 +426,13 @@ const rootRouteChildren: RootRouteChildren = {
   ImageFormatConverterRoute: ImageFormatConverterRoute,
   ImageToBase64Route: ImageToBase64Route,
   ImageToPdfRoute: ImageToPdfRoute,
+  JpgToPngRoute: JpgToPngRoute,
   JsonFormatterRoute: JsonFormatterRoute,
+  JsonPrettyPrintRoute: JsonPrettyPrintRoute,
   JsonToCsvRoute: JsonToCsvRoute,
   LoremIpsumGeneratorRoute: LoremIpsumGeneratorRoute,
+  PngToJpgRoute: PngToJpgRoute,
+  PngToWebpRoute: PngToWebpRoute,
   ToolsRoute: ToolsRoute,
   WordCounterRoute: WordCounterRoute,
 }
