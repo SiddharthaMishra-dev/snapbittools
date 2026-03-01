@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { formatConverterVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
-import { RouteComponent as ParentToolComponent } from "./image-format-converter";
+import PseoPage from "@/components/PseoPage";
+import { ImageConverterTool } from "@/components/ImageConverterTool";
 
 const variant = formatConverterVariants.find((v) => v.slug === "webp-to-png")!;
 const { faqs } = generatePageContent(variant);
@@ -23,11 +24,10 @@ export const Route = createFileRoute("/webp-to-png")({
 });
 
 function RouteComponent() {
-  const PseoPage = require("@/components/PseoPage").default;
   return (
     <PseoPage
       variant={variant}
-      toolComponent={ParentToolComponent}
+      toolComponent={ImageConverterTool}
     />
   );
 }

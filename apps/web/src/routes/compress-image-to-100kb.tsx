@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { compressionVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
-import * as ImageCompressorRoute from "./image-compressor";
+import PseoPage from "@/components/PseoPage";
+import { ImageCompressorTool } from "@/components/ImageCompressorTool";
 
 const variant = compressionVariants.find((v) => v.slug === "compress-image-to-100kb")!;
 const { faqs } = generatePageContent(variant);
@@ -23,12 +24,10 @@ export const Route = createFileRoute("/compress-image-to-100kb")({
 });
 
 function RouteComponent() {
-  const ParentToolComponent = ImageCompressorRoute.Route.options.component;
-  const PseoPage = require("@/components/PseoPage").default;
-  return ParentToolComponent ? (
+  return (
     <PseoPage
       variant={variant}
-      toolComponent={ParentToolComponent}
+      toolComponent={ImageCompressorTool}
     />
-  ) : null;
+  );
 }

@@ -9,6 +9,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { formatConverterVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
+import PseoPage from "@/components/PseoPage";
 
 // Import the parent tool route to reuse its component
 import * as ImageFormatConverterRoute from "./image-format-converter";
@@ -35,7 +36,6 @@ export const Route = createFileRoute("/png-to-jpg")({
 function RouteComponent() {
   // Use the parent tool's component
   const ParentToolComponent = ImageFormatConverterRoute.Route.options.component;
-  const PseoPage = require("@/components/PseoPage").default;
 
   return ParentToolComponent ? (
     <PseoPage

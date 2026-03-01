@@ -253,27 +253,27 @@ export function generateBenefitsSection(variant: KeywordVariant): ContentSection
             <h2>Why Choose Our ${variant.h1}</h2>
             <div class="benefits-grid">
                 <div class="benefit">
-                    <h3>🔒 Complete Privacy</h3>
+                    <h3 class="benefit-title">Complete Privacy</h3>
                     <p>Files processed in your browser never touch our servers. Your data stays on your device.</p>
                 </div>
                 <div class="benefit">
-                    <h3>⚡ Lightning Fast</h3>
+                    <h3 class="benefit-title">Lightning Fast</h3>
                     <p>No upload or download delays. Processing happens instantly using your device's power.</p>
                 </div>
                 <div class="benefit">
-                    <h3>💰 Always Free</h3>
+                    <h3 class="benefit-title">Always Free</h3>
                     <p>No usage limits, no accounts, no subscriptions. Free forever for unlimited use.</p>
                 </div>
                 <div class="benefit">
-                    <h3>🌐 Works Everywhere</h3>
+                    <h3 class="benefit-title">Works Everywhere</h3>
                     <p>Use on any device with a browser. No installation, downloads, or special software needed.</p>
                 </div>
                 <div class="benefit">
-                    <h3>📱 Mobile Friendly</h3>
+                    <h3 class="benefit-title">Mobile Friendly</h3>
                     <p>Fully responsive design works perfectly on phones and tablets, not just desktops.</p>
                 </div>
                 <div class="benefit">
-                    <h3>🔌 Offline Capable</h3>
+                    <h3 class="benefit-title">Offline Capable</h3>
                     <p>Once loaded, disconnect from the internet. All processing works completely offline.</p>
                 </div>
             </div>

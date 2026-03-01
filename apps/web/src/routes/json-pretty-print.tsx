@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { jsonVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
+import PseoPage from "@/components/PseoPage";
 import * as JsonFormatterRoute from "./json-formatter";
 
 const variant = jsonVariants.find((v) => v.slug === "json-pretty-print")!;
@@ -24,7 +25,6 @@ export const Route = createFileRoute("/json-pretty-print")({
 
 function RouteComponent() {
   const ParentToolComponent = JsonFormatterRoute.Route.options.component;
-  const PseoPage = require("@/components/PseoPage").default;
   return ParentToolComponent ? (
     <PseoPage
       variant={variant}

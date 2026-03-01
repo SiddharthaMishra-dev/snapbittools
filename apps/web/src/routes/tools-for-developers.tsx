@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useCaseVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
-import { RouteComponent as ParentToolComponent } from "./tools";
+import PseoPage from "@/components/PseoPage";
+import { ToolsListing } from "@/components/ToolsListing";
 
 const variant = useCaseVariants.find((v) => v.slug === "tools-for-developers")!;
 const { faqs } = generatePageContent(variant);
@@ -23,11 +24,10 @@ export const Route = createFileRoute("/tools-for-developers")({
 });
 
 function RouteComponent() {
-  const PseoPage = require("@/components/PseoPage").default;
   return (
     <PseoPage
       variant={variant}
-      toolComponent={ParentToolComponent}
+      toolComponent={ToolsListing}
     />
   );
 }

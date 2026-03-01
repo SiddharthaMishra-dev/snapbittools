@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { compressionVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
-import { RouteComponent as ParentToolComponent } from "./image-compressor";
+import PseoPage from "@/components/PseoPage";
+import { ImageCompressorTool } from "@/components/ImageCompressorTool";
 
 const variant = compressionVariants.find((v) => v.slug === "compress-jpeg-online")!;
 const { faqs } = generatePageContent(variant);
@@ -23,7 +24,6 @@ export const Route = createFileRoute("/compress-jpeg-online")({
 });
 
 function RouteComponent() {
-  const PseoPage = require("@/components/PseoPage").default;
   return (
     <PseoPage
       variant={variant}
