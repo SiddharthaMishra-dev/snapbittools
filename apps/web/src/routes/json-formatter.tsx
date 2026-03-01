@@ -61,7 +61,7 @@ export const Route = createFileRoute("/json-formatter")({
   component: RouteComponent,
 });
 
-function RouteComponent() {
+export function RouteComponent() {
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);

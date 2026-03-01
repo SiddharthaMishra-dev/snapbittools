@@ -69,7 +69,7 @@ interface ExtendedConversionItem extends ConversionItem {
   ext?: string;
 }
 
-function RouteComponent() {
+export function RouteComponent() {
   const uploadRef = useRef<HTMLInputElement>(null);
   const workerRef = useRef<Worker | null>(null);
   const [selectedFormat, setSelectedFormat] = useState("png");

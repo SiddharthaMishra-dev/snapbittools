@@ -79,7 +79,7 @@ interface CompressedFile {
   preview: string;
 }
 
-function RouteComponent() {
+export function RouteComponent() {
   const [files, setFiles] = useState<CompressedFile[]>([]);
   const [quality, setQuality] = useState(0.3);
   const [maxWidth, setMaxWidth] = useState(1920);

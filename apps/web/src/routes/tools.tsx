@@ -25,7 +25,7 @@ export const Route = createFileRoute("/tools")({
       ],
       url: "/tools",
     }),
-  component: ToolsPage,
+  component: RouteComponent,
 });
 
 const toolsByCategory = tools.reduce<Record<string, ToolDefinition[]>>((acc, tool) => {
@@ -34,7 +34,7 @@ const toolsByCategory = tools.reduce<Record<string, ToolDefinition[]>>((acc, too
   return acc;
 }, {});
 
-function ToolsPage() {
+export function RouteComponent() {
   return (
     <div
       className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 flex flex-col relative overflow-hidden"
