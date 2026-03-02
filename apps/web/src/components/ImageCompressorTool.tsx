@@ -382,24 +382,45 @@ export function ImageCompressorTool() {
               </div>
             </div>
             <div className="w-full flex justify-between items-center mb-3">
-              <h3 className="text-xl font-semibold text-gray-100 mb-4">Files ({files.length})</h3>
-              {files.length > 0 && (
-                <div className="flex items-center gap-2">
+              <h3 className="text-xl font-semibold text-gray-100 m-0">Files ({files.length})</h3>
+              <div className="flex">
+                {completedCount > 0 && (
                   <button
-                    onClick={clearAll}
-                    className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200"
+                    onClick={downloadAllAsZip}
+                    disabled={isDownloadingZip}
+                    className="px-4 py-2 text-sm bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
                   >
-                    Clear All
+                    {isDownloadingZip ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-green-300 border-t-transparent rounded-full animate-spin"></div>
+                        <span>ZIPPING...</span>
+                      </>
+                    ) : (
+                      <>
+                        <IconDownload className="w-4 h-4" />
+                        <span>ZIP ({completedCount})</span>
+                      </>
+                    )}
                   </button>
-                </div>
-              )}
+                )}
+                {files.length > 0 && (
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={clearAll}
+                      className="px-4 py-2 text-sm text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200"
+                    >
+                      Clear All
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="space-y-3">
               {files.map((file) => (
                 <div
                   key={file.id}
-                  className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700"
+                  className="flex items-center justify-between p-2 border border-gray-600 rounded-lg bg-gray-700"
                 >
                   <div className="mr-4 flex-shrink-0">
                     <img
@@ -458,27 +479,6 @@ export function ImageCompressorTool() {
                 </div>
               ))}
             </div>
-            {completedCount > 0 && (
-              <div className="mt-6 w-full flex justify-end">
-                <button
-                  onClick={downloadAllAsZip}
-                  disabled={isDownloadingZip}
-                  className="px-4 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
-                >
-                  {isDownloadingZip ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-green-300 border-t-transparent rounded-full animate-spin"></div>
-                      <span>Creating ZIP...</span>
-                    </>
-                  ) : (
-                    <>
-                      <IconDownload className="w-4 h-4" />
-                      <span>Download ZIP ({completedCount})</span>
-                    </>
-                  )}
-                </button>
-              </div>
-            )}
           </>
         )}
       </div>

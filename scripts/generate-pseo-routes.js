@@ -56,6 +56,7 @@ function generateRouteFile(variant) {
 import { ${dataSource} } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
+import PseoPage from "@/components/PseoPage";
 import { RouteComponent as ParentToolComponent } from "${toolImportPath}";
 
 const variant = ${dataSource}.find(v => v.slug === "${variant.slug}")!;
@@ -77,7 +78,6 @@ export const Route = createFileRoute("/${variant.slug}")({
 });
 
 function RouteComponent() {
-    const PseoPage = require("@/components/PseoPage").default;
     return <PseoPage variant={variant} toolComponent={ParentToolComponent} />;
 }
 `;
