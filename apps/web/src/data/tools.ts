@@ -9,6 +9,7 @@ import {
     IconPhoto,
     IconSearch,
     IconTypography,
+    IconFiles,
 } from "@tabler/icons-react";
 import type React from "react";
 
@@ -20,6 +21,7 @@ export type ToolDefinition = {
     icon: (props: IconProps) => React.ReactNode;
     category: "Images" | "Data";
     keywords: string[];
+    isNew?: boolean;
 };
 
 export const tools: ToolDefinition[] = [
@@ -131,5 +133,15 @@ export const tools: ToolDefinition[] = [
         icon: IconBraces,
         category: "Data",
         keywords: ["csv to json", "convert csv", "json generator", "data extraction"],
+    },
+    {
+        slug: "bulk-file-renamer",
+        name: "Bulk File Renamer",
+        href: "/bulk-file-renamer",
+        description: "Rename multiple files at once with pattern matching like file-[1,2,3...]. Works offline with zero uploads.",
+        icon: IconFiles,
+        category: "Data",
+        keywords: ["bulk rename", "file renamer", "batch rename", "file management"],
+        isNew: true,
     },
 ];

@@ -49,6 +49,7 @@ import { Route as CompressImageTo200kbRouteImport } from './routes/compress-imag
 import { Route as CompressImageTo100kbRouteImport } from './routes/compress-image-to-100kb'
 import { Route as CompressImageOnlineRouteImport } from './routes/compress-image-online'
 import { Route as CompressImageForWebRouteImport } from './routes/compress-image-for-web'
+import { Route as BulkFileRenamerRouteImport } from './routes/bulk-file-renamer'
 import { Route as BrowserBasedUtilitiesRouteImport } from './routes/browser-based-utilities'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -253,6 +254,11 @@ const CompressImageForWebRoute = CompressImageForWebRouteImport.update({
   path: '/compress-image-for-web',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BulkFileRenamerRoute = BulkFileRenamerRouteImport.update({
+  id: '/bulk-file-renamer',
+  path: '/bulk-file-renamer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BrowserBasedUtilitiesRoute = BrowserBasedUtilitiesRouteImport.update({
   id: '/browser-based-utilities',
   path: '/browser-based-utilities',
@@ -267,6 +273,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/browser-based-utilities': typeof BrowserBasedUtilitiesRoute
+  '/bulk-file-renamer': typeof BulkFileRenamerRoute
   '/compress-image-for-web': typeof CompressImageForWebRoute
   '/compress-image-online': typeof CompressImageOnlineRoute
   '/compress-image-to-100kb': typeof CompressImageTo100kbRoute
@@ -311,6 +318,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/browser-based-utilities': typeof BrowserBasedUtilitiesRoute
+  '/bulk-file-renamer': typeof BulkFileRenamerRoute
   '/compress-image-for-web': typeof CompressImageForWebRoute
   '/compress-image-online': typeof CompressImageOnlineRoute
   '/compress-image-to-100kb': typeof CompressImageTo100kbRoute
@@ -356,6 +364,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/browser-based-utilities': typeof BrowserBasedUtilitiesRoute
+  '/bulk-file-renamer': typeof BulkFileRenamerRoute
   '/compress-image-for-web': typeof CompressImageForWebRoute
   '/compress-image-online': typeof CompressImageOnlineRoute
   '/compress-image-to-100kb': typeof CompressImageTo100kbRoute
@@ -402,6 +411,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/browser-based-utilities'
+    | '/bulk-file-renamer'
     | '/compress-image-for-web'
     | '/compress-image-online'
     | '/compress-image-to-100kb'
@@ -446,6 +456,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/browser-based-utilities'
+    | '/bulk-file-renamer'
     | '/compress-image-for-web'
     | '/compress-image-online'
     | '/compress-image-to-100kb'
@@ -490,6 +501,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/browser-based-utilities'
+    | '/bulk-file-renamer'
     | '/compress-image-for-web'
     | '/compress-image-online'
     | '/compress-image-to-100kb'
@@ -535,6 +547,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BrowserBasedUtilitiesRoute: typeof BrowserBasedUtilitiesRoute
+  BulkFileRenamerRoute: typeof BulkFileRenamerRoute
   CompressImageForWebRoute: typeof CompressImageForWebRoute
   CompressImageOnlineRoute: typeof CompressImageOnlineRoute
   CompressImageTo100kbRoute: typeof CompressImageTo100kbRoute
@@ -859,6 +872,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompressImageForWebRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bulk-file-renamer': {
+      id: '/bulk-file-renamer'
+      path: '/bulk-file-renamer'
+      fullPath: '/bulk-file-renamer'
+      preLoaderRoute: typeof BulkFileRenamerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/browser-based-utilities': {
       id: '/browser-based-utilities'
       path: '/browser-based-utilities'
@@ -879,6 +899,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BrowserBasedUtilitiesRoute: BrowserBasedUtilitiesRoute,
+  BulkFileRenamerRoute: BulkFileRenamerRoute,
   CompressImageForWebRoute: CompressImageForWebRoute,
   CompressImageOnlineRoute: CompressImageOnlineRoute,
   CompressImageTo100kbRoute: CompressImageTo100kbRoute,

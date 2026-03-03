@@ -375,4 +375,42 @@ Upload CSV files or paste data directly. Load sample data to test conversion. Do
       "Building data transformation pipelines",
     ],
   },
+
+  "bulk-file-renamer": {
+    slug: "bulk-file-renamer",
+    title: "Bulk File Renamer - Rename Multiple Files Instantly",
+    intro: `Rename multiple files simultaneously with powerful pattern matching and numbering sequences using our free Bulk File Renamer. Replace filenames with custom patterns like file-[1,2,3,...], add prefixes, suffixes, remove extensions, or use find-and-replace operations—all processing happens locally in your browser with zero server uploads.
+
+Renaming files in bulk is a tedious task that becomes increasingly frustrating on Windows and macOS. Native operating systems lack built-in bulk renaming capabilities, forcing users to rename files one-by-one or install expensive third-party desktop applications. This archaic limitation wastes countless hours of productivity. Whether you're organizing photo libraries with inconsistent naming, preparing files for batch processing, renaming downloaded videos, organizing code backups, or preparing digital assets for project workflows, bulk renaming is an essential utility that should be universally available.
+
+SnapBit's Bulk File Renamer provides professional-grade batch renaming operations directly in your browser—no software installation required, no operating system limitations, and no compatibility issues between macOS and Windows. The tool intelligently handles naming conflicts, prevents accidental overwriting, and generates a preview of all changes before applying them. With powerful regex support and templating options, you can rename thousands of files using complex patterns in seconds.
+
+The tool supports multiple naming patterns: sequential numbering (file-1, file-2, file-3), custom ranges (photo-[10,15,20]), padded numbers (photo-001, photo-002), pattern templating, find-and-replace operations, and conditional renaming based on file type or original name. Use the live preview to verify all changes before commitment. Generate a downloadable batch script if needed for system-level operations. Perfect file organization workflow improvements that were previously impossible without expensive commercial tools.`,
+    benefits: [
+      "Rename unlimited files with sequential numbering patterns",
+      "Support for custom ranges like file-[1,2,4,10,...]",
+      "Find-and-replace operations with regex support",
+      "Add prefixes and suffixes to all files",
+      "Live preview of all changes before applying",
+      "100% browser-based with zero server uploads",
+      "No software installation or OS-specific tools required",
+      "Works identically on Windows, macOS, and Linux",
+      "Prevent duplicate filenames and naming conflicts",
+      "Download batch script for system-level operations",
+    ],
+    useCases: [
+      "Organizing photo libraries with consistent naming schemes",
+      "Renaming downloaded media files in bulk",
+      "Preparing files for batch processing workflows",
+      "Standardizing naming conventions for projects",
+      "Organizing code backups with version numbers",
+      "Batch processing video files with sequential names",
+      "Preparing digital assets for content management systems",
+      "Cleaning up messy file collections",
+      "Creating consistent file naming for team collaboration",
+      "Preparing files for cloud storage with organization",
+      "Renaming scanned documents with date-based patterns",
+      "Managing screenshot collections with sequence numbers",
+    ],
+  },
 };

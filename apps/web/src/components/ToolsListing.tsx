@@ -43,6 +43,7 @@ export function ToolsListing() {
                   <GlowCard
                     key={tool.slug}
                     to={tool.href}
+                    isNew={tool.isNew}
                   >
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
