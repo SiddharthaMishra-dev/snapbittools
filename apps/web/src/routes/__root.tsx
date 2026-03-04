@@ -4,7 +4,6 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import ReactGA from "react-ga4";
 
 import Header from "../components/Header";
-import Breadcrumbs from "../components/Breadcrumbs";
 import { getOrganizationSchema } from "../lib/seo";
 
 import appCss from "../styles.css?url";

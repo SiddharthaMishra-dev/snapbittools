@@ -128,16 +128,6 @@ function RelatedToolCard({ tool }: { tool: ToolDefinition }) {
         </h3>
         <p className="text-sm text-gray-300 mt-1 line-clamp-2">{tool.description}</p>
         {/* Keywords as breadcrumb for SEO */}
-        <div className="mt-2 flex flex-wrap gap-1">
-          {tool.keywords.slice(0, 3).map((keyword) => (
-            <span
-              key={keyword}
-              className="text-xs text-brand-light/70 font-medium"
-            >
-              #{keyword}
-            </span>
-          ))}
-        </div>
       </div>
       <IconChevronRight className="w-5 h-5 text-gray-400 group-hover:text-brand-primary group-hover:translate-x-1 transition-all shrink-0 mt-1" />
     </Link>

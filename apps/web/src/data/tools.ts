@@ -71,6 +71,16 @@ export const tools: ToolDefinition[] = [
         keywords: ["pdf", "merge", "images to pdf", "offline"],
     },
     {
+        slug: "bulk-file-renamer",
+        name: "Bulk File Renamer",
+        href: "/bulk-file-renamer",
+        description: "Rename multiple files at once with pattern matching like file-[1,2,3...]. Works offline with zero uploads.",
+        icon: IconFiles,
+        category: "Data",
+        keywords: ["bulk rename", "file renamer", "batch rename", "file management"],
+        isNew: true,
+    },
+    {
         slug: "json-formatter",
         name: "JSON Formatter",
         href: "/json-formatter",
@@ -134,14 +144,5 @@ export const tools: ToolDefinition[] = [
         category: "Data",
         keywords: ["csv to json", "convert csv", "json generator", "data extraction"],
     },
-    {
-        slug: "bulk-file-renamer",
-        name: "Bulk File Renamer",
-        href: "/bulk-file-renamer",
-        description: "Rename multiple files at once with pattern matching like file-[1,2,3...]. Works offline with zero uploads.",
-        icon: IconFiles,
-        category: "Data",
-        keywords: ["bulk rename", "file renamer", "batch rename", "file management"],
-        isNew: true,
-    },
+    
 ];

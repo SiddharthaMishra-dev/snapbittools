@@ -56,16 +56,7 @@ export function ToolsListing() {
                           {tool.name}
                         </h3>
                         <p className="text-gray-200 text-sm leading-relaxed">{tool.description}</p>
-                        {/* <div className="mt-3 flex flex-wrap gap-2">
-                                                    {tool.keywords.map((keyword) => (
-                                                        <span
-                                                            key={keyword}
-                                                            className="text-[11px] uppercase tracking-wide text-brand-light bg-white/5 border border-white/10 rounded-full px-2 py-1"
-                                                        >
-                                                            {keyword}
-                                                        </span>
-                                                    ))}
-                                                </div> */}
+
                         <div className="mt-4 flex items-center text-brand-primary text-sm font-medium">
                           <span>Try Now</span>
                           <IconChevronRight className="h-5 w-5 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-transform" />

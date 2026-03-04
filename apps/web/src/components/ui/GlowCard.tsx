@@ -104,7 +104,7 @@ export default function GlowCard({
       {isNew && (
         <div className="absolute top-4 right-4 z-20">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg">
-            ✨ New
+            New
           </span>
         </div>
       )}

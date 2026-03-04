@@ -79,7 +79,7 @@ interface FileRenameMapping {
 function RouteComponent() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<File[]>([]);
-  const [renamePattern, setRenamePattern] = useState("file-[1,2,3]");
+  const [renamePattern, setRenamePattern] = useState("file-[1]");
   const [patternType, setPatternType] = useState<
     "sequential" | "custom" | "findreplace" | "prefix-suffix"
   >("sequential");
@@ -92,7 +92,15 @@ function RouteComponent() {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const generateRenamedFilename = useCallback(
-    (originalName: string, index: number, currentPattern?: string): string => {
+    (
+      originalName: string,
+      index: number,
+      currentPattern?: string,
+      currentFindText?: string,
+      currentReplaceText?: string,
+      currentPrefix?: string,
+      currentSuffix?: string,
+    ): string => {
       const extension = originalName.includes(".") ? "." + originalName.split(".").pop() : "";
       const baseName = originalName.substring(0, originalName.length - extension.length);
       const pattern = currentPattern !== undefined ? currentPattern : renamePattern;
@@ -124,10 +132,15 @@ function RouteComponent() {
         }
 
         case "findreplace":
-          return baseName.replace(new RegExp(findText, "g"), replaceText) + extension;
+          return (
+            baseName.replace(
+              new RegExp(currentFindText ?? findText, "g"),
+              currentReplaceText ?? replaceText,
+            ) + extension
+          );
 
         case "prefix-suffix":
-          return `${prefix}${baseName}${suffix}${extension}`;
+          return `${currentPrefix ?? prefix}${baseName}${currentSuffix ?? suffix}${extension}`;
 
         default:
           return originalName;
@@ -137,12 +150,27 @@ function RouteComponent() {
   );
 
   const updatePreview = useCallback(
-    (fileList: File[], currentPattern?: string) => {
+    (
+      fileList: File[],
+      currentPattern?: string,
+      currentFindText?: string,
+      currentReplaceText?: string,
+      currentPrefix?: string,
+      currentSuffix?: string,
+    ) => {
       const mappings: FileRenameMapping[] = [];
       const newNames = new Set<string>();
 
       fileList.forEach((file, index) => {
-        const newName = generateRenamedFilename(file.name, index, currentPattern);
+        const newName = generateRenamedFilename(
+          file.name,
+          index,
+          currentPattern,
+          currentFindText,
+          currentReplaceText,
+          currentPrefix,
+          currentSuffix,
+        );
         const isConflict = newNames.has(newName);
 
         mappings.push({
@@ -273,11 +301,9 @@ function RouteComponent() {
       <Breadcrumbs />
       <div className="text-center mb-8 max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-100 mb-2">
-          CSV to <span className="text-brand-primary">JSON</span>
+          Bulk File <span className="text-brand-primary">Renamer</span>
         </h1>
-        <p className="text-md text-gray-200">
-          Transform CSV data into JSON format securely in your browser.
-        </p>
+        <p className="text-md text-gray-200">Rename bulk files securely in your browser.</p>
       </div>
 
       <main className="flex-1 px-4 relative z-10">
@@ -350,7 +376,6 @@ function RouteComponent() {
               </div>
             </div>
 
-            {/* Pattern Input */}
             {patternType === "sequential" && (
               <div className="space-y-4">
                 <label className="text-lg font-semibold text-gray-100">Pattern Template</label>
@@ -394,8 +419,9 @@ function RouteComponent() {
                       type="text"
                       value={findText}
                       onChange={(e) => {
-                        setFindText(e.target.value);
-                        updatePreview(files);
+                        const newFindText = e.target.value;
+                        setFindText(newFindText);
+                        updatePreview(files, undefined, newFindText, replaceText);
                       }}
                       placeholder="Text to find"
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
@@ -409,8 +435,9 @@ function RouteComponent() {
                       type="text"
                       value={replaceText}
                       onChange={(e) => {
-                        setReplaceText(e.target.value);
-                        updatePreview(files);
+                        const newReplaceText = e.target.value;
+                        setReplaceText(newReplaceText);
+                        updatePreview(files, undefined, findText, newReplaceText);
                       }}
                       placeholder="Replace with text"
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
@@ -429,8 +456,9 @@ function RouteComponent() {
                       type="text"
                       value={prefix}
                       onChange={(e) => {
-                        setPrefix(e.target.value);
-                        updatePreview(files);
+                        const newPrefix = e.target.value;
+                        setPrefix(newPrefix);
+                        updatePreview(files, undefined, undefined, undefined, newPrefix, suffix);
                       }}
                       placeholder="Add to beginning"
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
@@ -442,8 +470,9 @@ function RouteComponent() {
                       type="text"
                       value={suffix}
                       onChange={(e) => {
-                        setSuffix(e.target.value);
-                        updatePreview(files);
+                        const newSuffix = e.target.value;
+                        setSuffix(newSuffix);
+                        updatePreview(files, undefined, undefined, undefined, prefix, newSuffix);
                       }}
                       placeholder="Add to end"
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
