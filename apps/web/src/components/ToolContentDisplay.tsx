@@ -60,7 +60,6 @@ export default function ToolContentDisplay({
         <p className="text-md text-gray-400 leading-relaxed whitespace-pre-wrap">{intro}</p>
       </motion.div>
 
-      {/* Key Benefits */}
       {benefits && benefits.length > 0 && (
         <motion.div
           variants={itemVariants}
@@ -71,7 +70,7 @@ export default function ToolContentDisplay({
             {benefits.map((benefit, index) => (
               <li
                 key={index}
-                className="flex items-center space-x-3 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
+                className="flex items-center space-x-3 "
               >
                 <span className="text-brand-primary font-bold text-sm pt-0.5">✓</span>
                 <span className="text-gray-300 text-sm">{benefit}</span>
@@ -81,21 +80,20 @@ export default function ToolContentDisplay({
         </motion.div>
       )}
 
-      {/* Use Cases */}
       {useCases && useCases.length > 0 && (
         <motion.div
           variants={itemVariants}
           className="space-y-4"
         >
           <h2 className="text-2xl font-bold text-gray-100">Common Use Cases</h2>
-          <ul className="space-y-2">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {useCases.map((useCase, index) => (
               <li
                 key={index}
-                className="flex items-start space-x-3 p-3 hover:bg-white/5 transition-colors rounded-lg"
+                className="flex items-center space-x-3 "
               >
                 <span className="text-brand-primary font-bold text-lg pt-0.5">→</span>
-                <span className="text-gray-300">{useCase}</span>
+                <span className="text-gray-300 text-sm">{useCase}</span>
               </li>
             ))}
           </ul>

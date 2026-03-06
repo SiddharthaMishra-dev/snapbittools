@@ -375,7 +375,7 @@ function RouteComponent() {
             </div>
           </div>
 
-          <div className="max-w-5xl mx-auto mb-16 w-full">
+          <div className="max-w-7xl mx-auto mb-16 w-full">
             <ToolContentDisplay
               title={toolContent["json-to-csv"].title}
               intro={toolContent["json-to-csv"].intro}

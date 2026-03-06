@@ -116,7 +116,7 @@ function App() {
           </motion.h1>
           <motion.p
             variants={itemVariants}
-            className="text-md md:text-lg text-gray-200 max-w-3xl mx-auto"
+            className="text-sm md:text-lg text-gray-400 tracking-wide max-w-3xl mx-auto"
           >
             Professional-grade online tools that work entirely in your browser. Convert images to
             Base64, compress photos, format JSON, convert CSV to Excel, and more—all without
@@ -150,7 +150,7 @@ function App() {
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-2 text-xs text-gray-300"
+            className="hidden sm:flex flex-wrap justify-center gap-2 text-xs text-gray-300"
           >
             <span className="rounded-full font-semibold px-3 py-1">
               ✓ 100% Browser-Based Processing
@@ -174,10 +174,6 @@ function App() {
               <h2 className="text-2xl font-bold text-gray-100">
                 Most Used Image & Data Conversion Tools
               </h2>
-              <p className="text-sm text-gray-300 mt-1">
-                Powerful online utilities for converting images, compressing files, and formatting
-                data. All tools process files locally in your browser for maximum privacy and speed.
-              </p>
             </div>
             <Link
               to="/tools"
@@ -209,20 +205,10 @@ function App() {
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-brand-primary transition-colors">
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-300 mb-2 group-hover:text-brand-primary transition-colors">
                         {tool.name}
                       </h3>
-                      <p className="text-gray-200 text-sm leading-relaxed">{tool.description}</p>
-                      {/* <div className="mt-3 flex flex-wrap gap-2">
-                        {tool.keywords.slice(0, 2).map((keyword) => (
-                          <span
-                            key={keyword}
-                            className="text-[11px] uppercase tracking-wide text-brand-light bg-white/5 border border-white/10 rounded-full px-2 py-1"
-                          >
-                            {keyword}
-                          </span>
-                        ))}
-                      </div> */}
+                      <p className="text-gray-300 text-sm leading-relaxed">{tool.description}</p>
                       <div className="mt-4 flex items-center text-brand-primary text-sm font-medium">
                         <span>Try it</span>
                         <IconChevronRight className="h-5 w-5 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-transform" />
@@ -374,7 +360,7 @@ function UseCaseCard({ title, description }: { title: string; description: strin
   return (
     <div className="bg-white/ rounded-xl p-6 hover:bg-white/10  transition-all">
       <h4 className="text-lg font-bold text-gray-100 mb-2">{title}</h4>
-      <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
+      <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
     </div>
   );
 }

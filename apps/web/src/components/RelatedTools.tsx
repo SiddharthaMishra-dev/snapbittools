@@ -61,20 +61,17 @@ export default function RelatedTools({
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="mt-12 mx-auto w-full max-w-5xl"
+      className="mt-12 mx-auto w-full max-w-7xl"
     >
       <motion.div
         variants={itemVariants}
-        className="bg-white/5 border border-white/10 rounded-xl p-6"
+        className="p-6"
       >
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-100">
               {category !== "all" ? `Other ${category} Tools` : "More Tools You Might Need"}
             </h2>
-            <p className="text-sm text-gray-300 mt-1">
-              Explore our complete suite of free online tools
-            </p>
           </div>
           <Link
             to="/tools"
@@ -117,7 +114,7 @@ function RelatedToolCard({ tool }: { tool: ToolDefinition }) {
   return (
     <Link
       to={tool.href}
-      className="group flex items-start gap-3 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-brand-primary/50 transition-all duration-200"
+      className="group flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-brand-primary/50 transition-all duration-200"
     >
       <div className="shrink-0 w-10 h-10 bg-brand-dark rounded-lg flex items-center justify-center group-hover:bg-brand-primary transition-colors">
         <Icon className="w-5 h-5 text-brand-light" />
@@ -126,8 +123,6 @@ function RelatedToolCard({ tool }: { tool: ToolDefinition }) {
         <h3 className="text-base font-semibold text-gray-100 group-hover:text-brand-primary transition-colors">
           {tool.name}
         </h3>
-        <p className="text-sm text-gray-300 mt-1 line-clamp-2">{tool.description}</p>
-        {/* Keywords as breadcrumb for SEO */}
       </div>
       <IconChevronRight className="w-5 h-5 text-gray-400 group-hover:text-brand-primary group-hover:translate-x-1 transition-all shrink-0 mt-1" />
     </Link>
