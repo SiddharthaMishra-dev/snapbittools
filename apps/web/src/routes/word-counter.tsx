@@ -123,7 +123,7 @@ function WordCounterComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col font-sans">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
         <div className="text-center mb-8 max-w-5xl mx-auto">
@@ -136,7 +136,7 @@ function WordCounterComponent() {
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
-          <div className="bg-gray-800 rounded-xl shadow-lg p-4">
+          <div className=" rounded-xl shadow-lg p-4">
             <div className="flex flex-wrap gap-3 justify-center">
               <button
                 onClick={() => transformText("upper")}
@@ -203,7 +203,7 @@ function WordCounterComponent() {
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div className="lg:col-span-3">
-              <div className="bg-gray-800 rounded-xl shadow-lg p-6 h-full flex flex-col">
+              <div className=" rounded-xl shadow-lg p-6 h-full flex flex-col">
                 <textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
@@ -215,7 +215,7 @@ function WordCounterComponent() {
             </div>
 
             <div className="lg:col-span-1 space-y-6">
-              <div className="bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-700">
+              <div className=" rounded-xl shadow-lg p-6 border border-gray-700">
                 <h3 className="text-lg font-semibold text-gray-100 mb-6 flex items-center gap-2 border-b border-gray-700 pb-2">
                   <IconHash className="w-5 h-5 text-brand-primary" />
                   Live Statistics

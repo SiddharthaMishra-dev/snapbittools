@@ -238,7 +238,7 @@ export function JsonFormatterTool() {
   return (
     <div className="flex-1 max-w-9xl w-full mx-auto">
       {/* Toolbar */}
-      <div className="bg-gray-800 rounded-xl shadow-lg p-4 mb-6">
+      <div className=" rounded-xl shadow-lg p-4 mb-6">
         <div className="flex flex-wrap gap-3 justify-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg">
             <span className="text-sm font-medium">Quotes:</span>
@@ -338,13 +338,13 @@ export function JsonFormatterTool() {
       {/* Editor Panels */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Input Panel */}
-        <div className="bg-gray-800 rounded-xl shadow-lg p-6">
+        <div className="rounded-xl shadow-lg p-6">
           <h3 className="text-xl font-semibold text-gray-100 mb-4">Input</h3>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder='Paste your JSON here, e.g., {"name": "John", "age": 30}'
-            className={`w-full h-96 p-4 border rounded-lg bg-gray-700 text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            className={`w-full h-96 p-4 border rounded-lg  text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 ${
               error ? "border-red-500" : "border-gray-600"
             }`}
             spellCheck={false}
@@ -357,7 +357,7 @@ export function JsonFormatterTool() {
         </div>
 
         {/* Output Panel */}
-        <div className="bg-gray-800 rounded-xl shadow-lg p-6">
+        <div className=" rounded-xl shadow-lg p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-semibold text-gray-100">Output</h3>
             <div className="flex gap-2">
@@ -384,7 +384,7 @@ export function JsonFormatterTool() {
             </div>
           </div>
           <pre
-            className="w-full h-96 p-4 border border-gray-600 rounded-lg bg-gray-900 font-mono text-sm overflow-auto"
+            className="w-full h-96 p-4 border border-gray-600 rounded-lg  font-mono text-sm overflow-auto"
             style={{ tabSize: 2 }}
           >
             {activeView === "formatted" ? (

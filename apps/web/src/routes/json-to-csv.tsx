@@ -236,7 +236,7 @@ function RouteComponent() {
   }, [csvOutput]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
         {/* Header */}
@@ -252,7 +252,7 @@ function RouteComponent() {
         {/* Main Content */}
         <div className="flex-1 max-w-9xl w-full mx-auto">
           {/* Toolbar */}
-          <div className="bg-gray-800 rounded-xl shadow-lg p-4 mb-6">
+          <div className=" rounded-xl shadow-lg p-4 mb-6">
             <div className="flex flex-wrap gap-3 justify-center items-center">
               <button
                 onClick={loadSampleData}
@@ -331,8 +331,8 @@ function RouteComponent() {
           {/* Editor Panels */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
             {/* Input Panel */}
-            <div className="bg-gray-800 rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-              <div className="px-4 py-3 bg-gray-800 border-b border-gray-700 flex justify-between items-center">
+            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
+              <div className="px-4 py-3  border-b border-gray-700 flex justify-between items-center">
                 <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
                   Input JSON
                 </h3>
@@ -354,8 +354,8 @@ function RouteComponent() {
             </div>
 
             {/* Output Panel */}
-            <div className="bg-gray-800 rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-              <div className="px-4 py-3 bg-gray-800 border-b border-gray-700 flex justify-between items-center">
+            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
+              <div className="px-4 py-3  border-b border-gray-700 flex justify-between items-center">
                 <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
                   Output CSV
                 </h3>

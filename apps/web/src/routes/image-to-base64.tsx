@@ -156,7 +156,7 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
         <motion.div
@@ -186,7 +186,7 @@ function RouteComponent() {
         >
           <motion.div
             variants={itemVariants}
-            className="bg-gray-800 rounded-xl shadow-lg p-8 mb-6"
+            className="rounded-xl shadow-lg p-8 mb-6"
           >
             <div
               onDragOver={handleDragOver}
@@ -195,7 +195,7 @@ function RouteComponent() {
               className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
                 isDragging
                   ? "border-blue-500 bg-blue-900/20"
-                  : "border-gray-600 hover:border-blue-400 hover:bg-gray-700"
+                  : "border-gray-600 hover:border-blue-400 "
               }`}
             >
               <div className="flex flex-col items-center space-y-4">

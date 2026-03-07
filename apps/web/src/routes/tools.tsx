@@ -27,7 +27,7 @@ export const Route = createFileRoute("/tools")({
 export function RouteComponent() {
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 flex flex-col relative overflow-hidden"
+      className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col relative overflow-hidden"
       id="top"
     >
       <div className="absolute inset-0 z-0">

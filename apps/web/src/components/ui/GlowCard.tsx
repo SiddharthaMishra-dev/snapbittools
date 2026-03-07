@@ -42,7 +42,7 @@ export default function GlowCard({
     <Link
       ref={cardRef}
       to={to}
-      className={`group relative bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 sm:p-8 overflow-hidden ${className}`}
+      className={`group relative bg-transparent border border-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 sm:p-8 overflow-hidden ${className}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

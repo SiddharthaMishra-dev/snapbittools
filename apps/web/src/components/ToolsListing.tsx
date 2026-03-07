@@ -47,7 +47,7 @@ export function ToolsListing() {
                   >
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-brand-dark rounded-lg flex items-center justify-center group-hover:bg-brand-primary transition-colors ease-in-out">
+                        <div className="w-12 h-12  rounded-lg flex items-center justify-center group-hover:bg-brand-primary/5 transition-colors ease-in-out">
                           <Icon className="text-brand-light" />
                         </div>
                       </div>

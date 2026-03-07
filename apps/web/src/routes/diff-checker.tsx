@@ -94,7 +94,7 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
         <div className="text-center mb-10 max-w-5xl mx-auto">
@@ -108,7 +108,7 @@ function RouteComponent() {
         </div>
 
         {/* Action Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6 bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6  p-4 rounded-xl border border-gray-700">
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setViewMode("split")}
@@ -168,7 +168,7 @@ function RouteComponent() {
             </label>
             <textarea
               placeholder="Paste your original text here..."
-              className="w-full h-64 p-4 bg-gray-800 border border-gray-700 rounded-xl text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
+              className="w-full h-64 p-4  border border-gray-700 rounded-xl text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
               value={oldText}
               onChange={(e) => setOldText(e.target.value)}
             />
@@ -179,7 +179,7 @@ function RouteComponent() {
             </label>
             <textarea
               placeholder="Paste your modified text here..."
-              className="w-full h-64 p-4 bg-gray-800 border border-gray-700 rounded-xl text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
+              className="w-full h-64 p-4  border border-gray-700 rounded-xl text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
             />

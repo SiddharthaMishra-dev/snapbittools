@@ -206,7 +206,7 @@ function RouteComponent() {
   }, [jsonOutput]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col">
       <Breadcrumbs />
       <div className="text-center mb-8 max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-100 mb-2">
@@ -218,7 +218,7 @@ function RouteComponent() {
       </div>
 
       <div className="flex-1 max-w-7xl w-full mx-auto">
-        <div className="bg-gray-800 rounded-xl shadow-lg p-4 mb-6">
+        <div className="bg-transparent rounded-xl shadow-lg p-4 mb-6">
           <div className="flex flex-wrap gap-3 justify-center items-center">
             <input
               ref={fileInputRef}
@@ -320,8 +320,8 @@ function RouteComponent() {
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
-          <div className="bg-gray-800 rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-            <div className="px-4 py-3 bg-gray-800 border-b border-gray-700 flex justify-between items-center">
+          <div className=" rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
+            <div className="px-4 py-3  border-b border-gray-700 flex justify-between items-center">
               <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
                 Input CSV
               </h3>
@@ -335,15 +335,15 @@ function RouteComponent() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Paste CSV content here..."
-              className={`flex-1 w-full p-4 bg-gray-900/50 text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0 ${
+              className={`flex-1 w-full p-4  text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0 ${
                 error ? "bg-red-900/10" : ""
               }`}
               spellCheck={false}
             />
           </div>
 
-          <div className="bg-gray-800 rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-            <div className="px-4 py-3 bg-gray-800 border-b border-gray-700 flex justify-between items-center">
+          <div className=" rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
+            <div className="px-4 py-3  border-b border-gray-700 flex justify-between items-center">
               <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
                 Output JSON
               </h3>

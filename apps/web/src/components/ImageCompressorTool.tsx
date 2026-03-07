@@ -258,7 +258,7 @@ export function ImageCompressorTool() {
 
   return (
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-      <div className="bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
+      <div className="rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
         {files.length === 0 ? (
           <>
             <div
@@ -268,7 +268,7 @@ export function ImageCompressorTool() {
               className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
                 isDragging
                   ? "border-brand-primary bg-brand-primary/20"
-                  : "border-gray-600 hover:border-brand-primary/40 hover:bg-gray-700"
+                  : "border-gray-600 hover:border-brand-primary/40 "
               }`}
             >
               <div className="flex flex-col items-center space-y-4">

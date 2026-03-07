@@ -297,7 +297,7 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 to-slate-900 pt-24 pb-8 px-4 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col">
       <Breadcrumbs />
       <div className="text-center mb-8 max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-100 mb-2">
