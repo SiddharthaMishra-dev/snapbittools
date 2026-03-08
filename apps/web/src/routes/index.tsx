@@ -91,7 +91,7 @@ function App() {
           animate="visible"
           className="max-w-5xl mx-auto text-center space-y-6"
         >
-          <motion.a
+          {/* <motion.a
             variants={itemVariants}
             className="flex justify-center"
             href="https://snapbittools.com"
@@ -104,7 +104,7 @@ function App() {
               height="54"
               src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1071802&amp;theme=light&amp;t=1770132279046"
             ></img>
-          </motion.a>
+          </motion.a> */}
           <motion.h1
             variants={itemVariants}
             className="text-2xl md:text-5xl font-bold text-gray-100 leading-tight"

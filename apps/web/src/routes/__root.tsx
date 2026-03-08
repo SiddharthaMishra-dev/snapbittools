@@ -13,7 +13,8 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       {
-        title: "SnapBit Tools | Privacy First | 100% Private and Fast Utilities",
+        title:
+          "SnapBit Tools: Free Privacy-First Image Compressor & Data Converter | No Uploads Needed",
       },
       {
         charSet: "utf-8",
@@ -25,7 +26,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Free, private, and fast everyday tools. Convert images to Base64, compress, crop, and convert formats, format JSON and convert image to pdf instantly. 100% client-side—your data never leaves your browser.",
+          "Compress images, convert to Base64, format JSON/CSV—all in-browser for total privacy. Fast, free tools for developers & designers.",
       },
       {
         name: "keywords",
@@ -42,12 +43,13 @@ export const Route = createRootRoute({
       },
       {
         property: "og:title",
-        content: "SnapBit Tools | Privacy First | 100% Private and Fast Utilities",
+        content:
+          "SnapBit Tools: Free Privacy-First Image Compressor & Data Converter | No Uploads Needed",
       },
       {
         property: "og:description",
         content:
-          "Free, private, and fast tools. 100% client-side—your data never leaves your browser.",
+          "Compress images, convert to Base64, format JSON/CSV—all in-browser for total privacy. Fast, free tools for developers & designers.",
       },
       {
         property: "og:image",
@@ -59,12 +61,13 @@ export const Route = createRootRoute({
       },
       {
         name: "twitter:title",
-        content: "SnapBit Tools | Privacy First | 100% Client-Side Utilities",
+        content:
+          "SnapBit Tools: Free Privacy-First Image Compressor & Data Converter | No Uploads Needed",
       },
       {
         name: "twitter:description",
         content:
-          "Free, private, and fast tools. 100% client-side—your data never leaves your browser.",
+          "Compress images, convert to Base64, format JSON/CSV—all in-browser for total privacy. Fast, free tools for developers & designers.",
       },
       {
         name: "twitter:image",
