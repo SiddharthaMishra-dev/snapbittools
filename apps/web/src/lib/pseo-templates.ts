@@ -1,6 +1,6 @@
 /**
  * pSEO Content Templates
- * 
+ *
  * Reusable content templates for programmatic SEO pages.
  * Each template generates unique, high-quality content based on keyword variant data.
  */
@@ -20,7 +20,7 @@ export function generateIntroSection(variant: KeywordVariant): ContentSection {
     return {
         title: "",
         content: variant.uniqueContent.intro,
-        type: "intro"
+        type: "intro",
     };
 }
 
@@ -71,13 +71,13 @@ export function generateHowItWorksSection(variant: KeywordVariant): ContentSecti
                 <li><strong>Fast Processing:</strong> Client-side processing means no upload/download delays. Conversions happen instantly.</li>
             </ol>
             <p>Whether you're a developer, designer, content creator, or just need to convert files occasionally, these tools provide professional-grade functionality without compromising your privacy or requiring any setup.</p>
-        `
+        `,
     };
 
     return {
         title: "How It Works",
         content: templates[variant.searchIntent],
-        type: "howto"
+        type: "howto",
     };
 }
 
@@ -86,18 +86,18 @@ export function generateHowItWorksSection(variant: KeywordVariant): ContentSecti
  */
 export function generateUseCasesSection(variant: KeywordVariant): ContentSection {
     const useCases = variant.uniqueContent.useCases;
-    
+
     return {
         title: "Common Use Cases",
         content: `
             <h2>When to Use ${variant.h1}</h2>
             <p>This tool is perfect for a variety of scenarios:</p>
             <ul>
-                ${useCases.map(useCase => `<li><strong>${useCase}</strong></li>`).join("\n                ")}
+                ${useCases.map((useCase) => `<li><strong>${useCase}</strong></li>`).join("\n                ")}
             </ul>
             <p>${variant.uniqueContent.helpText}</p>
         `,
-        type: "usecases"
+        type: "usecases",
     };
 }
 
@@ -109,12 +109,18 @@ export function generatePrivacySection(variant: KeywordVariant): ContentSection 
         image: "images",
         json: "JSON data",
         csv: "data files",
-        general: "files"
+        general: "files",
     };
 
-    const fileType = variant.targetFormat 
-        ? (variant.targetFormat.some(f => ["png", "jpg", "jpeg", "webp", "avif", "heic", "gif", "svg", "bmp", "ico"].includes(f.toLowerCase())) ? "images" : "files")
-        : (variant.primaryKeyword.includes("json") ? "JSON data" : "files");
+    const fileType = variant.targetFormat
+        ? variant.targetFormat.some((f) =>
+              ["png", "jpg", "jpeg", "webp", "avif", "heic", "gif", "svg", "bmp", "ico"].includes(f.toLowerCase()),
+          )
+            ? "images"
+            : "files"
+        : variant.primaryKeyword.includes("json")
+          ? "JSON data"
+          : "files";
 
     return {
         title: "Why Privacy Matters",
@@ -141,7 +147,7 @@ export function generatePrivacySection(variant: KeywordVariant): ContentSection 
             </div>
             <p>This privacy-first approach makes our tools ideal for sensitive documents, confidential business data, personal photos, or any situation where data security is important. Use these tools with confidence knowing your ${fileType} remain completely private.</p>
         `,
-        type: "privacy"
+        type: "privacy",
     };
 }
 
@@ -153,91 +159,91 @@ export function generateFAQs(variant: KeywordVariant): Array<{ question: string;
         converter: [
             {
                 question: `Is the ${variant.h1} really free?`,
-                answer: `Yes, absolutely! Our ${variant.h1} is completely free with no hidden costs, no usage limits, and no account required. Convert as many files as you need, whenever you need.`
+                answer: `Yes, absolutely! Our ${variant.h1} is completely free with no hidden costs, no usage limits, and no account required. Convert as many files as you need, whenever you need.`,
             },
             {
                 question: "Are my files uploaded to your servers?",
-                answer: `No, never. All conversion happens in your browser using JavaScript. Your files are processed locally on your device and never leave it. This ensures complete privacy and security.`
+                answer: `No, never. All conversion happens in your browser using JavaScript. Your files are processed locally on your device and never leave it. This ensures complete privacy and security.`,
             },
             {
                 question: `What file sizes can the ${variant.h1} handle?`,
-                answer: `The tool can handle files of any reasonable size. Since processing happens in your browser, the limit is based on your device's available memory. Most users can easily process files up to several hundred megabytes.`
+                answer: `The tool can handle files of any reasonable size. Since processing happens in your browser, the limit is based on your device's available memory. Most users can easily process files up to several hundred megabytes.`,
             },
             {
                 question: "Do I need to install any software?",
-                answer: `No installation needed! The tool works entirely in your web browser. Just open the page and start converting. It works on any device with a modern browser—desktop, laptop, tablet, or phone.`
+                answer: `No installation needed! The tool works entirely in your web browser. Just open the page and start converting. It works on any device with a modern browser—desktop, laptop, tablet, or phone.`,
             },
             {
                 question: `Can I convert multiple files at once?`,
-                answer: `Yes! The tool supports batch conversion, allowing you to convert multiple files simultaneously. This is perfect for processing entire folders or image libraries.`
-            }
+                answer: `Yes! The tool supports batch conversion, allowing you to convert multiple files simultaneously. This is perfect for processing entire folders or image libraries.`,
+            },
         ],
         compressor: [
             {
                 question: "How much can I reduce my image file size?",
-                answer: `File size reduction depends on the original image and target size. Typically, you can reduce JPG files by 60-80% and PNG files by 40-70% without visible quality loss. Our intelligent algorithms find the optimal balance automatically.`
+                answer: `File size reduction depends on the original image and target size. Typically, you can reduce JPG files by 60-80% and PNG files by 40-70% without visible quality loss. Our intelligent algorithms find the optimal balance automatically.`,
             },
             {
                 question: "Will compressing reduce image quality?",
-                answer: `Our compression algorithms are designed to maintain visual quality while reducing file size. For most use cases, quality differences are imperceptible. You can always preview results and adjust settings before downloading.`
+                answer: `Our compression algorithms are designed to maintain visual quality while reducing file size. For most use cases, quality differences are imperceptible. You can always preview results and adjust settings before downloading.`,
             },
             {
                 question: "Are my images uploaded to your servers?",
-                answer: `No, absolutely not. All image compression happens in your browser. Your images are processed locally on your device and never leave it, ensuring complete privacy for your photos and graphics.`
+                answer: `No, absolutely not. All image compression happens in your browser. Your images are processed locally on your device and never leave it, ensuring complete privacy for your photos and graphics.`,
             },
             {
                 question: "Can I compress multiple images at once?",
-                answer: `Yes! The compressor supports batch processing, allowing you to compress dozens or hundreds of images simultaneously with consistent settings.`
+                answer: `Yes! The compressor supports batch processing, allowing you to compress dozens or hundreds of images simultaneously with consistent settings.`,
             },
             {
                 question: "What image formats are supported?",
-                answer: `The compressor supports all major image formats including JPG/JPEG, PNG, WebP, AVIF, GIF, and more. Different formats use different optimization techniques for best results.`
-            }
+                answer: `The compressor supports all major image formats including JPG/JPEG, PNG, WebP, AVIF, GIF, and more. Different formats use different optimization techniques for best results.`,
+            },
         ],
         validator: [
             {
                 question: "Is my JSON data private?",
-                answer: `Yes, completely private. All JSON processing happens in your browser using JavaScript. Your data never leaves your device and is never sent to our servers or anyone else's.`
+                answer: `Yes, completely private. All JSON processing happens in your browser using JavaScript. Your data never leaves your device and is never sent to our servers or anyone else's.`,
             },
             {
                 question: "Can this tool handle large JSON files?",
-                answer: `Yes! The tool is optimized to handle large JSON files efficiently, typically processing files of 100MB or more without issues. Processing happens locally using your device's resources.`
+                answer: `Yes! The tool is optimized to handle large JSON files efficiently, typically processing files of 100MB or more without issues. Processing happens locally using your device's resources.`,
             },
             {
                 question: "Does the tool validate JSON syntax?",
-                answer: `Yes, JSON is automatically validated. Any syntax errors are highlighted with detailed error messages showing exactly what's wrong and where, making it easy to fix issues quickly.`
+                answer: `Yes, JSON is automatically validated. Any syntax errors are highlighted with detailed error messages showing exactly what's wrong and where, making it easy to fix issues quickly.`,
             },
             {
                 question: "Can I use this tool offline?",
-                answer: `Yes! Once the page loads, you can disconnect from the internet. All JSON processing happens locally in your browser, so no internet connection is required for the actual work.`
+                answer: `Yes! Once the page loads, you can disconnect from the internet. All JSON processing happens locally in your browser, so no internet connection is required for the actual work.`,
             },
             {
                 question: "Is this tool really free?",
-                answer: `Yes, completely free with no usage limits, no accounts required, and no hidden costs. Use it as much as you need for personal or commercial projects.`
-            }
+                answer: `Yes, completely free with no usage limits, no accounts required, and no hidden costs. Use it as much as you need for personal or commercial projects.`,
+            },
         ],
         "use-case": [
             {
                 question: "Do these tools really work offline?",
-                answer: `Yes! Once a tool page loads, you can disconnect from the internet. All processing happens in your browser using JavaScript, so no internet connection is needed for the actual work.`
+                answer: `Yes! Once a tool page loads, you can disconnect from the internet. All processing happens in your browser using JavaScript, so no internet connection is needed for the actual work.`,
             },
             {
                 question: "Are these tools really free?",
-                answer: `Yes, completely free. No trials, no premium tiers, no usage limits, no hidden costs. All tools are free forever for both personal and commercial use.`
+                answer: `Yes, completely free. No trials, no premium tiers, no usage limits, no hidden costs. All tools are free forever for both personal and commercial use.`,
             },
             {
                 question: "Why don't you upload files to servers?",
-                answer: `Client-side processing offers three major advantages: complete privacy for your data, instant processing with no upload delays, and the ability to work offline. Your files never leave your device.`
+                answer: `Client-side processing offers three major advantages: complete privacy for your data, instant processing with no upload delays, and the ability to work offline. Your files never leave your device.`,
             },
             {
                 question: "What browsers are supported?",
-                answer: `All modern browsers are supported including Chrome, Firefox, Safari, Edge, and others. The tools use standard web technologies that work across all platforms and devices.`
+                answer: `All modern browsers are supported including Chrome, Firefox, Safari, Edge, and others. The tools use standard web technologies that work across all platforms and devices.`,
             },
             {
                 question: "Can I use these tools for commercial projects?",
-                answer: `Yes! All tools are free for both personal and commercial use. No attribution required, no licenses to buy, no usage restrictions.`
-            }
-        ]
+                answer: `Yes! All tools are free for both personal and commercial use. No attribution required, no licenses to buy, no usage restrictions.`,
+            },
+        ],
     };
 
     return baseFAQs[variant.searchIntent] || baseFAQs.converter;
@@ -278,7 +284,7 @@ export function generateBenefitsSection(variant: KeywordVariant): ContentSection
                 </div>
             </div>
         `,
-        type: "benefits"
+        type: "benefits",
     };
 }
 
@@ -295,9 +301,9 @@ export function generatePageContent(variant: KeywordVariant): {
             generateBenefitsSection(variant),
             generateHowItWorksSection(variant),
             generateUseCasesSection(variant),
-            generatePrivacySection(variant)
+            generatePrivacySection(variant),
         ],
-        faqs: generateFAQs(variant)
+        faqs: generateFAQs(variant),
     };
 }
 
@@ -307,25 +313,25 @@ export function generatePageContent(variant: KeywordVariant): {
 export function generateBreadcrumbs(variant: KeywordVariant) {
     const breadcrumbs = [
         { name: "Home", path: "/" },
-        { name: "Tools", path: "/tools" }
+        { name: "Tools", path: "/tools" },
     ];
 
     // Add parent tool if exists
     if (variant.parentTool && variant.parentTool !== "tools") {
         const toolName = variant.parentTool
             .split("-")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
         breadcrumbs.push({
             name: toolName,
-            path: `/${variant.parentTool}`
+            path: `/${variant.parentTool}`,
         });
     }
 
     // Add current page
     breadcrumbs.push({
         name: variant.h1,
-        path: `/${variant.slug}`
+        path: `/${variant.slug}`,
     });
 
     return breadcrumbs;

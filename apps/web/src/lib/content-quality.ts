@@ -1,6 +1,6 @@
 /**
  * Content Quality Safeguards
- * 
+ *
  * Validates pSEO content to prevent thin content, detect duplicates,
  * and ensure high-quality, unique pages.
  */
@@ -37,7 +37,7 @@ export function validateVariantQuality(variant: KeywordVariant): QualityCheck {
     const metrics = calculatePageMetrics(variant, sections, faqs);
 
     // CRITICAL CHECKS (errors that prevent indexing)
-    
+
     // 1. Minimum word count (300 words minimum)
     if (metrics.wordCount < 300) {
         errors.push(`Word count too low: ${metrics.wordCount} words (minimum: 300)`);
@@ -51,9 +51,9 @@ export function validateVariantQuality(variant: KeywordVariant): QualityCheck {
     }
 
     // 3. Ensure unique H1
-    const h1Duplicates = allKeywordVariants.filter(v => v.h1 === variant.h1 && v.slug !== variant.slug);
+    const h1Duplicates = allKeywordVariants.filter((v) => v.h1 === variant.h1 && v.slug !== variant.slug);
     if (h1Duplicates.length > 0) {
-        errors.push(`H1 "${variant.h1}" is duplicated on: ${h1Duplicates.map(v => v.slug).join(', ')}`);
+        errors.push(`H1 "${variant.h1}" is duplicated on: ${h1Duplicates.map((v) => v.slug).join(", ")}`);
         score -= 40;
     }
 
@@ -95,7 +95,8 @@ export function validateVariantQuality(variant: KeywordVariant): QualityCheck {
 
     // 9. Check for keyword stuffing in intro
     const keywordDensity = calculateKeywordDensity(variant.uniqueContent.intro, variant.primaryKeyword);
-    if (keywordDensity > 0.03) { // More than 3%
+    if (keywordDensity > 0.03) {
+        // More than 3%
         warnings.push(`Potential keyword stuffing: ${(keywordDensity * 100).toFixed(1)}% density (maximum: 3%)`);
         score -= 10;
     }
@@ -110,24 +111,20 @@ export function validateVariantQuality(variant: KeywordVariant): QualityCheck {
         passed: errors.length === 0,
         errors,
         warnings,
-        score: Math.max(0, score)
+        score: Math.max(0, score),
     };
 }
 
 /**
  * Calculate metrics for a page
  */
-function calculatePageMetrics(
-    variant: KeywordVariant, 
-    sections: any[], 
-    faqs: any[]
-): PageQualityMetrics {
+function calculatePageMetrics(variant: KeywordVariant, sections: any[], faqs: any[]): PageQualityMetrics {
     // Count total words
-    const allText = sections.map(s => stripHtml(s.content)).join(' ');
+    const allText = sections.map((s) => stripHtml(s.content)).join(" ");
     const wordCount = countWords(allText);
 
     // Calculate unique content ratio
-    const uniqueContent = variant.uniqueContent.intro + variant.uniqueContent.useCases.join(' ') + variant.uniqueContent.helpText;
+    const uniqueContent = variant.uniqueContent.intro + variant.uniqueContent.useCases.join(" ") + variant.uniqueContent.helpText;
     const uniqueWords = countWords(uniqueContent);
     const uniqueContentRatio = uniqueWords / wordCount;
 
@@ -155,7 +152,7 @@ function calculatePageMetrics(
         linksCount,
         faqCount,
         hasThinContent,
-        isDuplicate
+        isDuplicate,
     };
 }
 
@@ -164,18 +161,18 @@ function calculatePageMetrics(
  */
 function checkForDuplicates(variant: KeywordVariant): boolean {
     const currentIntro = variant.uniqueContent.intro.toLowerCase();
-    
+
     for (const other of allKeywordVariants) {
         if (other.slug === variant.slug) continue;
-        
+
         const similarity = calculateSimilarity(currentIntro, other.uniqueContent.intro.toLowerCase());
-        
+
         // If more than 80% similar, flag as duplicate
         if (similarity > 0.8) {
             return true;
         }
     }
-    
+
     return false;
 }
 
@@ -185,10 +182,10 @@ function checkForDuplicates(variant: KeywordVariant): boolean {
 function calculateSimilarity(text1: string, text2: string): number {
     const words1 = new Set(text1.split(/\s+/));
     const words2 = new Set(text2.split(/\s+/));
-    
-    const intersection = new Set([...words1].filter(word => words2.has(word)));
+
+    const intersection = new Set([...words1].filter((word) => words2.has(word)));
     const union = new Set([...words1, ...words2]);
-    
+
     return intersection.size / union.size;
 }
 
@@ -198,10 +195,10 @@ function calculateSimilarity(text1: string, text2: string): number {
 function calculateKeywordDensity(text: string, keyword: string): number {
     const lowerText = text.toLowerCase();
     const lowerKeyword = keyword.toLowerCase();
-    
-    const keywordOccurrences = (lowerText.match(new RegExp(lowerKeyword, 'g')) || []).length;
+
+    const keywordOccurrences = (lowerText.match(new RegExp(lowerKeyword, "g")) || []).length;
     const totalWords = countWords(text);
-    
+
     return keywordOccurrences / totalWords;
 }
 
@@ -209,14 +206,20 @@ function calculateKeywordDensity(text: string, keyword: string): number {
  * Count words in text
  */
 function countWords(text: string): number {
-    return text.trim().split(/\s+/).filter(word => word.length > 0).length;
+    return text
+        .trim()
+        .split(/\s+/)
+        .filter((word) => word.length > 0).length;
 }
 
 /**
  * Strip HTML tags from text
  */
 function stripHtml(html: string): string {
-    return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    return html
+        .replace(/<[^>]*>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
 }
 
 /**
@@ -229,12 +232,12 @@ export function validateAllVariants(): {
     avgScore: number;
     issues: Array<{ slug: string; check: QualityCheck }>;
 } {
-    const results = allKeywordVariants.map(variant => ({
+    const results = allKeywordVariants.map((variant) => ({
         slug: variant.slug,
-        check: validateVariantQuality(variant)
+        check: validateVariantQuality(variant),
     }));
 
-    const failed = results.filter(r => !r.check.passed);
+    const failed = results.filter((r) => !r.check.passed);
     const avgScore = results.reduce((sum, r) => sum + r.check.score, 0) / results.length;
 
     return {
@@ -242,7 +245,7 @@ export function validateAllVariants(): {
         passed: results.length - failed.length,
         failed: failed.length,
         avgScore: Math.round(avgScore),
-        issues: results.filter(r => r.check.errors.length > 0 || r.check.warnings.length > 0)
+        issues: results.filter((r) => r.check.errors.length > 0 || r.check.warnings.length > 0),
     };
 }
 
@@ -258,17 +261,17 @@ export function detectKeywordOverlap(): Array<{
 
     for (const variant of allKeywordVariants) {
         const normalized = normalizeKeyword(variant.primaryKeyword);
-        
+
         if (!keywordMap.has(normalized)) {
             keywordMap.set(normalized, []);
         }
-        
+
         keywordMap.get(normalized)!.push(variant.slug);
     }
 
     // Find keywords with multiple variants
     const overlaps: Array<{ keyword: string; variants: string[] }> = [];
-    
+
     for (const [keyword, variants] of keywordMap.entries()) {
         if (variants.length > 1) {
             overlaps.push({ keyword, variants });
@@ -284,8 +287,8 @@ export function detectKeywordOverlap(): Array<{
 function normalizeKeyword(keyword: string): string {
     return keyword
         .toLowerCase()
-        .replace(/online|free|tool|converter|compressor/g, '')
-        .replace(/\s+/g, ' ')
+        .replace(/online|free|tool|converter|compressor/g, "")
+        .replace(/\s+/g, " ")
         .trim();
 }
 
@@ -296,8 +299,8 @@ export function generateQualityReport(): string {
     const report = validateAllVariants();
     const overlaps = detectKeywordOverlap();
 
-    let output = '# Content Quality Report\n\n';
-    
+    let output = "# Content Quality Report\n\n";
+
     output += `## Overview\n`;
     output += `- Total Variants: ${report.totalVariants}\n`;
     output += `- Passed: ${report.passed} (${((report.passed / report.totalVariants) * 100).toFixed(1)}%)\n`;
@@ -307,31 +310,31 @@ export function generateQualityReport(): string {
     if (overlaps.length > 0) {
         output += `## ⚠️ Keyword Overlaps (${overlaps.length})\n\n`;
         for (const overlap of overlaps) {
-            output += `- **${overlap.keyword}**: ${overlap.variants.join(', ')}\n`;
+            output += `- **${overlap.keyword}**: ${overlap.variants.join(", ")}\n`;
         }
-        output += '\n';
+        output += "\n";
     }
 
     if (report.issues.length > 0) {
         output += `## Issues Found (${report.issues.length})\n\n`;
-        
+
         for (const issue of report.issues) {
             output += `### ${issue.slug} (Score: ${issue.check.score}/100)\n\n`;
-            
+
             if (issue.check.errors.length > 0) {
                 output += `**Errors:**\n`;
                 for (const error of issue.check.errors) {
                     output += `- ❌ ${error}\n`;
                 }
-                output += '\n';
+                output += "\n";
             }
-            
+
             if (issue.check.warnings.length > 0) {
                 output += `**Warnings:**\n`;
                 for (const warning of issue.check.warnings) {
                     output += `- ⚠️ ${warning}\n`;
                 }
-                output += '\n';
+                output += "\n";
             }
         }
     }
@@ -355,7 +358,7 @@ export function enforceQualityGates(minScore: number = 70): {
     }
 
     // Check for critical failures
-    const criticalFailures = report.issues.filter(i => i.check.errors.length > 0);
+    const criticalFailures = report.issues.filter((i) => i.check.errors.length > 0);
     if (criticalFailures.length > 0) {
         blockers.push(`${criticalFailures.length} variants have critical errors`);
     }
@@ -368,6 +371,6 @@ export function enforceQualityGates(minScore: number = 70): {
 
     return {
         canDeploy: blockers.length === 0,
-        blockers
+        blockers,
     };
 }

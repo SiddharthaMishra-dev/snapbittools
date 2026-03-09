@@ -1,6 +1,6 @@
 /**
  * Internal Linking System
- * 
+ *
  * Manages internal links between pSEO pages for improved SEO and user navigation.
  * Generates contextual, keyword-rich links between related pages.
  */
@@ -21,20 +21,20 @@ export interface InternalLink {
  * Returns 4-6 highly relevant links
  */
 export function generateInternalLinks(currentSlug: string): InternalLink[] {
-    const currentVariant = allKeywordVariants.find(v => v.slug === currentSlug);
+    const currentVariant = allKeywordVariants.find((v) => v.slug === currentSlug);
     if (!currentVariant) return [];
 
     const links: InternalLink[] = [];
 
     // 1. Add parent tool link
-    const parentTool = tools.find(t => t.slug === currentVariant.parentTool);
+    const parentTool = tools.find((t) => t.slug === currentVariant.parentTool);
     if (parentTool) {
         links.push({
             href: parentTool.href,
             title: parentTool.name,
             description: parentTool.description,
             anchorText: `Try our ${parentTool.name}`,
-            category: "parent-tool"
+            category: "parent-tool",
         });
     }
 
@@ -46,7 +46,7 @@ export function generateInternalLinks(currentSlug: string): InternalLink[] {
             title: variant.h1,
             description: variant.metaDescription,
             anchorText: variant.h1,
-            category: "related-variant"
+            category: "related-variant",
         });
     }
 
@@ -68,13 +68,13 @@ function getUseCaseLink(variant: KeywordVariant): InternalLink | null {
     const useCaseMap: Record<string, string> = {
         converter: "tools-for-developers",
         compressor: "tools-for-designers",
-        validator: "web-developer-toolkit"
+        validator: "web-developer-toolkit",
     };
 
     const useCaseSlug = useCaseMap[variant.searchIntent];
     if (!useCaseSlug) return null;
 
-    const useCaseVariant = allKeywordVariants.find(v => v.slug === useCaseSlug);
+    const useCaseVariant = allKeywordVariants.find((v) => v.slug === useCaseSlug);
     if (!useCaseVariant) return null;
 
     return {
@@ -82,7 +82,7 @@ function getUseCaseLink(variant: KeywordVariant): InternalLink | null {
         title: useCaseVariant.h1,
         description: useCaseVariant.metaDescription,
         anchorText: `Explore ${useCaseVariant.h1}`,
-        category: "use-case"
+        category: "use-case",
     };
 }
 
@@ -107,16 +107,8 @@ export function generateAnchorText(variant: KeywordVariant, context: "inline" | 
             `reduce image file size`,
             variant.primaryKeyword,
         ],
-        validator: [
-            variant.primaryKeyword,
-            `${variant.h1.toLowerCase()} tool`,
-            `format and validate JSON`,
-        ],
-        "use-case": [
-            variant.primaryKeyword,
-            variant.h1.toLowerCase(),
-            `explore ${variant.h1.toLowerCase()}`,
-        ]
+        validator: [variant.primaryKeyword, `${variant.h1.toLowerCase()} tool`, `format and validate JSON`],
+        "use-case": [variant.primaryKeyword, variant.h1.toLowerCase(), `explore ${variant.h1.toLowerCase()}`],
     };
 
     const options = templates[variant.searchIntent] || [variant.h1.toLowerCase()];
@@ -127,21 +119,21 @@ export function generateAnchorText(variant: KeywordVariant, context: "inline" | 
  * Get breadcrumb links for navigation
  */
 export function getBreadcrumbLinks(currentSlug: string): Array<{ label: string; href: string }> {
-    const currentVariant = allKeywordVariants.find(v => v.slug === currentSlug);
+    const currentVariant = allKeywordVariants.find((v) => v.slug === currentSlug);
     if (!currentVariant) return [];
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
-        { label: "Tools", href: "/tools" }
+        { label: "Tools", href: "/tools" },
     ];
 
     // Add parent tool if different from "tools"
     if (currentVariant.parentTool !== "tools") {
-        const parentTool = tools.find(t => t.slug === currentVariant.parentTool);
+        const parentTool = tools.find((t) => t.slug === currentVariant.parentTool);
         if (parentTool) {
             breadcrumbs.push({
                 label: parentTool.name,
-                href: parentTool.href
+                href: parentTool.href,
             });
         }
     }
@@ -149,7 +141,7 @@ export function getBreadcrumbLinks(currentSlug: string): Array<{ label: string; 
     // Add current page
     breadcrumbs.push({
         label: currentVariant.h1,
-        href: `/${currentVariant.slug}`
+        href: `/${currentVariant.slug}`,
     });
 
     return breadcrumbs;
@@ -165,17 +157,17 @@ export function getRelatedToolsData(currentSlug: string): Array<{
     description: string;
     isPseoVariant: boolean;
 }> {
-    const currentVariant = allKeywordVariants.find(v => v.slug === currentSlug);
+    const currentVariant = allKeywordVariants.find((v) => v.slug === currentSlug);
     if (!currentVariant) return [];
 
     const relatedVariants = getRelatedVariants(currentSlug).slice(0, 4);
 
-    return relatedVariants.map(variant => ({
+    return relatedVariants.map((variant) => ({
         slug: variant.slug,
         name: variant.h1,
         href: `/${variant.slug}`,
         description: variant.metaDescription,
-        isPseoVariant: true
+        isPseoVariant: true,
     }));
 }
 
@@ -189,36 +181,32 @@ export function getContextualLinks(variant: KeywordVariant): InternalLink[] {
     // Add format-specific links for converters
     if (variant.searchIntent === "converter" && variant.targetFormat) {
         const [fromFormat, toFormat] = variant.targetFormat;
-        
+
         // Find reverse conversion
-        const reverseVariant = allKeywordVariants.find(
-            v => v.targetFormat?.[0] === toFormat && v.targetFormat?.[1] === fromFormat
-        );
-        
+        const reverseVariant = allKeywordVariants.find((v) => v.targetFormat?.[0] === toFormat && v.targetFormat?.[1] === fromFormat);
+
         if (reverseVariant) {
             links.push({
                 href: `/${reverseVariant.slug}`,
                 title: reverseVariant.h1,
                 description: `Convert ${toFormat.toUpperCase()} back to ${fromFormat.toUpperCase()}`,
                 anchorText: `${toFormat} to ${fromFormat} conversion`,
-                category: "related-variant"
+                category: "related-variant",
             });
         }
     }
 
     // Add compression link for converters
     if (variant.searchIntent === "converter") {
-        const compressionVariant = allKeywordVariants.find(
-            v => v.searchIntent === "compressor" && v.slug.includes("compress-image")
-        );
-        
+        const compressionVariant = allKeywordVariants.find((v) => v.searchIntent === "compressor" && v.slug.includes("compress-image"));
+
         if (compressionVariant) {
             links.push({
                 href: `/${compressionVariant.slug}`,
                 title: compressionVariant.h1,
                 description: "Also compress your images for web use",
-                anchorText: "compress your images", 
-                category: "related-variant"
+                anchorText: "compress your images",
+                category: "related-variant",
             });
         }
     }
@@ -241,14 +229,14 @@ export function validateInternalLinks(): {
     for (const variant of allKeywordVariants) {
         // Check related variants exist
         for (const relatedSlug of variant.relatedVariants) {
-            const relatedVariant = allKeywordVariants.find(v => v.slug === relatedSlug);
+            const relatedVariant = allKeywordVariants.find((v) => v.slug === relatedSlug);
             if (!relatedVariant) {
                 errors.push(`Variant "${variant.slug}" references non-existent variant "${relatedSlug}"`);
             }
         }
 
         // Check parent tool exists
-        const parentTool = tools.find(t => t.slug === variant.parentTool);
+        const parentTool = tools.find((t) => t.slug === variant.parentTool);
         if (!parentTool && variant.parentTool !== "tools") {
             errors.push(`Variant "${variant.slug}" references non-existent parent tool "${variant.parentTool}"`);
         }
@@ -267,7 +255,7 @@ export function validateInternalLinks(): {
     return {
         valid: errors.length === 0,
         errors,
-        warnings
+        warnings,
     };
 }
 
@@ -279,7 +267,7 @@ export function generateLinkGraph(): Record<string, string[]> {
 
     for (const variant of allKeywordVariants) {
         const links = generateInternalLinks(variant.slug);
-        graph[variant.slug] = links.map(link => link.href.replace('/', ''));
+        graph[variant.slug] = links.map((link) => link.href.replace("/", ""));
     }
 
     return graph;

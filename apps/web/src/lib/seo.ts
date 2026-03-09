@@ -16,13 +16,13 @@ export type SeoMetadata = {
 };
 
 export function getSeoMetadata(config: SeoMetadata) {
-    const { 
-        title, 
-        description, 
-        keywords, 
-        url, 
-        image = "https://snapbittools.com/screenshot.png", 
-        type = "website", 
+    const {
+        title,
+        description,
+        keywords,
+        url,
+        image = "https://snapbittools.com/screenshot.png",
+        type = "website",
         faqs,
         breadcrumbs,
         schema,
@@ -135,9 +135,7 @@ export function getOrganizationSchema() {
         url: "https://snapbittools.com",
         logo: "https://snapbittools.com/logo.png",
         description: "Free, private, and fast browser-based utility tools for developers, designers, and content creators",
-        sameAs: [
-            "https://github.com/SiddharthaMishra-dev/js-dev-tools",
-        ],
+        sameAs: ["https://github.com/SiddharthaMishra-dev/js-dev-tools"],
         contactPoint: {
             "@type": "ContactPoint",
             contactType: "General",

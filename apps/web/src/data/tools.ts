@@ -144,5 +144,4 @@ export const tools: ToolDefinition[] = [
         category: "Data",
         keywords: ["csv to json", "convert csv", "json generator", "data extraction"],
     },
-    
 ];

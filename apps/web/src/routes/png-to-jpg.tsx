@@ -20,27 +20,22 @@ const { faqs } = generatePageContent(variant);
 const breadcrumbs = generateBreadcrumbs(variant);
 
 export const Route = createFileRoute("/png-to-jpg")({
-  head: () =>
-    getSeoMetadata({
-      title: variant.metaTitle,
-      description: variant.metaDescription,
-      keywords: [variant.primaryKeyword, ...variant.relatedVariants],
-      url: `/${variant.slug}`,
-      type: "software",
-      faqs,
-      breadcrumbs,
-    }),
-  component: RouteComponent,
+    head: () =>
+        getSeoMetadata({
+            title: variant.metaTitle,
+            description: variant.metaDescription,
+            keywords: [variant.primaryKeyword, ...variant.relatedVariants],
+            url: `/${variant.slug}`,
+            type: "software",
+            faqs,
+            breadcrumbs,
+        }),
+    component: RouteComponent,
 });
 
 function RouteComponent() {
-  // Use the parent tool's component
-  const ParentToolComponent = ImageFormatConverterRoute.Route.options.component;
+    // Use the parent tool's component
+    const ParentToolComponent = ImageFormatConverterRoute.Route.options.component;
 
-  return ParentToolComponent ? (
-    <PseoPage
-      variant={variant}
-      toolComponent={ParentToolComponent}
-    />
-  ) : null;
+    return ParentToolComponent ? <PseoPage variant={variant} toolComponent={ParentToolComponent} /> : null;
 }

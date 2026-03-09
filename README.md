@@ -20,7 +20,6 @@ Tired of jumping between different websites for simple image tasks? Me too!
 - Format JSON? → SnapBit Tools
 - Convert images to PDF? → SnapBit Tools
 - Compare text/code? → SnapBit Tools
-- Generate placeholder text? → SnapBit Tools
 
 So I built them ALL in one place!
 
@@ -110,18 +109,18 @@ So I built them ALL in one place!
 ## How to Run Locally
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/SiddharthaMishra-dev/js-dev-tools
-   cd js-dev-tools
-   ```
+    ```bash
+    git clone https://github.com/SiddharthaMishra-dev/js-dev-tools
+    cd js-dev-tools
+    ```
 2. Install dependencies:
-   ```bash
-   bun install
-   ```
+    ```bash
+    bun install
+    ```
 3. Start the dev server:
-   ```bash
-   bun dev
-   ```
+    ```bash
+    bun dev
+    ```
 
 ## Contributing
 
