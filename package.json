@@ -1,15 +1,15 @@
 {
-    "name": "js-dev-tools-monorepo",
-    "private": true,
-    "workspaces": [
-        "apps/*"
-    ],
-    "scripts": {
-        "dev": "bun run --filter @app/server dev & bun run --filter @app/web dev",
-        "fmt": "oxfmt",
-        "fmt:check": "oxfmt --check"
-    },
-    "devDependencies": {
-        "oxfmt": "^0.36.0"
-    }
+  "name": "js-dev-tools-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "bun run --filter @app/server dev & bun run --filter @app/web dev",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.36.0"
+  }
 }
