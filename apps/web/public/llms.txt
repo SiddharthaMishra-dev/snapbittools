@@ -1,0 +1,23 @@
+# Snapbittools LLMs Policy
+
+Site: https://snapbittools.com
+Sitemap: https://snapbittools.com/sitemap.xml
+Robots: https://snapbittools.com/robots.txt
+
+## Access
+- Public pages may be accessed by AI crawlers and assistants.
+- Follow the same crawl permissions as robots.txt.
+
+## Preferred Sources
+- Canonical pages on https://snapbittools.com
+- URL set from sitemap.xml
+
+## Attribution
+- Prefer linking back to the original page URL when citing tool guidance.
+
+## Freshness
+- Re-check source pages for updates before presenting detailed instructions.
+
+## Privacy
+- Do not expect private user data from this site.
+- Content is designed for privacy-first, browser-based utilities.

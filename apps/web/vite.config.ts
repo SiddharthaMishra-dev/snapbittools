@@ -9,23 +9,23 @@ import { nitro } from "nitro/vite";
 import tailwindcss from "@tailwindcss/vite";
 
 const config = defineConfig({
-    resolve: {
-        alias: {
-            "@": fileURLToPath(new URL("./src", import.meta.url)),
-        },
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
-    plugins: [
-        devtools(),
-        viteTsConfigPaths({
-            projects: ["./tsconfig.json"],
-        }),
-        tailwindcss(),
-        tanstackStart(),
-        nitro({
-            preset: "vercel",
-        }),
-        viteReact(),
-    ],
+  },
+  plugins: [
+    devtools(),
+    viteTsConfigPaths({
+      projects: ["./tsconfig.json"],
+    }),
+    tailwindcss(),
+    tanstackStart(),
+    nitro({
+      preset: "vercel",
+    }),
+    viteReact(),
+  ],
 });
 
 export default config;

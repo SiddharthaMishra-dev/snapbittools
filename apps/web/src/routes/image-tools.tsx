@@ -10,19 +10,19 @@ const { faqs } = generatePageContent(variant);
 const breadcrumbs = generateBreadcrumbs(variant);
 
 export const Route = createFileRoute("/image-tools")({
-    head: () =>
-        getSeoMetadata({
-            title: variant.metaTitle,
-            description: variant.metaDescription,
-            keywords: [variant.primaryKeyword, ...variant.relatedVariants],
-            url: `/${variant.slug}`,
-            type: "software",
-            faqs,
-            breadcrumbs,
-        }),
-    component: RouteComponent,
+  head: () =>
+    getSeoMetadata({
+      title: variant.metaTitle,
+      description: variant.metaDescription,
+      keywords: [variant.primaryKeyword, ...variant.relatedVariants],
+      url: `/${variant.slug}`,
+      type: "software",
+      faqs,
+      breadcrumbs,
+    }),
+  component: RouteComponent,
 });
 
 function RouteComponent() {
-    return <PseoPage variant={variant} toolComponent={ToolsListing} />;
+  return <PseoPage variant={variant} toolComponent={ToolsListing} />;
 }

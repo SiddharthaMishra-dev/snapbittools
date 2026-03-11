@@ -1,322 +1,370 @@
 import type { ReactNode } from "react";
 
 import Aurora from "@/components/Aurora";
-import { IconBolt, IconBrandGithub, IconChevronRight, IconLock } from "@tabler/icons-react";
+import { IconBolt, IconBrandGithub, IconCheck, IconChevronRight, IconLock } from "@tabler/icons-react";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { easeInOut, motion } from "motion/react";
+import { AnimatePresence, easeInOut, motion } from "motion/react";
 
 import GlowCard from "@/components/ui/GlowCard";
 import { tools } from "@/data/tools";
 
 import { getSeoMetadata } from "@/lib/seo";
+import React from "react";
 
 const jsonToCsvTool = tools.find((tool) => tool.slug === "json-to-csv");
 const featuredTools = [...(jsonToCsvTool ? [jsonToCsvTool] : []), ...tools.filter((tool) => tool.slug !== "json-to-csv")].slice(0, 6);
 
 export const Route = createFileRoute("/")({
-    head: () =>
-        getSeoMetadata({
-            title: "SnapBit Tools | Private & Fast Image and Data Tools",
-            description:
-                "Private browser tools: Convert images to Base64, compress photos, format JSON, and convert CSV to Excel. 100% secure—your data never leaves your browser.",
-            keywords: [
-                "free online tools",
-                "image to base64 converter",
-                "image compressor online",
-                "image format converter",
-                "json formatter validator",
-                "csv to xlsx converter",
-                "image to pdf converter",
-                "json to csv converter",
-                "privacy-first tools",
-                "client-side processing",
-                "offline image tools",
-                "free developer tools",
-                "browser-based utilities",
-                "no upload file converter",
-                "secure online tools",
-            ],
-            url: "/",
-        }),
-    component: App,
+  head: () =>
+    getSeoMetadata({
+      title: "SnapBit Tools | Private & Fast Image and Data Tools",
+      description:
+        "Private browser tools: Convert images to Base64, compress photos, format JSON, and convert CSV to Excel. 100% secure—your data never leaves your browser.",
+      keywords: [
+        "free online tools",
+        "image to base64 converter",
+        "image compressor online",
+        "image format converter",
+        "json formatter validator",
+        "csv to xlsx converter",
+        "image to pdf converter",
+        "json to csv converter",
+        "privacy-first tools",
+        "client-side processing",
+        "offline image tools",
+        "free developer tools",
+        "browser-based utilities",
+        "no upload file converter",
+        "secure online tools",
+      ],
+      url: "/",
+    }),
+  component: App,
 });
 
 function App() {
-    // Add fading and staggered animation variants for the main container and items
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.2,
-                duration: 0.6,
-                ease: easeInOut,
-            },
-        },
+  const rotatingWords = ["Free", "Private", "Fast"];
+  const widthSafetyBuffer = 15;
+  const wordMeasureRefs = React.useRef<Array<HTMLSpanElement | null>>([]);
+
+  const [active, setActive] = React.useState(0);
+  const [wordWidth, setWordWidth] = React.useState<number | null>(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0.4, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: easeInOut,
+      },
+    },
+  };
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % 3);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  React.useLayoutEffect(() => {
+    const activeWordEl = wordMeasureRefs.current[active];
+    if (activeWordEl) {
+      setWordWidth(activeWordEl.offsetWidth);
+    }
+  }, [active]);
+
+  React.useEffect(() => {
+    const onResize = () => {
+      const activeWordEl = wordMeasureRefs.current[active];
+      if (activeWordEl) {
+        setWordWidth(activeWordEl.offsetWidth);
+      }
     };
 
-    const itemVariants = {
-        hidden: { opacity: 0.4, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: easeInOut,
-            },
-        },
-    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [active]);
 
-    return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col font-sans relative overflow-hidden">
-            <div className="max-h-[60vh] absolute inset-0 blur-lg opacity-40">
-                <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col font-sans relative overflow-hidden">
+      <div className="max-h-[70vh] absolute inset-0 blur-lg opacity-40">
+        <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-                <Aurora colorStops={["#2563eb", "#B19EEF", "#5227FF"]} blend={0.5} amplitude={1.0} speed={1} />
-            </div>
+        <Aurora colorStops={["#2563eb", "#B19EEF", "#5227FF"]} blend={0.5} amplitude={1.0} speed={1} />
+      </div>
 
-            <section className="pt-24 pb-12 px-4 relative z-10 h-screen flex items-center">
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="max-w-5xl mx-auto text-center space-y-6"
+      <section className="pt-24 pb-12 px-4 relative z-10 h-[70dvh] sm:h-screen flex items-center">
+        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="max-w-5xl mx-auto text-center space-y-6">
+          <motion.h1 variants={itemVariants} className="relative text-2xl md:text-5xl font-bold text-gray-100 leading-tight">
+            <motion.span
+              animate={{ width: wordWidth ? wordWidth + widthSafetyBuffer : "auto" }}
+              transition={{ duration: 0.45, ease: easeInOut }}
+              className=" shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] inline-flex overflow-hidden text-3xl md:text-7xl justify-start text-brand-primary p-2 rounded-md bg-gray-800/90 "
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={rotatingWords[active]}
+                  initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -4, filter: "blur(3px)" }}
+                  transition={{ duration: 0.55, ease: easeInOut }}
+                  className="inline-block whitespace-nowrap"
                 >
-                    {/* <motion.a
-            variants={itemVariants}
-            className="flex justify-center"
-            href="https://snapbittools.com"
-            target="_blank"
-            rel="noopener noreferrer"
+                  {rotatingWords[active]}
+                </motion.span>
+              </AnimatePresence>
+            </motion.span>
+            <span className="pointer-events-none absolute -z-10 opacity-0" aria-hidden="true">
+              {rotatingWords.map((word, idx) => (
+                <span
+                  key={`measure-${word}`}
+                  ref={(el) => {
+                    wordMeasureRefs.current[idx] = el;
+                  }}
+                  className="inline-block whitespace-nowrap text-3xl md:text-7xl"
+                >
+                  {word}
+                </span>
+              ))}
+            </span>
+            <br />
+            Tools for Image and Data Processing.
+          </motion.h1>
+          <motion.p variants={itemVariants} className="text-sm md:text-lg text-gray-400 tracking-wide max-w-3xl mx-auto">
+            Professional-grade online tools that work entirely in your browser. Convert images to Base64, compress photos, format JSON,
+            convert CSV to Excel, and more—all without uploading files to any server. Fast, secure, and 100% free.
+          </motion.p>
+
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              to="/tools"
+              className=" inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white rounded-lg hover:bg-brand-hover active:scale-[0.97] transition-all duration-200 text-sm font-medium"
+            >
+              <button>
+                <span>Browse all tools</span>
+              </button>
+              <IconChevronRight className="h-4 w-4" />
+            </Link>
+
+            <a
+              href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center space-x-2 px-4 py-2 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 text-sm font-medium active:scale-[0.97] "
+            >
+              <IconBrandGithub className="w-4 h-4" />
+              <span>Star on GitHub</span>
+            </a>
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="hidden sm:flex flex-wrap justify-center gap-2 text-xs text-gray-300">
+            <span className="flex items-center gap-x-2 rounded-full font-semibold px-3 py-1">
+              <IconCheck className="h-4 w-4 text-green-500" /> 100% Browser-Based Processing
+            </span>
+            <span className="flex items-center gap-x-2 rounded-full font-semibold px-3 py-1">
+              <IconCheck className="h-4 w-4 text-green-500" /> No File Uploads Required
+            </span>
+            <span className="flex items-center gap-x-2 rounded-full font-semibold px-3 py-1">
+              <IconCheck className="h-4 w-4 text-green-500" /> Complete Privacy Protection
+            </span>
+            <span className="flex items-center gap-x-2 rounded-full font-semibold px-3 py-1">
+              <IconCheck className="h-4 w-4 text-green-500" /> Free & Open Source
+            </span>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      <main className="flex-1 px-4 pb-16 relative z-10" id="tools">
+        <section className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-100">Most Used Image & Data Conversion Tools</h2>
+            </div>
+            <Link to="/tools" className="inline-flex items-center gap-2 text-sm text-brand-primary font-semibold hover:text-brand-hover">
+              See catalog
+              <IconChevronRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            <img
-              alt="SnapBit Tools - Free Online Tools for Image Processing &amp; Data Formatting"
-              width="250"
-              height="54"
-              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1071802&amp;theme=light&amp;t=1770132279046"
-            ></img>
-          </motion.a> */}
-                    <motion.h1 variants={itemVariants} className="text-2xl md:text-5xl font-bold text-gray-100 leading-tight">
-                        Free Online <span className="text-brand-primary">Tools for</span> Image{" "}
-                        <span className="text-brand-primary">Conversion</span>, <span className="text-brand-primary">Compression</span> &
-                        Data <span className="text-brand-primary">Formatting</span>
-                    </motion.h1>
-                    <motion.p variants={itemVariants} className="text-sm md:text-lg text-gray-400 tracking-wide max-w-3xl mx-auto">
-                        Professional-grade online tools that work entirely in your browser. Convert images to Base64, compress photos,
-                        format JSON, convert CSV to Excel, and more—all without uploading files to any server. Fast, secure, and 100% free.
-                    </motion.p>
-
-                    <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                        <Link
-                            to="/tools"
-                            className=" inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 text-sm font-medium active:scale-[0.97]"
-                        >
-                            <button>
-                                <span>Browse all tools</span>
-                            </button>
-                            <IconChevronRight className="h-4 w-4" />
-                        </Link>
-
-                        <a
-                            href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center space-x-2 px-4 py-2 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 text-sm font-medium active:scale-[0.97] "
-                        >
-                            <IconBrandGithub className="w-4 h-4" />
-                            <span>Star on GitHub</span>
-                        </a>
-                    </motion.div>
-
-                    <motion.div variants={itemVariants} className="hidden sm:flex flex-wrap justify-center gap-2 text-xs text-gray-300">
-                        <span className="rounded-full font-semibold px-3 py-1">✓ 100% Browser-Based Processing</span>
-                        <span className="rounded-full font-semibold px-3 py-1">✓ No File Uploads Required</span>
-                        <span className="rounded-full font-semibold px-3 py-1">✓ Complete Privacy Protection</span>
-                        <span className="rounded-full font-semibold px-3 py-1">✓ Free & Open Source</span>
-                    </motion.div>
-                </motion.div>
-            </section>
-
-            <main className="flex-1 px-4 pb-16 relative z-10" id="tools">
-                <section className="max-w-7xl mx-auto">
-                    <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
-                        <div>
-                            <h2 className="text-2xl font-bold text-gray-100">Most Used Image & Data Conversion Tools</h2>
-                        </div>
-                        <Link
-                            to="/tools"
-                            className="inline-flex items-center gap-2 text-sm text-brand-primary font-semibold hover:text-brand-hover"
-                        >
-                            See catalog
-                            <IconChevronRight className="h-4 w-4" />
-                        </Link>
+            {featuredTools.map((tool) => {
+              const Icon = tool.icon;
+              return (
+                <GlowCard key={tool.slug} to={tool.href} isNew={tool.isNew}>
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12  rounded-lg flex items-center justify-center group-hover:bg-brand-primary/5 transition-colors ease-in-out">
+                        <Icon className="text-brand-light" />
+                      </div>
                     </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-300 mb-2 group-hover:text-brand-primary transition-colors">
+                        {tool.name}
+                      </h3>
+                      <p className="text-gray-300 text-sm leading-relaxed">{tool.description}</p>
+                      <div className="mt-4 flex items-center text-brand-primary text-sm font-medium">
+                        <span>Try it</span>
+                        <IconChevronRight className="h-5 w-5 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </GlowCard>
+              );
+            })}
+          </motion.div>
+        </section>
 
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                    >
-                        {featuredTools.map((tool) => {
-                            const Icon = tool.icon;
-                            return (
-                                <GlowCard key={tool.slug} to={tool.href} isNew={tool.isNew}>
-                                    <div className="flex items-start space-x-4">
-                                        <div className="flex-shrink-0">
-                                            <div className="w-12 h-12  rounded-lg flex items-center justify-center group-hover:bg-brand-primary/5 transition-colors ease-in-out">
-                                                <Icon className="text-brand-light" />
-                                            </div>
-                                        </div>
-                                        <div className="flex-1">
-                                            <h3 className="text-lg sm:text-xl font-semibold text-gray-300 mb-2 group-hover:text-brand-primary transition-colors">
-                                                {tool.name}
-                                            </h3>
-                                            <p className="text-gray-300 text-sm leading-relaxed">{tool.description}</p>
-                                            <div className="mt-4 flex items-center text-brand-primary text-sm font-medium">
-                                                <span>Try it</span>
-                                                <IconChevronRight className="h-5 w-5 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-transform" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </GlowCard>
-                            );
-                        })}
-                    </motion.div>
-                </section>
-
-                <section className="max-w-6xl mx-auto my-16 md:my-32 text-center">
-                    <h2 className="text-2xl font-bold text-gray-100 mb-8">
-                        Why Choose <span className="text-brand-primary">SnapBit</span> Tools?
-                    </h2>
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                        <FeatureCard
-                            icon={<IconLock className="text-brand-light w-6 h-6" />}
-                            title="Complete Privacy & Security"
-                            description="Your files never leave your device. "
-                        />
-                        <div className="flex items-center justify-center">
-                            <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-500"></div>
-                        </div>
-                        <FeatureCard
-                            icon={<IconBolt className="text-brand-light w-6 h-6" />}
-                            title="Lightning-Fast Performance"
-                            description="All processing happens instantly in your browser—no server delays."
-                        />
-                        <div className="flex items-center justify-center">
-                            <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-500"></div>
-                        </div>
-                        <FeatureCard
-                            icon={<IconBrandGithub className="text-brand-light w-6 h-6" />}
-                            title="100% Free & Open Source"
-                            description="All tools are free to use forever."
-                        />
-                        {/* <FeatureCard
+        <section className="max-w-6xl mx-auto my-16 md:my-32 text-center">
+          <h2 className="text-2xl font-bold text-gray-100 mb-8">
+            Why Choose <span className="text-brand-primary">SnapBit</span> Tools?
+          </h2>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            <FeatureCard
+              icon={<IconLock className="text-brand-light w-6 h-6" />}
+              title="Complete Privacy & Security"
+              description="Your files never leave your device. "
+            />
+            <div className="flex items-center justify-center">
+              <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-500"></div>
+            </div>
+            <FeatureCard
+              icon={<IconBolt className="text-brand-light w-6 h-6" />}
+              title="Lightning-Fast Performance"
+              description="All processing happens instantly in your browser—no server delays."
+            />
+            <div className="flex items-center justify-center">
+              <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-500"></div>
+            </div>
+            <FeatureCard
+              icon={<IconBrandGithub className="text-brand-light w-6 h-6" />}
+              title="100% Free & Open Source"
+              description="All tools are free to use forever."
+            />
+            {/* <FeatureCard
               icon={<IconSearch className="text-brand-light w-6 h-6" />}
               title="Works Offline"
               description="Client-side processing means tools work without internet connection after initial load."
             /> */}
-                    </div>
-                </section>
+          </div>
+        </section>
 
-                <section className="max-w-5xl mx-auto my-16 md:my-32  rounded-2xl p-8">
-                    <h3 className="text-2xl font-bold text-gray-100 mb-8 text-center">
-                        Who Uses <span className="text-brand-primary">SnapBit</span> Tools?
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <UseCaseCard
-                            title="Web Developers"
-                            description="Convert images to Base64 for embedded assets, format JSON API responses, convert between data formats, and validate code—all without leaving your browser."
-                        />
-                        <UseCaseCard
-                            title="Content Creators"
-                            description="Compress images for web publishing, crop photos for social media, convert between formats for different platforms, and analyze reading time for blog content."
-                        />
-                        <UseCaseCard
-                            title="Designers & Creatives"
-                            description="Optimize images for web projects, generate lorem ipsum placeholder text for mockups, resize images for different aspect ratios, and process batch conversions."
-                        />
-                        <UseCaseCard
-                            title="Data Professionals"
-                            description="Convert CSV to JSON and vice versa, format and validate JSON data, work with spreadsheets offline, and process data migrations—all securely in your browser."
-                        />
-                    </div>
-                </section>
+        <section className="max-w-5xl mx-auto my-16 md:my-32  rounded-2xl p-8">
+          <h3 className="text-2xl font-bold text-gray-100 mb-8 text-center">
+            Who Uses <span className="text-brand-primary">SnapBit</span> Tools?
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <UseCaseCard
+              title="Web Developers"
+              description="Convert images to Base64 for embedded assets, format JSON API responses, convert between data formats, and validate code—all without leaving your browser."
+            />
+            <UseCaseCard
+              title="Content Creators"
+              description="Compress images for web publishing, crop photos for social media, convert between formats for different platforms, and analyze reading time for blog content."
+            />
+            <UseCaseCard
+              title="Designers & Creatives"
+              description="Optimize images for web projects, generate lorem ipsum placeholder text for mockups, resize images for different aspect ratios, and process batch conversions."
+            />
+            <UseCaseCard
+              title="Data Professionals"
+              description="Convert CSV to JSON and vice versa, format and validate JSON data, work with spreadsheets offline, and process data migrations—all securely in your browser."
+            />
+          </div>
+        </section>
 
-                <section className="max-w-5xl mx-auto mt-16 text-center bg-white/5 border border-white/10 rounded-2xl p-8">
-                    <h3 className="text-2xl font-semibold text-gray-100 mb-2">
-                        Everything You Need for Image Processing & Data Conversion
-                    </h3>
-                    <p className="text-gray-400 tracking-normal leading-5 text-sm mt-3 mb-6">
-                        From converting images to Base64 encoding, compressing photos to reduce file size, formatting JSON data, to
-                        converting spreadsheets—our comprehensive suite handles all your file conversion and processing needs with
-                        professional results, all in your browser.
-                    </p>
-                    <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
-                        <Link
-                            to="/tools"
-                            className="px-5 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-brand-primary text-white rounded-lg text-sm font-semibold hover:bg-brand-hover transition-colors"
-                        >
-                            Go to tools page
-                        </Link>
-                        <a
-                            href="#tools"
-                            className="px-5 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-colors"
-                        >
-                            Explore featured tools
-                        </a>
-                    </div>
-                </section>
-            </main>
+        <section className="max-w-5xl mx-auto mt-16 text-center bg-white/5 border border-white/10 rounded-2xl p-8">
+          <h3 className="text-2xl font-semibold text-gray-100 mb-2">Everything You Need for Image Processing & Data Conversion</h3>
+          <p className="text-gray-400 tracking-normal leading-5 text-sm mt-3 mb-6">
+            From converting images to Base64 encoding, compressing photos to reduce file size, formatting JSON data, to converting
+            spreadsheets—our comprehensive suite handles all your file conversion and processing needs with professional results, all in
+            your browser.
+          </p>
+          <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
+            <Link
+              to="/tools"
+              className="px-5 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-brand-primary text-white rounded-lg text-sm font-semibold hover:bg-brand-hover transition-colors"
+            >
+              Go to tools page
+            </Link>
+            <a
+              href="#tools"
+              className="px-5 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-colors"
+            >
+              Explore featured tools
+            </a>
+          </div>
+        </section>
+      </main>
 
-            <footer className="pb-8 px-4 relative z-10">
-                <div className="max-w-4xl mx-auto text-center">
-                    <p className="text-gray-400 text-xs">
-                        Crafted with care by{" "}
-                        <a
-                            href="https://sidme.dev/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-brand-primary hover:text-brand-hover transition-colors"
-                        >
-                            sidme
-                        </a>{" "}
-                        •{" "}
-                        <a
-                            href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-brand-primary hover:text-brand-hover transition-colors"
-                        >
-                            Open Source on GitHub
-                        </a>
-                    </p>
-                </div>
-            </footer>
+      <footer className="pb-8 px-4 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-gray-400 text-xs">
+            Crafted with care by{" "}
+            <a
+              href="https://sidme.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-primary hover:text-brand-hover transition-colors"
+            >
+              sidme
+            </a>{" "}
+            •{" "}
+            <a
+              href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-primary hover:text-brand-hover transition-colors"
+            >
+              Open Source on GitHub
+            </a>
+          </p>
         </div>
-    );
+      </footer>
+    </div>
+  );
 }
 
 function FeatureCard({ icon, title, description }: { icon: ReactNode; title: string; description: string }) {
-    return (
-        <div className="flex items-center justify-start gap-x-2 space-y-3  p-4 group">
-            <div className="  rounded-lg flex items-center justify-center  group-hover:animate-[wiggle_300ms_ease-in-out] transition-transform duration-300">
-                {icon}
-            </div>
-            <div className="text-left space-y-1">
-                <h4 className="text-sm font-semibold text-gray-100">{title}</h4>
-                <p className="text-sm text-gray-400">{description}</p>
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex items-center justify-start gap-x-2 space-y-3  p-4 group">
+      <div className="  rounded-lg flex items-center justify-center  group-hover:animate-[wiggle_300ms_ease-in-out] transition-transform duration-300">
+        {icon}
+      </div>
+      <div className="text-left space-y-1">
+        <h4 className="text-sm font-semibold text-gray-100">{title}</h4>
+        <p className="text-sm text-gray-400">{description}</p>
+      </div>
+    </div>
+  );
 }
 
 function UseCaseCard({ title, description }: { title: string; description: string }) {
-    return (
-        <div className="bg-white/ rounded-xl p-6 hover:bg-white/10  transition-all">
-            <h4 className="text-lg font-bold text-gray-100 mb-2">{title}</h4>
-            <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
-        </div>
-    );
+  return (
+    <div className="bg-white/ rounded-xl p-6 hover:bg-white/10  transition-all">
+      <h4 className="text-lg font-bold text-gray-100 mb-2">{title}</h4>
+      <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+    </div>
+  );
 }

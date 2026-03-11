@@ -13,8 +13,7 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       {
-        title:
-          "SnapBit Tools: Free Privacy-First Image Compressor & Data Converter | No Uploads Needed",
+        title: "SnapBit Tools: Free Privacy-First Image Compressor & Data Converter | No Uploads Needed",
       },
       {
         charSet: "utf-8",
@@ -43,8 +42,7 @@ export const Route = createRootRoute({
       },
       {
         property: "og:title",
-        content:
-          "SnapBit Tools: Free Privacy-First Image Compressor & Data Converter | No Uploads Needed",
+        content: "SnapBit Tools: Free Privacy-First Image Compressor & Data Converter | No Uploads Needed",
       },
       {
         property: "og:description",
@@ -61,8 +59,7 @@ export const Route = createRootRoute({
       },
       {
         name: "twitter:title",
-        content:
-          "SnapBit Tools: Free Privacy-First Image Compressor & Data Converter | No Uploads Needed",
+        content: "SnapBit Tools: Free Privacy-First Image Compressor & Data Converter | No Uploads Needed",
       },
       {
         name: "twitter:description",
