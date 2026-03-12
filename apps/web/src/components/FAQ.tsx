@@ -69,7 +69,7 @@ export default function FAQ({ faqs }: FAQProps) {
         </div>
         <h2 className="text-2xl font-bold text-gray-100">Frequently Asked Questions</h2>
       </motion.div>
-      <motion.div variants={itemVariants} className="bg-gray-800/20 border border-gray-700/50 rounded-2xl px-6 md:px-8">
+      <motion.div variants={itemVariants} className="bg-gray-800/20 border border-gray-700/50 rounded-lg px-4 ">
         {faqs.map((faq, index) => (
           <FAQItem key={index} question={faq.question} answer={faq.answer} />
         ))}

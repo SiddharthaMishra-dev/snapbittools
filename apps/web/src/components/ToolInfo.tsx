@@ -113,7 +113,7 @@ export default function ToolInfo({ title, description, features, steps, privacyI
       {/* Privacy & Security */}
       <motion.div
         variants={itemVariants}
-        className="flex flex-col md:flex-row items-center justify-between gap-8 p-8 bg-brand-dark/10 border border-brand-dark/20 rounded-2xl"
+        className="flex flex-col md:flex-row items-center justify-between gap-8 p-4 bg-brand-dark/10 border border-brand-dark/20 rounded-lg"
       >
         <div className="flex items-start space-x-4">
           <div className="mt-1">

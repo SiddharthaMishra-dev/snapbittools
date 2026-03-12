@@ -207,7 +207,7 @@ function App() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
           >
             {featuredTools.map((tool) => {
               const Icon = tool.icon;
@@ -223,7 +223,7 @@ function App() {
                       <h3 className="text-lg sm:text-xl font-semibold text-gray-300 mb-2 group-hover:text-brand-primary transition-colors">
                         {tool.name}
                       </h3>
-                      <p className="text-gray-300 text-sm leading-relaxed">{tool.description}</p>
+                      <p className="text-gray-400 text-sm font-medium leading-relaxed">{tool.description}</p>
                       <div className="mt-4 flex items-center text-brand-primary text-sm font-medium">
                         <span>Try it</span>
                         <IconChevronRight className="h-5 w-5 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-transform" />
@@ -237,7 +237,7 @@ function App() {
         </section>
 
         <section className="max-w-6xl mx-auto my-16 md:my-32 text-center">
-          <h2 className="text-2xl font-bold text-gray-100 mb-8">
+          <h2 className="text-2xl font-bold text-gray-100 mb-6">
             Why Choose <span className="text-brand-primary">SnapBit</span> Tools?
           </h2>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6">
@@ -271,10 +271,10 @@ function App() {
         </section>
 
         <section className="max-w-5xl mx-auto my-16 md:my-32  rounded-2xl p-8">
-          <h3 className="text-2xl font-bold text-gray-100 mb-8 text-center">
+          <h3 className="text-2xl font-bold text-gray-100 mb-6 text-center">
             Who Uses <span className="text-brand-primary">SnapBit</span> Tools?
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <UseCaseCard
               title="Web Developers"
               description="Convert images to Base64 for embedded assets, format JSON API responses, convert between data formats, and validate code—all without leaving your browser."
@@ -294,9 +294,9 @@ function App() {
           </div>
         </section>
 
-        <section className="max-w-5xl mx-auto mt-16 text-center bg-white/5 border border-white/10 rounded-2xl p-8">
-          <h3 className="text-2xl font-semibold text-gray-100 mb-2">Everything You Need for Image Processing & Data Conversion</h3>
-          <p className="text-gray-400 tracking-normal leading-5 text-sm mt-3 mb-6">
+        <section className="max-w-5xl mx-auto mt-6 text-center bg-white/5 border border-white/10 rounded-lg p-6">
+          <h3 className="text-2xl font-semibold text-gray-100 mb-4">Everything You Need for Image Processing & Data Conversion</h3>
+          <p className="text-gray-400 tracking-normal leading-5 text-sm  mb-4">
             From converting images to Base64 encoding, compressing photos to reduce file size, formatting JSON data, to converting
             spreadsheets—our comprehensive suite handles all your file conversion and processing needs with professional results, all in
             your browser.

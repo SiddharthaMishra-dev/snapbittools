@@ -16,10 +16,10 @@ export function ToolsListing() {
       <div className="max-w-7xl mx-auto space-y-12">
         {Object.entries(toolsByCategory).map(([category, categoryTools]) => (
           <section key={category} id={category.toLowerCase()} className="space-y-4">
-            <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex items-center justify-between gap-3 flex-wrap mb-6">
               <div>
                 <h2 className="text-xl font-bold text-gray-100">{category} tools</h2>
-                <p className="text-sm text-gray-300">Optimized copy and internal links help each tool page index cleanly.</p>
+                {/* <p className="text-sm text-gray-300">Optimized copy and internal links help each tool page index cleanly.</p> */}
               </div>
               <a href="#top" className="text-sm text-brand-primary font-semibold hover:text-brand-hover flex items-center gap-1">
                 Back to top
@@ -27,7 +27,7 @@ export function ToolsListing() {
               </a>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {categoryTools.map((tool) => {
                 const Icon = tool.icon;
                 return (
@@ -42,7 +42,7 @@ export function ToolsListing() {
                         <h3 className="text-xl font-semibold text-gray-300 mb-2 group-hover:text-brand-primary transition-colors">
                           {tool.name}
                         </h3>
-                        <p className="text-gray-200 text-sm leading-relaxed">{tool.description}</p>
+                        <p className="text-gray-400 text-sm font-medium leading-relaxed">{tool.description}</p>
 
                         <div className="mt-4 flex items-center text-brand-primary text-sm font-medium">
                           <span>Try Now</span>
