@@ -191,12 +191,13 @@ function RouteComponent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col">
+      <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
       <Breadcrumbs />
       <div className="text-center mb-8 max-w-5xl mx-auto">
-        <h1 className="text-2xl font-bold text-gray-100 mb-2">
+        <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
           CSV to <span className="text-brand-primary">JSON</span>
         </h1>
-        <p className="text-md text-gray-200">Transform CSV data into JSON format securely in your browser.</p>
+        <p className="text-md text-gray-300">Transform CSV data into JSON format securely in your browser.</p>
       </div>
 
       <div className="flex-1 max-w-7xl w-full mx-auto">
@@ -330,14 +331,12 @@ function RouteComponent() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto mb-16 w-full">
-          <ToolContentDisplay
+       <ToolContentDisplay
             title={toolContent["csv-to-json"].title}
             intro={toolContent["csv-to-json"].intro}
             benefits={toolContent["csv-to-json"].benefits}
             useCases={toolContent["csv-to-json"].useCases}
           />
-        </div>
 
         <div className="mt-8">
           <ToolInfo
@@ -398,6 +397,7 @@ function RouteComponent() {
           </a>
         </p>
       </footer>
+      </div>
     </div>
   );
 }

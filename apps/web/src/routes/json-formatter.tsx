@@ -52,23 +52,20 @@ export function RouteComponent() {
 
         {/* Header */}
         <div className="text-center mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl font-bold text-gray-100 mb-2">
-            JSON <span className="text-blue-400">Formatter</span>
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+            JSON <span className="text-brand-primary">Formatter</span>
           </h1>
-          <p className="text-md text-gray-200">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p>
+          <p className="text-md text-gray-300">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p>
         </div>
 
         <JsonFormatterTool />
 
-        {/* Content Display */}
-        <div className="max-w-7xl mx-auto mb-16 w-full">
-          <ToolContentDisplay
+       <ToolContentDisplay
             title={toolContent["json-formatter"].title}
             intro={toolContent["json-formatter"].intro}
             benefits={toolContent["json-formatter"].benefits}
             useCases={toolContent["json-formatter"].useCases}
           />
-        </div>
         <ToolInfo
           title="JSON Formatter & Validator"
           description="Our JSON Formatter is a comprehensive suite for developers to clean, validate, and optimize JSON data. Whether you need to beautify deep nested objects for readability or minify data for production use, this tool provides a secure, client-side environment for all your JSON needs."

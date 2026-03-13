@@ -83,16 +83,16 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
         <div className="text-center mb-10 max-w-5xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-100 mb-3">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-3">
             Diff <span className="text-brand-primary">Checker</span>
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="text-md text-gray-300 max-w-2xl mx-auto">
             Pinpoint changes between two text versions instantly. Private, secure, and processing entirely in your browser.
           </p>
         </div>
 
         {/* Action Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6  p-4 rounded-xl border border-gray-700">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6  p-4 rounded-lg border border-gray-700">
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setViewMode("split")}
@@ -145,12 +145,12 @@ function RouteComponent() {
         </div>
 
         {/* Input Areas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-400 ml-1 uppercase tracking-wider">Original Text (Old)</label>
             <textarea
               placeholder="Paste your original text here..."
-              className="w-full h-64 p-4  border border-gray-700 rounded-xl text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
+              className="w-full h-64 p-4  border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
               value={oldText}
               onChange={(e) => setOldText(e.target.value)}
             />
@@ -159,7 +159,7 @@ function RouteComponent() {
             <label className="text-sm font-medium text-gray-400 ml-1 uppercase tracking-wider">Changed Text (New)</label>
             <textarea
               placeholder="Paste your modified text here..."
-              className="w-full h-64 p-4  border border-gray-700 rounded-xl text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
+              className="w-full h-64 p-4  border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
             />
@@ -189,14 +189,12 @@ function RouteComponent() {
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto mb-16 w-full">
-          <ToolContentDisplay
+  <ToolContentDisplay
             title={toolContent["diff-checker"].title}
             intro={toolContent["diff-checker"].intro}
             benefits={toolContent["diff-checker"].benefits}
             useCases={toolContent["diff-checker"].useCases}
           />
-        </div>
 
         <ToolInfo
           title="Diff Checker"

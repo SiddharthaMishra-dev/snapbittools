@@ -62,7 +62,7 @@ export default function FAQ({ faqs }: FAQProps) {
   };
 
   return (
-    <motion.div variants={containerVariants} initial="hidden" animate="visible" className="mt-16 space-y-8">
+    <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-8">
       <motion.div variants={itemVariants} className="flex items-center space-x-3">
         <div className="w-10 h-10 bg-brand-dark/20 rounded-full flex items-center justify-center text-brand-primary font-bold border border-brand-primary/20">
           ?

@@ -227,10 +227,10 @@ function RouteComponent() {
         <Breadcrumbs />
         {/* Header */}
         <div className="text-center mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
             JSON to <span className="text-brand-primary">CSV</span> Converter
           </h1>
-          <p className="text-md text-gray-200">Transform JSON data into CSV content securely in your browser.</p>
+          <p className="text-md text-gray-300">Transform JSON data into CSV content securely in your browser.</p>
         </div>
 
         {/* Main Content */}
@@ -349,14 +349,12 @@ function RouteComponent() {
             </div>
           </div>
 
-          <div className="max-w-7xl mx-auto mb-16 w-full">
             <ToolContentDisplay
               title={toolContent["json-to-csv"].title}
               intro={toolContent["json-to-csv"].intro}
               benefits={toolContent["json-to-csv"].benefits}
               useCases={toolContent["json-to-csv"].useCases}
             />
-          </div>
 
           <div className="mt-8">
             <ToolInfo

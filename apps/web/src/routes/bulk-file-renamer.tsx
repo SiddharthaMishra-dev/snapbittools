@@ -282,12 +282,13 @@ function RouteComponent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col">
-      <Breadcrumbs />
+      <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
+        <Breadcrumbs />
       <div className="text-center mb-8 max-w-5xl mx-auto">
-        <h1 className="text-2xl font-bold text-gray-100 mb-2">
+        <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
           Bulk File <span className="text-brand-primary">Renamer</span>
         </h1>
-        <p className="text-md text-gray-200">Rename bulk files securely in your browser.</p>
+        <p className="text-md text-gray-300">Rename bulk files securely in your browser.</p>
       </div>
 
       <main className="flex-1 px-4 relative z-10">
@@ -601,6 +602,7 @@ function RouteComponent() {
           </p>
         </footer>
       </main>
+      </div>
     </div>
   );
 }

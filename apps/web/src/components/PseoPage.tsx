@@ -35,7 +35,7 @@ export default function PseoPage({ variant, toolComponent: ToolComponent }: Pseo
         </section>
 
         <section className="mb-16 w-full">
-          <div className="max-w-4xl mx-auto px-8 py-10 bg-gradient-to-br from-gray-900/40 to-gray-900/20 rounded-xl border border-gray-700/40 backdrop-blur-sm hover:border-gray-600/60 transition-all duration-300">
+          <div className="max-w-7xl mx-auto px-8 py-10 bg-gradient-to-br from-gray-900/40 to-gray-900/20 rounded-xl border border-gray-700/40 backdrop-blur-sm hover:border-gray-600/60 transition-all duration-300">
             <div
               className="prose prose-lg prose-invert max-w-none text-gray-100 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-gray-50 [&_h2]:mb-4 [&_ul]:space-y-3 [&_li]:text-gray-200"
               dangerouslySetInnerHTML={{ __html: sections[1].content }}
@@ -44,7 +44,7 @@ export default function PseoPage({ variant, toolComponent: ToolComponent }: Pseo
         </section>
 
         <section className="mb-16 w-full">
-          <div className="max-w-4xl mx-auto px-8 py-10 bg-gradient-to-br from-blue-900/20 to-gray-900/30 rounded-xl border border-blue-500/30 backdrop-blur-sm hover:border-blue-500/50 transition-all duration-300">
+          <div className="max-w-7xl mx-auto px-8 py-10 bg-gradient-to-br from-blue-900/20 to-gray-900/30 rounded-xl border border-blue-500/30 backdrop-blur-sm hover:border-blue-500/50 transition-all duration-300">
             <div
               className="prose prose-lg prose-invert max-w-none text-gray-100 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-blue-200 [&_h2]:mb-4 [&_ol]:space-y-3 [&_li]:text-gray-200"
               dangerouslySetInnerHTML={{ __html: sections[2].content }}
@@ -53,7 +53,7 @@ export default function PseoPage({ variant, toolComponent: ToolComponent }: Pseo
         </section>
 
         <section className="mb-16 w-full">
-          <div className="max-w-4xl mx-auto px-8 py-10 bg-gradient-to-br from-gray-900/40 to-gray-900/20 rounded-xl border border-gray-700/40 backdrop-blur-sm hover:border-gray-600/60 transition-all duration-300">
+          <div className="max-w-7xl mx-auto px-8 py-10 bg-gradient-to-br from-gray-900/40 to-gray-900/20 rounded-xl border border-gray-700/40 backdrop-blur-sm hover:border-gray-600/60 transition-all duration-300">
             <div
               className="prose prose-lg prose-invert max-w-none text-gray-100 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-gray-50 [&_h2]:mb-4 [&_ul]:space-y-3 [&_li]:text-gray-200"
               dangerouslySetInnerHTML={{ __html: sections[3].content }}
@@ -61,7 +61,7 @@ export default function PseoPage({ variant, toolComponent: ToolComponent }: Pseo
           </div>
         </section>
         <section className="mb-16 w-full">
-          <div className="max-w-4xl mx-auto px-8 py-10 bg-gradient-to-br from-emerald-900/20 to-gray-900/30 rounded-xl border border-emerald-500/30 backdrop-blur-sm hover:border-emerald-500/50 transition-all duration-300">
+          <div className="max-w-7xl mx-auto px-8 py-10 bg-gradient-to-br from-emerald-900/20 to-gray-900/30 rounded-xl border border-emerald-500/30 backdrop-blur-sm hover:border-emerald-500/50 transition-all duration-300">
             <div
               className="prose prose-lg prose-invert max-w-none text-gray-100 privacy-section [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-emerald-200 [&_h2]:mb-4 [&_ul]:space-y-3 [&_li]:text-gray-200"
               dangerouslySetInnerHTML={{ __html: sections[4].content }}
@@ -69,7 +69,7 @@ export default function PseoPage({ variant, toolComponent: ToolComponent }: Pseo
           </div>
         </section>
         <section className="mb-16 w-full">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold mb-8 text-center text-gray-100">Frequently Asked Questions</h2>
             <div className="space-y-4">
               {faqs.map((faq, index) => (

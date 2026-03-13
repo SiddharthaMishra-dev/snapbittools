@@ -159,12 +159,12 @@ function RouteComponent() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-5xl mb-12 text-center mx-auto">
-          <motion.div variants={itemVariants} className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-100 mb-2">
-              Image to <span className="text-blue-400">Base64</span> Converter
+        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-5xl mt-6  mb-12 text-center mx-auto">
+          <motion.div variants={itemVariants} className="text-center">
+            <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+              Image to <span className="text-brand-primary">Base64</span> Converter
             </h1>
-            <p className="text-md text-gray-200">Convert images to Base64 instantly. 100% private—no uploads, ever.</p>
+            <p className="text-md text-gray-300">Convert images to Base64 instantly. 100% private—no uploads, ever.</p>
           </motion.div>
         </motion.div>
 
@@ -174,7 +174,7 @@ function RouteComponent() {
           animate="visible"
           className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto"
         >
-          <motion.div variants={itemVariants} className="rounded-xl shadow-lg p-8 mb-6">
+          <motion.div variants={itemVariants} className="rounded-xl shadow-lg  mb-6">
             <div
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -253,14 +253,12 @@ function RouteComponent() {
           </motion.div>
         </motion.div>
 
-        <div className="max-w-7xl mx-auto mb-16 w-full">
-          <ToolContentDisplay
+        <ToolContentDisplay
             title={toolContent["image-to-base64"].title}
             intro={toolContent["image-to-base64"].intro}
             benefits={toolContent["image-to-base64"].benefits}
             useCases={toolContent["image-to-base64"].useCases}
           />
-        </div>
 
         <ToolInfo
           title="Image to Base64"

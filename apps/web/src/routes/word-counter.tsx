@@ -119,10 +119,10 @@ function WordCounterComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
         <div className="text-center mb-8 max-w-5xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
             Word <span className="text-brand-primary">Counter</span>
           </h1>
-          <p className="text-md text-gray-200">Analyze your text instantly. Count words, characters, sentences and more.</p>
+          <p className="text-md text-gray-300">Analyze your text instantly. Count words, characters, sentences and more.</p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
@@ -191,7 +191,7 @@ function WordCounterComponent() {
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div className="lg:col-span-3">
-              <div className=" rounded-xl shadow-lg p-6 h-full flex flex-col">
+              <div className=" rounded-lg shadow-lg  h-full flex flex-col">
                 <textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
@@ -203,7 +203,7 @@ function WordCounterComponent() {
             </div>
 
             <div className="lg:col-span-1 space-y-6">
-              <div className=" rounded-xl shadow-lg p-6 border border-gray-700">
+              <div className=" rounded-lg shadow-lg p-6 border border-gray-700">
                 <h3 className="text-lg font-semibold text-gray-100 mb-6 flex items-center gap-2 border-b border-gray-700 pb-2">
                   <IconHash className="w-5 h-5 text-brand-primary" />
                   Live Statistics
@@ -221,7 +221,7 @@ function WordCounterComponent() {
                 </div>
               </div>
 
-              <div className="bg-brand-primary/10 rounded-xl p-6 border border-brand-primary/20">
+              <div className="bg-brand-primary/10 rounded-lg p-6 border border-brand-primary/20">
                 <p className="text-sm text-brand-light font-medium italic">
                   "Words are, in my not-so-humble opinion, our most inexhaustible source of magic."
                 </p>
@@ -229,15 +229,12 @@ function WordCounterComponent() {
               </div>
             </div>
           </div>
-
-          <div className="max-w-7xl mx-auto mb-16 w-full">
             <ToolContentDisplay
               title={toolContent["word-counter"].title}
               intro={toolContent["word-counter"].intro}
               benefits={toolContent["word-counter"].benefits}
               useCases={toolContent["word-counter"].useCases}
             />
-          </div>
 
           <ToolInfo
             title="Word & Character Counter"

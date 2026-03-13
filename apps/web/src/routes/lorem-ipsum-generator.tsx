@@ -186,14 +186,14 @@ function LoremIpsumComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
         <div className="text-center mb-8 max-w-5xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
             Lorem <span className="text-brand-primary">Ipsum</span> Generator
           </h1>
-          <p className="text-md text-gray-200">Instant placeholder text for your next big project.</p>
+          <p className="text-md text-gray-300">Instant placeholder text for your next big project.</p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
-          <div className="bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-700">
+          <div className="rounded-lg shadow-lg p-6 border border-gray-700">
             <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex flex-col">
@@ -266,11 +266,11 @@ function LoremIpsumComponent() {
             </div>
           </div>
 
-          <div className="bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-700 min-h-[400px]">
+          <div className="bg-gray-900 rounded-lg shadow-lg p-8 border border-gray-700 min-h-[400px]">
             {generatedText ? (
               <div className="prose prose-invert max-w-none">
                 {generatedText.split("\n\n").map((para, i) => (
-                  <p key={i} className="text-gray-200 text-lg leading-relaxed mb-6 last:mb-0">
+                  <p key={i} className="text-gray-200 text-xl leading-relaxed mb-6 last:mb-0">
                     {para}
                   </p>
                 ))}
@@ -282,15 +282,12 @@ function LoremIpsumComponent() {
               </div>
             )}
           </div>
-
-          <div className="max-w-7xl mx-auto mb-16 w-full">
-            <ToolContentDisplay
+<ToolContentDisplay
               title={toolContent["lorem-ipsum-generator"].title}
               intro={toolContent["lorem-ipsum-generator"].intro}
               benefits={toolContent["lorem-ipsum-generator"].benefits}
               useCases={toolContent["lorem-ipsum-generator"].useCases}
             />
-          </div>
 
           <ToolInfo
             title="Lorem Ipsum Generator"

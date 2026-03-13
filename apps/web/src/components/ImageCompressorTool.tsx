@@ -252,7 +252,7 @@ export function ImageCompressorTool() {
 
   return (
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-      <div className="rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
+      <div className="rounded-xl shadow-lg p-4 sm:p-8  w-full max-w-5xl">
         {files.length === 0 ? (
           <>
             <div

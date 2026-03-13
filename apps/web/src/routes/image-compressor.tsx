@@ -60,10 +60,10 @@ export function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
         <div className="text-center mb-8 max-w-5xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
             Compress <span className="text-brand-primary">Images</span>
           </h1>
-          <p className="text-lg text-gray-200">
+          <p className="text-md text-gray-300">
             Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while preserving quality. 100% client-side—your
             files never leave.
           </p>
@@ -71,14 +71,12 @@ export function RouteComponent() {
 
         <ImageCompressorTool />
 
-        <div className="max-w-7xl mx-auto mb-16 w-full">
-          <ToolContentDisplay
+        <ToolContentDisplay
             title={toolContent["image-compressor"].title}
             intro={toolContent["image-compressor"].intro}
             benefits={toolContent["image-compressor"].benefits}
             useCases={toolContent["image-compressor"].useCases}
-          />
-        </div>
+          />  
 
         <ToolInfo
           title="Image Compressor"

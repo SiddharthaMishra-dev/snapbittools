@@ -226,7 +226,7 @@ export function JsonFormatterTool() {
   };
 
   return (
-    <div className="flex-1 max-w-9xl w-full mx-auto">
+    <div className="flex-1 max-w-7xl w-full mx-auto">
       {/* Toolbar */}
       <div className=" rounded-xl shadow-lg p-4 mb-6">
         <div className="flex flex-wrap gap-3 justify-center">
@@ -234,7 +234,7 @@ export function JsonFormatterTool() {
             <span className="text-sm font-medium">Quotes:</span>
             <button
               onClick={() => setUseSingleQuotes(false)}
-              className={`px-2 py-1 text-xs rounded transition-colors ${
+              className={`px-2 py-1 text-xs rounded-lg transition-colors ${
                 !useSingleQuotes ? "bg-blue-700 text-blue-100" : "bg-gray-600 text-gray-300 hover:bg-gray-500"
               }`}
             >
@@ -242,7 +242,7 @@ export function JsonFormatterTool() {
             </button>
             <button
               onClick={() => setUseSingleQuotes(true)}
-              className={`px-2 py-1 text-xs rounded transition-colors ${
+              className={`px-2 py-1 text-xs rounded-lg transition-colors ${
                 useSingleQuotes ? "bg-blue-700 text-blue-100" : "bg-gray-600 text-gray-300 hover:bg-gray-500"
               }`}
             >
@@ -320,9 +320,9 @@ export function JsonFormatterTool() {
       )}
 
       {/* Editor Panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 sm:gap-0 gap-6">
         {/* Input Panel */}
-        <div className="rounded-xl shadow-lg p-6">
+        <div className="rounded-xl shadow-lg p-0 sm:p-6">
           <h3 className="text-xl font-semibold text-gray-100 mb-4">Input</h3>
           <textarea
             value={input}
@@ -337,7 +337,7 @@ export function JsonFormatterTool() {
         </div>
 
         {/* Output Panel */}
-        <div className=" rounded-xl shadow-lg p-6">
+        <div className=" rounded-xl shadow-lg p-0 sm:p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-semibold text-gray-100">Output</h3>
             <div className="flex gap-2">

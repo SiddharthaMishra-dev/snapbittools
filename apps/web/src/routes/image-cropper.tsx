@@ -453,10 +453,10 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
         <div className="text-center mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
             Image <span className="text-brand-primary">Cropper</span>
           </h1>
-          <p className="text-md text-gray-200">Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.</p>
+          <p className="text-md text-gray-300">Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.</p>
         </div>
 
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -631,14 +631,12 @@ function RouteComponent() {
             )}
           </div>
 
-          <div className="max-w-7xl mx-auto mb-16 w-full">
-            <ToolContentDisplay
+           <ToolContentDisplay
               title={toolContent["image-cropper"].title}
               intro={toolContent["image-cropper"].intro}
               benefits={toolContent["image-cropper"].benefits}
               useCases={toolContent["image-cropper"].useCases}
             />
-          </div>
 
           <ToolInfo
             title="Image Cropper"
