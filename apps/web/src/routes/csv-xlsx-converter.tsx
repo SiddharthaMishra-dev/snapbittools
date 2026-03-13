@@ -351,12 +351,12 @@ function RouteComponent() {
           </div>
         </div>
 
-         <ToolContentDisplay
-            title={toolContent["csv-xlsx-converter"].title}
-            intro={toolContent["csv-xlsx-converter"].intro}
-            benefits={toolContent["csv-xlsx-converter"].benefits}
-            useCases={toolContent["csv-xlsx-converter"].useCases}
-          />
+        <ToolContentDisplay
+          title={toolContent["csv-xlsx-converter"].title}
+          intro={toolContent["csv-xlsx-converter"].intro}
+          benefits={toolContent["csv-xlsx-converter"].benefits}
+          useCases={toolContent["csv-xlsx-converter"].useCases}
+        />
 
         <ToolInfo
           title="CSV to XLSX Converter"

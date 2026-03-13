@@ -60,12 +60,12 @@ export function RouteComponent() {
 
         <JsonFormatterTool />
 
-       <ToolContentDisplay
-            title={toolContent["json-formatter"].title}
-            intro={toolContent["json-formatter"].intro}
-            benefits={toolContent["json-formatter"].benefits}
-            useCases={toolContent["json-formatter"].useCases}
-          />
+        <ToolContentDisplay
+          title={toolContent["json-formatter"].title}
+          intro={toolContent["json-formatter"].intro}
+          benefits={toolContent["json-formatter"].benefits}
+          useCases={toolContent["json-formatter"].useCases}
+        />
         <ToolInfo
           title="JSON Formatter & Validator"
           description="Our JSON Formatter is a comprehensive suite for developers to clean, validate, and optimize JSON data. Whether you need to beautify deep nested objects for readability or minify data for production use, this tool provides a secure, client-side environment for all your JSON needs."

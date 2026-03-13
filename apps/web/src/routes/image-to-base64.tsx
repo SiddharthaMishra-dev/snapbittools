@@ -159,7 +159,12 @@ function RouteComponent() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <Breadcrumbs />
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-5xl mt-6  mb-12 text-center mx-auto">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="w-full max-w-5xl mt-6  mb-12 text-center mx-auto"
+        >
           <motion.div variants={itemVariants} className="text-center">
             <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
               Image to <span className="text-brand-primary">Base64</span> Converter
@@ -254,11 +259,11 @@ function RouteComponent() {
         </motion.div>
 
         <ToolContentDisplay
-            title={toolContent["image-to-base64"].title}
-            intro={toolContent["image-to-base64"].intro}
-            benefits={toolContent["image-to-base64"].benefits}
-            useCases={toolContent["image-to-base64"].useCases}
-          />
+          title={toolContent["image-to-base64"].title}
+          intro={toolContent["image-to-base64"].intro}
+          benefits={toolContent["image-to-base64"].benefits}
+          useCases={toolContent["image-to-base64"].useCases}
+        />
 
         <ToolInfo
           title="Image to Base64"

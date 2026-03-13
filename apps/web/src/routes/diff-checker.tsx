@@ -189,12 +189,12 @@ function RouteComponent() {
           </div>
         </div>
 
-  <ToolContentDisplay
-            title={toolContent["diff-checker"].title}
-            intro={toolContent["diff-checker"].intro}
-            benefits={toolContent["diff-checker"].benefits}
-            useCases={toolContent["diff-checker"].useCases}
-          />
+        <ToolContentDisplay
+          title={toolContent["diff-checker"].title}
+          intro={toolContent["diff-checker"].intro}
+          benefits={toolContent["diff-checker"].benefits}
+          useCases={toolContent["diff-checker"].useCases}
+        />
 
         <ToolInfo
           title="Diff Checker"

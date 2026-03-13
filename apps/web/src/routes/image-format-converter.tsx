@@ -60,12 +60,12 @@ export function RouteComponent() {
 
         <ImageConverterTool />
 
-         <ToolContentDisplay
-            title={toolContent["image-format-converter"].title}
-            intro={toolContent["image-format-converter"].intro}
-            benefits={toolContent["image-format-converter"].benefits}
-            useCases={toolContent["image-format-converter"].useCases}
-          />
+        <ToolContentDisplay
+          title={toolContent["image-format-converter"].title}
+          intro={toolContent["image-format-converter"].intro}
+          benefits={toolContent["image-format-converter"].benefits}
+          useCases={toolContent["image-format-converter"].useCases}
+        />
 
         <ToolInfo
           title="Image Format Converter"

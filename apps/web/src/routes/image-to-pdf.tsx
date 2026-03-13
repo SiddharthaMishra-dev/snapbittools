@@ -320,12 +320,12 @@ function RouteComponent() {
           </div>
         </div>
 
-         <ToolContentDisplay
-            title={toolContent["image-to-pdf"].title}
-            intro={toolContent["image-to-pdf"].intro}
-            benefits={toolContent["image-to-pdf"].benefits}
-            useCases={toolContent["image-to-pdf"].useCases}
-          />
+        <ToolContentDisplay
+          title={toolContent["image-to-pdf"].title}
+          intro={toolContent["image-to-pdf"].intro}
+          benefits={toolContent["image-to-pdf"].benefits}
+          useCases={toolContent["image-to-pdf"].useCases}
+        />
 
         <ToolInfo
           title="Image to PDF Converter"

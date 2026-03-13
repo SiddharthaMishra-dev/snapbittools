@@ -349,12 +349,12 @@ function RouteComponent() {
             </div>
           </div>
 
-            <ToolContentDisplay
-              title={toolContent["json-to-csv"].title}
-              intro={toolContent["json-to-csv"].intro}
-              benefits={toolContent["json-to-csv"].benefits}
-              useCases={toolContent["json-to-csv"].useCases}
-            />
+          <ToolContentDisplay
+            title={toolContent["json-to-csv"].title}
+            intro={toolContent["json-to-csv"].intro}
+            benefits={toolContent["json-to-csv"].benefits}
+            useCases={toolContent["json-to-csv"].useCases}
+          />
 
           <div className="mt-8">
             <ToolInfo

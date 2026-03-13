@@ -72,11 +72,11 @@ export function RouteComponent() {
         <ImageCompressorTool />
 
         <ToolContentDisplay
-            title={toolContent["image-compressor"].title}
-            intro={toolContent["image-compressor"].intro}
-            benefits={toolContent["image-compressor"].benefits}
-            useCases={toolContent["image-compressor"].useCases}
-          />  
+          title={toolContent["image-compressor"].title}
+          intro={toolContent["image-compressor"].intro}
+          benefits={toolContent["image-compressor"].benefits}
+          useCases={toolContent["image-compressor"].useCases}
+        />
 
         <ToolInfo
           title="Image Compressor"

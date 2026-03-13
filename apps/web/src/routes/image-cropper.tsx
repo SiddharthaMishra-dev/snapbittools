@@ -631,12 +631,12 @@ function RouteComponent() {
             )}
           </div>
 
-           <ToolContentDisplay
-              title={toolContent["image-cropper"].title}
-              intro={toolContent["image-cropper"].intro}
-              benefits={toolContent["image-cropper"].benefits}
-              useCases={toolContent["image-cropper"].useCases}
-            />
+          <ToolContentDisplay
+            title={toolContent["image-cropper"].title}
+            intro={toolContent["image-cropper"].intro}
+            benefits={toolContent["image-cropper"].benefits}
+            useCases={toolContent["image-cropper"].useCases}
+          />
 
           <ToolInfo
             title="Image Cropper"

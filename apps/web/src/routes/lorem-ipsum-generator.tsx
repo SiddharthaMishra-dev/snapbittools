@@ -282,12 +282,12 @@ function LoremIpsumComponent() {
               </div>
             )}
           </div>
-<ToolContentDisplay
-              title={toolContent["lorem-ipsum-generator"].title}
-              intro={toolContent["lorem-ipsum-generator"].intro}
-              benefits={toolContent["lorem-ipsum-generator"].benefits}
-              useCases={toolContent["lorem-ipsum-generator"].useCases}
-            />
+          <ToolContentDisplay
+            title={toolContent["lorem-ipsum-generator"].title}
+            intro={toolContent["lorem-ipsum-generator"].intro}
+            benefits={toolContent["lorem-ipsum-generator"].benefits}
+            useCases={toolContent["lorem-ipsum-generator"].useCases}
+          />
 
           <ToolInfo
             title="Lorem Ipsum Generator"

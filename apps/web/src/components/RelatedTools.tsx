@@ -54,7 +54,7 @@ export default function RelatedTools({ currentToolSlug, category = "all", maxToo
 
   return (
     <motion.section variants={containerVariants} initial="hidden" animate="visible" className="mt-12 mx-auto w-full max-w-7xl">
-      <motion.div variants={itemVariants} >
+      <motion.div variants={itemVariants}>
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-100">

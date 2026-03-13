@@ -229,12 +229,12 @@ function WordCounterComponent() {
               </div>
             </div>
           </div>
-            <ToolContentDisplay
-              title={toolContent["word-counter"].title}
-              intro={toolContent["word-counter"].intro}
-              benefits={toolContent["word-counter"].benefits}
-              useCases={toolContent["word-counter"].useCases}
-            />
+          <ToolContentDisplay
+            title={toolContent["word-counter"].title}
+            intro={toolContent["word-counter"].intro}
+            benefits={toolContent["word-counter"].benefits}
+            useCases={toolContent["word-counter"].useCases}
+          />
 
           <ToolInfo
             title="Word & Character Counter"

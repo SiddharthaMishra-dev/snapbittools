@@ -52,7 +52,6 @@ export function RouteComponent() {
             >
               Back to home
             </Link>
-            
           </div>
         </div>
       </section>
