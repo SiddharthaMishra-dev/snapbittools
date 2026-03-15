@@ -413,4 +413,32 @@ The tool supports multiple naming patterns: sequential numbering (file-1, file-2
       "Managing screenshot collections with sequence numbers",
     ],
   },
+
+  "html-minifier": {
+    slug: "html-minifier",
+    title: "HTML Minifier - Minify HTML Code Online",
+    intro: `Minify HTML instantly with our free browser-based HTML Minifier. Remove comments, collapse unnecessary whitespace, and reduce page size for faster delivery. Everything runs locally in your browser, so your markup never leaves your device.
+
+HTML minification is a practical performance step for frontend teams. Extra spaces, new lines, and comments increase transfer size without adding runtime value in production. Smaller HTML files are quicker to download, parse, and render, especially on mobile networks and lower-powered devices. Even small improvements can help Core Web Vitals and improve user experience across landing pages, static sites, server-rendered apps, and template-based systems.
+
+SnapBit's HTML Minifier focuses on safe, predictable cleanup for common workflows. You can choose whether to remove comments and whether to collapse whitespace. The minifier preserves content in sensitive blocks like script, style, pre, and textarea, so code and literal text remain intact while surrounding markup is compacted. This makes it suitable for real-world templates, snippets, and production build checks.
+
+Use this tool when preparing hand-written HTML, auditing generated templates, or quickly shrinking markup before deployment. Copy the minified result directly or download it as an .html file. There is no signup, no server processing, and no file upload step. Whether you are a frontend developer, SEO specialist, performance engineer, or content publisher, this tool gives you a fast private way to optimize HTML output.`,
+    benefits: [
+      "Minify HTML instantly with zero server uploads",
+      "Remove comments and collapse extra whitespace",
+      "Preserves script, style, pre, and textarea blocks",
+      "See file size savings in real time",
+      "Copy output or download as .html",
+      "100% privacy-first browser processing",
+    ],
+    useCases: [
+      "Optimizing landing page HTML before deployment",
+      "Reducing payload size for static website hosting",
+      "Cleaning generated template output",
+      "Preparing lightweight HTML for email workflows",
+      "Auditing markup during frontend performance tuning",
+      "Minifying snippets for CMS and no-code embeds",
+    ],
+  },
 };

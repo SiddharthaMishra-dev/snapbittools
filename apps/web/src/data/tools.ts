@@ -10,6 +10,7 @@ import {
   IconSearch,
   IconTypography,
   IconFiles,
+  IconCode,
 } from "@tabler/icons-react";
 import type React from "react";
 
@@ -106,6 +107,16 @@ export const tools: ToolDefinition[] = [
     icon: IconTypography,
     category: "Data",
     keywords: ["word count", "character count", "letters", "reading time"],
+  },
+  {
+    slug: "html-minifier",
+    name: "HTML Minifier",
+    href: "/html-minifier",
+    description: "Minify HTML by removing comments and extra whitespace. Fast, private, browser-based.",
+    icon: IconCode,
+    category: "Data",
+    keywords: ["html minifier", "minify html", "html optimizer", "compress html"],
+    isNew: true,
   },
   {
     slug: "diff-checker",

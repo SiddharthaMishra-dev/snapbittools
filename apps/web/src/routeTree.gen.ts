@@ -37,6 +37,7 @@ import { Route as ImageToBase64RouteImport } from './routes/image-to-base64'
 import { Route as ImageFormatConverterRouteImport } from './routes/image-format-converter'
 import { Route as ImageCropperRouteImport } from './routes/image-cropper'
 import { Route as ImageCompressorRouteImport } from './routes/image-compressor'
+import { Route as HtmlMinifierRouteImport } from './routes/html-minifier'
 import { Route as HeicToJpgRouteImport } from './routes/heic-to-jpg'
 import { Route as FormatJsonOnlineRouteImport } from './routes/format-json-online'
 import { Route as DiffCheckerRouteImport } from './routes/diff-checker'
@@ -194,6 +195,11 @@ const ImageCompressorRoute = ImageCompressorRouteImport.update({
   path: '/image-compressor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HtmlMinifierRoute = HtmlMinifierRouteImport.update({
+  id: '/html-minifier',
+  path: '/html-minifier',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HeicToJpgRoute = HeicToJpgRouteImport.update({
   id: '/heic-to-jpg',
   path: '/heic-to-jpg',
@@ -286,6 +292,7 @@ export interface FileRoutesByFullPath {
   '/diff-checker': typeof DiffCheckerRoute
   '/format-json-online': typeof FormatJsonOnlineRoute
   '/heic-to-jpg': typeof HeicToJpgRoute
+  '/html-minifier': typeof HtmlMinifierRoute
   '/image-compressor': typeof ImageCompressorRoute
   '/image-cropper': typeof ImageCropperRoute
   '/image-format-converter': typeof ImageFormatConverterRoute
@@ -331,6 +338,7 @@ export interface FileRoutesByTo {
   '/diff-checker': typeof DiffCheckerRoute
   '/format-json-online': typeof FormatJsonOnlineRoute
   '/heic-to-jpg': typeof HeicToJpgRoute
+  '/html-minifier': typeof HtmlMinifierRoute
   '/image-compressor': typeof ImageCompressorRoute
   '/image-cropper': typeof ImageCropperRoute
   '/image-format-converter': typeof ImageFormatConverterRoute
@@ -377,6 +385,7 @@ export interface FileRoutesById {
   '/diff-checker': typeof DiffCheckerRoute
   '/format-json-online': typeof FormatJsonOnlineRoute
   '/heic-to-jpg': typeof HeicToJpgRoute
+  '/html-minifier': typeof HtmlMinifierRoute
   '/image-compressor': typeof ImageCompressorRoute
   '/image-cropper': typeof ImageCropperRoute
   '/image-format-converter': typeof ImageFormatConverterRoute
@@ -424,6 +433,7 @@ export interface FileRouteTypes {
     | '/diff-checker'
     | '/format-json-online'
     | '/heic-to-jpg'
+    | '/html-minifier'
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
@@ -469,6 +479,7 @@ export interface FileRouteTypes {
     | '/diff-checker'
     | '/format-json-online'
     | '/heic-to-jpg'
+    | '/html-minifier'
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
@@ -514,6 +525,7 @@ export interface FileRouteTypes {
     | '/diff-checker'
     | '/format-json-online'
     | '/heic-to-jpg'
+    | '/html-minifier'
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
@@ -560,6 +572,7 @@ export interface RootRouteChildren {
   DiffCheckerRoute: typeof DiffCheckerRoute
   FormatJsonOnlineRoute: typeof FormatJsonOnlineRoute
   HeicToJpgRoute: typeof HeicToJpgRoute
+  HtmlMinifierRoute: typeof HtmlMinifierRoute
   ImageCompressorRoute: typeof ImageCompressorRoute
   ImageCropperRoute: typeof ImageCropperRoute
   ImageFormatConverterRoute: typeof ImageFormatConverterRoute
@@ -788,6 +801,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImageCompressorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/html-minifier': {
+      id: '/html-minifier'
+      path: '/html-minifier'
+      fullPath: '/html-minifier'
+      preLoaderRoute: typeof HtmlMinifierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/heic-to-jpg': {
       id: '/heic-to-jpg'
       path: '/heic-to-jpg'
@@ -912,6 +932,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiffCheckerRoute: DiffCheckerRoute,
   FormatJsonOnlineRoute: FormatJsonOnlineRoute,
   HeicToJpgRoute: HeicToJpgRoute,
+  HtmlMinifierRoute: HtmlMinifierRoute,
   ImageCompressorRoute: ImageCompressorRoute,
   ImageCropperRoute: ImageCropperRoute,
   ImageFormatConverterRoute: ImageFormatConverterRoute,
