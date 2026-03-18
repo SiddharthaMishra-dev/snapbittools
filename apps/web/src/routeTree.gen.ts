@@ -15,6 +15,7 @@ import { Route as WebpToJpgRouteImport } from './routes/webp-to-jpg'
 import { Route as ValidateJsonOnlineRouteImport } from './routes/validate-json-online'
 import { Route as ToolsForDevelopersRouteImport } from './routes/tools-for-developers'
 import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as ReduceYourImageSizeForFreeRouteImport } from './routes/reduce-your-image-size-for-free'
 import { Route as ReducePngSizeRouteImport } from './routes/reduce-png-size'
 import { Route as ReduceJpgSizeRouteImport } from './routes/reduce-jpg-size'
 import { Route as ReduceImageFileSizeRouteImport } from './routes/reduce-image-file-size'
@@ -84,6 +85,12 @@ const ToolsRoute = ToolsRouteImport.update({
   path: '/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReduceYourImageSizeForFreeRoute =
+  ReduceYourImageSizeForFreeRouteImport.update({
+    id: '/reduce-your-image-size-for-free',
+    path: '/reduce-your-image-size-for-free',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ReducePngSizeRoute = ReducePngSizeRouteImport.update({
   id: '/reduce-png-size',
   path: '/reduce-png-size',
@@ -315,6 +322,7 @@ export interface FileRoutesByFullPath {
   '/reduce-image-file-size': typeof ReduceImageFileSizeRoute
   '/reduce-jpg-size': typeof ReduceJpgSizeRoute
   '/reduce-png-size': typeof ReducePngSizeRoute
+  '/reduce-your-image-size-for-free': typeof ReduceYourImageSizeForFreeRoute
   '/tools': typeof ToolsRoute
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/validate-json-online': typeof ValidateJsonOnlineRoute
@@ -361,6 +369,7 @@ export interface FileRoutesByTo {
   '/reduce-image-file-size': typeof ReduceImageFileSizeRoute
   '/reduce-jpg-size': typeof ReduceJpgSizeRoute
   '/reduce-png-size': typeof ReducePngSizeRoute
+  '/reduce-your-image-size-for-free': typeof ReduceYourImageSizeForFreeRoute
   '/tools': typeof ToolsRoute
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/validate-json-online': typeof ValidateJsonOnlineRoute
@@ -408,6 +417,7 @@ export interface FileRoutesById {
   '/reduce-image-file-size': typeof ReduceImageFileSizeRoute
   '/reduce-jpg-size': typeof ReduceJpgSizeRoute
   '/reduce-png-size': typeof ReducePngSizeRoute
+  '/reduce-your-image-size-for-free': typeof ReduceYourImageSizeForFreeRoute
   '/tools': typeof ToolsRoute
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/validate-json-online': typeof ValidateJsonOnlineRoute
@@ -456,6 +466,7 @@ export interface FileRouteTypes {
     | '/reduce-image-file-size'
     | '/reduce-jpg-size'
     | '/reduce-png-size'
+    | '/reduce-your-image-size-for-free'
     | '/tools'
     | '/tools-for-developers'
     | '/validate-json-online'
@@ -502,6 +513,7 @@ export interface FileRouteTypes {
     | '/reduce-image-file-size'
     | '/reduce-jpg-size'
     | '/reduce-png-size'
+    | '/reduce-your-image-size-for-free'
     | '/tools'
     | '/tools-for-developers'
     | '/validate-json-online'
@@ -548,6 +560,7 @@ export interface FileRouteTypes {
     | '/reduce-image-file-size'
     | '/reduce-jpg-size'
     | '/reduce-png-size'
+    | '/reduce-your-image-size-for-free'
     | '/tools'
     | '/tools-for-developers'
     | '/validate-json-online'
@@ -595,6 +608,7 @@ export interface RootRouteChildren {
   ReduceImageFileSizeRoute: typeof ReduceImageFileSizeRoute
   ReduceJpgSizeRoute: typeof ReduceJpgSizeRoute
   ReducePngSizeRoute: typeof ReducePngSizeRoute
+  ReduceYourImageSizeForFreeRoute: typeof ReduceYourImageSizeForFreeRoute
   ToolsRoute: typeof ToolsRoute
   ToolsForDevelopersRoute: typeof ToolsForDevelopersRoute
   ValidateJsonOnlineRoute: typeof ValidateJsonOnlineRoute
@@ -645,6 +659,13 @@ declare module '@tanstack/react-router' {
       path: '/tools'
       fullPath: '/tools'
       preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reduce-your-image-size-for-free': {
+      id: '/reduce-your-image-size-for-free'
+      path: '/reduce-your-image-size-for-free'
+      fullPath: '/reduce-your-image-size-for-free'
+      preLoaderRoute: typeof ReduceYourImageSizeForFreeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reduce-png-size': {
@@ -955,6 +976,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReduceImageFileSizeRoute: ReduceImageFileSizeRoute,
   ReduceJpgSizeRoute: ReduceJpgSizeRoute,
   ReducePngSizeRoute: ReducePngSizeRoute,
+  ReduceYourImageSizeForFreeRoute: ReduceYourImageSizeForFreeRoute,
   ToolsRoute: ToolsRoute,
   ToolsForDevelopersRoute: ToolsForDevelopersRoute,
   ValidateJsonOnlineRoute: ValidateJsonOnlineRoute,

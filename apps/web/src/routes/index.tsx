@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import Aurora from "@/components/Aurora";
 import { IconBolt, IconBrandGithub, IconCheck, IconChevronRight, IconLock } from "@tabler/icons-react";
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, easeInOut, motion } from "motion/react";
 
 import GlowCard from "@/components/ui/GlowCard";
@@ -49,6 +49,9 @@ function App() {
 
   const [active, setActive] = React.useState(0);
   const [wordWidth, setWordWidth] = React.useState<number | null>(null);
+  const [isBrowsePressed, setIsBrowsePressed] = React.useState(false);
+  const navigate = useNavigate();
+  const browseNavigateTimeoutRef = React.useRef<number | null>(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -101,6 +104,32 @@ function App() {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [active]);
+
+  React.useEffect(() => {
+    return () => {
+      if (browseNavigateTimeoutRef.current) {
+        window.clearTimeout(browseNavigateTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleBrowseClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey || event.button !== 0) {
+      return;
+    }
+
+    event.preventDefault();
+    setIsBrowsePressed(false);
+
+    if (browseNavigateTimeoutRef.current) {
+      window.clearTimeout(browseNavigateTimeoutRef.current);
+    }
+
+    // Give the release transition a moment before route change.
+    browseNavigateTimeoutRef.current = window.setTimeout(() => {
+      navigate({ to: "/tools" });
+    }, 120);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col font-sans relative overflow-hidden">
@@ -155,11 +184,14 @@ function App() {
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               to="/tools"
-              className=" inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white rounded-lg hover:bg-brand-hover active:scale-[0.97] transition-all duration-200 text-sm font-medium"
+              onClick={handleBrowseClick}
+              onPointerDown={() => setIsBrowsePressed(true)}
+              onPointerUp={() => setIsBrowsePressed(false)}
+              onPointerLeave={() => setIsBrowsePressed(false)}
+              onBlur={() => setIsBrowsePressed(false)}
+              className={`inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white rounded-lg hover:bg-brand-hover transition-all duration-200 text-sm font-medium ${isBrowsePressed ? "scale-[0.98]" : "scale-100"}`}
             >
-              <button>
-                <span>Browse all tools</span>
-              </button>
+              <span>Browse all tools</span>
               <IconChevronRight className="h-4 w-4" />
             </Link>
 

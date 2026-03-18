@@ -36,10 +36,10 @@ export default function GlowCard({ to, children, className = "", icon: Icon, isN
     <Link
       ref={cardRef}
       to={to}
-      className={`group relative bg-transparent border border-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 p-4 sm:p-6 overflow-hidden ${className}`}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className={`group relative bg-transparent border border-gray-800 hover:border-brand-primary/25 hover:inset-ring hover:inset-ring-brand-primary/50  rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 p-4 sm:p-6 overflow-hidden ${className}`}
+      // onMouseMove={handleMouseMove}
+      // onMouseEnter={handleMouseEnter}
+      // onMouseLeave={handleMouseLeave}
       style={{
         background: isHovered
           ? `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(37, 99, 235, 0.06), transparent 40%), rgb(31 41 55)`
