@@ -252,7 +252,7 @@ export function ImageCompressorTool() {
 
   return (
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-      <div className="rounded-xl shadow-lg p-4 sm:p-8  w-full max-w-5xl">
+      <div className="rounded-xl shadow-lg px-0 py-4 sm:p-8  w-full max-w-5xl">
         {files.length === 0 ? (
           <>
             <div
@@ -288,14 +288,14 @@ export function ImageCompressorTool() {
         ) : (
           <>
             <div className="">
-              <h3 className="text-lg font-semibold text-gray-100 mb-4">Compression Settings</h3>
+              {/* <h3 className="text-lg font-semibold text-gray-100 mb-4">Compression Settings</h3> */}
               <div className="mb-4">
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={preserveFormat}
                     onChange={(e) => setPreserveFormat(e.target.checked)}
-                    className="w-4 h-4 text-brand-primary bg-gray-700 border-gray-600 rounded focus:ring-brand-primary"
+                    className="w-4 h-4 text-brand-primary bg-gray-800 border-gray-700 rounded focus:ring-brand-primary"
                   />
                   <span className="text-sm font-medium text-gray-200">Preserve original format</span>
                 </label>
@@ -317,7 +317,7 @@ export function ImageCompressorTool() {
                     step="0.05"
                     value={quality}
                     onChange={(e) => setQuality(parseFloat(e.target.value))}
-                    className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
+                    className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer slider"
                   />
                   <div className="flex justify-between text-xs text-gray-400 mt-1">
                     <span>Lower quality</span>
@@ -335,7 +335,7 @@ export function ImageCompressorTool() {
                     onChange={(e) => setMaxWidth(parseInt(e.target.value) || 1920)}
                     min="100"
                     max="4000"
-                    className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 border border-gray-800 rounded bg-gray-900 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
                 <div>
@@ -346,7 +346,7 @@ export function ImageCompressorTool() {
                     onChange={(e) => setMaxHeight(parseInt(e.target.value) || 1080)}
                     min="100"
                     max="4000"
-                    className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 border border-gray-800 rounded bg-gray-900 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
               </div>
@@ -388,15 +388,16 @@ export function ImageCompressorTool() {
 
             <div className="space-y-3">
               {files.map((file) => (
-                <div key={file.id} className="flex items-center justify-between p-2 border border-gray-600 rounded-lg bg-gray-700">
+                <div key={file.id} className="flex items-center justify-between p-2 border border-gray-900 rounded-lg bg-transparent">
                   <div className="mr-4 flex-shrink-0">
-                    <img src={file.preview} alt={file.name} className="w-16 h-16 object-contain rounded-md" />
+                    <img src={file.preview} alt={file.name} className="w-16 object-contain rounded-md" />
                   </div>
+
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center space-x-2 mb-1">
-                      <p className="font-medium text-gray-100 truncate">{file.name}</p>
+                    <div className=" flex min-w-0 flex-col items-start gap-2 sm:flex-row sm:items-center">
+                      <p className="w-full truncate font-medium text-gray-100 sm:w-auto sm:max-w-[18rem]">{file.name}</p>
                     </div>
-                    <div className="flex items-center space-x-4 mt-1 flex-wrap">
+                    <div className="flex items-center space-x-4  flex-wrap">
                       <span className="text-xs text-gray-400">
                         {formatFileSize(file.originalSize)} &rarr;
                         {file.compressedSize && (
@@ -422,9 +423,9 @@ export function ImageCompressorTool() {
                       <div className="flex items-center space-x-2">
                         <button
                           onClick={() => downloadFile(file)}
-                          className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
+                          className=" px-3 py-1  text-green-100 text-sm rounded hover:bg-green-800/40 transition-colors"
                         >
-                          <IconDownload className="w-4 h-4" />
+                          <IconDownload className=" text-green-700" />
                         </button>
                       </div>
                     )}

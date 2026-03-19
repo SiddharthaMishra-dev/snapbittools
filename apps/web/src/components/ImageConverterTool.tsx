@@ -245,8 +245,8 @@ export function ImageConverterTool() {
   const completedCount = conversions.filter((item) => item.status === "completed").length;
 
   return (
-    <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-      <div className="bg-transparent rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
+    <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto ">
+      <div className="bg-transparent rounded-xl shadow-lg px-0 py-4 sm:p-8 mb-6 w-full">
         {conversions.length === 0 ? (
           <>
             {/* Upload Area */}
@@ -282,19 +282,18 @@ export function ImageConverterTool() {
           </>
         ) : (
           <>
-            {/* Conversion Settings */}
             <div className="">
-              <h3 className="text-lg font-semibold text-gray-100 mb-4">Conversion Settings</h3>
+              {/* <h3 className="text-lg font-semibold text-gray-100 mb-4">Conversion Settings</h3> */}
 
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-200 mb-2">Convert to:</label>
+                <label className="block text-md font-medium text-gray-300 mb-2">Convert to:</label>
                 <select
                   value={selectedFormat}
                   onChange={(e) => setSelectedFormat(e.target.value)}
-                  className="px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                  className="px-3 py-2 border border-gray-700 rounded-lg bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
                 >
                   {supportedFormats.map((format) => (
-                    <option key={format.value} value={format.value} className="bg-gray-700">
+                    <option key={format.value} value={format.value} className="bg-gray-800">
                       {format.label}
                     </option>
                   ))}
@@ -340,17 +339,18 @@ export function ImageConverterTool() {
             {/* Files List */}
             <div className="space-y-3">
               {conversions.map((item) => (
-                <div key={item.id} className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700">
+                <div key={item.id} className="flex items-center justify-between p-2 border border-gray-900 rounded-lg bg-transparent">
                   {/* Preview Image */}
                   <div className="mr-4 flex-shrink-0">
-                    <img src={item.preview} alt={item.name} className="w-16 h-16 object-contain rounded-md" />
+                    <img src={item.preview} alt={item.name} className="w-16  object-contain rounded-md" />
                   </div>
 
                   {/* File Info */}
+
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center space-x-2 mb-1">
-                      <p className="font-medium text-gray-100 truncate">{item.name}</p>
-                      <span className="text-xs px-2 py-1 bg-gray-600 text-gray-300 rounded">
+                    <div className="mb-1 flex min-w-0 flex-col items-start gap-2 sm:flex-row sm:items-center">
+                      <p className="w-full truncate font-medium text-gray-100 sm:w-auto sm:max-w-[18rem]">{item.name}</p>
+                      <span className="text-xs px-2 py-1 bg-gray-800 text-gray-300 rounded">
                         {item.originalFormat} → {selectedFormat.toUpperCase()}
                       </span>
                     </div>
@@ -358,7 +358,7 @@ export function ImageConverterTool() {
                   </div>
 
                   {/* Status */}
-                  <div className="flex items-center space-x-3 ml-4">
+                  <div className="flex items-center space-x-3 ml-4 ">
                     {item.status === "pending" && <span className="text-gray-400 text-sm">Pending</span>}
                     {item.status === "converting" && (
                       <div className="flex items-center space-x-2">
@@ -370,9 +370,9 @@ export function ImageConverterTool() {
                       <div className="flex items-center space-x-2">
                         <button
                           onClick={() => downloadFile(item)}
-                          className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
+                          className=" px-3 py-1  text-green-100 text-sm rounded hover:bg-green-800/40 transition-colors"
                         >
-                          <IconDownload className="w-4 h-4" />
+                          <IconDownload className=" text-green-700" />
                         </button>
                       </div>
                     )}

@@ -288,7 +288,7 @@ function RouteComponent() {
                       <Reorder.Item
                         key={file.id}
                         value={file}
-                        className="bg-gray-800 rounded-lg border border-gray-700 p-3 flex items-center gap-4 cursor-grab active:cursor-grabbing shadow-sm hover:shadow-md transition-shadow"
+                        className="bg-gray-900 rounded-lg border border-gray-800 p-3 flex items-center gap-4 cursor-grab active:cursor-grabbing shadow-sm hover:shadow-md transition-shadow"
                       >
                         <div className="w-6 flex flex-col items-center justify-center gap-1 text-gray-500">
                           <div className="w-1 h-1 rounded-full bg-current"></div>

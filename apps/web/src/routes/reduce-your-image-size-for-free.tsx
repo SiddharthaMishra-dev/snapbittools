@@ -260,10 +260,7 @@ function BlogPage() {
         </header>
 
         {/* Table of Contents */}
-        <nav
-          className="mb-14 p-6 bg-gray-900/50 border border-gray-700/50 rounded-xl"
-          aria-label="Article contents"
-        >
+        <nav className="mb-14 p-6 bg-gray-900/50 border border-gray-700/50 rounded-xl" aria-label="Article contents">
           <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Table of Contents</h2>
           <ol className="space-y-2.5 text-sm">
             {[
@@ -303,8 +300,8 @@ function BlogPage() {
               <div className="p-5 bg-gray-900/60 border border-gray-700/50 rounded-xl">
                 <h3 className="font-semibold text-gray-100 mb-2">Lossy Compression</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  Permanently removes some image data to achieve smaller file sizes. Used by JPEG and WebP. Best for photographs where
-                  minor quality reduction at extreme ratios is acceptable.
+                  Permanently removes some image data to achieve smaller file sizes. Used by JPEG and WebP. Best for photographs where minor
+                  quality reduction at extreme ratios is acceptable.
                 </p>
               </div>
               <div className="p-5 bg-gray-900/60 border border-gray-700/50 rounded-xl">
@@ -398,12 +395,10 @@ function BlogPage() {
 
           {/* ── Section 5: Step-by-Step ── */}
           <section id="step-by-step" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-5">
-              How to Compress Images with SnapBit Tools — Step by Step
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-5">How to Compress Images with SnapBit Tools — Step by Step</h2>
             <p className="text-gray-300 leading-relaxed mb-8">
-              SnapBit Tools' free image compressor makes it easy to reduce image file sizes in seconds — no account required, no software
-              to install, and no files ever leave your device.
+              SnapBit Tools' free image compressor makes it easy to reduce image file sizes in seconds — no account required, no software to
+              install, and no files ever leave your device.
             </p>
 
             <div className="space-y-4">

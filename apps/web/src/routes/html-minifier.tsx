@@ -26,18 +26,15 @@ const faqs = [
   },
   {
     question: "Does it remove HTML comments?",
-    answer:
-      "By default, yes. You can turn comment removal on or off at any time before minifying.",
+    answer: "By default, yes. You can turn comment removal on or off at any time before minifying.",
   },
   {
     question: "Will it break <script>, <style>, or <pre> blocks?",
-    answer:
-      "No. The tool preserves content inside script, style, pre, and textarea blocks while minifying the surrounding HTML.",
+    answer: "No. The tool preserves content inside script, style, pre, and textarea blocks while minifying the surrounding HTML.",
   },
   {
     question: "Can I minify and de-minify HTML here?",
-    answer:
-      "Yes. You can generate either minified or de-minified output, then copy it or download it as an .html file instantly.",
+    answer: "Yes. You can generate either minified or de-minified output, then copy it or download it as an .html file instantly.",
   },
 ];
 
@@ -63,35 +60,38 @@ function RouteComponent() {
   const [removeComments, setRemoveComments] = useState(true);
   const [collapseWhitespace, setCollapseWhitespace] = useState(true);
 
-  const minifyHtml = useCallback((source: string) => {
-    let minified = source.replace(/\r\n/g, "\n");
+  const minifyHtml = useCallback(
+    (source: string) => {
+      let minified = source.replace(/\r\n/g, "\n");
 
-    const protectedBlocks: string[] = [];
-    minified = minified.replace(/<(script|style|pre|textarea)\b[^>]*>[\s\S]*?<\/\1>/gi, (match) => {
-      const marker = `___SNAPBIT_BLOCK_${protectedBlocks.length}___`;
-      protectedBlocks.push(match);
-      return marker;
-    });
-
-    if (removeComments) {
-      minified = minified.replace(/<!--[\s\S]*?-->/g, (comment) => {
-        const isConditional = /<!--\s*\[if[\s\S]*?\]>[\s\S]*?<!\[endif\]\s*-->/i.test(comment);
-        return isConditional ? comment : "";
+      const protectedBlocks: string[] = [];
+      minified = minified.replace(/<(script|style|pre|textarea)\b[^>]*>[\s\S]*?<\/\1>/gi, (match) => {
+        const marker = `___SNAPBIT_BLOCK_${protectedBlocks.length}___`;
+        protectedBlocks.push(match);
+        return marker;
       });
-    }
 
-    if (collapseWhitespace) {
-      minified = minified.replace(/\s{2,}/g, " ");
-      minified = minified.replace(/>\s+</g, "><");
-      minified = minified.replace(/\s+(\/?>)/g, "$1");
-    }
+      if (removeComments) {
+        minified = minified.replace(/<!--[\s\S]*?-->/g, (comment) => {
+          const isConditional = /<!--\s*\[if[\s\S]*?\]>[\s\S]*?<!\[endif\]\s*-->/i.test(comment);
+          return isConditional ? comment : "";
+        });
+      }
 
-    minified = minified.trim();
+      if (collapseWhitespace) {
+        minified = minified.replace(/\s{2,}/g, " ");
+        minified = minified.replace(/>\s+</g, "><");
+        minified = minified.replace(/\s+(\/?>)/g, "$1");
+      }
 
-    minified = minified.replace(/___SNAPBIT_BLOCK_(\d+)___/g, (_, index) => protectedBlocks[Number(index)] ?? "");
+      minified = minified.trim();
 
-    return minified;
-  }, [removeComments, collapseWhitespace]);
+      minified = minified.replace(/___SNAPBIT_BLOCK_(\d+)___/g, (_, index) => protectedBlocks[Number(index)] ?? "");
+
+      return minified;
+    },
+    [removeComments, collapseWhitespace],
+  );
 
   const deminifyHtml = useCallback((source: string) => {
     const voidTags = new Set([
@@ -121,7 +121,10 @@ function RouteComponent() {
     });
 
     html = html.replace(/(>)(<)(\/?)/g, "$1\n$2$3");
-    const lines = html.split("\n").map((line) => line.trim()).filter(Boolean);
+    const lines = html
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
 
     let indentLevel = 0;
     const formatted: string[] = [];
@@ -429,7 +432,9 @@ function RouteComponent() {
 
 function StatCard({ title, value, icon, highlight = false }: { title: string; value: string; icon: ReactNode; highlight?: boolean }) {
   return (
-    <div className={`rounded-xl border p-4 ${highlight ? "border-brand-primary/40 bg-brand-primary/10" : "border-gray-700 bg-gray-900/60"}`}>
+    <div
+      className={`rounded-xl border p-4 ${highlight ? "border-brand-primary/40 bg-brand-primary/10" : "border-gray-700 bg-gray-900/60"}`}
+    >
       <div className="text-xs uppercase tracking-wide text-gray-400 mb-2">{title}</div>
       <div className="flex items-center justify-between">
         <span className={`text-lg font-bold ${highlight ? "text-brand-light" : "text-gray-100"}`}>{value}</span>
