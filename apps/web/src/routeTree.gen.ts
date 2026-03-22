@@ -53,6 +53,7 @@ import { Route as CompressImageOnlineRouteImport } from './routes/compress-image
 import { Route as CompressImageForWebRouteImport } from './routes/compress-image-for-web'
 import { Route as BulkFileRenamerRouteImport } from './routes/bulk-file-renamer'
 import { Route as BrowserBasedUtilitiesRouteImport } from './routes/browser-based-utilities'
+import { Route as BlogsRouteImport } from './routes/blogs'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WordCounterRoute = WordCounterRouteImport.update({
@@ -277,6 +278,11 @@ const BrowserBasedUtilitiesRoute = BrowserBasedUtilitiesRouteImport.update({
   path: '/browser-based-utilities',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogsRoute = BlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -285,6 +291,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blogs': typeof BlogsRoute
   '/browser-based-utilities': typeof BrowserBasedUtilitiesRoute
   '/bulk-file-renamer': typeof BulkFileRenamerRoute
   '/compress-image-for-web': typeof CompressImageForWebRoute
@@ -332,6 +339,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blogs': typeof BlogsRoute
   '/browser-based-utilities': typeof BrowserBasedUtilitiesRoute
   '/bulk-file-renamer': typeof BulkFileRenamerRoute
   '/compress-image-for-web': typeof CompressImageForWebRoute
@@ -380,6 +388,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blogs': typeof BlogsRoute
   '/browser-based-utilities': typeof BrowserBasedUtilitiesRoute
   '/bulk-file-renamer': typeof BulkFileRenamerRoute
   '/compress-image-for-web': typeof CompressImageForWebRoute
@@ -429,6 +438,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/blogs'
     | '/browser-based-utilities'
     | '/bulk-file-renamer'
     | '/compress-image-for-web'
@@ -476,6 +486,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/blogs'
     | '/browser-based-utilities'
     | '/bulk-file-renamer'
     | '/compress-image-for-web'
@@ -523,6 +534,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/blogs'
     | '/browser-based-utilities'
     | '/bulk-file-renamer'
     | '/compress-image-for-web'
@@ -571,6 +583,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogsRoute: typeof BlogsRoute
   BrowserBasedUtilitiesRoute: typeof BrowserBasedUtilitiesRoute
   BulkFileRenamerRoute: typeof BulkFileRenamerRoute
   CompressImageForWebRoute: typeof CompressImageForWebRoute
@@ -927,6 +940,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BrowserBasedUtilitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blogs': {
+      id: '/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof BlogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -939,6 +959,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogsRoute: BlogsRoute,
   BrowserBasedUtilitiesRoute: BrowserBasedUtilitiesRoute,
   BulkFileRenamerRoute: BulkFileRenamerRoute,
   CompressImageForWebRoute: CompressImageForWebRoute,

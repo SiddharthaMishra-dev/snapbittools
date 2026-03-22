@@ -1,10 +1,13 @@
 import React from "react";
 
-import { IconApps } from "@tabler/icons-react";
+import { IconApps, IconArticle } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import { motion, easeInOut } from "motion/react";
 
-const navItems = [{ path: "/tools", label: "All Tools", icon: <IconApps size={18} /> }];
+const navItems = [
+  { path: "/tools", label: "All Tools", icon: <IconApps size={18} /> },
+  { path: "/blogs", label: "Blogs", icon: <IconArticle size={18} /> },
+];
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);

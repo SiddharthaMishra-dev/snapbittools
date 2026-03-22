@@ -69,12 +69,13 @@ export const Route = createFileRoute("/reduce-your-image-size-for-free")({
         "bulk image compressor free",
         "reduce image size without quality loss",
       ],
-      url: "/blog",
+      url: "/reduce-your-image-size-for-free",
       type: "website",
       faqs,
       breadcrumbs: [
         { name: "Home", path: "/" },
-        { name: "Blog", path: "/blog" },
+        { name: "Blogs", path: "/blogs" },
+        { name: "Reduce Your Image Size for Free", path: "/reduce-your-image-size-for-free" },
       ],
       schema: {
         "@context": "https://schema.org",
@@ -82,7 +83,7 @@ export const Route = createFileRoute("/reduce-your-image-size-for-free")({
         headline: "Why Image Compression Matters — And How to Reduce Your Image Size for Free",
         description:
           "A comprehensive guide on why image compression is essential for web performance and SEO, with a step-by-step tutorial on using SnapBit Tools' free, private, browser-based image compressor.",
-        url: "https://snapbittools.com/blog",
+        url: "https://snapbittools.com/reduce-your-image-size-for-free",
         datePublished: PUBLISHED_DATE,
         dateModified: MODIFIED_DATE,
         author: {
@@ -102,7 +103,7 @@ export const Route = createFileRoute("/reduce-your-image-size-for-free")({
         image: "https://snapbittools.com/screenshot.png",
         mainEntityOfPage: {
           "@type": "WebPage",
-          "@id": "https://snapbittools.com/blog",
+          "@id": "https://snapbittools.com/reduce-your-image-size-for-free",
         },
         keywords:
           "image compression, reduce image size, compress images online, web performance, SEO images, free image compressor, snapbittools",
@@ -159,22 +160,22 @@ const reasons = [
     number: "02",
     title: "Better Search Engine Rankings",
     desc: "Google uses page speed as a ranking factor. Properly optimized images improve your Core Web Vitals — particularly Largest Contentful Paint (LCP) — which directly impacts how Google ranks your pages.",
-    colorClass: "bg-violet-900/10 border-violet-500/20",
-    numberClass: "text-violet-400",
+    colorClass: "bg-blue-900/10 border-blue-500/20",
+    numberClass: "text-blue-400",
   },
   {
     number: "03",
     title: "Reduced Bandwidth & Hosting Costs",
     desc: "Every byte you shave off an image reduces server bandwidth on every page load. For high-traffic sites, this can translate to significant savings on hosting and CDN costs.",
-    colorClass: "bg-emerald-900/10 border-emerald-500/20",
-    numberClass: "text-emerald-400",
+    colorClass: "bg-blue-900/10 border-blue-500/20",
+    numberClass: "text-blue-400",
   },
   {
     number: "04",
     title: "Better Mobile Experience",
     desc: "Mobile users often browse on slower data connections. Compressed images load significantly faster on mobile, reducing frustration and unnecessary data usage for your visitors.",
-    colorClass: "bg-orange-900/10 border-orange-500/20",
-    numberClass: "text-orange-400",
+    colorClass: "bg-blue-900/10 border-blue-500/20",
+    numberClass: "text-blue-400",
   },
   {
     number: "05",
@@ -260,7 +261,7 @@ function BlogPage() {
         </header>
 
         {/* Table of Contents */}
-        <nav className="mb-14 p-6 bg-gray-900/50 border border-gray-700/50 rounded-xl" aria-label="Article contents">
+        <nav className="mb-14 p-6 bg-gray-900/50 border border-gray-700/50 rounded-lg" aria-label="Article contents">
           <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Table of Contents</h2>
           <ol className="space-y-2.5 text-sm">
             {[
@@ -297,14 +298,14 @@ function BlogPage() {
             </div>
 
             <div className="mt-6 grid sm:grid-cols-2 gap-4">
-              <div className="p-5 bg-gray-900/60 border border-gray-700/50 rounded-xl">
+              <div className="p-5 bg-gray-900/60 border border-gray-700/50 rounded-lg">
                 <h3 className="font-semibold text-gray-100 mb-2">Lossy Compression</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Permanently removes some image data to achieve smaller file sizes. Used by JPEG and WebP. Best for photographs where minor
                   quality reduction at extreme ratios is acceptable.
                 </p>
               </div>
-              <div className="p-5 bg-gray-900/60 border border-gray-700/50 rounded-xl">
+              <div className="p-5 bg-gray-900/60 border border-gray-700/50 rounded-lg">
                 <h3 className="font-semibold text-gray-100 mb-2">Lossless Compression</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Reduces file size without any loss of quality by encoding data more efficiently. Used by PNG and GIF. Best for logos,
@@ -325,7 +326,7 @@ function BlogPage() {
 
             <div className="space-y-4">
               {reasons.map(({ number, title, desc, colorClass, numberClass }) => (
-                <div key={number} className={`flex gap-4 p-5 border rounded-xl ${colorClass}`}>
+                <div key={number} className={`flex gap-4 p-4 border rounded-lg ${colorClass}`}>
                   <span className={`font-mono font-bold text-lg shrink-0 ${numberClass}`}>{number}</span>
                   <div>
                     <h3 className="font-semibold text-gray-100 mb-1">{title}</h3>
@@ -344,7 +345,7 @@ function BlogPage() {
               formats when using a modern compressor:
             </p>
 
-            <div className="overflow-x-auto rounded-xl border border-gray-700/50">
+            <div className="overflow-x-auto rounded-lg border border-gray-700/50">
               <table className="w-full text-sm">
                 <thead className="bg-gray-900/60">
                   <tr className="border-b border-gray-700/50">
@@ -381,7 +382,7 @@ function BlogPage() {
 
             <div className="grid sm:grid-cols-2 gap-4">
               {formatCards.map(({ format, best, pro, con }) => (
-                <div key={format} className="p-5 bg-gray-900/50 border border-gray-700/50 rounded-xl">
+                <div key={format} className="p-5 bg-gray-900/50 border border-gray-700/50 rounded-lg">
                   <h3 className="font-bold text-gray-100 text-sm uppercase tracking-wider mb-3">{format}</h3>
                   <p className="text-xs text-blue-400 mb-2">
                     <span className="font-medium">Best for:</span> {best}
@@ -405,7 +406,7 @@ function BlogPage() {
               {steps.map(({ step, title, desc }) => (
                 <div
                   key={step}
-                  className="flex gap-4 p-5 bg-gray-900/40 border border-gray-700/40 rounded-xl hover:border-blue-500/30 hover:bg-gray-900/60 transition-all duration-200"
+                  className="flex gap-4 p-5 bg-gray-900/40 border border-gray-700/40 rounded-lg hover:border-blue-500/30 hover:bg-gray-900/60 transition-all duration-200"
                 >
                   <div className="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-sm shrink-0">
                     {step}
@@ -421,7 +422,7 @@ function BlogPage() {
             <div className="mt-8">
               <Link
                 to="/image-compressor"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 group"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 group"
               >
                 Open Image Compressor — It's Free
                 <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -438,7 +439,7 @@ function BlogPage() {
               proprietary product assets.
             </p>
 
-            <div className="p-6 bg-emerald-900/20 border border-emerald-500/30 rounded-xl mb-6">
+            <div className="p-6 bg-emerald-900/20 border border-emerald-500/30 rounded-lg mb-6">
               <h3 className="font-semibold text-emerald-300 mb-4">SnapBit Tools is Different</h3>
               <ul className="space-y-3 text-sm text-gray-300">
                 {[
@@ -483,15 +484,15 @@ function BlogPage() {
 
           {/* ── Final CTA ── */}
           <section>
-            <div className="p-8 sm:p-10 bg-gradient-to-br from-blue-900/30 to-gray-900/50 border border-blue-500/30 rounded-2xl text-center">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-3">Ready to Compress Your Images?</h2>
-              <p className="text-gray-400 mb-8 max-w-md mx-auto leading-relaxed">
+            <div className="p-4 sm:p-6 bg-gradient-to-br from-blue-900/30 to-gray-900/50 border border-blue-500/30 rounded-lg text-center">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-100 mb-3">Ready to Compress Your Images?</h2>
+              <p className="text-gray-400 mb-4 text-md max-w-md mx-auto leading-relaxed">
                 Try SnapBit Tools' free, private, browser-based image compressor. No sign-up, no uploads, no limits — just fast, instant
                 compression right in your browser.
               </p>
               <Link
                 to="/image-compressor"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 group"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 group"
               >
                 Compress Images Now — Free
                 <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
