@@ -272,7 +272,7 @@ export function ImageCompressorTool() {
                   <p className="text-gray-400 mb-4">or</p>
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                    className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg active:scale-[0.98]"
                   >
                     Choose Files
                   </button>
@@ -287,8 +287,7 @@ export function ImageCompressorTool() {
           </>
         ) : (
           <>
-            <div className="">
-              {/* <h3 className="text-lg font-semibold text-gray-100 mb-4">Compression Settings</h3> */}
+            <div className="py-10">
               <div className="mb-4">
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -326,7 +325,7 @@ export function ImageCompressorTool() {
                 </div>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-200 mb-1">Max Width (px)</label>
                   <input
@@ -349,7 +348,7 @@ export function ImageCompressorTool() {
                     className="w-full px-3 py-2 border border-gray-800 rounded bg-gray-900 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="w-full flex justify-between items-center mb-3">
               <h3 className="text-xl font-semibold text-gray-100 m-0">Files ({files.length})</h3>
@@ -402,7 +401,7 @@ export function ImageCompressorTool() {
                         {formatFileSize(file.originalSize)} &rarr;
                         {file.compressedSize && (
                           <>
-                            <span className="text-xs bg-green-900 text-green-300">{formatFileSize(file.compressedSize)}</span>
+                            <span className="text-xs px-2 bg-green-900 text-green-300">{formatFileSize(file.compressedSize)}</span>
                           </>
                         )}
                       </span>

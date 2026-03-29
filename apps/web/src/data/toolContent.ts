@@ -46,6 +46,36 @@ The tool supports all common image formats including PNG, JPEG, WebP, AVIF, SVG,
     ],
   },
 
+  "base64-to-file": {
+    slug: "base64-to-file",
+    title: "Base64 to File Decoder - Convert Base64 Back to Original Files",
+    intro: `Decode Base64 strings into original downloadable files instantly with our free browser-based Base64 to File Decoder. Convert Base64 back to text files, images, PDFs, Excel sheets, Word documents, ZIP archives, and many other file formats without uploads. Everything is processed locally in your browser for complete privacy.
+
+Base64 is a text encoding method that represents binary file data as ASCII characters. It is commonly used in APIs, JSON payloads, Data URIs, email attachments, and database storage. While Base64 is great for transfer and embedding, you often need to reverse the process and recover the original file. This tool handles that process quickly and safely.
+
+Paste either a raw Base64 string or a full Data URI (for example, data:application/pdf;base64,...). If the input includes MIME metadata, the decoder detects it automatically. You can also set a custom MIME type and filename to ensure the downloaded file opens correctly in your target application.
+
+SnapBit's Base64 to File decoder runs 100% in-browser. No server-side decoding, no file retention, and no account required. Whether you are debugging API responses, extracting embedded files from data URIs, restoring archived Base64 content, or converting encoded payloads for business workflows, this tool provides fast, secure, and reliable decoding for all major file types.`,
+    benefits: [
+      "Decode Base64 to files instantly with one click",
+      "Supports text, images, PDFs, Office files, archives, and more",
+      "Accepts both raw Base64 and full Data URI input",
+      "Auto-detects MIME type when present",
+      "Custom filename and MIME override support",
+      "100% local browser processing for privacy",
+      "No uploads, no signups, no tracking",
+    ],
+    useCases: [
+      "Recovering files returned as Base64 in API responses",
+      "Converting Data URI payloads back to downloadable files",
+      "Restoring PDF and document attachments from encoded content",
+      "Decoding image Base64 from JSON exports",
+      "Extracting archived data shared in Base64 format",
+      "Testing and debugging backend encoding workflows",
+      "Converting Base64 business payloads into usable files",
+    ],
+  },
+
   "image-format-converter": {
     slug: "image-format-converter",
     title: "Image Format Converter - Convert PNG, JPEG, WebP & AVIF",

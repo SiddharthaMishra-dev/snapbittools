@@ -174,7 +174,7 @@ function App() {
               ))}
             </span>
             <br />
-            Tools for Image and Data Processing.
+          Image and Data Processing Tools.
           </motion.h1>
           <motion.p variants={itemVariants} className="text-sm md:text-lg text-gray-400 tracking-wide max-w-3xl mx-auto">
             Professional-grade online tools that work entirely in your browser. Convert images to Base64, compress photos, format JSON,
