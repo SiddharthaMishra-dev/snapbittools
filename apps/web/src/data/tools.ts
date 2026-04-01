@@ -3,6 +3,7 @@ import {
   IconBolt,
   IconBraces,
   IconCrop,
+  IconArrowsMaximize,
   IconDownload,
   IconFileSpreadsheet,
   IconFileTypePdf,
@@ -72,6 +73,15 @@ export const tools: ToolDefinition[] = [
     icon: IconCrop,
     category: "Images",
     keywords: ["crop", "resize", "rotate", "edit"],
+  },
+  {
+    slug: "image-resizer",
+    name: "Image Resizer",
+    href: "/image-resizer",
+    description: "Resize images instantly while keeping the original aspect ratio.",
+    icon: IconArrowsMaximize,
+    category: "Images",
+    keywords: ["resize image", "aspect ratio", "dimensions", "photo resizer"],
   },
   {
     slug: "image-to-pdf",

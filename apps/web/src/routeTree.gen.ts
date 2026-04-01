@@ -35,6 +35,7 @@ import { Route as JpgToPngRouteImport } from './routes/jpg-to-png'
 import { Route as ImageToolsRouteImport } from './routes/image-tools'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as ImageToBase64RouteImport } from './routes/image-to-base64'
+import { Route as ImageResizerRouteImport } from './routes/image-resizer'
 import { Route as ImageFormatConverterRouteImport } from './routes/image-format-converter'
 import { Route as ImageCropperRouteImport } from './routes/image-cropper'
 import { Route as ImageCompressorRouteImport } from './routes/image-compressor'
@@ -189,6 +190,11 @@ const ImageToBase64Route = ImageToBase64RouteImport.update({
   path: '/image-to-base64',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImageResizerRoute = ImageResizerRouteImport.update({
+  id: '/image-resizer',
+  path: '/image-resizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ImageFormatConverterRoute = ImageFormatConverterRouteImport.update({
   id: '/image-format-converter',
   path: '/image-format-converter',
@@ -317,6 +323,7 @@ export interface FileRoutesByFullPath {
   '/image-compressor': typeof ImageCompressorRoute
   '/image-cropper': typeof ImageCropperRoute
   '/image-format-converter': typeof ImageFormatConverterRoute
+  '/image-resizer': typeof ImageResizerRoute
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/image-tools': typeof ImageToolsRoute
@@ -366,6 +373,7 @@ export interface FileRoutesByTo {
   '/image-compressor': typeof ImageCompressorRoute
   '/image-cropper': typeof ImageCropperRoute
   '/image-format-converter': typeof ImageFormatConverterRoute
+  '/image-resizer': typeof ImageResizerRoute
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/image-tools': typeof ImageToolsRoute
@@ -416,6 +424,7 @@ export interface FileRoutesById {
   '/image-compressor': typeof ImageCompressorRoute
   '/image-cropper': typeof ImageCropperRoute
   '/image-format-converter': typeof ImageFormatConverterRoute
+  '/image-resizer': typeof ImageResizerRoute
   '/image-to-base64': typeof ImageToBase64Route
   '/image-to-pdf': typeof ImageToPdfRoute
   '/image-tools': typeof ImageToolsRoute
@@ -467,6 +476,7 @@ export interface FileRouteTypes {
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
+    | '/image-resizer'
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/image-tools'
@@ -516,6 +526,7 @@ export interface FileRouteTypes {
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
+    | '/image-resizer'
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/image-tools'
@@ -565,6 +576,7 @@ export interface FileRouteTypes {
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
+    | '/image-resizer'
     | '/image-to-base64'
     | '/image-to-pdf'
     | '/image-tools'
@@ -615,6 +627,7 @@ export interface RootRouteChildren {
   ImageCompressorRoute: typeof ImageCompressorRoute
   ImageCropperRoute: typeof ImageCropperRoute
   ImageFormatConverterRoute: typeof ImageFormatConverterRoute
+  ImageResizerRoute: typeof ImageResizerRoute
   ImageToBase64Route: typeof ImageToBase64Route
   ImageToPdfRoute: typeof ImageToPdfRoute
   ImageToolsRoute: typeof ImageToolsRoute
@@ -827,6 +840,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImageToBase64RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/image-resizer': {
+      id: '/image-resizer'
+      path: '/image-resizer'
+      fullPath: '/image-resizer'
+      preLoaderRoute: typeof ImageResizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/image-format-converter': {
       id: '/image-format-converter'
       path: '/image-format-converter'
@@ -999,6 +1019,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImageCompressorRoute: ImageCompressorRoute,
   ImageCropperRoute: ImageCropperRoute,
   ImageFormatConverterRoute: ImageFormatConverterRoute,
+  ImageResizerRoute: ImageResizerRoute,
   ImageToBase64Route: ImageToBase64Route,
   ImageToPdfRoute: ImageToPdfRoute,
   ImageToolsRoute: ImageToolsRoute,

@@ -166,6 +166,38 @@ Ideal for photographers preparing web galleries, social media managers creating 
     ],
   },
 
+  "image-resizer": {
+    slug: "image-resizer",
+    title: "Free Image Resizer - Resize Photos Online with Aspect Ratio Lock",
+    intro: `Resize images instantly with our free browser-based Image Resizer that preserves aspect ratio automatically. Upload your image, set a target width, and download a perfectly scaled result without stretching, distortion, or quality surprises. All processing runs locally in your browser for complete privacy.
+
+Image dimensions directly impact performance and presentation. Large images can slow down websites and inflate file transfer sizes, while incorrect dimensions can break layouts on mobile and desktop. Our Image Resizer gives you pixel-level control over output size while keeping the original proportion of the image. That means cleaner visuals, predictable rendering, and fewer design issues across devices.
+
+SnapBit's Image Resizer is designed for practical daily workflows: resizing hero banners, blog thumbnails, marketplace product photos, app screenshots, and social media assets. Instead of manually calculating target height, you only adjust width and the tool computes the matching height using the original ratio. You can also use the scale slider for quick percentage-based resizing when you need faster iteration.
+
+Because the tool works client-side, your files never leave your device. There are no uploads, no third-party processing, and no waiting for remote servers. This makes it ideal for privacy-sensitive projects, internal design assets, and fast edits on the go.
+
+Whether you're a developer optimizing front-end assets, a content creator preparing platform-ready media, or a marketer resizing campaign images, this tool helps you get consistent dimensions in seconds with a simple and reliable workflow.`,
+    benefits: [
+      "Resize images with automatic aspect ratio lock",
+      "Set precise pixel dimensions for predictable layouts",
+      "Percentage scale slider for quick adjustments",
+      "Live preview before downloading",
+      "No server uploads or account required",
+      "Private, browser-only processing",
+      "Fast downloads with renamed output files",
+    ],
+    useCases: [
+      "Preparing blog thumbnail and featured images",
+      "Resizing social media post visuals",
+      "Optimizing website banners and hero images",
+      "Creating consistent product listing photos",
+      "Scaling screenshots for documentation",
+      "Adjusting assets for email campaigns",
+      "Generating responsive-friendly image variants",
+    ],
+  },
+
   "image-to-pdf": {
     slug: "image-to-pdf",
     title: "Image to PDF Converter - Merge Images into PDF Documents",
