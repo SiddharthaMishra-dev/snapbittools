@@ -268,18 +268,18 @@ function App() {
           </motion.div>
         </section>
 
-        <section className="max-w-6xl mx-auto my-16 md:my-32 text-center">
+        <section className="max-w-7xl mx-auto my-16 md:my-32 text-center">
           <h2 className="text-2xl font-bold text-gray-100 mb-6">
             Why Choose <span className="text-brand-primary">SnapBit</span> Tools?
           </h2>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <FeatureCard
               icon={<IconLock className="text-brand-light w-6 h-6" />}
               title="Complete Privacy & Security"
               description="Your files never leave your device. "
             />
             <div className="flex items-center justify-center">
-              <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-500"></div>
+              <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-800"></div>
             </div>
             <FeatureCard
               icon={<IconBolt className="text-brand-light w-6 h-6" />}
@@ -287,7 +287,7 @@ function App() {
               description="All processing happens instantly in your browser—no server delays."
             />
             <div className="flex items-center justify-center">
-              <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-500"></div>
+              <div className="transition-colors duration-300 h-px w-6 md:h-6 md:w-px bg-gray-800"></div>
             </div>
             <FeatureCard
               icon={<IconBrandGithub className="text-brand-light w-6 h-6" />}
@@ -302,7 +302,7 @@ function App() {
           </div>
         </section>
 
-        <section className="max-w-5xl mx-auto my-16 md:my-32  rounded-2xl p-8">
+        <section className="max-w-7xl mx-auto my-16 md:my-32  rounded-2xl">
           <h3 className="text-2xl font-bold text-gray-100 mb-6 text-center">
             Who Uses <span className="text-brand-primary">SnapBit</span> Tools?
           </h3>

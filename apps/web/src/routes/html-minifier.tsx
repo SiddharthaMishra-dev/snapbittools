@@ -287,9 +287,9 @@ function RouteComponent() {
             </div>
           </section>
 
-          <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 grid grid-cols-1 gap-6">
-              <div className="rounded-xl border border-gray-700 bg-gray-900/60 p-4">
+          <section className="grid grid-cols-1 gap-6">
+            <div className="lg:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-2">
+              <div className="rounded-xl ">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-lg font-semibold text-gray-100 flex items-center gap-2">
                     <IconCode className="w-5 h-5 text-brand-primary" />
@@ -306,7 +306,7 @@ function RouteComponent() {
                 />
               </div>
 
-              <div className="rounded-xl border border-gray-700 bg-gray-900/60 p-4">
+              <div className="rounded-xl ">
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <h2 className="text-lg font-semibold text-gray-100 flex items-center gap-2">
                     <IconSparkles className="w-5 h-5 text-brand-primary" />
@@ -336,7 +336,7 @@ function RouteComponent() {
               </div>
             </div>
 
-            <div className="lg:col-span-1 space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <StatCard title="Original Size" value={`${originalBytes.toLocaleString()} bytes`} icon={<IconCode className="w-4 h-4" />} />
               <StatCard
                 title={outputMode === "minified" ? "Minified Size" : "De-minified Size"}
@@ -345,11 +345,11 @@ function RouteComponent() {
               />
               <StatCard title="Saved" value={`${savings}%`} icon={<IconBolt className="w-4 h-4" />} highlight />
 
-              <div className="bg-gray-700/20 border border-gray-600/50 rounded-lg p-4 flex items-start gap-3">
+              <div className="col-span-3 bg-gray-700/20 border border-gray-700/50 rounded-lg p-3  flex items-start gap-3">
                 <IconShieldLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                 <div className="text-sm text-gray-300">
-                  <p className="font-medium">100% Private Processing</p>
-                  <p className="mt-1">Everything runs locally in your browser. Your HTML never leaves your device.</p>
+                  <p className="font-semibold ">100% Private Processing</p>
+                  <p className="mt-1 text-gray-400">Everything runs locally in your browser. Your HTML never leaves your device.</p>
                 </div>
               </div>
             </div>
