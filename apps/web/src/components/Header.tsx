@@ -30,16 +30,17 @@ const Header: React.FC = () => {
         ease: easeInOut,
         delay: 0.2,
       }}
-      className={`max-w-5xl w-[95%] mx-auto rounded-lg fixed top-2 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`w-full mx-auto rounded-lg fixed top-2 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-gray-900/90 backdrop-blur-md border-gray-800 shadow-lg" : "bg-transparent border-transparent"
       } border-b`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center no-underline text-xl font-bold text-gray-100">
+
+          {/* <Link to="/" className="flex items-center no-underline text-xl font-bold text-gray-100">
             <img src="/logo192.png" alt="Logo" className="inline-block mr-2 w-8 h-8" />
             <span className="text-blue-400">SnapBit Tools</span>
-          </Link>
+          </Link> */}
 
           {/* Desktop Navigation */}
           <div className="flex gap-1 lg:gap-2">

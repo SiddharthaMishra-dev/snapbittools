@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import Aurora from "@/components/Aurora";
 import { IconBolt, IconBrandGithub, IconCheck, IconChevronRight, IconLock } from "@tabler/icons-react";
-import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Link, createFileRoute, createLink, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, easeInOut, motion } from "motion/react";
 
 import GlowCard from "@/components/ui/GlowCard";
@@ -10,6 +10,7 @@ import { tools } from "@/data/tools";
 
 import { getSeoMetadata } from "@/lib/seo";
 import React from "react";
+import Button from "@/components/ui/button";
 
 const jsonToCsvTool = tools.find((tool) => tool.slug === "json-to-csv");
 const featuredTools = [...(jsonToCsvTool ? [jsonToCsvTool] : []), ...tools.filter((tool) => tool.slug !== "json-to-csv")].slice(0, 6);
@@ -43,6 +44,8 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
+  
+  const ButtonLink = createLink(Button)
   const rotatingWords = ["Free", "Private", "Fast"];
   const widthSafetyBuffer = 15;
   const wordMeasureRefs = React.useRef<Array<HTMLSpanElement | null>>([]);
@@ -182,18 +185,18 @@ function App() {
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
+            <ButtonLink
               to="/tools"
-              onClick={handleBrowseClick}
-              onPointerDown={() => setIsBrowsePressed(true)}
-              onPointerUp={() => setIsBrowsePressed(false)}
-              onPointerLeave={() => setIsBrowsePressed(false)}
-              onBlur={() => setIsBrowsePressed(false)}
+              preload="intent"
+              // onPointerDown={() => setIsBrowsePressed(true)}
+              // onPointerUp={() => setIsBrowsePressed(false)}
+              // onPointerLeave={() => setIsBrowsePressed(false)}
+              // onBlur={() => setIsBrowsePressed(false)}
               className={`inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white rounded-lg hover:bg-brand-hover transition-all duration-200 text-sm font-medium ${isBrowsePressed ? "scale-[0.98]" : "scale-100"}`}
             >
               <span>Browse all tools</span>
               <IconChevronRight className="h-4 w-4" />
-            </Link>
+            </ButtonLink>
 
             <a
               href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
@@ -334,18 +337,19 @@ function App() {
             your browser.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
-            <Link
+            <ButtonLink
               to="/tools"
               className="px-5 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-brand-primary text-white rounded-lg text-sm font-semibold hover:bg-brand-hover transition-colors"
             >
               Go to tools page
-            </Link>
-            <a
-              href="#tools"
+            </ButtonLink>
+            <ButtonLink
+              to="/"
+              hash="tools"
               className="px-5 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-colors"
             >
               Explore featured tools
-            </a>
+            </ButtonLink>
           </div>
         </section>
       </main>
