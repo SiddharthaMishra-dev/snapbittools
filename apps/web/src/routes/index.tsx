@@ -44,8 +44,7 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
-  
-  const ButtonLink = createLink(Button)
+  const ButtonLink = createLink(Button);
   const rotatingWords = ["Free", "Private", "Fast"];
   const widthSafetyBuffer = 15;
   const wordMeasureRefs = React.useRef<Array<HTMLSpanElement | null>>([]);
@@ -177,7 +176,7 @@ function App() {
               ))}
             </span>
             <br />
-          Image and Data Processing Tools.
+            Image and Data Processing Tools.
           </motion.h1>
           <motion.p variants={itemVariants} className="text-sm md:text-lg text-gray-400 tracking-wide max-w-3xl mx-auto">
             Professional-grade online tools that work entirely in your browser. Convert images to Base64, compress photos, format JSON,

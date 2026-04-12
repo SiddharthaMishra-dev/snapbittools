@@ -18,8 +18,7 @@ export const Route = createFileRoute("/blogs")({
   head: () =>
     getSeoMetadata({
       title: "Blogs | SnapBit Tools",
-      description:
-        "Browse SnapBit Tools blog articles on image optimization, performance, and privacy-first workflows.",
+      description: "Browse SnapBit Tools blog articles on image optimization, performance, and privacy-first workflows.",
       keywords: ["snapbit blogs", "image optimization blog", "web performance blog", "privacy-first tools"],
       url: "/blogs",
       type: "website",

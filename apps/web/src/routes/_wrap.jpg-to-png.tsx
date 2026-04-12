@@ -3,7 +3,7 @@ import { formatConverterVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
 import PseoPage from "@/components/PseoPage";
-import * as ImageFormatConverterRoute from "./image-format-converter";
+import * as ImageFormatConverterRoute from "./_wrap.image-format-converter";
 
 const variant = formatConverterVariants.find((v) => v.slug === "jpg-to-png")!;
 const { faqs } = generatePageContent(variant);

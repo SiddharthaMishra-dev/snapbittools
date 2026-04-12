@@ -27,7 +27,7 @@ const config = defineConfig({
       },
       sitemap: {
         enabled: true,
-        host: 'https://snapbittools.com',
+        host: "https://snapbittools.com",
       },
     }),
     nitro({

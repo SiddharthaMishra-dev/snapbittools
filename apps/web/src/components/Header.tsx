@@ -36,7 +36,6 @@ const Header: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16">
-
           {/* <Link to="/" className="flex items-center no-underline text-xl font-bold text-gray-100">
             <img src="/logo192.png" alt="Logo" className="inline-block mr-2 w-8 h-8" />
             <span className="text-blue-400">SnapBit Tools</span>

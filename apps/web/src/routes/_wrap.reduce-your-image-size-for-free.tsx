@@ -222,9 +222,9 @@ const compressionStats = [
 
 function BlogPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-16 px-4">
+    <div className="min-h-screen py-2 px-4">
       <div className="max-w-4xl mx-auto">
-        <Breadcrumbs />
+        {/* <Breadcrumbs /> */}
 
         {/* Article Header */}
         <header className="mb-12 mt-4">

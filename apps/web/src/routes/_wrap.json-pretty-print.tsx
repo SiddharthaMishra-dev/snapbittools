@@ -3,7 +3,7 @@ import { jsonVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
 import PseoPage from "@/components/PseoPage";
-import * as JsonFormatterRoute from "./json-formatter";
+import * as JsonFormatterRoute from "./_wrap.json-formatter";
 
 const variant = jsonVariants.find((v) => v.slug === "json-pretty-print")!;
 const { faqs } = generatePageContent(variant);

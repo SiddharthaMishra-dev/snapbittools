@@ -182,10 +182,10 @@ function LoremIpsumComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col font-sans">
+    <div className="min-h-screen py-2 px-4 flex flex-col font-sans">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        <Breadcrumbs />
-        <div className="text-center mb-8 max-w-5xl mx-auto">
+        {/* <Breadcrumbs /> */}
+        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
           <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
             Lorem <span className="text-brand-primary">Ipsum</span> Generator
           </h1>

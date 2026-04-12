@@ -26,7 +26,7 @@ export const Route = createFileRoute("/tools")({
 });
 
 export function RouteComponent() {
-   const ButtonLink = createLink(Button)
+  const ButtonLink = createLink(Button);
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col relative overflow-hidden" id="top">
       <div className="absolute inset-0 z-0">

@@ -12,7 +12,7 @@ import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
 import PseoPage from "@/components/PseoPage";
 
 // Import the parent tool route to reuse its component
-import * as ImageFormatConverterRoute from "./image-format-converter";
+import * as ImageFormatConverterRoute from "./_wrap.image-format-converter";
 
 // Get the variant data for this specific page
 const variant = formatConverterVariants.find((v) => v.slug === "png-to-jpg")!;

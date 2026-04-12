@@ -18,13 +18,11 @@ const faqs = [
   },
   {
     question: "Do my Base64 data or files leave my device?",
-    answer:
-      "No. Everything runs in your browser only. Your Base64 input is decoded locally and never uploaded to any server.",
+    answer: "No. Everything runs in your browser only. Your Base64 input is decoded locally and never uploaded to any server.",
   },
   {
     question: "Can I decode raw Base64 without data: prefix?",
-    answer:
-      "Yes. Paste either raw Base64 or full Data URI strings. Raw Base64 works with optional manual MIME type input.",
+    answer: "Yes. Paste either raw Base64 or full Data URI strings. Raw Base64 works with optional manual MIME type input.",
   },
   {
     question: "Why does the downloaded file open incorrectly?",
@@ -257,183 +255,191 @@ function RouteComponent() {
   };
 
   return (
-   <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        <Breadcrumbs />
-
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-5xl mt-6 mb-10 text-center mx-auto">
-          <motion.div variants={itemVariants} className="text-center">
-            <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
-              Base64 to <span className="text-brand-primary">File</span> Decoder
-            </h1>
-            <p className="text-md text-gray-300">Decode any Base64 string back to its original file format. 100% private in-browser.</p>
-          </motion.div>
+    <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="w-full max-w-5xl mt-6 mb-10 text-center mx-auto"
+      >
+        <motion.div variants={itemVariants} className="text-center">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+            Base64 to <span className="text-brand-primary">File</span> Decoder
+          </h1>
+          <p className="text-md text-gray-300">Decode any Base64 string back to its original file format. 100% private in-browser.</p>
         </motion.div>
+      </motion.div>
 
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-5xl mx-auto mb-8">
-          <motion.div variants={itemVariants} className="rounded-xl shadow-lg bg-gray-800/40 border border-gray-700 p-4 sm:p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label htmlFor="file-base-name" className="block text-sm font-medium text-gray-300 mb-2">
-                  File name
-                </label>
-                <input
-                  id="file-base-name"
-                  type="text"
-                  value={fileBaseName}
-                  onChange={(event) => setFileBaseName(event.target.value)}
-                  placeholder="decoded-file"
-                  className="w-full px-3 py-2 border border-gray-700 rounded-lg bg-gray-800/60 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                />
-              </div>
-              <div>
-                <label htmlFor="mime-type" className="block text-sm font-medium text-gray-300 mb-2">
-                  MIME type (optional)
-                </label>
-                <input
-                  id="mime-type"
-                  type="text"
-                  value={mimeType}
-                  onChange={(event) => setMimeType(event.target.value)}
-                  placeholder={suggestedMime || "application/pdf or image/png"}
-                  className="w-full px-3 py-2 border border-gray-700 rounded-lg bg-gray-800/60 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                />
-              </div>
+      <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-5xl mx-auto mb-8">
+        <motion.div variants={itemVariants} className="rounded-xl shadow-lg bg-gray-800/40 border border-gray-700 p-4 sm:p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label htmlFor="file-base-name" className="block text-sm font-medium text-gray-300 mb-2">
+                File name
+              </label>
+              <input
+                id="file-base-name"
+                type="text"
+                value={fileBaseName}
+                onChange={(event) => setFileBaseName(event.target.value)}
+                placeholder="decoded-file"
+                className="w-full px-3 py-2 border border-gray-700 rounded-lg bg-gray-800/60 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+              />
             </div>
-
-            <label htmlFor="base64-input" className="block text-sm font-medium text-gray-300 mb-2">
-              Paste Base64 or Data URI
-            </label>
-            <textarea
-              id="base64-input"
-              value={base64Input}
-              onChange={(event) => setBase64Input(event.target.value)}
-              rows={10}
-              placeholder="data:application/pdf;base64,JVBERi0xLjQKJ... or raw Base64"
-              className="w-full p-4 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-brand-primary"
-            />
-
-            {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
-
-            <div className="mt-4 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={handleDecode}
-                className="px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium"
-              >
-                Decode Base64
-              </button>
-              <button
-                type="button"
-                onClick={handleClear}
-                className="px-4 py-2 bg-gray-700 text-gray-200 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium"
-              >
-                Clear
-              </button>
+            <div>
+              <label htmlFor="mime-type" className="block text-sm font-medium text-gray-300 mb-2">
+                MIME type (optional)
+              </label>
+              <input
+                id="mime-type"
+                type="text"
+                value={mimeType}
+                onChange={(event) => setMimeType(event.target.value)}
+                placeholder={suggestedMime || "application/pdf or image/png"}
+                className="w-full px-3 py-2 border border-gray-700 rounded-lg bg-gray-800/60 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+              />
             </div>
-          </motion.div>
+          </div>
 
-          {result && (
-            <motion.div variants={resultVariants} initial="hidden" animate="visible" className="mt-6 bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-700">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-100">Decoded file is ready</h3>
-                  <p className="text-sm text-gray-300 mt-1">{result.fileName}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleDownload}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 transition-colors duration-200 font-medium"
-                >
-                  <IconDownload className="w-4 h-4" />
-                  Download file
-                </button>
-              </div>
+          <label htmlFor="base64-input" className="block text-sm font-medium text-gray-300 mb-2">
+            Paste Base64 or Data URI
+          </label>
+          <textarea
+            id="base64-input"
+            value={base64Input}
+            onChange={(event) => setBase64Input(event.target.value)}
+            rows={10}
+            placeholder="data:application/pdf;base64,JVBERi0xLjQKJ... or raw Base64"
+            className="w-full p-4 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-brand-primary"
+          />
 
-              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                <div className="bg-gray-800/60 rounded-lg p-3 border border-gray-700">
-                  <p className="text-gray-400">Detected MIME</p>
-                  <p className="text-gray-100 font-medium break-all">{result.detectedMime || "Not found in input"}</p>
-                </div>
-                <div className="bg-gray-800/60 rounded-lg p-3 border border-gray-700">
-                  <p className="text-gray-400">Output MIME</p>
-                  <p className="text-gray-100 font-medium break-all">{result.finalMime}</p>
-                </div>
-                <div className="bg-gray-800/60 rounded-lg p-3 border border-gray-700 sm:col-span-2">
-                  <p className="text-gray-400">File size</p>
-                  <p className="text-gray-100 font-medium">{result.size.toLocaleString()} bytes</p>
-                </div>
-              </div>
-            </motion.div>
-          )}
+          {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
 
-          <motion.p variants={itemVariants} className="text-center text-gray-400 text-xs mt-4">
-            Privacy note: decoding happens entirely in your browser. Your data is never uploaded.
-          </motion.p>
-        </motion.div>
-
-        <ToolContentDisplay
-          title={toolContent["base64-to-file"].title}
-          intro={toolContent["base64-to-file"].intro}
-          benefits={toolContent["base64-to-file"].benefits}
-          useCases={toolContent["base64-to-file"].useCases}
-        />
-
-        <ToolInfo
-          title="Base64 to File"
-          description="Convert Base64 strings back into original downloadable files directly in your browser. Supports Data URI input and raw Base64 for documents, media files, spreadsheets, and more."
-          features={[
-            {
-              title: "Works for Any File Type",
-              description: "Decode Base64 content into text files, images, PDFs, Office files, archives, and other binary formats.",
-              icon: IconFileCode,
-            },
-            {
-              title: "Private by Design",
-              description: "All decoding happens locally in your browser. No input leaves your device.",
-              icon: IconLock,
-            },
-            {
-              title: "Instant Download",
-              description: "After decoding, download the recovered file immediately with one click.",
-              icon: IconBolt,
-            },
-          ]}
-          steps={[
-            {
-              title: "Paste Base64 Input",
-              description: "Paste raw Base64 or a full Data URI string into the input box.",
-            },
-            {
-              title: "Set File Details",
-              description: "Optionally provide MIME type and file name to ensure correct extension handling.",
-            },
-            {
-              title: "Decode",
-              description: "Click Decode Base64 to process the content into binary data.",
-            },
-            {
-              title: "Download",
-              description: "Download the decoded file to your device.",
-            },
-          ]}
-          faqs={faqs}
-        />
-
-        <RelatedTools currentToolSlug="base64-to-file" category="Data" />
-
-        <div className="mt-8 text-center">
-          <p className="text-gray-400 text-xs text-center">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors"
+          <div className="mt-4 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={handleDecode}
+              className="px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium"
             >
-              sidme
-            </a>
-          </p>
-        </div>
+              Decode Base64
+            </button>
+            <button
+              type="button"
+              onClick={handleClear}
+              className="px-4 py-2 bg-gray-700 text-gray-200 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium"
+            >
+              Clear
+            </button>
+          </div>
+        </motion.div>
+
+        {result && (
+          <motion.div
+            variants={resultVariants}
+            initial="hidden"
+            animate="visible"
+            className="mt-6 bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-700"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-100">Decoded file is ready</h3>
+                <p className="text-sm text-gray-300 mt-1">{result.fileName}</p>
+              </div>
+              <button
+                type="button"
+                onClick={handleDownload}
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 transition-colors duration-200 font-medium"
+              >
+                <IconDownload className="w-4 h-4" />
+                Download file
+              </button>
+            </div>
+
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <div className="bg-gray-800/60 rounded-lg p-3 border border-gray-700">
+                <p className="text-gray-400">Detected MIME</p>
+                <p className="text-gray-100 font-medium break-all">{result.detectedMime || "Not found in input"}</p>
+              </div>
+              <div className="bg-gray-800/60 rounded-lg p-3 border border-gray-700">
+                <p className="text-gray-400">Output MIME</p>
+                <p className="text-gray-100 font-medium break-all">{result.finalMime}</p>
+              </div>
+              <div className="bg-gray-800/60 rounded-lg p-3 border border-gray-700 sm:col-span-2">
+                <p className="text-gray-400">File size</p>
+                <p className="text-gray-100 font-medium">{result.size.toLocaleString()} bytes</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        <motion.p variants={itemVariants} className="text-center text-gray-400 text-xs mt-4">
+          Privacy note: decoding happens entirely in your browser. Your data is never uploaded.
+        </motion.p>
+      </motion.div>
+
+      <ToolContentDisplay
+        title={toolContent["base64-to-file"].title}
+        intro={toolContent["base64-to-file"].intro}
+        benefits={toolContent["base64-to-file"].benefits}
+        useCases={toolContent["base64-to-file"].useCases}
+      />
+
+      <ToolInfo
+        title="Base64 to File"
+        description="Convert Base64 strings back into original downloadable files directly in your browser. Supports Data URI input and raw Base64 for documents, media files, spreadsheets, and more."
+        features={[
+          {
+            title: "Works for Any File Type",
+            description: "Decode Base64 content into text files, images, PDFs, Office files, archives, and other binary formats.",
+            icon: IconFileCode,
+          },
+          {
+            title: "Private by Design",
+            description: "All decoding happens locally in your browser. No input leaves your device.",
+            icon: IconLock,
+          },
+          {
+            title: "Instant Download",
+            description: "After decoding, download the recovered file immediately with one click.",
+            icon: IconBolt,
+          },
+        ]}
+        steps={[
+          {
+            title: "Paste Base64 Input",
+            description: "Paste raw Base64 or a full Data URI string into the input box.",
+          },
+          {
+            title: "Set File Details",
+            description: "Optionally provide MIME type and file name to ensure correct extension handling.",
+          },
+          {
+            title: "Decode",
+            description: "Click Decode Base64 to process the content into binary data.",
+          },
+          {
+            title: "Download",
+            description: "Download the decoded file to your device.",
+          },
+        ]}
+        faqs={faqs}
+      />
+
+      <RelatedTools currentToolSlug="base64-to-file" category="Data" />
+
+      <div className="mt-8 text-center">
+        <p className="text-gray-400 text-xs text-center">
+          Crafted with care by{" "}
+          <a
+            href="https://sidme.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-primary hover:text-brand-hover transition-colors"
+          >
+            sidme
+          </a>
+        </p>
       </div>
+    </div>
   );
 }

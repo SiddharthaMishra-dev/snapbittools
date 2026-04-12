@@ -37,13 +37,7 @@ export const Route = createFileRoute("/_wrap/image-resizer")({
       title: "Image Resizer - Resize Images Online with Aspect Ratio Lock",
       description:
         "Resize images online while maintaining aspect ratio. Upload, set width, and download resized images instantly. 100% private and browser-based.",
-      keywords: [
-        "image resizer",
-        "resize image online",
-        "maintain aspect ratio",
-        "photo resizer",
-        "resize image without distortion",
-      ],
+      keywords: ["image resizer", "resize image online", "maintain aspect ratio", "photo resizer", "resize image without distortion"],
       url: "/image-resizer",
       type: "software",
       faqs,
@@ -53,10 +47,10 @@ export const Route = createFileRoute("/_wrap/image-resizer")({
 
 export function RouteComponent() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col items-center">
+    <div className="min-h-screen py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        <Breadcrumbs />
-        <div className="text-center mb-8 max-w-5xl mx-auto">
+        {/* <Breadcrumbs /> */}
+        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
           <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
             Image <span className="text-brand-primary">Resizer</span>
           </h1>

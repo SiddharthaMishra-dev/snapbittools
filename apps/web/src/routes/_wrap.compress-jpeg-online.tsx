@@ -24,5 +24,5 @@ export const Route = createFileRoute("/_wrap/compress-jpeg-online")({
 });
 
 function RouteComponent() {
-  return <PseoPage variant={variant} toolComponent={ParentToolComponent} />;
+  return <PseoPage variant={variant} toolComponent={ImageCompressorTool} />;
 }
