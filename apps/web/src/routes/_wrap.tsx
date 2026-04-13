@@ -11,9 +11,10 @@ function RouteComponent() {
   return (
     <div className="bg-gradient-to-br from-gray-900 to-black flex">
       <Sidebar />
-      <div className="flex-1 h-screen overflow-y-auto">
+      <div className="mt-8 sm:mt-0 flex-1 h-screen overflow-y-auto">
         <Outlet />
       </div>
     </div>
   );
 }
+  
