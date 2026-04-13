@@ -1,7 +1,8 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute, createLink } from "@tanstack/react-router";
 
 import { ToolsListing } from "@/components/ToolsListing";
 import { getSeoMetadata } from "@/lib/seo";
+import Button from "@/components/ui/button";
 
 export const Route = createFileRoute("/tools")({
   head: () =>
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/tools")({
 });
 
 export function RouteComponent() {
+  const ButtonLink = createLink(Button);
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col relative overflow-hidden" id="top">
       <div className="absolute inset-0 z-0">
@@ -40,18 +42,19 @@ export function RouteComponent() {
             Browse all tools in one place. Image converters, compressors, croppers, JSON formatter, CSV to XLSX , CSV to JSON and many more.
           </p>
           <div className="flex justify-center gap-3">
-            <a
-              href="#images"
+            <ButtonLink
+              to="/tools"
+              hash="images"
               className="px-4 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-brand-primary text-white rounded-lg text-sm font-semibold hover:bg-brand-hover transition-colors"
             >
               Jump to tools
-            </a>
-            <Link
+            </ButtonLink>
+            <ButtonLink
               to="/"
               className="px-4 py-2.5 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-colors"
             >
               Back to home
-            </Link>
+            </ButtonLink>
           </div>
         </div>
       </section>

@@ -19,7 +19,7 @@ export default function PseoPage({ variant, toolComponent: ToolComponent }: Pseo
   const { sections, faqs } = generatePageContent(variant);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black pt-24 pb-8 px-4 flex flex-col items-center">
+    <div className="min-h-screen py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <section className="text-center mb-12 max-w-5xl mx-auto w-full">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-100">{variant.h1}</h1>

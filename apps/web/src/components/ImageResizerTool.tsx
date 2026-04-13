@@ -172,10 +172,7 @@ export function ImageResizerTool() {
     };
   }, [sourceUrl, resizedUrl]);
 
-  const scalePercent =
-    originalWidth > 0
-      ? Math.max(1, Math.min(1000, Math.round((targetWidth / originalWidth) * 100)))
-      : 100;
+  const scalePercent = originalWidth > 0 ? Math.max(1, Math.min(1000, Math.round((targetWidth / originalWidth) * 100))) : 100;
 
   return (
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -301,7 +298,11 @@ export function ImageResizerTool() {
                   </button>
                 </div>
 
-                <img src={resizedUrl} alt="Resized preview" className="w-full h-auto max-h-96 object-contain rounded-lg border border-gray-700" />
+                <img
+                  src={resizedUrl}
+                  alt="Resized preview"
+                  className="w-full h-auto max-h-96 object-contain rounded-lg border border-gray-700"
+                />
 
                 <p className="text-sm text-green-100">
                   Output dimensions: {targetWidth} x {targetHeight}px
