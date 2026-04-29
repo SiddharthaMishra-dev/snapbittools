@@ -35,7 +35,13 @@ export const tools: ToolDefinition[] = [
     description: "Convert images to Base64 instantly with full client-side privacy.",
     icon: IconNumber64Small,
     category: "Images",
-    keywords: ["base64", "encode", "image converter", "privacy"],
+    keywords: ["base64", "encode", "image converter", "privacy", "data uri encode", 
+      "jpg to base64", "png to base64", "webp to base64", "avif to base64",
+      "image to base64 converter", "photo to base64", "picture to base64",
+      "convert image to base64", "base64 encoding for images", "image data uri encoder",
+      "image url to base64", "base64 image generator", "image to base64 online", "offline image to base64 converter",
+      "compress image to base64", "optimize image to base64", "fast image to base64 converter", "secure image to base64 converter"
+    ],
   },
   {
     slug: "base64-to-file",
@@ -44,7 +50,14 @@ export const tools: ToolDefinition[] = [
     description: "Decode Base64 back to original files like TXT, images, PDF, Excel, and more.",
     icon: IconDownload,
     category: "Data",
-    keywords: ["base64 decode", "base64 to file", "data uri decode", "decode base64"],
+    keywords: ["base64 decode", "base64 to file", "data uri decode", "decode base64",
+      "base64 to txt", "base64 to image", "base64 to pdf", "base64 to excel",
+      "base64 to file converter", "base64 decoder online", "offline base64 to file converter",
+      "secure base64 to file converter", "fast base64 to file converter", "base64 decoding tool",
+      "base64 to file converter online", "base64 to file converter offline", "base64 to file converter secure",
+      "base64 to pdf converter", "base64 to excel converter", "base64 to image converter",
+      "base64 to zip converter", "base64 to docx converter", "base64 to pptx converter", "base64 to csv converter"
+    ],
     isNew: true,
   },
   {

@@ -62,14 +62,14 @@ export const Route = createFileRoute("/_wrap/base64-to-file")({
       description:
         "Decode Base64 to original files instantly in your browser. Supports text, image, PDF, Excel, Word, ZIP, and more with zero uploads.",
       keywords: [
-        "base64 to file",
-        "decode base64",
-        "base64 decoder",
-        "base64 to pdf",
-        "base64 to image",
-        "base64 to excel",
-        "data uri decoder",
-        "browser base64 converter",
+      "base64 decode", "base64 to file", "data uri decode", "decode base64",
+      "base64 to txt", "base64 to image", "base64 to pdf", "base64 to excel",
+      "base64 to file converter", "base64 decoder online", "offline base64 to file converter",
+      "secure base64 to file converter", "fast base64 to file converter", "base64 decoding tool",
+      "base64 to file converter online", "base64 to file converter offline", "base64 to file converter secure",
+      "base64 to pdf converter", "base64 to excel converter", "base64 to image converter",
+      "base64 to zip converter", "base64 to docx converter", "base64 to pptx converter", "base64 to csv converter"
+    
       ],
       url: "/base64-to-file",
       type: "software",

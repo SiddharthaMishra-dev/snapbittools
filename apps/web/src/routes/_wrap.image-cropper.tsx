@@ -16,7 +16,6 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
-import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
   {
@@ -46,7 +45,10 @@ export const Route = createFileRoute("/_wrap/image-cropper")({
     getSeoMetadata({
       title: "Image Cropper | Crop & Resize Images Online | SnapBit Tools",
       description: "Crop, rotate, and resize your images with pixel-perfect precision. 100% private, client-side, and works offline.",
-      keywords: ["image cropper", "crop photos online", "resize images", "rotate image", "photo editor"],
+      keywords: ["image cropper", "crop photos online", "resize images", "rotate image", "photo editor",
+        "free crop image online", "crop image to specific dimensions", "crop image with aspect ratio", "rotate image online", "flip image online",
+        "crop irregular shape online", "photo crop editor free download", "i love image crop", "freehand crop online"
+      ],
       url: "/image-cropper",
       type: "software",
       faqs,

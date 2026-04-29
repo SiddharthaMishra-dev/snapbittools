@@ -3,8 +3,6 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { getSeoMetadata } from "@/lib/seo";
 import { blogPosts } from "@/data/blogs";
 
-
-
 export const Route = createFileRoute("/blogs")({
   head: () =>
     getSeoMetadata({

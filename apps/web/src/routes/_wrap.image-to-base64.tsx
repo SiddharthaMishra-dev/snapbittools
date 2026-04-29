@@ -7,8 +7,7 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
-import { getSeoMetadata } from "@/lib/seo";
-import Breadcrumbs from "@/components/Breadcrumbs";
+import { getSeoMetadata } from "@/lib/seo"; 
 
 const faqs = [
   {
@@ -38,13 +37,11 @@ export const Route = createFileRoute("/_wrap/image-to-base64")({
       title: "Image to Base64 Converter | SnapBit Tools",
       description: "Optimize your images and convert them to base64 instantly and securely in your browser. No uploads, 100% private.",
       keywords: [
-        "image to base64",
-        "image to base64 online",
-        "html base64 image",
-        "convert image to base64 javascript",
-        "base64 encoder",
-        "data uri converter",
-        "privacy-first tools",
+      "jpg to base64", "png to base64", "webp to base64", "avif to base64",
+      "image to base64 converter", "photo to base64", "picture to base64",
+      "convert image to base64", "base64 encoding for images", "image data uri encoder",
+      "image url to base64", "base64 image generator", "image to base64 online", "offline image to base64 converter",
+      "compress image to base64", "optimize image to base64", "fast image to base64 converter", "secure image to base64 converter"
       ],
       url: "/image-to-base64",
       type: "software",

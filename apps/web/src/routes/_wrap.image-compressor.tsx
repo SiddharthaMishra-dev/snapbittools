@@ -6,7 +6,6 @@ import { IconArrowsMinimize, IconBolt, IconLock } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { getSeoMetadata } from "@/lib/seo";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { ImageCompressorTool } from "@/components/ImageCompressorTool";
 
 const faqs = [
@@ -46,6 +45,18 @@ export const Route = createFileRoute("/_wrap/image-compressor")({
         "image compressor",
         "reduce image size",
         "online image optimizer",
+        "free image compression tool",
+        "compress images online",
+        "optimize images for web",
+        "shrink image file size",
+        "client-side image compressor",
+        "privacy-focused image compression",
+        "bulk image compressor",
+        "fast image compression tool",
+        "i love image compression",
+        "compress image to 100kb",
+        "image compressor to 20kb",
+        "image compressor to 50kb",
       ],
       url: "/image-compressor",
       type: "software",

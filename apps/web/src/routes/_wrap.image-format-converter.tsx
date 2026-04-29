@@ -7,7 +7,6 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { ImageConverterTool } from "@/components/ImageConverterTool";
 
 const faqs = [
@@ -38,7 +37,13 @@ export const Route = createFileRoute("/_wrap/image-format-converter")({
       title: "Image Format Converter | PNG, JPG, WebP, AVIF | SnapBit Tools",
       description:
         "Convert images between PNG, JPEG, WebP, and AVIF formats instantly. Supports batch processing and ZIP downloads. 100% private and client-side.",
-      keywords: ["image converter", "png to webp", "jpg to png", "avif converter", "batch image conversion"],
+      keywords: ["image converter", "png to webp", "jpg to png", "avif converter", "batch image conversion",
+        "image format converter", "webp to jpeg", "avif to png", "convert image formats online", "offline image format converter",
+        "image converter size","image converter to jpg", "image format converter online", "image format converter i love pdf","image format converter to words",
+        "secure image format converter", "fast image format converter", "image format conversion tool",
+        "png to avif converter", "jpeg to webp converter", "webp to avif converter", "avif to jpeg converter"
+
+      ],
       url: "/image-format-converter",
       type: "software",
       faqs,
