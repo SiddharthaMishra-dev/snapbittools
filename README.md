@@ -23,73 +23,24 @@ Tired of jumping between different websites for simple image tasks? Me too!
 
 So I built them ALL in one place!
 
-## Features
+## Tools
 
-### Image to Base64 Converter
-
-- Drag & drop or click to upload
-- Instant Base64 conversion with data URI
-- One-click copy to clipboard
-- Supports all image formats
-
-### Image Format Converter
-
-- Convert between PNG, JPEG, WebP, AVIF
-- Batch processing support
-- Individual or bulk downloads
-- Image quality preservation
-
-### Image Compressor
-
-- Adjustable quality control (10%-100%)
-- Custom dimension limits
-- Real-time compression ratio display
-- Batch compression with progress tracking
-
-### Image Cropper
-
-- Precision cropping and resizing
-- Aspect ratio locking
-- Flip and rotate options
-- Real-time preview
-
-### JSON Formatter
-
-- Format, minify, and validate JSON online
-- Syntax highlighting with bracket matching
-- Download formatted JSON
-
-### Image to PDF
-
-- Convert multiple images to a single PDF
-- Reorder images before conversion
-- Fast, client-side PDF generation
-
-### Word Counter
-
-- Real-time word, character, and sentence counting
-- Reading time estimation
-- Text case transformations (UPPERCASE, lowercase, Title Case)
-
-### Diff Checker
-
-- Side-by-side text and code comparison
-- Split and Unified view modes
-- Smart line-by-line alignment
-
-### CSV ↔ XLSX Converter
-
-- Convert CSV to Excel (.xlsx) and back
-- Batch support and zero uploads
-- Privacy-first spreadsheet processing
-
-### Lorem Ipsum Generator
-
-- Generate custom paragraphs, sentences, or words
-- Instantly refresh for new random text
-- Easy copy-to-clipboard functionality
-
-### And More!
+- [Image to base64](https://snapbittools.com/image-to-base64)
+- [Base64 to file](https://snapbittools.com/base64-to-file)
+- [Format Converter](https://snapbittools.com/image-format-converter)
+- [Image Compressor](https://snapbittools.com/image-compressor)
+- [Image Cropper](https://snapbittools.com/image-cropper)
+- [Image Resizer](https://snapbittools.com/image-resizer)
+- [Image to PDF](https://snapbittools.com/image-to-pdf)
+- [Bulk File Renamer](https://snapbittools.com/bulk-file-renamer)
+- [JSON Formatter](https://snapbittools.com/json-formatter)
+- [CSV <-> XLSX](https://snapbittools.com/csv-xlsx-converter)
+- [Word Counter](https://snapbittools.com/word-counter)
+- [HTML Minifier](https://snapbittools.com/html-minifier)
+- [DIFF Checker](https://snapbittools.com/diff-checker)
+- [Lorem Ipsum](https://snapbittools.com/lorem-ipsum-generator)
+- [JSON to CSV](https://snapbittools.com/json-to-csv)
+- [CSV to JSON](https://snapbittools.com/csv-to-json)
 
 ## Tech Stack
 
@@ -110,8 +61,8 @@ So I built them ALL in one place!
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/SiddharthaMishra-dev/js-dev-tools
-   cd js-dev-tools
+   git clone https://github.com/SiddharthaMishra-dev/snapbittools.git
+   cd snapbittools
    ```
 2. Install dependencies:
    ```bash
