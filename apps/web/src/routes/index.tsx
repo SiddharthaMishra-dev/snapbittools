@@ -134,14 +134,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col font-sans relative">
       <div className="max-h-[70vh] absolute inset-0 blur-lg opacity-40">
         <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
         <Aurora colorStops={["#2563eb", "#B19EEF", "#5227FF"]} blend={0.5} amplitude={1.0} speed={1} />
       </div>
 
-      <section className="pt-24 pb-12 px-4 relative z-10 h-[70dvh] sm:h-screen flex items-center">
+      <section className="pt-24 pb-12 px-4 relative z-10 h-screen  flex items-center">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="max-w-5xl mx-auto text-center space-y-6">
           <motion.h1 variants={itemVariants} className="relative text-2xl md:text-5xl font-bold text-gray-100 leading-tight">
             <motion.span
@@ -225,8 +225,12 @@ function App() {
         </motion.div>
       </section>
 
+      
+      
+
       <main className="flex-1 px-4 pb-16 relative z-10" id="tools">
-        <section className="max-w-7xl mx-auto">
+        
+        <section className="max-w-7xl mx-auto my-40 fadeElement" id="tools">
           <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
             <div>
               <h2 className="text-2xl font-bold text-gray-100">Most Used Image & Data Conversion Tools</h2>

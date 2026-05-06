@@ -151,6 +151,19 @@ code {
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    scale: 0.85;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes wiggle {
   0%,
   100% {
@@ -163,6 +176,16 @@ code {
     transform: rotate(-5deg);
   }
 }
+
+.fadeElement {
+  animation:fadeIn;
+  animation-timeline: view();
+}
+
+
+
+
+
 
 .benefits-grid {
   @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3;
