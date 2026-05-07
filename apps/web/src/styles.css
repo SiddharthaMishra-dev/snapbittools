@@ -155,12 +155,12 @@ code {
   from {
     opacity: 0;
     scale: 0.85;
-    transform: translateY(20px);
+    transform: translateY(20px) rotateX(-40deg);
   }
   to {
     opacity: 1;
     scale: 1;
-    transform: translateY(0);
+    transform: translateY(0) rotateX(0deg);
   }
 }
 
@@ -180,6 +180,8 @@ code {
 .fadeElement {
   animation:fadeIn;
   animation-timeline: view();
+  animation-range: cover;
+
 }
 
 

@@ -57,6 +57,7 @@ import { Route as WrapCompressImageOnlineRouteImport } from './routes/_wrap.comp
 import { Route as WrapCompressImageForWebRouteImport } from './routes/_wrap.compress-image-for-web'
 import { Route as WrapBulkFileRenamerRouteImport } from './routes/_wrap.bulk-file-renamer'
 import { Route as WrapBrowserBasedUtilitiesRouteImport } from './routes/_wrap.browser-based-utilities'
+import { Route as WrapBestFreeImageFormatConverter2026RouteImport } from './routes/_wrap.best-free-image-format-converter-2026'
 import { Route as WrapBase64ToFileRouteImport } from './routes/_wrap.base64-to-file'
 
 const ToolsForDevelopersRoute = ToolsForDevelopersRouteImport.update({
@@ -304,6 +305,12 @@ const WrapBrowserBasedUtilitiesRoute =
     path: '/browser-based-utilities',
     getParentRoute: () => WrapRoute,
   } as any)
+const WrapBestFreeImageFormatConverter2026Route =
+  WrapBestFreeImageFormatConverter2026RouteImport.update({
+    id: '/best-free-image-format-converter-2026',
+    path: '/best-free-image-format-converter-2026',
+    getParentRoute: () => WrapRoute,
+  } as any)
 const WrapBase64ToFileRoute = WrapBase64ToFileRouteImport.update({
   id: '/base64-to-file',
   path: '/base64-to-file',
@@ -316,6 +323,7 @@ export interface FileRoutesByFullPath {
   '/tools': typeof ToolsRoute
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/base64-to-file': typeof WrapBase64ToFileRoute
+  '/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
   '/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
   '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
   '/compress-image-for-web': typeof WrapCompressImageForWebRoute
@@ -366,6 +374,7 @@ export interface FileRoutesByTo {
   '/tools': typeof ToolsRoute
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/base64-to-file': typeof WrapBase64ToFileRoute
+  '/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
   '/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
   '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
   '/compress-image-for-web': typeof WrapCompressImageForWebRoute
@@ -418,6 +427,7 @@ export interface FileRoutesById {
   '/tools': typeof ToolsRoute
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/_wrap/base64-to-file': typeof WrapBase64ToFileRoute
+  '/_wrap/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
   '/_wrap/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
   '/_wrap/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
   '/_wrap/compress-image-for-web': typeof WrapCompressImageForWebRoute
@@ -470,6 +480,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/tools-for-developers'
     | '/base64-to-file'
+    | '/best-free-image-format-converter-2026'
     | '/browser-based-utilities'
     | '/bulk-file-renamer'
     | '/compress-image-for-web'
@@ -520,6 +531,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/tools-for-developers'
     | '/base64-to-file'
+    | '/best-free-image-format-converter-2026'
     | '/browser-based-utilities'
     | '/bulk-file-renamer'
     | '/compress-image-for-web'
@@ -571,6 +583,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/tools-for-developers'
     | '/_wrap/base64-to-file'
+    | '/_wrap/best-free-image-format-converter-2026'
     | '/_wrap/browser-based-utilities'
     | '/_wrap/bulk-file-renamer'
     | '/_wrap/compress-image-for-web'
@@ -962,6 +975,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapBrowserBasedUtilitiesRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/best-free-image-format-converter-2026': {
+      id: '/_wrap/best-free-image-format-converter-2026'
+      path: '/best-free-image-format-converter-2026'
+      fullPath: '/best-free-image-format-converter-2026'
+      preLoaderRoute: typeof WrapBestFreeImageFormatConverter2026RouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/base64-to-file': {
       id: '/_wrap/base64-to-file'
       path: '/base64-to-file'
@@ -974,6 +994,7 @@ declare module '@tanstack/react-router' {
 
 interface WrapRouteChildren {
   WrapBase64ToFileRoute: typeof WrapBase64ToFileRoute
+  WrapBestFreeImageFormatConverter2026Route: typeof WrapBestFreeImageFormatConverter2026Route
   WrapBrowserBasedUtilitiesRoute: typeof WrapBrowserBasedUtilitiesRoute
   WrapBulkFileRenamerRoute: typeof WrapBulkFileRenamerRoute
   WrapCompressImageForWebRoute: typeof WrapCompressImageForWebRoute
@@ -1021,6 +1042,8 @@ interface WrapRouteChildren {
 
 const WrapRouteChildren: WrapRouteChildren = {
   WrapBase64ToFileRoute: WrapBase64ToFileRoute,
+  WrapBestFreeImageFormatConverter2026Route:
+    WrapBestFreeImageFormatConverter2026Route,
   WrapBrowserBasedUtilitiesRoute: WrapBrowserBasedUtilitiesRoute,
   WrapBulkFileRenamerRoute: WrapBulkFileRenamerRoute,
   WrapCompressImageForWebRoute: WrapCompressImageForWebRoute,

@@ -230,7 +230,7 @@ function App() {
 
       <main className="flex-1 px-4 pb-16 relative z-10" id="tools">
         
-        <section className="max-w-7xl mx-auto my-40 fadeElement" id="tools">
+        <section className="max-w-7xl  mx-auto py-40 perspective-distant fadeElement" id="tools">
           <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
             <div>
               <h2 className="text-2xl font-bold text-gray-100">Most Used Image & Data Conversion Tools</h2>
