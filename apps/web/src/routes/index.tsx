@@ -1,7 +1,13 @@
 import type { ReactNode } from "react";
 
 import Aurora from "@/components/Aurora";
-import { IconBolt, IconBrandGithub, IconCheck, IconChevronRight, IconLock } from "@tabler/icons-react";
+import {
+  IconBolt,
+  IconBrandGithub,
+  IconCheck,
+  IconChevronRight,
+  IconLock,
+} from "@tabler/icons-react";
 import { Link, createFileRoute, createLink, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, easeInOut, motion } from "motion/react";
 
@@ -11,9 +17,13 @@ import { tools } from "@/data/tools";
 import { getSeoMetadata } from "@/lib/seo";
 import React from "react";
 import Button from "@/components/ui/button";
+import { Button as MagneticButton } from "@/components/Magnetic-button";
 
 const jsonToCsvTool = tools.find((tool) => tool.slug === "json-to-csv");
-const featuredTools = [...(jsonToCsvTool ? [jsonToCsvTool] : []), ...tools.filter((tool) => tool.slug !== "json-to-csv")].slice(0, 6);
+const featuredTools = [
+  ...(jsonToCsvTool ? [jsonToCsvTool] : []),
+  ...tools.filter((tool) => tool.slug !== "json-to-csv"),
+].slice(0, 6);
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -138,18 +148,34 @@ function App() {
       <div className="max-h-[70vh] absolute inset-0 blur-lg opacity-40">
         <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-        <Aurora colorStops={["#2563eb", "#B19EEF", "#5227FF"]} blend={0.5} amplitude={1.0} speed={1} />
+        <Aurora
+          colorStops={["#2563eb", "#B19EEF", "#5227FF"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={1}
+        />
       </div>
 
       <section className="pt-24 pb-12 px-4 relative z-10 h-screen  flex items-center">
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="max-w-5xl mx-auto text-center space-y-6">
-          <motion.h1 variants={itemVariants} className="relative text-2xl md:text-5xl font-bold text-gray-100 leading-tight">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-5xl mx-auto text-center space-y-6"
+        >
+          <motion.h1
+            variants={itemVariants}
+            className="relative text-2xl md:text-5xl font-bold text-gray-100 leading-tight"
+          >
             <motion.span
               animate={{ width: wordWidth ? wordWidth + widthSafetyBuffer : "auto" }}
               transition={{ duration: 0.45, ease: easeInOut }}
               className=" shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] inline-flex overflow-hidden text-3xl md:text-7xl justify-start text-brand-primary p-2 rounded-md bg-gray-800/90 "
             >
-              <AnimatePresence mode="wait" initial={false}>
+              <AnimatePresence
+                mode="wait"
+                initial={false}
+              >
                 <motion.span
                   key={rotatingWords[active]}
                   initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
@@ -162,7 +188,10 @@ function App() {
                 </motion.span>
               </AnimatePresence>
             </motion.span>
-            <span className="pointer-events-none absolute -z-10 opacity-0" aria-hidden="true">
+            <span
+              className="pointer-events-none absolute -z-10 opacity-0"
+              aria-hidden="true"
+            >
               {rotatingWords.map((word, idx) => (
                 <span
                   key={`measure-${word}`}
@@ -178,37 +207,35 @@ function App() {
             <br />
             Image and Data Processing Tools.
           </motion.h1>
-          <motion.p variants={itemVariants} className="text-sm md:text-lg text-gray-400 tracking-wide max-w-3xl mx-auto">
-            Professional-grade online tools that work entirely in your browser. Convert images to Base64, compress photos, format JSON,
-            convert CSV to Excel, and more—all without uploading files to any server. Fast, secure, and 100% free.
+          <motion.p
+            variants={itemVariants}
+            className="text-sm md:text-lg text-gray-400 tracking-wide max-w-3xl mx-auto"
+          >
+            Professional-grade online tools that work entirely in your browser. Convert images to
+            Base64, compress photos, format JSON, convert CSV to Excel, and more—all without
+            uploading files to any server. Fast, secure, and 100% free.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <ButtonLink
-              to="/tools"
-              preload="intent"
-              // onPointerDown={() => setIsBrowsePressed(true)}
-              // onPointerUp={() => setIsBrowsePressed(false)}
-              // onPointerLeave={() => setIsBrowsePressed(false)}
-              // onBlur={() => setIsBrowsePressed(false)}
-              className={`inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white rounded-lg hover:bg-brand-hover transition-all duration-200 text-sm font-medium ${isBrowsePressed ? "scale-[0.98]" : "scale-100"}`}
-            >
-              <span>Browse all tools</span>
-              <IconChevronRight className="h-4 w-4" />
-            </ButtonLink>
-
-            <a
-              href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center space-x-2 px-4 py-2 shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 text-sm font-medium active:scale-[0.97] "
-            >
-              <IconBrandGithub className="w-4 h-4" />
-              <span>Star on GitHub</span>
-            </a>
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3"
+          >
+            <MagneticButton>
+              <ButtonLink
+                to="/tools"
+                preload="intent"
+                className={`inline-flex items-center space-x-2 px-5 py-2.5 bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white rounded-lg hover:bg-brand-hover transition-all duration-200 text-sm font-medium ${isBrowsePressed ? "scale-[0.98]" : "scale-100"}`}
+              >
+                <span>Browse all tools</span>
+                <IconChevronRight className="h-4 w-4" />
+              </ButtonLink>
+            </MagneticButton>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="hidden sm:flex flex-wrap justify-center gap-2 text-xs text-gray-300">
+          <motion.div
+            variants={itemVariants}
+            className="hidden sm:flex flex-wrap justify-center gap-2 text-xs text-gray-300"
+          >
             <span className="flex items-center gap-x-2 rounded-full font-semibold px-3 py-1">
               <IconCheck className="h-4 w-4 text-green-500" /> 100% Browser-Based Processing
             </span>
@@ -222,20 +249,43 @@ function App() {
               <IconCheck className="h-4 w-4 text-green-500" /> Free & Open Source
             </span>
           </motion.div>
+
+          <div>
+            <a
+              href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-100 inline-flex items-center group hover:scale-110 transition-all duration-150"
+            >
+              <div className="w-8 h-8 border-1 border-neutral-600 rounded-full flex items-center justify-center z-10 bg-gray-800">
+                <IconBrandGithub className="w-4 h-4" />
+              </div>
+              <span className="bg-gray-800 pl-4 pr-4 py-1 text-sm -ml-2 z-0 rounded-tr-xl rounded-br-xl group-hover:underline">
+                Star on GitHub
+              </span>
+            </a>
+          </div>
         </motion.div>
       </section>
 
-      
-      
-
-      <main className="flex-1 px-4 pb-16 relative z-10" id="tools">
-        
-        <section className="max-w-7xl  mx-auto py-40 perspective-distant fadeElement" id="tools">
+      <main
+        className="flex-1 px-4 pb-16 relative z-10"
+        id="tools"
+      >
+        <section
+          className="max-w-7xl  mx-auto py-40 perspective-distant fadeElement"
+          id="tools"
+        >
           <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
             <div>
-              <h2 className="text-2xl font-bold text-gray-100">Most Used Image & Data Conversion Tools</h2>
+              <h2 className="text-2xl font-bold text-gray-100">
+                Most Used Image & Data Conversion Tools
+              </h2>
             </div>
-            <Link to="/tools" className="inline-flex items-center gap-2 text-sm text-brand-primary font-semibold hover:text-brand-hover">
+            <Link
+              to="/tools"
+              className="inline-flex items-center gap-2 text-sm text-brand-primary font-semibold hover:text-brand-hover"
+            >
               See catalog
               <IconChevronRight className="h-4 w-4" />
             </Link>
@@ -250,7 +300,11 @@ function App() {
             {featuredTools.map((tool) => {
               const Icon = tool.icon;
               return (
-                <GlowCard key={tool.slug} to={tool.href} isNew={tool.isNew}>
+                <GlowCard
+                  key={tool.slug}
+                  to={tool.href}
+                  isNew={tool.isNew}
+                >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12  rounded-lg flex items-center justify-center group-hover:bg-brand-primary/5 transition-colors ease-in-out">
@@ -261,7 +315,9 @@ function App() {
                       <h3 className="text-lg sm:text-xl font-semibold text-gray-300 mb-2 group-hover:text-brand-primary transition-colors">
                         {tool.name}
                       </h3>
-                      <p className="text-gray-400 text-sm font-medium leading-relaxed">{tool.description}</p>
+                      <p className="text-gray-400 text-sm font-medium leading-relaxed">
+                        {tool.description}
+                      </p>
                       <div className="mt-4 flex items-center text-brand-primary text-sm font-medium">
                         <span>Try it</span>
                         <IconChevronRight className="h-5 w-5 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-transform" />
@@ -333,11 +389,14 @@ function App() {
         </section>
 
         <section className="max-w-5xl mx-auto mt-6 text-center bg-white/5 border border-white/10 rounded-lg p-6">
-          <h3 className="text-2xl font-semibold text-gray-100 mb-4">Everything You Need for Image Processing & Data Conversion</h3>
+          <h3 className="text-2xl font-semibold text-gray-100 mb-4">
+            Everything You Need for Image Processing & Data Conversion
+          </h3>
           <p className="text-gray-400 tracking-normal leading-5 text-sm  mb-4">
-            From converting images to Base64 encoding, compressing photos to reduce file size, formatting JSON data, to converting
-            spreadsheets—our comprehensive suite handles all your file conversion and processing needs with professional results, all in
-            your browser.
+            From converting images to Base64 encoding, compressing photos to reduce file size,
+            formatting JSON data, to converting spreadsheets—our comprehensive suite handles all
+            your file conversion and processing needs with professional results, all in your
+            browser.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
             <ButtonLink
@@ -385,7 +444,15 @@ function App() {
   );
 }
 
-function FeatureCard({ icon, title, description }: { icon: ReactNode; title: string; description: string }) {
+function FeatureCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: ReactNode;
+  title: string;
+  description: string;
+}) {
   return (
     <div className="flex items-center justify-start gap-x-2 space-y-3  p-4 group">
       <div className="  rounded-lg flex items-center justify-center  group-hover:animate-[wiggle_300ms_ease-in-out] transition-transform duration-300">
