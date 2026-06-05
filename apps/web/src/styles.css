@@ -164,6 +164,20 @@ code {
   }
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+  to {
+    opacity: 0;
+    scale: 0.85;
+    transform: translateY(20px) rotateX(-40deg);
+  }
+}
+
+
 @keyframes wiggle {
   0%,
   100% {
@@ -178,10 +192,9 @@ code {
 }
 
 .fadeElement {
-  animation:fadeIn;
-  animation-timeline: view();
-  animation-range: cover;
-
+  animation:fadeIn,fadeOut;
+  animation-timeline: view(), view();
+  animation-range: entry 0% 50%,exit 0% 100%;
 }
 
 

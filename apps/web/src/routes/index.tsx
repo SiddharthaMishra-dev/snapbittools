@@ -330,7 +330,7 @@ function App() {
           </motion.div>
         </section>
 
-        <section className="max-w-7xl mx-auto my-16 md:my-32 text-center">
+        <section className="max-w-7xl mx-auto my-16 md:my-32 text-center fadeElement">
           <h2 className="text-2xl font-bold text-gray-100 mb-6">
             Why Choose <span className="text-brand-primary">SnapBit</span> Tools?
           </h2>
@@ -364,7 +364,7 @@ function App() {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto my-16 md:my-32  rounded-2xl">
+        <section className="max-w-7xl mx-auto my-16 md:my-32  rounded-2xl fadeElement">
           <h3 className="text-2xl font-bold text-gray-100 mb-6 text-center">
             Who Uses <span className="text-brand-primary">SnapBit</span> Tools?
           </h3>
@@ -388,7 +388,7 @@ function App() {
           </div>
         </section>
 
-        <section className="max-w-5xl mx-auto mt-6 text-center bg-white/5 border border-white/10 rounded-lg p-6">
+        <section className="max-w-5xl mx-auto mt-6 text-center bg-white/5 border border-white/10 rounded-lg p-6 fadeElement">
           <h3 className="text-2xl font-semibold text-gray-100 mb-4">
             Everything You Need for Image Processing & Data Conversion
           </h3>
