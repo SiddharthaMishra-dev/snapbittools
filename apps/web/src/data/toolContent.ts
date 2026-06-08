@@ -503,4 +503,36 @@ Use this tool when preparing hand-written HTML, auditing generated templates, or
       "Minifying snippets for CMS and no-code embeds",
     ],
   },
+
+  "color-palette-generator": {
+    slug: "color-palette-generator",
+    title: "Color Palette Generator - Create Beautiful Color Schemes Online",
+    intro: `Generate beautiful, harmonious color palettes instantly with our free browser-based Color Palette Generator. Choose from nine generation modes including random, shades, brand, contrast, and five color theory modes — complementary, triadic, analogous, split-complementary, and tetradic. Export palettes as CSS custom properties, JSON, or a Tailwind configuration snippet. Everything runs locally in your browser for complete privacy.
+
+Color is one of the most powerful tools in design. A well-crafted color palette communicates brand personality, guides user attention, establishes visual hierarchy, and creates emotional resonance. Whether you are building a brand identity, designing a web application, crafting a marketing campaign, or exploring new visual directions, having a reliable palette generator saves hours of trial and error.
+
+Color theory provides a mathematical framework for selecting harmonious colors. Complementary palettes pair colors directly opposite each other on the color wheel, creating vibrant, high-contrast combinations perfect for calls-to-action. Triadic schemes use three equally spaced hues, producing balanced yet colorful palettes ideal for playful interfaces. Analogous palettes group adjacent hues for a natural, cohesive feel inspired by nature. Split-complementary and tetradic schemes add complexity while maintaining structure, suitable for rich multi-element layouts.
+
+Beyond theory, SnapBit's Shades mode generates a full lightness scale (from near-white to near-black) for any hue — ready for design system tokens or Tailwind configuration. Brand mode creates a complete system from a single brand color: primary, light variant, dark variant, neutral text, neutral background, and accent. Contrast mode builds palettes with strong accessibility-first contrast relationships.
+
+Every palette includes full WCAG 2.1 contrast ratio analysis. The color detail table shows each color's contrast ratio against white and black, with AA and AAA compliance levels displayed. Lock individual colors before regenerating to preserve favorites. Save up to ten palettes to localStorage for later reference. Copy any color in HEX, RGB, or HSL format with a single click. All processing is offline-capable and requires no account or server connection.`,
+    benefits: [
+      "Nine generation modes including five color theory algorithms",
+      "Full WCAG 2.1 contrast ratio and AA/AAA compliance display",
+      "Lock individual colors when regenerating palettes",
+      "Copy colors in HEX, RGB, or HSL format",
+      "Export as CSS variables, JSON, or Tailwind config",
+      "Save and reload up to 10 palettes via localStorage",
+      "100% browser-based with no uploads or accounts",
+    ],
+    useCases: [
+      "Building brand color systems from a primary color",
+      "Generating Tailwind CSS theme extensions",
+      "Creating accessible UI color palettes with WCAG compliance",
+      "Designing color scales for design system tokens",
+      "Exploring complementary and triadic color theory",
+      "Producing CSS custom property files for theming",
+      "Generating shades for hover, active, and disabled states",
+    ],
+  },
 };

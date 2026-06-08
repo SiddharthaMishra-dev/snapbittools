@@ -13,6 +13,7 @@ import {
   IconTypography,
   IconFiles,
   IconCode,
+  IconPalette,
 } from "@tabler/icons-react";
 import type React from "react";
 
@@ -113,6 +114,29 @@ export const tools: ToolDefinition[] = [
     icon: IconFiles,
     category: "Data",
     keywords: ["bulk rename", "file renamer", "batch rename", "file management"],
+    isNew: true,
+  },
+  {
+    slug: "color-palette-generator",
+    name: "Color Palette",
+    href: "/color-palette-generator",
+    description: "Generate color palettes using color theory. Complementary, triadic, shades, brand & more. Export as CSS, JSON, or Tailwind.",
+    icon: IconPalette,
+    category: "Images",
+    keywords: [
+      "color palette generator",
+      "color scheme",
+      "complementary colors",
+      "triadic palette",
+      "color theory",
+      "hex rgb hsl",
+      "brand colors",
+      "color shades",
+      "tailwind palette",
+      "css variables",
+      "wcag contrast",
+      "accessible colors",
+    ],
     isNew: true,
   },
   {

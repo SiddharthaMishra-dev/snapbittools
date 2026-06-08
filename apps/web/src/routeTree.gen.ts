@@ -55,6 +55,7 @@ import { Route as WrapCompressImageTo200kbRouteImport } from './routes/_wrap.com
 import { Route as WrapCompressImageTo100kbRouteImport } from './routes/_wrap.compress-image-to-100kb'
 import { Route as WrapCompressImageOnlineRouteImport } from './routes/_wrap.compress-image-online'
 import { Route as WrapCompressImageForWebRouteImport } from './routes/_wrap.compress-image-for-web'
+import { Route as WrapColorPaletteGeneratorRouteImport } from './routes/_wrap.color-palette-generator'
 import { Route as WrapBulkFileRenamerRouteImport } from './routes/_wrap.bulk-file-renamer'
 import { Route as WrapBrowserBasedUtilitiesRouteImport } from './routes/_wrap.browser-based-utilities'
 import { Route as WrapBestFreeImageFormatConverter2026RouteImport } from './routes/_wrap.best-free-image-format-converter-2026'
@@ -294,6 +295,12 @@ const WrapCompressImageForWebRoute = WrapCompressImageForWebRouteImport.update({
   path: '/compress-image-for-web',
   getParentRoute: () => WrapRoute,
 } as any)
+const WrapColorPaletteGeneratorRoute =
+  WrapColorPaletteGeneratorRouteImport.update({
+    id: '/color-palette-generator',
+    path: '/color-palette-generator',
+    getParentRoute: () => WrapRoute,
+  } as any)
 const WrapBulkFileRenamerRoute = WrapBulkFileRenamerRouteImport.update({
   id: '/bulk-file-renamer',
   path: '/bulk-file-renamer',
@@ -326,6 +333,7 @@ export interface FileRoutesByFullPath {
   '/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
   '/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
   '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
+  '/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
   '/compress-image-for-web': typeof WrapCompressImageForWebRoute
   '/compress-image-online': typeof WrapCompressImageOnlineRoute
   '/compress-image-to-100kb': typeof WrapCompressImageTo100kbRoute
@@ -377,6 +385,7 @@ export interface FileRoutesByTo {
   '/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
   '/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
   '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
+  '/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
   '/compress-image-for-web': typeof WrapCompressImageForWebRoute
   '/compress-image-online': typeof WrapCompressImageOnlineRoute
   '/compress-image-to-100kb': typeof WrapCompressImageTo100kbRoute
@@ -430,6 +439,7 @@ export interface FileRoutesById {
   '/_wrap/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
   '/_wrap/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
   '/_wrap/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
+  '/_wrap/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
   '/_wrap/compress-image-for-web': typeof WrapCompressImageForWebRoute
   '/_wrap/compress-image-online': typeof WrapCompressImageOnlineRoute
   '/_wrap/compress-image-to-100kb': typeof WrapCompressImageTo100kbRoute
@@ -483,6 +493,7 @@ export interface FileRouteTypes {
     | '/best-free-image-format-converter-2026'
     | '/browser-based-utilities'
     | '/bulk-file-renamer'
+    | '/color-palette-generator'
     | '/compress-image-for-web'
     | '/compress-image-online'
     | '/compress-image-to-100kb'
@@ -534,6 +545,7 @@ export interface FileRouteTypes {
     | '/best-free-image-format-converter-2026'
     | '/browser-based-utilities'
     | '/bulk-file-renamer'
+    | '/color-palette-generator'
     | '/compress-image-for-web'
     | '/compress-image-online'
     | '/compress-image-to-100kb'
@@ -586,6 +598,7 @@ export interface FileRouteTypes {
     | '/_wrap/best-free-image-format-converter-2026'
     | '/_wrap/browser-based-utilities'
     | '/_wrap/bulk-file-renamer'
+    | '/_wrap/color-palette-generator'
     | '/_wrap/compress-image-for-web'
     | '/_wrap/compress-image-online'
     | '/_wrap/compress-image-to-100kb'
@@ -961,6 +974,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapCompressImageForWebRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/color-palette-generator': {
+      id: '/_wrap/color-palette-generator'
+      path: '/color-palette-generator'
+      fullPath: '/color-palette-generator'
+      preLoaderRoute: typeof WrapColorPaletteGeneratorRouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/bulk-file-renamer': {
       id: '/_wrap/bulk-file-renamer'
       path: '/bulk-file-renamer'
@@ -997,6 +1017,7 @@ interface WrapRouteChildren {
   WrapBestFreeImageFormatConverter2026Route: typeof WrapBestFreeImageFormatConverter2026Route
   WrapBrowserBasedUtilitiesRoute: typeof WrapBrowserBasedUtilitiesRoute
   WrapBulkFileRenamerRoute: typeof WrapBulkFileRenamerRoute
+  WrapColorPaletteGeneratorRoute: typeof WrapColorPaletteGeneratorRoute
   WrapCompressImageForWebRoute: typeof WrapCompressImageForWebRoute
   WrapCompressImageOnlineRoute: typeof WrapCompressImageOnlineRoute
   WrapCompressImageTo100kbRoute: typeof WrapCompressImageTo100kbRoute
@@ -1046,6 +1067,7 @@ const WrapRouteChildren: WrapRouteChildren = {
     WrapBestFreeImageFormatConverter2026Route,
   WrapBrowserBasedUtilitiesRoute: WrapBrowserBasedUtilitiesRoute,
   WrapBulkFileRenamerRoute: WrapBulkFileRenamerRoute,
+  WrapColorPaletteGeneratorRoute: WrapColorPaletteGeneratorRoute,
   WrapCompressImageForWebRoute: WrapCompressImageForWebRoute,
   WrapCompressImageOnlineRoute: WrapCompressImageOnlineRoute,
   WrapCompressImageTo100kbRoute: WrapCompressImageTo100kbRoute,
