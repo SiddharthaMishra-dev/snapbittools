@@ -36,7 +36,7 @@ export default function Sidebar() {
       {/* background Overlay */}
       {isMobile && isOpen && (
         <motion.div
-          className="fixed inset-0 bg-black z-10 "
+          className="fixed inset-0 bg-white z-10 "
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
           initial={{ opacity: 0 }}
@@ -49,26 +49,36 @@ export default function Sidebar() {
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           `group fixed top-[15px] left-4 z-50 p-[4px] text-white cursor-pointer transition-colors duration-300`,
-          isOpen ? `` : `bg-gray-800 rounded-md ring-1 ring-gray-900/50 hover:opacity-80 `,
+          isOpen ? `` : `bg-white rounded-md ring-1 ring-gray-700/50 hover:opacity-80 `,
         )}
         aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
         aria-expanded={isOpen}
       >
         <div className="p-1 group-hover:bg-gray-700 rounded-[4px] transition-colors duration-300">
-          <IconLayoutSidebar size={20} className="text-brand-primary" />
+          <IconLayoutSidebar
+            size={20}
+            className="text-gray-700"
+          />
         </div>
       </button>
 
       <motion.div
         className={cn(
-          `shrink-0 border-r-[1px] border-gray-900 text-white overflow-hidden transition-all duration-300 w-64 py-4 px-2`,
+          `shrink-0 border-r-[1px] border-gray-400 text-gray-700 overflow-hidden transition-all duration-300 w-64 py-4 px-2`,
           isOpen ? `ml-0` : `-ml-64`,
-          isMobile ? `fixed top-0 left-0 h-full bg-gray-900 z-20` : `relative h-screen`,
+          isMobile ? `fixed top-0 left-0 h-full bg-white z-20` : `relative h-screen`,
         )}
       >
         <div className="flex items-center justify-center pt-1 pb-2">
-          <Link to="/" className="pl-6 flex items-center no-underline font-bold text-gray-100">
-            <img src="/logo192.png" alt="Logo" className="inline-block mr-2 w-5 h-5" />
+          <Link
+            to="/"
+            className="pl-6 flex items-center no-underline font-bold text-gray-100"
+          >
+            <img
+              src="/logo192.png"
+              alt="Logo"
+              className="inline-block mr-2 w-5 h-5"
+            />
             <span className="text-blue-400 text-md">SnapBit Tools</span>
           </Link>
         </div>
@@ -84,7 +94,10 @@ export default function Sidebar() {
               )}
               activeOptions={{ exact: true }}
             >
-              <IconLink size={16} className="w-0 mr-2 group-hover:w-4 transition-all duration-150 " />
+              <IconLink
+                size={16}
+                className="w-0 mr-2 group-hover:w-4 transition-all duration-150 "
+              />
               {tool.name}
             </Link>
           ))}

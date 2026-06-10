@@ -1,4 +1,11 @@
-import { IconBolt, IconCheck, IconCloudUpload, IconCopy, IconFileCode, IconLock } from "@tabler/icons-react";
+import {
+  IconBolt,
+  IconCheck,
+  IconCloudUpload,
+  IconCopy,
+  IconFileCode,
+  IconLock,
+} from "@tabler/icons-react";
 import { useCallback, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, easeInOut } from "motion/react";
@@ -7,7 +14,7 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
-import { getSeoMetadata } from "@/lib/seo"; 
+import { getSeoMetadata } from "@/lib/seo";
 
 const faqs = [
   {
@@ -35,13 +42,27 @@ export const Route = createFileRoute("/_wrap/image-to-base64")({
   head: () =>
     getSeoMetadata({
       title: "Image to Base64 Converter | SnapBit Tools",
-      description: "Optimize your images and convert them to base64 instantly and securely in your browser. No uploads, 100% private.",
+      description:
+        "Optimize your images and convert them to base64 instantly and securely in your browser. No uploads, 100% private.",
       keywords: [
-      "jpg to base64", "png to base64", "webp to base64", "avif to base64",
-      "image to base64 converter", "photo to base64", "picture to base64",
-      "convert image to base64", "base64 encoding for images", "image data uri encoder",
-      "image url to base64", "base64 image generator", "image to base64 online", "offline image to base64 converter",
-      "compress image to base64", "optimize image to base64", "fast image to base64 converter", "secure image to base64 converter"
+        "jpg to base64",
+        "png to base64",
+        "webp to base64",
+        "avif to base64",
+        "image to base64 converter",
+        "photo to base64",
+        "picture to base64",
+        "convert image to base64",
+        "base64 encoding for images",
+        "image data uri encoder",
+        "image url to base64",
+        "base64 image generator",
+        "image to base64 online",
+        "offline image to base64 converter",
+        "compress image to base64",
+        "optimize image to base64",
+        "fast image to base64 converter",
+        "secure image to base64 converter",
       ],
       url: "/image-to-base64",
       type: "software",
@@ -153,7 +174,18 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen  py-2 px-4 flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white  py-2 px-4 flex flex-col items-center">
+      <div
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{
+          backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+          opacity: 0.45,
+          maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, black 60%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, black 60%, transparent 100%)",
+        }}
+      />
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <motion.div
@@ -162,11 +194,16 @@ function RouteComponent() {
           animate="visible"
           className="w-full max-w-5xl mt-6  mb-12 text-center mx-auto"
         >
-          <motion.div variants={itemVariants} className="text-center">
-            <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <motion.div
+            variants={itemVariants}
+            className="text-center"
+          >
+            <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
               Image to <span className="text-brand-primary">Base64</span> Converter
             </h1>
-            <p className="text-md text-gray-300">Convert images to Base64 instantly. 100% private—no uploads, ever.</p>
+            <p className="text-md text-gray-500">
+              Convert images to Base64 instantly. 100% private—no uploads, ever.
+            </p>
           </motion.div>
         </motion.div>
 
@@ -176,19 +213,26 @@ function RouteComponent() {
           animate="visible"
           className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto"
         >
-          <motion.div variants={itemVariants} className="rounded-xl shadow-lg  mb-6">
+          <motion.div
+            variants={itemVariants}
+            className="rounded-xl shadow-lg  mb-6"
+          >
             <div
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                isDragging ? "border-blue-500 bg-blue-900/20" : "border-gray-600 hover:border-blue-400 "
+                isDragging
+                  ? "border-blue-500 bg-blue-900/20"
+                  : "border-gray-600 hover:border-blue-400 "
               }`}
             >
               <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-gray-400"} transition-colors`} />
+                <IconCloudUpload
+                  className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-gray-500"} transition-colors`}
+                />
                 <div>
-                  <p className="text-xl font-medium text-gray-100 mb-2">
+                  <p className="text-xl font-medium text-gray-500 mb-2">
                     {isDragging ? "Drop your image here" : "Drag & drop your image here"}
                   </p>
                   <p className="text-gray-400 mb-4">or</p>
@@ -201,11 +245,17 @@ function RouteComponent() {
                 </div>
               </div>
             </div>
-            <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
+            <p className="text-center text-gray-500 text-xs mt-3 flex items-center justify-center gap-1">
               🔒 Your files stay on your device. Nothing is uploaded to any server.
             </p>
 
-            <input type="file" accept="image/*" ref={imageRef} className="hidden" onChange={handleFileChange} />
+            <input
+              type="file"
+              accept="image/*"
+              ref={imageRef}
+              className="hidden"
+              onChange={handleFileChange}
+            />
           </motion.div>
 
           {base64Result && (
@@ -214,14 +264,16 @@ function RouteComponent() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="bg-gray-800 w-full max-w-4xl rounded-xl shadow-lg p-6"
+              className="bg-gray-100 w-full max-w-4xl rounded-xl shadow-lg p-6"
             >
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold text-gray-100">Base64 Data URI</h3>
+                <h3 className="text-xl font-semibold text-gray-700">Base64 Data URI</h3>
                 <button
                   onClick={copyToClipboard}
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                    copySuccess ? "bg-green-800 text-green-200" : "bg-blue-700 text-blue-100 hover:bg-blue-600 shadow-md hover:shadow-lg"
+                    copySuccess
+                      ? "bg-green-800 text-green-200"
+                      : "bg-blue-700 text-blue-100 hover:bg-blue-600 shadow-md hover:shadow-lg"
                   }`}
                 >
                   {copySuccess ? (
@@ -241,15 +293,20 @@ function RouteComponent() {
                 value={base64Result}
                 readOnly
                 rows={8}
-                className="w-full p-4 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-4 border border-gray-600 rounded-lg bg-gray-100 text-gray-700 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Base64 data will appear here..."
               />
-              <p className="text-sm text-gray-400 mt-2">Data size: {new Blob([base64Result]).size.toLocaleString()} bytes</p>
+              <p className="text-sm text-gray-400 mt-2">
+                Data size: {new Blob([base64Result]).size.toLocaleString()} bytes
+              </p>
             </motion.div>
           )}
 
-          <motion.div variants={itemVariants} className="text-center mt-2">
-            <p className="text-gray-400 text-xs">
+          <motion.div
+            variants={itemVariants}
+            className="text-center mt-2"
+          >
+            <p className="text-gray-500 text-xs">
               <sup>*</sup>All major formats supported: JPG, PNG, GIF, SVG, WebP & more.
             </p>
           </motion.div>
@@ -268,42 +325,52 @@ function RouteComponent() {
           features={[
             {
               title: "100% Private",
-              description: "All conversions happen locally in your browser. Your images are never uploaded to any server.",
+              description:
+                "All conversions happen locally in your browser. Your images are never uploaded to any server.",
               icon: IconLock,
             },
             {
               title: "Instant Results",
-              description: "Get your Base64 string immediately after dropping your image. No waiting for server processing.",
+              description:
+                "Get your Base64 string immediately after dropping your image. No waiting for server processing.",
               icon: IconBolt,
             },
             {
               title: "Format Agnostic",
-              description: "Supports JPG, PNG, WebP, SVG, and GIF. Generates standard Data URIs compatible with all modern browsers.",
+              description:
+                "Supports JPG, PNG, WebP, SVG, and GIF. Generates standard Data URIs compatible with all modern browsers.",
               icon: IconFileCode,
             },
           ]}
           steps={[
             {
               title: "Select Image",
-              description: "Drag and drop your image or click the select button to choose a file from your device.",
+              description:
+                "Drag and drop your image or click the select button to choose a file from your device.",
             },
             {
               title: "Auto-Conversion",
-              description: "The tool automatically processes your image and generates the Base64 Data URI.",
+              description:
+                "The tool automatically processes your image and generates the Base64 Data URI.",
             },
             {
               title: "Copy Result",
-              description: "Click the copy button to save the Base64 string to your clipboard for use in your code.",
+              description:
+                "Click the copy button to save the Base64 string to your clipboard for use in your code.",
             },
             {
               title: "Use in Code",
-              description: "Paste the string into your HTML src, CSS url(), or JSON data as needed.",
+              description:
+                "Paste the string into your HTML src, CSS url(), or JSON data as needed.",
             },
           ]}
           faqs={faqs}
         />
 
-        <RelatedTools currentToolSlug="image-to-base64" category="Images" />
+        <RelatedTools
+          currentToolSlug="image-to-base64"
+          category="Images"
+        />
 
         <div className="mt-8 text-center">
           <p className="text-gray-400 text-xs text-center">
