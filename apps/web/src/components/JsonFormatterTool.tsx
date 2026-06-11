@@ -153,7 +153,7 @@ export function JsonFormatterTool() {
       const keyPrefix = keyName ? (
         <>
           <span className="text-cyan-400">{formatQuoted(keyName)}</span>
-          <span className="text-gray-300">: </span>
+          <span className="text-theme-body">: </span>
         </>
       ) : null;
 
@@ -164,7 +164,7 @@ export function JsonFormatterTool() {
             <div className="leading-6 whitespace-pre">
               {keyPrefix}
               {formatPrimitive(value as Exclude<JsonValue, JsonValue[] | { [key: string]: JsonValue }>)}
-              <span className="text-gray-300">{trailingComma}</span>
+              <span className="text-theme-body">{trailingComma}</span>
             </div>
           </div>
         );
@@ -179,7 +179,7 @@ export function JsonFormatterTool() {
             <button
               type="button"
               onClick={() => togglePath(path)}
-              className="w-5 h-5 mr-1 mt-0.5 text-gray-300 hover:text-gray-100"
+              className="w-5 h-5 mr-1 mt-0.5 text-theme-body hover:text-theme-heading"
               aria-label="Expand section"
             >
               <IconChevronRight className="w-4 h-4" />
@@ -187,9 +187,9 @@ export function JsonFormatterTool() {
             <div className="leading-6 whitespace-pre">
               {keyPrefix}
               <span className="text-blue-400 font-bold">{openBracket}</span>
-              <span className="text-gray-400">...</span>
+              <span className="text-theme-muted">...</span>
               <span className="text-blue-400 font-bold">{closeBracket}</span>
-              <span className="text-gray-300">{trailingComma}</span>
+              <span className="text-theme-body">{trailingComma}</span>
             </div>
           </div>
         );
@@ -202,7 +202,7 @@ export function JsonFormatterTool() {
               <button
                 type="button"
                 onClick={() => togglePath(path)}
-                className="w-5 h-5 mr-1 mt-0.5 text-gray-300 hover:text-gray-100"
+                className="w-5 h-5 mr-1 mt-0.5 text-theme-body hover:text-theme-heading"
                 aria-label="Collapse section"
               >
                 <IconChevronDown className="w-4 h-4" />
@@ -228,7 +228,7 @@ export function JsonFormatterTool() {
             <span className="w-5 h-5 mr-1" />
             <div className="leading-6 whitespace-pre">
               <span className="text-blue-400 font-bold">{closeBracket}</span>
-              <span className="text-gray-300">{trailingComma}</span>
+              <span className="text-theme-body">{trailingComma}</span>
             </div>
           </div>
         </div>
@@ -243,12 +243,12 @@ export function JsonFormatterTool() {
         parsedData ? (
           renderJsonNode(parsedData, "$", 0, true)
         ) : (
-          <span className="text-gray-500">Formatted JSON will appear here...</span>
+          <span className="text-theme-muted">Formatted JSON will appear here...</span>
         )
       ) : minifiedJson ? (
-        <span className="text-gray-300 break-all">{minifiedJson}</span>
+        <span className="text-theme-body break-all">{minifiedJson}</span>
       ) : (
-        <span className="text-gray-500">Minified JSON will appear here...</span>
+        <span className="text-theme-muted">Minified JSON will appear here...</span>
       )}
     </pre>
   );
@@ -256,27 +256,27 @@ export function JsonFormatterTool() {
   const renderEditorPanels = (isInModal: boolean) => (
     <div className="grid grid-cols-1 lg:grid-cols-2 sm:gap-0 gap-6">
       <div className="rounded-xl shadow-lg p-0 sm:p-6">
-        <h3 className="text-xl font-semibold text-gray-100 mb-4">Input</h3>
+        <h3 className="text-xl font-semibold text-theme-heading mb-4">Input</h3>
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder='Paste your JSON here, e.g., {"name": "John", "age": 30}'
-          className={`w-full ${isInModal ? "min-h-[40vh] h-auto" : "h-96"} p-4 border rounded-lg text-gray-100 font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+          className={`w-full ${isInModal ? "min-h-[40vh] h-auto" : "h-96"} p-4 border rounded-lg text-theme-heading font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 ${
             error ? "border-red-500" : "border-gray-600"
           }`}
           spellCheck={false}
         />
-        {input && <p className="text-sm text-gray-400 mt-2">Size: {new Blob([input]).size.toLocaleString()} bytes</p>}
+        {input && <p className="text-sm text-theme-muted mt-2">Size: {new Blob([input]).size.toLocaleString()} bytes</p>}
       </div>
 
       <div className="rounded-xl shadow-lg p-0 sm:p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-semibold text-gray-100">Output</h3>
+          <h3 className="text-xl font-semibold text-theme-heading">Output</h3>
           <div className="flex gap-2">
             <button
               onClick={() => setActiveView("formatted")}
               className={`px-3 py-1 text-sm rounded-lg transition-colors ${
-                activeView === "formatted" ? "bg-blue-700 text-blue-100" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                activeView === "formatted" ? "bg-blue-700 text-blue-100" : "bg-gray-700 text-theme-body hover:bg-gray-600"
               }`}
             >
               Formatted
@@ -284,7 +284,7 @@ export function JsonFormatterTool() {
             <button
               onClick={() => setActiveView("minified")}
               className={`px-3 py-1 text-sm rounded-lg transition-colors ${
-                activeView === "minified" ? "bg-blue-700 text-blue-100" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                activeView === "minified" ? "bg-blue-700 text-blue-100" : "bg-gray-700 text-theme-body hover:bg-gray-600"
               }`}
             >
               Minified
@@ -293,7 +293,7 @@ export function JsonFormatterTool() {
         </div>
         {renderOutputContent(isInModal ? "min-h-[40vh] h-auto" : "h-96")}
         {formattedJson && (
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-sm text-theme-muted mt-2">
             Size: {new Blob([activeView === "formatted" ? formattedJson : minifiedJson]).size.toLocaleString()} bytes
           </p>
         )}
@@ -410,12 +410,12 @@ export function JsonFormatterTool() {
       {/* Toolbar */}
       <div className=" rounded-xl shadow-lg p-4 mb-6">
         <div className="flex flex-wrap gap-3 justify-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg">
             <span className="text-sm font-medium">Quotes:</span>
             <button
               onClick={() => setUseSingleQuotes(false)}
               className={`px-2 py-1 text-xs rounded-lg transition-colors ${
-                !useSingleQuotes ? "bg-blue-700 text-blue-100" : "bg-gray-600 text-gray-300 hover:bg-gray-500"
+                !useSingleQuotes ? "bg-blue-700 text-blue-100" : "bg-gray-600 text-theme-body hover:bg-theme-page-muted0"
               }`}
             >
               "
@@ -423,7 +423,7 @@ export function JsonFormatterTool() {
             <button
               onClick={() => setUseSingleQuotes(true)}
               className={`px-2 py-1 text-xs rounded-lg transition-colors ${
-                useSingleQuotes ? "bg-blue-700 text-blue-100" : "bg-gray-600 text-gray-300 hover:bg-gray-500"
+                useSingleQuotes ? "bg-blue-700 text-blue-100" : "bg-gray-600 text-theme-body hover:bg-theme-page-muted0"
               }`}
             >
               '
@@ -452,7 +452,7 @@ export function JsonFormatterTool() {
             onClick={copyToClipboard}
             disabled={!formattedJson}
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-              copySuccess ? "bg-green-800 text-green-200" : "bg-gray-700 text-gray-100 hover:bg-gray-600"
+              copySuccess ? "bg-green-800 text-green-200" : "bg-gray-700 text-theme-heading hover:bg-gray-600"
             }`}
           >
             {copySuccess ? (
@@ -471,7 +471,7 @@ export function JsonFormatterTool() {
           <button
             onClick={downloadCSV}
             disabled={!parsedData}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <IconDownload className="w-4 h-4" />
             <span>Download CSV</span>
@@ -488,7 +488,7 @@ export function JsonFormatterTool() {
 
           <button
             onClick={() => setIsFullscreen(true)}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium"
           >
             <IconMaximize className="w-4 h-4" />
             <span>Fullscreen</span>
@@ -511,20 +511,20 @@ export function JsonFormatterTool() {
 
       {isFullscreen && (
         <div className="fixed inset-0 z-50 bg-black/80 p-2 sm:p-4">
-          <div className="h-full w-full rounded-xl border border-gray-700 bg-black/80 p-3 sm:p-6 overflow-auto">
+          <div className="h-full w-full rounded-xl border border-theme-border bg-black/80 p-3 sm:p-6 overflow-auto">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-100">JSON Formatter - Fullscreen</h2>
+              <h2 className="text-lg sm:text-xl font-semibold text-theme-heading">JSON Formatter - Fullscreen</h2>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setIsFullscreen(false)}
-                  className="inline-flex items-center gap-2 px-3 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors"
+                  className="inline-flex items-center gap-2 px-3 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors"
                 >
                   <IconMinimize className="w-4 h-4" />
                   <span className="hidden sm:inline">Exit Fullscreen</span>
                 </button>
                 <button
                   onClick={() => setIsFullscreen(false)}
-                  className="inline-flex items-center justify-center p-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors"
+                  className="inline-flex items-center justify-center p-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors"
                   aria-label="Close fullscreen modal"
                 >
                   <IconX className="w-4 h-4" />

@@ -174,8 +174,8 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white  py-2 px-4 flex flex-col items-center">
-      <div
+    <div className="min-h-screen bg-theme-page theme-page-gradient  py-2 px-4 flex flex-col items-center">
+      {/* <div
         className="pointer-events-none fixed inset-0 z-0"
         style={{
           backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)",
@@ -185,7 +185,7 @@ function RouteComponent() {
           WebkitMaskImage:
             "radial-gradient(ellipse 80% 60% at 50% 0%, black 60%, transparent 100%)",
         }}
-      />
+      /> */}
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <motion.div
@@ -198,10 +198,10 @@ function RouteComponent() {
             variants={itemVariants}
             className="text-center"
           >
-            <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
+            <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
               Image to <span className="text-brand-primary">Base64</span> Converter
             </h1>
-            <p className="text-md text-gray-500">
+            <p className="text-md text-theme-muted">
               Convert images to Base64 instantly. 100% private—no uploads, ever.
             </p>
           </motion.div>
@@ -229,13 +229,13 @@ function RouteComponent() {
             >
               <div className="flex flex-col items-center space-y-4">
                 <IconCloudUpload
-                  className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-gray-500"} transition-colors`}
+                  className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-theme-muted"} transition-colors`}
                 />
                 <div>
-                  <p className="text-xl font-medium text-gray-500 mb-2">
+                  <p className="text-xl font-medium text-theme-muted mb-2">
                     {isDragging ? "Drop your image here" : "Drag & drop your image here"}
                   </p>
-                  <p className="text-gray-400 mb-4">or</p>
+                  <p className="text-theme-muted mb-4">or</p>
                   <button
                     onClick={() => imageRef.current?.click()}
                     className="text-sm px-3 py-2 bg-blue-700 text-blue-100 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
@@ -245,7 +245,7 @@ function RouteComponent() {
                 </div>
               </div>
             </div>
-            <p className="text-center text-gray-500 text-xs mt-3 flex items-center justify-center gap-1">
+            <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
               🔒 Your files stay on your device. Nothing is uploaded to any server.
             </p>
 
@@ -264,10 +264,10 @@ function RouteComponent() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="bg-gray-100 w-full max-w-4xl rounded-xl shadow-lg p-6"
+              className="bg-theme-surface-muted w-full max-w-4xl rounded-xl shadow-lg p-6"
             >
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold text-gray-700">Base64 Data URI</h3>
+                <h3 className="text-xl font-semibold text-theme-heading">Base64 Data URI</h3>
                 <button
                   onClick={copyToClipboard}
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
@@ -293,10 +293,10 @@ function RouteComponent() {
                 value={base64Result}
                 readOnly
                 rows={8}
-                className="w-full p-4 border border-gray-600 rounded-lg bg-gray-100 text-gray-700 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-4 border border-gray-600 rounded-lg bg-theme-surface-muted text-theme-heading font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Base64 data will appear here..."
               />
-              <p className="text-sm text-gray-400 mt-2">
+              <p className="text-sm text-theme-muted mt-2">
                 Data size: {new Blob([base64Result]).size.toLocaleString()} bytes
               </p>
             </motion.div>
@@ -306,7 +306,7 @@ function RouteComponent() {
             variants={itemVariants}
             className="text-center mt-2"
           >
-            <p className="text-gray-500 text-xs">
+            <p className="text-theme-muted text-xs">
               <sup>*</sup>All major formats supported: JPG, PNG, GIF, SVG, WebP & more.
             </p>
           </motion.div>
@@ -373,7 +373,7 @@ function RouteComponent() {
         />
 
         <div className="mt-8 text-center">
-          <p className="text-gray-400 text-xs text-center">
+          <p className="text-theme-muted text-xs text-center">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"

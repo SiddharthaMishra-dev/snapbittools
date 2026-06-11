@@ -215,10 +215,10 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Image to <span className="text-brand-primary">PDF</span>
           </h1>
-          <p className="text-md text-gray-300">Convert images to PDF instantly. Reorder, resize & compress. 100% private—no uploads.</p>
+          <p className="text-md text-theme-body">Convert images to PDF instantly. Reorder, resize & compress. 100% private—no uploads.</p>
         </div>
 
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -233,10 +233,10 @@ function RouteComponent() {
               }`}
             >
               <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-gray-400"} transition-colors`} />
+                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-theme-muted"} transition-colors`} />
                 <div>
-                  <p className="text-xl font-medium text-gray-100 mb-2">{isDragging ? "Drop images here" : "Drag & drop images here"}</p>
-                  <p className="text-gray-400 mb-4 text-sm">Supports JPG, PNG, WebP, etc.</p>
+                  <p className="text-xl font-medium text-theme-heading mb-2">{isDragging ? "Drop images here" : "Drag & drop images here"}</p>
+                  <p className="text-theme-muted mb-4 text-sm">Supports JPG, PNG, WebP, etc.</p>
                   <button
                     onClick={() => uploadRef.current?.click()}
                     className="px-6 py-2.5 bg-blue-700 text-blue-100 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
@@ -251,8 +251,8 @@ function RouteComponent() {
             {/* Controls & List */}
             {files.length > 0 && (
               <div className="space-y-6">
-                <div className="flex justify-between items-center bg-gray-900/50 p-4 rounded-lg border border-gray-700">
-                  <span className="text-gray-300 font-medium">{files.length} pages ready</span>
+                <div className="flex justify-between items-center bg-theme-surface/50 p-4 rounded-lg border border-theme-border">
+                  <span className="text-theme-body font-medium">{files.length} pages ready</span>
                   <div className="flex gap-3">
                     <button
                       onClick={handleClearAll}
@@ -281,33 +281,33 @@ function RouteComponent() {
                   </div>
                 </div>
 
-                <div className="bg-gray-900/30 rounded-xl p-4 border border-gray-700/50">
-                  <p className="text-gray-400 text-xs mb-3 text-center uppercase tracking-wider font-semibold">Drag to Reorder Pages</p>
+                <div className="bg-theme-surface/30 rounded-xl p-4 border border-theme-border">
+                  <p className="text-theme-muted text-xs mb-3 text-center uppercase tracking-wider font-semibold">Drag to Reorder Pages</p>
                   <Reorder.Group axis="y" values={files} onReorder={setFiles} className="space-y-2">
                     {files.map((file) => (
                       <Reorder.Item
                         key={file.id}
                         value={file}
-                        className="bg-gray-900 rounded-lg border border-gray-800 p-3 flex items-center gap-4 cursor-grab active:cursor-grabbing shadow-sm hover:shadow-md transition-shadow"
+                        className="bg-theme-surface rounded-lg border border-theme-border p-3 flex items-center gap-4 cursor-grab active:cursor-grabbing shadow-sm hover:shadow-md transition-shadow"
                       >
-                        <div className="w-6 flex flex-col items-center justify-center gap-1 text-gray-500">
+                        <div className="w-6 flex flex-col items-center justify-center gap-1 text-theme-muted">
                           <div className="w-1 h-1 rounded-full bg-current"></div>
                           <div className="w-1 h-1 rounded-full bg-current"></div>
                           <div className="w-1 h-1 rounded-full bg-current"></div>
                         </div>
 
-                        <div className="w-12 h-12 bg-gray-900 rounded overflow-hidden flex-shrink-0 border border-gray-700">
+                        <div className="w-12 h-12 bg-theme-surface rounded overflow-hidden flex-shrink-0 border border-theme-border">
                           <img src={file.preview} alt="" className="w-full h-full object-cover" />
                         </div>
 
                         <div className="flex-1 min-w-0">
                           <p className="text-gray-200 text-sm font-medium truncate">{file.name}</p>
-                          <p className="text-gray-500 text-xs text-nowrap mt-0.5">{(file.file.size / 1024).toFixed(1)} KB</p>
+                          <p className="text-theme-muted text-xs text-nowrap mt-0.5">{(file.file.size / 1024).toFixed(1)} KB</p>
                         </div>
 
                         <button
                           onClick={() => handleRemoveFile(file.id)}
-                          className="p-2 text-gray-500 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors"
+                          className="p-2 text-theme-muted hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors"
                         >
                           <IconX className="w-5 h-5" />
                         </button>
@@ -371,7 +371,7 @@ function RouteComponent() {
         <RelatedTools currentToolSlug="image-to-pdf" category="Images" />
 
         <div className="mt-8 text-center">
-          <p className="text-gray-400 text-xs">
+          <p className="text-theme-muted text-xs">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"

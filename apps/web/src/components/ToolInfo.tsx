@@ -68,7 +68,7 @@ export default function ToolInfo({ privacyInfo, faqs }: ToolInfoProps) {
             <IconLock className="text-brand-primary w-8 h-8" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-700 mb-2">100% Client-Side & Private</h3>
+            <h3 className="text-md font-bold text-gray-700 mb-2">100% Client-Side & Private</h3>
             <p className="text-gray-400 text-sm max-w-xl">
               {privacyInfo ||
                 "Your data never leaves your browser. All processing is done locally on your machine, ensuring maximum security and speed. No server calls, no tracking, no risk."}

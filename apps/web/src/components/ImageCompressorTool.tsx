@@ -264,12 +264,12 @@ export function ImageCompressorTool() {
               }`}
             >
               <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`} />
+                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-theme-muted"} transition-colors`} />
                 <div>
-                  <p className="text-xl font-medium text-gray-100 mb-2">
+                  <p className="text-xl font-medium text-theme-heading mb-2">
                     {isDragging ? "Drop your images here" : "Drag & drop your images here"}
                   </p>
-                  <p className="text-gray-400 mb-4">or</p>
+                  <p className="text-theme-muted mb-4">or</p>
                   <button
                     onClick={() => fileInputRef.current?.click()}
                     className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg active:scale-[0.98]"
@@ -279,7 +279,7 @@ export function ImageCompressorTool() {
                 </div>
               </div>
             </div>
-            <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
+            <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
               <IconLock className="w-4 h-4" /> Your files stay on your device. Nothing is uploaded to any server.
             </p>
 
@@ -294,11 +294,11 @@ export function ImageCompressorTool() {
                     type="checkbox"
                     checked={preserveFormat}
                     onChange={(e) => setPreserveFormat(e.target.checked)}
-                    className="w-4 h-4 text-brand-primary bg-gray-800 border-gray-700 rounded focus:ring-brand-primary"
+                    className="w-4 h-4 text-brand-primary bg-theme-surface-muted border-theme-border rounded focus:ring-brand-primary"
                   />
                   <span className="text-sm font-medium text-gray-200">Preserve original format</span>
                 </label>
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-xs text-theme-muted mt-1">
                   {preserveFormat ? "Keep original file formats (PNG, JPEG, etc.)" : "Convert all images to JPEG for better compression"}
                 </p>
               </div>
@@ -316,9 +316,9 @@ export function ImageCompressorTool() {
                     step="0.05"
                     value={quality}
                     onChange={(e) => setQuality(parseFloat(e.target.value))}
-                    className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer slider"
+                    className="w-full h-2 bg-theme-surface-muted rounded-lg appearance-none cursor-pointer slider"
                   />
-                  <div className="flex justify-between text-xs text-gray-400 mt-1">
+                  <div className="flex justify-between text-xs text-theme-muted mt-1">
                     <span>Lower quality</span>
                     <span>Higher quality</span>
                   </div>
@@ -334,7 +334,7 @@ export function ImageCompressorTool() {
                     onChange={(e) => setMaxWidth(parseInt(e.target.value) || 1920)}
                     min="100"
                     max="4000"
-                    className="w-full px-3 py-2 border border-gray-800 rounded bg-gray-900 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 border border-theme-border rounded bg-theme-surface text-theme-heading text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
                 <div>
@@ -345,13 +345,13 @@ export function ImageCompressorTool() {
                     onChange={(e) => setMaxHeight(parseInt(e.target.value) || 1080)}
                     min="100"
                     max="4000"
-                    className="w-full px-3 py-2 border border-gray-800 rounded bg-gray-900 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 border border-theme-border rounded bg-theme-surface text-theme-heading text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
               </div> */}
             </div>
             <div className="w-full flex justify-between items-center mb-3">
-              <h3 className="text-xl font-semibold text-gray-100 m-0">Files ({files.length})</h3>
+              <h3 className="text-xl font-semibold text-theme-heading m-0">Files ({files.length})</h3>
               <div className="flex">
                 {completedCount > 0 && (
                   <button
@@ -394,10 +394,10 @@ export function ImageCompressorTool() {
 
                   <div className="flex-1 min-w-0">
                     <div className=" flex min-w-0 flex-col items-start gap-2 sm:flex-row sm:items-center">
-                      <p className="w-full truncate font-medium text-gray-100 sm:w-auto sm:max-w-[18rem]">{file.name}</p>
+                      <p className="w-full truncate font-medium text-theme-heading sm:w-auto sm:max-w-[18rem]">{file.name}</p>
                     </div>
                     <div className="flex items-center space-x-4  flex-wrap">
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-theme-muted">
                         {formatFileSize(file.originalSize)} &rarr;
                         {file.compressedSize && (
                           <>
@@ -411,7 +411,7 @@ export function ImageCompressorTool() {
                   </div>
 
                   <div className="flex items-center space-x-3 ml-4">
-                    {file.status === "ready" && <span className="text-gray-400 text-sm">Ready</span>}
+                    {file.status === "ready" && <span className="text-theme-muted text-sm">Ready</span>}
                     {file.status === "compressing" && (
                       <div className="flex items-center space-x-2">
                         <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>

@@ -13,6 +13,7 @@ import { AnimatePresence, easeInOut, motion } from "motion/react";
 
 import { tools } from "@/data/tools";
 
+import PageShell from "@/components/PageShell";
 import { getSeoMetadata } from "@/lib/seo";
 import React from "react";
 import Button from "@/components/ui/button";
@@ -94,21 +95,8 @@ function App() {
   }, [active]);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col font-sans">
-      {/* ── subtle dot-grid background ── */}
-      <div
-        className="pointer-events-none fixed inset-0 z-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #cbd5e1 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-          opacity: 0.45,
-          maskImage:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, black 60%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, black 60%, transparent 100%)",
-        }}
-      />
+    <PageShell withDotGrid={false} className="bg-theme-page">
+      <div className="theme-dot-grid pointer-events-none fixed inset-0 z-0" aria-hidden="true" />
 
       {/* ════════════════════════════════
           HERO
@@ -126,9 +114,9 @@ function App() {
             href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-gray-200 bg-white hover:bg-gray-50 shadow-sm rounded-full px-4 py-1.5 text-xs font-semibold text-gray-600 transition-colors no-underline"
+            className="inline-flex items-center gap-2 border border-theme-border bg-theme-surface hover:bg-theme-surface-muted shadow-sm rounded-full px-4 py-1.5 text-xs font-semibold text-theme-body transition-colors no-underline"
           >
-            <IconBrandGithub className="h-3.5 w-3.5 text-gray-500" />
+            <IconBrandGithub className="h-3.5 w-3.5 text-theme-muted" />
             100% Open Source · Star on GitHub
             <IconArrowRight className="h-3 w-3 text-brand-primary" />
           </motion.a>
@@ -136,13 +124,13 @@ function App() {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-[1.08] tracking-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-theme-heading leading-[1.08] tracking-tight"
           >
             {/* animated word */}
             <motion.span
               animate={{ width: wordWidth ? wordWidth + widthSafetyBuffer : "auto" }}
               transition={{ duration: 0.45, ease: easeInOut }}
-              className="inline-flex overflow-hidden text-brand-primary bg-blue-50 border border-blue-200 px-3 py-1 rounded-xl mr-2 align-middle"
+              className="inline-flex overflow-hidden text-brand-primary bg-theme-icon-bg border border-[var(--theme-pseo-accent-border)] px-3 py-1 rounded-xl mr-2 align-middle"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -175,7 +163,7 @@ function App() {
           {/* Subheadline */}
           <motion.p
             variants={itemVariants}
-            className="text-base md:text-lg text-gray-500 max-w-2xl leading-relaxed"
+            className="text-base md:text-lg text-theme-muted max-w-2xl leading-relaxed"
           >
             Professional browser tools for developers and designers. Convert, compress, format,
             and transform files — entirely on your device. No uploads. No accounts. Always free.
@@ -202,7 +190,7 @@ function App() {
           {/* Trust badges */}
           <motion.div
             variants={itemVariants}
-            className="hidden sm:flex flex-wrap justify-center gap-x-6 gap-y-1.5 text-xs text-gray-500 font-medium pt-1"
+            className="hidden sm:flex flex-wrap justify-center gap-x-6 gap-y-1.5 text-xs text-theme-muted font-medium pt-1"
           >
             {[
               "100% Browser-Based",
@@ -233,18 +221,18 @@ function App() {
           />
 
           {/* outer frame border */}
-          <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden"
+          <div className="rounded-2xl border border-theme-border bg-white overflow-hidden"
             style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.9)" }}
           >
             {/* browser top bar */}
-            <div className="bg-[#f5f5f7] border-b border-gray-200/80 px-4 py-3 flex items-center gap-3">
+            <div className="bg-[#f5f5f7] border-b border-theme-border/80 px-4 py-3 flex items-center gap-3">
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
                 <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
                 <div className="w-3 h-3 rounded-full bg-[#28c840]" />
               </div>
               <div className="flex-1 flex justify-center">
-                <div className="bg-white border border-gray-200 rounded-md px-4 py-1 text-xs text-gray-400 font-mono w-56 text-center">
+                <div className="bg-white border border-theme-border rounded-md px-4 py-1 text-xs text-theme-muted font-mono w-56 text-center">
                   snapbittools.com/tools
                 </div>
               </div>
@@ -276,16 +264,16 @@ function App() {
       {/* ════════════════════════════════
           MAIN CONTENT  (light)
       ════════════════════════════════ */}
-      <main className="flex-1 px-4 pb-16 relative z-10 bg-white" id="tools">
+      <main className="flex-1 px-4 pb-16 relative z-10 bg-theme-page" id="tools">
 
         {/* Featured tools */}
         <section className="max-w-7xl mx-auto pt-24 pb-16 fadeElement" id="tools">
           <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">
+              <h2 className="text-2xl font-bold text-theme-heading">
                 Most Used Tools
               </h2>
-              <p className="text-sm text-gray-500 mt-1">Click any tool to open it instantly — no signup needed.</p>
+              <p className="text-sm text-theme-muted mt-1">Click any tool to open it instantly — no signup needed.</p>
             </div>
             <Link
               to="/tools"
@@ -308,21 +296,21 @@ function App() {
                 <Link
                   key={tool.slug}
                   to={tool.href}
-                  className="group relative flex items-start gap-4 p-5 rounded-xl border border-gray-200 bg-white hover:border-brand-primary/40 hover:shadow-md hover:shadow-blue-50 transition-all duration-200 no-underline"
+                  className="group relative flex items-start gap-4 p-5 rounded-xl border border-theme-border bg-theme-card hover:border-brand-primary/40 hover:shadow-md hover:shadow-blue-50 transition-all duration-200 no-underline"
                 >
-                  <div className="w-11 h-11 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-blue-100 transition-colors">
+                  <div className="w-11 h-11 rounded-lg bg-theme-icon-bg flex items-center justify-center shrink-0 group-hover:bg-theme-icon-bg-hover transition-colors">
                     <Icon className="text-brand-primary" size={22} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <h3 className="text-sm font-semibold text-gray-800 group-hover:text-brand-primary transition-colors truncate">
+                      <h3 className="text-sm font-semibold text-theme-heading group-hover:text-brand-primary transition-colors truncate">
                         {tool.name}
                       </h3>
                       {tool.isNew && (
                         <span className="shrink-0 text-[10px] font-bold bg-brand-primary text-white px-1.5 py-0.5 rounded-full">NEW</span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 mt-0.5 leading-relaxed line-clamp-2">
+                    <p className="text-xs text-theme-muted mt-0.5 leading-relaxed line-clamp-2">
                       {tool.description}
                     </p>
                     <span className="mt-2 inline-flex items-center text-xs text-brand-primary font-medium gap-0.5">
@@ -338,7 +326,7 @@ function App() {
 
         {/* Why SnapBit */}
         <section className="max-w-7xl mx-auto py-16 border-t border-gray-100 fadeElement">
-          <h2 className="text-2xl font-bold text-gray-900 mb-10 text-center">
+          <h2 className="text-2xl font-bold text-theme-heading mb-10 text-center">
             Why <span className="text-brand-primary">SnapBit</span> Tools?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -362,7 +350,7 @@ function App() {
 
         {/* Who uses it */}
         <section className="max-w-7xl mx-auto py-16 border-t border-gray-100 fadeElement">
-          <h2 className="text-2xl font-bold text-gray-900 mb-10 text-center">
+          <h2 className="text-2xl font-bold text-theme-heading mb-10 text-center">
             Built for Everyone
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -390,10 +378,10 @@ function App() {
             ].map(({ title, description }) => (
               <div
                 key={title}
-                className="rounded-xl border border-gray-200 bg-white p-6 hover:border-brand-primary/30 hover:shadow-sm transition-all"
+                className="rounded-xl border border-theme-border bg-theme-card p-6 hover:border-brand-primary/30 hover:shadow-sm transition-all"
               >
-                <h4 className="text-base font-bold text-gray-800 mb-2">{title}</h4>
-                <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+                <h4 className="text-base font-bold text-theme-heading mb-2">{title}</h4>
+                <p className="text-sm text-theme-muted leading-relaxed">{description}</p>
               </div>
             ))}
           </div>
@@ -401,10 +389,10 @@ function App() {
 
         {/* Bottom CTA */}
         <section className="max-w-4xl mx-auto py-16 text-center border-t border-gray-100 fadeElement">
-          <h3 className="text-2xl font-bold text-gray-900 mb-3">
+          <h3 className="text-2xl font-bold text-theme-heading mb-3">
             Everything you need, right in the browser
           </h3>
-          <p className="text-gray-500 text-sm max-w-xl mx-auto mb-8 leading-relaxed">
+          <p className="text-theme-muted text-sm max-w-xl mx-auto mb-8 leading-relaxed">
             From Base64 encoding to image compression, JSON formatting to spreadsheet conversion —
             our suite covers the daily file tasks that slow developers and designers down.
           </p>
@@ -419,7 +407,7 @@ function App() {
               href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 border border-gray-200 bg-white text-gray-700 rounded-xl text-sm font-semibold hover:bg-gray-50 transition-colors no-underline"
+              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 border border-theme-border bg-theme-surface text-theme-body rounded-xl text-sm font-semibold hover:bg-theme-surface-muted transition-colors no-underline"
             >
               <IconBrandGithub className="h-4 w-4" />
               Star on GitHub
@@ -429,9 +417,9 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="pb-8 px-4 relative z-10 bg-white border-t border-gray-100">
+      <footer className="pb-8 px-4 relative z-10 bg-theme-page border-t border-theme-border">
         <div className="max-w-4xl mx-auto text-center pt-8">
-          <p className="text-gray-400 text-xs">
+          <p className="text-theme-muted text-xs">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"
@@ -453,7 +441,7 @@ function App() {
           </p>
         </div>
       </footer>
-    </div>
+    </PageShell>
   );
 }
 
@@ -467,11 +455,11 @@ function LightFeatureCard({
   description: string;
 }) {
   return (
-    <div className="flex flex-col gap-3 p-6 rounded-xl border border-gray-200 bg-white hover:border-brand-primary/30 hover:shadow-sm transition-all">
-      <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">{icon}</div>
+    <div className="flex flex-col gap-3 p-6 rounded-xl border border-theme-border bg-theme-card hover:border-brand-primary/30 hover:shadow-sm transition-all">
+      <div className="w-9 h-9 rounded-lg bg-theme-icon-bg flex items-center justify-center">{icon}</div>
       <div>
-        <h4 className="text-sm font-bold text-gray-800 mb-1">{title}</h4>
-        <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+        <h4 className="text-sm font-bold text-theme-heading mb-1">{title}</h4>
+        <p className="text-sm text-theme-muted leading-relaxed">{description}</p>
       </div>
     </div>
   );

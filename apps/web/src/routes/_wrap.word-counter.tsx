@@ -119,10 +119,10 @@ function WordCounterComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Word <span className="text-brand-primary">Counter</span>
           </h1>
-          <p className="text-md text-gray-300">Analyze your text instantly. Count words, characters, sentences and more.</p>
+          <p className="text-md text-theme-body">Analyze your text instantly. Count words, characters, sentences and more.</p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
@@ -131,7 +131,7 @@ function WordCounterComponent() {
               <button
                 onClick={() => transformText("upper")}
                 disabled={!text}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 title="UPPERCASE"
               >
                 <IconLetterCaseUpper className="w-5 h-5" />
@@ -140,7 +140,7 @@ function WordCounterComponent() {
               <button
                 onClick={() => transformText("lower")}
                 disabled={!text}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 title="lowercase"
               >
                 <IconLetterCaseLower className="w-5 h-5" />
@@ -149,7 +149,7 @@ function WordCounterComponent() {
               <button
                 onClick={() => transformText("title")}
                 disabled={!text}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 title="Title Case"
               >
                 <IconLetterCase className="w-5 h-5" />
@@ -196,15 +196,15 @@ function WordCounterComponent() {
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Start typing or paste your content here..."
-                  className="w-full flex-grow min-h-[400px] p-4 bg-gray-900 text-gray-100 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none font-sans text-lg leading-relaxed"
+                  className="w-full flex-grow min-h-[400px] p-4 bg-theme-surface text-theme-heading rounded-lg border border-theme-border focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none font-sans text-lg leading-relaxed"
                   spellCheck={true}
                 />
               </div>
             </div>
 
             <div className="lg:col-span-1 space-y-6">
-              <div className=" rounded-lg shadow-lg p-6 border border-gray-700">
-                <h3 className="text-lg font-semibold text-gray-100 mb-6 flex items-center gap-2 border-b border-gray-700 pb-2">
+              <div className=" rounded-lg shadow-lg p-6 border border-theme-border">
+                <h3 className="text-lg font-semibold text-theme-heading mb-6 flex items-center gap-2 border-b border-theme-border pb-2">
                   <IconHash className="w-5 h-5 text-brand-primary" />
                   Live Statistics
                 </h3>
@@ -215,7 +215,7 @@ function WordCounterComponent() {
                   <StatItem label="Excl. Spaces" value={stats.charactersNoSpaces} icon={<IconLetterCase className="w-4 h-4" />} />
                   <StatItem label="Sentences" value={stats.sentences} icon={<IconFileText className="w-4 h-4" />} />
                   <StatItem label="Paragraphs" value={stats.paragraphs} icon={<IconFileText className="w-4 h-4" />} />
-                  <div className="pt-4 border-t border-gray-700 mt-4">
+                  <div className="pt-4 border-t border-theme-border mt-4">
                     <StatItem label="Reading Time" value={`${stats.readingTime} min`} icon={<IconClock className="w-4 h-4" />} />
                   </div>
                 </div>
@@ -225,7 +225,7 @@ function WordCounterComponent() {
                 <p className="text-sm text-brand-light font-medium italic">
                   "Words are, in my not-so-humble opinion, our most inexhaustible source of magic."
                 </p>
-                <p className="text-xs text-gray-400 mt-2 text-right">— Albus Dumbledore</p>
+                <p className="text-xs text-theme-muted mt-2 text-right">— Albus Dumbledore</p>
               </div>
             </div>
           </div>
@@ -281,7 +281,7 @@ function WordCounterComponent() {
         <RelatedTools currentToolSlug="word-counter" category="Data" />
 
         <footer className="mt-12 text-center">
-          <p className="text-gray-400 text-xs">
+          <p className="text-theme-muted text-xs">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"
@@ -301,11 +301,11 @@ function WordCounterComponent() {
 function StatItem({ label, value, icon }: { label: string; value: string | number; icon: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between group">
-      <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-200 transition-colors">
+      <div className="flex items-center gap-2 text-theme-muted group-hover:text-gray-200 transition-colors">
         {icon}
         <span className="text-sm font-medium">{label}</span>
       </div>
-      <span className="text-lg font-bold text-gray-100">{value}</span>
+      <span className="text-lg font-bold text-theme-heading">{value}</span>
     </div>
   );
 }

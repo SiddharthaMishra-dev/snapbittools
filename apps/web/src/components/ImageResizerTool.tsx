@@ -193,8 +193,8 @@ export function ImageResizerTool() {
             }`}
           >
             <IconCloudUpload className="h-14 w-14 mx-auto text-brand-primary mb-4" />
-            <h2 className="text-2xl font-bold text-gray-100 mb-2">Upload image to resize</h2>
-            <p className="text-gray-300 mb-5">Drag and drop your image here, or click below to choose a file.</p>
+            <h2 className="text-2xl font-bold text-theme-heading mb-2">Upload image to resize</h2>
+            <p className="text-theme-body mb-5">Drag and drop your image here, or click below to choose a file.</p>
             <button
               onClick={() => fileInputRef.current?.click()}
               className="px-6 py-3 bg-brand-primary hover:bg-brand-hover text-white rounded-lg font-medium transition-all duration-200"
@@ -214,10 +214,10 @@ export function ImageResizerTool() {
           </div>
         ) : (
           <div className="space-y-6">
-            <div className="flex items-start justify-between gap-4 rounded-lg border border-gray-700 bg-gray-800/30 p-4">
+            <div className="flex items-start justify-between gap-4 rounded-lg border border-theme-border bg-theme-surface-muted/30 p-4">
               <div>
-                <h3 className="text-lg font-semibold text-gray-100">{sourceFile.name}</h3>
-                <p className="text-sm text-gray-300">
+                <h3 className="text-lg font-semibold text-theme-heading">{sourceFile.name}</h3>
+                <p className="text-sm text-theme-body">
                   Original size: {originalWidth} x {originalHeight}px
                 </p>
               </div>
@@ -231,11 +231,11 @@ export function ImageResizerTool() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="rounded-lg border border-gray-700 bg-gray-800/30 p-4">
+              <div className="rounded-lg border border-theme-border bg-theme-surface-muted/30 p-4">
                 <img src={sourceUrl || ""} alt="Original preview" className="w-full h-auto max-h-96 object-contain rounded-lg" />
               </div>
 
-              <div className="rounded-lg border border-gray-700 bg-gray-800/30 p-5 space-y-5">
+              <div className="rounded-lg border border-theme-border bg-theme-surface-muted/30 p-5 space-y-5">
                 <div>
                   <label className="block text-sm font-medium text-gray-200 mb-2">Width (px)</label>
                   <input
@@ -244,7 +244,7 @@ export function ImageResizerTool() {
                     max={10000}
                     value={targetWidth || ""}
                     onChange={(e) => handleWidthChange(Number(e.target.value || 0))}
-                    className="w-full rounded-md border border-gray-600 bg-gray-900 px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    className="w-full rounded-md border border-gray-600 bg-theme-surface px-3 py-2 text-theme-heading focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
 
@@ -262,10 +262,10 @@ export function ImageResizerTool() {
                     }}
                     className="w-full slider"
                   />
-                  <p className="mt-2 text-sm text-gray-300">{Math.min(300, scalePercent)}%</p>
+                  <p className="mt-2 text-sm text-theme-body">{Math.min(300, scalePercent)}%</p>
                 </div>
 
-                <div className="rounded-md bg-black/20 border border-gray-700 p-3 text-sm text-gray-200 space-y-1">
+                <div className="rounded-md bg-black/20 border border-theme-border p-3 text-sm text-gray-200 space-y-1">
                   <p>
                     Target size: {targetWidth} x {targetHeight}px
                   </p>
@@ -301,7 +301,7 @@ export function ImageResizerTool() {
                 <img
                   src={resizedUrl}
                   alt="Resized preview"
-                  className="w-full h-auto max-h-96 object-contain rounded-lg border border-gray-700"
+                  className="w-full h-auto max-h-96 object-contain rounded-lg border border-theme-border"
                 />
 
                 <p className="text-sm text-green-100">

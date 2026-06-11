@@ -71,10 +71,10 @@ export function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Compress <span className="text-brand-primary">Images</span>
           </h1>
-          <p className="text-md text-gray-300">
+          <p className="text-md text-theme-body">
             Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while preserving quality. 100% client-side—your
             files never leave.
           </p>
@@ -134,7 +134,7 @@ export function RouteComponent() {
       <RelatedTools currentToolSlug="image-compressor" category="Images" />
 
       <div className="mt-8">
-        <p className="text-gray-400 text-xs text-center">
+        <p className="text-theme-muted text-xs text-center">
           Crafted with care by{" "}
           <a
             href="https://sidme.dev/"

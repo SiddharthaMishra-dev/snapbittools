@@ -285,14 +285,14 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Bulk File <span className="text-brand-primary">Renamer</span>
           </h1>
-          <p className="text-md text-gray-300">Rename bulk files securely in your browser.</p>
+          <p className="text-md text-theme-body">Rename bulk files securely in your browser.</p>
         </div>
 
         <main className="flex-1 px-4 relative z-10">
-          <section className="max-w-7xl mx-auto mb-12 rounded-2xl border border-gray-700/50 bg-gray-800/20 p-8 backdrop-blur-sm">
+          <section className="max-w-7xl mx-auto mb-12 rounded-2xl border border-theme-border bg-theme-surface-muted/20 p-8 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -303,7 +303,7 @@ function RouteComponent() {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <IconCloudUpload className="w-5 h-5 text-brand-primary" />
-                  <label className="text-lg font-semibold text-gray-100">Upload Files to Rename</label>
+                  <label className="text-lg font-semibold text-theme-heading">Upload Files to Rename</label>
                 </div>
                 <div
                   onClick={() => fileInputRef.current?.click()}
@@ -318,8 +318,8 @@ function RouteComponent() {
                 >
                   <input ref={fileInputRef} type="file" multiple onChange={(e) => handleFileChange(e.target.files)} className="hidden" />
                   <div className="space-y-2">
-                    <p className="text-gray-300 font-medium">Drag files here or click to select</p>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-theme-body font-medium">Drag files here or click to select</p>
+                    <p className="text-sm text-theme-muted">
                       {files.length > 0 ? `${files.length} file(s) selected` : "Select multiple files to rename"}
                     </p>
                   </div>
@@ -328,7 +328,7 @@ function RouteComponent() {
 
               {/* Pattern Type Selection */}
               <div className="space-y-4">
-                <label className="text-lg font-semibold text-gray-100">Rename Pattern Type</label>
+                <label className="text-lg font-semibold text-theme-heading">Rename Pattern Type</label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {[
                     { id: "sequential", label: "Sequential (1, 2, 3...)" },
@@ -340,7 +340,7 @@ function RouteComponent() {
                       key={type.id}
                       onClick={() => handlePatternTypeChange(type.id as any)}
                       className={`p-3 rounded-lg font-medium transition-colors  border border-gray-600/50 ${
-                        patternType === type.id ? "bg-brand-primary text-white" : "bg-gray-700/20 text-gray-300 hover:bg-gray-600"
+                        patternType === type.id ? "bg-brand-primary text-white" : "bg-gray-700/20 text-theme-body hover:bg-gray-600"
                       }`}
                     >
                       {type.label}
@@ -351,28 +351,28 @@ function RouteComponent() {
 
               {patternType === "sequential" && (
                 <div className="space-y-4">
-                  <label className="text-lg font-semibold text-gray-100">Pattern Template</label>
-                  <p className="text-sm text-gray-400">Use [1] for starting number, e.g., "photo-[1]" becomes "photo-1", "photo-2", etc.</p>
+                  <label className="text-lg font-semibold text-theme-heading">Pattern Template</label>
+                  <p className="text-sm text-theme-muted">Use [1] for starting number, e.g., "photo-[1]" becomes "photo-1", "photo-2", etc.</p>
                   <input
                     type="text"
                     value={renamePattern}
                     onChange={(e) => handlePatternChange(e.target.value)}
                     placeholder="e.g., file-[1] or photo_[1]"
-                    className="w-full px-4 py-3  border border-gray-800 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                    className="w-full px-4 py-3  border border-theme-border rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
                   />
                 </div>
               )}
 
               {patternType === "custom" && (
                 <div className="space-y-4">
-                  <label className="text-lg font-semibold text-gray-100">Custom Sequence Pattern</label>
-                  <p className="text-sm text-gray-400">e.g., "file-[1,2,4,10,15]" renames files with your custom sequence</p>
+                  <label className="text-lg font-semibold text-theme-heading">Custom Sequence Pattern</label>
+                  <p className="text-sm text-theme-muted">e.g., "file-[1,2,4,10,15]" renames files with your custom sequence</p>
                   <input
                     type="text"
                     value={renamePattern}
                     onChange={(e) => handlePatternChange(e.target.value)}
                     placeholder="e.g., photo-[1,2,4,5,10]"
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
                   />
                 </div>
               )}
@@ -381,7 +381,7 @@ function RouteComponent() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-100 mb-2">Find</label>
+                      <label className="block text-sm font-medium text-theme-heading mb-2">Find</label>
                       <input
                         type="text"
                         value={findText}
@@ -391,11 +391,11 @@ function RouteComponent() {
                           updatePreview(files, undefined, newFindText, replaceText);
                         }}
                         placeholder="Text to find"
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-100 mb-2">Replace With</label>
+                      <label className="block text-sm font-medium text-theme-heading mb-2">Replace With</label>
                       <input
                         type="text"
                         value={replaceText}
@@ -405,7 +405,7 @@ function RouteComponent() {
                           updatePreview(files, undefined, findText, newReplaceText);
                         }}
                         placeholder="Replace with text"
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -416,7 +416,7 @@ function RouteComponent() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-100 mb-2">Prefix</label>
+                      <label className="block text-sm font-medium text-theme-heading mb-2">Prefix</label>
                       <input
                         type="text"
                         value={prefix}
@@ -426,11 +426,11 @@ function RouteComponent() {
                           updatePreview(files, undefined, undefined, undefined, newPrefix, suffix);
                         }}
                         placeholder="Add to beginning"
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-100 mb-2">Suffix</label>
+                      <label className="block text-sm font-medium text-theme-heading mb-2">Suffix</label>
                       <input
                         type="text"
                         value={suffix}
@@ -440,7 +440,7 @@ function RouteComponent() {
                           updatePreview(files, undefined, undefined, undefined, prefix, newSuffix);
                         }}
                         placeholder="Add to end"
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -453,22 +453,22 @@ function RouteComponent() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <IconCheck className="w-5 h-5 text-brand-primary" />
-                      <label className="text-lg font-semibold text-gray-100">Preview</label>
+                      <label className="text-lg font-semibold text-theme-heading">Preview</label>
                     </div>
-                    <span className="text-sm text-gray-400">{preview.length} file(s)</span>
+                    <span className="text-sm text-theme-muted">{preview.length} file(s)</span>
                   </div>
                   <div className="bg-gray-700/30 rounded-lg border border-gray-600 max-h-96 overflow-y-auto">
                     <table className="w-full text-sm">
-                      <thead className="sticky top-0 bg-gray-800">
+                      <thead className="sticky top-0 bg-theme-surface-muted">
                         <tr className="border-b border-gray-600">
-                          <th className="px-4 py-3 text-left text-gray-300 font-medium">Original Name</th>
-                          <th className="px-4 py-3 text-left text-gray-300 font-medium">New Name</th>
+                          <th className="px-4 py-3 text-left text-theme-body font-medium">Original Name</th>
+                          <th className="px-4 py-3 text-left text-theme-body font-medium">New Name</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-700">
                         {preview.map((mapping, index) => (
                           <tr key={index} className="hover:bg-gray-700/30">
-                            <td className="px-4 py-3 text-gray-300">{mapping.originalName}</td>
+                            <td className="px-4 py-3 text-theme-body">{mapping.originalName}</td>
                             <td className="px-4 py-3">
                               {mapping.isConflict ? (
                                 <span className="flex items-center gap-2 text-red-400">
@@ -517,7 +517,7 @@ function RouteComponent() {
                   </button>
                   <button
                     onClick={resetForm}
-                    className="flex items-center gap-2 px-6 py-3 bg-gray-700 text-gray-100 rounded-lg font-medium hover:bg-gray-600 transition-colors active:scale-[0.97]"
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-700 text-theme-heading rounded-lg font-medium hover:bg-gray-600 transition-colors active:scale-[0.97]"
                   >
                     <IconRefresh className="w-4 h-4" />
                     Reset
@@ -527,7 +527,7 @@ function RouteComponent() {
 
               <div className="bg-gray-700/20 border border-gray-600/50 rounded-lg p-4 flex items-start gap-3">
                 <IconLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
-                <div className="text-sm text-gray-300">
+                <div className="text-sm text-theme-body">
                   <p className="font-medium">100% Private & Secure</p>
                   <p className="mt-1">
                     All file renaming happens locally in your browser. Your files never leave your device, and the tool never uploads any
@@ -589,7 +589,7 @@ function RouteComponent() {
 
           <RelatedTools currentToolSlug="bulk-file-renamer" />
           <footer className="mt-8 text-center">
-            <p className="text-gray-400 text-xs">
+            <p className="text-theme-muted text-xs">
               Crafted with care by{" "}
               <a
                 href="https://sidme.dev/"

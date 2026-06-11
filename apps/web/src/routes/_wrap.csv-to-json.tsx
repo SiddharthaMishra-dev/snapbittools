@@ -194,10 +194,10 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             CSV to <span className="text-brand-primary">JSON</span>
           </h1>
-          <p className="text-md text-gray-300">Transform CSV data into JSON format securely in your browser.</p>
+          <p className="text-md text-theme-body">Transform CSV data into JSON format securely in your browser.</p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto">
@@ -207,7 +207,7 @@ function RouteComponent() {
 
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
               >
                 <IconUpload className="w-4 h-4" />
                 <span>Upload CSV</span>
@@ -215,7 +215,7 @@ function RouteComponent() {
 
               <button
                 onClick={loadSampleData}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
               >
                 <IconTable className="w-4 h-4" />
                 <span>Sample CSV</span>
@@ -255,7 +255,7 @@ function RouteComponent() {
                 onClick={copyToClipboard}
                 disabled={!jsonOutput}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-                  copySuccess ? "bg-green-800 text-green-200" : "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                  copySuccess ? "bg-green-800 text-green-200" : "bg-gray-700 text-theme-heading hover:bg-gray-600"
                 }`}
               >
                 {copySuccess ? (
@@ -295,37 +295,37 @@ function RouteComponent() {
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
-            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-              <div className="px-4 py-3  border-b border-gray-700 flex justify-between items-center">
-                <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">Input CSV</h3>
-                {input && <span className="text-xs text-gray-500">{(new Blob([input]).size / 1024).toFixed(2)} KB</span>}
+            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-theme-border overflow-hidden">
+              <div className="px-4 py-3  border-b border-theme-border flex justify-between items-center">
+                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Input CSV</h3>
+                {input && <span className="text-xs text-theme-muted">{(new Blob([input]).size / 1024).toFixed(2)} KB</span>}
               </div>
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Paste CSV content here..."
-                className={`flex-1 w-full p-4  text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0 ${
+                className={`flex-1 w-full p-4  text-theme-heading font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0 ${
                   error ? "bg-red-900/10" : ""
                 }`}
                 spellCheck={false}
               />
             </div>
 
-            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-              <div className="px-4 py-3  border-b border-gray-700 flex justify-between items-center">
-                <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">Output JSON</h3>
+            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-theme-border overflow-hidden">
+              <div className="px-4 py-3  border-b border-theme-border flex justify-between items-center">
+                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Output JSON</h3>
                 {stats.rows > 0 && (
                   <span className="text-xs text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-full">
                     {stats.rows} objects • {stats.columns} fields
                   </span>
                 )}
-                {isProcessing && <span className="text-xs text-gray-400">Processing...</span>}
+                {isProcessing && <span className="text-xs text-theme-muted">Processing...</span>}
               </div>
               <textarea
                 readOnly
                 value={jsonOutput}
                 placeholder="JSON output will appear here..."
-                className="flex-1 w-full p-4 bg-gray-900/50 text-green-400 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0"
+                className="flex-1 w-full p-4 bg-theme-surface/50 text-green-400 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0"
                 spellCheck={false}
               />
             </div>
@@ -385,7 +385,7 @@ function RouteComponent() {
         <RelatedTools currentToolSlug="csv-to-json" category="Data" />
 
         <footer className="mt-8 text-center">
-          <p className="text-gray-400 text-xs">
+          <p className="text-theme-muted text-xs">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"

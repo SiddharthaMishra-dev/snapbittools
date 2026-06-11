@@ -455,10 +455,10 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Image <span className="text-brand-primary">Cropper</span>
           </h1>
-          <p className="text-md text-gray-300">Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.</p>
+          <p className="text-md text-theme-body">Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.</p>
         </div>
 
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -474,12 +474,12 @@ function RouteComponent() {
                   }`}
                 >
                   <div className="flex flex-col items-center space-y-4">
-                    <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`} />
+                    <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-theme-muted"} transition-colors`} />
                     <div>
-                      <p className="text-xl font-medium text-gray-100 mb-2">
+                      <p className="text-xl font-medium text-theme-heading mb-2">
                         {isDragging ? "Drop your image here" : "Drag & drop your image here"}
                       </p>
-                      <p className="text-gray-400 mb-4">or</p>
+                      <p className="text-theme-muted mb-4">or</p>
                       <button
                         onClick={() => fileInputRef.current?.click()}
                         disabled={isUploading}
@@ -490,7 +490,7 @@ function RouteComponent() {
                     </div>
                   </div>
                 </div>
-                <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
+                <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
                   🔒 Your files stay on your device. Nothing is uploaded to any server.
                 </p>
 
@@ -499,12 +499,12 @@ function RouteComponent() {
             ) : (
               <>
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-100 mb-4">Crop Controls</h3>
+                  <h3 className="text-lg font-semibold text-theme-heading mb-4">Crop Controls</h3>
 
                   <div className="flex flex-wrap items-center gap-4 mb-4">
                     <button
                       onClick={() => setRotation((prev) => (prev + 90) % 360)}
-                      className="flex items-center space-x-2 px-3 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors"
+                      className="flex items-center space-x-2 px-3 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors"
                     >
                       <IconRotateClockwise className="w-4 h-4" />
                       <span>Rotate</span>
@@ -513,7 +513,7 @@ function RouteComponent() {
                     <button
                       onClick={() => setFlipHorizontal(!flipHorizontal)}
                       className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                        flipHorizontal ? "bg-brand-primary text-white" : "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                        flipHorizontal ? "bg-brand-primary text-white" : "bg-gray-700 text-theme-heading hover:bg-gray-600"
                       }`}
                     >
                       <IconFlipHorizontal className="w-4 h-4" />
@@ -523,7 +523,7 @@ function RouteComponent() {
                     <button
                       onClick={() => setFlipVertical(!flipVertical)}
                       className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                        flipVertical ? "bg-brand-primary text-white" : "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                        flipVertical ? "bg-brand-primary text-white" : "bg-gray-700 text-theme-heading hover:bg-gray-600"
                       }`}
                     >
                       <IconFlipVertical className="w-4 h-4" />
@@ -532,7 +532,7 @@ function RouteComponent() {
                     <button
                       onClick={handleCropVisible}
                       className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                        isCrop ? "bg-brand-primary text-white" : "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                        isCrop ? "bg-brand-primary text-white" : "bg-gray-700 text-theme-heading hover:bg-gray-600"
                       }`}
                     >
                       <IconCrop className="w-4 h-4" />
@@ -543,7 +543,7 @@ function RouteComponent() {
                   {isCrop && (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                       <div>
-                        <label className="block text-gray-300 mb-1">X Position</label>
+                        <label className="block text-theme-body mb-1">X Position</label>
                         <input
                           type="number"
                           value={Math.round(cropArea.x)}
@@ -553,11 +553,11 @@ function RouteComponent() {
                               x: Math.max(0, parseInt(e.target.value) || 0),
                             })
                           }
-                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
+                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-theme-heading text-sm"
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-1">Y Position</label>
+                        <label className="block text-theme-body mb-1">Y Position</label>
                         <input
                           type="number"
                           value={Math.round(cropArea.y)}
@@ -567,11 +567,11 @@ function RouteComponent() {
                               y: Math.max(0, parseInt(e.target.value) || 0),
                             })
                           }
-                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
+                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-theme-heading text-sm"
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-1">Width</label>
+                        <label className="block text-theme-body mb-1">Width</label>
                         <input
                           type="number"
                           value={Math.round(cropArea.width)}
@@ -581,11 +581,11 @@ function RouteComponent() {
                               width: Math.max(20, parseInt(e.target.value) || 20),
                             })
                           }
-                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
+                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-theme-heading text-sm"
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-300 mb-1">Height</label>
+                        <label className="block text-theme-body mb-1">Height</label>
                         <input
                           type="number"
                           value={Math.round(cropArea.height)}
@@ -595,7 +595,7 @@ function RouteComponent() {
                               height: Math.max(20, parseInt(e.target.value) || 20),
                             })
                           }
-                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-gray-100 text-sm"
+                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-theme-heading text-sm"
                         />
                       </div>
                     </div>
@@ -685,7 +685,7 @@ function RouteComponent() {
         <RelatedTools currentToolSlug="image-cropper" category="Images" />
 
         <div className="mt-8">
-          <p className="text-gray-400 text-xs text-center">
+          <p className="text-theme-muted text-xs text-center">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"

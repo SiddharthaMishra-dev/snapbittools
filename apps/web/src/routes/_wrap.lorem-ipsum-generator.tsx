@@ -186,37 +186,37 @@ function LoremIpsumComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Lorem <span className="text-brand-primary">Ipsum</span> Generator
           </h1>
-          <p className="text-md text-gray-300">Instant placeholder text for your next big project.</p>
+          <p className="text-md text-theme-body">Instant placeholder text for your next big project.</p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
-          <div className="rounded-lg shadow-lg p-6 border border-gray-700">
+          <div className="rounded-lg shadow-lg p-6 border border-theme-border">
             <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex flex-col">
-                  <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Quantity</label>
+                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Quantity</label>
                   <input
                     type="number"
                     min="1"
                     max="100"
                     value={count}
                     onChange={(e) => setCount(parseInt(e.target.value) || 1)}
-                    className="w-24 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    className="w-24 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   />
                 </div>
 
                 <div className="flex flex-col">
-                  <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Type</label>
-                  <div className="flex p-1 bg-gray-900 rounded-lg">
+                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Type</label>
+                  <div className="flex p-1 bg-theme-surface rounded-lg">
                     {(["paragraphs", "sentences", "words"] as const).map((t) => (
                       <button
                         key={t}
                         onClick={() => setType(t)}
                         className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                          type === t ? "bg-brand-primary text-white shadow-sm" : "text-gray-400 hover:text-gray-200"
+                          type === t ? "bg-brand-primary text-white shadow-sm" : "text-theme-muted hover:text-gray-200"
                         }`}
                       >
                         {t.charAt(0).toUpperCase() + t.slice(1)}
@@ -229,7 +229,7 @@ function LoremIpsumComponent() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={generateText}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium"
                 >
                   <IconRefresh className="w-5 h-5" />
                   <span>Regenerate</span>
@@ -266,7 +266,7 @@ function LoremIpsumComponent() {
             </div>
           </div>
 
-          <div className="bg-gray-900 rounded-lg shadow-lg p-8 border border-gray-700 min-h-[400px]">
+          <div className="bg-theme-surface rounded-lg shadow-lg p-8 border border-theme-border min-h-[400px]">
             {generatedText ? (
               <div className="prose prose-invert max-w-none">
                 {generatedText.split("\n\n").map((para, i) => (
@@ -276,7 +276,7 @@ function LoremIpsumComponent() {
                 ))}
               </div>
             ) : (
-              <div className="h-full flex flex-col items-center justify-center text-gray-500 py-20">
+              <div className="h-full flex flex-col items-center justify-center text-theme-muted py-20">
                 <IconTypography className="w-16 h-16 opacity-10 mb-4" />
                 <p>Generate some magic text above...</p>
               </div>
@@ -333,7 +333,7 @@ function LoremIpsumComponent() {
 
         <RelatedTools currentToolSlug="lorem-ipsum-generator" category="Data" />
         <footer className="mt-12 text-center">
-          <p className="text-gray-400 text-xs">
+          <p className="text-theme-muted text-xs">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"
