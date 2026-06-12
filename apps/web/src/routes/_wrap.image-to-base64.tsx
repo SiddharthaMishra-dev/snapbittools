@@ -175,17 +175,6 @@ function RouteComponent() {
 
   return (
     <div className="min-h-screen bg-theme-page theme-page-gradient  py-2 px-4 flex flex-col items-center">
-      {/* <div
-        className="pointer-events-none fixed inset-0 z-0"
-        style={{
-          backgroundImage: "radial-gradient(circle, #cbd5e1 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-          opacity: 0.45,
-          maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, black 60%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, black 60%, transparent 100%)",
-        }}
-      /> */}
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <motion.div
@@ -245,7 +234,7 @@ function RouteComponent() {
                 </div>
               </div>
             </div>
-            <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
+            <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1 p-2">
               🔒 Your files stay on your device. Nothing is uploaded to any server.
             </p>
 

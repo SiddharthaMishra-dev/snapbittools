@@ -11,7 +11,7 @@ function FAQItem({ question, answer }: FAQItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-[var(--theme-faq-border)] last:border-0">
+    <div className="border-b border-[var(--theme-faq-border)] last:border-0 cursor-pointer">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left group transition-all"
@@ -83,7 +83,7 @@ export default function FAQ({ faqs }: FAQProps) {
       </motion.div>
       <motion.div
         variants={itemVariants}
-        className="bg-[var(--theme-faq-bg)] border border-[var(--theme-faq-border)] rounded-lg px-4"
+        className="px-4"
       >
         {faqs.map((faq, index) => (
           <FAQItem

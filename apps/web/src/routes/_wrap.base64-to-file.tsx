@@ -352,7 +352,7 @@ function RouteComponent() {
             onChange={(event) => setBase64Input(event.target.value)}
             rows={10}
             placeholder="data:application/pdf;base64,JVBERi0xLjQKJ... or raw Base64"
-            className="w-full p-4 border border-gray-600 rounded-lg bg-gray-700 text-theme-heading font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            className="w-full p-4 border border-gray-600 rounded-lg dark:bg-gray-700 text-theme-heading font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-brand-primary"
           />
 
           {error && <p className="mt-3 text-sm text-red-400">{error}</p>}

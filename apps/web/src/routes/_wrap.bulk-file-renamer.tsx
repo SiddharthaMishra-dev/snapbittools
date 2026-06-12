@@ -20,7 +20,6 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
-import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
   {
@@ -56,7 +55,13 @@ export const Route = createFileRoute("/_wrap/bulk-file-renamer")({
       title: "Bulk File Renamer | Rename Multiple Files Online | SnapBit Tools",
       description:
         "Rename multiple files at once with pattern matching and sequential numbering. Pattern like file-[1,2,3...]. 100% private, browser-based.",
-      keywords: ["bulk rename files", "batch file renamer", "rename multiple files", "file naming pattern", "bulk file management"],
+      keywords: [
+        "bulk rename files",
+        "batch file renamer",
+        "rename multiple files",
+        "file naming pattern",
+        "bulk file management",
+      ],
       url: "/bulk-file-renamer",
       type: "software",
       faqs,
@@ -74,7 +79,9 @@ function RouteComponent() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<File[]>([]);
   const [renamePattern, setRenamePattern] = useState("file-[1]");
-  const [patternType, setPatternType] = useState<"sequential" | "custom" | "findreplace" | "prefix-suffix">("sequential");
+  const [patternType, setPatternType] = useState<
+    "sequential" | "custom" | "findreplace" | "prefix-suffix"
+  >("sequential");
   const [findText, setFindText] = useState("");
   const [replaceText, setReplaceText] = useState("");
   const [prefix, setPrefix] = useState("");
@@ -124,7 +131,12 @@ function RouteComponent() {
         }
 
         case "findreplace":
-          return baseName.replace(new RegExp(currentFindText ?? findText, "g"), currentReplaceText ?? replaceText) + extension;
+          return (
+            baseName.replace(
+              new RegExp(currentFindText ?? findText, "g"),
+              currentReplaceText ?? replaceText,
+            ) + extension
+          );
 
         case "prefix-suffix":
           return `${currentPrefix ?? prefix}${baseName}${currentSuffix ?? suffix}${extension}`;
@@ -208,10 +220,13 @@ function RouteComponent() {
     [files, updatePreview],
   );
 
-  const handlePatternTypeChange = useCallback((type: "sequential" | "custom" | "findreplace" | "prefix-suffix") => {
-    setPatternType(type);
-    setCopySuccess(false);
-  }, []);
+  const handlePatternTypeChange = useCallback(
+    (type: "sequential" | "custom" | "findreplace" | "prefix-suffix") => {
+      setPatternType(type);
+      setCopySuccess(false);
+    },
+    [],
+  );
 
   const downloadFilesAsZip = async () => {
     try {
@@ -303,7 +318,9 @@ function RouteComponent() {
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <IconCloudUpload className="w-5 h-5 text-brand-primary" />
-                  <label className="text-lg font-semibold text-theme-heading">Upload Files to Rename</label>
+                  <label className="text-lg font-semibold text-theme-heading">
+                    Upload Files to Rename
+                  </label>
                 </div>
                 <div
                   onClick={() => fileInputRef.current?.click()}
@@ -316,11 +333,21 @@ function RouteComponent() {
                       : "border-gray-600 hover:border-brand-primary/50 hover:bg-gray-700/30"
                   }`}
                 >
-                  <input ref={fileInputRef} type="file" multiple onChange={(e) => handleFileChange(e.target.files)} className="hidden" />
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    multiple
+                    onChange={(e) => handleFileChange(e.target.files)}
+                    className="hidden"
+                  />
                   <div className="space-y-2">
-                    <p className="text-theme-body font-medium">Drag files here or click to select</p>
+                    <p className="text-theme-body font-medium">
+                      Drag files here or click to select
+                    </p>
                     <p className="text-sm text-theme-muted">
-                      {files.length > 0 ? `${files.length} file(s) selected` : "Select multiple files to rename"}
+                      {files.length > 0
+                        ? `${files.length} file(s) selected`
+                        : "Select multiple files to rename"}
                     </p>
                   </div>
                 </div>
@@ -328,7 +355,9 @@ function RouteComponent() {
 
               {/* Pattern Type Selection */}
               <div className="space-y-4">
-                <label className="text-lg font-semibold text-theme-heading">Rename Pattern Type</label>
+                <label className="text-lg font-semibold text-theme-heading">
+                  Rename Pattern Type
+                </label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {[
                     { id: "sequential", label: "Sequential (1, 2, 3...)" },
@@ -340,7 +369,9 @@ function RouteComponent() {
                       key={type.id}
                       onClick={() => handlePatternTypeChange(type.id as any)}
                       className={`p-3 rounded-lg font-medium transition-colors  border border-gray-600/50 ${
-                        patternType === type.id ? "bg-brand-primary text-white" : "bg-gray-700/20 text-theme-body hover:bg-gray-600"
+                        patternType === type.id
+                          ? "bg-brand-primary text-white"
+                          : "dark:bg-gray-700/20 text-theme-body hover:dark:bg-gray-600 hover:bg-gray-200"
                       }`}
                     >
                       {type.label}
@@ -351,8 +382,13 @@ function RouteComponent() {
 
               {patternType === "sequential" && (
                 <div className="space-y-4">
-                  <label className="text-lg font-semibold text-theme-heading">Pattern Template</label>
-                  <p className="text-sm text-theme-muted">Use [1] for starting number, e.g., "photo-[1]" becomes "photo-1", "photo-2", etc.</p>
+                  <label className="text-lg font-semibold text-theme-heading">
+                    Pattern Template
+                  </label>
+                  <p className="text-sm text-theme-muted">
+                    Use [1] for starting number, e.g., "photo-[1]" becomes "photo-1", "photo-2",
+                    etc.
+                  </p>
                   <input
                     type="text"
                     value={renamePattern}
@@ -365,8 +401,12 @@ function RouteComponent() {
 
               {patternType === "custom" && (
                 <div className="space-y-4">
-                  <label className="text-lg font-semibold text-theme-heading">Custom Sequence Pattern</label>
-                  <p className="text-sm text-theme-muted">e.g., "file-[1,2,4,10,15]" renames files with your custom sequence</p>
+                  <label className="text-lg font-semibold text-theme-heading">
+                    Custom Sequence Pattern
+                  </label>
+                  <p className="text-sm text-theme-muted">
+                    e.g., "file-[1,2,4,10,15]" renames files with your custom sequence
+                  </p>
                   <input
                     type="text"
                     value={renamePattern}
@@ -381,7 +421,9 @@ function RouteComponent() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-theme-heading mb-2">Find</label>
+                      <label className="block text-sm font-medium text-theme-heading mb-2">
+                        Find
+                      </label>
                       <input
                         type="text"
                         value={findText}
@@ -395,7 +437,9 @@ function RouteComponent() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-theme-heading mb-2">Replace With</label>
+                      <label className="block text-sm font-medium text-theme-heading mb-2">
+                        Replace With
+                      </label>
                       <input
                         type="text"
                         value={replaceText}
@@ -416,7 +460,9 @@ function RouteComponent() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-theme-heading mb-2">Prefix</label>
+                      <label className="block text-sm font-medium text-theme-heading mb-2">
+                        Prefix
+                      </label>
                       <input
                         type="text"
                         value={prefix}
@@ -430,7 +476,9 @@ function RouteComponent() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-theme-heading mb-2">Suffix</label>
+                      <label className="block text-sm font-medium text-theme-heading mb-2">
+                        Suffix
+                      </label>
                       <input
                         type="text"
                         value={suffix}
@@ -461,13 +509,20 @@ function RouteComponent() {
                     <table className="w-full text-sm">
                       <thead className="sticky top-0 bg-theme-surface-muted">
                         <tr className="border-b border-gray-600">
-                          <th className="px-4 py-3 text-left text-theme-body font-medium">Original Name</th>
-                          <th className="px-4 py-3 text-left text-theme-body font-medium">New Name</th>
+                          <th className="px-4 py-3 text-left text-theme-body font-medium">
+                            Original Name
+                          </th>
+                          <th className="px-4 py-3 text-left text-theme-body font-medium">
+                            New Name
+                          </th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-700">
                         {preview.map((mapping, index) => (
-                          <tr key={index} className="hover:bg-gray-700/30">
+                          <tr
+                            key={index}
+                            className="hover:bg-gray-700/30"
+                          >
                             <td className="px-4 py-3 text-theme-body">{mapping.originalName}</td>
                             <td className="px-4 py-3">
                               {mapping.isConflict ? (
@@ -492,7 +547,8 @@ function RouteComponent() {
                   {preview.some((m) => m.isConflict) && (
                     <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-4">
                       <p className="text-yellow-500 text-sm font-medium">
-                        ⚠️ Warning: Some files have naming conflicts. They are marked above and won't be included in the ZIP download.
+                        ⚠️ Warning: Some files have naming conflicts. They are marked above and
+                        won't be included in the ZIP download.
                       </p>
                     </div>
                   )}
@@ -530,8 +586,8 @@ function RouteComponent() {
                 <div className="text-sm text-theme-body">
                   <p className="font-medium">100% Private & Secure</p>
                   <p className="mt-1">
-                    All file renaming happens locally in your browser. Your files never leave your device, and the tool never uploads any
-                    data to servers.
+                    All file renaming happens locally in your browser. Your files never leave your
+                    device, and the tool never uploads any data to servers.
                   </p>
                 </div>
               </div>
@@ -572,7 +628,8 @@ function RouteComponent() {
               },
               {
                 title: "Choose Pattern",
-                description: "Select a naming pattern type (sequential, custom, find-replace, prefix-suffix)",
+                description:
+                  "Select a naming pattern type (sequential, custom, find-replace, prefix-suffix)",
               },
               {
                 title: "Preview Changes",

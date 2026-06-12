@@ -79,6 +79,18 @@
   --theme-tool-dropzone-active: rgba(239, 246, 255, 1);
   --theme-code-bg: #f3f4f6;
   --theme-code-text: #111827;
+  --theme-btn-primary-bg: #2563eb;
+  --theme-btn-primary-text: #ffffff;
+  --theme-btn-primary-hover: #1d4ed8;
+  --theme-btn-secondary-bg: #f3f4f6;
+  --theme-btn-secondary-text: #374151;
+  --theme-btn-secondary-hover: #e5e7eb;
+  --theme-btn-secondary-border: #e5e7eb;
+  --theme-btn-success-bg: #dcfce7;
+  --theme-btn-success-text: #166534;
+  --theme-btn-danger-bg: #fee2e2;
+  --theme-btn-danger-text: #991b1b;
+  --theme-btn-danger-hover: #fecaca;
 
   --bg-gradient-from: #1f2937;
   --bg-gradient-to: #0f172a;
@@ -294,6 +306,18 @@ code {
   --theme-tool-dropzone-active: rgba(30, 58, 138, 0.2);
   --theme-code-bg: #1f2937;
   --theme-code-text: #f3f4f6;
+  --theme-btn-primary-bg: #2563eb;
+  --theme-btn-primary-text: #eff6ff;
+  --theme-btn-primary-hover: #1d4ed8;
+  --theme-btn-secondary-bg: #374151;
+  --theme-btn-secondary-text: #f3f4f6;
+  --theme-btn-secondary-hover: #4b5563;
+  --theme-btn-secondary-border: #4b5563;
+  --theme-btn-success-bg: #14532d;
+  --theme-btn-success-text: #bbf7d0;
+  --theme-btn-danger-bg: #7f1d1d;
+  --theme-btn-danger-text: #fecaca;
+  --theme-btn-danger-hover: #991b1b;
 }
 
 @layer base {
@@ -357,6 +381,43 @@ code {
       var(--theme-pseo-emerald-to)
     );
     border: 1px solid var(--theme-pseo-emerald-border);
+  }
+
+  .theme-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .theme-btn-primary {
+    background-color: var(--theme-btn-primary-bg);
+    color: var(--theme-btn-primary-text);
+  }
+
+  .theme-btn-primary:hover:not(:disabled) {
+    background-color: var(--theme-btn-primary-hover);
+  }
+
+  .theme-btn-secondary {
+    background-color: var(--theme-btn-secondary-bg);
+    color: var(--theme-btn-secondary-text);
+    border: 1px solid var(--theme-btn-secondary-border);
+  }
+
+  .theme-btn-secondary:hover:not(:disabled) {
+    background-color: var(--theme-btn-secondary-hover);
+  }
+
+  .theme-btn-success {
+    background-color: var(--theme-btn-success-bg);
+    color: var(--theme-btn-success-text);
+  }
+
+  .theme-btn-danger {
+    background-color: var(--theme-btn-danger-bg);
+    color: var(--theme-btn-danger-text);
+  }
+
+  .theme-btn-danger:hover:not(:disabled) {
+    background-color: var(--theme-btn-danger-hover);
   }
 }
 

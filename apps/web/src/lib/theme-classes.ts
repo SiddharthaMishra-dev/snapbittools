@@ -16,4 +16,9 @@ export const themeClasses = {
   iconBadge: "bg-theme-icon-bg group-hover:bg-theme-icon-bg-hover",
   input: "bg-theme-input-bg border-theme-border text-theme-heading",
   code: "bg-theme-code-bg text-theme-code-text",
+  btn: "theme-btn",
+  btnPrimary: "theme-btn theme-btn-primary",
+  btnSecondary: "theme-btn theme-btn-secondary",
+  btnSuccess: "theme-btn theme-btn-success",
+  btnDanger: "theme-btn theme-btn-danger",
 } as const;
