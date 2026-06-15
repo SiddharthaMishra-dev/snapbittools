@@ -56,7 +56,7 @@ export const Route = createFileRoute("/")({
 function App() {
   const ButtonLink = createLink(Button);
   const rotatingWords = ["Free", "Private", "Fast"];
-  const widthSafetyBuffer = 15;
+  const widthSafetyBuffer = 24;
   const wordMeasureRefs = React.useRef<Array<HTMLSpanElement | null>>([]);
 
   const [active, setActive] = React.useState(0);
@@ -130,7 +130,7 @@ function App() {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-theme-heading leading-[1.08] tracking-tight"
+            className="text-4xl md:text-4xl lg:text-4xl font-extrabold text-theme-heading leading-[1.08] tracking-tight"
           >
             {/* animated word */}
             <motion.span
@@ -165,7 +165,7 @@ function App() {
                   ref={(el) => {
                     wordMeasureRefs.current[idx] = el;
                   }}
-                  className="inline-block whitespace-nowrap text-4xl md:text-6xl lg:text-7xl"
+                  className="inline-block whitespace-nowrap text-4xl md:text-4xl lg:text-4xl"
                 >
                   {word}
                 </span>
@@ -244,9 +244,15 @@ function App() {
               </div>
 
               <img
-                src="/screenshot.png"
+                src="/light.png"
                 alt="SnapBit Tools interface preview"
-                className="w-full block"
+                className="w-full block dark:hidden"
+                loading="eager"
+              />
+              <img
+                src="/dark.png"
+                alt="SnapBit Tools interface preview"
+                className="w-full hidden dark:block"
                 loading="eager"
               />
             </div>
