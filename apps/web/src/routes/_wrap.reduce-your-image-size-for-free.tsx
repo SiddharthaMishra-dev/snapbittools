@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 
-import Breadcrumbs from "@/components/Breadcrumbs";
 import RelatedTools from "@/components/RelatedTools";
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 const PUBLISHED_DATE = "2026-03-19";
 const MODIFIED_DATE = "2026-03-19";
@@ -153,36 +154,36 @@ const reasons = [
     number: "01",
     title: "Faster Page Load Times",
     desc: "Studies show that a one-second delay in page load time can cause a 7% drop in conversions. Smaller images translate directly to faster load speeds, keeping visitors engaged instead of bouncing.",
-    colorClass: "bg-blue-900/10 border-blue-500/20",
-    numberClass: "text-blue-400",
+    colorClass: "bg-brand-primary/10 border-brand-primary/20",
+    numberClass: "text-brand-primary",
   },
   {
     number: "02",
     title: "Better Search Engine Rankings",
     desc: "Google uses page speed as a ranking factor. Properly optimized images improve your Core Web Vitals — particularly Largest Contentful Paint (LCP) — which directly impacts how Google ranks your pages.",
-    colorClass: "bg-blue-900/10 border-blue-500/20",
-    numberClass: "text-blue-400",
+    colorClass: "bg-brand-primary/10 border-brand-primary/20",
+    numberClass: "text-brand-primary",
   },
   {
     number: "03",
     title: "Reduced Bandwidth & Hosting Costs",
     desc: "Every byte you shave off an image reduces server bandwidth on every page load. For high-traffic sites, this can translate to significant savings on hosting and CDN costs.",
-    colorClass: "bg-blue-900/10 border-blue-500/20",
-    numberClass: "text-blue-400",
+    colorClass: "bg-brand-primary/10 border-brand-primary/20",
+    numberClass: "text-brand-primary",
   },
   {
     number: "04",
     title: "Better Mobile Experience",
     desc: "Mobile users often browse on slower data connections. Compressed images load significantly faster on mobile, reducing frustration and unnecessary data usage for your visitors.",
-    colorClass: "bg-blue-900/10 border-blue-500/20",
-    numberClass: "text-blue-400",
+    colorClass: "bg-brand-primary/10 border-brand-primary/20",
+    numberClass: "text-brand-primary",
   },
   {
     number: "05",
     title: "Improved Email Deliverability",
     desc: "Large embedded images in emails cause them to land in spam or take forever to load. Compressing email images ensures your campaigns render fast and consistently reach inboxes.",
-    colorClass: "bg-blue-900/10 border-blue-500/20",
-    numberClass: "text-blue-400",
+    colorClass: "bg-brand-primary/10 border-brand-primary/20",
+    numberClass: "text-brand-primary",
   },
 ];
 
@@ -229,11 +230,14 @@ function BlogPage() {
         {/* Article Header */}
         <header className="mb-12 mt-4">
           <div className="flex flex-wrap items-center gap-2 text-sm mb-5">
-            <span className="bg-blue-500/10 border border-blue-500/30 rounded-full px-3 py-0.5 text-xs font-medium text-blue-400">
+            <span className="bg-brand-primary/10 border border-brand-primary/30 rounded-full px-3 py-0.5 text-xs font-medium text-brand-primary">
               Image Optimization
             </span>
             <span className="text-theme-body">·</span>
-            <time dateTime={PUBLISHED_DATE} className="text-theme-muted text-xs">
+            <time
+              dateTime={PUBLISHED_DATE}
+              className="text-theme-muted text-xs"
+            >
               March 19, 2026
             </time>
             <span className="text-theme-body">·</span>
@@ -245,24 +249,30 @@ function BlogPage() {
           </h1>
 
           <p className="text-lg text-theme-muted leading-relaxed">
-            Large images slow down your website, hurt your search rankings, and frustrate users. Here's everything you need to know about
-            image compression — and how to shrink your files in seconds using SnapBit Tools.
+            Large images slow down your website, hurt your search rankings, and frustrate users.
+            Here's everything you need to know about image compression — and how to shrink your
+            files in seconds using SnapBit Tools.
           </p>
 
           <div className="mt-6 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-primary to-violet-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
               S
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-200">Siddhartha Mishra</p>
+              <p className="text-sm font-medium text-theme-heading">Siddhartha Mishra</p>
               <p className="text-xs text-theme-muted">SnapBit Tools</p>
             </div>
           </div>
         </header>
 
         {/* Table of Contents */}
-        <nav className="mb-14 p-6 bg-theme-surface/50 border border-theme-border rounded-lg" aria-label="Article contents">
-          <h2 className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-4">Table of Contents</h2>
+        <nav
+          className="mb-14 p-6 bg-theme-surface/50 border border-theme-border rounded-lg"
+          aria-label="Article contents"
+        >
+          <h2 className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-4">
+            Table of Contents
+          </h2>
           <ol className="space-y-2.5 text-sm">
             {[
               ["#what-is-image-compression", "What Is Image Compression?"],
@@ -273,9 +283,15 @@ function BlogPage() {
               ["#privacy-matters", "Privacy First: Why No-Upload Tools Are Better"],
               ["#faqs", "Frequently Asked Questions"],
             ].map(([href, text]) => (
-              <li key={href} className="flex items-center gap-1.5">
+              <li
+                key={href}
+                className="flex items-center gap-1.5"
+              >
                 <IconChevronRight className="w-3.5 h-3.5 text-theme-body shrink-0" />
-                <a href={href} className="text-blue-400 hover:text-blue-300 hover:underline transition-colors">
+                <a
+                  href={href}
+                  className="text-brand-primary hover:text-brand-hover hover:underline transition-colors"
+                >
                   {text}
                 </a>
               </li>
@@ -286,13 +302,19 @@ function BlogPage() {
         {/* Article Body */}
         <article className="space-y-20">
           {/* ── Section 1: What Is Image Compression ── */}
-          <section id="what-is-image-compression" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">What Is Image Compression?</h2>
-            <div className="prose prose-lg prose-invert max-w-none text-theme-body">
+          <section
+            id="what-is-image-compression"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              What Is Image Compression?
+            </h2>
+            <div className="prose prose-lg max-w-none text-theme-body">
               <p>
-                Image compression is the process of reducing an image file's size by eliminating redundant or less perceptible data. The
-                goal is a smaller file that retains as much visual quality as possible — often indistinguishable from the original for
-                everyday web and print use.
+                Image compression is the process of reducing an image file's size by eliminating
+                redundant or less perceptible data. The goal is a smaller file that retains as much
+                visual quality as possible — often indistinguishable from the original for everyday
+                web and print use.
               </p>
               <p className="mt-4">There are two main types of image compression:</p>
             </div>
@@ -301,33 +323,45 @@ function BlogPage() {
               <div className="p-5 bg-theme-surface border border-theme-border rounded-lg">
                 <h3 className="font-semibold text-theme-heading mb-2">Lossy Compression</h3>
                 <p className="text-sm text-theme-muted leading-relaxed">
-                  Permanently removes some image data to achieve smaller file sizes. Used by JPEG and WebP. Best for photographs where minor
-                  quality reduction at extreme ratios is acceptable.
+                  Permanently removes some image data to achieve smaller file sizes. Used by JPEG
+                  and WebP. Best for photographs where minor quality reduction at extreme ratios is
+                  acceptable.
                 </p>
               </div>
               <div className="p-5 bg-theme-surface border border-theme-border rounded-lg">
                 <h3 className="font-semibold text-theme-heading mb-2">Lossless Compression</h3>
                 <p className="text-sm text-theme-muted leading-relaxed">
-                  Reduces file size without any loss of quality by encoding data more efficiently. Used by PNG and GIF. Best for logos,
-                  icons, and graphics with text or sharp edges.
+                  Reduces file size without any loss of quality by encoding data more efficiently.
+                  Used by PNG and GIF. Best for logos, icons, and graphics with text or sharp edges.
                 </p>
               </div>
             </div>
           </section>
 
           {/* ── Section 2: Why It Matters ── */}
-          <section id="why-it-matters" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Why Image Compression Matters</h2>
+          <section
+            id="why-it-matters"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              Why Image Compression Matters
+            </h2>
             <p className="text-theme-body leading-relaxed mb-8">
-              Images account for more than 50% of the average web page's total weight. Unoptimized images are among the biggest culprits
-              behind slow websites, inflated hosting costs, and poor user experiences. Here's why compression should be part of every web
+              Images account for more than 50% of the average web page's total weight. Unoptimized
+              images are among the biggest culprits behind slow websites, inflated hosting costs,
+              and poor user experiences. Here's why compression should be part of every web
               workflow:
             </p>
 
             <div className="space-y-4">
               {reasons.map(({ number, title, desc, colorClass, numberClass }) => (
-                <div key={number} className={`flex gap-4 p-4 border rounded-lg ${colorClass}`}>
-                  <span className={`font-mono font-bold text-lg shrink-0 ${numberClass}`}>{number}</span>
+                <div
+                  key={number}
+                  className={`flex gap-4 p-4 border rounded-lg ${colorClass}`}
+                >
+                  <span className={`font-mono font-bold text-lg shrink-0 ${numberClass}`}>
+                    {number}
+                  </span>
                   <div>
                     <h3 className="font-semibold text-theme-heading mb-1">{title}</h3>
                     <p className="text-sm text-theme-muted leading-relaxed">{desc}</p>
@@ -338,11 +372,16 @@ function BlogPage() {
           </section>
 
           {/* ── Section 3: How Much Can You Save ── */}
-          <section id="how-much-can-you-save" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">How Much Can You Actually Save?</h2>
+          <section
+            id="how-much-can-you-save"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              How Much Can You Actually Save?
+            </h2>
             <p className="text-theme-body leading-relaxed mb-6">
-              The savings from image compression are often dramatic. Here's what typical compression looks like across different image
-              formats when using a modern compressor:
+              The savings from image compression are often dramatic. Here's what typical compression
+              looks like across different image formats when using a modern compressor:
             </p>
 
             <div className="overflow-x-auto rounded-lg border border-theme-border">
@@ -350,65 +389,91 @@ function BlogPage() {
                 <thead className="bg-theme-surface">
                   <tr className="border-b border-theme-border">
                     <th className="text-left py-3 px-4 text-theme-muted font-medium">Format</th>
-                    <th className="text-left py-3 px-4 text-theme-muted font-medium">Original Size</th>
-                    <th className="text-left py-3 px-4 text-theme-muted font-medium">Compressed Size</th>
+                    <th className="text-left py-3 px-4 text-theme-muted font-medium">
+                      Original Size
+                    </th>
+                    <th className="text-left py-3 px-4 text-theme-muted font-medium">
+                      Compressed Size
+                    </th>
                     <th className="text-left py-3 px-4 text-theme-muted font-medium">Savings</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-800/60">
+                <tbody className="divide-y divide-theme-border">
                   {compressionStats.map((row) => (
-                    <tr key={row.format} className="hover:bg-theme-surface-muted/20 transition-colors">
-                      <td className="py-3 px-4 text-gray-200 font-medium">{row.format}</td>
+                    <tr
+                      key={row.format}
+                      className="hover:bg-theme-surface-muted/20 transition-colors"
+                    >
+                      <td className="py-3 px-4 text-theme-heading font-medium">{row.format}</td>
                       <td className="py-3 px-4 text-theme-muted">{row.original}</td>
                       <td className="py-3 px-4 text-theme-muted">{row.compressed}</td>
-                      <td className="py-3 px-4 text-emerald-400 font-semibold">{row.savings}</td>
+                      <td className="py-3 px-4 text-[var(--theme-diff-added-text)] font-semibold">
+                        {row.savings}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
             <p className="text-xs text-theme-body mt-3">
-              * Estimates based on typical scenarios. Results vary depending on image content, original quality, and chosen compression
-              settings.
+              * Estimates based on typical scenarios. Results vary depending on image content,
+              original quality, and chosen compression settings.
             </p>
           </section>
 
           {/* ── Section 4: Formats Explained ── */}
-          <section id="formats-explained" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Image Formats Explained</h2>
+          <section
+            id="formats-explained"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              Image Formats Explained
+            </h2>
             <p className="text-theme-body leading-relaxed mb-6">
-              Choosing the right format is just as important as the compression settings. Here's a quick reference guide to help you decide:
+              Choosing the right format is just as important as the compression settings. Here's a
+              quick reference guide to help you decide:
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4">
               {formatCards.map(({ format, best, pro, con }) => (
-                <div key={format} className="p-5 bg-theme-surface/50 border border-theme-border rounded-lg">
-                  <h3 className="font-bold text-theme-heading text-sm uppercase tracking-wider mb-3">{format}</h3>
-                  <p className="text-xs text-blue-400 mb-2">
+                <div
+                  key={format}
+                  className="p-5 bg-theme-surface/50 border border-theme-border rounded-lg"
+                >
+                  <h3 className="font-bold text-theme-heading text-sm uppercase tracking-wider mb-3">
+                    {format}
+                  </h3>
+                  <p className="text-xs text-brand-primary mb-2">
                     <span className="font-medium">Best for:</span> {best}
                   </p>
-                  <p className="text-xs text-emerald-400 mb-1.5">✓ {pro}</p>
-                  <p className="text-xs text-red-400">✗ {con}</p>
+                  <p className="text-xs text-[var(--theme-diff-added-text)] mb-1.5">✓ {pro}</p>
+                  <p className="text-xs text-[var(--theme-alert-error-text)]">✗ {con}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* ── Section 5: Step-by-Step ── */}
-          <section id="step-by-step" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">How to Compress Images with SnapBit Tools — Step by Step</h2>
+          <section
+            id="step-by-step"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              How to Compress Images with SnapBit Tools — Step by Step
+            </h2>
             <p className="text-theme-body leading-relaxed mb-8">
-              SnapBit Tools' free image compressor makes it easy to reduce image file sizes in seconds — no account required, no software to
-              install, and no files ever leave your device.
+              SnapBit Tools' free image compressor makes it easy to reduce image file sizes in
+              seconds — no account required, no software to install, and no files ever leave your
+              device.
             </p>
 
             <div className="space-y-4">
               {steps.map(({ step, title, desc }) => (
                 <div
                   key={step}
-                  className="flex gap-4 p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg hover:border-blue-500/30 hover:bg-theme-surface transition-all duration-200"
+                  className="flex gap-4 p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg hover:border-brand-primary/30 hover:bg-theme-surface transition-all duration-200"
                 >
-                  <div className="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-sm shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-brand-primary/20 border border-brand-primary/30 flex items-center justify-center text-brand-primary font-bold text-sm shrink-0">
                     {step}
                   </div>
                   <div>
@@ -422,7 +487,10 @@ function BlogPage() {
             <div className="mt-8">
               <Link
                 to="/image-compressor"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 group"
+                className={cn(
+                  tc.btnPrimary,
+                  "inline-flex items-center gap-2 font-semibold px-6 py-3 group",
+                )}
               >
                 Open Image Compressor — It's Free
                 <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -431,16 +499,24 @@ function BlogPage() {
           </section>
 
           {/* ── Section 6: Privacy ── */}
-          <section id="privacy-matters" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Privacy First: Why No-Upload Tools Are Better</h2>
+          <section
+            id="privacy-matters"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              Privacy First: Why No-Upload Tools Are Better
+            </h2>
             <p className="text-theme-body leading-relaxed mb-6">
-              Most online image compressors work by uploading your images to a remote server, processing them there, and returning the
-              result. This raises serious privacy concerns — especially for sensitive images like personal photos, legal documents, or
+              Most online image compressors work by uploading your images to a remote server,
+              processing them there, and returning the result. This raises serious privacy concerns
+              — especially for sensitive images like personal photos, legal documents, or
               proprietary product assets.
             </p>
 
-            <div className="p-6 bg-emerald-900/20 border border-emerald-500/30 rounded-lg mb-6">
-              <h3 className="font-semibold text-emerald-300 mb-4">SnapBit Tools is Different</h3>
+            <div className={cn(tc.diffAdded, "p-6 border border-theme-border rounded-lg mb-6")}>
+              <h3 className="font-semibold text-[var(--theme-diff-added-text)] mb-4">
+                SnapBit Tools is Different
+              </h3>
               <ul className="space-y-3 text-sm text-theme-body">
                 {[
                   "Your images are processed entirely in your browser using JavaScript — no server involved",
@@ -449,8 +525,11 @@ function BlogPage() {
                   "Zero data retention — close the tab and everything is gone",
                   "No account, no sign-up, and no tracking of your images whatsoever",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5">
-                    <span className="text-emerald-400 mt-0.5 shrink-0">✓</span>
+                  <li
+                    key={item}
+                    className="flex items-start gap-2.5"
+                  >
+                    <span className="text-[var(--theme-diff-added-text)] mt-0.5 shrink-0">✓</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -458,19 +537,25 @@ function BlogPage() {
             </div>
 
             <p className="text-theme-body leading-relaxed">
-              This client-side approach isn't just more private — it's also faster, since there's no waiting for file uploads or server
-              processing. Your compression happens at the speed of your own device.
+              This client-side approach isn't just more private — it's also faster, since there's no
+              waiting for file uploads or server processing. Your compression happens at the speed
+              of your own device.
             </p>
           </section>
 
           {/* ── FAQ Section ── */}
-          <section id="faqs" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-8">Frequently Asked Questions</h2>
+          <section
+            id="faqs"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-8">
+              Frequently Asked Questions
+            </h2>
             <div className="space-y-4">
               {faqs.map((faq, index) => (
                 <details
                   key={index}
-                  className="group bg-theme-surface-muted border border-theme-border rounded-lg p-6 cursor-pointer hover:border-blue-500/50 hover:bg-theme-surface transition-all duration-200"
+                  className="group bg-theme-surface-muted border border-theme-border rounded-lg p-6 cursor-pointer hover:border-brand-primary/50 hover:bg-theme-surface transition-all duration-200"
                 >
                   <summary className="font-semibold text-base flex items-center justify-between text-theme-heading cursor-pointer list-none">
                     {faq.question}
@@ -484,15 +569,20 @@ function BlogPage() {
 
           {/* ── Final CTA ── */}
           <section>
-            <div className="p-4 sm:p-6 bg-gradient-to-br from-blue-900/30 to-gray-900/50 border border-blue-500/30 rounded-lg text-center">
-              <h2 className="text-lg sm:text-xl font-bold text-theme-heading mb-3">Ready to Compress Your Images?</h2>
+            <div className="p-4 sm:p-6 bg-brand-primary/10 border border-brand-primary/30 rounded-lg text-center">
+              <h2 className="text-lg sm:text-xl font-bold text-theme-heading mb-3">
+                Ready to Compress Your Images?
+              </h2>
               <p className="text-theme-muted mb-4 text-md max-w-md mx-auto leading-relaxed">
-                Try SnapBit Tools' free, private, browser-based image compressor. No sign-up, no uploads, no limits — just fast, instant
-                compression right in your browser.
+                Try SnapBit Tools' free, private, browser-based image compressor. No sign-up, no
+                uploads, no limits — just fast, instant compression right in your browser.
               </p>
               <Link
                 to="/image-compressor"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 group"
+                className={cn(
+                  tc.btnPrimary,
+                  "inline-flex items-center gap-2 font-semibold px-8 py-3 group",
+                )}
               >
                 Compress Images Now — Free
                 <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -503,7 +593,11 @@ function BlogPage() {
 
         {/* Related Tools */}
         <div className="mt-20">
-          <RelatedTools currentToolSlug="image-compressor" category="Images" maxTools={4} />
+          <RelatedTools
+            currentToolSlug="image-compressor"
+            category="Images"
+            maxTools={4}
+          />
         </div>
       </div>
     </div>

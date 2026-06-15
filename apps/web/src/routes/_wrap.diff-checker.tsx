@@ -8,6 +8,8 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
 import { computeDiff, DiffLine } from "@/lib/diffFn";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
@@ -96,22 +98,20 @@ function RouteComponent() {
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setViewMode("split")}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
-                viewMode === "split"
-                  ? "bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white"
-                  : "text-theme-muted hover:bg-gray-700/50 hover:text-gray-200"
-              }`}
+              className={cn(
+                "flex items-center space-x-2 px-4 py-2 rounded-lg transition-all",
+                viewMode === "split" ? tc.toggleActive : tc.toggleInactive,
+              )}
             >
               <IconColumns className="w-4 h-4" />
               <span className="text-sm font-medium">Split View</span>
             </button>
             <button
               onClick={() => setViewMode("unified")}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
-                viewMode === "unified"
-                  ? "bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white"
-                  : "text-theme-muted hover:bg-gray-700/50 hover:text-gray-200"
-              }`}
+              className={cn(
+                "flex items-center space-x-2 px-4 py-2 rounded-lg transition-all",
+                viewMode === "unified" ? tc.toggleActive : tc.toggleInactive,
+              )}
             >
               <IconLayoutList className="w-4 h-4" />
               <span className="text-sm font-medium">Unified View</span>
@@ -122,21 +122,21 @@ function RouteComponent() {
             <button
               onClick={handleSwap}
               title="Swap Inputs"
-              className="p-2 text-theme-muted hover:bg-gray-700/50 hover:text-brand-primary rounded-lg transition-all"
+              className={cn(tc.toggleInactive, "p-2 rounded-lg hover:text-brand-primary")}
             >
               <IconArrowsExchange className="w-5 h-5" />
             </button>
             <button
               onClick={handleClear}
               title="Clear All"
-              className="p-2 text-theme-muted hover:bg-red-900/20 hover:text-red-400 rounded-lg transition-all"
+              className={cn(tc.btnDanger, "p-2")}
             >
               <IconTrash className="w-5 h-5" />
             </button>
             <button
               onClick={handleCopyResult}
               disabled={diffResult.length === 0}
-              className="flex items-center space-x-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-all text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}
             >
               <IconCopy className="w-4 h-4" />
               <span>{copyStatus || "Copy Diff"}</span>
@@ -150,7 +150,7 @@ function RouteComponent() {
             <label className="text-sm font-medium text-theme-muted ml-1 uppercase tracking-wider">Original Text (Old)</label>
             <textarea
               placeholder="Paste your original text here..."
-              className="w-full h-64 p-4  border border-theme-border rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
+              className={cn(tc.field, "w-full h-64 p-4 font-mono text-sm leading-relaxed")}
               value={oldText}
               onChange={(e) => setOldText(e.target.value)}
             />
@@ -159,7 +159,7 @@ function RouteComponent() {
             <label className="text-sm font-medium text-theme-muted ml-1 uppercase tracking-wider">Changed Text (New)</label>
             <textarea
               placeholder="Paste your modified text here..."
-              className="w-full h-64 p-4  border border-theme-border rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
+              className={cn(tc.field, "w-full h-64 p-4 font-mono text-sm leading-relaxed")}
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
             />
@@ -249,18 +249,19 @@ function SplitView({ diff }: { diff: DiffLine[] }) {
   }
 
   return (
-    <div className="grid grid-cols-2 divide-x divide-gray-800 min-w-[800px]">
+    <div className="grid grid-cols-2 divide-x divide-theme-border min-w-[800px]">
       <div className="font-mono text-sm">
         {diff.map((line, idx) => (
           <div
             key={`left-${idx}`}
-            className={`flex items-start ${
+            className={cn(
+              "flex items-start py-0.5 px-4 min-h-[24px]",
               line.type === "removed"
-                ? "bg-red-900/20 text-red-200"
+                ? tc.diffRemoved
                 : line.type === "added"
                   ? "invisible pointer-events-none"
-                  : "text-theme-muted"
-            } py-0.5 px-4 min-h-[24px]`}
+                  : "text-theme-muted",
+            )}
           >
             <span className="w-8 flex-shrink-0 text-theme-body select-none text-right mr-4 leading-6">{line.oldLineNumber || ""}</span>
             <span className="flex-1 whitespace-pre-wrap break-all leading-6">{line.type === "added" ? "" : line.value}</span>
@@ -273,13 +274,14 @@ function SplitView({ diff }: { diff: DiffLine[] }) {
         {diff.map((line, idx) => (
           <div
             key={`right-${idx}`}
-            className={`flex items-start ${
+            className={cn(
+              "flex items-start py-0.5 px-4 min-h-[24px] border-l border-theme-border",
               line.type === "added"
-                ? "bg-green-900/20 text-green-200"
+                ? tc.diffAdded
                 : line.type === "removed"
                   ? "invisible pointer-events-none"
-                  : "text-theme-muted"
-            } py-0.5 px-4 min-h-[24px] border-l border-theme-border`}
+                  : "text-theme-muted",
+            )}
           >
             <span className="w-8 flex-shrink-0 text-theme-body select-none text-right mr-4 leading-6">{line.newLineNumber || ""}</span>
             <span className="flex-1 whitespace-pre-wrap break-all leading-6">{line.type === "removed" ? "" : line.value}</span>
@@ -300,13 +302,14 @@ function UnifiedView({ diff }: { diff: DiffLine[] }) {
       {diff.map((line, idx) => (
         <div
           key={`unified-${idx}`}
-          className={`flex items-start px-4 py-0.5 ${
+          className={cn(
+            "flex items-start px-4 py-0.5",
             line.type === "added"
-              ? "bg-green-900/20 text-green-200"
+              ? tc.diffAdded
               : line.type === "removed"
-                ? "bg-red-900/20 text-red-200"
-                : "text-theme-muted"
-          }`}
+                ? tc.diffRemoved
+                : "text-theme-muted",
+          )}
         >
           <div className="flex w-16 flex-shrink-0 select-none text-right mr-4 space-x-2 text-theme-body">
             <span className="w-7">{line.oldLineNumber || ""}</span>

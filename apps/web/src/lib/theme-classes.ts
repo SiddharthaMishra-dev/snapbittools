@@ -21,4 +21,11 @@ export const themeClasses = {
   btnSecondary: "theme-btn theme-btn-secondary",
   btnSuccess: "theme-btn theme-btn-success",
   btnDanger: "theme-btn theme-btn-danger",
+  field: "theme-field",
+  diffAdded: "theme-diff-added",
+  diffRemoved: "theme-diff-removed",
+  alertError: "theme-alert-error",
+  badgeWarn: "theme-badge-warning",
+  toggleActive: "theme-toggle-active",
+  toggleInactive: "theme-toggle-inactive",
 } as const;

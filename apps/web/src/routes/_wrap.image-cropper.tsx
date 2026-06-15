@@ -16,6 +16,8 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 const faqs = [
   {
@@ -462,19 +464,22 @@ function RouteComponent() {
         </div>
 
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-          <div className=" rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl">
+          <div className="rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface">
             {!image ? (
               <>
                 <div
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
-                  className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                    isDragging ? "border-brand-primary bg-brand-primary/20" : "border-gray-600 hover:border-brand-primary/40 "
-                  }`}
+                  className={cn(
+                    "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
+                    isDragging
+                      ? "border-brand-primary bg-brand-primary/20"
+                      : "border-theme-border hover:border-brand-primary/40",
+                  )}
                 >
                   <div className="flex flex-col items-center space-y-4">
-                    <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-theme-muted"} transition-colors`} />
+                    <IconCloudUpload className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")} />
                     <div>
                       <p className="text-xl font-medium text-theme-heading mb-2">
                         {isDragging ? "Drop your image here" : "Drag & drop your image here"}
@@ -483,7 +488,7 @@ function RouteComponent() {
                       <button
                         onClick={() => fileInputRef.current?.click()}
                         disabled={isUploading}
-                        className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover disabled:opacity-50 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                        className={cn(tc.btnPrimary, "text-sm px-3 py-2 shadow-md hover:shadow-lg")}
                       >
                         {isUploading ? "Loading..." : "Choose Image"}
                       </button>
@@ -504,7 +509,7 @@ function RouteComponent() {
                   <div className="flex flex-wrap items-center gap-4 mb-4">
                     <button
                       onClick={() => setRotation((prev) => (prev + 90) % 360)}
-                      className="flex items-center space-x-2 px-3 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors"
+                      className={cn(tc.btnSecondary, "px-3 py-2")}
                     >
                       <IconRotateClockwise className="w-4 h-4" />
                       <span>Rotate</span>
@@ -512,9 +517,11 @@ function RouteComponent() {
 
                     <button
                       onClick={() => setFlipHorizontal(!flipHorizontal)}
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                        flipHorizontal ? "bg-brand-primary text-white" : "bg-gray-700 text-theme-heading hover:bg-gray-600"
-                      }`}
+                      className={cn(
+                        tc.btn,
+                        "px-3 py-2",
+                        flipHorizontal ? tc.toggleActive : "theme-btn-secondary",
+                      )}
                     >
                       <IconFlipHorizontal className="w-4 h-4" />
                       <span>Flip H</span>
@@ -522,18 +529,22 @@ function RouteComponent() {
 
                     <button
                       onClick={() => setFlipVertical(!flipVertical)}
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                        flipVertical ? "bg-brand-primary text-white" : "bg-gray-700 text-theme-heading hover:bg-gray-600"
-                      }`}
+                      className={cn(
+                        tc.btn,
+                        "px-3 py-2",
+                        flipVertical ? tc.toggleActive : "theme-btn-secondary",
+                      )}
                     >
                       <IconFlipVertical className="w-4 h-4" />
                       <span>Flip V</span>
                     </button>
                     <button
                       onClick={handleCropVisible}
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
-                        isCrop ? "bg-brand-primary text-white" : "bg-gray-700 text-theme-heading hover:bg-gray-600"
-                      }`}
+                      className={cn(
+                        tc.btn,
+                        "px-3 py-2",
+                        isCrop ? tc.toggleActive : "theme-btn-secondary",
+                      )}
                     >
                       <IconCrop className="w-4 h-4" />
                       <span>{isCrop ? "Hide Crop" : "Show Crop"}</span>
@@ -553,7 +564,7 @@ function RouteComponent() {
                               x: Math.max(0, parseInt(e.target.value) || 0),
                             })
                           }
-                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-theme-heading text-sm"
+                          className={cn(tc.field, "w-full px-2 py-1 text-sm")}
                         />
                       </div>
                       <div>
@@ -567,7 +578,7 @@ function RouteComponent() {
                               y: Math.max(0, parseInt(e.target.value) || 0),
                             })
                           }
-                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-theme-heading text-sm"
+                          className={cn(tc.field, "w-full px-2 py-1 text-sm")}
                         />
                       </div>
                       <div>
@@ -581,7 +592,7 @@ function RouteComponent() {
                               width: Math.max(20, parseInt(e.target.value) || 20),
                             })
                           }
-                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-theme-heading text-sm"
+                          className={cn(tc.field, "w-full px-2 py-1 text-sm")}
                         />
                       </div>
                       <div>
@@ -595,7 +606,7 @@ function RouteComponent() {
                               height: Math.max(20, parseInt(e.target.value) || 20),
                             })
                           }
-                          className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-theme-heading text-sm"
+                          className={cn(tc.field, "w-full px-2 py-1 text-sm")}
                         />
                       </div>
                     </div>
@@ -609,13 +620,13 @@ function RouteComponent() {
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseUp}
-                    className="border-2 border-gray-600 rounded-lg cursor-default"
+                    className="border-2 border-theme-border rounded-lg cursor-default bg-theme-surface-muted"
                   />
                 </div>
                 <div className="flex justify-between items-center">
                   <button
                     onClick={resetImage}
-                    className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200"
+                    className={cn(tc.btnDanger, "px-4 py-2")}
                   >
                     Clear Image
                   </button>
@@ -623,7 +634,7 @@ function RouteComponent() {
                   <button
                     onClick={downloadCroppedImage}
                     disabled={!isCrop}
-                    className="px-6 py-2 bg-green-700 text-green-100 rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium shadow-md hover:shadow-lg flex items-center space-x-2"
+                    className={cn(tc.btnSuccess, "px-6 py-2 shadow-md hover:shadow-lg")}
                   >
                     <IconDownload className="w-4 h-4" />
                     <span>Download Cropped Image</span>

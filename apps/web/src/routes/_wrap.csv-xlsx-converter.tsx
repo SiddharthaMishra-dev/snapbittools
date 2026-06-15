@@ -16,6 +16,8 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
@@ -253,19 +255,22 @@ function RouteComponent() {
         </div>
 
         <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
-          <div className=" rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
+          <div className="rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface">
             {conversions.length === 0 ? (
               <>
                 <div
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
-                  className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                    isDragging ? "border-brand-primary bg-brand-primary/20" : "border-gray-600 hover:border-brand-primary/40 "
-                  }`}
+                  className={cn(
+                    "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
+                    isDragging
+                      ? "border-brand-primary bg-brand-primary/20"
+                      : "border-theme-border hover:border-brand-primary/40",
+                  )}
                 >
                   <div className="flex flex-col items-center space-y-4">
-                    <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-theme-muted"} transition-colors`} />
+                    <IconCloudUpload className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")} />
                     <div>
                       <p className="text-xl font-medium text-theme-heading mb-2">
                         {isDragging ? "Drop your files here" : "Drag & drop CSV or XLSX files here"}
@@ -273,7 +278,7 @@ function RouteComponent() {
                       <p className="text-theme-muted mb-4">or</p>
                       <button
                         onClick={() => uploadRef.current?.click()}
-                        className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                        className={cn(tc.btnPrimary, "text-sm px-3 py-2 shadow-md hover:shadow-lg")}
                       >
                         Choose Files
                       </button>
@@ -298,7 +303,7 @@ function RouteComponent() {
                   <h3 className="text-xl font-semibold text-theme-heading mb-4">Files ({conversions.length})</h3>
                   <button
                     onClick={clearAll}
-                    className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200"
+                    className={cn(tc.btnDanger, "px-4 py-2")}
                   >
                     Clear All
                   </button>
@@ -306,8 +311,8 @@ function RouteComponent() {
 
                 <div className="space-y-3">
                   {conversions.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700">
-                      <div className="mr-4 flex-shrink-0">
+                    <div key={item.id} className="flex items-center justify-between p-4 border border-theme-border rounded-lg bg-theme-surface-muted">
+                      <div className="mr-4 shrink-0">
                         {item.originalFormat === "CSV" ? (
                           <IconFileText className="w-10 h-10 text-brand-primary" />
                         ) : (
@@ -318,11 +323,11 @@ function RouteComponent() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center space-x-2 mb-1">
                           <p className="font-medium text-theme-heading truncate">{item.name}</p>
-                          <span className="text-xs px-2 py-1 bg-gray-600 text-theme-body rounded">
+                          <span className="text-xs px-2 py-1 bg-theme-icon-bg text-theme-body rounded">
                             {item.originalFormat} → {item.targetFormat.toUpperCase()}
                           </span>
                         </div>
-                        {item.error && <p className="text-xs text-red-400 mt-1">{item.error}</p>}
+                        {item.error && <p className="text-xs text-[var(--theme-alert-error-text)] mt-1">{item.error}</p>}
                       </div>
 
                       <div className="flex items-center space-x-3 ml-4">
@@ -336,12 +341,12 @@ function RouteComponent() {
                         {item.status === "completed" && (
                           <button
                             onClick={() => downloadFile(item)}
-                            className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
+                            className={cn(tc.btnSuccess, "px-3 py-1 text-sm")}
                           >
                             <IconDownload className="w-4 h-4" />
                           </button>
                         )}
-                        {item.status === "error" && <IconCircleX className="w-4 h-4 text-red-400" />}
+                        {item.status === "error" && <IconCircleX className="w-4 h-4 text-[var(--theme-alert-error-icon)]" />}
                       </div>
                     </div>
                   ))}

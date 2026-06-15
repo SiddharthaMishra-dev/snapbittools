@@ -91,6 +91,17 @@
   --theme-btn-danger-bg: #fee2e2;
   --theme-btn-danger-text: #991b1b;
   --theme-btn-danger-hover: #fecaca;
+  --theme-diff-added-bg: #dcfce7;
+  --theme-diff-added-text: #166534;
+  --theme-diff-removed-bg: #fee2e2;
+  --theme-diff-removed-text: #991b1b;
+  --theme-alert-error-bg: #fef2f2;
+  --theme-alert-error-border: #fecaca;
+  --theme-alert-error-text: #b91c1c;
+  --theme-alert-error-icon: #ef4444;
+  --theme-badge-warning-bg: #fef9c3;
+  --theme-badge-warning-text: #a16207;
+  --theme-badge-warning-border: #fde047;
 
   --bg-gradient-from: #1f2937;
   --bg-gradient-to: #0f172a;
@@ -318,6 +329,17 @@ code {
   --theme-btn-danger-bg: #7f1d1d;
   --theme-btn-danger-text: #fecaca;
   --theme-btn-danger-hover: #991b1b;
+  --theme-diff-added-bg: rgba(20, 83, 45, 0.25);
+  --theme-diff-added-text: #bbf7d0;
+  --theme-diff-removed-bg: rgba(127, 29, 29, 0.25);
+  --theme-diff-removed-text: #fecaca;
+  --theme-alert-error-bg: rgba(127, 29, 29, 0.25);
+  --theme-alert-error-border: rgba(185, 28, 28, 0.45);
+  --theme-alert-error-text: #fca5a5;
+  --theme-alert-error-icon: #f87171;
+  --theme-badge-warning-bg: rgba(113, 63, 18, 0.25);
+  --theme-badge-warning-text: #fde68a;
+  --theme-badge-warning-border: rgba(202, 138, 4, 0.45);
 }
 
 @layer base {
@@ -418,6 +440,45 @@ code {
 
   .theme-btn-danger:hover:not(:disabled) {
     background-color: var(--theme-btn-danger-hover);
+  }
+
+  .theme-field {
+    @apply bg-theme-input-bg border border-theme-border text-theme-heading rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary;
+  }
+
+  .theme-diff-added {
+    background-color: var(--theme-diff-added-bg);
+    color: var(--theme-diff-added-text);
+  }
+
+  .theme-diff-removed {
+    background-color: var(--theme-diff-removed-bg);
+    color: var(--theme-diff-removed-text);
+  }
+
+  .theme-alert-error {
+    background-color: var(--theme-alert-error-bg);
+    border: 1px solid var(--theme-alert-error-border);
+    color: var(--theme-alert-error-text);
+  }
+
+  .theme-badge-warning {
+    background-color: var(--theme-badge-warning-bg);
+    color: var(--theme-badge-warning-text);
+    border: 1px solid var(--theme-badge-warning-border);
+  }
+
+  .theme-toggle-active {
+    @apply bg-brand-primary text-white shadow-sm;
+  }
+
+  .theme-toggle-inactive {
+    @apply text-theme-muted hover:bg-theme-surface-muted hover:text-theme-heading;
+  }
+
+  /* Hero screenshot frame shadow */
+  .hero-preview-wrap {
+    filter: drop-shadow(0 18px 40px color-mix(in srgb, var(--brand-primary) 10%, transparent));
   }
 }
 

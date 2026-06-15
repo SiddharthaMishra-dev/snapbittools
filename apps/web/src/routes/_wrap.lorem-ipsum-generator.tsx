@@ -7,6 +7,8 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 const LOREM_WORDS = [
@@ -204,7 +206,7 @@ function LoremIpsumComponent() {
                     max="100"
                     value={count}
                     onChange={(e) => setCount(parseInt(e.target.value) || 1)}
-                    className="w-24 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    className={cn(tc.field, "w-24 px-3 py-2")}
                   />
                 </div>
 
@@ -215,9 +217,10 @@ function LoremIpsumComponent() {
                       <button
                         key={t}
                         onClick={() => setType(t)}
-                        className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                          type === t ? "bg-brand-primary text-white shadow-sm" : "text-theme-muted hover:text-gray-200"
-                        }`}
+                        className={cn(
+                          "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
+                          type === t ? tc.toggleActive : tc.toggleInactive,
+                        )}
                       >
                         {t.charAt(0).toUpperCase() + t.slice(1)}
                       </button>
@@ -229,7 +232,7 @@ function LoremIpsumComponent() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={generateText}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium"
+                  className={cn(tc.btnSecondary, "px-5 py-2.5")}
                 >
                   <IconRefresh className="w-5 h-5" />
                   <span>Regenerate</span>
@@ -238,9 +241,11 @@ function LoremIpsumComponent() {
                 <button
                   onClick={copyToClipboard}
                   disabled={!generatedText}
-                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-                    copySuccess ? "bg-green-800 text-green-200" : "bg-brand-primary text-white hover:bg-brand-hover"
-                  }`}
+                  className={cn(
+                    tc.btn,
+                    "px-5 py-2.5",
+                    copySuccess ? "theme-btn-success" : "theme-btn-primary",
+                  )}
                 >
                   {copySuccess ? (
                     <>
@@ -257,7 +262,7 @@ function LoremIpsumComponent() {
 
                 <button
                   onClick={clearText}
-                  className="p-2.5 text-red-400 hover:bg-red-400/10 rounded-lg transition-colors border border-transparent hover:border-red-400/20"
+                  className={cn(tc.btnDanger, "p-2.5")}
                   title="Clear"
                 >
                   <IconTrash className="w-5 h-5" />
@@ -268,9 +273,9 @@ function LoremIpsumComponent() {
 
           <div className="bg-theme-surface rounded-lg shadow-lg p-8 border border-theme-border min-h-[400px]">
             {generatedText ? (
-              <div className="prose prose-invert max-w-none">
+              <div className="max-w-none">
                 {generatedText.split("\n\n").map((para, i) => (
-                  <p key={i} className="text-gray-200 text-xl leading-relaxed mb-6 last:mb-0">
+                  <p key={i} className="text-theme-body text-xl leading-relaxed mb-6 last:mb-0">
                     {para}
                   </p>
                 ))}

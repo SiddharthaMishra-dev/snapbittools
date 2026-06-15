@@ -16,6 +16,8 @@ interface ImageItem {
 }
 
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
@@ -222,24 +224,27 @@ function RouteComponent() {
         </div>
 
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-          <div className=" backdrop-blur-sm rounded-xl  w-full p-6 shadow-xl">
+          <div className="backdrop-blur-sm rounded-xl w-full p-6 shadow-xl border border-theme-border bg-theme-surface">
             {/* Upload Area */}
             <div
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              className={`border-3 border-dashed rounded-xl p-8 text-center transition-all duration-300 mb-6 ${
-                isDragging ? "border-blue-500 bg-blue-900/20" : "border-gray-600 hover:border-blue-400 "
-              }`}
+              className={cn(
+                "border-3 border-dashed rounded-xl p-8 text-center transition-all duration-300 mb-6",
+                isDragging
+                  ? "border-brand-primary bg-brand-primary/20"
+                  : "border-theme-border hover:border-brand-primary/40",
+              )}
             >
               <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-theme-muted"} transition-colors`} />
+                <IconCloudUpload className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")} />
                 <div>
                   <p className="text-xl font-medium text-theme-heading mb-2">{isDragging ? "Drop images here" : "Drag & drop images here"}</p>
                   <p className="text-theme-muted mb-4 text-sm">Supports JPG, PNG, WebP, etc.</p>
                   <button
                     onClick={() => uploadRef.current?.click()}
-                    className="px-6 py-2.5 bg-blue-700 text-blue-100 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                    className={cn(tc.btnPrimary, "px-6 py-2.5 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5")}
                   >
                     Select Images
                   </button>
@@ -256,7 +261,7 @@ function RouteComponent() {
                   <div className="flex gap-3">
                     <button
                       onClick={handleClearAll}
-                      className="px-4 py-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors text-sm font-medium flex items-center gap-2"
+                      className={cn(tc.btnDanger, "px-4 py-2 text-sm")}
                     >
                       <IconTrash className="w-4 h-4" />
                       Clear All
@@ -264,7 +269,7 @@ function RouteComponent() {
                     <button
                       onClick={handleConvertToPdf}
                       disabled={isGenerating}
-                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors font-medium shadow-md flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className={cn(tc.btnPrimary, "px-6 py-2 shadow-md")}
                     >
                       {isGenerating ? (
                         <>
@@ -301,13 +306,13 @@ function RouteComponent() {
                         </div>
 
                         <div className="flex-1 min-w-0">
-                          <p className="text-gray-200 text-sm font-medium truncate">{file.name}</p>
+                          <p className="text-theme-heading text-sm font-medium truncate">{file.name}</p>
                           <p className="text-theme-muted text-xs text-nowrap mt-0.5">{(file.file.size / 1024).toFixed(1)} KB</p>
                         </div>
 
                         <button
                           onClick={() => handleRemoveFile(file.id)}
-                          className="p-2 text-theme-muted hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors"
+                          className={cn(tc.btnDanger, "p-2 rounded-full")}
                         >
                           <IconX className="w-5 h-5" />
                         </button>
@@ -377,7 +382,7 @@ function RouteComponent() {
               href="https://sidme.dev/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 transition-colors"
+              className="text-brand-primary hover:text-brand-hover transition-colors"
             >
               sidme
             </a>

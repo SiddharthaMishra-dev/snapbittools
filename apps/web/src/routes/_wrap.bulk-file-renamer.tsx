@@ -20,6 +20,8 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 const faqs = [
   {
@@ -327,11 +329,12 @@ function RouteComponent() {
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
-                  className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
+                  className={cn(
+                    "border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors",
                     isDragging
                       ? "border-brand-primary bg-brand-primary/10"
-                      : "border-gray-600 hover:border-brand-primary/50 hover:bg-gray-700/30"
-                  }`}
+                      : "border-theme-border hover:border-brand-primary/50 hover:bg-theme-surface-muted",
+                  )}
                 >
                   <input
                     ref={fileInputRef}
@@ -368,11 +371,10 @@ function RouteComponent() {
                     <button
                       key={type.id}
                       onClick={() => handlePatternTypeChange(type.id as any)}
-                      className={`p-3 rounded-lg font-medium transition-colors  border border-gray-600/50 ${
-                        patternType === type.id
-                          ? "bg-brand-primary text-white"
-                          : "dark:bg-gray-700/20 text-theme-body hover:dark:bg-gray-600 hover:bg-gray-200"
-                      }`}
+                      className={cn(
+                        "p-3 rounded-lg font-medium transition-colors border border-theme-border",
+                        patternType === type.id ? tc.toggleActive : tc.toggleInactive,
+                      )}
                     >
                       {type.label}
                     </button>
@@ -394,7 +396,7 @@ function RouteComponent() {
                     value={renamePattern}
                     onChange={(e) => handlePatternChange(e.target.value)}
                     placeholder="e.g., file-[1] or photo_[1]"
-                    className="w-full px-4 py-3  border border-theme-border rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                    className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
                   />
                 </div>
               )}
@@ -412,7 +414,7 @@ function RouteComponent() {
                     value={renamePattern}
                     onChange={(e) => handlePatternChange(e.target.value)}
                     placeholder="e.g., photo-[1,2,4,5,10]"
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                    className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
                   />
                 </div>
               )}
@@ -433,7 +435,7 @@ function RouteComponent() {
                           updatePreview(files, undefined, newFindText, replaceText);
                         }}
                         placeholder="Text to find"
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                        className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
                       />
                     </div>
                     <div>
@@ -449,7 +451,7 @@ function RouteComponent() {
                           updatePreview(files, undefined, findText, newReplaceText);
                         }}
                         placeholder="Replace with text"
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                        className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
                       />
                     </div>
                   </div>
@@ -472,7 +474,7 @@ function RouteComponent() {
                           updatePreview(files, undefined, undefined, undefined, newPrefix, suffix);
                         }}
                         placeholder="Add to beginning"
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                        className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
                       />
                     </div>
                     <div>
@@ -488,7 +490,7 @@ function RouteComponent() {
                           updatePreview(files, undefined, undefined, undefined, prefix, newSuffix);
                         }}
                         placeholder="Add to end"
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-theme-heading placeholder-gray-500 focus:border-brand-primary focus:outline-none transition-colors"
+                        className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
                       />
                     </div>
                   </div>
@@ -505,10 +507,10 @@ function RouteComponent() {
                     </div>
                     <span className="text-sm text-theme-muted">{preview.length} file(s)</span>
                   </div>
-                  <div className="bg-gray-700/30 rounded-lg border border-gray-600 max-h-96 overflow-y-auto">
+                  <div className="bg-theme-surface-muted rounded-lg border border-theme-border max-h-96 overflow-y-auto">
                     <table className="w-full text-sm">
                       <thead className="sticky top-0 bg-theme-surface-muted">
-                        <tr className="border-b border-gray-600">
+                        <tr className="border-b border-theme-border">
                           <th className="px-4 py-3 text-left text-theme-body font-medium">
                             Original Name
                           </th>
@@ -517,16 +519,16 @@ function RouteComponent() {
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-700">
+                      <tbody className="divide-y divide-theme-border">
                         {preview.map((mapping, index) => (
                           <tr
                             key={index}
-                            className="hover:bg-gray-700/30"
+                            className="hover:bg-theme-surface"
                           >
                             <td className="px-4 py-3 text-theme-body">{mapping.originalName}</td>
                             <td className="px-4 py-3">
                               {mapping.isConflict ? (
-                                <span className="flex items-center gap-2 text-red-400">
+                                <span className="flex items-center gap-2 text-[var(--theme-alert-error-text)]">
                                   <IconX className="w-4 h-4" />
                                   {mapping.newName} (conflict)
                                 </span>
@@ -545,8 +547,8 @@ function RouteComponent() {
 
                   {/* Conflict Warning */}
                   {preview.some((m) => m.isConflict) && (
-                    <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-4">
-                      <p className="text-yellow-500 text-sm font-medium">
+                    <div className={cn(tc.alertError, "rounded-lg p-4")}>
+                      <p className="text-sm font-medium">
                         ⚠️ Warning: Some files have naming conflicts. They are marked above and
                         won't be included in the ZIP download.
                       </p>
@@ -559,21 +561,25 @@ function RouteComponent() {
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={copyPreviewToClipboard}
-                    className="flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-lg font-medium hover:bg-brand-hover transition-colors active:scale-[0.97]"
+                    className={cn(
+                      tc.btn,
+                      "px-6 py-3 active:scale-[0.97]",
+                      copySuccess ? "theme-btn-success" : "theme-btn-primary",
+                    )}
                   >
                     <IconCopy className="w-4 h-4" />
                     {copySuccess ? "Copied!" : "Copy Preview"}
                   </button>
                   <button
                     onClick={downloadFilesAsZip}
-                    className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors active:scale-[0.97]"
+                    className={cn(tc.btnPrimary, "px-6 py-3 active:scale-[0.97]")}
                   >
                     <IconDownload className="w-4 h-4" />
                     Download ZIP
                   </button>
                   <button
                     onClick={resetForm}
-                    className="flex items-center gap-2 px-6 py-3 bg-gray-700 text-theme-heading rounded-lg font-medium hover:bg-gray-600 transition-colors active:scale-[0.97]"
+                    className={cn(tc.btnSecondary, "px-6 py-3 active:scale-[0.97]")}
                   >
                     <IconRefresh className="w-4 h-4" />
                     Reset
@@ -581,7 +587,7 @@ function RouteComponent() {
                 </div>
               )}
 
-              <div className="bg-gray-700/20 border border-gray-600/50 rounded-lg p-4 flex items-start gap-3">
+              <div className="bg-theme-surface-muted border border-theme-border rounded-lg p-4 flex items-start gap-3">
                 <IconLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                 <div className="text-sm text-theme-body">
                   <p className="font-medium">100% Private & Secure</p>

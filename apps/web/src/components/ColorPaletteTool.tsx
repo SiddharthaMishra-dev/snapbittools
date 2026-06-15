@@ -14,6 +14,8 @@ import {
   IconBookmarkFilled,
   IconColorPicker,
 } from "@tabler/icons-react";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -36,6 +38,16 @@ type PaletteColor = {
   name?: string;
   locked: boolean;
 };
+
+const wcagBadgeClass = (result: "Pass" | "Large only" | "Fail") =>
+  cn(
+    "px-1.5 py-0.5 rounded text-[10px] font-semibold",
+    result === "Pass"
+      ? cn(tc.diffAdded, "border border-theme-border")
+      : result === "Large only"
+        ? tc.badgeWarn
+        : cn(tc.diffRemoved, "border border-theme-border"),
+  );
 
 // ─── Color Math Utilities ─────────────────────────────────────────────────────
 
@@ -640,11 +652,10 @@ export function ColorPaletteTool() {
                 <button
                   key={m.value}
                   onClick={() => handleModeChange(m.value)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
-                    mode === m.value
-                      ? "bg-brand-primary text-white shadow-sm"
-                      : "bg-theme-surface-muted text-theme-body hover:bg-gray-700 hover:text-white"
-                  }`}
+                  className={cn(
+                    "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200",
+                    mode === m.value ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                  )}
                 >
                   {m.label}
                 </button>
@@ -662,11 +673,10 @@ export function ColorPaletteTool() {
                 <button
                   key={m.value}
                   onClick={() => handleModeChange(m.value)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
-                    mode === m.value
-                      ? "bg-brand-primary text-white shadow-sm"
-                      : "bg-theme-surface-muted text-theme-body hover:bg-gray-700 hover:text-white"
-                  }`}
+                  className={cn(
+                    "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200",
+                    mode === m.value ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                  )}
                 >
                   {m.label}
                 </button>
@@ -694,7 +704,7 @@ export function ColorPaletteTool() {
                   value={baseColor}
                   onChange={(e) => handleColorPickerChange(e.target.value)}
                   disabled={!currentMode.needsBase}
-                  className="w-10 h-9 rounded-lg border border-gray-600 bg-theme-surface-muted cursor-pointer p-0.5 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-10 h-9 rounded-lg border border-theme-border bg-theme-surface-muted cursor-pointer p-0.5 disabled:opacity-40 disabled:cursor-not-allowed"
                   title="Pick a color"
                 />
               </div>
@@ -706,10 +716,13 @@ export function ColorPaletteTool() {
                   onChange={(e) => handleBaseColorChange(e.target.value)}
                   disabled={!currentMode.needsBase}
                   placeholder="#2563eb"
-                  className="w-full bg-theme-surface-muted border border-gray-600 rounded-lg px-3 py-2 text-sm font-mono text-theme-heading placeholder-gray-500 focus:outline-none focus:border-brand-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className={cn(
+                    tc.field,
+                    "w-full px-3 py-2 text-sm font-mono placeholder:text-theme-muted disabled:opacity-40 disabled:cursor-not-allowed",
+                  )}
                 />
                 {colorInputError && (
-                  <p className="text-red-400 text-[11px] mt-1">{colorInputError}</p>
+                  <p className="text-[var(--theme-alert-error-text)] text-[11px] mt-1">{colorInputError}</p>
                 )}
               </div>
             </div>
@@ -723,11 +736,10 @@ export function ColorPaletteTool() {
                 <button
                   key={f}
                   onClick={() => setFormat(f)}
-                  className={`px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                    format === f
-                      ? "bg-brand-primary text-white"
-                      : "bg-theme-surface-muted text-theme-muted hover:bg-gray-700 hover:text-white"
-                  }`}
+                  className={cn(
+                    "px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200",
+                    format === f ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                  )}
                 >
                   {f}
                 </button>
@@ -741,11 +753,7 @@ export function ColorPaletteTool() {
             <div className="flex gap-2">
               <button
                 onClick={() => generate()}
-                className="
-                  flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 active:scale-95
-                  bg-brand-primary text-brand-primary-foreground
-                  hover:bg-brand-hover hover:text-brand-hover-foreground
-                "
+                className={cn(tc.btnPrimary, "flex items-center gap-2 px-4 py-2 text-sm active:scale-95")}
               >
                 <IconRefresh size={16} />
                 Generate
@@ -753,18 +761,16 @@ export function ColorPaletteTool() {
 
               <button
                 onClick={copyAll}
-                className="
-                  flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 active:scale-95
-                  border border-theme-border 
-                  bg-theme-surface-muted text-theme-muted 
-                  hover:bg-theme-surface-elevated hover:text-theme-heading
-                "
+                className={cn(
+                  tc.btnSecondary,
+                  "flex items-center gap-2 px-3 py-2 text-sm active:scale-95",
+                )}
                 title="Copy all colors"
               >
                 {copiedAll ? (
                   <IconCheck
                     size={16}
-                    className="text-green-400"
+                    className="text-[var(--theme-diff-added-text)]"
                   />
                 ) : (
                   <IconCopy size={16} />
@@ -774,12 +780,7 @@ export function ColorPaletteTool() {
 
               <button
                 onClick={savePalette}
-                className="
-                  flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 active:scale-95
-                  border border-theme-border 
-                  bg-theme-surface-muted text-theme-body 
-                  hover:bg-theme-surface-elevated hover:text-theme-heading
-                "
+                className={cn(tc.btnSecondary, "flex items-center gap-2 px-3 py-2 text-sm active:scale-95")}
                 title="Save palette"
               >
                 <IconBookmark size={16} />
@@ -793,12 +794,7 @@ export function ColorPaletteTool() {
               >
                 <button
                   onClick={() => setExportOpen((v) => !v)}
-                  className="
-                    flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200
-                    border border-theme-border
-                    bg-theme-surface-muted text-theme-body
-                    hover:bg-theme-surface-elevated hover:text-theme-heading
-                  "
+                  className={cn(tc.btnSecondary, "flex items-center gap-1.5 px-3 py-2 text-sm")}
                 >
                   <IconDownload size={16} />
                   <span className="hidden sm:inline">Export</span>
@@ -929,7 +925,7 @@ export function ColorPaletteTool() {
                         style={{ backgroundColor: c.hex }}
                       />
                     </td>
-                    <td className="px-4 py-3 font-mono text-gray-200 text-xs">
+                    <td className="px-4 py-3 font-mono text-theme-heading text-xs">
                       {c.hex.toUpperCase()}
                     </td>
                     <td className="px-4 py-3 font-mono text-theme-body text-xs">
@@ -944,15 +940,7 @@ export function ColorPaletteTool() {
                         className={`inline-flex items-center gap-1.5 font-mono`}
                       >
                         <span className="text-theme-body">{wContrast}:1</span>
-                        <span
-                          className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
-                            wcagW === "Pass"
-                              ? "bg-green-900/50 text-green-400 border border-green-700/50"
-                              : wcagW === "Large only"
-                                ? "bg-yellow-900/50 text-yellow-400 border border-yellow-700/50"
-                                : "bg-red-900/50 text-red-400 border border-red-700/50"
-                          }`}
-                        >
+                        <span className={wcagBadgeClass(wcagW)}>
                           {wcagW}
                         </span>
                       </span>
@@ -963,15 +951,7 @@ export function ColorPaletteTool() {
                         className={`inline-flex items-center gap-1.5 font-mono`}
                       >
                         <span className="text-theme-body">{bContrast}:1</span>
-                        <span
-                          className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
-                            wcagB === "Pass"
-                              ? "bg-green-900/50 text-green-400 border border-green-700/50"
-                              : wcagB === "Large only"
-                                ? "bg-yellow-900/50 text-yellow-400 border border-yellow-700/50"
-                                : "bg-red-900/50 text-red-400 border border-red-700/50"
-                          }`}
-                        >
+                        <span className={wcagBadgeClass(wcagB)}>
                           {wcagB}
                         </span>
                       </span>
@@ -986,19 +966,19 @@ export function ColorPaletteTool() {
         <div className="px-5 py-3 border-t border-theme-border flex flex-wrap items-center gap-x-5 gap-y-1.5">
           <span className="text-xs text-theme-muted font-medium">Readability legend:</span>
           <span className="flex items-center gap-1.5 text-xs text-theme-muted">
-            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-green-900/50 text-green-400 border border-green-700/50">
+            <span className={wcagBadgeClass("Pass")}>
               Pass
             </span>
             readable at any text size <span className="text-theme-body">(ratio ≥ 4.5:1)</span>
           </span>
           <span className="flex items-center gap-1.5 text-xs text-theme-muted">
-            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-yellow-900/50 text-yellow-400 border border-yellow-700/50">
+            <span className={wcagBadgeClass("Large only")}>
               Large only
             </span>
             ok for headings only <span className="text-theme-body">(≥ 3:1)</span>
           </span>
           <span className="flex items-center gap-1.5 text-xs text-theme-muted">
-            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-900/50 text-red-400 border border-red-700/50">
+            <span className={wcagBadgeClass("Fail")}>
               Fail
             </span>
             hard to read, avoid as text <span className="text-theme-body">(&lt; 3:1)</span>
@@ -1030,7 +1010,7 @@ export function ColorPaletteTool() {
           </button>
 
           {showSaved && (
-            <div className="border-t border-theme-border/60 divide-y divide-gray-800">
+            <div className="border-t border-theme-border/60 divide-y divide-theme-border">
               {savedPalettes.map((saved, si) => (
                 <div
                   key={si}
@@ -1046,17 +1026,17 @@ export function ColorPaletteTool() {
                       />
                     ))}
                   </div>
-                  <div className="flex gap-1.5 flex-shrink-0">
+                  <div className="flex gap-1.5 shrink-0">
                     <button
                       onClick={() => loadPalette(saved)}
-                      className="px-3 py-1.5 text-xs font-semibold bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg transition-colors flex items-center gap-1.5"
+                      className={cn(tc.btnSecondary, "px-3 py-1.5 text-xs flex items-center gap-1.5")}
                     >
                       <IconWand size={12} />
                       Load
                     </button>
                     <button
                       onClick={() => deleteSaved(si)}
-                      className="p-1.5 text-theme-muted hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors"
+                      className={cn(tc.btnDanger, "p-1.5")}
                     >
                       <IconX size={14} />
                     </button>
@@ -1124,7 +1104,7 @@ function ModeExplainer({ mode }: { mode: PaletteMode }) {
         className="text-brand-primary mt-0.5 flex-shrink-0"
       />
       <div>
-        <p className="text-sm font-semibold text-gray-200">{info.title}</p>
+        <p className="text-sm font-semibold text-theme-heading">{info.title}</p>
         <p className="text-sm text-theme-muted mt-0.5 leading-relaxed">{info.desc}</p>
       </div>
     </div>

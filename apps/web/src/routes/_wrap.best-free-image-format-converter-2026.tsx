@@ -3,6 +3,8 @@ import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 
 import RelatedTools from "@/components/RelatedTools";
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 const PUBLISHED_DATE = "2026-05-07";
 const MODIFIED_DATE = "2026-05-07";
@@ -162,7 +164,7 @@ const formatOverview = [
     transparency: "No",
     support: "Universal",
     idealFor: "Photographs, complex gradients",
-    badgeClass: "bg-theme-surface-muted border-gray-600 text-theme-body",
+    badgeClass: "bg-theme-surface-muted border-theme-border text-theme-body",
   },
   {
     name: "PNG",
@@ -171,7 +173,7 @@ const formatOverview = [
     transparency: "Yes",
     support: "Universal",
     idealFor: "Logos, icons, UI graphics",
-    badgeClass: "bg-theme-surface-muted border-gray-600 text-theme-body",
+    badgeClass: "bg-theme-surface-muted border-theme-border text-theme-body",
   },
   {
     name: "WebP",
@@ -180,7 +182,7 @@ const formatOverview = [
     transparency: "Yes",
     support: "95%+ browsers",
     idealFor: "All web images",
-    badgeClass: "bg-blue-900/30 border-blue-500/40 text-blue-300",
+    badgeClass: "bg-brand-primary/10 border-brand-primary/30 text-brand-primary",
   },
   {
     name: "AVIF",
@@ -189,7 +191,7 @@ const formatOverview = [
     transparency: "Yes",
     support: "~85% browsers",
     idealFor: "High-performance web images",
-    badgeClass: "bg-violet-900/30 border-violet-500/40 text-violet-300",
+    badgeClass: "bg-theme-icon-bg border-brand-primary/20 text-brand-primary",
   },
 ];
 
@@ -333,7 +335,7 @@ function BlogPage() {
         {/* Article Header */}
         <header className="mb-12 mt-4">
           <div className="flex flex-wrap items-center gap-2 text-sm mb-5">
-            <span className="bg-blue-500/10 border border-blue-500/30 rounded-full px-3 py-0.5 text-xs font-medium text-blue-400">
+            <span className="bg-brand-primary/10 border border-brand-primary/30 rounded-full px-3 py-0.5 text-xs font-medium text-brand-primary">
               Image Optimization
             </span>
             <span className="text-theme-body">·</span>
@@ -358,11 +360,11 @@ function BlogPage() {
           </p>
 
           <div className="mt-6 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-primary to-violet-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
               S
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-200">Siddhartha Mishra</p>
+              <p className="text-sm font-medium text-theme-heading">Siddhartha Mishra</p>
               <p className="text-xs text-theme-muted">SnapBit Tools</p>
             </div>
           </div>
@@ -385,7 +387,7 @@ function BlogPage() {
                 <IconChevronRight className="w-3.5 h-3.5 text-theme-body shrink-0" />
                 <a
                   href={href}
-                  className="text-blue-400 hover:text-blue-300 hover:underline transition-colors"
+                  className="text-brand-primary hover:text-brand-hover hover:underline transition-colors"
                 >
                   {text}
                 </a>
@@ -463,27 +465,27 @@ function BlogPage() {
                 {
                   label: "25–35% smaller than JPEG",
                   detail: "at equivalent visual quality for photographs",
-                  color: "text-emerald-400",
+                  color: "text-[var(--theme-diff-added-text)]",
                 },
                 {
                   label: "26% smaller than lossless PNG",
                   detail: "when using WebP's lossless mode for graphics",
-                  color: "text-emerald-400",
+                  color: "text-[var(--theme-diff-added-text)]",
                 },
                 {
                   label: "Supports alpha transparency",
                   detail: "unlike JPEG, making it viable for icons and UI elements",
-                  color: "text-blue-400",
+                  color: "text-brand-primary",
                 },
                 {
                   label: "Supports animation",
                   detail: "as a lighter alternative to GIF",
-                  color: "text-blue-400",
+                  color: "text-brand-primary",
                 },
                 {
                   label: "Fast encoding",
                   detail: "suitable for batch processing large numbers of images",
-                  color: "text-blue-400",
+                  color: "text-brand-primary",
                 },
               ].map(({ label, detail, color }) => (
                 <div
@@ -499,20 +501,20 @@ function BlogPage() {
               ))}
             </div>
 
-            <div className="p-5 bg-blue-900/10 border border-blue-500/20 rounded-lg">
+            <div className="p-5 bg-brand-primary/10 border border-brand-primary/20 rounded-lg">
               <p className="text-sm text-theme-body leading-relaxed">
-                <span className="font-semibold text-blue-300">Recommended tool:</span> Convert your
+                <span className="font-semibold text-brand-primary">Recommended tool:</span> Convert your
                 JPEG photographs to WebP using{" "}
                 <Link
                   to="/jpg-to-webp"
-                  className="text-blue-400 hover:text-blue-300 hover:underline font-medium"
+                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
                 >
                   SnapBit Tools JPG to WebP Converter
                 </Link>
                 , or convert PNG graphics using the{" "}
                 <Link
                   to="/png-to-webp"
-                  className="text-blue-400 hover:text-blue-300 hover:underline font-medium"
+                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
                 >
                   PNG to WebP Converter
                 </Link>
@@ -542,8 +544,8 @@ function BlogPage() {
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              <div className="p-5 bg-violet-900/10 border border-violet-500/20 rounded-lg">
-                <h3 className="font-semibold text-violet-300 mb-3 text-sm">Where AVIF excels</h3>
+              <div className="p-5 bg-theme-icon-bg border border-brand-primary/20 rounded-lg">
+                <h3 className="font-semibold text-brand-primary mb-3 text-sm">Where AVIF excels</h3>
                 <ul className="space-y-2 text-xs text-theme-muted">
                   {[
                     "40–55% smaller than JPEG at comparable quality",
@@ -556,7 +558,7 @@ function BlogPage() {
                       key={pt}
                       className="flex items-start gap-2"
                     >
-                      <span className="text-violet-400 shrink-0">+</span>
+                      <span className="text-brand-primary shrink-0">+</span>
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -577,7 +579,7 @@ function BlogPage() {
                       key={pt}
                       className="flex items-start gap-2"
                     >
-                      <span className="text-red-400 shrink-0">-</span>
+                      <span className="text-[var(--theme-alert-error-text)] shrink-0">-</span>
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -657,21 +659,21 @@ function BlogPage() {
               Need to convert between these legacy formats?{" "}
               <Link
                 to="/jpg-to-png"
-                className="text-blue-400 hover:text-blue-300 hover:underline"
+                className="text-brand-primary hover:text-brand-hover hover:underline"
               >
                 JPG to PNG
               </Link>
               ,{" "}
               <Link
                 to="/png-to-jpg"
-                className="text-blue-400 hover:text-blue-300 hover:underline"
+                className="text-brand-primary hover:text-brand-hover hover:underline"
               >
                 PNG to JPG
               </Link>
               , and{" "}
               <Link
                 to="/heic-to-jpg"
-                className="text-blue-400 hover:text-blue-300 hover:underline"
+                className="text-brand-primary hover:text-brand-hover hover:underline"
               >
                 HEIC to JPG
               </Link>{" "}
@@ -698,11 +700,11 @@ function BlogPage() {
                     <th className="text-left py-3 px-4 text-theme-muted font-medium">Criterion</th>
                     <th className="text-left py-3 px-4 text-theme-muted font-medium">JPEG</th>
                     <th className="text-left py-3 px-4 text-theme-muted font-medium">PNG</th>
-                    <th className="text-left py-3 px-4 text-blue-400 font-medium">WebP</th>
-                    <th className="text-left py-3 px-4 text-violet-400 font-medium">AVIF</th>
+                    <th className="text-left py-3 px-4 text-brand-primary font-medium">WebP</th>
+                    <th className="text-left py-3 px-4 text-brand-primary font-medium">AVIF</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-800/60">
+                <tbody className="divide-y divide-theme-border">
                   {comparisonRows.map((row) => (
                     <tr
                       key={row.criterion}
@@ -713,8 +715,8 @@ function BlogPage() {
                       </td>
                       <td className="py-3 px-4 text-theme-muted text-xs">{row.jpeg}</td>
                       <td className="py-3 px-4 text-theme-muted text-xs">{row.png}</td>
-                      <td className="py-3 px-4 text-gray-200 text-xs">{row.webp}</td>
-                      <td className="py-3 px-4 text-gray-200 text-xs">{row.avif}</td>
+                      <td className="py-3 px-4 text-theme-heading text-xs">{row.webp}</td>
+                      <td className="py-3 px-4 text-theme-heading text-xs">{row.avif}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -744,31 +746,31 @@ function BlogPage() {
                   scenario: "New website or web app",
                   recommendation:
                     "WebP for all images; AVIF where your build pipeline supports it. Use JPEG as fallback only.",
-                  color: "border-blue-500/30 bg-blue-900/10",
+                  color: "border-brand-primary/30 bg-brand-primary/10",
                   label: "WebP / AVIF",
-                  labelColor: "text-blue-400",
+                  labelColor: "text-brand-primary",
                 },
                 {
                   scenario: "E-commerce product images",
                   recommendation:
                     "AVIF for main product shots where supported, WebP otherwise. Smaller images mean faster pages and better conversion rates.",
-                  color: "border-violet-500/30 bg-violet-900/10",
+                  color: "border-brand-primary/20 bg-theme-icon-bg",
                   label: "AVIF / WebP",
-                  labelColor: "text-violet-400",
+                  labelColor: "text-brand-primary",
                 },
                 {
                   scenario: "Logos, icons, and UI assets with transparency",
                   recommendation:
                     "WebP lossless or PNG. AVIF lossless is also excellent but WebP has broader tooling support.",
-                  color: "border-blue-500/30 bg-blue-900/10",
+                  color: "border-brand-primary/30 bg-brand-primary/10",
                   label: "WebP / PNG",
-                  labelColor: "text-blue-400",
+                  labelColor: "text-brand-primary",
                 },
                 {
                   scenario: "Email newsletters",
                   recommendation:
                     "JPEG. Email clients have inconsistent WebP support. Stick to JPEG for maximum compatibility.",
-                  color: "border-gray-600/40 bg-theme-surface-muted",
+                  color: "border-theme-border bg-theme-surface-muted",
                   label: "JPEG",
                   labelColor: "text-theme-muted",
                 },
@@ -776,7 +778,7 @@ function BlogPage() {
                   scenario: "iPhone photos (HEIC) for sharing",
                   recommendation:
                     "Convert to JPEG first for universal compatibility, then to WebP if you're publishing on the web.",
-                  color: "border-gray-600/40 bg-theme-surface-muted",
+                  color: "border-theme-border bg-theme-surface-muted",
                   label: "JPEG / WebP",
                   labelColor: "text-theme-muted",
                 },
@@ -784,9 +786,9 @@ function BlogPage() {
                   scenario: "Source / archival files",
                   recommendation:
                     "PNG or lossless WebP. Never use lossy formats for files you will re-edit later.",
-                  color: "border-emerald-500/30 bg-emerald-900/10",
+                  color: "border-theme-border bg-[var(--theme-diff-added-bg)]",
                   label: "PNG",
-                  labelColor: "text-emerald-400",
+                  labelColor: "text-[var(--theme-diff-added-text)]",
                 },
               ].map(({ scenario, recommendation, color, label, labelColor }) => (
                 <div
@@ -822,9 +824,9 @@ function BlogPage() {
               {conversionSteps.map(({ step, title, desc }) => (
                 <div
                   key={step}
-                  className="flex gap-4 p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg hover:border-blue-500/30 hover:bg-theme-surface transition-all duration-200"
+                  className="flex gap-4 p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg hover:border-brand-primary/30 hover:bg-theme-surface transition-all duration-200"
                 >
-                  <div className="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-sm shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-brand-primary/20 border border-brand-primary/30 flex items-center justify-center text-brand-primary font-bold text-sm shrink-0">
                     {step}
                   </div>
                   <div>
@@ -839,7 +841,7 @@ function BlogPage() {
             <div className="mb-10">
               <Link
                 to="/image-format-converter"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 group"
+                className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-6 py-3 group")}
               >
                 Open Image Format Converter — Free
                 <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -855,13 +857,13 @@ function BlogPage() {
                 <Link
                   key={href}
                   to={href}
-                  className="p-4 bg-theme-surface-muted border border-theme-border/40 rounded-lg hover:border-blue-500/30 hover:bg-theme-surface transition-all duration-200 group block"
+                  className="p-4 bg-theme-surface-muted border border-theme-border/40 rounded-lg hover:border-brand-primary/30 hover:bg-theme-surface transition-all duration-200 group block"
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-semibold text-sm text-theme-heading group-hover:text-blue-300 transition-colors">
+                    <span className="font-semibold text-sm text-theme-heading group-hover:text-brand-primary transition-colors">
                       {label}
                     </span>
-                    <IconChevronRight className="w-3.5 h-3.5 text-theme-body group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all" />
+                    <IconChevronRight className="w-3.5 h-3.5 text-theme-body group-hover:text-brand-primary group-hover:translate-x-0.5 transition-all" />
                   </div>
                   <p className="text-xs text-theme-muted leading-relaxed">{desc}</p>
                 </Link>
@@ -874,7 +876,7 @@ function BlogPage() {
                 Once converted, you can reduce file sizes further with the{" "}
                 <Link
                   to="/image-compressor"
-                  className="text-blue-400 hover:text-blue-300 hover:underline font-medium"
+                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
                 >
                   SnapBit Tools Image Compressor
                 </Link>
@@ -896,7 +898,7 @@ function BlogPage() {
               {faqs.map((faq, index) => (
                 <details
                   key={index}
-                  className="group bg-theme-surface-muted border border-theme-border rounded-lg p-6 cursor-pointer hover:border-blue-500/50 hover:bg-theme-surface transition-all duration-200"
+                  className="group bg-theme-surface-muted border border-theme-border rounded-lg p-6 cursor-pointer hover:border-brand-primary/50 hover:bg-theme-surface transition-all duration-200"
                 >
                   <summary className="font-semibold text-base flex items-center justify-between text-theme-heading cursor-pointer list-none">
                     {faq.question}
@@ -910,7 +912,7 @@ function BlogPage() {
 
           {/* ── Final CTA ── */}
           <section>
-            <div className="p-6 bg-gradient-to-br from-blue-900/30 to-gray-900/50 border border-blue-500/30 rounded-lg text-center">
+            <div className="p-6 bg-brand-primary/10 border border-brand-primary/30 rounded-lg text-center">
               <h2 className="text-lg sm:text-xl font-bold text-theme-heading mb-3">
                 Convert Your Images Now — Free
               </h2>
@@ -921,14 +923,14 @@ function BlogPage() {
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link
                   to="/image-format-converter"
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2.5 rounded-lg transition-all duration-200 group text-sm"
+                  className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-6 py-2.5 group text-sm")}
                 >
                   Format Converter
                   <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
                 <Link
                   to="/image-compressor"
-                  className="inline-flex items-center gap-2 bg-theme-surface-muted hover:bg-gray-700 border border-gray-600 text-theme-heading font-semibold px-6 py-2.5 rounded-lg transition-all duration-200 group text-sm"
+                  className={cn(tc.btnSecondary, "inline-flex items-center gap-2 font-semibold px-6 py-2.5 group text-sm")}
                 >
                   Image Compressor
                   <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

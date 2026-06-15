@@ -95,13 +95,19 @@ function App() {
   }, [active]);
 
   return (
-    <PageShell withDotGrid={false} className="bg-theme-page">
-      <div className="theme-dot-grid pointer-events-none fixed inset-0 z-0" aria-hidden="true" />
+    <PageShell
+      withDotGrid={false}
+      className="bg-theme-page"
+    >
+      <div
+        className="theme-dot-grid pointer-events-none fixed inset-0 z-0"
+        aria-hidden="true"
+      />
 
       {/* ════════════════════════════════
           HERO
       ════════════════════════════════ */}
-      <section className="relative z-10 pt-28 pb-0 px-4 flex flex-col items-center text-center">
+      <section className="relative z-10 pt-28 pb-0 px-4 flex flex-col items-center text-center bg-theme-page">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -132,7 +138,10 @@ function App() {
               transition={{ duration: 0.45, ease: easeInOut }}
               className="inline-flex overflow-hidden text-brand-primary bg-theme-icon-bg border border-[var(--theme-pseo-accent-border)] px-3 py-1 rounded-xl mr-2 align-middle"
             >
-              <AnimatePresence mode="wait" initial={false}>
+              <AnimatePresence
+                mode="wait"
+                initial={false}
+              >
                 <motion.span
                   key={rotatingWords[active]}
                   initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
@@ -146,11 +155,16 @@ function App() {
               </AnimatePresence>
             </motion.span>
             {/* hidden measurement spans */}
-            <span className="pointer-events-none absolute -z-10 opacity-0" aria-hidden="true">
+            <span
+              className="pointer-events-none absolute -z-10 opacity-0"
+              aria-hidden="true"
+            >
               {rotatingWords.map((word, idx) => (
                 <span
                   key={`measure-${word}`}
-                  ref={(el) => { wordMeasureRefs.current[idx] = el; }}
+                  ref={(el) => {
+                    wordMeasureRefs.current[idx] = el;
+                  }}
                   className="inline-block whitespace-nowrap text-4xl md:text-6xl lg:text-7xl"
                 >
                   {word}
@@ -165,8 +179,8 @@ function App() {
             variants={itemVariants}
             className="text-base md:text-lg text-theme-muted max-w-2xl leading-relaxed"
           >
-            Professional browser tools for developers and designers. Convert, compress, format,
-            and transform files — entirely on your device. No uploads. No accounts. Always free.
+            Professional browser tools for developers and designers. Convert, compress, format, and
+            transform files — entirely on your device. No uploads. No accounts. Always free.
           </motion.p>
 
           {/* CTA row */}
@@ -184,7 +198,6 @@ function App() {
                 <IconChevronRight className="h-4 w-4" />
               </ButtonLink>
             </MagneticButton>
-
           </motion.div>
 
           {/* Trust badges */}
@@ -192,17 +205,17 @@ function App() {
             variants={itemVariants}
             className="hidden sm:flex flex-wrap justify-center gap-x-6 gap-y-1.5 text-xs text-theme-muted font-medium pt-1"
           >
-            {[
-              "100% Browser-Based",
-              "No File Uploads",
-              "Complete Privacy",
-              "Free Forever",
-            ].map((badge) => (
-              <span key={badge} className="flex items-center gap-1.5">
-                <IconCheck className="h-3.5 w-3.5 text-green-500 shrink-0" />
-                {badge}
-              </span>
-            ))}
+            {["100% Browser-Based", "No File Uploads", "Complete Privacy", "Free Forever"].map(
+              (badge) => (
+                <span
+                  key={badge}
+                  className="flex items-center gap-1.5"
+                >
+                  <IconCheck className="h-3.5 w-3.5 text-green-500 shrink-0" />
+                  {badge}
+                </span>
+              ),
+            )}
           </motion.div>
         </motion.div>
 
@@ -213,48 +226,28 @@ function App() {
           transition={{ duration: 0.8, delay: 0.55, ease: easeInOut }}
           className="relative mt-14 w-full max-w-5xl mx-auto"
         >
-          {/* layered shadow: soft outer glow + crisp drop shadow */}
-          <div className="absolute -inset-1 rounded-3xl pointer-events-none"
-            style={{
-              boxShadow: "0 0 0 1px rgba(37,99,235,0.08), 0 24px 72px -8px rgba(37,99,235,0.14), 0 8px 24px -4px rgba(0,0,0,0.07)",
-            }}
-          />
-
-          {/* outer frame border */}
-          <div className="rounded-2xl border border-theme-border bg-white overflow-hidden"
-            style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.9)" }}
-          >
-            {/* browser top bar */}
-            <div className="bg-[#f5f5f7] border-b border-theme-border/80 px-4 py-3 flex items-center gap-3">
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-                <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-              </div>
-              <div className="flex-1 flex justify-center">
-                <div className="bg-white border border-theme-border rounded-md px-4 py-1 text-xs text-theme-muted font-mono w-56 text-center">
-                  snapbittools.com/tools
+          <div className="hero-preview-wrap">
+            <div className="rounded-2xl border border-theme-border bg-theme-surface overflow-hidden shadow-lg">
+              {/* browser top bar */}
+              <div className="bg-[#f5f5f7] dark:bg-theme-surface-muted border-b border-theme-border/80 px-4 py-3 flex items-center gap-3">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
                 </div>
+                <div className="flex-1 flex justify-center">
+                  <div className="bg-theme-surface border border-theme-border rounded-md px-4 py-1 text-xs text-theme-muted font-mono w-56 text-center">
+                    snapbittools.com/tools
+                  </div>
+                </div>
+                <div className="w-12" />
               </div>
-              <div className="w-12" />
-            </div>
 
-            {/* screenshot — no overflow-hidden here so we can fade past the frame edge */}
-            <div className="relative">
               <img
                 src="/screenshot.png"
                 alt="SnapBit Tools interface preview"
                 className="w-full block"
                 loading="eager"
-              />
-              {/* bottom-only fade: starts transparent at 55% and is fully white by 100% */}
-              <div
-                className="absolute bottom-0 left-0 right-0 pointer-events-none"
-                style={{
-                  height: "42%",
-                  background:
-                    "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0.88) 70%, #ffffff 100%)",
-                }}
               />
             </div>
           </div>
@@ -264,16 +257,21 @@ function App() {
       {/* ════════════════════════════════
           MAIN CONTENT  (light)
       ════════════════════════════════ */}
-      <main className="flex-1 px-4 pb-16 relative z-10 bg-theme-page" id="tools">
-
+      <main
+        className="flex-1 px-4 pb-16 relative z-10 bg-theme-page"
+        id="tools"
+      >
         {/* Featured tools */}
-        <section className="max-w-7xl mx-auto pt-24 pb-16 fadeElement" id="tools">
+        <section
+          className="max-w-7xl mx-auto pt-16 pb-16 fadeElement"
+          id="tools"
+        >
           <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
             <div>
-              <h2 className="text-2xl font-bold text-theme-heading">
-                Most Used Tools
-              </h2>
-              <p className="text-sm text-theme-muted mt-1">Click any tool to open it instantly — no signup needed.</p>
+              <h2 className="text-2xl font-bold text-theme-heading">Most Used Tools</h2>
+              <p className="text-sm text-theme-muted mt-1">
+                Click any tool to open it instantly — no signup needed.
+              </p>
             </div>
             <Link
               to="/tools"
@@ -299,7 +297,10 @@ function App() {
                   className="group relative flex items-start gap-4 p-5 rounded-xl border border-theme-border bg-theme-card hover:border-brand-primary/40 hover:shadow-md hover:shadow-blue-50 transition-all duration-200 no-underline"
                 >
                   <div className="w-11 h-11 rounded-lg bg-theme-icon-bg flex items-center justify-center shrink-0 group-hover:bg-theme-icon-bg-hover transition-colors">
-                    <Icon className="text-brand-primary" size={22} />
+                    <Icon
+                      className="text-brand-primary"
+                      size={22}
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -307,7 +308,9 @@ function App() {
                         {tool.name}
                       </h3>
                       {tool.isNew && (
-                        <span className="shrink-0 text-[10px] font-bold bg-brand-primary text-white px-1.5 py-0.5 rounded-full">NEW</span>
+                        <span className="shrink-0 text-[10px] font-bold bg-brand-primary text-white px-1.5 py-0.5 rounded-full">
+                          NEW
+                        </span>
                       )}
                     </div>
                     <p className="text-xs text-theme-muted mt-0.5 leading-relaxed line-clamp-2">
@@ -456,7 +459,9 @@ function LightFeatureCard({
 }) {
   return (
     <div className="flex flex-col gap-3 p-6 rounded-xl border border-theme-border bg-theme-card hover:border-brand-primary/30 hover:shadow-sm transition-all">
-      <div className="w-9 h-9 rounded-lg bg-theme-icon-bg flex items-center justify-center">{icon}</div>
+      <div className="w-9 h-9 rounded-lg bg-theme-icon-bg flex items-center justify-center">
+        {icon}
+      </div>
       <div>
         <h4 className="text-sm font-bold text-theme-heading mb-1">{title}</h4>
         <p className="text-sm text-theme-muted leading-relaxed">{description}</p>

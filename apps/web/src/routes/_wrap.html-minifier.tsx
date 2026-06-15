@@ -16,6 +16,8 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 const faqs = [
   {
@@ -249,7 +251,7 @@ function RouteComponent() {
           <section className="rounded-2xl border border-theme-border bg-theme-surface-muted/20 p-4 sm:p-6 backdrop-blur-sm">
             <div className="flex flex-wrap items-center gap-3 justify-center sm:justify-between">
               <div className="flex flex-wrap gap-3">
-                <label className="inline-flex items-center gap-2 text-sm text-gray-200 bg-theme-surface-muted/60 border border-theme-border rounded-lg px-3 py-2">
+                <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
                   <input
                     type="checkbox"
                     checked={removeComments}
@@ -258,7 +260,7 @@ function RouteComponent() {
                   />
                   Remove comments
                 </label>
-                <label className="inline-flex items-center gap-2 text-sm text-gray-200 bg-theme-surface-muted/60 border border-theme-border rounded-lg px-3 py-2">
+                <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
                   <input
                     type="checkbox"
                     checked={collapseWhitespace}
@@ -273,7 +275,7 @@ function RouteComponent() {
                 <button
                   onClick={handleMinify}
                   disabled={!input.trim()}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-lg font-medium hover:bg-brand-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={cn(tc.btnPrimary, "px-4 py-2")}
                 >
                   <IconArrowsMinimize className="w-4 h-4" />
                   Minify
@@ -281,7 +283,7 @@ function RouteComponent() {
                 <button
                   onClick={handleDeminify}
                   disabled={!input.trim()}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg font-medium hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={cn(tc.btnSecondary, "px-4 py-2")}
                 >
                   <IconSparkles className="w-4 h-4" />
                   De-minify
@@ -289,7 +291,7 @@ function RouteComponent() {
                 <button
                   onClick={handleDownload}
                   disabled={!output}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={cn(tc.btnPrimary, "px-4 py-2")}
                 >
                   <IconDownload className="w-4 h-4" />
                   Download
@@ -297,7 +299,7 @@ function RouteComponent() {
                 <button
                   onClick={handleClear}
                   disabled={!input && !output}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-900 text-red-200 rounded-lg font-medium hover:bg-red-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={cn(tc.btnDanger, "px-4 py-2")}
                 >
                   <IconTrash className="w-4 h-4" />
                   Clear
@@ -322,7 +324,7 @@ function RouteComponent() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Paste your HTML markup here..."
-                  className="w-full min-h-[260px] p-4 bg-theme-background text-theme-heading rounded-lg border border-theme-border focus:outline-none focus:ring-2 focus:ring-brand-primary font-mono text-sm resize-y"
+                  className={cn(tc.field, "w-full min-h-[260px] p-4 font-mono text-sm resize-y")}
                   spellCheck={false}
                 />
               </div>
@@ -340,11 +342,11 @@ function RouteComponent() {
                     <button
                       onClick={handleCopy}
                       disabled={!output}
-                      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-                        copySuccess
-                          ? "bg-green-800 text-green-200"
-                          : "bg-gray-700 text-theme-heading hover:bg-gray-600"
-                      }`}
+                      className={cn(
+                        tc.btn,
+                        "px-3 py-1.5 text-xs",
+                        copySuccess ? "theme-btn-success" : "theme-btn-secondary",
+                      )}
                     >
                       {copySuccess ? (
                         <IconCheck className="w-3.5 h-3.5" />
@@ -359,7 +361,10 @@ function RouteComponent() {
                   value={output}
                   readOnly
                   placeholder="Processed HTML output will appear here..."
-                  className="w-full min-h-[260px] p-4 bg-theme-background text-theme-heading rounded-lg border border-theme-border focus:outline-none font-mono text-sm resize-y"
+                  className={cn(
+                    tc.field,
+                    "w-full min-h-[260px] p-4 font-mono text-sm resize-y bg-theme-code-bg text-theme-code-text focus:ring-0",
+                  )}
                   spellCheck={false}
                 />
               </div>
@@ -389,7 +394,7 @@ function RouteComponent() {
                 highlight
               />
 
-              <div className="col-span-3 bg-gray-700/20 border border-theme-border rounded-lg p-3  flex items-start gap-3">
+              <div className="col-span-3 bg-theme-surface-muted border border-theme-border rounded-lg p-3 flex items-start gap-3">
                 <IconShieldLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                 <div className="text-sm text-theme-body">
                   <p className="font-semibold ">100% Private Processing</p>

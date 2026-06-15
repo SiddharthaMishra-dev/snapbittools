@@ -1,5 +1,7 @@
 import { IconCircleX, IconCloudUpload, IconDownload, IconRefresh } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 export function ImageResizerTool() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -176,7 +178,7 @@ export function ImageResizerTool() {
 
   return (
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-      <div className="rounded-xl shadow-lg px-0 py-4 sm:p-8 w-full max-w-5xl">
+      <div className="rounded-xl shadow-lg px-0 py-4 sm:p-8 w-full max-w-5xl border border-theme-border bg-theme-surface">
         {!sourceFile ? (
           <div
             onDragOver={(e) => {
@@ -188,16 +190,17 @@ export function ImageResizerTool() {
               setIsDragging(false);
             }}
             onDrop={handleDrop}
-            className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-              isDragging ? "border-brand-primary bg-brand-primary/20" : "border-gray-600 hover:border-brand-primary/40"
-            }`}
+            className={cn(
+              "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
+              isDragging ? "border-brand-primary bg-brand-primary/20" : "border-theme-border hover:border-brand-primary/40",
+            )}
           >
             <IconCloudUpload className="h-14 w-14 mx-auto text-brand-primary mb-4" />
             <h2 className="text-2xl font-bold text-theme-heading mb-2">Upload image to resize</h2>
             <p className="text-theme-body mb-5">Drag and drop your image here, or click below to choose a file.</p>
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="px-6 py-3 bg-brand-primary hover:bg-brand-hover text-white rounded-lg font-medium transition-all duration-200"
+              className={cn(tc.btnPrimary, "px-6 py-3")}
             >
               Select Image
             </button>
@@ -223,7 +226,7 @@ export function ImageResizerTool() {
               </div>
               <button
                 onClick={clearAll}
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm bg-red-500/20 hover:bg-red-500/30 text-red-300 rounded-md transition-colors"
+                className={cn(tc.btnDanger, "px-3 py-2 text-sm")}
               >
                 <IconCircleX className="w-4 h-4" />
                 Remove
@@ -237,19 +240,19 @@ export function ImageResizerTool() {
 
               <div className="rounded-lg border border-theme-border bg-theme-surface-muted/30 p-5 space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-gray-200 mb-2">Width (px)</label>
+                  <label className="block text-sm font-medium text-theme-body mb-2">Width (px)</label>
                   <input
                     type="number"
                     min={1}
                     max={10000}
                     value={targetWidth || ""}
                     onChange={(e) => handleWidthChange(Number(e.target.value || 0))}
-                    className="w-full rounded-md border border-gray-600 bg-theme-surface px-3 py-2 text-theme-heading focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                    className={cn(tc.field, "w-full px-3 py-2")}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-200 mb-2">Scale (%)</label>
+                  <label className="block text-sm font-medium text-theme-body mb-2">Scale (%)</label>
                   <input
                     type="range"
                     min={1}
@@ -265,7 +268,7 @@ export function ImageResizerTool() {
                   <p className="mt-2 text-sm text-theme-body">{Math.min(300, scalePercent)}%</p>
                 </div>
 
-                <div className="rounded-md bg-black/20 border border-theme-border p-3 text-sm text-gray-200 space-y-1">
+                <div className="rounded-md bg-theme-surface-muted border border-theme-border p-3 text-sm text-theme-body space-y-1">
                   <p>
                     Target size: {targetWidth} x {targetHeight}px
                   </p>
@@ -275,7 +278,7 @@ export function ImageResizerTool() {
                 <button
                   onClick={resizeImage}
                   disabled={isResizing || !targetWidth || !targetHeight}
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-brand-primary hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold transition-colors"
+                  className={cn(tc.btnPrimary, "w-full px-5 py-3 font-semibold")}
                 >
                   <IconRefresh className={`w-5 h-5 ${isResizing ? "animate-spin" : ""}`} />
                   {isResizing ? "Resizing..." : "Resize Image"}
@@ -283,15 +286,15 @@ export function ImageResizerTool() {
               </div>
             </div>
 
-            {error ? <p className="text-red-300 text-sm">{error}</p> : null}
+            {error ? <p className={cn(tc.alertError, "text-sm rounded-lg px-3 py-2")}>{error}</p> : null}
 
             {resizedUrl ? (
-              <div className="rounded-lg border border-green-500/30 bg-green-500/10 p-4 space-y-4">
+              <div className={cn(tc.diffAdded, "rounded-lg border border-theme-border p-4 space-y-4")}>
                 <div className="flex items-center justify-between gap-4">
-                  <h4 className="text-green-200 font-semibold">Resized image ready</h4>
+                  <h4 className="font-semibold">Resized image ready</h4>
                   <button
                     onClick={downloadResized}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-green-500/20 hover:bg-green-500/30 text-green-100 transition-colors"
+                    className={cn(tc.btnSuccess, "px-4 py-2")}
                   >
                     <IconDownload className="w-4 h-4" />
                     Download
@@ -304,7 +307,7 @@ export function ImageResizerTool() {
                   className="w-full h-auto max-h-96 object-contain rounded-lg border border-theme-border"
                 />
 
-                <p className="text-sm text-green-100">
+                <p className="text-sm opacity-90">
                   Output dimensions: {targetWidth} x {targetHeight}px
                   {resizedBlob ? ` | Approx. ${Math.round(resizedBlob.size / 1024)} KB` : ""}
                 </p>

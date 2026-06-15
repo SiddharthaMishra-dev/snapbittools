@@ -18,6 +18,8 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
@@ -131,7 +133,7 @@ function WordCounterComponent() {
               <button
                 onClick={() => transformText("upper")}
                 disabled={!text}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className={cn(tc.btnSecondary, "px-4 py-2")}
                 title="UPPERCASE"
               >
                 <IconLetterCaseUpper className="w-5 h-5" />
@@ -140,7 +142,7 @@ function WordCounterComponent() {
               <button
                 onClick={() => transformText("lower")}
                 disabled={!text}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className={cn(tc.btnSecondary, "px-4 py-2")}
                 title="lowercase"
               >
                 <IconLetterCaseLower className="w-5 h-5" />
@@ -149,7 +151,7 @@ function WordCounterComponent() {
               <button
                 onClick={() => transformText("title")}
                 disabled={!text}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-theme-heading rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className={cn(tc.btnSecondary, "px-4 py-2")}
                 title="Title Case"
               >
                 <IconLetterCase className="w-5 h-5" />
@@ -161,9 +163,11 @@ function WordCounterComponent() {
               <button
                 onClick={copyToClipboard}
                 disabled={!text}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-                  copySuccess ? "bg-green-800 text-green-200" : "bg-brand-primary text-white hover:bg-brand-hover"
-                }`}
+                className={cn(
+                  tc.btn,
+                  "px-4 py-2",
+                  copySuccess ? "theme-btn-success" : "theme-btn-primary",
+                )}
               >
                 {copySuccess ? (
                   <>
@@ -181,7 +185,7 @@ function WordCounterComponent() {
               <button
                 onClick={clearText}
                 disabled={!text}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-red-900 text-red-200 rounded-lg hover:bg-red-800 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className={cn(tc.btnDanger, "px-4 py-2")}
               >
                 <IconTrash className="w-5 h-5" />
                 <span>Clear</span>
@@ -196,7 +200,7 @@ function WordCounterComponent() {
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Start typing or paste your content here..."
-                  className="w-full flex-grow min-h-[400px] p-4 bg-theme-surface text-theme-heading rounded-lg border border-theme-border focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none font-sans text-lg leading-relaxed"
+                  className={cn(tc.field, "w-full flex-grow min-h-[400px] p-4 resize-none font-sans text-lg leading-relaxed")}
                   spellCheck={true}
                 />
               </div>
@@ -301,7 +305,7 @@ function WordCounterComponent() {
 function StatItem({ label, value, icon }: { label: string; value: string | number; icon: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between group">
-      <div className="flex items-center gap-2 text-theme-muted group-hover:text-gray-200 transition-colors">
+      <div className="flex items-center gap-2 text-theme-muted group-hover:text-theme-heading transition-colors">
         {icon}
         <span className="text-sm font-medium">{label}</span>
       </div>
