@@ -14,6 +14,7 @@ import { AnimatePresence, easeInOut, motion } from "motion/react";
 import { tools } from "@/data/tools";
 
 import PageShell from "@/components/PageShell";
+import { HeroScreenshotCanvas } from "@/components/HeroScreenshotCanvas";
 import { getSeoMetadata } from "@/lib/seo";
 import React from "react";
 import Button from "@/components/ui/button";
@@ -227,7 +228,7 @@ function App() {
           className="relative mt-14 w-full max-w-5xl mx-auto"
         >
           <div className="hero-preview-wrap">
-            <div className="rounded-2xl border border-theme-border bg-theme-surface overflow-hidden shadow-lg">
+            <div className="rounded-2xl border border-theme-border bg-theme-surface overflow-hidden shadow-none">
               {/* browser top bar */}
               <div className="bg-[#f5f5f7] dark:bg-theme-surface-muted border-b border-theme-border/80 px-4 py-3 flex items-center gap-3">
                 <div className="flex items-center gap-1.5">
@@ -243,18 +244,7 @@ function App() {
                 <div className="w-12" />
               </div>
 
-              <img
-                src="/light.png"
-                alt="SnapBit Tools interface preview"
-                className="w-full block dark:hidden"
-                loading="eager"
-              />
-              <img
-                src="/dark.png"
-                alt="SnapBit Tools interface preview"
-                className="w-full hidden dark:block"
-                loading="eager"
-              />
+              <HeroScreenshotCanvas />
             </div>
           </div>
         </motion.div>
