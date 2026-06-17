@@ -41,6 +41,7 @@ So I built them ALL in one place!
 - [Lorem Ipsum](https://snapbittools.com/lorem-ipsum-generator)
 - [JSON to CSV](https://snapbittools.com/json-to-csv)
 - [CSV to JSON](https://snapbittools.com/csv-to-json)
+- [Color Palette Generator](https://snapbittools.com/color-palette-generator)
 
 ## Tech Stack
 

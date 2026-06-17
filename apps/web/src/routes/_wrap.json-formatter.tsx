@@ -52,10 +52,10 @@ export function RouteComponent() {
 
         {/* Header */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             JSON <span className="text-brand-primary">Formatter</span>
           </h1>
-          <p className="text-md text-gray-300">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p>
+          <p className="text-md text-theme-body">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p>
         </div>
 
         <JsonFormatterTool />
@@ -110,7 +110,7 @@ export function RouteComponent() {
         <RelatedTools currentToolSlug="json-formatter" category="Data" />
 
         <footer className="mt-8 text-center">
-          <p className="text-gray-400 text-xs">
+          <p className="text-theme-muted text-xs">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"

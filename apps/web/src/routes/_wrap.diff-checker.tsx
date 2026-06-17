@@ -8,6 +8,8 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
 import { computeDiff, DiffLine } from "@/lib/diffFn";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
@@ -83,35 +85,33 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-3">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-3">
             Diff <span className="text-brand-primary">Checker</span>
           </h1>
-          <p className="text-md text-gray-300 max-w-2xl mx-auto">
+          <p className="text-md text-theme-body max-w-2xl mx-auto">
             Pinpoint changes between two text versions instantly. Private, secure, and processing entirely in your browser.
           </p>
         </div>
 
         {/* Action Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6  p-4 rounded-lg border border-gray-700">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6  p-4 rounded-lg border border-theme-border">
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setViewMode("split")}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
-                viewMode === "split"
-                  ? "bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white"
-                  : "text-gray-400 hover:bg-gray-700/50 hover:text-gray-200"
-              }`}
+              className={cn(
+                "flex items-center space-x-2 px-4 py-2 rounded-lg transition-all",
+                viewMode === "split" ? tc.toggleActive : tc.toggleInactive,
+              )}
             >
               <IconColumns className="w-4 h-4" />
               <span className="text-sm font-medium">Split View</span>
             </button>
             <button
               onClick={() => setViewMode("unified")}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
-                viewMode === "unified"
-                  ? "bg-brand-primary shadow-[0px_0px_2px_1px_rgba(255, 255, 255,0.2)_inset] text-shadow-sm text-shadow-white/10 ring ring-white/20 text-white"
-                  : "text-gray-400 hover:bg-gray-700/50 hover:text-gray-200"
-              }`}
+              className={cn(
+                "flex items-center space-x-2 px-4 py-2 rounded-lg transition-all",
+                viewMode === "unified" ? tc.toggleActive : tc.toggleInactive,
+              )}
             >
               <IconLayoutList className="w-4 h-4" />
               <span className="text-sm font-medium">Unified View</span>
@@ -122,21 +122,21 @@ function RouteComponent() {
             <button
               onClick={handleSwap}
               title="Swap Inputs"
-              className="p-2 text-gray-400 hover:bg-gray-700/50 hover:text-brand-primary rounded-lg transition-all"
+              className={cn(tc.toggleInactive, "p-2 rounded-lg hover:text-brand-primary")}
             >
               <IconArrowsExchange className="w-5 h-5" />
             </button>
             <button
               onClick={handleClear}
               title="Clear All"
-              className="p-2 text-gray-400 hover:bg-red-900/20 hover:text-red-400 rounded-lg transition-all"
+              className={cn(tc.btnDanger, "p-2")}
             >
               <IconTrash className="w-5 h-5" />
             </button>
             <button
               onClick={handleCopyResult}
               disabled={diffResult.length === 0}
-              className="flex items-center space-x-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-all text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}
             >
               <IconCopy className="w-4 h-4" />
               <span>{copyStatus || "Copy Diff"}</span>
@@ -147,19 +147,19 @@ function RouteComponent() {
         {/* Input Areas */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-400 ml-1 uppercase tracking-wider">Original Text (Old)</label>
+            <label className="text-sm font-medium text-theme-muted ml-1 uppercase tracking-wider">Original Text (Old)</label>
             <textarea
               placeholder="Paste your original text here..."
-              className="w-full h-64 p-4  border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
+              className={cn(tc.field, "w-full h-64 p-4 font-mono text-sm leading-relaxed")}
               value={oldText}
               onChange={(e) => setOldText(e.target.value)}
             />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-400 ml-1 uppercase tracking-wider">Changed Text (New)</label>
+            <label className="text-sm font-medium text-theme-muted ml-1 uppercase tracking-wider">Changed Text (New)</label>
             <textarea
               placeholder="Paste your modified text here..."
-              className="w-full h-64 p-4  border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all font-mono text-sm leading-relaxed"
+              className={cn(tc.field, "w-full h-64 p-4 font-mono text-sm leading-relaxed")}
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
             />
@@ -167,18 +167,18 @@ function RouteComponent() {
         </div>
 
         {/* Diff Visualization */}
-        <div className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden shadow-2xl mb-12">
-          <div className="bg-gray-800/50 px-6 py-3 border-b border-gray-800 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest">Comparison Results</h2>
+        <div className="bg-theme-surface rounded-2xl border border-theme-border overflow-hidden shadow-2xl mb-12">
+          <div className="bg-theme-surface-muted/50 px-6 py-3 border-b border-theme-border flex items-center justify-between">
+            <h2 className="text-sm font-semibold text-theme-muted uppercase tracking-widest">Comparison Results</h2>
             {diffResult.length > 0 && (
               <div className="flex items-center space-x-4 text-xs">
                 <span className="flex items-center space-x-1">
                   <span className="w-2 h-2 rounded-full bg-green-500/50"></span>
-                  <span className="text-gray-400">{diffResult.filter((l) => l.type === "added").length} added</span>
+                  <span className="text-theme-muted">{diffResult.filter((l) => l.type === "added").length} added</span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <span className="w-2 h-2 rounded-full bg-red-500/50"></span>
-                  <span className="text-gray-400">{diffResult.filter((l) => l.type === "removed").length} removed</span>
+                  <span className="text-theme-muted">{diffResult.filter((l) => l.type === "removed").length} removed</span>
                 </span>
               </div>
             )}
@@ -249,20 +249,21 @@ function SplitView({ diff }: { diff: DiffLine[] }) {
   }
 
   return (
-    <div className="grid grid-cols-2 divide-x divide-gray-800 min-w-[800px]">
+    <div className="grid grid-cols-2 divide-x divide-theme-border min-w-[800px]">
       <div className="font-mono text-sm">
         {diff.map((line, idx) => (
           <div
             key={`left-${idx}`}
-            className={`flex items-start ${
+            className={cn(
+              "flex items-start py-0.5 px-4 min-h-[24px]",
               line.type === "removed"
-                ? "bg-red-900/20 text-red-200"
+                ? tc.diffRemoved
                 : line.type === "added"
                   ? "invisible pointer-events-none"
-                  : "text-gray-400"
-            } py-0.5 px-4 min-h-[24px]`}
+                  : "text-theme-muted",
+            )}
           >
-            <span className="w-8 flex-shrink-0 text-gray-600 select-none text-right mr-4 leading-6">{line.oldLineNumber || ""}</span>
+            <span className="w-8 flex-shrink-0 text-theme-body select-none text-right mr-4 leading-6">{line.oldLineNumber || ""}</span>
             <span className="flex-1 whitespace-pre-wrap break-all leading-6">{line.type === "added" ? "" : line.value}</span>
           </div>
         ))}
@@ -273,15 +274,16 @@ function SplitView({ diff }: { diff: DiffLine[] }) {
         {diff.map((line, idx) => (
           <div
             key={`right-${idx}`}
-            className={`flex items-start ${
+            className={cn(
+              "flex items-start py-0.5 px-4 min-h-[24px] border-l border-theme-border",
               line.type === "added"
-                ? "bg-green-900/20 text-green-200"
+                ? tc.diffAdded
                 : line.type === "removed"
                   ? "invisible pointer-events-none"
-                  : "text-gray-400"
-            } py-0.5 px-4 min-h-[24px] border-l border-gray-800`}
+                  : "text-theme-muted",
+            )}
           >
-            <span className="w-8 flex-shrink-0 text-gray-600 select-none text-right mr-4 leading-6">{line.newLineNumber || ""}</span>
+            <span className="w-8 flex-shrink-0 text-theme-body select-none text-right mr-4 leading-6">{line.newLineNumber || ""}</span>
             <span className="flex-1 whitespace-pre-wrap break-all leading-6">{line.type === "removed" ? "" : line.value}</span>
           </div>
         ))}
@@ -296,23 +298,24 @@ function UnifiedView({ diff }: { diff: DiffLine[] }) {
   }
 
   return (
-    <div className="font-mono text-sm bg-gray-900 min-w-[600px]">
+    <div className="font-mono text-sm bg-theme-surface min-w-[600px]">
       {diff.map((line, idx) => (
         <div
           key={`unified-${idx}`}
-          className={`flex items-start px-4 py-0.5 ${
+          className={cn(
+            "flex items-start px-4 py-0.5",
             line.type === "added"
-              ? "bg-green-900/20 text-green-200"
+              ? tc.diffAdded
               : line.type === "removed"
-                ? "bg-red-900/20 text-red-200"
-                : "text-gray-400"
-          }`}
+                ? tc.diffRemoved
+                : "text-theme-muted",
+          )}
         >
-          <div className="flex w-16 flex-shrink-0 select-none text-right mr-4 space-x-2 text-gray-600">
+          <div className="flex w-16 flex-shrink-0 select-none text-right mr-4 space-x-2 text-theme-body">
             <span className="w-7">{line.oldLineNumber || ""}</span>
             <span className="w-7">{line.newLineNumber || ""}</span>
           </div>
-          <span className="w-4 flex-shrink-0 select-none text-gray-500">
+          <span className="w-4 flex-shrink-0 select-none text-theme-muted">
             {line.type === "added" ? "+" : line.type === "removed" ? "-" : " "}
           </span>
           <span className="flex-1 whitespace-pre-wrap break-all">{line.value}</span>
@@ -324,8 +327,8 @@ function UnifiedView({ diff }: { diff: DiffLine[] }) {
 
 function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center p-20 text-gray-500">
-      <div className="bg-gray-800 p-4 rounded-full mb-4">
+    <div className="flex flex-col items-center justify-center p-20 text-theme-muted">
+      <div className="bg-theme-surface-muted p-4 rounded-full mb-4">
         <IconSearch className="w-8 h-8 opacity-20" />
       </div>
       <p className="text-sm font-medium">Enter text above to see the comparison</p>

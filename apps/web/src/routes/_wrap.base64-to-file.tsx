@@ -18,11 +18,13 @@ const faqs = [
   },
   {
     question: "Do my Base64 data or files leave my device?",
-    answer: "No. Everything runs in your browser only. Your Base64 input is decoded locally and never uploaded to any server.",
+    answer:
+      "No. Everything runs in your browser only. Your Base64 input is decoded locally and never uploaded to any server.",
   },
   {
     question: "Can I decode raw Base64 without data: prefix?",
-    answer: "Yes. Paste either raw Base64 or full Data URI strings. Raw Base64 works with optional manual MIME type input.",
+    answer:
+      "Yes. Paste either raw Base64 or full Data URI strings. Raw Base64 works with optional manual MIME type input.",
   },
   {
     question: "Why does the downloaded file open incorrectly?",
@@ -62,14 +64,30 @@ export const Route = createFileRoute("/_wrap/base64-to-file")({
       description:
         "Decode Base64 to original files instantly in your browser. Supports text, image, PDF, Excel, Word, ZIP, and more with zero uploads.",
       keywords: [
-      "base64 decode", "base64 to file", "data uri decode", "decode base64",
-      "base64 to txt", "base64 to image", "base64 to pdf", "base64 to excel",
-      "base64 to file converter", "base64 decoder online", "offline base64 to file converter",
-      "secure base64 to file converter", "fast base64 to file converter", "base64 decoding tool",
-      "base64 to file converter online", "base64 to file converter offline", "base64 to file converter secure",
-      "base64 to pdf converter", "base64 to excel converter", "base64 to image converter",
-      "base64 to zip converter", "base64 to docx converter", "base64 to pptx converter", "base64 to csv converter"
-    
+        "base64 decode",
+        "base64 to file",
+        "data uri decode",
+        "decode base64",
+        "base64 to txt",
+        "base64 to image",
+        "base64 to pdf",
+        "base64 to excel",
+        "base64 to file converter",
+        "base64 decoder online",
+        "offline base64 to file converter",
+        "secure base64 to file converter",
+        "fast base64 to file converter",
+        "base64 decoding tool",
+        "base64 to file converter online",
+        "base64 to file converter offline",
+        "base64 to file converter secure",
+        "base64 to pdf converter",
+        "base64 to excel converter",
+        "base64 to image converter",
+        "base64 to zip converter",
+        "base64 to docx converter",
+        "base64 to pptx converter",
+        "base64 to csv converter",
       ],
       url: "/base64-to-file",
       type: "software",
@@ -228,7 +246,9 @@ function RouteComponent() {
       });
     } catch (decodeError) {
       setResult(null);
-      setError(decodeError instanceof Error ? decodeError.message : "Failed to decode Base64 input.");
+      setError(
+        decodeError instanceof Error ? decodeError.message : "Failed to decode Base64 input.",
+      );
     }
   };
 
@@ -262,19 +282,35 @@ function RouteComponent() {
         animate="visible"
         className="w-full max-w-5xl mt-6 mb-10 text-center mx-auto"
       >
-        <motion.div variants={itemVariants} className="text-center">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+        <motion.div
+          variants={itemVariants}
+          className="text-center"
+        >
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Base64 to <span className="text-brand-primary">File</span> Decoder
           </h1>
-          <p className="text-md text-gray-300">Decode any Base64 string back to its original file format. 100% private in-browser.</p>
+          <p className="text-md text-theme-body">
+            Decode any Base64 string back to its original file format. 100% private in-browser.
+          </p>
         </motion.div>
       </motion.div>
 
-      <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-5xl mx-auto mb-8">
-        <motion.div variants={itemVariants} className="rounded-xl shadow-lg bg-gray-800/40 border border-gray-700 p-4 sm:p-6">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="w-full max-w-5xl mx-auto mb-8"
+      >
+        <motion.div
+          variants={itemVariants}
+          className="rounded-xl shadow-lg bg-theme-surface-muted/40 border border-theme-border p-4 sm:p-6"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label htmlFor="file-base-name" className="block text-sm font-medium text-gray-300 mb-2">
+              <label
+                htmlFor="file-base-name"
+                className="block text-sm font-medium text-theme-body mb-2"
+              >
                 File name
               </label>
               <input
@@ -283,11 +319,14 @@ function RouteComponent() {
                 value={fileBaseName}
                 onChange={(event) => setFileBaseName(event.target.value)}
                 placeholder="decoded-file"
-                className="w-full px-3 py-2 border border-gray-700 rounded-lg bg-gray-800/60 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                className="w-full px-3 py-2 border border-theme-border rounded-lg bg-theme-surface-muted/60 text-theme-heading focus:outline-none focus:ring-2 focus:ring-brand-primary"
               />
             </div>
             <div>
-              <label htmlFor="mime-type" className="block text-sm font-medium text-gray-300 mb-2">
+              <label
+                htmlFor="mime-type"
+                className="block text-sm font-medium text-theme-body mb-2"
+              >
                 MIME type (optional)
               </label>
               <input
@@ -296,12 +335,15 @@ function RouteComponent() {
                 value={mimeType}
                 onChange={(event) => setMimeType(event.target.value)}
                 placeholder={suggestedMime || "application/pdf or image/png"}
-                className="w-full px-3 py-2 border border-gray-700 rounded-lg bg-gray-800/60 text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                className="w-full px-3 py-2 border border-theme-border rounded-lg bg-theme-surface-muted/60 text-theme-heading focus:outline-none focus:ring-2 focus:ring-brand-primary"
               />
             </div>
           </div>
 
-          <label htmlFor="base64-input" className="block text-sm font-medium text-gray-300 mb-2">
+          <label
+            htmlFor="base64-input"
+            className="block text-sm font-medium text-theme-body mb-2"
+          >
             Paste Base64 or Data URI
           </label>
           <textarea
@@ -310,7 +352,7 @@ function RouteComponent() {
             onChange={(event) => setBase64Input(event.target.value)}
             rows={10}
             placeholder="data:application/pdf;base64,JVBERi0xLjQKJ... or raw Base64"
-            className="w-full p-4 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            className="w-full p-4 border border-gray-600 rounded-lg dark:bg-gray-700 text-theme-heading font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-brand-primary"
           />
 
           {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
@@ -338,12 +380,12 @@ function RouteComponent() {
             variants={resultVariants}
             initial="hidden"
             animate="visible"
-            className="mt-6 bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-700"
+            className="mt-6 bg-theme-surface rounded-xl shadow-lg p-6 border border-theme-border"
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h3 className="text-xl font-semibold text-gray-100">Decoded file is ready</h3>
-                <p className="text-sm text-gray-300 mt-1">{result.fileName}</p>
+                <h3 className="text-xl font-semibold text-theme-heading">Decoded file is ready</h3>
+                <p className="text-sm text-theme-body mt-1">{result.fileName}</p>
               </div>
               <button
                 type="button"
@@ -356,23 +398,30 @@ function RouteComponent() {
             </div>
 
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-              <div className="bg-gray-800/60 rounded-lg p-3 border border-gray-700">
-                <p className="text-gray-400">Detected MIME</p>
-                <p className="text-gray-100 font-medium break-all">{result.detectedMime || "Not found in input"}</p>
+              <div className="bg-theme-surface-muted/60 rounded-lg p-3 border border-theme-border">
+                <p className="text-theme-muted">Detected MIME</p>
+                <p className="text-theme-heading font-medium break-all">
+                  {result.detectedMime || "Not found in input"}
+                </p>
               </div>
-              <div className="bg-gray-800/60 rounded-lg p-3 border border-gray-700">
-                <p className="text-gray-400">Output MIME</p>
-                <p className="text-gray-100 font-medium break-all">{result.finalMime}</p>
+              <div className="bg-theme-surface-muted/60 rounded-lg p-3 border border-theme-border">
+                <p className="text-theme-muted">Output MIME</p>
+                <p className="text-theme-heading font-medium break-all">{result.finalMime}</p>
               </div>
-              <div className="bg-gray-800/60 rounded-lg p-3 border border-gray-700 sm:col-span-2">
-                <p className="text-gray-400">File size</p>
-                <p className="text-gray-100 font-medium">{result.size.toLocaleString()} bytes</p>
+              <div className="bg-theme-surface-muted/60 rounded-lg p-3 border border-theme-border sm:col-span-2">
+                <p className="text-theme-muted">File size</p>
+                <p className="text-theme-heading font-medium">
+                  {result.size.toLocaleString()} bytes
+                </p>
               </div>
             </div>
           </motion.div>
         )}
 
-        <motion.p variants={itemVariants} className="text-center text-gray-400 text-xs mt-4">
+        <motion.p
+          variants={itemVariants}
+          className="text-center text-theme-muted text-xs mt-4"
+        >
           Privacy note: decoding happens entirely in your browser. Your data is never uploaded.
         </motion.p>
       </motion.div>
@@ -390,12 +439,14 @@ function RouteComponent() {
         features={[
           {
             title: "Works for Any File Type",
-            description: "Decode Base64 content into text files, images, PDFs, Office files, archives, and other binary formats.",
+            description:
+              "Decode Base64 content into text files, images, PDFs, Office files, archives, and other binary formats.",
             icon: IconFileCode,
           },
           {
             title: "Private by Design",
-            description: "All decoding happens locally in your browser. No input leaves your device.",
+            description:
+              "All decoding happens locally in your browser. No input leaves your device.",
             icon: IconLock,
           },
           {
@@ -411,7 +462,8 @@ function RouteComponent() {
           },
           {
             title: "Set File Details",
-            description: "Optionally provide MIME type and file name to ensure correct extension handling.",
+            description:
+              "Optionally provide MIME type and file name to ensure correct extension handling.",
           },
           {
             title: "Decode",
@@ -425,10 +477,13 @@ function RouteComponent() {
         faqs={faqs}
       />
 
-      <RelatedTools currentToolSlug="base64-to-file" category="Data" />
+      <RelatedTools
+        currentToolSlug="base64-to-file"
+        category="Data"
+      />
 
       <div className="mt-8 text-center">
-        <p className="text-gray-400 text-xs text-center">
+        <p className="text-theme-muted text-xs text-center">
           Crafted with care by{" "}
           <a
             href="https://sidme.dev/"

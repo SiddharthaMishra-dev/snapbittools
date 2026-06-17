@@ -3,6 +3,8 @@ import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 
 import RelatedTools from "@/components/RelatedTools";
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 const PUBLISHED_DATE = "2026-05-07";
 const MODIFIED_DATE = "2026-05-07";
@@ -81,7 +83,10 @@ export const Route = createFileRoute("/_wrap/best-free-image-format-converter-20
       breadcrumbs: [
         { name: "Home", path: "/" },
         { name: "Blogs", path: "/blogs" },
-        { name: "Best Free Image Format Converter 2026", path: "/best-free-image-format-converter-2026" },
+        {
+          name: "Best Free Image Format Converter 2026",
+          path: "/best-free-image-format-converter-2026",
+        },
       ],
       schema: {
         "@context": "https://schema.org",
@@ -125,12 +130,14 @@ export const Route = createFileRoute("/_wrap/best-free-image-format-converter-20
           {
             "@type": "Thing",
             name: "AVIF",
-            description: "Next-generation image format based on AV1 video codec with excellent compression",
+            description:
+              "Next-generation image format based on AV1 video codec with excellent compression",
           },
           {
             "@type": "Thing",
             name: "Image Format Conversion",
-            description: "The process of converting images between formats like JPEG, PNG, WebP, and AVIF",
+            description:
+              "The process of converting images between formats like JPEG, PNG, WebP, and AVIF",
           },
         ],
       },
@@ -157,7 +164,7 @@ const formatOverview = [
     transparency: "No",
     support: "Universal",
     idealFor: "Photographs, complex gradients",
-    badgeClass: "bg-gray-800 border-gray-600 text-gray-300",
+    badgeClass: "bg-theme-surface-muted border-theme-border text-theme-body",
   },
   {
     name: "PNG",
@@ -166,7 +173,7 @@ const formatOverview = [
     transparency: "Yes",
     support: "Universal",
     idealFor: "Logos, icons, UI graphics",
-    badgeClass: "bg-gray-800 border-gray-600 text-gray-300",
+    badgeClass: "bg-theme-surface-muted border-theme-border text-theme-body",
   },
   {
     name: "WebP",
@@ -175,7 +182,7 @@ const formatOverview = [
     transparency: "Yes",
     support: "95%+ browsers",
     idealFor: "All web images",
-    badgeClass: "bg-blue-900/30 border-blue-500/40 text-blue-300",
+    badgeClass: "bg-brand-primary/10 border-brand-primary/30 text-brand-primary",
   },
   {
     name: "AVIF",
@@ -184,7 +191,7 @@ const formatOverview = [
     transparency: "Yes",
     support: "~85% browsers",
     idealFor: "High-performance web images",
-    badgeClass: "bg-violet-900/30 border-violet-500/40 text-violet-300",
+    badgeClass: "bg-theme-icon-bg border-brand-primary/20 text-brand-primary",
   },
 ];
 
@@ -328,45 +335,60 @@ function BlogPage() {
         {/* Article Header */}
         <header className="mb-12 mt-4">
           <div className="flex flex-wrap items-center gap-2 text-sm mb-5">
-            <span className="bg-blue-500/10 border border-blue-500/30 rounded-full px-3 py-0.5 text-xs font-medium text-blue-400">
+            <span className="bg-brand-primary/10 border border-brand-primary/30 rounded-full px-3 py-0.5 text-xs font-medium text-brand-primary">
               Image Optimization
             </span>
-            <span className="text-gray-600">·</span>
-            <time dateTime={PUBLISHED_DATE} className="text-gray-500 text-xs">
+            <span className="text-theme-body">·</span>
+            <time
+              dateTime={PUBLISHED_DATE}
+              className="text-theme-muted text-xs"
+            >
               May 7, 2026
             </time>
-            <span className="text-gray-600">·</span>
-            <span className="text-gray-500 text-xs">10 min read</span>
+            <span className="text-theme-body">·</span>
+            <span className="text-theme-muted text-xs">10 min read</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-100 leading-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-theme-heading leading-tight mb-6">
             Best Free Image Format Converter 2026: WebP vs AVIF vs JPEG
           </h1>
 
-          <p className="text-lg text-gray-400 leading-relaxed">
-            JPEG dominated the web for three decades. WebP changed the game. AVIF is rewriting it again. Here is a straight-to-the-point
-            comparison of every major image format in 2026 — and a guide to converting between them for free, directly in your browser.
+          <p className="text-lg text-theme-muted leading-relaxed">
+            JPEG dominated the web for three decades. WebP changed the game. AVIF is rewriting it
+            again. Here is a straight-to-the-point comparison of every major image format in 2026 —
+            and a guide to converting between them for free, directly in your browser.
           </p>
 
           <div className="mt-6 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-primary to-violet-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
               S
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-200">Siddhartha Mishra</p>
-              <p className="text-xs text-gray-500">SnapBit Tools</p>
+              <p className="text-sm font-medium text-theme-heading">Siddhartha Mishra</p>
+              <p className="text-xs text-theme-muted">SnapBit Tools</p>
             </div>
           </div>
         </header>
 
         {/* Table of Contents */}
-        <nav className="mb-14 p-6 bg-gray-900/50 border border-gray-700/50 rounded-lg" aria-label="Article contents">
-          <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Table of Contents</h2>
+        <nav
+          className="mb-14 p-6 bg-theme-surface/50 border border-theme-border rounded-lg"
+          aria-label="Article contents"
+        >
+          <h2 className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-4">
+            Table of Contents
+          </h2>
           <ol className="space-y-2.5 text-sm">
             {tocItems.map(([href, text]) => (
-              <li key={href} className="flex items-center gap-1.5">
-                <IconChevronRight className="w-3.5 h-3.5 text-gray-600 shrink-0" />
-                <a href={href} className="text-blue-400 hover:text-blue-300 hover:underline transition-colors">
+              <li
+                key={href}
+                className="flex items-center gap-1.5"
+              >
+                <IconChevronRight className="w-3.5 h-3.5 text-theme-body shrink-0" />
+                <a
+                  href={href}
+                  className="text-brand-primary hover:text-brand-hover hover:underline transition-colors"
+                >
                   {text}
                 </a>
               </li>
@@ -377,32 +399,41 @@ function BlogPage() {
         {/* Article Body */}
         <article className="space-y-20">
           {/* ── Section 1: Format Overview ── */}
-          <section id="format-overview" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-5">The Four Major Formats at a Glance</h2>
-            <p className="text-gray-300 leading-relaxed mb-8">
-              Four image formats dominate the modern web: JPEG, PNG, WebP, and AVIF. Each has its own compression method, feature set, and
-              ideal use case. Understanding the differences is the foundation of any serious image optimization workflow.
+          <section
+            id="format-overview"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              The Four Major Formats at a Glance
+            </h2>
+            <p className="text-theme-body leading-relaxed mb-8">
+              Four image formats dominate the modern web: JPEG, PNG, WebP, and AVIF. Each has its
+              own compression method, feature set, and ideal use case. Understanding the differences
+              is the foundation of any serious image optimization workflow.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4">
               {formatOverview.map((fmt) => (
-                <div key={fmt.name} className={`p-5 border rounded-lg ${fmt.badgeClass}`}>
+                <div
+                  key={fmt.name}
+                  className={`p-5 border rounded-lg ${fmt.badgeClass}`}
+                >
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="font-bold text-base tracking-wide">{fmt.name}</h3>
-                    <span className="text-xs text-gray-500">Since {fmt.year}</span>
+                    <span className="text-xs text-theme-muted">Since {fmt.year}</span>
                   </div>
-                  <ul className="space-y-1 text-xs text-gray-400">
+                  <ul className="space-y-1 text-xs text-theme-muted">
                     <li>
-                      <span className="text-gray-500">Compression:</span> {fmt.type}
+                      <span className="text-theme-muted">Compression:</span> {fmt.type}
                     </li>
                     <li>
-                      <span className="text-gray-500">Transparency:</span> {fmt.transparency}
+                      <span className="text-theme-muted">Transparency:</span> {fmt.transparency}
                     </li>
                     <li>
-                      <span className="text-gray-500">Browser support:</span> {fmt.support}
+                      <span className="text-theme-muted">Browser support:</span> {fmt.support}
                     </li>
                     <li>
-                      <span className="text-gray-500">Best for:</span> {fmt.idealFor}
+                      <span className="text-theme-muted">Best for:</span> {fmt.idealFor}
                     </li>
                   </ul>
                 </div>
@@ -411,16 +442,22 @@ function BlogPage() {
           </section>
 
           {/* ── Section 2: WebP Deep Dive ── */}
-          <section id="webp-deep-dive" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-5">WebP: The Practical Web Standard</h2>
-            <p className="text-gray-300 leading-relaxed mb-5">
-              Developed by Google and introduced in 2010, WebP was designed from the ground up as a replacement for both JPEG and PNG on the
-              web. It supports both lossy and lossless compression, transparency, and animation — making it the most versatile modern format
+          <section
+            id="webp-deep-dive"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              WebP: The Practical Web Standard
+            </h2>
+            <p className="text-theme-body leading-relaxed mb-5">
+              Developed by Google and introduced in 2010, WebP was designed from the ground up as a
+              replacement for both JPEG and PNG on the web. It supports both lossy and lossless
+              compression, transparency, and animation — making it the most versatile modern format
               with reliable cross-browser support.
             </p>
-            <p className="text-gray-300 leading-relaxed mb-8">
-              As of 2026, WebP is supported by 96%+ of all browsers, including all major desktop and mobile environments. There is almost no
-              reason not to use it for new web projects.
+            <p className="text-theme-body leading-relaxed mb-8">
+              As of 2026, WebP is supported by 96%+ of all browsers, including all major desktop and
+              mobile environments. There is almost no reason not to use it for new web projects.
             </p>
 
             <div className="space-y-3 mb-8">
@@ -428,47 +465,57 @@ function BlogPage() {
                 {
                   label: "25–35% smaller than JPEG",
                   detail: "at equivalent visual quality for photographs",
-                  color: "text-emerald-400",
+                  color: "text-[var(--theme-diff-added-text)]",
                 },
                 {
                   label: "26% smaller than lossless PNG",
                   detail: "when using WebP's lossless mode for graphics",
-                  color: "text-emerald-400",
+                  color: "text-[var(--theme-diff-added-text)]",
                 },
                 {
                   label: "Supports alpha transparency",
                   detail: "unlike JPEG, making it viable for icons and UI elements",
-                  color: "text-blue-400",
+                  color: "text-brand-primary",
                 },
                 {
                   label: "Supports animation",
                   detail: "as a lighter alternative to GIF",
-                  color: "text-blue-400",
+                  color: "text-brand-primary",
                 },
                 {
                   label: "Fast encoding",
                   detail: "suitable for batch processing large numbers of images",
-                  color: "text-blue-400",
+                  color: "text-brand-primary",
                 },
               ].map(({ label, detail, color }) => (
-                <div key={label} className="flex items-start gap-3 p-4 bg-gray-900/40 border border-gray-700/40 rounded-lg">
+                <div
+                  key={label}
+                  className="flex items-start gap-3 p-4 bg-theme-surface-muted border border-theme-border/40 rounded-lg"
+                >
                   <span className={`font-semibold text-sm shrink-0 ${color}`}>+</span>
                   <div>
-                    <span className="text-sm font-medium text-gray-100">{label}</span>
-                    <span className="text-sm text-gray-500"> — {detail}</span>
+                    <span className="text-sm font-medium text-theme-heading">{label}</span>
+                    <span className="text-sm text-theme-muted"> — {detail}</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="p-5 bg-blue-900/10 border border-blue-500/20 rounded-lg">
-              <p className="text-sm text-gray-300 leading-relaxed">
-                <span className="font-semibold text-blue-300">Recommended tool:</span> Convert your JPEG photographs to WebP using{" "}
-                <Link to="/jpg-to-webp" className="text-blue-400 hover:text-blue-300 hover:underline font-medium">
+            <div className="p-5 bg-brand-primary/10 border border-brand-primary/20 rounded-lg">
+              <p className="text-sm text-theme-body leading-relaxed">
+                <span className="font-semibold text-brand-primary">Recommended tool:</span> Convert your
+                JPEG photographs to WebP using{" "}
+                <Link
+                  to="/jpg-to-webp"
+                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
+                >
                   SnapBit Tools JPG to WebP Converter
                 </Link>
                 , or convert PNG graphics using the{" "}
-                <Link to="/png-to-webp" className="text-blue-400 hover:text-blue-300 hover:underline font-medium">
+                <Link
+                  to="/png-to-webp"
+                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
+                >
                   PNG to WebP Converter
                 </Link>
                 . Both run entirely in your browser with no uploads.
@@ -477,22 +524,29 @@ function BlogPage() {
           </section>
 
           {/* ── Section 3: AVIF Deep Dive ── */}
-          <section id="avif-deep-dive" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-5">AVIF: The Performance Leader</h2>
-            <p className="text-gray-300 leading-relaxed mb-5">
-              AVIF (AV1 Image File Format) is derived from the AV1 video codec and represents the current state-of-the-art in image
-              compression. Released in 2019, it consistently outperforms WebP in compression ratios, particularly for photographs and
-              high-detail images.
+          <section
+            id="avif-deep-dive"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              AVIF: The Performance Leader
+            </h2>
+            <p className="text-theme-body leading-relaxed mb-5">
+              AVIF (AV1 Image File Format) is derived from the AV1 video codec and represents the
+              current state-of-the-art in image compression. Released in 2019, it consistently
+              outperforms WebP in compression ratios, particularly for photographs and high-detail
+              images.
             </p>
-            <p className="text-gray-300 leading-relaxed mb-8">
-              The tradeoff is encoding speed — AVIF encodes significantly slower than WebP or JPEG, which makes it impractical for
-              real-time generation but perfectly suitable for pre-processing assets before deployment.
+            <p className="text-theme-body leading-relaxed mb-8">
+              The tradeoff is encoding speed — AVIF encodes significantly slower than WebP or JPEG,
+              which makes it impractical for real-time generation but perfectly suitable for
+              pre-processing assets before deployment.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              <div className="p-5 bg-violet-900/10 border border-violet-500/20 rounded-lg">
-                <h3 className="font-semibold text-violet-300 mb-3 text-sm">Where AVIF excels</h3>
-                <ul className="space-y-2 text-xs text-gray-400">
+              <div className="p-5 bg-theme-icon-bg border border-brand-primary/20 rounded-lg">
+                <h3 className="font-semibold text-brand-primary mb-3 text-sm">Where AVIF excels</h3>
+                <ul className="space-y-2 text-xs text-theme-muted">
                   {[
                     "40–55% smaller than JPEG at comparable quality",
                     "Supports HDR and wide color gamut",
@@ -500,24 +554,32 @@ function BlogPage() {
                     "Full transparency and animation support",
                     "Lossless mode available",
                   ].map((pt) => (
-                    <li key={pt} className="flex items-start gap-2">
-                      <span className="text-violet-400 shrink-0">+</span>
+                    <li
+                      key={pt}
+                      className="flex items-start gap-2"
+                    >
+                      <span className="text-brand-primary shrink-0">+</span>
                       <span>{pt}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="p-5 bg-gray-900/40 border border-gray-700/40 rounded-lg">
-                <h3 className="font-semibold text-gray-300 mb-3 text-sm">Where AVIF falls short</h3>
-                <ul className="space-y-2 text-xs text-gray-400">
+              <div className="p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg">
+                <h3 className="font-semibold text-theme-body mb-3 text-sm">
+                  Where AVIF falls short
+                </h3>
+                <ul className="space-y-2 text-xs text-theme-muted">
                   {[
                     "Browser support ~85% (not yet universal)",
                     "Slow encoding — not ideal for real-time use",
                     "Limited tooling support compared to WebP",
                     "Requires fallback strategy for older browsers",
                   ].map((pt) => (
-                    <li key={pt} className="flex items-start gap-2">
-                      <span className="text-red-400 shrink-0">-</span>
+                    <li
+                      key={pt}
+                      className="flex items-start gap-2"
+                    >
+                      <span className="text-[var(--theme-alert-error-text)] shrink-0">-</span>
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -525,50 +587,67 @@ function BlogPage() {
               </div>
             </div>
 
-            <p className="text-gray-300 leading-relaxed">
-              The consensus in 2026: AVIF is the format to move toward, especially for image-heavy e-commerce and media sites. For most
-              teams, the practical approach is to use AVIF as the primary format where supported, with WebP as a fallback, and JPEG as the
-              last resort.
+            <p className="text-theme-body leading-relaxed">
+              The consensus in 2026: AVIF is the format to move toward, especially for image-heavy
+              e-commerce and media sites. For most teams, the practical approach is to use AVIF as
+              the primary format where supported, with WebP as a fallback, and JPEG as the last
+              resort.
             </p>
           </section>
 
           {/* ── Section 4: JPEG & PNG ── */}
-          <section id="jpeg-png-still-relevant" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-5">JPEG and PNG: Still Relevant?</h2>
-            <p className="text-gray-300 leading-relaxed mb-6">
-              Despite being decades old, JPEG and PNG are not going away. Their universal support, widespread tooling, and deep integration
-              into software ecosystems keep them relevant — but their role is increasingly that of a baseline rather than the optimal choice.
+          <section
+            id="jpeg-png-still-relevant"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              JPEG and PNG: Still Relevant?
+            </h2>
+            <p className="text-theme-body leading-relaxed mb-6">
+              Despite being decades old, JPEG and PNG are not going away. Their universal support,
+              widespread tooling, and deep integration into software ecosystems keep them relevant —
+              but their role is increasingly that of a baseline rather than the optimal choice.
             </p>
 
             <div className="space-y-4">
-              <div className="p-5 bg-gray-900/40 border border-gray-700/40 rounded-lg">
-                <h3 className="font-semibold text-gray-100 mb-2">When JPEG is still the right choice</h3>
-                <ul className="space-y-1.5 text-sm text-gray-400 mt-3">
+              <div className="p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg">
+                <h3 className="font-semibold text-theme-heading mb-2">
+                  When JPEG is still the right choice
+                </h3>
+                <ul className="space-y-1.5 text-sm text-theme-muted mt-3">
                   {[
                     "Email clients that do not support WebP",
                     "Legacy CMS or software with strict format requirements",
                     "Social media platforms that re-encode images on upload anyway",
                     "When universal compatibility across all devices is non-negotiable",
                   ].map((pt) => (
-                    <li key={pt} className="flex items-start gap-2">
-                      <span className="text-gray-500 shrink-0">—</span>
+                    <li
+                      key={pt}
+                      className="flex items-start gap-2"
+                    >
+                      <span className="text-theme-muted shrink-0">—</span>
                       <span>{pt}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="p-5 bg-gray-900/40 border border-gray-700/40 rounded-lg">
-                <h3 className="font-semibold text-gray-100 mb-2">When PNG is still the right choice</h3>
-                <ul className="space-y-1.5 text-sm text-gray-400 mt-3">
+              <div className="p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg">
+                <h3 className="font-semibold text-theme-heading mb-2">
+                  When PNG is still the right choice
+                </h3>
+                <ul className="space-y-1.5 text-sm text-theme-muted mt-3">
                   {[
                     "Source files that need to be re-edited — lossless preserves full fidelity",
                     "Screenshots with text, which degrade visibly under lossy compression",
                     "Software that requires PNG specifically (design tools, icon pipelines)",
                     "When toolchain support for WebP or AVIF is not yet in place",
                   ].map((pt) => (
-                    <li key={pt} className="flex items-start gap-2">
-                      <span className="text-gray-500 shrink-0">—</span>
+                    <li
+                      key={pt}
+                      className="flex items-start gap-2"
+                    >
+                      <span className="text-theme-muted shrink-0">—</span>
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -576,17 +655,26 @@ function BlogPage() {
               </div>
             </div>
 
-            <p className="text-gray-300 leading-relaxed mt-6">
+            <p className="text-theme-body leading-relaxed mt-6">
               Need to convert between these legacy formats?{" "}
-              <Link to="/jpg-to-png" className="text-blue-400 hover:text-blue-300 hover:underline">
+              <Link
+                to="/jpg-to-png"
+                className="text-brand-primary hover:text-brand-hover hover:underline"
+              >
                 JPG to PNG
               </Link>
               ,{" "}
-              <Link to="/png-to-jpg" className="text-blue-400 hover:text-blue-300 hover:underline">
+              <Link
+                to="/png-to-jpg"
+                className="text-brand-primary hover:text-brand-hover hover:underline"
+              >
                 PNG to JPG
               </Link>
               , and{" "}
-              <Link to="/heic-to-jpg" className="text-blue-400 hover:text-blue-300 hover:underline">
+              <Link
+                to="/heic-to-jpg"
+                className="text-brand-primary hover:text-brand-hover hover:underline"
+              >
                 HEIC to JPG
               </Link>{" "}
               converters are all available free on SnapBit Tools — no uploads, no sign-up.
@@ -594,45 +682,61 @@ function BlogPage() {
           </section>
 
           {/* ── Section 5: Head-to-Head Table ── */}
-          <section id="head-to-head" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-5">Head-to-Head Comparison Table</h2>
-            <p className="text-gray-300 leading-relaxed mb-6">
+          <section
+            id="head-to-head"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              Head-to-Head Comparison Table
+            </h2>
+            <p className="text-theme-body leading-relaxed mb-6">
               A direct comparison across the criteria that matter most for web and production use:
             </p>
 
-            <div className="overflow-x-auto rounded-lg border border-gray-700/50">
+            <div className="overflow-x-auto rounded-lg border border-theme-border">
               <table className="w-full text-sm">
-                <thead className="bg-gray-900/60">
-                  <tr className="border-b border-gray-700/50">
-                    <th className="text-left py-3 px-4 text-gray-400 font-medium">Criterion</th>
-                    <th className="text-left py-3 px-4 text-gray-400 font-medium">JPEG</th>
-                    <th className="text-left py-3 px-4 text-gray-400 font-medium">PNG</th>
-                    <th className="text-left py-3 px-4 text-blue-400 font-medium">WebP</th>
-                    <th className="text-left py-3 px-4 text-violet-400 font-medium">AVIF</th>
+                <thead className="bg-theme-surface">
+                  <tr className="border-b border-theme-border">
+                    <th className="text-left py-3 px-4 text-theme-muted font-medium">Criterion</th>
+                    <th className="text-left py-3 px-4 text-theme-muted font-medium">JPEG</th>
+                    <th className="text-left py-3 px-4 text-theme-muted font-medium">PNG</th>
+                    <th className="text-left py-3 px-4 text-brand-primary font-medium">WebP</th>
+                    <th className="text-left py-3 px-4 text-brand-primary font-medium">AVIF</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-800/60">
+                <tbody className="divide-y divide-theme-border">
                   {comparisonRows.map((row) => (
-                    <tr key={row.criterion} className="hover:bg-gray-800/20 transition-colors">
-                      <td className="py-3 px-4 text-gray-300 font-medium text-xs">{row.criterion}</td>
-                      <td className="py-3 px-4 text-gray-400 text-xs">{row.jpeg}</td>
-                      <td className="py-3 px-4 text-gray-400 text-xs">{row.png}</td>
-                      <td className="py-3 px-4 text-gray-200 text-xs">{row.webp}</td>
-                      <td className="py-3 px-4 text-gray-200 text-xs">{row.avif}</td>
+                    <tr
+                      key={row.criterion}
+                      className="hover:bg-theme-surface-muted/20 transition-colors"
+                    >
+                      <td className="py-3 px-4 text-theme-body font-medium text-xs">
+                        {row.criterion}
+                      </td>
+                      <td className="py-3 px-4 text-theme-muted text-xs">{row.jpeg}</td>
+                      <td className="py-3 px-4 text-theme-muted text-xs">{row.png}</td>
+                      <td className="py-3 px-4 text-theme-heading text-xs">{row.webp}</td>
+                      <td className="py-3 px-4 text-theme-heading text-xs">{row.avif}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-600 mt-3">
-              * Browser support figures based on global usage data as of May 2026. Encoding speed ratings are relative, not absolute.
+            <p className="text-xs text-theme-body mt-3">
+              * Browser support figures based on global usage data as of May 2026. Encoding speed
+              ratings are relative, not absolute.
             </p>
           </section>
 
           {/* ── Section 6: When to Use ── */}
-          <section id="when-to-use" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-5">Which Format Should You Use?</h2>
-            <p className="text-gray-300 leading-relaxed mb-6">
+          <section
+            id="when-to-use"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              Which Format Should You Use?
+            </h2>
+            <p className="text-theme-body leading-relaxed mb-6">
               The right format depends on your context. Here is a practical decision guide:
             </p>
 
@@ -640,66 +744,79 @@ function BlogPage() {
               {[
                 {
                   scenario: "New website or web app",
-                  recommendation: "WebP for all images; AVIF where your build pipeline supports it. Use JPEG as fallback only.",
-                  color: "border-blue-500/30 bg-blue-900/10",
+                  recommendation:
+                    "WebP for all images; AVIF where your build pipeline supports it. Use JPEG as fallback only.",
+                  color: "border-brand-primary/30 bg-brand-primary/10",
                   label: "WebP / AVIF",
-                  labelColor: "text-blue-400",
+                  labelColor: "text-brand-primary",
                 },
                 {
                   scenario: "E-commerce product images",
                   recommendation:
                     "AVIF for main product shots where supported, WebP otherwise. Smaller images mean faster pages and better conversion rates.",
-                  color: "border-violet-500/30 bg-violet-900/10",
+                  color: "border-brand-primary/20 bg-theme-icon-bg",
                   label: "AVIF / WebP",
-                  labelColor: "text-violet-400",
+                  labelColor: "text-brand-primary",
                 },
                 {
                   scenario: "Logos, icons, and UI assets with transparency",
-                  recommendation: "WebP lossless or PNG. AVIF lossless is also excellent but WebP has broader tooling support.",
-                  color: "border-blue-500/30 bg-blue-900/10",
+                  recommendation:
+                    "WebP lossless or PNG. AVIF lossless is also excellent but WebP has broader tooling support.",
+                  color: "border-brand-primary/30 bg-brand-primary/10",
                   label: "WebP / PNG",
-                  labelColor: "text-blue-400",
+                  labelColor: "text-brand-primary",
                 },
                 {
                   scenario: "Email newsletters",
-                  recommendation: "JPEG. Email clients have inconsistent WebP support. Stick to JPEG for maximum compatibility.",
-                  color: "border-gray-600/40 bg-gray-900/40",
+                  recommendation:
+                    "JPEG. Email clients have inconsistent WebP support. Stick to JPEG for maximum compatibility.",
+                  color: "border-theme-border bg-theme-surface-muted",
                   label: "JPEG",
-                  labelColor: "text-gray-400",
+                  labelColor: "text-theme-muted",
                 },
                 {
                   scenario: "iPhone photos (HEIC) for sharing",
                   recommendation:
                     "Convert to JPEG first for universal compatibility, then to WebP if you're publishing on the web.",
-                  color: "border-gray-600/40 bg-gray-900/40",
+                  color: "border-theme-border bg-theme-surface-muted",
                   label: "JPEG / WebP",
-                  labelColor: "text-gray-400",
+                  labelColor: "text-theme-muted",
                 },
                 {
                   scenario: "Source / archival files",
-                  recommendation: "PNG or lossless WebP. Never use lossy formats for files you will re-edit later.",
-                  color: "border-emerald-500/30 bg-emerald-900/10",
+                  recommendation:
+                    "PNG or lossless WebP. Never use lossy formats for files you will re-edit later.",
+                  color: "border-theme-border bg-[var(--theme-diff-added-bg)]",
                   label: "PNG",
-                  labelColor: "text-emerald-400",
+                  labelColor: "text-[var(--theme-diff-added-text)]",
                 },
               ].map(({ scenario, recommendation, color, label, labelColor }) => (
-                <div key={scenario} className={`p-5 border rounded-lg ${color}`}>
+                <div
+                  key={scenario}
+                  className={`p-5 border rounded-lg ${color}`}
+                >
                   <div className="flex items-start justify-between gap-4 mb-2">
-                    <h3 className="font-semibold text-gray-100 text-sm">{scenario}</h3>
+                    <h3 className="font-semibold text-theme-heading text-sm">{scenario}</h3>
                     <span className={`text-xs font-bold shrink-0 ${labelColor}`}>{label}</span>
                   </div>
-                  <p className="text-xs text-gray-400 leading-relaxed">{recommendation}</p>
+                  <p className="text-xs text-theme-muted leading-relaxed">{recommendation}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* ── Section 7: How to Convert ── */}
-          <section id="how-to-convert" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-5">How to Convert Image Formats for Free</h2>
-            <p className="text-gray-300 leading-relaxed mb-8">
-              SnapBit Tools provides a full set of free, browser-based image format converters. Every conversion happens locally in your
-              browser — no files are uploaded to any server, no account is required, and there are no usage limits.
+          <section
+            id="how-to-convert"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
+              How to Convert Image Formats for Free
+            </h2>
+            <p className="text-theme-body leading-relaxed mb-8">
+              SnapBit Tools provides a full set of free, browser-based image format converters.
+              Every conversion happens locally in your browser — no files are uploaded to any
+              server, no account is required, and there are no usage limits.
             </p>
 
             {/* Step by step */}
@@ -707,14 +824,14 @@ function BlogPage() {
               {conversionSteps.map(({ step, title, desc }) => (
                 <div
                   key={step}
-                  className="flex gap-4 p-5 bg-gray-900/40 border border-gray-700/40 rounded-lg hover:border-blue-500/30 hover:bg-gray-900/60 transition-all duration-200"
+                  className="flex gap-4 p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg hover:border-brand-primary/30 hover:bg-theme-surface transition-all duration-200"
                 >
-                  <div className="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-sm shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-brand-primary/20 border border-brand-primary/30 flex items-center justify-center text-brand-primary font-bold text-sm shrink-0">
                     {step}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-100 mb-1">{title}</h3>
-                    <p className="text-sm text-gray-400 leading-relaxed">{desc}</p>
+                    <h3 className="font-semibold text-theme-heading mb-1">{title}</h3>
+                    <p className="text-sm text-theme-muted leading-relaxed">{desc}</p>
                   </div>
                 </div>
               ))}
@@ -724,7 +841,7 @@ function BlogPage() {
             <div className="mb-10">
               <Link
                 to="/image-format-converter"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 group"
+                className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-6 py-3 group")}
               >
                 Open Image Format Converter — Free
                 <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -732,49 +849,62 @@ function BlogPage() {
             </div>
 
             {/* Conversion links grid */}
-            <h3 className="text-lg font-semibold text-gray-100 mb-4">All Available Conversion Tools</h3>
+            <h3 className="text-lg font-semibold text-theme-heading mb-4">
+              All Available Conversion Tools
+            </h3>
             <div className="grid sm:grid-cols-2 gap-3">
               {conversionTools.map(({ label, href, desc }) => (
                 <Link
                   key={href}
                   to={href}
-                  className="p-4 bg-gray-900/40 border border-gray-700/40 rounded-lg hover:border-blue-500/30 hover:bg-gray-900/60 transition-all duration-200 group block"
+                  className="p-4 bg-theme-surface-muted border border-theme-border/40 rounded-lg hover:border-brand-primary/30 hover:bg-theme-surface transition-all duration-200 group block"
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-semibold text-sm text-gray-100 group-hover:text-blue-300 transition-colors">{label}</span>
-                    <IconChevronRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all" />
+                    <span className="font-semibold text-sm text-theme-heading group-hover:text-brand-primary transition-colors">
+                      {label}
+                    </span>
+                    <IconChevronRight className="w-3.5 h-3.5 text-theme-body group-hover:text-brand-primary group-hover:translate-x-0.5 transition-all" />
                   </div>
-                  <p className="text-xs text-gray-500 leading-relaxed">{desc}</p>
+                  <p className="text-xs text-theme-muted leading-relaxed">{desc}</p>
                 </Link>
               ))}
             </div>
 
             {/* Secondary CTA */}
-            <div className="mt-8 p-5 bg-gray-900/40 border border-gray-700/40 rounded-lg">
-              <p className="text-sm text-gray-300 leading-relaxed">
+            <div className="mt-8 p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg">
+              <p className="text-sm text-theme-body leading-relaxed">
                 Once converted, you can reduce file sizes further with the{" "}
-                <Link to="/image-compressor" className="text-blue-400 hover:text-blue-300 hover:underline font-medium">
+                <Link
+                  to="/image-compressor"
+                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
+                >
                   SnapBit Tools Image Compressor
                 </Link>
-                . Combining format conversion and compression is the most effective way to minimize image weight for web delivery.
+                . Combining format conversion and compression is the most effective way to minimize
+                image weight for web delivery.
               </p>
             </div>
           </section>
 
           {/* ── FAQ Section ── */}
-          <section id="faqs" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-8">Frequently Asked Questions</h2>
+          <section
+            id="faqs"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-8">
+              Frequently Asked Questions
+            </h2>
             <div className="space-y-4">
               {faqs.map((faq, index) => (
                 <details
                   key={index}
-                  className="group bg-gray-900/40 border border-gray-700/50 rounded-lg p-6 cursor-pointer hover:border-blue-500/50 hover:bg-gray-900/60 transition-all duration-200"
+                  className="group bg-theme-surface-muted border border-theme-border rounded-lg p-6 cursor-pointer hover:border-brand-primary/50 hover:bg-theme-surface transition-all duration-200"
                 >
-                  <summary className="font-semibold text-base flex items-center justify-between text-gray-100 cursor-pointer list-none">
+                  <summary className="font-semibold text-base flex items-center justify-between text-theme-heading cursor-pointer list-none">
                     {faq.question}
-                    <IconChevronDown className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-300 shrink-0 ml-3" />
+                    <IconChevronDown className="w-5 h-5 text-theme-muted group-open:rotate-180 transition-transform duration-300 shrink-0 ml-3" />
                   </summary>
-                  <p className="mt-4 text-gray-300 leading-relaxed text-sm">{faq.answer}</p>
+                  <p className="mt-4 text-theme-body leading-relaxed text-sm">{faq.answer}</p>
                 </details>
               ))}
             </div>
@@ -782,23 +912,25 @@ function BlogPage() {
 
           {/* ── Final CTA ── */}
           <section>
-            <div className="p-6 bg-gradient-to-br from-blue-900/30 to-gray-900/50 border border-blue-500/30 rounded-lg text-center">
-              <h2 className="text-lg sm:text-xl font-bold text-gray-100 mb-3">Convert Your Images Now — Free</h2>
-              <p className="text-gray-400 mb-6 text-sm max-w-md mx-auto leading-relaxed">
-                No uploads. No sign-up. No limits. SnapBit Tools converts between every major image format directly in your browser with
-                full privacy.
+            <div className="p-6 bg-brand-primary/10 border border-brand-primary/30 rounded-lg text-center">
+              <h2 className="text-lg sm:text-xl font-bold text-theme-heading mb-3">
+                Convert Your Images Now — Free
+              </h2>
+              <p className="text-theme-muted mb-6 text-sm max-w-md mx-auto leading-relaxed">
+                No uploads. No sign-up. No limits. SnapBit Tools converts between every major image
+                format directly in your browser with full privacy.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link
                   to="/image-format-converter"
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2.5 rounded-lg transition-all duration-200 group text-sm"
+                  className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-6 py-2.5 group text-sm")}
                 >
                   Format Converter
                   <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
                 <Link
                   to="/image-compressor"
-                  className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-100 font-semibold px-6 py-2.5 rounded-lg transition-all duration-200 group text-sm"
+                  className={cn(tc.btnSecondary, "inline-flex items-center gap-2 font-semibold px-6 py-2.5 group text-sm")}
                 >
                   Image Compressor
                   <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -810,7 +942,11 @@ function BlogPage() {
 
         {/* Related Tools */}
         <div className="mt-20">
-          <RelatedTools currentToolSlug="image-format-converter" category="Images" maxTools={4} />
+          <RelatedTools
+            currentToolSlug="image-format-converter"
+            category="Images"
+            maxTools={4}
+          />
         </div>
       </div>
     </div>

@@ -16,6 +16,8 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
@@ -246,41 +248,44 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             CSV ↔ XLSX <span className="text-brand-primary">Converter</span>
           </h1>
-          <p className="text-md text-gray-300">Convert between CSV and Excel instantly. No uploads—100% private.</p>
+          <p className="text-md text-theme-body">Convert between CSV and Excel instantly. No uploads—100% private.</p>
         </div>
 
         <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
-          <div className=" rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl">
+          <div className="rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface">
             {conversions.length === 0 ? (
               <>
                 <div
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
-                  className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                    isDragging ? "border-brand-primary bg-brand-primary/20" : "border-gray-600 hover:border-brand-primary/40 "
-                  }`}
+                  className={cn(
+                    "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
+                    isDragging
+                      ? "border-brand-primary bg-brand-primary/20"
+                      : "border-theme-border hover:border-brand-primary/40",
+                  )}
                 >
                   <div className="flex flex-col items-center space-y-4">
-                    <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-gray-400"} transition-colors`} />
+                    <IconCloudUpload className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")} />
                     <div>
-                      <p className="text-xl font-medium text-gray-100 mb-2">
+                      <p className="text-xl font-medium text-theme-heading mb-2">
                         {isDragging ? "Drop your files here" : "Drag & drop CSV or XLSX files here"}
                       </p>
-                      <p className="text-gray-400 mb-4">or</p>
+                      <p className="text-theme-muted mb-4">or</p>
                       <button
                         onClick={() => uploadRef.current?.click()}
-                        className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
+                        className={cn(tc.btnPrimary, "text-sm px-3 py-2 shadow-md hover:shadow-lg")}
                       >
                         Choose Files
                       </button>
                     </div>
                   </div>
                 </div>
-                <p className="text-center text-gray-400 text-xs mt-3 flex items-center justify-center gap-1">
+                <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
                   🔒 Your files stay on your device. Nothing is uploaded to any server.
                 </p>
                 <input
@@ -295,10 +300,10 @@ function RouteComponent() {
             ) : (
               <>
                 <div className="w-full flex justify-between items-center mb-3">
-                  <h3 className="text-xl font-semibold text-gray-100 mb-4">Files ({conversions.length})</h3>
+                  <h3 className="text-xl font-semibold text-theme-heading mb-4">Files ({conversions.length})</h3>
                   <button
                     onClick={clearAll}
-                    className="px-4 py-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors duration-200"
+                    className={cn(tc.btnDanger, "px-4 py-2")}
                   >
                     Clear All
                   </button>
@@ -306,8 +311,8 @@ function RouteComponent() {
 
                 <div className="space-y-3">
                   {conversions.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between p-4 border border-gray-600 rounded-lg bg-gray-700">
-                      <div className="mr-4 flex-shrink-0">
+                    <div key={item.id} className="flex items-center justify-between p-4 border border-theme-border rounded-lg bg-theme-surface-muted">
+                      <div className="mr-4 shrink-0">
                         {item.originalFormat === "CSV" ? (
                           <IconFileText className="w-10 h-10 text-brand-primary" />
                         ) : (
@@ -317,16 +322,16 @@ function RouteComponent() {
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center space-x-2 mb-1">
-                          <p className="font-medium text-gray-100 truncate">{item.name}</p>
-                          <span className="text-xs px-2 py-1 bg-gray-600 text-gray-300 rounded">
+                          <p className="font-medium text-theme-heading truncate">{item.name}</p>
+                          <span className="text-xs px-2 py-1 bg-theme-icon-bg text-theme-body rounded">
                             {item.originalFormat} → {item.targetFormat.toUpperCase()}
                           </span>
                         </div>
-                        {item.error && <p className="text-xs text-red-400 mt-1">{item.error}</p>}
+                        {item.error && <p className="text-xs text-[var(--theme-alert-error-text)] mt-1">{item.error}</p>}
                       </div>
 
                       <div className="flex items-center space-x-3 ml-4">
-                        {item.status === "pending" && <span className="text-gray-400 text-sm">Pending</span>}
+                        {item.status === "pending" && <span className="text-theme-muted text-sm">Pending</span>}
                         {item.status === "converting" && (
                           <div className="flex items-center space-x-2">
                             <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
@@ -336,12 +341,12 @@ function RouteComponent() {
                         {item.status === "completed" && (
                           <button
                             onClick={() => downloadFile(item)}
-                            className="px-3 py-1 bg-green-700 text-green-100 text-sm rounded hover:bg-green-600 transition-colors"
+                            className={cn(tc.btnSuccess, "px-3 py-1 text-sm")}
                           >
                             <IconDownload className="w-4 h-4" />
                           </button>
                         )}
-                        {item.status === "error" && <IconCircleX className="w-4 h-4 text-red-400" />}
+                        {item.status === "error" && <IconCircleX className="w-4 h-4 text-[var(--theme-alert-error-icon)]" />}
                       </div>
                     </div>
                   ))}
@@ -402,7 +407,7 @@ function RouteComponent() {
         <RelatedTools currentToolSlug="csv-xlsx-converter" category="Data" />
 
         <div className="mt-8">
-          <p className="text-gray-400 text-xs text-center">
+          <p className="text-theme-muted text-xs text-center">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"

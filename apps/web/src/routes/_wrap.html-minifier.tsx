@@ -16,7 +16,8 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
-import Breadcrumbs from "@/components/Breadcrumbs";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 const faqs = [
   {
@@ -30,11 +31,13 @@ const faqs = [
   },
   {
     question: "Will it break <script>, <style>, or <pre> blocks?",
-    answer: "No. The tool preserves content inside script, style, pre, and textarea blocks while minifying the surrounding HTML.",
+    answer:
+      "No. The tool preserves content inside script, style, pre, and textarea blocks while minifying the surrounding HTML.",
   },
   {
     question: "Can I minify and de-minify HTML here?",
-    answer: "Yes. You can generate either minified or de-minified output, then copy it or download it as an .html file instantly.",
+    answer:
+      "Yes. You can generate either minified or de-minified output, then copy it or download it as an .html file instantly.",
   },
 ];
 
@@ -44,7 +47,13 @@ export const Route = createFileRoute("/_wrap/html-minifier")({
       title: "HTML Minifier Online | Minify HTML Code Instantly | SnapBit Tools",
       description:
         "Minify HTML code instantly by removing comments and extra whitespace. 100% private, browser-based, and works without uploads.",
-      keywords: ["html minifier", "minify html", "compress html", "html optimizer", "remove html comments"],
+      keywords: [
+        "html minifier",
+        "minify html",
+        "compress html",
+        "html optimizer",
+        "remove html comments",
+      ],
       url: "/html-minifier",
       type: "software",
       faqs,
@@ -65,11 +74,14 @@ function RouteComponent() {
       let minified = source.replace(/\r\n/g, "\n");
 
       const protectedBlocks: string[] = [];
-      minified = minified.replace(/<(script|style|pre|textarea)\b[^>]*>[\s\S]*?<\/\1>/gi, (match) => {
-        const marker = `___SNAPBIT_BLOCK_${protectedBlocks.length}___`;
-        protectedBlocks.push(match);
-        return marker;
-      });
+      minified = minified.replace(
+        /<(script|style|pre|textarea)\b[^>]*>[\s\S]*?<\/\1>/gi,
+        (match) => {
+          const marker = `___SNAPBIT_BLOCK_${protectedBlocks.length}___`;
+          protectedBlocks.push(match);
+          return marker;
+        },
+      );
 
       if (removeComments) {
         minified = minified.replace(/<!--[\s\S]*?-->/g, (comment) => {
@@ -86,7 +98,10 @@ function RouteComponent() {
 
       minified = minified.trim();
 
-      minified = minified.replace(/___SNAPBIT_BLOCK_(\d+)___/g, (_, index) => protectedBlocks[Number(index)] ?? "");
+      minified = minified.replace(
+        /___SNAPBIT_BLOCK_(\d+)___/g,
+        (_, index) => protectedBlocks[Number(index)] ?? "",
+      );
 
       return minified;
     },
@@ -137,7 +152,8 @@ function RouteComponent() {
       const isDeclaration = /^<![^-]/.test(line) || /^<\?/.test(line);
       const isSelfClosing = /\/>$/.test(line) || (!!tagName && voidTags.has(tagName));
       const hasInlineClosing = !!tagName && new RegExp(`</${tagName}>$`, "i").test(line);
-      const shouldIncreaseIndent = !!tagName && !isSelfClosing && !hasInlineClosing && !isClosingTag;
+      const shouldIncreaseIndent =
+        !!tagName && !isSelfClosing && !hasInlineClosing && !isClosingTag;
 
       if (isClosingTag) {
         indentLevel = Math.max(indentLevel - 1, 0);
@@ -153,7 +169,10 @@ function RouteComponent() {
 
     return formatted
       .join("\n")
-      .replace(/___SNAPBIT_FORMAT_BLOCK_(\d+)___/g, (_, index) => protectedBlocks[Number(index)] ?? "")
+      .replace(
+        /___SNAPBIT_FORMAT_BLOCK_(\d+)___/g,
+        (_, index) => protectedBlocks[Number(index)] ?? "",
+      )
       .trim();
   }, []);
 
@@ -220,17 +239,19 @@ function RouteComponent() {
         {/* <Breadcrumbs /> */}
 
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             HTML <span className="text-brand-primary">Minifier</span>
           </h1>
-          <p className="text-md text-gray-300">Minify HTML instantly by removing comments and unnecessary spaces in a private workflow.</p>
+          <p className="text-md text-theme-body">
+            Minify HTML instantly by removing comments and unnecessary spaces in a private workflow.
+          </p>
         </div>
 
         <main className="flex-1 max-w-7xl w-full mx-auto space-y-6">
-          <section className="rounded-2xl border border-gray-700/50 bg-gray-800/20 p-4 sm:p-6 backdrop-blur-sm">
+          <section className="rounded-2xl border border-theme-border bg-theme-surface-muted/20 p-4 sm:p-6 backdrop-blur-sm">
             <div className="flex flex-wrap items-center gap-3 justify-center sm:justify-between">
               <div className="flex flex-wrap gap-3">
-                <label className="inline-flex items-center gap-2 text-sm text-gray-200 bg-gray-800/60 border border-gray-700 rounded-lg px-3 py-2">
+                <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
                   <input
                     type="checkbox"
                     checked={removeComments}
@@ -239,7 +260,7 @@ function RouteComponent() {
                   />
                   Remove comments
                 </label>
-                <label className="inline-flex items-center gap-2 text-sm text-gray-200 bg-gray-800/60 border border-gray-700 rounded-lg px-3 py-2">
+                <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
                   <input
                     type="checkbox"
                     checked={collapseWhitespace}
@@ -254,7 +275,7 @@ function RouteComponent() {
                 <button
                   onClick={handleMinify}
                   disabled={!input.trim()}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-lg font-medium hover:bg-brand-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={cn(tc.btnPrimary, "px-4 py-2")}
                 >
                   <IconArrowsMinimize className="w-4 h-4" />
                   Minify
@@ -262,7 +283,7 @@ function RouteComponent() {
                 <button
                   onClick={handleDeminify}
                   disabled={!input.trim()}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg font-medium hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={cn(tc.btnSecondary, "px-4 py-2")}
                 >
                   <IconSparkles className="w-4 h-4" />
                   De-minify
@@ -270,7 +291,7 @@ function RouteComponent() {
                 <button
                   onClick={handleDownload}
                   disabled={!output}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={cn(tc.btnPrimary, "px-4 py-2")}
                 >
                   <IconDownload className="w-4 h-4" />
                   Download
@@ -278,7 +299,7 @@ function RouteComponent() {
                 <button
                   onClick={handleClear}
                   disabled={!input && !output}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-900 text-red-200 rounded-lg font-medium hover:bg-red-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={cn(tc.btnDanger, "px-4 py-2")}
                 >
                   <IconTrash className="w-4 h-4" />
                   Clear
@@ -291,37 +312,47 @@ function RouteComponent() {
             <div className="lg:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-2">
               <div className="rounded-xl ">
                 <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-lg font-semibold text-gray-100 flex items-center gap-2">
+                  <h2 className="text-lg font-semibold text-theme-heading flex items-center gap-2">
                     <IconCode className="w-5 h-5 text-brand-primary" />
                     Input HTML
                   </h2>
-                  <span className="text-xs text-gray-400">{originalBytes.toLocaleString()} bytes</span>
+                  <span className="text-xs text-theme-muted">
+                    {originalBytes.toLocaleString()} bytes
+                  </span>
                 </div>
                 <textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Paste your HTML markup here..."
-                  className="w-full min-h-[260px] p-4 bg-gray-950 text-gray-100 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-primary font-mono text-sm resize-y"
+                  className={cn(tc.field, "w-full min-h-[260px] p-4 font-mono text-sm resize-y")}
                   spellCheck={false}
                 />
               </div>
 
               <div className="rounded-xl ">
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <h2 className="text-lg font-semibold text-gray-100 flex items-center gap-2">
+                  <h2 className="text-lg font-semibold text-theme-heading flex items-center gap-2">
                     <IconSparkles className="w-5 h-5 text-brand-primary" />
                     {outputMode === "minified" ? "Minified Output" : "De-minified Output"}
                   </h2>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-400">{outputBytes.toLocaleString()} bytes</span>
+                    <span className="text-xs text-theme-muted">
+                      {outputBytes.toLocaleString()} bytes
+                    </span>
                     <button
                       onClick={handleCopy}
                       disabled={!output}
-                      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-                        copySuccess ? "bg-green-800 text-green-200" : "bg-gray-700 text-gray-100 hover:bg-gray-600"
-                      }`}
+                      className={cn(
+                        tc.btn,
+                        "px-3 py-1.5 text-xs",
+                        copySuccess ? "theme-btn-success" : "theme-btn-secondary",
+                      )}
                     >
-                      {copySuccess ? <IconCheck className="w-3.5 h-3.5" /> : <IconCopy className="w-3.5 h-3.5" />}
+                      {copySuccess ? (
+                        <IconCheck className="w-3.5 h-3.5" />
+                      ) : (
+                        <IconCopy className="w-3.5 h-3.5" />
+                      )}
                       {copySuccess ? "Copied" : "Copy"}
                     </button>
                   </div>
@@ -330,26 +361,46 @@ function RouteComponent() {
                   value={output}
                   readOnly
                   placeholder="Processed HTML output will appear here..."
-                  className="w-full min-h-[260px] p-4 bg-gray-950 text-gray-100 rounded-lg border border-gray-700 focus:outline-none font-mono text-sm resize-y"
+                  className={cn(
+                    tc.field,
+                    "w-full min-h-[260px] p-4 font-mono text-sm resize-y bg-theme-code-bg text-theme-code-text focus:ring-0",
+                  )}
                   spellCheck={false}
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <StatCard title="Original Size" value={`${originalBytes.toLocaleString()} bytes`} icon={<IconCode className="w-4 h-4" />} />
+              <StatCard
+                title="Original Size"
+                value={`${originalBytes.toLocaleString()} bytes`}
+                icon={<IconCode className="w-4 h-4" />}
+              />
               <StatCard
                 title={outputMode === "minified" ? "Minified Size" : "De-minified Size"}
                 value={`${outputBytes.toLocaleString()} bytes`}
-                icon={outputMode === "minified" ? <IconArrowsMinimize className="w-4 h-4" /> : <IconSparkles className="w-4 h-4" />}
+                icon={
+                  outputMode === "minified" ? (
+                    <IconArrowsMinimize className="w-4 h-4" />
+                  ) : (
+                    <IconSparkles className="w-4 h-4" />
+                  )
+                }
               />
-              <StatCard title="Saved" value={`${savings}%`} icon={<IconBolt className="w-4 h-4" />} highlight />
+              <StatCard
+                title="Saved"
+                value={`${savings}%`}
+                icon={<IconBolt className="w-4 h-4" />}
+                highlight
+              />
 
-              <div className="col-span-3 bg-gray-700/20 border border-gray-700/50 rounded-lg p-3  flex items-start gap-3">
+              <div className="col-span-3 bg-theme-surface-muted border border-theme-border rounded-lg p-3 flex items-start gap-3">
                 <IconShieldLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
-                <div className="text-sm text-gray-300">
+                <div className="text-sm text-theme-body">
                   <p className="font-semibold ">100% Private Processing</p>
-                  <p className="mt-1 text-gray-400">Everything runs locally in your browser. Your HTML never leaves your device.</p>
+                  <p className="mt-1 text-theme-muted">
+                    Everything runs locally in your browser. Your HTML never leaves your device.
+                  </p>
                 </div>
               </div>
             </div>
@@ -368,22 +419,26 @@ function RouteComponent() {
             features={[
               {
                 title: "Comment Removal",
-                description: "Strip non-essential HTML comments to reduce file size before deployment.",
+                description:
+                  "Strip non-essential HTML comments to reduce file size before deployment.",
                 icon: IconTrash,
               },
               {
                 title: "Whitespace Optimization",
-                description: "Collapse redundant spacing between elements for compact, clean output.",
+                description:
+                  "Collapse redundant spacing between elements for compact, clean output.",
                 icon: IconArrowsMinimize,
               },
               {
                 title: "Readable De-minify",
-                description: "Expand compact HTML into a structured, readable format for debugging and reviews.",
+                description:
+                  "Expand compact HTML into a structured, readable format for debugging and reviews.",
                 icon: IconSparkles,
               },
               {
                 title: "Private by Default",
-                description: "All minification happens locally with no uploads, logs, or backend processing.",
+                description:
+                  "All minification happens locally with no uploads, logs, or backend processing.",
                 icon: IconShieldLock,
               },
             ]}
@@ -394,11 +449,13 @@ function RouteComponent() {
               },
               {
                 title: "Set Options",
-                description: "Toggle comment removal and whitespace collapsing based on your needs.",
+                description:
+                  "Toggle comment removal and whitespace collapsing based on your needs.",
               },
               {
                 title: "Minify or De-minify",
-                description: "Generate compact HTML for production or readable HTML for editing and debugging.",
+                description:
+                  "Generate compact HTML for production or readable HTML for editing and debugging.",
               },
               {
                 title: "Copy or Download",
@@ -409,10 +466,13 @@ function RouteComponent() {
             faqs={faqs}
           />
 
-          <RelatedTools currentToolSlug="html-minifier" category="Data" />
+          <RelatedTools
+            currentToolSlug="html-minifier"
+            category="Data"
+          />
 
           <footer className="mt-8 text-center">
-            <p className="text-gray-400 text-xs">
+            <p className="text-theme-muted text-xs">
               Crafted with care by{" "}
               <a
                 href="https://sidme.dev/"
@@ -430,15 +490,31 @@ function RouteComponent() {
   );
 }
 
-function StatCard({ title, value, icon, highlight = false }: { title: string; value: string; icon: ReactNode; highlight?: boolean }) {
+function StatCard({
+  title,
+  value,
+  icon,
+  highlight = false,
+}: {
+  title: string;
+  value: string;
+  icon: ReactNode;
+  highlight?: boolean;
+}) {
   return (
     <div
-      className={`rounded-xl border p-4 ${highlight ? "border-brand-primary/40 bg-brand-primary/10" : "border-gray-700 bg-gray-900/60"}`}
+      className={`rounded-xl border p-4 ${highlight ? "border-brand-primary/40 bg-brand-primary/10" : "border-theme-border bg-theme-surface"}`}
     >
-      <div className="text-xs uppercase tracking-wide text-gray-400 mb-2">{title}</div>
+      <div className="text-xs uppercase tracking-wide text-theme-muted mb-2">{title}</div>
       <div className="flex items-center justify-between">
-        <span className={`text-lg font-bold ${highlight ? "text-brand-light" : "text-gray-100"}`}>{value}</span>
-        <span className={`shrink-0 ${highlight ? "text-brand-primary" : "text-gray-400"}`}>{icon}</span>
+        <span
+          className={`text-lg font-bold ${highlight ? "text-brand-light" : "text-theme-heading"}`}
+        >
+          {value}
+        </span>
+        <span className={`shrink-0 ${highlight ? "text-brand-primary" : "text-theme-muted"}`}>
+          {icon}
+        </span>
       </div>
     </div>
   );

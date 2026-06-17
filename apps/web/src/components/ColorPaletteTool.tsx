@@ -14,6 +14,8 @@ import {
   IconBookmarkFilled,
   IconColorPicker,
 } from "@tabler/icons-react";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -37,6 +39,16 @@ type PaletteColor = {
   locked: boolean;
 };
 
+const wcagBadgeClass = (result: "Pass" | "Large only" | "Fail") =>
+  cn(
+    "px-1.5 py-0.5 rounded text-[10px] font-semibold",
+    result === "Pass"
+      ? cn(tc.diffAdded, "border border-theme-border")
+      : result === "Large only"
+        ? tc.badgeWarn
+        : cn(tc.diffRemoved, "border border-theme-border"),
+  );
+
 // ─── Color Math Utilities ─────────────────────────────────────────────────────
 
 function hexToRgb(hex: string): { r: number; g: number; b: number } {
@@ -53,7 +65,11 @@ function rgbToHex(r: number, g: number, b: number): string {
   return (
     "#" +
     [r, g, b]
-      .map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, "0"))
+      .map((v) =>
+        Math.round(Math.max(0, Math.min(255, v)))
+          .toString(16)
+          .padStart(2, "0"),
+      )
       .join("")
   );
 }
@@ -186,10 +202,10 @@ function generateContrast(baseHex: string): string[] {
   const { h, s, l } = rgbToHsl(r, g, b);
   return [
     baseHex,
-    hslToHex((h + 180) % 360, s, l),                         // complement
-    hslToHex(h, Math.max(10, s - 30), l > 50 ? 20 : 85),     // dark/light neutral
-    hslToHex((h + 60) % 360, 80, 55),                         // warm accent
-    hslToHex((h + 300) % 360, 70, 60),                        // cool accent
+    hslToHex((h + 180) % 360, s, l), // complement
+    hslToHex(h, Math.max(10, s - 30), l > 50 ? 20 : 85), // dark/light neutral
+    hslToHex((h + 60) % 360, 80, 55), // warm accent
+    hslToHex((h + 300) % 360, 70, 60), // cool accent
   ];
 }
 
@@ -197,11 +213,11 @@ function generateBrand(baseHex: string): string[] {
   const { r, g, b } = hexToRgb(baseHex);
   const { h, s } = rgbToHsl(r, g, b);
   return [
-    hslToHex(h, s, 55),         // Primary
-    hslToHex(h, s - 10, 70),    // Light primary
-    hslToHex(h, s, 35),         // Dark primary
-    hslToHex(h, 10, 20),        // Text / dark neutral
-    hslToHex(h, 15, 96),        // Background / light neutral
+    hslToHex(h, s, 55), // Primary
+    hslToHex(h, s - 10, 70), // Light primary
+    hslToHex(h, s, 35), // Dark primary
+    hslToHex(h, 10, 20), // Text / dark neutral
+    hslToHex(h, 15, 96), // Background / light neutral
     hslToHex((h + 30) % 360, s + 10, 55), // Accent
   ];
 }
@@ -252,9 +268,9 @@ function generateSplitComplementary(baseHex: string): string[] {
 function generateTetradic(baseHex: string): string[] {
   const { r, g, b } = hexToRgb(baseHex);
   const { h, s, l } = rgbToHsl(r, g, b);
-  return [0, 90, 180, 270].map((offset) => hslToHex((h + offset) % 360, s, l)).concat([
-    hslToHex(h, Math.max(20, s - 20), l + 20 > 90 ? l : l + 20),
-  ]);
+  return [0, 90, 180, 270]
+    .map((offset) => hslToHex((h + offset) % 360, s, l))
+    .concat([hslToHex(h, Math.max(20, s - 20), l + 20 > 90 ? l : l + 20)]);
 }
 
 function buildPalette(hexes: string[], existingLocked?: PaletteColor[]): PaletteColor[] {
@@ -267,16 +283,26 @@ function buildPalette(hexes: string[], existingLocked?: PaletteColor[]): Palette
 
 function getPaletteHexes(mode: PaletteMode, baseHex: string): string[] {
   switch (mode) {
-    case "random":           return generateRandom();
-    case "shades":           return generateShades(baseHex);
-    case "contrast":         return generateContrast(baseHex);
-    case "brand":            return generateBrand(baseHex);
-    case "complementary":    return generateComplementary(baseHex);
-    case "triadic":          return generateTriadic(baseHex);
-    case "analogous":        return generateAnalogous(baseHex);
-    case "split-complementary": return generateSplitComplementary(baseHex);
-    case "tetradic":         return generateTetradic(baseHex);
-    default:                 return generateRandom();
+    case "random":
+      return generateRandom();
+    case "shades":
+      return generateShades(baseHex);
+    case "contrast":
+      return generateContrast(baseHex);
+    case "brand":
+      return generateBrand(baseHex);
+    case "complementary":
+      return generateComplementary(baseHex);
+    case "triadic":
+      return generateTriadic(baseHex);
+    case "analogous":
+      return generateAnalogous(baseHex);
+    case "split-complementary":
+      return generateSplitComplementary(baseHex);
+    case "tetradic":
+      return generateTetradic(baseHex);
+    default:
+      return generateRandom();
   }
 }
 
@@ -304,15 +330,20 @@ function savePalettes(palettes: PaletteColor[][]): void {
 // ─── Mode config ──────────────────────────────────────────────────────────────
 
 const MODES: { value: PaletteMode; label: string; needsBase: boolean; group: string }[] = [
-  { value: "random",              label: "Random",               needsBase: false, group: "General" },
-  { value: "shades",              label: "Shades",               needsBase: true,  group: "General" },
-  { value: "contrast",            label: "Contrast",             needsBase: true,  group: "General" },
-  { value: "brand",               label: "Brand",                needsBase: true,  group: "General" },
-  { value: "complementary",       label: "Complementary",        needsBase: true,  group: "Color Theory" },
-  { value: "triadic",             label: "Triadic",              needsBase: true,  group: "Color Theory" },
-  { value: "analogous",           label: "Analogous",            needsBase: true,  group: "Color Theory" },
-  { value: "split-complementary", label: "Split-Complementary",  needsBase: true,  group: "Color Theory" },
-  { value: "tetradic",            label: "Tetradic",             needsBase: true,  group: "Color Theory" },
+  { value: "random", label: "Random", needsBase: false, group: "General" },
+  { value: "shades", label: "Shades", needsBase: true, group: "General" },
+  { value: "contrast", label: "Contrast", needsBase: true, group: "General" },
+  { value: "brand", label: "Brand", needsBase: true, group: "General" },
+  { value: "complementary", label: "Complementary", needsBase: true, group: "Color Theory" },
+  { value: "triadic", label: "Triadic", needsBase: true, group: "Color Theory" },
+  { value: "analogous", label: "Analogous", needsBase: true, group: "Color Theory" },
+  {
+    value: "split-complementary",
+    label: "Split-Complementary",
+    needsBase: true,
+    group: "Color Theory",
+  },
+  { value: "tetradic", label: "Tetradic", needsBase: true, group: "Color Theory" },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -338,7 +369,14 @@ function ColorCard({
   const whiteContrast = contrastRatio(color.hex, "#ffffff");
   const blackContrast = contrastRatio(color.hex, "#000000");
   const bestContrast = Math.max(whiteContrast, blackContrast);
-  const wcagLevel = bestContrast >= 7 ? "AAA" : bestContrast >= 4.5 ? "AA" : bestContrast >= 3 ? "AA Large" : "Fail";
+  const wcagLevel =
+    bestContrast >= 7
+      ? "AAA"
+      : bestContrast >= 4.5
+        ? "AA"
+        : bestContrast >= 3
+          ? "AA Large"
+          : "Fail";
 
   return (
     <div
@@ -396,14 +434,19 @@ function ColorCard({
         >
           <span className="text-xs font-mono font-semibold truncate">{displayValue}</span>
           <div className="flex items-center gap-1 flex-shrink-0">
-            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded"
-              style={{ background: `${textColor}20` }}>
+            <span
+              className="text-[10px] font-bold px-1.5 py-0.5 rounded"
+              style={{ background: `${textColor}20` }}
+            >
               {wcagLevel}
             </span>
             {isCopied ? (
               <IconCheck size={14} />
             ) : (
-              <IconCopy size={14} className="opacity-70" />
+              <IconCopy
+                size={14}
+                className="opacity-70"
+              />
             )}
           </div>
         </div>
@@ -421,9 +464,14 @@ function ColorCard({
 
       {/* Copy flash overlay */}
       {isCopied && (
-        <div className="absolute inset-0 flex items-center justify-center"
-          style={{ background: `${color.hex}cc` }}>
-          <div className="flex flex-col items-center gap-1" style={{ color: textColor }}>
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ background: `${color.hex}cc` }}
+        >
+          <div
+            className="flex flex-col items-center gap-1"
+            style={{ color: textColor }}
+          >
             <IconCheck size={28} />
             <span className="text-xs font-semibold">Copied!</span>
           </div>
@@ -440,9 +488,7 @@ export function ColorPaletteTool() {
   const [baseColor, setBaseColor] = useState("#2563eb");
   const [inputColor, setInputColor] = useState("#2563eb");
   const [format, setFormat] = useState<ColorFormat>("hex");
-  const [palette, setPalette] = useState<PaletteColor[]>(() =>
-    buildPalette(generateRandom())
-  );
+  const [palette, setPalette] = useState<PaletteColor[]>(() => buildPalette(generateRandom()));
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
   const [savedPalettes, setSavedPalettes] = useState<PaletteColor[][]>(loadSaved);
@@ -476,7 +522,7 @@ export function ColorPaletteTool() {
         });
       });
     },
-    [mode, baseColor]
+    [mode, baseColor],
   );
 
   const handleModeChange = (newMode: PaletteMode) => {
@@ -504,9 +550,7 @@ export function ColorPaletteTool() {
   };
 
   const toggleLock = (id: string) => {
-    setPalette((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, locked: !c.locked } : c))
-    );
+    setPalette((prev) => prev.map((c) => (c.id === id ? { ...c, locked: !c.locked } : c)));
   };
 
   const copyColor = async (hex: string, id: string) => {
@@ -548,11 +592,9 @@ export function ColorPaletteTool() {
   };
 
   const exportCSS = () => {
-    const lines = [
-      ":root {",
-      ...palette.map((c, i) => `  --color-${i + 1}: ${c.hex};`),
-      "}",
-    ].join("\n");
+    const lines = [":root {", ...palette.map((c, i) => `  --color-${i + 1}: ${c.hex};`), "}"].join(
+      "\n",
+    );
     downloadText(lines, "palette.css");
     setExportOpen(false);
   };
@@ -598,22 +640,22 @@ export function ColorPaletteTool() {
   return (
     <div className="w-full max-w-7xl mx-auto space-y-5">
       {/* ── Controls ── */}
-      <div className="bg-gray-900 border border-gray-700/60 rounded-2xl p-5 space-y-5">
-
+      <div className="bg-theme-surface border border-theme-border/60 rounded-2xl p-5 space-y-5">
         {/* Row 1: Mode selector */}
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider mr-1">Mode</span>
+            <span className="text-xs font-semibold text-theme-muted uppercase tracking-wider mr-1">
+              Mode
+            </span>
             <div className="flex flex-wrap gap-1.5">
               {generalModes.map((m) => (
                 <button
                   key={m.value}
                   onClick={() => handleModeChange(m.value)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
-                    mode === m.value
-                      ? "bg-brand-primary text-white shadow-sm"
-                      : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
-                  }`}
+                  className={cn(
+                    "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200",
+                    mode === m.value ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                  )}
                 >
                   {m.label}
                 </button>
@@ -623,17 +665,18 @@ export function ColorPaletteTool() {
 
           {/* Color Theory group */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider mr-1">Theory</span>
+            <span className="text-xs font-semibold text-theme-muted uppercase tracking-wider mr-1">
+              Theory
+            </span>
             <div className="flex flex-wrap gap-1.5">
               {theoryModes.map((m) => (
                 <button
                   key={m.value}
                   onClick={() => handleModeChange(m.value)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
-                    mode === m.value
-                      ? "bg-brand-primary text-white shadow-sm"
-                      : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
-                  }`}
+                  className={cn(
+                    "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200",
+                    mode === m.value ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                  )}
                 >
                   {m.label}
                 </button>
@@ -646,11 +689,11 @@ export function ColorPaletteTool() {
         <div className="flex flex-wrap items-start gap-3">
           {/* Base color (always shown, disabled for random) */}
           <div className="flex-1 min-w-[220px] space-y-1.5">
-            <label className="text-xs font-semibold text-gray-400 flex items-center gap-1.5">
+            <label className="text-xs font-semibold text-theme-muted flex items-center gap-1.5">
               <IconColorPicker size={13} />
               Base Color
               {!currentMode.needsBase && (
-                <span className="text-gray-500 font-normal">(not used in random mode)</span>
+                <span className="text-theme-muted font-normal">(not used in random mode)</span>
               )}
             </label>
             <div className="flex items-center gap-2">
@@ -661,7 +704,7 @@ export function ColorPaletteTool() {
                   value={baseColor}
                   onChange={(e) => handleColorPickerChange(e.target.value)}
                   disabled={!currentMode.needsBase}
-                  className="w-10 h-9 rounded-lg border border-gray-600 bg-gray-800 cursor-pointer p-0.5 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-10 h-9 rounded-lg border border-theme-border bg-theme-surface-muted cursor-pointer p-0.5 disabled:opacity-40 disabled:cursor-not-allowed"
                   title="Pick a color"
                 />
               </div>
@@ -673,10 +716,13 @@ export function ColorPaletteTool() {
                   onChange={(e) => handleBaseColorChange(e.target.value)}
                   disabled={!currentMode.needsBase}
                   placeholder="#2563eb"
-                  className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm font-mono text-gray-100 placeholder-gray-500 focus:outline-none focus:border-brand-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className={cn(
+                    tc.field,
+                    "w-full px-3 py-2 text-sm font-mono placeholder:text-theme-muted disabled:opacity-40 disabled:cursor-not-allowed",
+                  )}
                 />
                 {colorInputError && (
-                  <p className="text-red-400 text-[11px] mt-1">{colorInputError}</p>
+                  <p className="text-[var(--theme-alert-error-text)] text-[11px] mt-1">{colorInputError}</p>
                 )}
               </div>
             </div>
@@ -684,17 +730,16 @@ export function ColorPaletteTool() {
 
           {/* Format selector */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-gray-400">Format</label>
+            <label className="text-xs font-semibold text-theme-muted">Format</label>
             <div className="flex gap-1">
               {(["hex", "rgb", "hsl"] as ColorFormat[]).map((f) => (
                 <button
                   key={f}
                   onClick={() => setFormat(f)}
-                  className={`px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                    format === f
-                      ? "bg-brand-primary text-white"
-                      : "bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white"
-                  }`}
+                  className={cn(
+                    "px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200",
+                    format === f ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                  )}
                 >
                   {f}
                 </button>
@@ -704,11 +749,11 @@ export function ColorPaletteTool() {
 
           {/* Action buttons */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-gray-400 invisible">Actions</label>
+            <label className="text-xs font-semibold text-theme-muted invisible">Actions</label>
             <div className="flex gap-2">
               <button
                 onClick={() => generate()}
-                className="flex items-center gap-2 px-4 py-2 bg-brand-primary hover:bg-brand-hover text-white rounded-lg text-sm font-semibold transition-all duration-200 active:scale-95"
+                className={cn(tc.btnPrimary, "flex items-center gap-2 px-4 py-2 text-sm active:scale-95")}
               >
                 <IconRefresh size={16} />
                 Generate
@@ -716,16 +761,26 @@ export function ColorPaletteTool() {
 
               <button
                 onClick={copyAll}
-                className="flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-200 rounded-lg text-sm font-semibold transition-all duration-200 border border-gray-600 active:scale-95"
+                className={cn(
+                  tc.btnSecondary,
+                  "flex items-center gap-2 px-3 py-2 text-sm active:scale-95",
+                )}
                 title="Copy all colors"
               >
-                {copiedAll ? <IconCheck size={16} className="text-green-400" /> : <IconCopy size={16} />}
+                {copiedAll ? (
+                  <IconCheck
+                    size={16}
+                    className="text-[var(--theme-diff-added-text)]"
+                  />
+                ) : (
+                  <IconCopy size={16} />
+                )}
                 <span className="hidden sm:inline">Copy All</span>
               </button>
 
               <button
                 onClick={savePalette}
-                className="flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-200 rounded-lg text-sm font-semibold transition-all duration-200 border border-gray-600 active:scale-95"
+                className={cn(tc.btnSecondary, "flex items-center gap-2 px-3 py-2 text-sm active:scale-95")}
                 title="Save palette"
               >
                 <IconBookmark size={16} />
@@ -733,17 +788,23 @@ export function ColorPaletteTool() {
               </button>
 
               {/* Export dropdown */}
-              <div className="relative" ref={exportRef}>
+              <div
+                className="relative"
+                ref={exportRef}
+              >
                 <button
                   onClick={() => setExportOpen((v) => !v)}
-                  className="flex items-center gap-1.5 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-200 rounded-lg text-sm font-semibold transition-all duration-200 border border-gray-600"
+                  className={cn(tc.btnSecondary, "flex items-center gap-1.5 px-3 py-2 text-sm")}
                 >
                   <IconDownload size={16} />
                   <span className="hidden sm:inline">Export</span>
-                  <IconChevronDown size={13} className={`transition-transform ${exportOpen ? "rotate-180" : ""}`} />
+                  <IconChevronDown
+                    size={13}
+                    className={`transition-transform ${exportOpen ? "rotate-180" : ""}`}
+                  />
                 </button>
                 {exportOpen && (
-                  <div className="absolute right-0 mt-1.5 w-48 bg-gray-800 border border-gray-700 rounded-xl shadow-2xl z-20 overflow-hidden">
+                  <div className="absolute right-0 mt-1.5 w-48 bg-theme-surface-muted border border-theme-border rounded-xl shadow-2xl z-20 overflow-hidden">
                     {[
                       { label: "CSS Variables", action: exportCSS, ext: ".css" },
                       { label: "JSON", action: exportJSON, ext: ".json" },
@@ -752,10 +813,13 @@ export function ColorPaletteTool() {
                       <button
                         key={opt.label}
                         onClick={opt.action}
-                        className="w-full text-left px-4 py-2.5 text-sm text-gray-200 hover:bg-gray-700 flex items-center justify-between transition-colors"
+                        className="
+                          w-full text-left px-4 py-2.5 text-sm flex items-center justify-between transition-colors
+                          text-theme-body hover:bg-theme-surface-elevated hover:text-theme-heading
+                        "
                       >
                         <span>{opt.label}</span>
-                        <span className="text-xs text-gray-500 font-mono">{opt.ext}</span>
+                        <span className="text-xs text-theme-muted font-mono">{opt.ext}</span>
                       </button>
                     ))}
                   </div>
@@ -767,8 +831,10 @@ export function ColorPaletteTool() {
       </div>
 
       {/* ── Palette Display ── */}
-      <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:rounded-2xl sm:overflow-hidden"
-        style={{ minHeight: "260px" }}>
+      <div
+        className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:rounded-2xl sm:overflow-hidden"
+        style={{ minHeight: "260px" }}
+      >
         {palette.map((color, i) => (
           <ColorCard
             key={color.id}
@@ -783,30 +849,47 @@ export function ColorPaletteTool() {
       </div>
 
       {/* ── Color detail table ── */}
-      <div className="bg-gray-900 border border-gray-700/60 rounded-2xl overflow-hidden">
-        <div className="px-5 py-3 border-b border-gray-700/60 flex items-center justify-between">
-          <span className="text-sm font-semibold text-gray-300 flex items-center gap-2">
-            <IconPalette size={16} className="text-brand-primary" />
+      <div className="bg-theme-surface border border-theme-border/60 rounded-2xl overflow-hidden">
+        <div className="px-5 py-3 border-b border-theme-border/60 flex items-center justify-between">
+          <span className="text-sm font-semibold text-theme-body flex items-center gap-2">
+            <IconPalette
+              size={16}
+              className="text-brand-primary"
+            />
             Color Details
           </span>
-          <span className="text-xs text-gray-500">{palette.length} colors · click to copy</span>
+          <span className="text-xs text-theme-muted">{palette.length} colors · click to copy</span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-700/60">
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">#</th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Swatch</th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">HEX</th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">RGB</th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">HSL</th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                  <span className="block">On White</span>
-                  <span className="block text-gray-600 normal-case font-normal tracking-normal mt-0.5">as text on white bg</span>
+              <tr className="border-b border-theme-border/60">
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
+                  #
                 </th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
+                  Swatch
+                </th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
+                  HEX
+                </th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
+                  RGB
+                </th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
+                  HSL
+                </th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
+                  <span className="block">On White</span>
+                  <span className="block text-theme-body normal-case font-normal tracking-normal mt-0.5">
+                    as text on white bg
+                  </span>
+                </th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
                   <span className="block">On Black</span>
-                  <span className="block text-gray-600 normal-case font-normal tracking-normal mt-0.5">as text on black bg</span>
+                  <span className="block text-theme-body normal-case font-normal tracking-normal mt-0.5">
+                    as text on black bg
+                  </span>
                 </th>
               </tr>
             </thead>
@@ -815,37 +898,51 @@ export function ColorPaletteTool() {
                 const wContrast = contrastRatio(c.hex, "#ffffff");
                 const bContrast = contrastRatio(c.hex, "#000000");
                 const wcagW = wContrast >= 4.5 ? "Pass" : wContrast >= 3 ? "Large only" : "Fail";
-                const wcagWTitle = wContrast >= 4.5 ? "Readable at any text size" : wContrast >= 3 ? "Readable only for large text (18px+ or bold 14px+)" : "Too low contrast — avoid as text";
+                const wcagWTitle =
+                  wContrast >= 4.5
+                    ? "Readable at any text size"
+                    : wContrast >= 3
+                      ? "Readable only for large text (18px+ or bold 14px+)"
+                      : "Too low contrast — avoid as text";
                 const wcagB = bContrast >= 4.5 ? "Pass" : bContrast >= 3 ? "Large only" : "Fail";
-                const wcagBTitle = bContrast >= 4.5 ? "Readable at any text size" : bContrast >= 3 ? "Readable only for large text (18px+ or bold 14px+)" : "Too low contrast — avoid as text";
+                const wcagBTitle =
+                  bContrast >= 4.5
+                    ? "Readable at any text size"
+                    : bContrast >= 3
+                      ? "Readable only for large text (18px+ or bold 14px+)"
+                      : "Too low contrast — avoid as text";
                 return (
                   <tr
                     key={c.id}
-                    className="border-b border-gray-800 hover:bg-gray-800/40 transition-colors cursor-pointer"
+                    className="border-b border-theme-border hover:bg-theme-surface-muted/40 transition-colors cursor-pointer"
                     onClick={() => copyColor(c.hex, c.id)}
                     title="Click to copy"
                   >
-                    <td className="px-4 py-3 text-gray-500 font-mono text-xs">{i + 1}</td>
+                    <td className="px-4 py-3 text-theme-muted font-mono text-xs">{i + 1}</td>
                     <td className="px-4 py-3">
                       <div
-                        className="w-8 h-8 rounded-lg border border-gray-700 shadow-sm"
+                        className="w-8 h-8 rounded-lg border border-theme-border shadow-sm"
                         style={{ backgroundColor: c.hex }}
                       />
                     </td>
-                    <td className="px-4 py-3 font-mono text-gray-200 text-xs">{c.hex.toUpperCase()}</td>
-                    <td className="px-4 py-3 font-mono text-gray-300 text-xs">{formatColor(c.hex, "rgb")}</td>
-                    <td className="px-4 py-3 font-mono text-gray-300 text-xs">{formatColor(c.hex, "hsl")}</td>
+                    <td className="px-4 py-3 font-mono text-theme-heading text-xs">
+                      {c.hex.toUpperCase()}
+                    </td>
+                    <td className="px-4 py-3 font-mono text-theme-body text-xs">
+                      {formatColor(c.hex, "rgb")}
+                    </td>
+                    <td className="px-4 py-3 font-mono text-theme-body text-xs">
+                      {formatColor(c.hex, "hsl")}
+                    </td>
                     <td className="px-4 py-3 text-xs">
                       <span
                         title={wcagWTitle}
                         className={`inline-flex items-center gap-1.5 font-mono`}
                       >
-                        <span className="text-gray-300">{wContrast}:1</span>
-                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
-                          wcagW === "Pass" ? "bg-green-900/50 text-green-400 border border-green-700/50" :
-                          wcagW === "Large only" ? "bg-yellow-900/50 text-yellow-400 border border-yellow-700/50" :
-                          "bg-red-900/50 text-red-400 border border-red-700/50"
-                        }`}>{wcagW}</span>
+                        <span className="text-theme-body">{wContrast}:1</span>
+                        <span className={wcagBadgeClass(wcagW)}>
+                          {wcagW}
+                        </span>
                       </span>
                     </td>
                     <td className="px-4 py-3 text-xs">
@@ -853,12 +950,10 @@ export function ColorPaletteTool() {
                         title={wcagBTitle}
                         className={`inline-flex items-center gap-1.5 font-mono`}
                       >
-                        <span className="text-gray-300">{bContrast}:1</span>
-                        <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
-                          wcagB === "Pass" ? "bg-green-900/50 text-green-400 border border-green-700/50" :
-                          wcagB === "Large only" ? "bg-yellow-900/50 text-yellow-400 border border-yellow-700/50" :
-                          "bg-red-900/50 text-red-400 border border-red-700/50"
-                        }`}>{wcagB}</span>
+                        <span className="text-theme-body">{bContrast}:1</span>
+                        <span className={wcagBadgeClass(wcagB)}>
+                          {wcagB}
+                        </span>
                       </span>
                     </td>
                   </tr>
@@ -868,32 +963,41 @@ export function ColorPaletteTool() {
           </table>
         </div>
         {/* Legend */}
-        <div className="px-5 py-3 border-t border-gray-800 flex flex-wrap items-center gap-x-5 gap-y-1.5">
-          <span className="text-xs text-gray-500 font-medium">Readability legend:</span>
-          <span className="flex items-center gap-1.5 text-xs text-gray-400">
-            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-green-900/50 text-green-400 border border-green-700/50">Pass</span>
-            readable at any text size <span className="text-gray-600">(ratio ≥ 4.5:1)</span>
+        <div className="px-5 py-3 border-t border-theme-border flex flex-wrap items-center gap-x-5 gap-y-1.5">
+          <span className="text-xs text-theme-muted font-medium">Readability legend:</span>
+          <span className="flex items-center gap-1.5 text-xs text-theme-muted">
+            <span className={wcagBadgeClass("Pass")}>
+              Pass
+            </span>
+            readable at any text size <span className="text-theme-body">(ratio ≥ 4.5:1)</span>
           </span>
-          <span className="flex items-center gap-1.5 text-xs text-gray-400">
-            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-yellow-900/50 text-yellow-400 border border-yellow-700/50">Large only</span>
-            ok for headings only <span className="text-gray-600">(≥ 3:1)</span>
+          <span className="flex items-center gap-1.5 text-xs text-theme-muted">
+            <span className={wcagBadgeClass("Large only")}>
+              Large only
+            </span>
+            ok for headings only <span className="text-theme-body">(≥ 3:1)</span>
           </span>
-          <span className="flex items-center gap-1.5 text-xs text-gray-400">
-            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-900/50 text-red-400 border border-red-700/50">Fail</span>
-            hard to read, avoid as text <span className="text-gray-600">(&lt; 3:1)</span>
+          <span className="flex items-center gap-1.5 text-xs text-theme-muted">
+            <span className={wcagBadgeClass("Fail")}>
+              Fail
+            </span>
+            hard to read, avoid as text <span className="text-theme-body">(&lt; 3:1)</span>
           </span>
         </div>
       </div>
 
       {/* ── Saved Palettes ── */}
       {savedPalettes.length > 0 && (
-        <div className="bg-gray-900 border border-gray-700/60 rounded-2xl overflow-hidden">
+        <div className="bg-theme-surface border border-theme-border/60 rounded-2xl overflow-hidden">
           <button
-            className="w-full px-5 py-3 flex items-center justify-between hover:bg-gray-800/40 transition-colors"
+            className="w-full px-5 py-3 flex items-center justify-between hover:bg-theme-surface-muted/40 transition-colors"
             onClick={() => setShowSaved((v) => !v)}
           >
-            <span className="text-sm font-semibold text-gray-300 flex items-center gap-2">
-              <IconBookmarkFilled size={16} className="text-brand-primary" />
+            <span className="text-sm font-semibold text-theme-body flex items-center gap-2">
+              <IconBookmarkFilled
+                size={16}
+                className="text-brand-primary"
+              />
               Saved Palettes
               <span className="text-xs bg-brand-primary/20 text-brand-light px-2 py-0.5 rounded-full font-bold">
                 {savedPalettes.length}
@@ -901,14 +1005,17 @@ export function ColorPaletteTool() {
             </span>
             <IconChevronDown
               size={16}
-              className={`text-gray-400 transition-transform duration-200 ${showSaved ? "rotate-180" : ""}`}
+              className={`text-theme-muted transition-transform duration-200 ${showSaved ? "rotate-180" : ""}`}
             />
           </button>
 
           {showSaved && (
-            <div className="border-t border-gray-700/60 divide-y divide-gray-800">
+            <div className="border-t border-theme-border/60 divide-y divide-theme-border">
               {savedPalettes.map((saved, si) => (
-                <div key={si} className="px-5 py-3 flex items-center gap-3 hover:bg-gray-800/30 transition-colors">
+                <div
+                  key={si}
+                  className="px-5 py-3 flex items-center gap-3 hover:bg-theme-surface-muted/30 transition-colors"
+                >
                   <div className="flex gap-1 flex-1">
                     {saved.map((c, ci) => (
                       <div
@@ -919,17 +1026,17 @@ export function ColorPaletteTool() {
                       />
                     ))}
                   </div>
-                  <div className="flex gap-1.5 flex-shrink-0">
+                  <div className="flex gap-1.5 shrink-0">
                     <button
                       onClick={() => loadPalette(saved)}
-                      className="px-3 py-1.5 text-xs font-semibold bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg transition-colors flex items-center gap-1.5"
+                      className={cn(tc.btnSecondary, "px-3 py-1.5 text-xs flex items-center gap-1.5")}
                     >
                       <IconWand size={12} />
                       Load
                     </button>
                     <button
                       onClick={() => deleteSaved(si)}
-                      className="p-1.5 text-gray-500 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors"
+                      className={cn(tc.btnDanger, "p-1.5")}
                     >
                       <IconX size={14} />
                     </button>
@@ -991,11 +1098,14 @@ const MODE_DESCRIPTIONS: Record<PaletteMode, { title: string; desc: string }> = 
 function ModeExplainer({ mode }: { mode: PaletteMode }) {
   const info = MODE_DESCRIPTIONS[mode];
   return (
-    <div className="bg-gray-800/40 border border-gray-700/40 rounded-xl px-5 py-4 flex gap-3 items-start">
-      <IconWand size={18} className="text-brand-primary mt-0.5 flex-shrink-0" />
+    <div className="bg-theme-surface-muted/40 border border-theme-border/40 rounded-xl px-5 py-4 flex gap-3 items-start">
+      <IconWand
+        size={18}
+        className="text-brand-primary mt-0.5 flex-shrink-0"
+      />
       <div>
-        <p className="text-sm font-semibold text-gray-200">{info.title}</p>
-        <p className="text-sm text-gray-400 mt-0.5 leading-relaxed">{info.desc}</p>
+        <p className="text-sm font-semibold text-theme-heading">{info.title}</p>
+        <p className="text-sm text-theme-muted mt-0.5 leading-relaxed">{info.desc}</p>
       </div>
     </div>
   );

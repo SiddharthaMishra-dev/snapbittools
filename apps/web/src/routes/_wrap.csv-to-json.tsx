@@ -7,6 +7,8 @@ import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
 import { getSeoMetadata } from "@/lib/seo";
+import { themeClasses as tc } from "@/lib/theme-classes";
+import { cn } from "@/lib/utils";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
@@ -194,10 +196,10 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-100 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             CSV to <span className="text-brand-primary">JSON</span>
           </h1>
-          <p className="text-md text-gray-300">Transform CSV data into JSON format securely in your browser.</p>
+          <p className="text-md text-theme-body">Transform CSV data into JSON format securely in your browser.</p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto">
@@ -207,7 +209,7 @@ function RouteComponent() {
 
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
+                className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}
               >
                 <IconUpload className="w-4 h-4" />
                 <span>Upload CSV</span>
@@ -215,29 +217,29 @@ function RouteComponent() {
 
               <button
                 onClick={loadSampleData}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
+                className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}
               >
                 <IconTable className="w-4 h-4" />
                 <span>Sample CSV</span>
               </button>
-              <div className="h-6 w-px bg-gray-600 mx-2 hidden sm:block"></div>
+              <div className="h-6 w-px bg-theme-border mx-2 hidden sm:block" />
 
-              <label className="flex items-center space-x-2 text-gray-200 text-sm cursor-pointer select-none bg-gray-700/50 px-3 py-2 rounded-lg hover:bg-gray-700 transition">
+              <label className="flex items-center space-x-2 text-theme-body text-sm cursor-pointer select-none bg-theme-surface-muted border border-theme-border px-3 py-2 rounded-lg hover:bg-theme-surface transition">
                 <input
                   type="checkbox"
                   checked={hasHeader}
                   onChange={(e) => setHasHeader(e.target.checked)}
-                  className="rounded border-gray-600 text-brand-primary focus:ring-offset-0 focus:ring-brand-primary bg-gray-700"
+                  className="rounded border-theme-border text-brand-primary focus:ring-brand-primary bg-theme-input-bg"
                 />
                 <span>First row as header</span>
               </label>
 
-              <label className="flex items-center space-x-2 text-gray-200 text-sm cursor-pointer select-none bg-gray-700/50 px-3 py-2 rounded-lg hover:bg-gray-700 transition">
+              <label className="flex items-center space-x-2 text-theme-body text-sm cursor-pointer select-none bg-theme-surface-muted border border-theme-border px-3 py-2 rounded-lg hover:bg-theme-surface transition">
                 <input
                   type="checkbox"
                   checked={sanitizeJson}
                   onChange={(e) => setSanitizeJson(e.target.checked)}
-                  className="rounded border-gray-600 text-brand-primary focus:ring-offset-0 focus:ring-brand-primary bg-gray-700"
+                  className="rounded border-theme-border text-brand-primary focus:ring-brand-primary bg-theme-input-bg"
                 />
                 <span>Sanitize JSON strings</span>
               </label>
@@ -245,7 +247,7 @@ function RouteComponent() {
               <button
                 onClick={downloadJSON}
                 disabled={!jsonOutput}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
+                className={cn(tc.btnPrimary, "px-4 py-2 ml-auto")}
               >
                 <IconDownload className="w-4 h-4" />
                 <span>Download JSON</span>
@@ -254,9 +256,11 @@ function RouteComponent() {
               <button
                 onClick={copyToClipboard}
                 disabled={!jsonOutput}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-                  copySuccess ? "bg-green-800 text-green-200" : "bg-gray-700 text-gray-100 hover:bg-gray-600"
-                }`}
+                className={cn(
+                  tc.btn,
+                  "px-4 py-2",
+                  copySuccess ? "theme-btn-success" : "theme-btn-secondary",
+                )}
               >
                 {copySuccess ? (
                   <>
@@ -277,7 +281,7 @@ function RouteComponent() {
                   setError(null);
                 }}
                 disabled={!input}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-red-900/50 text-red-200 rounded-lg hover:bg-red-800/70 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className={cn(tc.btnDanger, "px-4 py-2")}
               >
                 <IconTrash className="w-4 h-4" />
               </button>
@@ -285,9 +289,9 @@ function RouteComponent() {
           </div>
 
           {error && (
-            <div className="bg-red-900/30 border border-red-700 rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
-              <IconAlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-              <div className="text-red-300">
+            <div className={cn(tc.alertError, "rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2")}>
+              <IconAlertCircle className="w-5 h-5 text-[var(--theme-alert-error-icon)] flex-shrink-0 mt-0.5" />
+              <div>
                 <p className="font-medium">Parse Error</p>
                 <p className="text-sm opacity-80">{error}</p>
               </div>
@@ -295,37 +299,42 @@ function RouteComponent() {
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
-            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-              <div className="px-4 py-3  border-b border-gray-700 flex justify-between items-center">
-                <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">Input CSV</h3>
-                {input && <span className="text-xs text-gray-500">{(new Blob([input]).size / 1024).toFixed(2)} KB</span>}
+            <div className="rounded-xl shadow-lg flex flex-col h-full border border-theme-border bg-theme-surface overflow-hidden">
+              <div className="px-4 py-3 border-b border-theme-border flex justify-between items-center bg-theme-surface-muted">
+                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Input CSV</h3>
+                {input && <span className="text-xs text-theme-muted">{(new Blob([input]).size / 1024).toFixed(2)} KB</span>}
               </div>
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Paste CSV content here..."
-                className={`flex-1 w-full p-4  text-gray-100 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0 ${
-                  error ? "bg-red-900/10" : ""
-                }`}
+                className={cn(
+                  tc.field,
+                  "flex-1 w-full p-4 font-mono text-sm resize-none focus:ring-0 border-0 rounded-none",
+                  error && "bg-[var(--theme-alert-error-bg)]",
+                )}
                 spellCheck={false}
               />
             </div>
 
-            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-gray-700 overflow-hidden">
-              <div className="px-4 py-3  border-b border-gray-700 flex justify-between items-center">
-                <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">Output JSON</h3>
+            <div className="rounded-xl shadow-lg flex flex-col h-full border border-theme-border bg-theme-surface overflow-hidden">
+              <div className="px-4 py-3 border-b border-theme-border flex justify-between items-center bg-theme-surface-muted">
+                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Output JSON</h3>
                 {stats.rows > 0 && (
-                  <span className="text-xs text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-full">
+                  <span className="text-xs text-brand-primary bg-theme-icon-bg px-2 py-0.5 rounded-full">
                     {stats.rows} objects • {stats.columns} fields
                   </span>
                 )}
-                {isProcessing && <span className="text-xs text-gray-400">Processing...</span>}
+                {isProcessing && <span className="text-xs text-theme-muted">Processing...</span>}
               </div>
               <textarea
                 readOnly
                 value={jsonOutput}
                 placeholder="JSON output will appear here..."
-                className="flex-1 w-full p-4 bg-gray-900/50 text-green-400 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0"
+                className={cn(
+                  tc.field,
+                  "flex-1 w-full p-4 font-mono text-sm resize-none focus:ring-0 border-0 rounded-none bg-theme-code-bg text-theme-code-text",
+                )}
                 spellCheck={false}
               />
             </div>
@@ -385,7 +394,7 @@ function RouteComponent() {
         <RelatedTools currentToolSlug="csv-to-json" category="Data" />
 
         <footer className="mt-8 text-center">
-          <p className="text-gray-400 text-xs">
+          <p className="text-theme-muted text-xs">
             Crafted with care by{" "}
             <a
               href="https://sidme.dev/"
