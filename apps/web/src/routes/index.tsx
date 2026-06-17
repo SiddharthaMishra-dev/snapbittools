@@ -227,7 +227,7 @@ function App() {
           transition={{ duration: 0.8, delay: 0.55, ease: easeInOut }}
           className="relative mt-14 w-full max-w-5xl mx-auto"
         >
-          <div className="hero-preview-wrap">
+          <div className="hero-preview-wrap pb-12">
             <div className="rounded-2xl border border-theme-border bg-theme-surface overflow-hidden shadow-none">
               {/* browser top bar */}
               <div className="bg-[#f5f5f7] dark:bg-theme-surface-muted border-b border-theme-border/80 px-4 py-3 flex items-center gap-3">

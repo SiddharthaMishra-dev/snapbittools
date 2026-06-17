@@ -66,17 +66,6 @@ export function HeroScreenshotCanvas() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, cssWidth, cssHeight);
       ctx.drawImage(image, 0, 0, cssWidth, cssHeight);
-
-      const startY = cssHeight * 0.4;
-      const endY = cssHeight * 0.8;
-      const pageBg = getPageBackground();
-
-      const gradient = ctx.createLinearGradient(0, startY, 0, endY);
-      gradient.addColorStop(0, transparentPageBackground());
-      gradient.addColorStop(1, pageBg);
-
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, cssWidth, cssHeight);
     };
 
     image.onload = paint;
