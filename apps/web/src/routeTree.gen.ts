@@ -58,6 +58,8 @@ import { Route as WrapCompressImageForWebRouteImport } from './routes/_wrap.comp
 import { Route as WrapColorPaletteGeneratorRouteImport } from './routes/_wrap.color-palette-generator'
 import { Route as WrapBulkFileRenamerRouteImport } from './routes/_wrap.bulk-file-renamer'
 import { Route as WrapBrowserBasedUtilitiesRouteImport } from './routes/_wrap.browser-based-utilities'
+import { Route as WrapBestImageConverterTool2026RouteImport } from './routes/_wrap.best-image-converter-tool-2026'
+import { Route as WrapBestImageCompressorTool2026RouteImport } from './routes/_wrap.best-image-compressor-tool-2026'
 import { Route as WrapBestFreeImageFormatConverter2026RouteImport } from './routes/_wrap.best-free-image-format-converter-2026'
 import { Route as WrapBase64ToFileRouteImport } from './routes/_wrap.base64-to-file'
 
@@ -312,6 +314,18 @@ const WrapBrowserBasedUtilitiesRoute =
     path: '/browser-based-utilities',
     getParentRoute: () => WrapRoute,
   } as any)
+const WrapBestImageConverterTool2026Route =
+  WrapBestImageConverterTool2026RouteImport.update({
+    id: '/best-image-converter-tool-2026',
+    path: '/best-image-converter-tool-2026',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapBestImageCompressorTool2026Route =
+  WrapBestImageCompressorTool2026RouteImport.update({
+    id: '/best-image-compressor-tool-2026',
+    path: '/best-image-compressor-tool-2026',
+    getParentRoute: () => WrapRoute,
+  } as any)
 const WrapBestFreeImageFormatConverter2026Route =
   WrapBestFreeImageFormatConverter2026RouteImport.update({
     id: '/best-free-image-format-converter-2026',
@@ -331,6 +345,8 @@ export interface FileRoutesByFullPath {
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/base64-to-file': typeof WrapBase64ToFileRoute
   '/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
+  '/best-image-compressor-tool-2026': typeof WrapBestImageCompressorTool2026Route
+  '/best-image-converter-tool-2026': typeof WrapBestImageConverterTool2026Route
   '/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
   '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
   '/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
@@ -383,6 +399,8 @@ export interface FileRoutesByTo {
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/base64-to-file': typeof WrapBase64ToFileRoute
   '/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
+  '/best-image-compressor-tool-2026': typeof WrapBestImageCompressorTool2026Route
+  '/best-image-converter-tool-2026': typeof WrapBestImageConverterTool2026Route
   '/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
   '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
   '/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
@@ -437,6 +455,8 @@ export interface FileRoutesById {
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/_wrap/base64-to-file': typeof WrapBase64ToFileRoute
   '/_wrap/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
+  '/_wrap/best-image-compressor-tool-2026': typeof WrapBestImageCompressorTool2026Route
+  '/_wrap/best-image-converter-tool-2026': typeof WrapBestImageConverterTool2026Route
   '/_wrap/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
   '/_wrap/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
   '/_wrap/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
@@ -491,6 +511,8 @@ export interface FileRouteTypes {
     | '/tools-for-developers'
     | '/base64-to-file'
     | '/best-free-image-format-converter-2026'
+    | '/best-image-compressor-tool-2026'
+    | '/best-image-converter-tool-2026'
     | '/browser-based-utilities'
     | '/bulk-file-renamer'
     | '/color-palette-generator'
@@ -543,6 +565,8 @@ export interface FileRouteTypes {
     | '/tools-for-developers'
     | '/base64-to-file'
     | '/best-free-image-format-converter-2026'
+    | '/best-image-compressor-tool-2026'
+    | '/best-image-converter-tool-2026'
     | '/browser-based-utilities'
     | '/bulk-file-renamer'
     | '/color-palette-generator'
@@ -596,6 +620,8 @@ export interface FileRouteTypes {
     | '/tools-for-developers'
     | '/_wrap/base64-to-file'
     | '/_wrap/best-free-image-format-converter-2026'
+    | '/_wrap/best-image-compressor-tool-2026'
+    | '/_wrap/best-image-converter-tool-2026'
     | '/_wrap/browser-based-utilities'
     | '/_wrap/bulk-file-renamer'
     | '/_wrap/color-palette-generator'
@@ -995,6 +1021,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapBrowserBasedUtilitiesRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/best-image-converter-tool-2026': {
+      id: '/_wrap/best-image-converter-tool-2026'
+      path: '/best-image-converter-tool-2026'
+      fullPath: '/best-image-converter-tool-2026'
+      preLoaderRoute: typeof WrapBestImageConverterTool2026RouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/best-image-compressor-tool-2026': {
+      id: '/_wrap/best-image-compressor-tool-2026'
+      path: '/best-image-compressor-tool-2026'
+      fullPath: '/best-image-compressor-tool-2026'
+      preLoaderRoute: typeof WrapBestImageCompressorTool2026RouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/best-free-image-format-converter-2026': {
       id: '/_wrap/best-free-image-format-converter-2026'
       path: '/best-free-image-format-converter-2026'
@@ -1015,6 +1055,8 @@ declare module '@tanstack/react-router' {
 interface WrapRouteChildren {
   WrapBase64ToFileRoute: typeof WrapBase64ToFileRoute
   WrapBestFreeImageFormatConverter2026Route: typeof WrapBestFreeImageFormatConverter2026Route
+  WrapBestImageCompressorTool2026Route: typeof WrapBestImageCompressorTool2026Route
+  WrapBestImageConverterTool2026Route: typeof WrapBestImageConverterTool2026Route
   WrapBrowserBasedUtilitiesRoute: typeof WrapBrowserBasedUtilitiesRoute
   WrapBulkFileRenamerRoute: typeof WrapBulkFileRenamerRoute
   WrapColorPaletteGeneratorRoute: typeof WrapColorPaletteGeneratorRoute
@@ -1065,6 +1107,8 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapBase64ToFileRoute: WrapBase64ToFileRoute,
   WrapBestFreeImageFormatConverter2026Route:
     WrapBestFreeImageFormatConverter2026Route,
+  WrapBestImageCompressorTool2026Route: WrapBestImageCompressorTool2026Route,
+  WrapBestImageConverterTool2026Route: WrapBestImageConverterTool2026Route,
   WrapBrowserBasedUtilitiesRoute: WrapBrowserBasedUtilitiesRoute,
   WrapBulkFileRenamerRoute: WrapBulkFileRenamerRoute,
   WrapColorPaletteGeneratorRoute: WrapColorPaletteGeneratorRoute,
