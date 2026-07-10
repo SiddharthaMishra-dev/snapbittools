@@ -14,6 +14,12 @@ const config = defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  worker: {
+    format: "es",
+  },
+  optimizeDeps: {
+    exclude: ["@imgly/background-removal", "onnxruntime-web"],
+  },
   plugins: [
     devtools(),
     viteTsConfigPaths({

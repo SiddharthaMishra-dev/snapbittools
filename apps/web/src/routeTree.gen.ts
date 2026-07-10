@@ -42,6 +42,7 @@ import { Route as WrapImageResizerRouteImport } from './routes/_wrap.image-resiz
 import { Route as WrapImageFormatConverterRouteImport } from './routes/_wrap.image-format-converter'
 import { Route as WrapImageCropperRouteImport } from './routes/_wrap.image-cropper'
 import { Route as WrapImageCompressorRouteImport } from './routes/_wrap.image-compressor'
+import { Route as WrapImageBackgroundRemoverRouteImport } from './routes/_wrap.image-background-remover'
 import { Route as WrapHtmlMinifierRouteImport } from './routes/_wrap.html-minifier'
 import { Route as WrapHeicToJpgRouteImport } from './routes/_wrap.heic-to-jpg'
 import { Route as WrapFormatJsonOnlineRouteImport } from './routes/_wrap.format-json-online'
@@ -230,6 +231,12 @@ const WrapImageCompressorRoute = WrapImageCompressorRouteImport.update({
   path: '/image-compressor',
   getParentRoute: () => WrapRoute,
 } as any)
+const WrapImageBackgroundRemoverRoute =
+  WrapImageBackgroundRemoverRouteImport.update({
+    id: '/image-background-remover',
+    path: '/image-background-remover',
+    getParentRoute: () => WrapRoute,
+  } as any)
 const WrapHtmlMinifierRoute = WrapHtmlMinifierRouteImport.update({
   id: '/html-minifier',
   path: '/html-minifier',
@@ -363,6 +370,7 @@ export interface FileRoutesByFullPath {
   '/format-json-online': typeof WrapFormatJsonOnlineRoute
   '/heic-to-jpg': typeof WrapHeicToJpgRoute
   '/html-minifier': typeof WrapHtmlMinifierRoute
+  '/image-background-remover': typeof WrapImageBackgroundRemoverRoute
   '/image-compressor': typeof WrapImageCompressorRoute
   '/image-cropper': typeof WrapImageCropperRoute
   '/image-format-converter': typeof WrapImageFormatConverterRoute
@@ -417,6 +425,7 @@ export interface FileRoutesByTo {
   '/format-json-online': typeof WrapFormatJsonOnlineRoute
   '/heic-to-jpg': typeof WrapHeicToJpgRoute
   '/html-minifier': typeof WrapHtmlMinifierRoute
+  '/image-background-remover': typeof WrapImageBackgroundRemoverRoute
   '/image-compressor': typeof WrapImageCompressorRoute
   '/image-cropper': typeof WrapImageCropperRoute
   '/image-format-converter': typeof WrapImageFormatConverterRoute
@@ -473,6 +482,7 @@ export interface FileRoutesById {
   '/_wrap/format-json-online': typeof WrapFormatJsonOnlineRoute
   '/_wrap/heic-to-jpg': typeof WrapHeicToJpgRoute
   '/_wrap/html-minifier': typeof WrapHtmlMinifierRoute
+  '/_wrap/image-background-remover': typeof WrapImageBackgroundRemoverRoute
   '/_wrap/image-compressor': typeof WrapImageCompressorRoute
   '/_wrap/image-cropper': typeof WrapImageCropperRoute
   '/_wrap/image-format-converter': typeof WrapImageFormatConverterRoute
@@ -529,6 +539,7 @@ export interface FileRouteTypes {
     | '/format-json-online'
     | '/heic-to-jpg'
     | '/html-minifier'
+    | '/image-background-remover'
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
@@ -583,6 +594,7 @@ export interface FileRouteTypes {
     | '/format-json-online'
     | '/heic-to-jpg'
     | '/html-minifier'
+    | '/image-background-remover'
     | '/image-compressor'
     | '/image-cropper'
     | '/image-format-converter'
@@ -638,6 +650,7 @@ export interface FileRouteTypes {
     | '/_wrap/format-json-online'
     | '/_wrap/heic-to-jpg'
     | '/_wrap/html-minifier'
+    | '/_wrap/image-background-remover'
     | '/_wrap/image-compressor'
     | '/_wrap/image-cropper'
     | '/_wrap/image-format-converter'
@@ -909,6 +922,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapImageCompressorRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/image-background-remover': {
+      id: '/_wrap/image-background-remover'
+      path: '/image-background-remover'
+      fullPath: '/image-background-remover'
+      preLoaderRoute: typeof WrapImageBackgroundRemoverRouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/html-minifier': {
       id: '/_wrap/html-minifier'
       path: '/html-minifier'
@@ -1073,6 +1093,7 @@ interface WrapRouteChildren {
   WrapFormatJsonOnlineRoute: typeof WrapFormatJsonOnlineRoute
   WrapHeicToJpgRoute: typeof WrapHeicToJpgRoute
   WrapHtmlMinifierRoute: typeof WrapHtmlMinifierRoute
+  WrapImageBackgroundRemoverRoute: typeof WrapImageBackgroundRemoverRoute
   WrapImageCompressorRoute: typeof WrapImageCompressorRoute
   WrapImageCropperRoute: typeof WrapImageCropperRoute
   WrapImageFormatConverterRoute: typeof WrapImageFormatConverterRoute
@@ -1125,6 +1146,7 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapFormatJsonOnlineRoute: WrapFormatJsonOnlineRoute,
   WrapHeicToJpgRoute: WrapHeicToJpgRoute,
   WrapHtmlMinifierRoute: WrapHtmlMinifierRoute,
+  WrapImageBackgroundRemoverRoute: WrapImageBackgroundRemoverRoute,
   WrapImageCompressorRoute: WrapImageCompressorRoute,
   WrapImageCropperRoute: WrapImageCropperRoute,
   WrapImageFormatConverterRoute: WrapImageFormatConverterRoute,

@@ -106,6 +106,36 @@ Whether you're a web developer optimizing images for faster loading times, a des
     ],
   },
 
+  "image-background-remover": {
+    slug: "image-background-remover",
+    title: "Free AI Image Background Remover - Transparent PNG Online",
+    intro: `Remove image backgrounds for free with SnapBit's AI Background Remover. Upload a photo, run on-device segmentation powered by @imgly/background-removal, and download a transparent PNG — all without uploading your files to a server.
+
+Product shots, profile photos, and marketing creatives often need a clean cutout. Traditional online removers send your images to remote APIs, which raises privacy and cost concerns. Our tool runs the neural network in a Web Worker inside your browser, so pixels never leave your device. The first run downloads and caches the model; later removals are much faster.
+
+The result is a PNG with an alpha channel ready for e-commerce listings, presentations, social graphics, and design tools. Pair it with our Image Compressor or Format Converter when you need smaller files or WebP output after the cutout.
+
+Ideal for sellers preparing catalog images, creators making stickers and thumbnails, and anyone who wants a private remove.bg alternative that stays free and offline-friendly after the model is cached.`,
+    benefits: [
+      "AI background removal entirely in the browser",
+      "Web Worker processing keeps the UI responsive",
+      "Transparent PNG download with alpha channel",
+      "No account, no per-image fees, no server uploads",
+      "Powered by open-source @imgly/background-removal",
+      "Progress feedback while the model loads and runs",
+      "Works with JPG, PNG, WebP, and common photo formats",
+    ],
+    useCases: [
+      "Creating transparent product photos for online stores",
+      "Cutting out portraits for avatars and ID-style images",
+      "Preparing assets for presentations and pitch decks",
+      "Making stickers and social media graphics",
+      "Isolating subjects for design and collage work",
+      "Privacy-sensitive photo editing without cloud APIs",
+      "Batch creative workflows alongside other SnapBit image tools",
+    ],
+  },
+
   "image-compressor": {
     slug: "image-compressor",
     title: "Free Image Compressor - Compress PNG, JPEG, WebP & AVIF",
