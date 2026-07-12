@@ -17,7 +17,7 @@ import type {
 } from "@/workers/imageBackgroundRemoval.worker";
 import ImageBackgroundRemovalWorker from "@/workers/imageBackgroundRemoval.worker.ts?worker";
 
-type ProcessingStage = "idle" | "loading-model" | "analyzing" | "removing" | "done" | "error";
+type ProcessingStage = "idle" | "preparing" | "processing" | "converting" | "done" | "error";
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -25,22 +25,44 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 }
 
-function stageFromProgressKey(key: string): ProcessingStage {
+function stageFromProgressKey(key: string, fromCache?: boolean): ProcessingStage {
   const lower = key.toLowerCase();
-  if (lower.includes("fetch") || lower.includes("download") || lower.includes("load")) {
-    return "loading-model";
+  // Cached assets should never look like a download step.
+  if ((lower.includes("fetch") || lower.includes("load")) && !fromCache) {
+    return "preparing";
   }
-  if (lower.includes("decode") || lower.includes("preprocess")) {
-    return "analyzing";
+  if (lower.includes("encode") || lower.includes("convert")) {
+    return "converting";
   }
-  return "removing";
+  return "processing";
 }
 
-const STAGE_COPY: Record<Exclude<ProcessingStage, "idle" | "done" | "error">, string> = {
-  "loading-model": "Downloading AI model…",
-  analyzing: "Analyzing image…",
-  removing: "Removing background…",
+function friendlyProgressLabel(key: string, stage: ProcessingStage): string {
+  const lower = key.toLowerCase();
+  if (lower.includes("encode")) return "Saving transparent PNG…";
+  if (lower.includes("mask")) return "Refining edges…";
+  if (lower.includes("inference")) return "Separating subject from background…";
+  if (lower.includes("decode")) return "Reading your image…";
+  if (lower.includes("fetch") || lower.includes("load")) return "Getting things ready…";
+
+  switch (stage) {
+    case "preparing":
+      return "Getting things ready…";
+    case "converting":
+      return "Converting to transparent PNG…";
+    case "processing":
+    default:
+      return "Processing your image…";
+  }
+}
+
+const STAGE_COPY: Record<"preparing" | "processing" | "converting", string> = {
+  preparing: "Preparing…",
+  processing: "Processing…",
+  converting: "Converting…",
 };
+
+const STAGE_ORDER = ["preparing", "processing", "converting"] as const;
 
 export function ImageBackgroundRemovalTool() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -57,7 +79,7 @@ export function ImageBackgroundRemovalTool() {
   const [progressLabel, setProgressLabel] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const isProcessing = stage === "loading-model" || stage === "analyzing" || stage === "removing";
+  const isProcessing = stage === "preparing" || stage === "processing" || stage === "converting";
 
   useEffect(() => {
     workerRef.current = new ImageBackgroundRemovalWorker();
@@ -120,9 +142,9 @@ export function ImageBackgroundRemovalTool() {
 
     resetResult();
     setError(null);
-    setStage("loading-model");
+    setStage("preparing");
     setProgress(0);
-    setProgressLabel("Preparing…");
+    setProgressLabel("Getting things ready…");
 
     const requestId = String(++requestIdRef.current);
     const worker = workerRef.current;
@@ -140,9 +162,10 @@ export function ImageBackgroundRemovalTool() {
           if (data.requestId !== requestId) return;
 
           if (data.type === "progress") {
-            setProgress(data.percent);
-            setStage(stageFromProgressKey(data.key));
-            setProgressLabel(data.key.replace(/:/g, " · "));
+            const nextStage = stageFromProgressKey(data.key, data.fromCache);
+            setProgress(Math.max(data.percent, nextStage === "processing" ? 10 : 0));
+            setStage(nextStage);
+            setProgressLabel(friendlyProgressLabel(data.key, nextStage));
             return;
           }
 
@@ -272,16 +295,8 @@ export function ImageBackgroundRemovalTool() {
                 <div>
                   <h4 className="font-semibold text-theme-heading mb-1">AI background removal</h4>
                   <p className="text-sm text-theme-muted leading-relaxed">
-                    Runs locally with{" "}
-                    <a
-                      href="https://github.com/imgly/background-removal-js"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-brand-primary hover:text-brand-hover hover:underline"
-                    >
-                      @imgly/background-removal
-                    </a>
-                    . The first run downloads a model (~80&nbsp;MB) and caches it in your browser.
+                    Remove the background instantly in your browser — private, free, and ready as a
+                    transparent PNG.
                   </p>
                 </div>
 
@@ -327,10 +342,10 @@ export function ImageBackgroundRemovalTool() {
                           </div>
                           <div className="min-w-0 flex-1">
                             <p className="font-medium text-theme-heading">
-                              {STAGE_COPY[stage as keyof typeof STAGE_COPY] || "Working…"}
+                              {STAGE_COPY[stage as keyof typeof STAGE_COPY] || "Processing…"}
                             </p>
                             <p className="text-xs text-theme-muted truncate mt-0.5">
-                              {progressLabel || "Starting worker…"}
+                              {progressLabel || "Processing your image…"}
                             </p>
                           </div>
                           <span className="text-sm font-semibold text-brand-primary tabular-nums">
@@ -348,12 +363,11 @@ export function ImageBackgroundRemovalTool() {
                         </div>
 
                         <div className="relative mt-3 flex gap-2">
-                          {(["loading-model", "analyzing", "removing"] as const).map((s) => {
-                            const active =
-                              stage === s ||
-                              (s === "loading-model" &&
-                                (stage === "analyzing" || stage === "removing")) ||
-                              (s === "analyzing" && stage === "removing");
+                          {STAGE_ORDER.map((s, index) => {
+                            const currentIndex = STAGE_ORDER.indexOf(
+                              stage as (typeof STAGE_ORDER)[number],
+                            );
+                            const active = currentIndex >= index;
                             return (
                               <div
                                 key={s}

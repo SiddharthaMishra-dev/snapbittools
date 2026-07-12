@@ -1,4 +1,8 @@
-import { removeBackground, type Config } from "@imgly/background-removal";
+import { preload, removeBackground, type Config } from "@imgly/background-removal";
+
+import { installModelFetchCache } from "@/lib/bgRemovalModelCache";
+
+installModelFetchCache();
 
 export type BackgroundRemovalRequest = {
   requestId: string;
@@ -14,6 +18,7 @@ export type BackgroundRemovalProgress = {
   current: number;
   total: number;
   percent: number;
+  fromCache?: boolean;
 };
 
 export type BackgroundRemovalSuccess = {
@@ -30,36 +35,76 @@ export type BackgroundRemovalError = {
   error: string;
 };
 
+/** Bridge so a single memoized library init can report progress for the active job. */
+let activeRequestId: string | null = null;
+let lastFetchWasCacheHit = true;
+
+/**
+ * Stable config (same JSON memoize key every time) so @imgly reuses the ONNX session
+ * instead of reloading the model on every image.
+ */
+const sharedConfig: Config = {
+  debug: false,
+  model: "isnet_fp16",
+  output: {
+    format: "image/png",
+    quality: 0.9,
+  },
+  progress: (key, current, total) => {
+    if (!activeRequestId) return;
+
+    const isFetch = key.toLowerCase().includes("fetch");
+    if (isFetch && lastFetchWasCacheHit) {
+      const message: BackgroundRemovalProgress = {
+        type: "progress",
+        requestId: activeRequestId,
+        key: "compute:decode",
+        current: 0,
+        total: 4,
+        percent: 5,
+        fromCache: true,
+      };
+      self.postMessage(message);
+      return;
+    }
+
+    const safeTotal = total > 0 ? total : 1;
+    const percent = Math.min(100, Math.round((current / safeTotal) * 100));
+    const message: BackgroundRemovalProgress = {
+      type: "progress",
+      requestId: activeRequestId,
+      key,
+      current,
+      total,
+      percent,
+      fromCache: isFetch ? lastFetchWasCacheHit : undefined,
+    };
+    self.postMessage(message);
+  },
+};
+
+self.addEventListener("snapbit-bg-cache", ((event: CustomEvent<{ fromCache: boolean }>) => {
+  if (!event.detail?.fromCache) {
+    lastFetchWasCacheHit = false;
+  }
+}) as EventListener);
+
+/** Load + cache model as soon as the worker boots; reused for every image. */
+const engineReady = preload(sharedConfig).catch((error) => {
+  console.warn("[bg-removal] preload failed; will retry on first image", error);
+});
+
 self.onmessage = async (event: MessageEvent<BackgroundRemovalRequest>) => {
   const { requestId, imageData, mimeType, fileName } = event.data;
 
+  activeRequestId = requestId;
+  lastFetchWasCacheHit = true;
+
   try {
+    await engineReady;
+
     const inputBlob = new Blob([imageData], { type: mimeType || "image/png" });
-
-    const config: Config = {
-      debug: false,
-      model: "isnet_fp16",
-      output: {
-        format: "image/png",
-        quality: 0.9,
-        type: "foreground",
-      },
-      progress: (key, current, total) => {
-        const safeTotal = total > 0 ? total : 1;
-        const percent = Math.min(100, Math.round((current / safeTotal) * 100));
-        const message: BackgroundRemovalProgress = {
-          type: "progress",
-          requestId,
-          key,
-          current,
-          total,
-          percent,
-        };
-        self.postMessage(message);
-      },
-    };
-
-    const resultBlob = await removeBackground(inputBlob, config);
+    const resultBlob = await removeBackground(inputBlob, sharedConfig);
 
     const success: BackgroundRemovalSuccess = {
       type: "success",
@@ -76,5 +121,9 @@ self.onmessage = async (event: MessageEvent<BackgroundRemovalRequest>) => {
       error: error instanceof Error ? error.message : "Background removal failed",
     };
     self.postMessage(message);
+  } finally {
+    if (activeRequestId === requestId) {
+      activeRequestId = null;
+    }
   }
 };

@@ -24,9 +24,9 @@ const faqs = [
       "No. Processing is 100% client-side. The only network request is downloading the AI model files (cached by your browser after the first run). Your image pixels stay on your device.",
   },
   {
-    question: "Why is the first run slow?",
+    question: "Why is the first run slower?",
     answer:
-      "On first use, the browser downloads the ONNX model (~40–80 MB) and WASM runtime. Subsequent removals reuse the cache and are much faster.",
+      "The first removal prepares the on-device AI engine and stores it in your browser’s IndexedDB cache. Later runs reuse that cache and finish much faster.",
   },
   {
     question: "What output format do I get?",
