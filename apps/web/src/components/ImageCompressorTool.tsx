@@ -1,6 +1,8 @@
 import { IconCircleX, IconCloudUpload, IconDownload, IconLock } from "@tabler/icons-react";
 import JSZip from "jszip";
 import { useEffect, useRef, useState } from "react";
+
+import { mimeTypeToExtension } from "@/lib/imageCompress";
 import ImageCompressorWorker from "../workers/imageCompressor.worker.ts?worker";
 
 interface CompressedFile {
@@ -16,14 +18,16 @@ interface CompressedFile {
   error?: string;
   ext: string;
   mimeType: string;
+  outputMimeType?: string;
   preview: string;
 }
 
 export function ImageCompressorTool() {
   const [files, setFiles] = useState<CompressedFile[]>([]);
-  const [quality, setQuality] = useState(0.3);
-  const [maxWidth, setMaxWidth] = useState(1920);
-  const [maxHeight, setMaxHeight] = useState(1080);
+  const [quality, setQuality] = useState(0.9);
+  // High defaults so images are not silently downscaled (dimension controls are hidden).
+  const [maxWidth, setMaxWidth] = useState(16384);
+  const [maxHeight, setMaxHeight] = useState(16384);
   const [isDragging, setIsDragging] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
   const [preserveFormat, setPreserveFormat] = useState(true);
@@ -90,6 +94,7 @@ export function ImageCompressorTool() {
             reject(new Error(data.error));
           } else {
             const downloadUrl = URL.createObjectURL(data.blob);
+            const outputMimeType = data.outputMimeType || fileObj.mimeType;
             setFiles((prev) =>
               prev.map((f) =>
                 f.id === fileObj.id
@@ -100,6 +105,8 @@ export function ImageCompressorTool() {
                       compressedBlob: data.blob,
                       downloadUrl: downloadUrl,
                       compressionRatio: data.compressionRatio,
+                      outputMimeType,
+                      ext: mimeTypeToExtension(outputMimeType),
                     }
                   : f,
               ),
@@ -165,9 +172,10 @@ export function ImageCompressorTool() {
     const link = document.createElement("a");
     link.href = fileObj.downloadUrl;
 
-    // Preserve original extension or use jpg if converting
     const originalName = fileObj.name.replace(/\.[^/.]+$/, "");
-    const extension = preserveFormat ? fileObj.ext : "jpg";
+    const extension =
+      fileObj.ext ||
+      mimeTypeToExtension(fileObj.outputMimeType || (preserveFormat ? fileObj.mimeType : "image/jpeg"));
     link.download = `compressed_${originalName}.${extension}`;
 
     document.body.appendChild(link);
@@ -187,7 +195,10 @@ export function ImageCompressorTool() {
       const zip = new JSZip();
       for (const item of completedFiles) {
         if (item.compressedBlob) {
-          const filName = `${item.name.split(".")[0]}.${preserveFormat ? item.ext : "jpg"}`;
+          const extension =
+            item.ext ||
+            mimeTypeToExtension(item.outputMimeType || (preserveFormat ? item.mimeType : "image/jpeg"));
+          const filName = `${item.name.replace(/\.[^/.]+$/, "")}.${extension}`;
           zip.file(filName, item.compressedBlob);
         }
       }
@@ -325,31 +336,33 @@ export function ImageCompressorTool() {
                 </p>
               </div>
 
-              {(!preserveFormat || files.some((f) => f.mimeType === "image/jpeg")) && (
-                <div className="mb-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium dark:text-gray-200 text-gray-800">
-                      Quality {!preserveFormat ? "" : "(JPEG only)"}
-                    </label>
-                    <span className="text-sm text-brand-primary font-medium">
-                      {Math.round(quality * 100)}%
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0.1"
-                    max="1"
-                    step="0.05"
-                    value={quality}
-                    onChange={(e) => setQuality(parseFloat(e.target.value))}
-                    className="w-full h-2 bg-theme-surface-muted rounded-lg appearance-none cursor-pointer slider"
-                  />
-                  <div className="flex justify-between text-xs text-theme-muted mt-1">
-                    <span>Lower quality</span>
-                    <span>Higher quality</span>
-                  </div>
+              <div className="mb-4">
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-sm font-medium dark:text-gray-200 text-gray-800">
+                    Quality
+                  </label>
+                  <span className="text-sm text-brand-primary font-medium">
+                    {Math.round(quality * 100)}%
+                  </span>
                 </div>
-              )}
+                <input
+                  type="range"
+                  min="0.1"
+                  max="1"
+                  step="0.05"
+                  value={quality}
+                  onChange={(e) => setQuality(parseFloat(e.target.value))}
+                  className="w-full h-2 bg-theme-surface-muted rounded-lg appearance-none cursor-pointer slider"
+                />
+                <div className="flex justify-between text-xs text-theme-muted mt-1">
+                  <span>Smaller file</span>
+                  <span>Higher quality</span>
+                </div>
+                <p className="text-xs text-theme-muted mt-2">
+                  At 100%, PNG stays lossless. Lower values reduce colors for smaller files.
+                  JPEG/WebP use quality encoding.
+                </p>
+              </div>
 
               {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>

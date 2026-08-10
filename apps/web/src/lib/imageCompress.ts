@@ -1,3 +1,5 @@
+import UPNG from "upng-js";
+
 export type CompressResult = {
   blob: Blob;
   mimeType: string;
@@ -50,7 +52,11 @@ function drawImageToCanvas(
 }
 
 /** Sample pixels to detect meaningful alpha (transparency). */
-export function hasSignificantAlpha(ctx: OffscreenCanvasRenderingContext2D, width: number, height: number): boolean {
+export function hasSignificantAlpha(
+  ctx: OffscreenCanvasRenderingContext2D,
+  width: number,
+  height: number,
+): boolean {
   const { data } = ctx.getImageData(0, 0, width, height);
   const step = Math.max(4, Math.floor((width * height) / 4096) * 4);
 
@@ -62,28 +68,39 @@ export function hasSignificantAlpha(ctx: OffscreenCanvasRenderingContext2D, widt
 }
 
 /**
- * Reduce unique colors by downscaling then upscaling — effective for photographic PNGs
- * where canvas PNG re-encode alone rarely shrinks file size.
+ * Map quality slider (0–1) to UPNG palette size.
+ * 0 = lossless (all colors). Lower quality → fewer colors → smaller files.
  */
-function applyColorReduction(source: OffscreenCanvas, width: number, height: number, quality: number): OffscreenCanvas {
-  const scale = Math.max(0.12, Math.min(1, 0.2 + quality * 0.8));
-  const midWidth = Math.max(1, Math.round(width * scale));
-  const midHeight = Math.max(1, Math.round(height * scale));
+export function qualityToPngColors(quality: number): number {
+  if (quality >= 0.98) return 0;
+  if (quality >= 0.85) return 256;
+  if (quality >= 0.7) return 192;
+  if (quality >= 0.55) return 128;
+  if (quality >= 0.4) return 64;
+  if (quality >= 0.25) return 32;
+  return 16;
+}
 
-  const mid = new OffscreenCanvas(midWidth, midHeight);
-  const midCtx = mid.getContext("2d");
-  if (!midCtx) return source;
+/** Encode canvas pixels to PNG with UPNG (quantized palette when cnum > 0). */
+export function encodePngWithUpng(
+  canvas: OffscreenCanvas,
+  width: number,
+  height: number,
+  maxColors: number,
+): Blob {
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    throw new Error("Failed to get canvas context for PNG encoding");
+  }
 
-  midCtx.imageSmoothingEnabled = true;
-  midCtx.drawImage(source, 0, 0, midWidth, midHeight);
+  const imageData = ctx.getImageData(0, 0, width, height);
+  const rgba = imageData.data.buffer.slice(
+    imageData.data.byteOffset,
+    imageData.data.byteOffset + imageData.data.byteLength,
+  );
 
-  const output = new OffscreenCanvas(width, height);
-  const outCtx = output.getContext("2d");
-  if (!outCtx) return source;
-
-  outCtx.imageSmoothingEnabled = true;
-  outCtx.drawImage(mid, 0, 0, width, height);
-  return output;
+  const pngBuffer = UPNG.encode([rgba], width, height, maxColors);
+  return new Blob([pngBuffer], { type: "image/png" });
 }
 
 async function encodeCanvas(canvas: OffscreenCanvas, mimeType: string, quality?: number): Promise<Blob> {
@@ -103,28 +120,31 @@ async function pickSmallest(candidates: EncodeCandidate[]): Promise<EncodeCandid
   return best;
 }
 
-/** PNG-only strategies when the user wants to keep PNG output. */
+/** PNG compression via upng-js when preserving PNG format. */
 async function compressPngPreserve(
   canvas: OffscreenCanvas,
   width: number,
   height: number,
   quality: number,
 ): Promise<EncodeCandidate> {
-  const candidates: EncodeCandidate[] = [];
+  const maxColors = qualityToPngColors(quality);
 
-  candidates.push({ blob: await encodeCanvas(canvas, "image/png"), mimeType: "image/png" });
-
-  if (quality < 0.98) {
-    const reduced = applyColorReduction(canvas, width, height, quality);
-    candidates.push({ blob: await encodeCanvas(reduced, "image/png"), mimeType: "image/png" });
+  // High quality / lossless: never quantize — picking a smaller paletted PNG
+  // would destroy photographic detail even at 100% quality.
+  if (maxColors === 0) {
+    const upngLossless = encodePngWithUpng(canvas, width, height, 0);
+    const canvasPng = await encodeCanvas(canvas, "image/png");
+    return pickSmallest([
+      { blob: upngLossless, mimeType: "image/png" },
+      { blob: canvasPng, mimeType: "image/png" },
+    ]);
   }
 
-  if (quality < 0.55) {
-    const aggressive = applyColorReduction(canvas, width, height, quality * 0.45);
-    candidates.push({ blob: await encodeCanvas(aggressive, "image/png"), mimeType: "image/png" });
-  }
-
-  return pickSmallest(candidates);
+  // Lossy: encode exactly at the requested palette size (no lower-quality trial).
+  return {
+    blob: encodePngWithUpng(canvas, width, height, maxColors),
+    mimeType: "image/png",
+  };
 }
 
 async function compressWithConversion(
@@ -143,12 +163,13 @@ async function compressWithConversion(
     candidates.push({ blob: await encodeCanvas(canvas, "image/jpeg", quality), mimeType: "image/jpeg" });
   }
 
-  candidates.push({ blob: await encodeCanvas(canvas, "image/png"), mimeType: "image/png" });
-
-  if (quality < 0.98) {
-    const reduced = applyColorReduction(canvas, width, height, quality);
-    candidates.push({ blob: await encodeCanvas(reduced, "image/png"), mimeType: "image/png" });
-  }
+  // UPNG PNG as another candidate (often wins for graphics / transparency).
+  // Keep cnum=0 for lossless — do not coerce to 256.
+  const maxColors = qualityToPngColors(quality);
+  candidates.push({
+    blob: encodePngWithUpng(canvas, width, height, maxColors),
+    mimeType: "image/png",
+  });
 
   return pickSmallest(candidates);
 }
