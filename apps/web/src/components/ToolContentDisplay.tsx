@@ -84,14 +84,14 @@ export default function ToolContentDisplay({
           variants={itemVariants}
           className="space-y-4"
         >
-          <h2 className="text-2xl font-bold text-theme-muted">Common Use Cases</h2>
+          <h2 className="text-lg font-bold text-theme-muted">Common Use Cases</h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {useCases.map((useCase, index) => (
               <li
                 key={index}
                 className="flex items-center space-x-3"
               >
-                <span className="text-brand-primary font-bold text-lg pt-0.5">→</span>
+                <span className="text-brand-primary font-bold text-lg pt-0.5">✓</span>
                 <span className="text-theme-muted text-sm">{useCase}</span>
               </li>
             ))}

@@ -51,8 +51,19 @@ const wcagBadgeClass = (result: "Pass" | "Large only" | "Fail") =>
 
 // ─── Color Math Utilities ─────────────────────────────────────────────────────
 
+function normalizeHex(hex: string): string {
+  let clean = hex.trim().replace("#", "");
+  if (/^[0-9a-fA-F]{3}$/.test(clean)) {
+    clean = clean
+      .split("")
+      .map((c) => c + c)
+      .join("");
+  }
+  return `#${clean.toLowerCase()}`;
+}
+
 function hexToRgb(hex: string): { r: number; g: number; b: number } {
-  const clean = hex.replace("#", "");
+  const clean = normalizeHex(hex).replace("#", "");
   const bigint = parseInt(clean, 16);
   return {
     r: (bigint >> 16) & 255,
@@ -134,11 +145,86 @@ function hslToRgb(h: number, s: number, l: number): { r: number; g: number; b: n
 }
 
 function formatColor(hex: string, format: ColorFormat): string {
-  const { r, g, b } = hexToRgb(hex);
-  if (format === "hex") return hex.toUpperCase();
+  const normalized = normalizeHex(hex);
+  const { r, g, b } = hexToRgb(normalized);
+  if (format === "hex") return normalized.toUpperCase();
   if (format === "rgb") return `rgb(${r}, ${g}, ${b})`;
   const { h, s, l } = rgbToHsl(r, g, b);
   return `hsl(${h}, ${s}%, ${l}%)`;
+}
+
+/** Parse a hex / rgb() / hsl() string into a normalized #rrggbb, or null if invalid. */
+function parseColorToHex(value: string, format: ColorFormat): string | null {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  if (format === "hex") {
+    const withHash = trimmed.startsWith("#") ? trimmed : `#${trimmed}`;
+    if (/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(withHash)) {
+      return normalizeHex(withHash);
+    }
+    return null;
+  }
+
+  if (format === "rgb") {
+    const match =
+      trimmed.match(
+        /^rgba?\(\s*(\d{1,3})\s*[, ]\s*(\d{1,3})\s*[, ]\s*(\d{1,3})(?:\s*[,/]\s*[\d.]+%?)?\s*\)$/i,
+      ) ||
+      trimmed.match(/^(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})$/) ||
+      trimmed.match(/^(\d{1,3})\s+(\d{1,3})\s+(\d{1,3})$/);
+    if (!match) return null;
+    const r = Number(match[1]);
+    const g = Number(match[2]);
+    const b = Number(match[3]);
+    if ([r, g, b].some((v) => Number.isNaN(v) || v < 0 || v > 255)) return null;
+    return normalizeHex(rgbToHex(r, g, b));
+  }
+
+  // hsl
+  const match =
+    trimmed.match(
+      /^hsla?\(\s*(\d{1,3}(?:\.\d+)?)\s*[, ]\s*(\d{1,3}(?:\.\d+)?)%?\s*[, ]\s*(\d{1,3}(?:\.\d+)?)%?(?:\s*[,/]\s*[\d.]+%?)?\s*\)$/i,
+    ) ||
+    trimmed.match(
+      /^(\d{1,3}(?:\.\d+)?)\s*,\s*(\d{1,3}(?:\.\d+)?)%?\s*,\s*(\d{1,3}(?:\.\d+)?)%?$/,
+    ) ||
+    trimmed.match(/^(\d{1,3}(?:\.\d+)?)\s+(\d{1,3}(?:\.\d+)?)%?\s+(\d{1,3}(?:\.\d+)?)%?$/);
+  if (!match) return null;
+  const h = Number(match[1]);
+  const s = Number(match[2]);
+  const l = Number(match[3]);
+  if (
+    [h, s, l].some((v) => Number.isNaN(v)) ||
+    h < 0 ||
+    h > 360 ||
+    s < 0 ||
+    s > 100 ||
+    l < 0 ||
+    l > 100
+  ) {
+    return null;
+  }
+  return normalizeHex(hslToHex(h, s, l));
+}
+
+function colorInputPlaceholder(format: ColorFormat): string {
+  if (format === "hex") return "#2563eb";
+  if (format === "rgb") return "rgb(37, 99, 235)";
+  return "hsl(217, 91%, 53%)";
+}
+
+function colorInputErrorMessage(format: ColorFormat): string {
+  if (format === "hex") return "Enter a valid hex color (e.g. #FF5733)";
+  if (format === "rgb") return "Enter a valid RGB color (e.g. rgb(255, 87, 51))";
+  return "Enter a valid HSL color (e.g. hsl(14, 100%, 60%))";
+}
+
+/** Guarantee the exact entered base color is first in the palette. */
+function ensureExactBase(baseHex: string, hexes: string[]): string[] {
+  const base = normalizeHex(baseHex);
+  const rest = hexes.filter((h) => normalizeHex(h) !== base);
+  return [base, ...rest];
 }
 
 /** Relative luminance per WCAG 2.1 */
@@ -191,44 +277,62 @@ function generateRandom(count = 5): string[] {
 }
 
 function generateShades(baseHex: string, count = 7): string[] {
-  const { r, g, b } = hexToRgb(baseHex);
-  const { h, s } = rgbToHsl(r, g, b);
-  const lightnesses = [90, 75, 60, 45, 35, 22, 12];
-  return lightnesses.slice(0, count).map((l) => hslToHex(h, s, l));
+  const base = normalizeHex(baseHex);
+  const { r, g, b } = hexToRgb(base);
+  const { h, s, l: baseL } = rgbToHsl(r, g, b);
+  const lightnesses = [90, 75, 60, 45, 35, 22, 12].slice(0, count);
+
+  // Put the exact base color in the closest lightness slot.
+  let closestIdx = 0;
+  let closestDiff = Infinity;
+  lightnesses.forEach((l, i) => {
+    const diff = Math.abs(l - baseL);
+    if (diff < closestDiff) {
+      closestDiff = diff;
+      closestIdx = i;
+    }
+  });
+
+  return lightnesses.map((l, i) =>
+    i === closestIdx ? base : hslToHex(h, Math.max(0, Math.min(100, s)), l),
+  );
 }
 
 function generateContrast(baseHex: string): string[] {
-  const { r, g, b } = hexToRgb(baseHex);
+  const base = normalizeHex(baseHex);
+  const { r, g, b } = hexToRgb(base);
   const { h, s, l } = rgbToHsl(r, g, b);
   return [
-    baseHex,
-    hslToHex((h + 180) % 360, s, l), // complement
-    hslToHex(h, Math.max(10, s - 30), l > 50 ? 20 : 85), // dark/light neutral
-    hslToHex((h + 60) % 360, 80, 55), // warm accent
-    hslToHex((h + 300) % 360, 70, 60), // cool accent
+    base,
+    hslToHex((h + 180) % 360, s, l),
+    hslToHex(h, Math.max(10, s - 30), l > 50 ? 20 : 85),
+    hslToHex((h + 60) % 360, 80, 55),
+    hslToHex((h + 300) % 360, 70, 60),
   ];
 }
 
 function generateBrand(baseHex: string): string[] {
-  const { r, g, b } = hexToRgb(baseHex);
+  const base = normalizeHex(baseHex);
+  const { r, g, b } = hexToRgb(base);
   const { h, s } = rgbToHsl(r, g, b);
   return [
-    hslToHex(h, s, 55), // Primary
-    hslToHex(h, s - 10, 70), // Light primary
-    hslToHex(h, s, 35), // Dark primary
-    hslToHex(h, 10, 20), // Text / dark neutral
-    hslToHex(h, 15, 96), // Background / light neutral
-    hslToHex((h + 30) % 360, s + 10, 55), // Accent
+    base, // exact entered brand / primary color
+    hslToHex(h, Math.max(0, s - 10), 70),
+    hslToHex(h, s, 35),
+    hslToHex(h, 10, 20),
+    hslToHex(h, 15, 96),
+    hslToHex((h + 30) % 360, Math.min(100, s + 10), 55),
   ];
 }
 
 function generateComplementary(baseHex: string): string[] {
-  const { r, g, b } = hexToRgb(baseHex);
+  const base = normalizeHex(baseHex);
+  const { r, g, b } = hexToRgb(base);
   const { h, s, l } = rgbToHsl(r, g, b);
   const comp = (h + 180) % 360;
   return [
+    base,
     hslToHex(h, s, l + 15 > 90 ? l - 10 : l + 15),
-    hslToHex(h, s, l),
     hslToHex(h, s, l - 15 < 10 ? l + 10 : l - 15),
     hslToHex(comp, s, l),
     hslToHex(comp, s, l - 10 < 10 ? l + 10 : l - 10),
@@ -236,40 +340,46 @@ function generateComplementary(baseHex: string): string[] {
 }
 
 function generateTriadic(baseHex: string): string[] {
-  const { r, g, b } = hexToRgb(baseHex);
+  const base = normalizeHex(baseHex);
+  const { r, g, b } = hexToRgb(base);
   const { h, s, l } = rgbToHsl(r, g, b);
   return [
-    hslToHex(h, s, l),
+    base,
     hslToHex((h + 120) % 360, s, l),
     hslToHex((h + 240) % 360, s, l),
-    hslToHex(h, s - 15, l + 20 > 90 ? l : l + 20),
-    hslToHex((h + 120) % 360, s - 15, l + 20 > 90 ? l : l + 20),
+    hslToHex(h, Math.max(0, s - 15), l + 20 > 90 ? l : l + 20),
+    hslToHex((h + 120) % 360, Math.max(0, s - 15), l + 20 > 90 ? l : l + 20),
   ];
 }
 
 function generateAnalogous(baseHex: string): string[] {
-  const { r, g, b } = hexToRgb(baseHex);
+  const base = normalizeHex(baseHex);
+  const { r, g, b } = hexToRgb(base);
   const { h, s, l } = rgbToHsl(r, g, b);
-  return [-60, -30, 0, 30, 60].map((offset) => hslToHex((h + offset + 360) % 360, s, l));
+  return [-60, -30, 0, 30, 60].map((offset) =>
+    offset === 0 ? base : hslToHex((h + offset + 360) % 360, s, l),
+  );
 }
 
 function generateSplitComplementary(baseHex: string): string[] {
-  const { r, g, b } = hexToRgb(baseHex);
+  const base = normalizeHex(baseHex);
+  const { r, g, b } = hexToRgb(base);
   const { h, s, l } = rgbToHsl(r, g, b);
   return [
-    hslToHex(h, s, l),
+    base,
     hslToHex((h + 150) % 360, s, l),
     hslToHex((h + 210) % 360, s, l),
-    hslToHex(h, s - 20, l + 15 > 90 ? l : l + 15),
-    hslToHex((h + 180) % 360, s - 20, l),
+    hslToHex(h, Math.max(0, s - 20), l + 15 > 90 ? l : l + 15),
+    hslToHex((h + 180) % 360, Math.max(0, s - 20), l),
   ];
 }
 
 function generateTetradic(baseHex: string): string[] {
-  const { r, g, b } = hexToRgb(baseHex);
+  const base = normalizeHex(baseHex);
+  const { r, g, b } = hexToRgb(base);
   const { h, s, l } = rgbToHsl(r, g, b);
   return [0, 90, 180, 270]
-    .map((offset) => hslToHex((h + offset) % 360, s, l))
+    .map((offset) => (offset === 0 ? base : hslToHex((h + offset) % 360, s, l)))
     .concat([hslToHex(h, Math.max(20, s - 20), l + 20 > 90 ? l : l + 20)]);
 }
 
@@ -286,21 +396,21 @@ function getPaletteHexes(mode: PaletteMode, baseHex: string): string[] {
     case "random":
       return generateRandom();
     case "shades":
-      return generateShades(baseHex);
+      return ensureExactBase(baseHex, generateShades(baseHex));
     case "contrast":
-      return generateContrast(baseHex);
+      return ensureExactBase(baseHex, generateContrast(baseHex));
     case "brand":
-      return generateBrand(baseHex);
+      return ensureExactBase(baseHex, generateBrand(baseHex));
     case "complementary":
-      return generateComplementary(baseHex);
+      return ensureExactBase(baseHex, generateComplementary(baseHex));
     case "triadic":
-      return generateTriadic(baseHex);
+      return ensureExactBase(baseHex, generateTriadic(baseHex));
     case "analogous":
-      return generateAnalogous(baseHex);
+      return ensureExactBase(baseHex, generateAnalogous(baseHex));
     case "split-complementary":
-      return generateSplitComplementary(baseHex);
+      return ensureExactBase(baseHex, generateSplitComplementary(baseHex));
     case "tetradic":
-      return generateTetradic(baseHex);
+      return ensureExactBase(baseHex, generateTetradic(baseHex));
     default:
       return generateRandom();
   }
@@ -530,23 +640,31 @@ export function ColorPaletteTool() {
     generate(newMode, baseColor);
   };
 
-  const handleBaseColorChange = (hex: string) => {
-    setInputColor(hex);
-    // Validate hex
-    if (/^#([0-9a-fA-F]{6})$/.test(hex)) {
+  const handleFormatChange = (newFormat: ColorFormat) => {
+    setFormat(newFormat);
+    // Rewrite the base-color field in the newly selected format.
+    setInputColor(formatColor(baseColor, newFormat));
+    setColorInputError("");
+  };
+
+  const handleBaseColorChange = (value: string) => {
+    setInputColor(value);
+    const hex = parseColorToHex(value, format);
+    if (hex) {
       setColorInputError("");
       setBaseColor(hex);
       generate(mode, hex);
     } else {
-      setColorInputError("Enter a valid 6-digit hex (e.g. #FF5733)");
+      setColorInputError(colorInputErrorMessage(format));
     }
   };
 
   const handleColorPickerChange = (hex: string) => {
-    setInputColor(hex);
-    setBaseColor(hex);
+    const normalized = normalizeHex(hex);
+    setBaseColor(normalized);
+    setInputColor(formatColor(normalized, format));
     setColorInputError("");
-    generate(mode, hex);
+    generate(mode, normalized);
   };
 
   const toggleLock = (id: string) => {
@@ -654,7 +772,9 @@ export function ColorPaletteTool() {
                   onClick={() => handleModeChange(m.value)}
                   className={cn(
                     "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200",
-                    mode === m.value ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                    mode === m.value
+                      ? tc.toggleActive
+                      : cn(tc.toggleInactive, "bg-theme-surface-muted"),
                   )}
                 >
                   {m.label}
@@ -675,7 +795,9 @@ export function ColorPaletteTool() {
                   onClick={() => handleModeChange(m.value)}
                   className={cn(
                     "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200",
-                    mode === m.value ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                    mode === m.value
+                      ? tc.toggleActive
+                      : cn(tc.toggleInactive, "bg-theme-surface-muted"),
                   )}
                 >
                   {m.label}
@@ -708,21 +830,24 @@ export function ColorPaletteTool() {
                   title="Pick a color"
                 />
               </div>
-              {/* Hex text input */}
+              {/* Color text input — format matches Hex / RGB / HSL selector */}
               <div className="flex-1">
                 <input
                   type="text"
                   value={inputColor}
                   onChange={(e) => handleBaseColorChange(e.target.value)}
                   disabled={!currentMode.needsBase}
-                  placeholder="#2563eb"
+                  placeholder={colorInputPlaceholder(format)}
+                  spellCheck={false}
                   className={cn(
                     tc.field,
                     "w-full px-3 py-2 text-sm font-mono placeholder:text-theme-muted disabled:opacity-40 disabled:cursor-not-allowed",
                   )}
                 />
                 {colorInputError && (
-                  <p className="text-[var(--theme-alert-error-text)] text-[11px] mt-1">{colorInputError}</p>
+                  <p className="text-[var(--theme-alert-error-text)] text-[11px] mt-1">
+                    {colorInputError}
+                  </p>
                 )}
               </div>
             </div>
@@ -735,10 +860,12 @@ export function ColorPaletteTool() {
               {(["hex", "rgb", "hsl"] as ColorFormat[]).map((f) => (
                 <button
                   key={f}
-                  onClick={() => setFormat(f)}
+                  onClick={() => handleFormatChange(f)}
                   className={cn(
                     "px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200",
-                    format === f ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                    format === f
+                      ? tc.toggleActive
+                      : cn(tc.toggleInactive, "bg-theme-surface-muted"),
                   )}
                 >
                   {f}
@@ -753,7 +880,10 @@ export function ColorPaletteTool() {
             <div className="flex gap-2">
               <button
                 onClick={() => generate()}
-                className={cn(tc.btnPrimary, "flex items-center gap-2 px-4 py-2 text-sm active:scale-95")}
+                className={cn(
+                  tc.btnPrimary,
+                  "flex items-center gap-2 px-4 py-2 text-sm active:scale-95",
+                )}
               >
                 <IconRefresh size={16} />
                 Generate
@@ -780,7 +910,10 @@ export function ColorPaletteTool() {
 
               <button
                 onClick={savePalette}
-                className={cn(tc.btnSecondary, "flex items-center gap-2 px-3 py-2 text-sm active:scale-95")}
+                className={cn(
+                  tc.btnSecondary,
+                  "flex items-center gap-2 px-3 py-2 text-sm active:scale-95",
+                )}
                 title="Save palette"
               >
                 <IconBookmark size={16} />
@@ -832,7 +965,7 @@ export function ColorPaletteTool() {
 
       {/* ── Palette Display ── */}
       <div
-        className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:rounded-2xl sm:overflow-hidden"
+        className="flex flex-col sm:flex-row gap-2 sm:gap-1 sm:rounded-2xl sm:overflow-hidden"
         style={{ minHeight: "260px" }}
       >
         {palette.map((color, i) => (
@@ -940,9 +1073,7 @@ export function ColorPaletteTool() {
                         className={`inline-flex items-center gap-1.5 font-mono`}
                       >
                         <span className="text-theme-body">{wContrast}:1</span>
-                        <span className={wcagBadgeClass(wcagW)}>
-                          {wcagW}
-                        </span>
+                        <span className={wcagBadgeClass(wcagW)}>{wcagW}</span>
                       </span>
                     </td>
                     <td className="px-4 py-3 text-xs">
@@ -951,9 +1082,7 @@ export function ColorPaletteTool() {
                         className={`inline-flex items-center gap-1.5 font-mono`}
                       >
                         <span className="text-theme-body">{bContrast}:1</span>
-                        <span className={wcagBadgeClass(wcagB)}>
-                          {wcagB}
-                        </span>
+                        <span className={wcagBadgeClass(wcagB)}>{wcagB}</span>
                       </span>
                     </td>
                   </tr>
@@ -966,21 +1095,15 @@ export function ColorPaletteTool() {
         <div className="px-5 py-3 border-t border-theme-border flex flex-wrap items-center gap-x-5 gap-y-1.5">
           <span className="text-xs text-theme-muted font-medium">Readability legend:</span>
           <span className="flex items-center gap-1.5 text-xs text-theme-muted">
-            <span className={wcagBadgeClass("Pass")}>
-              Pass
-            </span>
+            <span className={wcagBadgeClass("Pass")}>Pass</span>
             readable at any text size <span className="text-theme-body">(ratio ≥ 4.5:1)</span>
           </span>
           <span className="flex items-center gap-1.5 text-xs text-theme-muted">
-            <span className={wcagBadgeClass("Large only")}>
-              Large only
-            </span>
+            <span className={wcagBadgeClass("Large only")}>Large only</span>
             ok for headings only <span className="text-theme-body">(≥ 3:1)</span>
           </span>
           <span className="flex items-center gap-1.5 text-xs text-theme-muted">
-            <span className={wcagBadgeClass("Fail")}>
-              Fail
-            </span>
+            <span className={wcagBadgeClass("Fail")}>Fail</span>
             hard to read, avoid as text <span className="text-theme-body">(&lt; 3:1)</span>
           </span>
         </div>
@@ -1029,7 +1152,10 @@ export function ColorPaletteTool() {
                   <div className="flex gap-1.5 shrink-0">
                     <button
                       onClick={() => loadPalette(saved)}
-                      className={cn(tc.btnSecondary, "px-3 py-1.5 text-xs flex items-center gap-1.5")}
+                      className={cn(
+                        tc.btnSecondary,
+                        "px-3 py-1.5 text-xs flex items-center gap-1.5",
+                      )}
                     >
                       <IconWand size={12} />
                       Load

@@ -61,7 +61,7 @@ export default function ToolInfo({ privacyInfo, faqs }: ToolInfoProps) {
       {/* Privacy & Security */}
       <motion.div
         variants={itemVariants}
-        className="flex flex-col md:flex-row items-center justify-between gap-8 p-4 bg-brand-dark/10 border border-brand-dark/20 rounded-lg"
+        className="flex flex-col md:flex-row items-center justify-between gap-8 p-4 bg-brand-dark/10 border border-brand-dark/10 rounded-lg"
       >
         <div className="flex items-start space-x-4">
           <div className="mt-1">
@@ -76,7 +76,7 @@ export default function ToolInfo({ privacyInfo, faqs }: ToolInfoProps) {
           </div>
         </div>
         <div className="flex-shrink-0">
-          <div className="px-6 py-3 bg-brand-dark/20 text-brand-primary rounded-full text-sm font-semibold border border-brand-dark/30">
+          <div className="px-6 py-3 bg-brand-dark/10 text-brand-primary rounded-full text-sm font-semibold border border-brand-dark/10">
             Privacy Guaranteed
           </div>
         </div>

@@ -76,9 +76,9 @@ export default function FAQ({ faqs }: FAQProps) {
         variants={itemVariants}
         className="flex items-center space-x-3"
       >
-        <div className="w-10 h-10 bg-brand-dark/20 rounded-full flex items-center justify-center text-brand-primary font-bold border border-brand-primary/20">
+        {/* <div className="w-10 h-10 bg-brand-dark/20 rounded-full flex items-center justify-center text-brand-primary font-bold border border-brand-primary/20">
           ?
-        </div>
+        </div> */}
         <h2 className="text-xl font-bold text-theme-heading">Frequently Asked Questions</h2>
       </motion.div>
       <motion.div
