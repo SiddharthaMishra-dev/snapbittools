@@ -55,19 +55,35 @@ const Header: React.FC = () => {
                 aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
                 aria-expanded={isOpen}
               >
-                <IconLayoutSidebar size={20} stroke={1.75} />
+                <IconLayoutSidebar
+                  size={20}
+                  stroke={1.75}
+                />
               </button>
             )}
 
-            <Link to="/" className="flex items-center gap-2 no-underline">
-              <img src="/logo192.png" alt="SnapBit Tools" className="w-7 h-7" />
-              <span className="text-sm font-bold text-theme-heading hidden sm:inline">SnapBit Tools</span>
+            <Link
+              to="/"
+              className="flex items-center gap-2 no-underline"
+            >
+              <img
+                src="/logo192.png"
+                alt="SnapBit Tools"
+                className="w-7 h-7"
+              />
+              <span className="text-sm font-bold text-theme-heading hidden sm:inline">
+                SnapBit Tools
+              </span>
             </Link>
           </div>
 
           <div className="flex items-center gap-1 lg:gap-2">
             {navItems.map((item) => (
-              <Link key={item.path} to={item.path} className={linkCls}>
+              <Link
+                key={item.path}
+                to={item.path}
+                className={linkCls}
+              >
                 <span>{item.icon}</span>
                 <span className="hidden sm:inline">{item.label}</span>
               </Link>

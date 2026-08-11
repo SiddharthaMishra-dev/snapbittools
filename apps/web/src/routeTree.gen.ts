@@ -55,6 +55,7 @@ import { Route as WrapCompressImageTo50kbRouteImport } from './routes/_wrap.comp
 import { Route as WrapCompressImageTo200kbRouteImport } from './routes/_wrap.compress-image-to-200kb'
 import { Route as WrapCompressImageTo100kbRouteImport } from './routes/_wrap.compress-image-to-100kb'
 import { Route as WrapCompressImageOnlineRouteImport } from './routes/_wrap.compress-image-online'
+import { Route as WrapCompressImageForWebWithoutQualityLossRouteImport } from './routes/_wrap.compress-image-for-web-without-quality-loss'
 import { Route as WrapCompressImageForWebRouteImport } from './routes/_wrap.compress-image-for-web'
 import { Route as WrapColorPaletteGeneratorRouteImport } from './routes/_wrap.color-palette-generator'
 import { Route as WrapBulkFileRenamerRouteImport } from './routes/_wrap.bulk-file-renamer'
@@ -299,6 +300,12 @@ const WrapCompressImageOnlineRoute = WrapCompressImageOnlineRouteImport.update({
   path: '/compress-image-online',
   getParentRoute: () => WrapRoute,
 } as any)
+const WrapCompressImageForWebWithoutQualityLossRoute =
+  WrapCompressImageForWebWithoutQualityLossRouteImport.update({
+    id: '/compress-image-for-web-without-quality-loss',
+    path: '/compress-image-for-web-without-quality-loss',
+    getParentRoute: () => WrapRoute,
+  } as any)
 const WrapCompressImageForWebRoute = WrapCompressImageForWebRouteImport.update({
   id: '/compress-image-for-web',
   path: '/compress-image-for-web',
@@ -358,6 +365,7 @@ export interface FileRoutesByFullPath {
   '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
   '/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
   '/compress-image-for-web': typeof WrapCompressImageForWebRoute
+  '/compress-image-for-web-without-quality-loss': typeof WrapCompressImageForWebWithoutQualityLossRoute
   '/compress-image-online': typeof WrapCompressImageOnlineRoute
   '/compress-image-to-100kb': typeof WrapCompressImageTo100kbRoute
   '/compress-image-to-200kb': typeof WrapCompressImageTo200kbRoute
@@ -413,6 +421,7 @@ export interface FileRoutesByTo {
   '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
   '/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
   '/compress-image-for-web': typeof WrapCompressImageForWebRoute
+  '/compress-image-for-web-without-quality-loss': typeof WrapCompressImageForWebWithoutQualityLossRoute
   '/compress-image-online': typeof WrapCompressImageOnlineRoute
   '/compress-image-to-100kb': typeof WrapCompressImageTo100kbRoute
   '/compress-image-to-200kb': typeof WrapCompressImageTo200kbRoute
@@ -470,6 +479,7 @@ export interface FileRoutesById {
   '/_wrap/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
   '/_wrap/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
   '/_wrap/compress-image-for-web': typeof WrapCompressImageForWebRoute
+  '/_wrap/compress-image-for-web-without-quality-loss': typeof WrapCompressImageForWebWithoutQualityLossRoute
   '/_wrap/compress-image-online': typeof WrapCompressImageOnlineRoute
   '/_wrap/compress-image-to-100kb': typeof WrapCompressImageTo100kbRoute
   '/_wrap/compress-image-to-200kb': typeof WrapCompressImageTo200kbRoute
@@ -527,6 +537,7 @@ export interface FileRouteTypes {
     | '/bulk-file-renamer'
     | '/color-palette-generator'
     | '/compress-image-for-web'
+    | '/compress-image-for-web-without-quality-loss'
     | '/compress-image-online'
     | '/compress-image-to-100kb'
     | '/compress-image-to-200kb'
@@ -582,6 +593,7 @@ export interface FileRouteTypes {
     | '/bulk-file-renamer'
     | '/color-palette-generator'
     | '/compress-image-for-web'
+    | '/compress-image-for-web-without-quality-loss'
     | '/compress-image-online'
     | '/compress-image-to-100kb'
     | '/compress-image-to-200kb'
@@ -638,6 +650,7 @@ export interface FileRouteTypes {
     | '/_wrap/bulk-file-renamer'
     | '/_wrap/color-palette-generator'
     | '/_wrap/compress-image-for-web'
+    | '/_wrap/compress-image-for-web-without-quality-loss'
     | '/_wrap/compress-image-online'
     | '/_wrap/compress-image-to-100kb'
     | '/_wrap/compress-image-to-200kb'
@@ -1013,6 +1026,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapCompressImageOnlineRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/compress-image-for-web-without-quality-loss': {
+      id: '/_wrap/compress-image-for-web-without-quality-loss'
+      path: '/compress-image-for-web-without-quality-loss'
+      fullPath: '/compress-image-for-web-without-quality-loss'
+      preLoaderRoute: typeof WrapCompressImageForWebWithoutQualityLossRouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/compress-image-for-web': {
       id: '/_wrap/compress-image-for-web'
       path: '/compress-image-for-web'
@@ -1081,6 +1101,7 @@ interface WrapRouteChildren {
   WrapBulkFileRenamerRoute: typeof WrapBulkFileRenamerRoute
   WrapColorPaletteGeneratorRoute: typeof WrapColorPaletteGeneratorRoute
   WrapCompressImageForWebRoute: typeof WrapCompressImageForWebRoute
+  WrapCompressImageForWebWithoutQualityLossRoute: typeof WrapCompressImageForWebWithoutQualityLossRoute
   WrapCompressImageOnlineRoute: typeof WrapCompressImageOnlineRoute
   WrapCompressImageTo100kbRoute: typeof WrapCompressImageTo100kbRoute
   WrapCompressImageTo200kbRoute: typeof WrapCompressImageTo200kbRoute
@@ -1134,6 +1155,8 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapBulkFileRenamerRoute: WrapBulkFileRenamerRoute,
   WrapColorPaletteGeneratorRoute: WrapColorPaletteGeneratorRoute,
   WrapCompressImageForWebRoute: WrapCompressImageForWebRoute,
+  WrapCompressImageForWebWithoutQualityLossRoute:
+    WrapCompressImageForWebWithoutQualityLossRoute,
   WrapCompressImageOnlineRoute: WrapCompressImageOnlineRoute,
   WrapCompressImageTo100kbRoute: WrapCompressImageTo100kbRoute,
   WrapCompressImageTo200kbRoute: WrapCompressImageTo200kbRoute,

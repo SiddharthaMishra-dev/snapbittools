@@ -1,5 +1,14 @@
 export const blogPosts = [
   {
+    title: "How to Compress Images for Website Without Losing Quality (Step-by-Step)",
+    description:
+      "Compress image for web without quality loss — step-by-step resize, format, and quality settings with before/after examples and SnapBit’s free compressor.",
+    href: "/compress-image-for-web-without-quality-loss",
+    category: "Image Optimization",
+    publishedAt: "August 11, 2026",
+    readTime: "12 min read",
+  },
+  {
     title: "Best Image Compressor Tool 2026: SnapBit vs TinyPNG, Squoosh & More",
     description:
       "Compare the best free image compressors in 2026 — privacy, batch support, and format coverage. See why SnapBit Tools beats TinyPNG, Squoosh, and iLoveIMG.",
