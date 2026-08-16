@@ -3,7 +3,7 @@ import { jsonVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
 import PseoPage from "@/components/PseoPage";
-import * as JsonFormatterRoute from "./_wrap.json-formatter";
+import { JsonFormatterTool } from "@/components/JsonFormatterTool";
 
 const variant = jsonVariants.find((v) => v.slug === "json-pretty-print")!;
 const { faqs } = generatePageContent(variant);
@@ -24,6 +24,5 @@ export const Route = createFileRoute("/_wrap/json-pretty-print")({
 });
 
 function RouteComponent() {
-  const ParentToolComponent = JsonFormatterRoute.Route.options.component;
-  return ParentToolComponent ? <PseoPage variant={variant} toolComponent={ParentToolComponent} /> : null;
+  return <PseoPage variant={variant} toolComponent={JsonFormatterTool} />;
 }

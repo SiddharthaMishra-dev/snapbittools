@@ -3,7 +3,7 @@ import { formatConverterVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
 import PseoPage from "@/components/PseoPage";
-import * as ImageFormatConverterRoute from "./_wrap.image-format-converter";
+import { ImageConverterTool } from "@/components/ImageConverterTool";
 
 const variant = formatConverterVariants.find((v) => v.slug === "png-to-webp")!;
 const { faqs } = generatePageContent(variant);
@@ -24,6 +24,5 @@ export const Route = createFileRoute("/_wrap/png-to-webp")({
 });
 
 function RouteComponent() {
-  const ParentToolComponent = ImageFormatConverterRoute.Route.options.component;
-  return ParentToolComponent ? <PseoPage variant={variant} toolComponent={ParentToolComponent} /> : null;
+  return <PseoPage variant={variant} toolComponent={ImageConverterTool} />;
 }

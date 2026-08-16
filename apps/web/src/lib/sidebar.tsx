@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from "react";
 
-const ROUTES_WITHOUT_SIDEBAR = ["/", "/tools", "/blogs"];
+const ROUTES_WITHOUT_SIDEBAR = ["/", "/tools", "/blogs", "/privacy-policy", "/terms", "/privacy"];
 
 export function isSidebarRoute(pathname: string) {
   return !ROUTES_WITHOUT_SIDEBAR.includes(pathname);

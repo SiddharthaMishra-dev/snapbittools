@@ -13,6 +13,23 @@ export type SeoMetadata = {
   faqs?: { question: string; answer: string }[];
   breadcrumbs?: Breadcrumb[];
   schema?: Record<string, any>;
+  /** Override the canonical URL when this page should consolidate to a pillar. */
+  canonicalUrl?: string;
+};
+
+/**
+ * Near-duplicate pSEO landers. Keep the URLs live for users, but tell crawlers
+ * to treat the pillar as the indexable version until copy is unique.
+ */
+const CANONICAL_TARGETS: Record<string, string> = {
+  "/compress-image-online": "/image-compressor",
+  "/reduce-image-file-size": "/image-compressor",
+  "/reduce-jpg-size": "/compress-jpeg-online",
+  "/reduce-png-size": "/compress-png-online",
+  "/format-json-online": "/json-formatter",
+  "/json-beautifier": "/json-formatter",
+  "/json-pretty-print": "/json-formatter",
+  "/validate-json-online": "/json-validator",
 };
 
 export function getSeoMetadata(config: SeoMetadata) {
@@ -26,10 +43,13 @@ export function getSeoMetadata(config: SeoMetadata) {
     faqs,
     breadcrumbs,
     schema,
+    canonicalUrl,
   } = config;
 
   const baseUrl = "https://snapbittools.com";
   const fullUrl = url.startsWith("http") ? url : `${baseUrl}${url}`;
+  const canonicalPath = canonicalUrl ?? CANONICAL_TARGETS[url] ?? url;
+  const canonicalHref = canonicalPath.startsWith("http") ? canonicalPath : `${baseUrl}${canonicalPath}`;
 
   const meta: any[] = [
     { title: title },
@@ -122,7 +142,7 @@ export function getSeoMetadata(config: SeoMetadata) {
 
   return {
     meta,
-    links: [{ rel: "canonical", href: fullUrl }],
+    links: [{ rel: "canonical", href: canonicalHref }],
     scripts,
   };
 }

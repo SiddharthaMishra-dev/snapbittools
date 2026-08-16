@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import SiteFooter from "@/components/SiteFooter";
 import { cn } from "@/lib/utils";
 
 type PageShellProps = {
@@ -14,6 +15,7 @@ export default function PageShell({ children, className, withDotGrid = true, id 
     <div id={id} className={cn("min-h-screen flex flex-col font-sans bg-theme-page text-theme-heading relative", className)}>
       {withDotGrid && <div className="theme-dot-grid pointer-events-none fixed inset-0 z-0" aria-hidden="true" />}
       {children}
+      <SiteFooter />
     </div>
   );
 }

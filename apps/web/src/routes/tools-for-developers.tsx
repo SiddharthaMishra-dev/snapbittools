@@ -3,6 +3,7 @@ import { useCaseVariants } from "@/data/pseo-keywords";
 import { getSeoMetadata } from "@/lib/seo";
 import { generatePageContent, generateBreadcrumbs } from "@/lib/pseo-templates";
 import PseoPage from "@/components/PseoPage";
+import SiteFooter from "@/components/SiteFooter";
 import { ToolsListing } from "@/components/ToolsListing";
 
 const variant = useCaseVariants.find((v) => v.slug === "tools-for-developers")!;
@@ -24,5 +25,10 @@ export const Route = createFileRoute("/tools-for-developers")({
 });
 
 function RouteComponent() {
-  return <PseoPage variant={variant} toolComponent={ToolsListing} />;
+  return (
+    <>
+      <PseoPage variant={variant} toolComponent={ToolsListing} />
+      <SiteFooter />
+    </>
+  );
 }

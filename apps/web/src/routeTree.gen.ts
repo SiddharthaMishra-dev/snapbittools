@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ToolsForDevelopersRouteImport } from './routes/tools-for-developers'
 import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as BlogsRouteImport } from './routes/blogs'
 import { Route as WrapRouteImport } from './routes/_wrap'
 import { Route as IndexRouteImport } from './routes/index'
@@ -25,6 +28,7 @@ import { Route as WrapReduceImageFileSizeRouteImport } from './routes/_wrap.redu
 import { Route as WrapPrivacyFirstToolsRouteImport } from './routes/_wrap.privacy-first-tools'
 import { Route as WrapPngToWebpRouteImport } from './routes/_wrap.png-to-webp'
 import { Route as WrapPngToJpgRouteImport } from './routes/_wrap.png-to-jpg'
+import { Route as WrapPdfCompressorRouteImport } from './routes/_wrap.pdf-compressor'
 import { Route as WrapOptimizeImagesForWebsiteRouteImport } from './routes/_wrap.optimize-images-for-website'
 import { Route as WrapLoremIpsumGeneratorRouteImport } from './routes/_wrap.lorem-ipsum-generator'
 import { Route as WrapJsonValidatorRouteImport } from './routes/_wrap.json-validator'
@@ -73,6 +77,21 @@ const ToolsForDevelopersRoute = ToolsForDevelopersRouteImport.update({
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogsRoute = BlogsRouteImport.update({
@@ -143,6 +162,11 @@ const WrapPngToWebpRoute = WrapPngToWebpRouteImport.update({
 const WrapPngToJpgRoute = WrapPngToJpgRouteImport.update({
   id: '/png-to-jpg',
   path: '/png-to-jpg',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapPdfCompressorRoute = WrapPdfCompressorRouteImport.update({
+  id: '/pdf-compressor',
+  path: '/pdf-compressor',
   getParentRoute: () => WrapRoute,
 } as any)
 const WrapOptimizeImagesForWebsiteRoute =
@@ -355,6 +379,9 @@ const WrapBase64ToFileRoute = WrapBase64ToFileRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blogs': typeof BlogsRoute
+  '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms': typeof TermsRoute
   '/tools': typeof ToolsRoute
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/base64-to-file': typeof WrapBase64ToFileRoute
@@ -396,6 +423,7 @@ export interface FileRoutesByFullPath {
   '/json-validator': typeof WrapJsonValidatorRoute
   '/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
   '/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
+  '/pdf-compressor': typeof WrapPdfCompressorRoute
   '/png-to-jpg': typeof WrapPngToJpgRoute
   '/png-to-webp': typeof WrapPngToWebpRoute
   '/privacy-first-tools': typeof WrapPrivacyFirstToolsRoute
@@ -411,6 +439,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blogs': typeof BlogsRoute
+  '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms': typeof TermsRoute
   '/tools': typeof ToolsRoute
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/base64-to-file': typeof WrapBase64ToFileRoute
@@ -452,6 +483,7 @@ export interface FileRoutesByTo {
   '/json-validator': typeof WrapJsonValidatorRoute
   '/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
   '/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
+  '/pdf-compressor': typeof WrapPdfCompressorRoute
   '/png-to-jpg': typeof WrapPngToJpgRoute
   '/png-to-webp': typeof WrapPngToWebpRoute
   '/privacy-first-tools': typeof WrapPrivacyFirstToolsRoute
@@ -469,6 +501,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_wrap': typeof WrapRouteWithChildren
   '/blogs': typeof BlogsRoute
+  '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms': typeof TermsRoute
   '/tools': typeof ToolsRoute
   '/tools-for-developers': typeof ToolsForDevelopersRoute
   '/_wrap/base64-to-file': typeof WrapBase64ToFileRoute
@@ -510,6 +545,7 @@ export interface FileRoutesById {
   '/_wrap/json-validator': typeof WrapJsonValidatorRoute
   '/_wrap/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
   '/_wrap/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
+  '/_wrap/pdf-compressor': typeof WrapPdfCompressorRoute
   '/_wrap/png-to-jpg': typeof WrapPngToJpgRoute
   '/_wrap/png-to-webp': typeof WrapPngToWebpRoute
   '/_wrap/privacy-first-tools': typeof WrapPrivacyFirstToolsRoute
@@ -527,6 +563,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/blogs'
+    | '/privacy'
+    | '/privacy-policy'
+    | '/terms'
     | '/tools'
     | '/tools-for-developers'
     | '/base64-to-file'
@@ -568,6 +607,7 @@ export interface FileRouteTypes {
     | '/json-validator'
     | '/lorem-ipsum-generator'
     | '/optimize-images-for-website'
+    | '/pdf-compressor'
     | '/png-to-jpg'
     | '/png-to-webp'
     | '/privacy-first-tools'
@@ -583,6 +623,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/blogs'
+    | '/privacy'
+    | '/privacy-policy'
+    | '/terms'
     | '/tools'
     | '/tools-for-developers'
     | '/base64-to-file'
@@ -624,6 +667,7 @@ export interface FileRouteTypes {
     | '/json-validator'
     | '/lorem-ipsum-generator'
     | '/optimize-images-for-website'
+    | '/pdf-compressor'
     | '/png-to-jpg'
     | '/png-to-webp'
     | '/privacy-first-tools'
@@ -640,6 +684,9 @@ export interface FileRouteTypes {
     | '/'
     | '/_wrap'
     | '/blogs'
+    | '/privacy'
+    | '/privacy-policy'
+    | '/terms'
     | '/tools'
     | '/tools-for-developers'
     | '/_wrap/base64-to-file'
@@ -681,6 +728,7 @@ export interface FileRouteTypes {
     | '/_wrap/json-validator'
     | '/_wrap/lorem-ipsum-generator'
     | '/_wrap/optimize-images-for-website'
+    | '/_wrap/pdf-compressor'
     | '/_wrap/png-to-jpg'
     | '/_wrap/png-to-webp'
     | '/_wrap/privacy-first-tools'
@@ -698,6 +746,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   WrapRoute: typeof WrapRouteWithChildren
   BlogsRoute: typeof BlogsRoute
+  PrivacyRoute: typeof PrivacyRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  TermsRoute: typeof TermsRoute
   ToolsRoute: typeof ToolsRoute
   ToolsForDevelopersRoute: typeof ToolsForDevelopersRoute
 }
@@ -716,6 +767,27 @@ declare module '@tanstack/react-router' {
       path: '/tools'
       fullPath: '/tools'
       preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blogs': {
@@ -814,6 +886,13 @@ declare module '@tanstack/react-router' {
       path: '/png-to-jpg'
       fullPath: '/png-to-jpg'
       preLoaderRoute: typeof WrapPngToJpgRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/pdf-compressor': {
+      id: '/_wrap/pdf-compressor'
+      path: '/pdf-compressor'
+      fullPath: '/pdf-compressor'
+      preLoaderRoute: typeof WrapPdfCompressorRouteImport
       parentRoute: typeof WrapRoute
     }
     '/_wrap/optimize-images-for-website': {
@@ -1132,6 +1211,7 @@ interface WrapRouteChildren {
   WrapJsonValidatorRoute: typeof WrapJsonValidatorRoute
   WrapLoremIpsumGeneratorRoute: typeof WrapLoremIpsumGeneratorRoute
   WrapOptimizeImagesForWebsiteRoute: typeof WrapOptimizeImagesForWebsiteRoute
+  WrapPdfCompressorRoute: typeof WrapPdfCompressorRoute
   WrapPngToJpgRoute: typeof WrapPngToJpgRoute
   WrapPngToWebpRoute: typeof WrapPngToWebpRoute
   WrapPrivacyFirstToolsRoute: typeof WrapPrivacyFirstToolsRoute
@@ -1187,6 +1267,7 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapJsonValidatorRoute: WrapJsonValidatorRoute,
   WrapLoremIpsumGeneratorRoute: WrapLoremIpsumGeneratorRoute,
   WrapOptimizeImagesForWebsiteRoute: WrapOptimizeImagesForWebsiteRoute,
+  WrapPdfCompressorRoute: WrapPdfCompressorRoute,
   WrapPngToJpgRoute: WrapPngToJpgRoute,
   WrapPngToWebpRoute: WrapPngToWebpRoute,
   WrapPrivacyFirstToolsRoute: WrapPrivacyFirstToolsRoute,
@@ -1206,6 +1287,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   WrapRoute: WrapRouteWithChildren,
   BlogsRoute: BlogsRoute,
+  PrivacyRoute: PrivacyRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  TermsRoute: TermsRoute,
   ToolsRoute: ToolsRoute,
   ToolsForDevelopersRoute: ToolsForDevelopersRoute,
 }

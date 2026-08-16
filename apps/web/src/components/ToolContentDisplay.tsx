@@ -45,12 +45,12 @@ export default function ToolContentDisplay({
       animate="visible"
       className="w-full max-w-7xl mx-auto mt-8 mb-12 space-y-8"
     >
-      <motion.h1
+      <motion.h2
         variants={itemVariants}
         className="text-xl md:text-xl font-bold text-theme-heading leading-tight"
       >
         {title}
-      </motion.h1>
+      </motion.h2>
 
       <motion.div
         variants={itemVariants}

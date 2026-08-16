@@ -128,36 +128,41 @@ function App() {
             <IconArrowRight className="h-3 w-3 text-brand-primary" />
           </motion.a>
 
-          {/* Headline */}
-          <motion.h1
+          {/* Headline: one static H1 for crawlers/AT; cycling badges are decorative */}
+          <motion.div
             variants={itemVariants}
-            className="text-4xl md:text-4xl lg:text-4xl font-extrabold text-theme-heading leading-[1.08] tracking-tight"
+            className="relative"
           >
-            {/* animated word */}
-            <motion.span
-              animate={{ width: wordWidth ? wordWidth + widthSafetyBuffer : "auto" }}
-              transition={{ duration: 0.45, ease: easeInOut }}
-              className="inline-flex overflow-hidden text-brand-primary bg-theme-icon-bg border border-[var(--theme-pseo-accent-border)] px-3 py-1 rounded-xl mr-2 align-middle"
+            <h1 className="sr-only">Free, Private & Fast Image & Data Tools.</h1>
+            <div
+              aria-hidden="true"
+              className="text-4xl md:text-4xl lg:text-4xl font-extrabold text-theme-heading leading-[1.08] tracking-tight"
             >
-              <AnimatePresence
-                mode="wait"
-                initial={false}
+              <motion.span
+                animate={{ width: wordWidth ? wordWidth + widthSafetyBuffer : "auto" }}
+                transition={{ duration: 0.45, ease: easeInOut }}
+                className="inline-flex overflow-hidden text-brand-primary bg-theme-icon-bg border border-[var(--theme-pseo-accent-border)] px-3 py-1 rounded-xl mr-2 align-middle"
               >
-                <motion.span
-                  key={rotatingWords[active]}
-                  initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -6, filter: "blur(3px)" }}
-                  transition={{ duration: 0.45, ease: easeInOut }}
-                  className="inline-block whitespace-nowrap"
+                <AnimatePresence
+                  mode="wait"
+                  initial={false}
                 >
-                  {rotatingWords[active]}
-                </motion.span>
-              </AnimatePresence>
-            </motion.span>
-            {/* hidden measurement spans */}
+                  <motion.span
+                    key={rotatingWords[active]}
+                    initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -6, filter: "blur(3px)" }}
+                    transition={{ duration: 0.45, ease: easeInOut }}
+                    className="inline-block whitespace-nowrap"
+                  >
+                    {rotatingWords[active]}
+                  </motion.span>
+                </AnimatePresence>
+              </motion.span>
+              Image &amp; Data Tools.
+            </div>
             <span
-              className="pointer-events-none absolute -z-10 opacity-0"
+              className="pointer-events-none absolute -z-10 opacity-0 font-extrabold"
               aria-hidden="true"
             >
               {rotatingWords.map((word, idx) => (
@@ -172,8 +177,7 @@ function App() {
                 </span>
               ))}
             </span>
-            Image &amp; Data Tools.
-          </motion.h1>
+          </motion.div>
 
           {/* Subheadline */}
           <motion.p
@@ -414,32 +418,6 @@ function App() {
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="pb-8 px-4 relative z-10 bg-theme-page border-t border-theme-border">
-        <div className="max-w-4xl mx-auto text-center pt-8">
-          <p className="text-theme-muted text-xs">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors"
-            >
-              sidme
-            </a>{" "}
-            •{" "}
-            <a
-              href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors"
-            >
-              Open Source on GitHub
-            </a>
-          </p>
-        </div>
-      </footer>
     </PageShell>
   );
 }

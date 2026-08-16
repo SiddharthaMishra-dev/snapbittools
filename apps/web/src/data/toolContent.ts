@@ -228,6 +228,35 @@ Whether you're a developer optimizing front-end assets, a content creator prepar
     ],
   },
 
+  "pdf-compressor": {
+    slug: "pdf-compressor",
+    title: "Free PDF Compressor - Compress PDF Online Without Uploading",
+    intro: `Compress PDF files free in your browser with SnapBit’s private PDF Compressor. Shrink image-heavy documents, scans, and exports without uploading to a server — choose quality and DPI, then download a smaller PDF in seconds.
+
+Large PDFs clog email inboxes, slow downloads, and hit upload limits on forms and CRMs. Most online compressors require uploading sensitive documents to remote servers. SnapBit processes pages locally: each page is rendered at your chosen resolution, re-encoded as JPEG, and rebuilt into a new PDF. You stay in control of the size/quality tradeoff with Strong, Balanced, and High quality presets.
+
+This client-side approach is ideal for privacy-sensitive files — contracts, IDs, medical scans, and internal reports — while still delivering meaningful size reductions for photograph- and scan-heavy PDFs. If a file is already optimized, the tool keeps the original instead of giving you a larger download.
+
+Use it alongside Image to PDF and Image Compressor when building document workflows entirely on-device. Enhanced server compression (optional, consent-based) is planned for cases that need Distiller-level optimization while keeping private mode as the default.`,
+    benefits: [
+      "Compress PDFs entirely in the browser — no uploads",
+      "Strong, Balanced, and High quality presets",
+      "Custom JPEG quality and DPI controls",
+      "Page-by-page progress for multi-page files",
+      "Keeps the original when compression doesn’t help",
+      "Free, no account required",
+      "Designed for privacy-first document workflows",
+    ],
+    useCases: [
+      "Shrinking scanned documents for email",
+      "Meeting upload size limits on job or visa portals",
+      "Reducing image-heavy PDF exports before sharing",
+      "Compressing receipts and invoices for accounting",
+      "Preparing lighter slide or report PDFs for mobile",
+      "Private compression of sensitive paperwork",
+    ],
+  },
+
   "image-to-pdf": {
     slug: "image-to-pdf",
     title: "Image to PDF Converter - Merge Images into PDF Documents",

@@ -124,6 +124,22 @@ export const tools: ToolDefinition[] = [
     keywords: ["pdf", "merge", "images to pdf", "offline"],
   },
   {
+    slug: "pdf-compressor",
+    name: "PDF Compressor",
+    href: "/pdf-compressor",
+    description: "Shrink PDF size in your browser. Private, no upload required.",
+    icon: IconFileTypePdf,
+    category: "Images",
+    keywords: [
+      "compress pdf",
+      "pdf compressor",
+      "reduce pdf size",
+      "shrink pdf",
+      "pdf optimizer",
+    ],
+    isNew: true,
+  },
+  {
     slug: "bulk-file-renamer",
     name: "Bulk File Renamer",
     href: "/bulk-file-renamer",
