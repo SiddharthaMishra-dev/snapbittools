@@ -432,20 +432,6 @@ function RouteComponent() {
           currentToolSlug="json-to-csv"
           category="Data"
         />
-
-        <footer className="mt-8 text-center">
-          <p className="text-theme-muted text-xs">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors"
-            >
-              sidme
-            </a>
-          </p>
-        </footer>
       </div>
     </div>
   );

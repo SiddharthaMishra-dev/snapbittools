@@ -296,10 +296,10 @@ function App() {
                   to={tool.href}
                   className="group relative flex items-start gap-4 p-5 rounded-xl border border-theme-border bg-theme-card hover:border-brand-primary/40 hover:shadow-md hover:shadow-blue-50 transition-all duration-200 no-underline"
                 >
-                  <div className="w-11 h-11 rounded-lg bg-theme-icon-bg flex items-center justify-center shrink-0 group-hover:bg-theme-icon-bg-hover transition-colors">
+                  <div className="w-11 h-11 rounded-lg bg-linear-to-b from-brand-primary to-brand-hover  ring-2 ring-brand-primary/80 shadow-lg flex items-center justify-center shrink-0 group-hover:bg-brand-hover transition-colors">
                     <Icon
-                      className="text-brand-primary"
-                      size={22}
+                      className="text-white"
+                      size={24}
                     />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -334,17 +334,17 @@ function App() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <LightFeatureCard
-              icon={<IconLock className="text-brand-primary w-5 h-5" />}
+              icon={<IconLock className="text-white w-5 h-5" />}
               title="Complete Privacy"
               description="Your files never leave your device. Everything runs 100% in the browser — no servers, no tracking."
             />
             <LightFeatureCard
-              icon={<IconBolt className="text-brand-primary w-5 h-5" />}
+              icon={<IconBolt className="text-white w-5 h-5" />}
               title="Instant Performance"
               description="No upload queues or server wait times. Processing starts the moment you drop a file."
             />
             <LightFeatureCard
-              icon={<IconBrandGithub className="text-brand-primary w-5 h-5" />}
+              icon={<IconBrandGithub className="text-white w-5 h-5" />}
               title="Free & Open Source"
               description="Every tool is free forever. The entire codebase is open source on GitHub."
             />
@@ -433,7 +433,7 @@ function LightFeatureCard({
 }) {
   return (
     <div className="flex flex-col gap-3 p-6 rounded-xl border border-theme-border bg-theme-card hover:border-brand-primary/30 hover:shadow-sm transition-all">
-      <div className="w-9 h-9 rounded-lg bg-theme-icon-bg flex items-center justify-center">
+      <div className="w-9 h-9 rounded-lg bg-linear-to-b from-red-500 to-red-600 flex items-center justify-center shadow-lg ring-2 ring-red-500/80">
         {icon}
       </div>
       <div>

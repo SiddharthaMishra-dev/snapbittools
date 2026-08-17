@@ -37,7 +37,13 @@ export const Route = createFileRoute("/_wrap/image-resizer")({
       title: "Image Resizer - Resize Images Online with Aspect Ratio Lock",
       description:
         "Resize images online while maintaining aspect ratio. Upload, set width, and download resized images instantly. 100% private and browser-based.",
-      keywords: ["image resizer", "resize image online", "maintain aspect ratio", "photo resizer", "resize image without distortion"],
+      keywords: [
+        "image resizer",
+        "resize image online",
+        "maintain aspect ratio",
+        "photo resizer",
+        "resize image without distortion",
+      ],
       url: "/image-resizer",
       type: "software",
       faqs,
@@ -55,7 +61,8 @@ export function RouteComponent() {
             Image <span className="text-brand-primary">Resizer</span>
           </h1>
           <p className="text-md text-theme-body">
-            Upload an image, choose width, and resize instantly with automatic aspect ratio lock. Private, fast, and fully browser-based.
+            Upload an image, choose width, and resize instantly with automatic aspect ratio lock.
+            Private, fast, and fully browser-based.
           </p>
         </div>
 
@@ -74,17 +81,20 @@ export function RouteComponent() {
           features={[
             {
               title: "Aspect Ratio Lock",
-              description: "Resize by width and let height update automatically so your image keeps perfect proportions.",
+              description:
+                "Resize by width and let height update automatically so your image keeps perfect proportions.",
               icon: IconAspectRatio,
             },
             {
               title: "Pixel-Level Control",
-              description: "Set exact output dimensions for web banners, social posts, thumbnails, and app assets.",
+              description:
+                "Set exact output dimensions for web banners, social posts, thumbnails, and app assets.",
               icon: IconArrowsMaximize,
             },
             {
               title: "Privacy First",
-              description: "Your images never leave your device. Everything runs client-side in your browser.",
+              description:
+                "Your images never leave your device. Everything runs client-side in your browser.",
               icon: IconLock,
             },
           ]}
@@ -99,7 +109,8 @@ export function RouteComponent() {
             },
             {
               title: "Resize Instantly",
-              description: "Click resize and the tool generates a new image with the same aspect ratio.",
+              description:
+                "Click resize and the tool generates a new image with the same aspect ratio.",
             },
             {
               title: "Download",
@@ -110,21 +121,10 @@ export function RouteComponent() {
         />
       </div>
 
-      <RelatedTools currentToolSlug="image-resizer" category="Images" />
-
-      <div className="mt-8">
-        <p className="text-theme-muted text-xs text-center">
-          Crafted with care by{" "}
-          <a
-            href="https://sidme.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-primary hover:text-brand-hover transition-colors"
-          >
-            sidme
-          </a>
-        </p>
-      </div>
+      <RelatedTools
+        currentToolSlug="image-resizer"
+        category="Images"
+      />
     </div>
   );
 }

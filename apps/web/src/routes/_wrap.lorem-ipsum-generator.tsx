@@ -1,6 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useMemo, useCallback } from "react";
-import { IconTypography, IconCopy, IconTrash, IconCheck, IconRefresh, IconBolt, IconLock, IconSearch } from "@tabler/icons-react";
+import {
+  IconTypography,
+  IconCopy,
+  IconTrash,
+  IconCheck,
+  IconRefresh,
+  IconBolt,
+  IconLock,
+  IconSearch,
+} from "@tabler/icons-react";
 
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
@@ -9,7 +18,6 @@ import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
-import Breadcrumbs from "@/components/Breadcrumbs";
 
 const LOREM_WORDS = [
   "lorem",
@@ -96,7 +104,8 @@ const faqs = [
   },
   {
     question: "Is my data private when using this tool?",
-    answer: "Absolutely. As with all SnapBit Tools, the generation happens entirely in your browser. No data is sent to any server.",
+    answer:
+      "Absolutely. As with all SnapBit Tools, the generation happens entirely in your browser. No data is sent to any server.",
   },
   {
     question: "Does it support paragraph formatting?",
@@ -111,7 +120,13 @@ export const Route = createFileRoute("/_wrap/lorem-ipsum-generator")({
       title: "Lorem Ipsum Generator | Random Placeholder Text | SnapBit Tools",
       description:
         "Generate custom Lorem Ipsum placeholder text for your designs and layouts. Choose paragraphs, words, or sentences. 100% private and fast.",
-      keywords: ["lorem ipsum generator", "placeholder text", "dummy text", "random text", "developer tools"],
+      keywords: [
+        "lorem ipsum generator",
+        "placeholder text",
+        "dummy text",
+        "random text",
+        "developer tools",
+      ],
       url: "/lorem-ipsum-generator",
       type: "software",
       faqs,
@@ -191,7 +206,9 @@ function LoremIpsumComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Lorem <span className="text-brand-primary">Ipsum</span> Generator
           </h1>
-          <p className="text-md text-theme-body">Instant placeholder text for your next big project.</p>
+          <p className="text-md text-theme-body">
+            Instant placeholder text for your next big project.
+          </p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
@@ -199,7 +216,9 @@ function LoremIpsumComponent() {
             <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex flex-col">
-                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Quantity</label>
+                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">
+                    Quantity
+                  </label>
                   <input
                     type="number"
                     min="1"
@@ -211,7 +230,9 @@ function LoremIpsumComponent() {
                 </div>
 
                 <div className="flex flex-col">
-                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Type</label>
+                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">
+                    Type
+                  </label>
                   <div className="flex p-1 bg-theme-surface rounded-lg">
                     {(["paragraphs", "sentences", "words"] as const).map((t) => (
                       <button
@@ -275,7 +296,10 @@ function LoremIpsumComponent() {
             {generatedText ? (
               <div className="max-w-none">
                 {generatedText.split("\n\n").map((para, i) => (
-                  <p key={i} className="text-theme-body text-xl leading-relaxed mb-6 last:mb-0">
+                  <p
+                    key={i}
+                    className="text-theme-body text-xl leading-relaxed mb-6 last:mb-0"
+                  >
                     {para}
                   </p>
                 ))}
@@ -300,17 +324,20 @@ function LoremIpsumComponent() {
             features={[
               {
                 title: "Custom Sizes",
-                description: "Generate exactly as much text as you need, from a single word to 100 paragraphs.",
+                description:
+                  "Generate exactly as much text as you need, from a single word to 100 paragraphs.",
                 icon: IconBolt,
               },
               {
                 title: "Smart Formatting",
-                description: "Sentences are properly capitalized and punctuated, and paragraphs are spaced correctly.",
+                description:
+                  "Sentences are properly capitalized and punctuated, and paragraphs are spaced correctly.",
                 icon: IconSearch,
               },
               {
                 title: "Privacy First",
-                description: "The generation logic runs entirely in your browser. No cookies, no tracking, no server calls.",
+                description:
+                  "The generation logic runs entirely in your browser. No cookies, no tracking, no server calls.",
                 icon: IconLock,
               },
             ]}
@@ -325,31 +352,23 @@ function LoremIpsumComponent() {
               },
               {
                 title: "Copy & Use",
-                description: "Preview the text and use the Copy All button to take it to your project.",
+                description:
+                  "Preview the text and use the Copy All button to take it to your project.",
               },
               {
                 title: "Regenerate",
-                description: "Want something different? Click regenerate to create a new set of random words.",
+                description:
+                  "Want something different? Click regenerate to create a new set of random words.",
               },
             ]}
             faqs={faqs}
           />
         </div>
 
-        <RelatedTools currentToolSlug="lorem-ipsum-generator" category="Data" />
-        <footer className="mt-12 text-center">
-          <p className="text-theme-muted text-xs">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors font-medium"
-            >
-              sidme
-            </a>
-          </p>
-        </footer>
+        <RelatedTools
+          currentToolSlug="lorem-ipsum-generator"
+          category="Data"
+        />
       </div>
     </div>
   );

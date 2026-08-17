@@ -1,5 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { IconArrowsSort, IconCloudUpload, IconFileTypePdf, IconLock, IconTrash, IconX } from "@tabler/icons-react";
+import {
+  IconArrowsSort,
+  IconCloudUpload,
+  IconFileTypePdf,
+  IconLock,
+  IconTrash,
+  IconX,
+} from "@tabler/icons-react";
 import { jsPDF } from "jspdf";
 import { Reorder } from "motion/react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -49,7 +56,13 @@ export const Route = createFileRoute("/_wrap/image-to-pdf")({
       title: "Image to PDF Converter | Merge Images into PDF | SnapBit Tools",
       description:
         "Combine multiple JPG, PNG, and WebP images into a single PDF document. Rearrange pages, 100% private and works in your browser.",
-      keywords: ["image to pdf", "merge images", "convert png to pdf", "jpg to pdf converter", "offline pdf tools"],
+      keywords: [
+        "image to pdf",
+        "merge images",
+        "convert png to pdf",
+        "jpg to pdf converter",
+        "offline pdf tools",
+      ],
       url: "/image-to-pdf",
       type: "software",
       faqs,
@@ -57,7 +70,9 @@ export const Route = createFileRoute("/_wrap/image-to-pdf")({
   component: RouteComponent,
 });
 
-const processImageForPdf = async (file: ImageItem): Promise<{ dataUrl: string; width: number; height: number; format: string }> => {
+const processImageForPdf = async (
+  file: ImageItem,
+): Promise<{ dataUrl: string; width: number; height: number; format: string }> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
@@ -220,7 +235,9 @@ function RouteComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Image to <span className="text-brand-primary">PDF</span>
           </h1>
-          <p className="text-md text-theme-body">Convert images to PDF instantly. Reorder, resize & compress. 100% private—no uploads.</p>
+          <p className="text-md text-theme-body">
+            Convert images to PDF instantly. Reorder, resize & compress. 100% private—no uploads.
+          </p>
         </div>
 
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -238,19 +255,36 @@ function RouteComponent() {
               )}
             >
               <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")} />
+                <IconCloudUpload
+                  className={cn(
+                    "w-16 h-16 transition-colors",
+                    isDragging ? "text-brand-primary" : "text-theme-muted",
+                  )}
+                />
                 <div>
-                  <p className="text-xl font-medium text-theme-heading mb-2">{isDragging ? "Drop images here" : "Drag & drop images here"}</p>
+                  <p className="text-xl font-medium text-theme-heading mb-2">
+                    {isDragging ? "Drop images here" : "Drag & drop images here"}
+                  </p>
                   <p className="text-theme-muted mb-4 text-sm">Supports JPG, PNG, WebP, etc.</p>
                   <button
                     onClick={() => uploadRef.current?.click()}
-                    className={cn(tc.btnPrimary, "px-6 py-2.5 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5")}
+                    className={cn(
+                      tc.btnPrimary,
+                      "px-6 py-2.5 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5",
+                    )}
                   >
                     Select Images
                   </button>
                 </div>
               </div>
-              <input type="file" multiple accept="image/*" ref={uploadRef} className="hidden" onChange={handleFileChange} />
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                ref={uploadRef}
+                className="hidden"
+                onChange={handleFileChange}
+              />
             </div>
 
             {/* Controls & List */}
@@ -287,8 +321,15 @@ function RouteComponent() {
                 </div>
 
                 <div className="bg-theme-surface/30 rounded-xl p-4 border border-theme-border">
-                  <p className="text-theme-muted text-xs mb-3 text-center uppercase tracking-wider font-semibold">Drag to Reorder Pages</p>
-                  <Reorder.Group axis="y" values={files} onReorder={setFiles} className="space-y-2">
+                  <p className="text-theme-muted text-xs mb-3 text-center uppercase tracking-wider font-semibold">
+                    Drag to Reorder Pages
+                  </p>
+                  <Reorder.Group
+                    axis="y"
+                    values={files}
+                    onReorder={setFiles}
+                    className="space-y-2"
+                  >
                     {files.map((file) => (
                       <Reorder.Item
                         key={file.id}
@@ -302,12 +343,20 @@ function RouteComponent() {
                         </div>
 
                         <div className="w-12 h-12 bg-theme-surface rounded overflow-hidden flex-shrink-0 border border-theme-border">
-                          <img src={file.preview} alt="" className="w-full h-full object-cover" />
+                          <img
+                            src={file.preview}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
                         </div>
 
                         <div className="flex-1 min-w-0">
-                          <p className="text-theme-heading text-sm font-medium truncate">{file.name}</p>
-                          <p className="text-theme-muted text-xs text-nowrap mt-0.5">{(file.file.size / 1024).toFixed(1)} KB</p>
+                          <p className="text-theme-heading text-sm font-medium truncate">
+                            {file.name}
+                          </p>
+                          <p className="text-theme-muted text-xs text-nowrap mt-0.5">
+                            {(file.file.size / 1024).toFixed(1)} KB
+                          </p>
                         </div>
 
                         <button
@@ -338,17 +387,20 @@ function RouteComponent() {
           features={[
             {
               title: "Custom Page Order",
-              description: "Intuitive drag-and-drop interface lets you rearrange pages to your exact specifications.",
+              description:
+                "Intuitive drag-and-drop interface lets you rearrange pages to your exact specifications.",
               icon: IconArrowsSort,
             },
             {
               title: "Universal Format",
-              description: "Generates standard PDF files compatible with all devices and operating systems.",
+              description:
+                "Generates standard PDF files compatible with all devices and operating systems.",
               icon: IconFileTypePdf,
             },
             {
               title: "Secure & Private",
-              description: "The entire PDF generation process happens in your browser. No files are uploaded to any server.",
+              description:
+                "The entire PDF generation process happens in your browser. No files are uploaded to any server.",
               icon: IconLock,
             },
           ]}
@@ -359,35 +411,27 @@ function RouteComponent() {
             },
             {
               title: "Arrange Order",
-              description: "Drag the thumbnails to change the order in which they appear in the final PDF.",
+              description:
+                "Drag the thumbnails to change the order in which they appear in the final PDF.",
             },
             {
               title: "Convert Process",
-              description: 'Click "Convert to PDF" to start the local generation process. It takes only seconds.',
+              description:
+                'Click "Convert to PDF" to start the local generation process. It takes only seconds.',
             },
             {
               title: "Save PDF",
-              description: "Your browser will automatically prompt you to save the newly created PDF document.",
+              description:
+                "Your browser will automatically prompt you to save the newly created PDF document.",
             },
           ]}
           faqs={faqs}
         />
 
-        <RelatedTools currentToolSlug="image-to-pdf" category="Images" />
-
-        <div className="mt-8 text-center">
-          <p className="text-theme-muted text-xs">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors"
-            >
-              sidme
-            </a>
-          </p>
-        </div>
+        <RelatedTools
+          currentToolSlug="image-to-pdf"
+          category="Images"
+        />
       </div>
     </div>
   );

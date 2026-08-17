@@ -84,7 +84,8 @@ export function RouteComponent() {
             Color <span className="text-brand-primary">Palette</span> Generator
           </h1>
           <p className="text-md text-theme-body">
-            Generate harmonious color palettes using color theory. Random, shades, brand & more. Export as CSS, JSON, or Tailwind.
+            Generate harmonious color palettes using color theory. Random, shades, brand & more.
+            Export as CSS, JSON, or Tailwind.
           </p>
         </div>
 
@@ -151,21 +152,10 @@ export function RouteComponent() {
           faqs={faqs}
         />
 
-        <RelatedTools currentToolSlug="color-palette-generator" category="Images" />
-
-        <div className="mt-8">
-          <p className="text-theme-muted text-xs text-center">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors"
-            >
-              sidme
-            </a>
-          </p>
-        </div>
+        <RelatedTools
+          currentToolSlug="color-palette-generator"
+          category="Images"
+        />
       </div>
     </div>
   );

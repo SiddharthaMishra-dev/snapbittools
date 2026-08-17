@@ -1,8 +1,4 @@
-import {
-  IconEraser,
-  IconLock,
-  IconSparkles,
-} from "@tabler/icons-react";
+import { IconEraser, IconLock, IconSparkles } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { ImageBackgroundRemovalTool } from "@/components/ImageBackgroundRemovalTool";
@@ -139,21 +135,10 @@ function RouteComponent() {
         />
       </div>
 
-      <RelatedTools currentToolSlug="image-background-remover" category="Images" />
-
-      <div className="mt-8">
-        <p className="text-theme-muted text-xs text-center">
-          Crafted with care by{" "}
-          <a
-            href="https://sidme.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-primary hover:text-brand-hover transition-colors"
-          >
-            sidme
-          </a>
-        </p>
-      </div>
+      <RelatedTools
+        currentToolSlug="image-background-remover"
+        category="Images"
+      />
     </div>
   );
 }

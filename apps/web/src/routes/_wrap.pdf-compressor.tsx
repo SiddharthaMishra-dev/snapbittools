@@ -1,8 +1,4 @@
-import {
-  IconFileTypePdf,
-  IconLock,
-  IconArrowsMinimize,
-} from "@tabler/icons-react";
+import { IconFileTypePdf, IconLock, IconArrowsMinimize } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PdfCompressorTool } from "@/components/PdfCompressorTool";
@@ -133,21 +129,10 @@ function RouteComponent() {
         />
       </div>
 
-      <RelatedTools currentToolSlug="pdf-compressor" category="Images" />
-
-      <div className="mt-8">
-        <p className="text-theme-muted text-xs text-center">
-          Crafted with care by{" "}
-          <a
-            href="https://sidme.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-primary hover:text-brand-hover transition-colors"
-          >
-            sidme
-          </a>
-        </p>
-      </div>
+      <RelatedTools
+        currentToolSlug="pdf-compressor"
+        category="Images"
+      />
     </div>
   );
 }

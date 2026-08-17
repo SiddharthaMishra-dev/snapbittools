@@ -16,7 +16,11 @@ export function ToolsListing() {
     <main className="flex-1 px-4 pb-16 relative z-10 bg-theme-page">
       <div className="max-w-7xl mx-auto space-y-12">
         {Object.entries(toolsByCategory).map(([category, categoryTools]) => (
-          <section key={category} id={category.toLowerCase()} className="space-y-4">
+          <section
+            key={category}
+            id={category.toLowerCase()}
+            className="space-y-4"
+          >
             <div className="flex items-center justify-between gap-3 flex-wrap mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-theme-heading">{category} tools</h2>
@@ -43,8 +47,11 @@ export function ToolsListing() {
                     to={tool.href}
                     className="group relative flex items-start gap-4 p-5 rounded-xl border border-theme-border bg-theme-card hover:border-brand-primary/40 hover:shadow-md transition-all duration-200 no-underline theme-card-hover"
                   >
-                    <div className="w-11 h-11 rounded-lg bg-theme-icon-bg flex items-center justify-center shrink-0 group-hover:bg-theme-icon-bg-hover transition-colors">
-                      <Icon className="text-brand-primary" size={22} />
+                    <div className="w-11 h-11 rounded-lg bg-linear-to-b from-brand-primary to-brand-hover  ring-2 ring-brand-primary/80 shadow-lg flex items-center justify-center shrink-0 group-hover:bg-brand-hover transition-colors">
+                      <Icon
+                        className="text-white"
+                        size={24}
+                      />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">

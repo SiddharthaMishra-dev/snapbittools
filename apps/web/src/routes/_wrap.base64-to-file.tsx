@@ -481,20 +481,6 @@ function RouteComponent() {
         currentToolSlug="base64-to-file"
         category="Data"
       />
-
-      <div className="mt-8 text-center">
-        <p className="text-theme-muted text-xs text-center">
-          Crafted with care by{" "}
-          <a
-            href="https://sidme.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-primary hover:text-brand-hover transition-colors"
-          >
-            sidme
-          </a>
-        </p>
-      </div>
     </div>
   );
 }

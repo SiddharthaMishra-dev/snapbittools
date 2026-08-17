@@ -51,7 +51,13 @@ export const Route = createFileRoute("/_wrap/word-counter")({
       title: "Word Counter Online | Character Count & Reading Time | SnapBit Tools",
       description:
         "Count words, characters, and sentences in real-time. Estimate reading time and analyze text density. 100% private and client-side.",
-      keywords: ["word counter", "character count", "reading time calculator", "text analyzer", "offline word count"],
+      keywords: [
+        "word counter",
+        "character count",
+        "reading time calculator",
+        "text analyzer",
+        "offline word count",
+      ],
       url: "/word-counter",
       type: "software",
       faqs,
@@ -69,7 +75,9 @@ function WordCounterComponent() {
     const charactersTotal = text.length;
     const charactersNoSpaces = text.replace(/\s/g, "").length;
     const sentences = trimmedText ? (text.match(/[.!?]+($|\s)/g) || []).length : 0;
-    const paragraphs = trimmedText ? text.split(/\n\s*\n/).filter((p) => p.trim().length > 0).length : 0;
+    const paragraphs = trimmedText
+      ? text.split(/\n\s*\n/).filter((p) => p.trim().length > 0).length
+      : 0;
 
     const readingTime = Math.ceil(words / 200);
 
@@ -124,7 +132,9 @@ function WordCounterComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Word <span className="text-brand-primary">Counter</span>
           </h1>
-          <p className="text-md text-theme-body">Analyze your text instantly. Count words, characters, sentences and more.</p>
+          <p className="text-md text-theme-body">
+            Analyze your text instantly. Count words, characters, sentences and more.
+          </p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
@@ -200,7 +210,10 @@ function WordCounterComponent() {
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Start typing or paste your content here..."
-                  className={cn(tc.field, "w-full flex-grow min-h-[400px] p-4 resize-none font-sans text-lg leading-relaxed")}
+                  className={cn(
+                    tc.field,
+                    "w-full flex-grow min-h-[400px] p-4 resize-none font-sans text-lg leading-relaxed",
+                  )}
                   spellCheck={true}
                 />
               </div>
@@ -214,13 +227,37 @@ function WordCounterComponent() {
                 </h3>
 
                 <div className="space-y-4">
-                  <StatItem label="Words" value={stats.words} icon={<IconTypography className="w-4 h-4" />} />
-                  <StatItem label="Characters" value={stats.charactersTotal} icon={<IconLetterCase className="w-4 h-4" />} />
-                  <StatItem label="Excl. Spaces" value={stats.charactersNoSpaces} icon={<IconLetterCase className="w-4 h-4" />} />
-                  <StatItem label="Sentences" value={stats.sentences} icon={<IconFileText className="w-4 h-4" />} />
-                  <StatItem label="Paragraphs" value={stats.paragraphs} icon={<IconFileText className="w-4 h-4" />} />
+                  <StatItem
+                    label="Words"
+                    value={stats.words}
+                    icon={<IconTypography className="w-4 h-4" />}
+                  />
+                  <StatItem
+                    label="Characters"
+                    value={stats.charactersTotal}
+                    icon={<IconLetterCase className="w-4 h-4" />}
+                  />
+                  <StatItem
+                    label="Excl. Spaces"
+                    value={stats.charactersNoSpaces}
+                    icon={<IconLetterCase className="w-4 h-4" />}
+                  />
+                  <StatItem
+                    label="Sentences"
+                    value={stats.sentences}
+                    icon={<IconFileText className="w-4 h-4" />}
+                  />
+                  <StatItem
+                    label="Paragraphs"
+                    value={stats.paragraphs}
+                    icon={<IconFileText className="w-4 h-4" />}
+                  />
                   <div className="pt-4 border-t border-theme-border mt-4">
-                    <StatItem label="Reading Time" value={`${stats.readingTime} min`} icon={<IconClock className="w-4 h-4" />} />
+                    <StatItem
+                      label="Reading Time"
+                      value={`${stats.readingTime} min`}
+                      icon={<IconClock className="w-4 h-4" />}
+                    />
                   </div>
                 </div>
               </div>
@@ -246,63 +283,67 @@ function WordCounterComponent() {
             features={[
               {
                 title: "Real-time Metrics",
-                description: "Counts update instantly as you type, providing immediate feedback on word and character counts.",
+                description:
+                  "Counts update instantly as you type, providing immediate feedback on word and character counts.",
                 icon: IconHash,
               },
               {
                 title: "Text Transformations",
-                description: "Quickly convert your entire text to UPPERCASE, lowercase, or Title Case with a single click.",
+                description:
+                  "Quickly convert your entire text to UPPERCASE, lowercase, or Title Case with a single click.",
                 icon: IconLetterCase,
               },
               {
                 title: "Reading Time Estimate",
-                description: "Plan your content length based on average reading speeds to better engage your audience.",
+                description:
+                  "Plan your content length based on average reading speeds to better engage your audience.",
                 icon: IconClock,
               },
             ]}
             steps={[
               {
                 title: "Enter Your Text",
-                description: "Type directly into the editor or paste content from your favorite writing application.",
+                description:
+                  "Type directly into the editor or paste content from your favorite writing application.",
               },
               {
                 title: "Monitor Stats",
-                description: "Watch the sidebar for real-time updates on words, sentences, and character counts.",
+                description:
+                  "Watch the sidebar for real-time updates on words, sentences, and character counts.",
               },
               {
                 title: "Format & Edit",
-                description: "Use the toolbar to transform text case or clear the editor for a fresh start.",
+                description:
+                  "Use the toolbar to transform text case or clear the editor for a fresh start.",
               },
               {
                 title: "Copy Content",
-                description: "Use the Copy button to take your analyzed or transformed text back to your project.",
+                description:
+                  "Use the Copy button to take your analyzed or transformed text back to your project.",
               },
             ]}
             faqs={faqs}
           />
         </div>
 
-        <RelatedTools currentToolSlug="word-counter" category="Data" />
-
-        <footer className="mt-12 text-center">
-          <p className="text-theme-muted text-xs">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors font-medium"
-            >
-              sidme
-            </a>
-          </p>
-        </footer>
+        <RelatedTools
+          currentToolSlug="word-counter"
+          category="Data"
+        />
       </div>
     </div>
   );
 }
 
-function StatItem({ label, value, icon }: { label: string; value: string | number; icon: React.ReactNode }) {
+function StatItem({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: string | number;
+  icon: React.ReactNode;
+}) {
   return (
     <div className="flex items-center justify-between group">
       <div className="flex items-center gap-2 text-theme-muted group-hover:text-theme-heading transition-colors">

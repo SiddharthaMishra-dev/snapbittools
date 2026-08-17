@@ -75,8 +75,8 @@ export function RouteComponent() {
             Compress <span className="text-brand-primary">Images</span>
           </h1>
           <p className="text-md text-theme-body">
-            Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while preserving quality. 100% client-side—your
-            files never leave.
+            Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while
+            preserving quality. 100% client-side—your files never leave.
           </p>
         </div>
 
@@ -95,57 +95,53 @@ export function RouteComponent() {
           features={[
             {
               title: "Quality Control",
-              description: "Fine-tune the compression level to find the perfect balance between file size and image clarity.",
+              description:
+                "Fine-tune the compression level to find the perfect balance between file size and image clarity.",
               icon: IconBolt,
             },
             {
               title: "Privacy Guaranteed",
-              description: "Processing happens entirely in your browser. No images are ever uploaded to a server.",
+              description:
+                "Processing happens entirely in your browser. No images are ever uploaded to a server.",
               icon: IconLock,
             },
             {
               title: "Bulk Compression",
-              description: "Compress dozens of images simultaneously and download them all at once in a ZIP file.",
+              description:
+                "Compress dozens of images simultaneously and download them all at once in a ZIP file.",
               icon: IconArrowsMinimize,
             },
           ]}
           steps={[
             {
               title: "Add Images",
-              description: "Drop your images into the compression zone or use the file picker to select them.",
+              description:
+                "Drop your images into the compression zone or use the file picker to select them.",
             },
             {
               title: "Adjust Settings",
-              description: "Set your desired quality and maximum dimensions to optimize your images further.",
+              description:
+                "Set your desired quality and maximum dimensions to optimize your images further.",
             },
             {
               title: "Review Savings",
-              description: "Instantly see how much space you have saved for each image after compression.",
+              description:
+                "Instantly see how much space you have saved for each image after compression.",
             },
             {
               title: "Download All",
-              description: "Download individual optimized images or grab the entire batch as a ZIP archive.",
+              description:
+                "Download individual optimized images or grab the entire batch as a ZIP archive.",
             },
           ]}
           faqs={faqs}
         />
       </div>
 
-      <RelatedTools currentToolSlug="image-compressor" category="Images" />
-
-      <div className="mt-8">
-        <p className="text-theme-muted text-xs text-center">
-          Crafted with care by{" "}
-          <a
-            href="https://sidme.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-primary hover:text-brand-hover transition-colors"
-          >
-            sidme
-          </a>
-        </p>
-      </div>
+      <RelatedTools
+        currentToolSlug="image-compressor"
+        category="Images"
+      />
 
       <style>{`
         .slider::-webkit-slider-thumb {

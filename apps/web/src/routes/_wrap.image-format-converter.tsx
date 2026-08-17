@@ -27,7 +27,8 @@ const faqs = [
   },
   {
     question: "Is there a limit on the number of conversions?",
-    answer: "No, you can convert as many images as you want. There are no daily limits, and you don't even need to create an account.",
+    answer:
+      "No, you can convert as many images as you want. There are no daily limits, and you don't even need to create an account.",
   },
 ];
 
@@ -37,12 +38,29 @@ export const Route = createFileRoute("/_wrap/image-format-converter")({
       title: "Image Format Converter | PNG, JPG, WebP, AVIF | SnapBit Tools",
       description:
         "Convert images between PNG, JPEG, WebP, and AVIF formats instantly. Supports batch processing and ZIP downloads. 100% private and client-side.",
-      keywords: ["image converter", "png to webp", "jpg to png", "avif converter", "batch image conversion",
-        "image format converter", "webp to jpeg", "avif to png", "convert image formats online", "offline image format converter",
-        "image converter size","image converter to jpg", "image format converter online", "image format converter i love pdf","image format converter to words",
-        "secure image format converter", "fast image format converter", "image format conversion tool",
-        "png to avif converter", "jpeg to webp converter", "webp to avif converter", "avif to jpeg converter"
-
+      keywords: [
+        "image converter",
+        "png to webp",
+        "jpg to png",
+        "avif converter",
+        "batch image conversion",
+        "image format converter",
+        "webp to jpeg",
+        "avif to png",
+        "convert image formats online",
+        "offline image format converter",
+        "image converter size",
+        "image converter to jpg",
+        "image format converter online",
+        "image format converter i love pdf",
+        "image format converter to words",
+        "secure image format converter",
+        "fast image format converter",
+        "image format conversion tool",
+        "png to avif converter",
+        "jpeg to webp converter",
+        "webp to avif converter",
+        "avif to jpeg converter",
       ],
       url: "/image-format-converter",
       type: "software",
@@ -60,7 +78,9 @@ export function RouteComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Image <span className="text-brand-primary">Format</span> Converter
           </h1>
-          <p className="text-md text-theme-body">Convert images between formats instantly. Batch support. No uploads—100% private.</p>
+          <p className="text-md text-theme-body">
+            Convert images between formats instantly. Batch support. No uploads—100% private.
+          </p>
         </div>
 
         <ImageConverterTool />
@@ -78,17 +98,20 @@ export function RouteComponent() {
           features={[
             {
               title: "Batch Processing",
-              description: "Convert multiple images at once and download them all as a single ZIP file, saving you valuable time.",
+              description:
+                "Convert multiple images at once and download them all as a single ZIP file, saving you valuable time.",
               icon: IconBox,
             },
             {
               title: "Client-Side Only",
-              description: "Conversions are performed entirely on your machine. Your private images never touch our servers.",
+              description:
+                "Conversions are performed entirely on your machine. Your private images never touch our servers.",
               icon: IconLock,
             },
             {
               title: "High Compatibility",
-              description: "Convert between all modern web formats including PNG, JPG, WebP, and the next-gen AVIF format.",
+              description:
+                "Convert between all modern web formats including PNG, JPG, WebP, and the next-gen AVIF format.",
               icon: IconArrowsExchange,
             },
           ]}
@@ -99,36 +122,27 @@ export function RouteComponent() {
             },
             {
               title: "Select Target Format",
-              description: "Choose your desired output format (PNG, JPEG, WebP, or AVIF) from the dropdown.",
+              description:
+                "Choose your desired output format (PNG, JPEG, WebP, or AVIF) from the dropdown.",
             },
             {
               title: "Automatic Conversion",
-              description: "The tool will instantly begin converting each image to your chosen format.",
+              description:
+                "The tool will instantly begin converting each image to your chosen format.",
             },
             {
               title: "Download Results",
-              description: "Download individual converted images or grab everything at once as a ZIP archive.",
+              description:
+                "Download individual converted images or grab everything at once as a ZIP archive.",
             },
           ]}
           faqs={faqs}
         />
 
-        <RelatedTools currentToolSlug="image-format-converter" category="Images" />
-
-        {/* Footer */}
-        <div className="mt-8">
-          <p className="text-theme-muted text-xs text-center">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors"
-            >
-              sidme
-            </a>
-          </p>
-        </div>
+        <RelatedTools
+          currentToolSlug="image-format-converter"
+          category="Images"
+        />
       </div>
     </div>
   );

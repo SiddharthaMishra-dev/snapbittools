@@ -46,10 +46,23 @@ export const Route = createFileRoute("/_wrap/image-cropper")({
   head: () =>
     getSeoMetadata({
       title: "Image Cropper | Crop & Resize Images Online | SnapBit Tools",
-      description: "Crop, rotate, and resize your images with pixel-perfect precision. 100% private, client-side, and works offline.",
-      keywords: ["image cropper", "crop photos online", "resize images", "rotate image", "photo editor",
-        "free crop image online", "crop image to specific dimensions", "crop image with aspect ratio", "rotate image online", "flip image online",
-        "crop irregular shape online", "photo crop editor free download", "i love image crop", "freehand crop online"
+      description:
+        "Crop, rotate, and resize your images with pixel-perfect precision. 100% private, client-side, and works offline.",
+      keywords: [
+        "image cropper",
+        "crop photos online",
+        "resize images",
+        "rotate image",
+        "photo editor",
+        "free crop image online",
+        "crop image to specific dimensions",
+        "crop image with aspect ratio",
+        "rotate image online",
+        "flip image online",
+        "crop irregular shape online",
+        "photo crop editor free download",
+        "i love image crop",
+        "freehand crop online",
       ],
       url: "/image-cropper",
       type: "software",
@@ -198,7 +211,17 @@ function RouteComponent() {
     ctx.scale(flipHorizontal ? -1 : 1, flipVertical ? -1 : 1);
     ctx.translate(-(cropWidth / 2), -(cropHeight / 2));
 
-    ctx.drawImage(image, cropArea.x, cropArea.y, cropArea.width, cropArea.height, 0, 0, cropWidth, cropHeight);
+    ctx.drawImage(
+      image,
+      cropArea.x,
+      cropArea.y,
+      cropArea.width,
+      cropArea.height,
+      0,
+      0,
+      cropWidth,
+      cropHeight,
+    );
 
     ctx.restore();
 
@@ -213,15 +236,50 @@ function RouteComponent() {
 
     // Corner handles
     ctx.fillRect(cropX - handleSize / 2, cropY - handleSize / 2, handleSize, handleSize);
-    ctx.fillRect(cropX + cropWidth - handleSize / 2, cropY - handleSize / 2, handleSize, handleSize);
-    ctx.fillRect(cropX - handleSize / 2, cropY + cropHeight - handleSize / 2, handleSize, handleSize);
-    ctx.fillRect(cropX + cropWidth - handleSize / 2, cropY + cropHeight - handleSize / 2, handleSize, handleSize);
+    ctx.fillRect(
+      cropX + cropWidth - handleSize / 2,
+      cropY - handleSize / 2,
+      handleSize,
+      handleSize,
+    );
+    ctx.fillRect(
+      cropX - handleSize / 2,
+      cropY + cropHeight - handleSize / 2,
+      handleSize,
+      handleSize,
+    );
+    ctx.fillRect(
+      cropX + cropWidth - handleSize / 2,
+      cropY + cropHeight - handleSize / 2,
+      handleSize,
+      handleSize,
+    );
 
     // Edge handles
-    ctx.fillRect(cropX + cropWidth / 2 - handleSize / 2, cropY - handleSize / 2, handleSize, handleSize);
-    ctx.fillRect(cropX + cropWidth / 2 - handleSize / 2, cropY + cropHeight - handleSize / 2, handleSize, handleSize);
-    ctx.fillRect(cropX - handleSize / 2, cropY + cropHeight / 2 - handleSize / 2, handleSize, handleSize);
-    ctx.fillRect(cropX + cropWidth - handleSize / 2, cropY + cropHeight / 2 - handleSize / 2, handleSize, handleSize);
+    ctx.fillRect(
+      cropX + cropWidth / 2 - handleSize / 2,
+      cropY - handleSize / 2,
+      handleSize,
+      handleSize,
+    );
+    ctx.fillRect(
+      cropX + cropWidth / 2 - handleSize / 2,
+      cropY + cropHeight - handleSize / 2,
+      handleSize,
+      handleSize,
+    );
+    ctx.fillRect(
+      cropX - handleSize / 2,
+      cropY + cropHeight / 2 - handleSize / 2,
+      handleSize,
+      handleSize,
+    );
+    ctx.fillRect(
+      cropX + cropWidth - handleSize / 2,
+      cropY + cropHeight / 2 - handleSize / 2,
+      handleSize,
+      handleSize,
+    );
   };
 
   useEffect(() => {
@@ -294,7 +352,12 @@ function RouteComponent() {
       const cropWidth = cropArea.width * scale;
       const cropHeight = cropArea.height * scale;
 
-      if (mousePos.x >= cropX && mousePos.x <= cropX + cropWidth && mousePos.y >= cropY && mousePos.y <= cropY + cropHeight) {
+      if (
+        mousePos.x >= cropX &&
+        mousePos.x <= cropX + cropWidth &&
+        mousePos.y >= cropY &&
+        mousePos.y <= cropY + cropHeight
+      ) {
         setIsDragging(true);
         setDragOffset({
           x: mousePos.x - cropX,
@@ -392,7 +455,12 @@ function RouteComponent() {
         const cropWidth = cropArea.width * scale;
         const cropHeight = cropArea.height * scale;
 
-        if (mousePos.x >= cropX && mousePos.x <= cropX + cropWidth && mousePos.y >= cropY && mousePos.y <= cropY + cropHeight) {
+        if (
+          mousePos.x >= cropX &&
+          mousePos.x <= cropX + cropWidth &&
+          mousePos.y >= cropY &&
+          mousePos.y <= cropY + cropHeight
+        ) {
           canvas.style.cursor = "move";
         } else {
           canvas.style.cursor = "default";
@@ -422,7 +490,17 @@ function RouteComponent() {
     ctx.scale(flipHorizontal ? -1 : 1, flipVertical ? -1 : 1);
     ctx.translate(-canvas.width / 2, -canvas.height / 2);
 
-    ctx.drawImage(image, cropArea.x, cropArea.y, cropArea.width, cropArea.height, 0, 0, cropArea.width, cropArea.height);
+    ctx.drawImage(
+      image,
+      cropArea.x,
+      cropArea.y,
+      cropArea.width,
+      cropArea.height,
+      0,
+      0,
+      cropArea.width,
+      cropArea.height,
+    );
 
     ctx.restore();
 
@@ -460,7 +538,9 @@ function RouteComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Image <span className="text-brand-primary">Cropper</span>
           </h1>
-          <p className="text-md text-theme-body">Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.</p>
+          <p className="text-md text-theme-body">
+            Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.
+          </p>
         </div>
 
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -479,7 +559,12 @@ function RouteComponent() {
                   )}
                 >
                   <div className="flex flex-col items-center space-y-4">
-                    <IconCloudUpload className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")} />
+                    <IconCloudUpload
+                      className={cn(
+                        "w-16 h-16 transition-colors",
+                        isDragging ? "text-brand-primary" : "text-theme-muted",
+                      )}
+                    />
                     <div>
                       <p className="text-xl font-medium text-theme-heading mb-2">
                         {isDragging ? "Drop your image here" : "Drag & drop your image here"}
@@ -499,7 +584,13 @@ function RouteComponent() {
                   🔒 Your files stay on your device. Nothing is uploaded to any server.
                 </p>
 
-                <input type="file" accept="image/*" ref={fileInputRef} className="hidden" onChange={handleFileUpload} />
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  className="hidden"
+                  onChange={handleFileUpload}
+                />
               </>
             ) : (
               <>
@@ -657,24 +748,28 @@ function RouteComponent() {
             features={[
               {
                 title: "Precision Editing",
-                description: "Manually adjust crop coordinates and dimensions or use the intuitive on-canvas handles for visual editing.",
+                description:
+                  "Manually adjust crop coordinates and dimensions or use the intuitive on-canvas handles for visual editing.",
                 icon: IconCrop,
               },
               {
                 title: "Transformation Tools",
-                description: "Rotate images in 90-degree increments and flip them along both axes with a single click.",
+                description:
+                  "Rotate images in 90-degree increments and flip them along both axes with a single click.",
                 icon: IconArrowsMaximize,
               },
               {
                 title: "Zero Uploads",
-                description: "Edit your photos with full confidence in your privacy. No data ever leaves your device.",
+                description:
+                  "Edit your photos with full confidence in your privacy. No data ever leaves your device.",
                 icon: IconLock,
               },
             ]}
             steps={[
               {
                 title: "Upload Image",
-                description: "Select an image from your device or use drag and drop to start editing.",
+                description:
+                  "Select an image from your device or use drag and drop to start editing.",
               },
               {
                 title: "Toggle Crop",
@@ -682,32 +777,23 @@ function RouteComponent() {
               },
               {
                 title: "Adjust Boundary",
-                description: "Drag the crop box or use the corner handles to select the area you want to keep.",
+                description:
+                  "Drag the crop box or use the corner handles to select the area you want to keep.",
               },
               {
                 title: "Save & Download",
-                description: "Configure your export options like format or quality and download your final cropped image.",
+                description:
+                  "Configure your export options like format or quality and download your final cropped image.",
               },
             ]}
             faqs={faqs}
           />
         </div>
 
-        <RelatedTools currentToolSlug="image-cropper" category="Images" />
-
-        <div className="mt-8">
-          <p className="text-theme-muted text-xs text-center">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors"
-            >
-              sidme
-            </a>
-          </p>
-        </div>
+        <RelatedTools
+          currentToolSlug="image-cropper"
+          category="Images"
+        />
       </div>
     </div>
   );

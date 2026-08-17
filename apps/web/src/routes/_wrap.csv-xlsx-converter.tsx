@@ -18,7 +18,6 @@ import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
-import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
   {
@@ -49,7 +48,13 @@ export const Route = createFileRoute("/_wrap/csv-xlsx-converter")({
       title: "CSV ↔ XLSX Converter | Convert Excel to CSV Online | SnapBit Tools",
       description:
         "Fast and secure batch conversion between CSV and XLSX formats. 100% private, client-side, and no data uploads required.",
-      keywords: ["csv to xlsx", "xlsx to csv", "convert excel to csv", "batch converter", "offline office tools"],
+      keywords: [
+        "csv to xlsx",
+        "xlsx to csv",
+        "convert excel to csv",
+        "batch converter",
+        "offline office tools",
+      ],
       url: "/csv-xlsx-converter",
       type: "software",
       faqs,
@@ -203,11 +208,17 @@ function RouteComponent() {
     setIsConverting(true);
     for (const item of itemsToConvert) {
       try {
-        setConversions((prev) => prev.map((conv) => (conv.id === item.id ? { ...conv, status: "converting" } : conv)));
+        setConversions((prev) =>
+          prev.map((conv) => (conv.id === item.id ? { ...conv, status: "converting" } : conv)),
+        );
         await convertFile(item);
       } catch (error) {
         setConversions((prev) =>
-          prev.map((conv) => (conv.id === item.id ? { ...conv, status: "error", error: (error as Error).message } : conv)),
+          prev.map((conv) =>
+            conv.id === item.id
+              ? { ...conv, status: "error", error: (error as Error).message }
+              : conv,
+          ),
         );
       }
     }
@@ -251,7 +262,9 @@ function RouteComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             CSV ↔ XLSX <span className="text-brand-primary">Converter</span>
           </h1>
-          <p className="text-md text-theme-body">Convert between CSV and Excel instantly. No uploads—100% private.</p>
+          <p className="text-md text-theme-body">
+            Convert between CSV and Excel instantly. No uploads—100% private.
+          </p>
         </div>
 
         <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -270,7 +283,12 @@ function RouteComponent() {
                   )}
                 >
                   <div className="flex flex-col items-center space-y-4">
-                    <IconCloudUpload className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")} />
+                    <IconCloudUpload
+                      className={cn(
+                        "w-16 h-16 transition-colors",
+                        isDragging ? "text-brand-primary" : "text-theme-muted",
+                      )}
+                    />
                     <div>
                       <p className="text-xl font-medium text-theme-heading mb-2">
                         {isDragging ? "Drop your files here" : "Drag & drop CSV or XLSX files here"}
@@ -300,7 +318,9 @@ function RouteComponent() {
             ) : (
               <>
                 <div className="w-full flex justify-between items-center mb-3">
-                  <h3 className="text-xl font-semibold text-theme-heading mb-4">Files ({conversions.length})</h3>
+                  <h3 className="text-xl font-semibold text-theme-heading mb-4">
+                    Files ({conversions.length})
+                  </h3>
                   <button
                     onClick={clearAll}
                     className={cn(tc.btnDanger, "px-4 py-2")}
@@ -311,7 +331,10 @@ function RouteComponent() {
 
                 <div className="space-y-3">
                   {conversions.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between p-4 border border-theme-border rounded-lg bg-theme-surface-muted">
+                    <div
+                      key={item.id}
+                      className="flex items-center justify-between p-4 border border-theme-border rounded-lg bg-theme-surface-muted"
+                    >
                       <div className="mr-4 shrink-0">
                         {item.originalFormat === "CSV" ? (
                           <IconFileText className="w-10 h-10 text-brand-primary" />
@@ -327,11 +350,17 @@ function RouteComponent() {
                             {item.originalFormat} → {item.targetFormat.toUpperCase()}
                           </span>
                         </div>
-                        {item.error && <p className="text-xs text-[var(--theme-alert-error-text)] mt-1">{item.error}</p>}
+                        {item.error && (
+                          <p className="text-xs text-[var(--theme-alert-error-text)] mt-1">
+                            {item.error}
+                          </p>
+                        )}
                       </div>
 
                       <div className="flex items-center space-x-3 ml-4">
-                        {item.status === "pending" && <span className="text-theme-muted text-sm">Pending</span>}
+                        {item.status === "pending" && (
+                          <span className="text-theme-muted text-sm">Pending</span>
+                        )}
                         {item.status === "converting" && (
                           <div className="flex items-center space-x-2">
                             <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
@@ -346,7 +375,9 @@ function RouteComponent() {
                             <IconDownload className="w-4 h-4" />
                           </button>
                         )}
-                        {item.status === "error" && <IconCircleX className="w-4 h-4 text-[var(--theme-alert-error-icon)]" />}
+                        {item.status === "error" && (
+                          <IconCircleX className="w-4 h-4 text-[var(--theme-alert-error-icon)]" />
+                        )}
                       </div>
                     </div>
                   ))}
@@ -369,17 +400,20 @@ function RouteComponent() {
           features={[
             {
               title: "Two-Way Conversion",
-              description: "Convert CSV to Excel (XLSX) or Excel to CSV with equal ease and accuracy.",
+              description:
+                "Convert CSV to Excel (XLSX) or Excel to CSV with equal ease and accuracy.",
               icon: IconArrowsExchange,
             },
             {
               title: "Client-Side Only",
-              description: "All processing happens in your browser. Your sensitive data never touches any server.",
+              description:
+                "All processing happens in your browser. Your sensitive data never touches any server.",
               icon: IconLock,
             },
             {
               title: "Batch Processing",
-              description: "Upload multiple files at once and convert them all simultaneously for maximum efficiency.",
+              description:
+                "Upload multiple files at once and convert them all simultaneously for maximum efficiency.",
               icon: IconFileSpreadsheet,
             },
           ]}
@@ -390,7 +424,8 @@ function RouteComponent() {
             },
             {
               title: "Automatic Detection",
-              description: "The tool automatically detects the file type and prepares the conversion.",
+              description:
+                "The tool automatically detects the file type and prepares the conversion.",
             },
             {
               title: "Instant Processing",
@@ -398,27 +433,17 @@ function RouteComponent() {
             },
             {
               title: "Export & Save",
-              description: "Download your newly converted files individually or as a complete ZIP archive.",
+              description:
+                "Download your newly converted files individually or as a complete ZIP archive.",
             },
           ]}
           faqs={faqs}
         />
 
-        <RelatedTools currentToolSlug="csv-xlsx-converter" category="Data" />
-
-        <div className="mt-8">
-          <p className="text-theme-muted text-xs text-center">
-            Crafted with care by{" "}
-            <a
-              href="https://sidme.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-primary hover:text-brand-hover transition-colors"
-            >
-              sidme
-            </a>
-          </p>
-        </div>
+        <RelatedTools
+          currentToolSlug="csv-xlsx-converter"
+          category="Data"
+        />
       </div>
     </div>
   );
