@@ -5,8 +5,17 @@
  * Generates contextual, keyword-rich links between related pages.
  */
 
-import { allKeywordVariants, getRelatedVariants, type KeywordVariant } from "@/data/pseo-keywords";
+import {
+  allKeywordVariants,
+  getRelatedVariants,
+  getVariantsByParentTool,
+  type KeywordVariant,
+} from "@/data/pseo-keywords";
+import { isCanonicalizedPath } from "@/lib/seo";
 import { tools } from "@/data/tools";
+
+const toolsBySlug = new Map(tools.map((tool) => [tool.slug, tool]));
+const variantsBySlug = new Map(allKeywordVariants.map((variant) => [variant.slug, variant]));
 
 export interface InternalLink {
   href: string;
@@ -14,6 +23,134 @@ export interface InternalLink {
   description: string;
   anchorText: string;
   category: "related-variant" | "parent-tool" | "category-page" | "use-case";
+}
+
+export type ClusterLink = {
+  href: string;
+  name: string;
+  description: string;
+};
+
+/**
+ * pSEO routes that exist on disk. Keep in sync with `src/routes`.
+ * Canonicalized clones stay in this set (the URL works) but are not linked.
+ */
+const PUBLISHED_PSEO_SLUGS = new Set([
+  "jpg-to-png",
+  "png-to-jpg",
+  "png-to-webp",
+  "webp-to-png",
+  "jpg-to-webp",
+  "webp-to-jpg",
+  "heic-to-jpg",
+  "compress-image-to-50kb",
+  "compress-image-to-100kb",
+  "compress-image-to-200kb",
+  "compress-jpeg-online",
+  "compress-png-online",
+  "compress-image-for-web",
+  "optimize-images-for-website",
+  "compress-image-online",
+  "reduce-image-file-size",
+  "reduce-jpg-size",
+  "reduce-png-size",
+  "json-pretty-print",
+  "json-beautifier",
+  "json-validator",
+  "json-minifier",
+  "format-json-online",
+  "validate-json-online",
+  "image-tools",
+  "privacy-first-tools",
+  "browser-based-utilities",
+  "tools-for-developers",
+]);
+
+export function isIndexablePseoSlug(slug: string): boolean {
+  return PUBLISHED_PSEO_SLUGS.has(slug) && !isCanonicalizedPath(`/${slug}`);
+}
+
+function variantToClusterLink(variant: KeywordVariant): ClusterLink {
+  return {
+    href: `/${variant.slug}`,
+    name: variant.h1,
+    description: variant.metaDescription,
+  };
+}
+
+function clusterHeadingForIntent(intent: KeywordVariant["searchIntent"]): string {
+  if (intent === "converter") return "Related converters";
+  if (intent === "compressor") return "Related compression tools";
+  if (intent === "validator") return "Related JSON tools";
+  return "Related tools";
+}
+
+export function getClusterHeading(slug: string): string {
+  const variant = variantsBySlug.get(slug);
+  if (!variant) return "Related tools";
+  return clusterHeadingForIntent(variant.searchIntent);
+}
+
+/** Indexable spokes to list on a pillar page (4–8). */
+export function getPillarSpokes(parentToolSlug: string, limit = 8): ClusterLink[] {
+  return getVariantsByParentTool(parentToolSlug)
+    .filter((variant) => isIndexablePseoSlug(variant.slug))
+    .slice(0, limit)
+    .map(variantToClusterLink);
+}
+
+/**
+ * Pillar + sibling links for a pSEO spoke. Skips unpublished and canonicalized URLs.
+ */
+export function getSpokeClusterLinks(currentSlug: string, limit = 6): ClusterLink[] {
+  const current = variantsBySlug.get(currentSlug);
+  if (!current) return [];
+
+  const links: ClusterLink[] = [];
+  const seen = new Set<string>();
+
+  const push = (link: ClusterLink) => {
+    if (seen.has(link.href) || links.length >= limit) return;
+    seen.add(link.href);
+    links.push(link);
+  };
+
+  const parentTool = toolsBySlug.get(current.parentTool);
+  if (parentTool) {
+    push({
+      href: parentTool.href,
+      name: parentTool.name,
+      description: parentTool.description,
+    });
+  } else if (current.parentTool === "tools") {
+    push({
+      href: "/tools",
+      name: "All Tools",
+      description: "Browse every SnapBit utility in one place.",
+    });
+  }
+
+  for (const slug of current.relatedVariants) {
+    if (slug === currentSlug) continue;
+    const tool = toolsBySlug.get(slug);
+    if (tool) {
+      push({ href: tool.href, name: tool.name, description: tool.description });
+      continue;
+    }
+    const variant = variantsBySlug.get(slug);
+    if (variant && isIndexablePseoSlug(variant.slug)) {
+      push(variantToClusterLink(variant));
+    }
+  }
+
+  if (current.parentTool !== "tools") {
+    for (const sibling of getVariantsByParentTool(current.parentTool)) {
+      if (sibling.slug === currentSlug || !isIndexablePseoSlug(sibling.slug)) continue;
+      push(variantToClusterLink(sibling));
+    }
+  }
+
+  return links;
 }
 
 /**
@@ -39,8 +176,8 @@ export function generateInternalLinks(currentSlug: string): InternalLink[] {
   }
 
   // 2. Add related variant links (3-4 links)
-  const relatedVariants = getRelatedVariants(currentSlug).slice(0, 4);
-  for (const variant of relatedVariants) {
+  const relatedVariants = getRelatedVariants(currentSlug).filter((variant) => isIndexablePseoSlug(variant.slug));
+  for (const variant of relatedVariants.slice(0, 4)) {
     links.push({
       href: `/${variant.slug}`,
       title: variant.h1,
@@ -75,7 +212,7 @@ function getUseCaseLink(variant: KeywordVariant): InternalLink | null {
   if (!useCaseSlug) return null;
 
   const useCaseVariant = allKeywordVariants.find((v) => v.slug === useCaseSlug);
-  if (!useCaseVariant) return null;
+  if (!useCaseVariant || !isIndexablePseoSlug(useCaseVariant.slug)) return null;
 
   return {
     href: `/${useCaseVariant.slug}`,
@@ -157,17 +294,12 @@ export function getRelatedToolsData(currentSlug: string): Array<{
   description: string;
   isPseoVariant: boolean;
 }> {
-  const currentVariant = allKeywordVariants.find((v) => v.slug === currentSlug);
-  if (!currentVariant) return [];
-
-  const relatedVariants = getRelatedVariants(currentSlug).slice(0, 4);
-
-  return relatedVariants.map((variant) => ({
-    slug: variant.slug,
-    name: variant.h1,
-    href: `/${variant.slug}`,
-    description: variant.metaDescription,
-    isPseoVariant: true,
+  return getSpokeClusterLinks(currentSlug).map((link) => ({
+    slug: link.href.replace(/^\//, ""),
+    name: link.name,
+    href: link.href,
+    description: link.description,
+    isPseoVariant: isIndexablePseoSlug(link.href.replace(/^\//, "")),
   }));
 }
 

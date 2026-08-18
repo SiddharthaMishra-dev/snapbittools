@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { IconBraces, IconArrowsMinimize, IconDownload } from "@tabler/icons-react";
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
+import ClusterLinks from "@/components/ClusterLinks";
+import { getPillarSpokes } from "@/lib/internal-linking";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
@@ -117,6 +119,10 @@ export function RouteComponent() {
           faqs={faqs}
         />
 
+        <ClusterLinks
+          heading="Also useful for"
+          links={getPillarSpokes("json-formatter")}
+        />
         <RelatedTools
           currentToolSlug="json-formatter"
           category="Data"

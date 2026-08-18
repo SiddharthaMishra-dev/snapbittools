@@ -3,6 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { IconBox, IconLock, IconArrowsExchange } from "@tabler/icons-react";
 import ToolInfo from "../components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
+import ClusterLinks from "@/components/ClusterLinks";
+import { getPillarSpokes } from "@/lib/internal-linking";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
@@ -139,6 +141,10 @@ export function RouteComponent() {
           faqs={faqs}
         />
 
+        <ClusterLinks
+          heading="Also useful for"
+          links={getPillarSpokes("image-format-converter")}
+        />
         <RelatedTools
           currentToolSlug="image-format-converter"
           category="Images"

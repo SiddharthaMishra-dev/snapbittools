@@ -21,7 +21,7 @@ export type SeoMetadata = {
  * Near-duplicate pSEO landers. Keep the URLs live for users, but tell crawlers
  * to treat the pillar as the indexable version until copy is unique.
  */
-const CANONICAL_TARGETS: Record<string, string> = {
+export const CANONICAL_TARGETS: Record<string, string> = {
   "/compress-image-online": "/image-compressor",
   "/reduce-image-file-size": "/image-compressor",
   "/reduce-jpg-size": "/compress-jpeg-online",
@@ -31,6 +31,11 @@ const CANONICAL_TARGETS: Record<string, string> = {
   "/json-pretty-print": "/json-formatter",
   "/validate-json-online": "/json-validator",
 };
+
+export function isCanonicalizedPath(path: string): boolean {
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  return Boolean(CANONICAL_TARGETS[normalized]);
+}
 
 export function getSeoMetadata(config: SeoMetadata) {
   const {

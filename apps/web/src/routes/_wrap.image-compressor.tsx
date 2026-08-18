@@ -1,5 +1,7 @@
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
+import ClusterLinks from "@/components/ClusterLinks";
+import { getPillarSpokes } from "@/lib/internal-linking";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { IconArrowsMinimize, IconBolt, IconLock } from "@tabler/icons-react";
@@ -138,6 +140,10 @@ export function RouteComponent() {
         />
       </div>
 
+      <ClusterLinks
+        heading="Also useful for"
+        links={getPillarSpokes("image-compressor")}
+      />
       <RelatedTools
         currentToolSlug="image-compressor"
         category="Images"

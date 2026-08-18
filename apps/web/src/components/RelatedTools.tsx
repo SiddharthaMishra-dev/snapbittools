@@ -55,7 +55,6 @@ export default function RelatedTools({
 
   return (
     <motion.section
-      style={{ display: "none" }}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -111,8 +110,8 @@ function RelatedToolCard({ tool }: { tool: ToolDefinition }) {
       to={tool.href}
       className="group flex items-center gap-3 p-4 rounded-lg border border-[var(--theme-related-card-border)] bg-[var(--theme-related-card-bg)] hover:bg-[var(--theme-related-card-hover-bg)] hover:border-brand-primary/50 transition-all duration-200"
     >
-      <div className="shrink-0 w-10 h-10 bg-brand-dark rounded-lg flex items-center justify-center group-hover:bg-brand-primary transition-colors">
-        <Icon className="w-5 h-5 text-brand-light" />
+      <div className="shrink-0 w-11 h-11 bg-linear-to-b from-red-500 to-red-600  ring-2 ring-red-500/80 shadow-lg rounded-lg flex items-center justify-center group-hover:bg-brand-primary transition-colors">
+        <Icon className="w-6 h-6 text-white" />
       </div>
       <div className="flex-1 min-w-0">
         <h3 className="text-base font-semibold text-theme-heading group-hover:text-brand-primary transition-colors">

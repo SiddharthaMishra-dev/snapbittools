@@ -550,7 +550,7 @@ code {
 }
 
 .privacy-features {
-  @apply text-gray-200 p-4 rounded-lg mb-6;
+  @apply text-theme-heading p-4 rounded-lg mb-6;
 }
 
 .feature {

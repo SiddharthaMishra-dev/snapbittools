@@ -7,6 +7,8 @@
 
 import { type KeywordVariant } from "@/data/pseo-keywords";
 import { generatePageContent } from "@/lib/pseo-templates";
+import { getClusterHeading, getSpokeClusterLinks } from "@/lib/internal-linking";
+import ClusterLinks from "@/components/ClusterLinks";
 import RelatedTools from "@/components/RelatedTools";
 import { IconChevronDown } from "@tabler/icons-react";
 
@@ -89,7 +91,13 @@ export default function PseoPage({ variant, toolComponent: ToolComponent }: Pseo
         </section>
 
         <section className="w-full">
-          <RelatedTools currentToolSlug={variant.parentTool} />
+          <ClusterLinks
+            heading={getClusterHeading(variant.slug)}
+            links={getSpokeClusterLinks(variant.slug)}
+          />
+          {variant.parentTool !== "tools" && (
+            <RelatedTools currentToolSlug={variant.parentTool} />
+          )}
         </section>
       </div>
     </div>
