@@ -25,11 +25,7 @@ const toolBtnSm = "px-3 py-1 text-sm";
 const toolBtnXs = "px-2 py-1 text-xs";
 
 function toggleBtnClass(active: boolean, size: "sm" | "xs" = "sm") {
-  return cn(
-    toolBtnBase,
-    size === "xs" ? toolBtnXs : toolBtnSm,
-    active ? "theme-btn-primary" : "theme-btn-secondary",
-  );
+  return cn(toolBtnBase, size === "xs" ? toolBtnXs : toolBtnSm, active ? "theme-btn-primary" : "theme-btn-secondary");
 }
 
 export function JsonFormatterTool() {
@@ -113,12 +109,7 @@ export function JsonFormatterTool() {
   }
 
   function escapeStringValue(value: string): string {
-    return value
-      .replace(/\\/g, "\\\\")
-      .replace(/\n/g, "\\n")
-      .replace(/\r/g, "\\r")
-      .replace(/\t/g, "\\t")
-      .replace(/\f/g, "\\f");
+    return value.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t").replace(/\f/g, "\\f");
   }
 
   function formatQuoted(value: string): string {
@@ -127,9 +118,7 @@ export function JsonFormatterTool() {
     return `${quote}${escaped}${quote}`;
   }
 
-  function formatPrimitive(
-    value: Exclude<JsonValue, JsonValue[] | { [key: string]: JsonValue }>,
-  ): ReactNode {
+  function formatPrimitive(value: Exclude<JsonValue, JsonValue[] | { [key: string]: JsonValue }>): ReactNode {
     if (typeof value === "string") {
       return <span className="text-green-400">{formatQuoted(value)}</span>;
     }
@@ -158,13 +147,7 @@ export function JsonFormatterTool() {
   }, []);
 
   const renderJsonNode = useCallback(
-    (
-      value: JsonValue,
-      path: string,
-      depth: number,
-      isLast: boolean,
-      keyName?: string,
-    ): ReactNode => {
+    (value: JsonValue, path: string, depth: number, isLast: boolean, keyName?: string): ReactNode => {
       const isArray = Array.isArray(value);
       const isObject = isObjectValue(value);
       const isContainer = isArray || isObject;
@@ -182,17 +165,11 @@ export function JsonFormatterTool() {
 
       if (!isContainer) {
         return (
-          <div
-            key={path}
-            className="flex items-start"
-            style={{ paddingLeft: `${depth * 16}px` }}
-          >
+          <div key={path} className="flex items-start" style={{ paddingLeft: `${depth * 16}px` }}>
             <span className="w-5 h-5 mr-1" />
             <div className="leading-6 whitespace-pre">
               {keyPrefix}
-              {formatPrimitive(
-                value as Exclude<JsonValue, JsonValue[] | { [key: string]: JsonValue }>,
-              )}
+              {formatPrimitive(value as Exclude<JsonValue, JsonValue[] | { [key: string]: JsonValue }>)}
               <span className="text-theme-body">{trailingComma}</span>
             </div>
           </div>
@@ -204,11 +181,7 @@ export function JsonFormatterTool() {
 
       if (isCollapsed) {
         return (
-          <div
-            key={path}
-            className="flex items-start"
-            style={{ paddingLeft: `${depth * 16}px` }}
-          >
+          <div key={path} className="flex items-start" style={{ paddingLeft: `${depth * 16}px` }}>
             <button
               type="button"
               onClick={() => togglePath(path)}
@@ -230,10 +203,7 @@ export function JsonFormatterTool() {
 
       return (
         <div key={path}>
-          <div
-            className="flex items-start"
-            style={{ paddingLeft: `${depth * 16}px` }}
-          >
+          <div className="flex items-start" style={{ paddingLeft: `${depth * 16}px` }}>
             {isCollapsible ? (
               <button
                 type="button"
@@ -253,23 +223,12 @@ export function JsonFormatterTool() {
           </div>
 
           {isArray
-            ? value.map((item, index) =>
-                renderJsonNode(item, `${path}[${index}]`, depth + 1, index === value.length - 1),
-              )
+            ? value.map((item, index) => renderJsonNode(item, `${path}[${index}]`, depth + 1, index === value.length - 1))
             : Object.entries(value).map(([childKey, childValue], index, allEntries) =>
-                renderJsonNode(
-                  childValue,
-                  `${path}.${childKey}`,
-                  depth + 1,
-                  index === allEntries.length - 1,
-                  childKey,
-                ),
+                renderJsonNode(childValue, `${path}.${childKey}`, depth + 1, index === allEntries.length - 1, childKey),
               )}
 
-          <div
-            className="flex items-start"
-            style={{ paddingLeft: `${depth * 16}px` }}
-          >
+          <div className="flex items-start" style={{ paddingLeft: `${depth * 16}px` }}>
             <span className="w-5 h-5 mr-1" />
             <div className="leading-6 whitespace-pre">
               <span className="text-blue-400 font-bold">{closeBracket}</span>
@@ -316,29 +275,17 @@ export function JsonFormatterTool() {
           )}
           spellCheck={false}
         />
-        {input && (
-          <p className="text-sm text-theme-muted mt-2">
-            Size: {new Blob([input]).size.toLocaleString()} bytes
-          </p>
-        )}
+        {input && <p className="text-sm text-theme-muted mt-2">Size: {new Blob([input]).size.toLocaleString()} bytes</p>}
       </div>
 
       <div className="rounded-xl shadow-lg p-0 sm:p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-semibold text-theme-heading">Output</h3>
           <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => setActiveView("formatted")}
-              className={toggleBtnClass(activeView === "formatted")}
-            >
+            <button type="button" onClick={() => setActiveView("formatted")} className={toggleBtnClass(activeView === "formatted")}>
               Formatted
             </button>
-            <button
-              type="button"
-              onClick={() => setActiveView("minified")}
-              className={toggleBtnClass(activeView === "minified")}
-            >
+            <button type="button" onClick={() => setActiveView("minified")} className={toggleBtnClass(activeView === "minified")}>
               Minified
             </button>
           </div>
@@ -346,11 +293,7 @@ export function JsonFormatterTool() {
         {renderOutputContent(isInModal ? "min-h-[40vh] h-auto" : "h-96")}
         {formattedJson && (
           <p className="text-sm text-theme-muted mt-2">
-            Size:{" "}
-            {new Blob([
-              activeView === "formatted" ? formattedJson : minifiedJson,
-            ]).size.toLocaleString()}{" "}
-            bytes
+            Size: {new Blob([activeView === "formatted" ? formattedJson : minifiedJson]).size.toLocaleString()} bytes
           </p>
         )}
       </div>
@@ -379,8 +322,7 @@ export function JsonFormatterTool() {
     let dataArray: JsonObject[];
     if (Array.isArray(parsedData)) {
       const objectItems = parsedData.filter(
-        (item): item is JsonObject =>
-          typeof item === "object" && item !== null && !Array.isArray(item),
+        (item): item is JsonObject => typeof item === "object" && item !== null && !Array.isArray(item),
       );
 
       if (objectItems.length !== parsedData.length) {
@@ -389,11 +331,7 @@ export function JsonFormatterTool() {
       }
 
       dataArray = objectItems;
-    } else if (
-      typeof parsedData === "object" &&
-      parsedData !== null &&
-      !Array.isArray(parsedData)
-    ) {
+    } else if (typeof parsedData === "object" && parsedData !== null && !Array.isArray(parsedData)) {
       dataArray = [parsedData as JsonObject];
     } else {
       setError("JSON must be an object or array of objects to convert to CSV");
@@ -429,10 +367,7 @@ export function JsonFormatterTool() {
       return str;
     };
 
-    const csvRows = [
-      headers.join(","),
-      ...dataArray.map((item) => headers.map((key) => escapeCSV(item[key] ?? "")).join(",")),
-    ];
+    const csvRows = [headers.join(","), ...dataArray.map((item) => headers.map((key) => escapeCSV(item[key] ?? "")).join(","))];
 
     const csvContent = csvRows.join("\n");
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -473,18 +408,10 @@ export function JsonFormatterTool() {
         <div className="flex flex-wrap gap-3 justify-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-theme-surface-muted border border-theme-border text-theme-heading rounded-lg">
             <span className="text-sm font-medium">Quotes:</span>
-            <button
-              type="button"
-              onClick={() => setUseSingleQuotes(false)}
-              className={toggleBtnClass(!useSingleQuotes, "xs")}
-            >
+            <button type="button" onClick={() => setUseSingleQuotes(false)} className={toggleBtnClass(!useSingleQuotes, "xs")}>
               "
             </button>
-            <button
-              type="button"
-              onClick={() => setUseSingleQuotes(true)}
-              className={toggleBtnClass(useSingleQuotes, "xs")}
-            >
+            <button type="button" onClick={() => setUseSingleQuotes(true)} className={toggleBtnClass(useSingleQuotes, "xs")}>
               '
             </button>
           </div>
@@ -513,11 +440,7 @@ export function JsonFormatterTool() {
             type="button"
             onClick={copyToClipboard}
             disabled={!formattedJson}
-            className={cn(
-              toolBtnBase,
-              toolBtnMd,
-              copySuccess ? "theme-btn-success" : "theme-btn-secondary",
-            )}
+            className={cn(toolBtnBase, toolBtnMd, copySuccess ? "theme-btn-success" : "theme-btn-secondary")}
           >
             {copySuccess ? (
               <>
@@ -532,31 +455,17 @@ export function JsonFormatterTool() {
             )}
           </button>
 
-          <button
-            type="button"
-            onClick={downloadCSV}
-            disabled={!parsedData}
-            className={cn(toolBtnBase, toolBtnMd, "theme-btn-secondary")}
-          >
+          <button type="button" onClick={downloadCSV} disabled={!parsedData} className={cn(toolBtnBase, toolBtnMd, "theme-btn-secondary")}>
             <IconDownload className="w-4 h-4" />
             <span>Download CSV</span>
           </button>
 
-          <button
-            type="button"
-            onClick={clearInput}
-            disabled={!input}
-            className={cn(toolBtnBase, toolBtnMd, "theme-btn-danger")}
-          >
+          <button type="button" onClick={clearInput} disabled={!input} className={cn(toolBtnBase, toolBtnMd, "theme-btn-danger")}>
             <IconTrash className="w-4 h-4" />
             <span>Clear</span>
           </button>
 
-          <button
-            type="button"
-            onClick={() => setIsFullscreen(true)}
-            className={cn(toolBtnBase, toolBtnMd, "theme-btn-secondary")}
-          >
+          <button type="button" onClick={() => setIsFullscreen(true)} className={cn(toolBtnBase, toolBtnMd, "theme-btn-secondary")}>
             <IconMaximize className="w-4 h-4" />
             <span>Fullscreen</span>
           </button>
@@ -580,9 +489,7 @@ export function JsonFormatterTool() {
         <div className="fixed inset-0 z-50 bg-black/60 p-2 sm:p-4">
           <div className="h-full w-full rounded-xl border border-theme-border bg-theme-page p-3 sm:p-6 overflow-auto">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg sm:text-xl font-semibold text-theme-heading">
-                JSON Formatter - Fullscreen
-              </h2>
+              <h2 className="text-lg sm:text-xl font-semibold text-theme-heading">JSON Formatter - Fullscreen</h2>
               <div className="flex items-center gap-2">
                 <button
                   type="button"

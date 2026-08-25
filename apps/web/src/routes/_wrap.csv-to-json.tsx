@@ -1,15 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useCallback, useRef, useEffect } from "react";
-import {
-  IconCheck,
-  IconCopy,
-  IconDownload,
-  IconBraces,
-  IconTrash,
-  IconAlertCircle,
-  IconTable,
-  IconUpload,
-} from "@tabler/icons-react";
+import { IconCheck, IconCopy, IconDownload, IconBraces, IconTrash, IconAlertCircle, IconTable, IconUpload } from "@tabler/icons-react";
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
@@ -58,13 +49,7 @@ export const Route = createFileRoute("/_wrap/csv-to-json")({
       title: "CSV to JSON Converter | Convert CSV to JSON Online | SnapBit Tools",
       description:
         "Convert CSV data to JSON objects instantly. Handle headers, quoted fields, and large files locally in your browser. 100% free and private.",
-      keywords: [
-        "csv to json",
-        "csv converter",
-        "json generator",
-        "csv to web",
-        "online converter",
-      ],
+      keywords: ["csv to json", "csv converter", "json generator", "csv to web", "online converter"],
       url: "/csv-to-json",
       type: "software",
       faqs,
@@ -132,8 +117,7 @@ function RouteComponent() {
 
     worker.onmessage = (
       event: MessageEvent<
-        | { requestId: number; jsonOutput: string; stats: { rows: number; columns: number } }
-        | { requestId: number; error: string }
+        { requestId: number; jsonOutput: string; stats: { rows: number; columns: number } } | { requestId: number; error: string }
       >,
     ) => {
       const payload = event.data;
@@ -214,34 +198,20 @@ function RouteComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             CSV to <span className="text-brand-primary">JSON</span>
           </h1>
-          <p className="text-md text-theme-body">
-            Transform CSV data into JSON format securely in your browser.
-          </p>
+          <p className="text-md text-theme-body">Transform CSV data into JSON format securely in your browser.</p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto">
           <div className="bg-transparent rounded-xl shadow-lg p-4 mb-6">
             <div className="flex flex-wrap gap-3 justify-center items-center">
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".csv,text/csv"
-                onChange={handleFileUpload}
-                className="hidden"
-              />
+              <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleFileUpload} className="hidden" />
 
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}
-              >
+              <button onClick={() => fileInputRef.current?.click()} className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}>
                 <IconUpload className="w-4 h-4" />
                 <span>Upload CSV</span>
               </button>
 
-              <button
-                onClick={loadSampleData}
-                className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}
-              >
+              <button onClick={loadSampleData} className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}>
                 <IconTable className="w-4 h-4" />
                 <span>Sample CSV</span>
               </button>
@@ -267,11 +237,7 @@ function RouteComponent() {
                 <span>Sanitize JSON strings</span>
               </label>
 
-              <button
-                onClick={downloadJSON}
-                disabled={!jsonOutput}
-                className={cn(tc.btnPrimary, "px-4 py-2 ml-auto")}
-              >
+              <button onClick={downloadJSON} disabled={!jsonOutput} className={cn(tc.btnPrimary, "px-4 py-2 ml-auto")}>
                 <IconDownload className="w-4 h-4" />
                 <span>Download JSON</span>
               </button>
@@ -279,11 +245,7 @@ function RouteComponent() {
               <button
                 onClick={copyToClipboard}
                 disabled={!jsonOutput}
-                className={cn(
-                  tc.btn,
-                  "px-4 py-2",
-                  copySuccess ? "theme-btn-success" : "theme-btn-secondary",
-                )}
+                className={cn(tc.btn, "px-4 py-2", copySuccess ? "theme-btn-success" : "theme-btn-secondary")}
               >
                 {copySuccess ? (
                   <>
@@ -312,12 +274,7 @@ function RouteComponent() {
           </div>
 
           {error && (
-            <div
-              className={cn(
-                tc.alertError,
-                "rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2",
-              )}
-            >
+            <div className={cn(tc.alertError, "rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2")}>
               <IconAlertCircle className="w-5 h-5 text-[var(--theme-alert-error-icon)] flex-shrink-0 mt-0.5" />
               <div>
                 <p className="font-medium">Parse Error</p>
@@ -329,14 +286,8 @@ function RouteComponent() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
             <div className="rounded-xl shadow-lg flex flex-col h-full border border-theme-border bg-theme-surface overflow-hidden">
               <div className="px-4 py-3 border-b border-theme-border flex justify-between items-center bg-theme-surface-muted">
-                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">
-                  Input CSV
-                </h3>
-                {input && (
-                  <span className="text-xs text-theme-muted">
-                    {(new Blob([input]).size / 1024).toFixed(2)} KB
-                  </span>
-                )}
+                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Input CSV</h3>
+                {input && <span className="text-xs text-theme-muted">{(new Blob([input]).size / 1024).toFixed(2)} KB</span>}
               </div>
               <textarea
                 value={input}
@@ -353,9 +304,7 @@ function RouteComponent() {
 
             <div className="rounded-xl shadow-lg flex flex-col h-full border border-theme-border bg-theme-surface overflow-hidden">
               <div className="px-4 py-3 border-b border-theme-border flex justify-between items-center bg-theme-surface-muted">
-                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">
-                  Output JSON
-                </h3>
+                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Output JSON</h3>
                 {stats.rows > 0 && (
                   <span className="text-xs text-brand-primary bg-theme-icon-bg px-2 py-0.5 rounded-full">
                     {stats.rows} objects • {stats.columns} fields
@@ -390,28 +339,24 @@ function RouteComponent() {
               features={[
                 {
                   title: "Smart Type Detection",
-                  description:
-                    "Automatically detects and parses numbers and booleans into their correct JSON types.",
+                  description: "Automatically detects and parses numbers and booleans into their correct JSON types.",
                   icon: IconBraces,
                 },
                 {
                   title: "Robust CSV Parsing",
-                  description:
-                    "Handles complex CSV scenarios including quoted fields, escaped characters, and multi-line cells.",
+                  description: "Handles complex CSV scenarios including quoted fields, escaped characters, and multi-line cells.",
                   icon: IconTable,
                 },
                 {
                   title: "Secure & Private",
-                  description:
-                    "All conversion happens entirely in your browser. Your data is never uploaded to any server.",
+                  description: "All conversion happens entirely in your browser. Your data is never uploaded to any server.",
                   icon: IconCheck,
                 },
               ]}
               steps={[
                 {
                   title: "Paste CSV",
-                  description:
-                    "Input your CSV data into the left panel or click 'Sample CSV' to see how it works.",
+                  description: "Input your CSV data into the left panel or click 'Sample CSV' to see how it works.",
                 },
                 {
                   title: "Configure",
@@ -419,8 +364,7 @@ function RouteComponent() {
                 },
                 {
                   title: "Review JSON",
-                  description:
-                    "The structured JSON output is generated instantly in the right panel.",
+                  description: "The structured JSON output is generated instantly in the right panel.",
                 },
                 {
                   title: "Export",
@@ -432,10 +376,7 @@ function RouteComponent() {
           </div>
         </div>
 
-        <RelatedTools
-          currentToolSlug="csv-to-json"
-          category="Data"
-        />
+        <RelatedTools currentToolSlug="csv-to-json" category="Data" />
       </div>
     </div>
   );

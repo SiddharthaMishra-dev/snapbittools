@@ -31,13 +31,11 @@ const faqs = [
   },
   {
     question: "Will it break <script>, <style>, or <pre> blocks?",
-    answer:
-      "No. The tool preserves content inside script, style, pre, and textarea blocks while minifying the surrounding HTML.",
+    answer: "No. The tool preserves content inside script, style, pre, and textarea blocks while minifying the surrounding HTML.",
   },
   {
     question: "Can I minify and de-minify HTML here?",
-    answer:
-      "Yes. You can generate either minified or de-minified output, then copy it or download it as an .html file instantly.",
+    answer: "Yes. You can generate either minified or de-minified output, then copy it or download it as an .html file instantly.",
   },
 ];
 
@@ -47,13 +45,7 @@ export const Route = createFileRoute("/_wrap/html-minifier")({
       title: "HTML Minifier Online | Minify HTML Code Instantly | SnapBit Tools",
       description:
         "Minify HTML code instantly by removing comments and extra whitespace. 100% private, browser-based, and works without uploads.",
-      keywords: [
-        "html minifier",
-        "minify html",
-        "compress html",
-        "html optimizer",
-        "remove html comments",
-      ],
+      keywords: ["html minifier", "minify html", "compress html", "html optimizer", "remove html comments"],
       url: "/html-minifier",
       type: "software",
       faqs,
@@ -74,14 +66,11 @@ function RouteComponent() {
       let minified = source.replace(/\r\n/g, "\n");
 
       const protectedBlocks: string[] = [];
-      minified = minified.replace(
-        /<(script|style|pre|textarea)\b[^>]*>[\s\S]*?<\/\1>/gi,
-        (match) => {
-          const marker = `___SNAPBIT_BLOCK_${protectedBlocks.length}___`;
-          protectedBlocks.push(match);
-          return marker;
-        },
-      );
+      minified = minified.replace(/<(script|style|pre|textarea)\b[^>]*>[\s\S]*?<\/\1>/gi, (match) => {
+        const marker = `___SNAPBIT_BLOCK_${protectedBlocks.length}___`;
+        protectedBlocks.push(match);
+        return marker;
+      });
 
       if (removeComments) {
         minified = minified.replace(/<!--[\s\S]*?-->/g, (comment) => {
@@ -98,10 +87,7 @@ function RouteComponent() {
 
       minified = minified.trim();
 
-      minified = minified.replace(
-        /___SNAPBIT_BLOCK_(\d+)___/g,
-        (_, index) => protectedBlocks[Number(index)] ?? "",
-      );
+      minified = minified.replace(/___SNAPBIT_BLOCK_(\d+)___/g, (_, index) => protectedBlocks[Number(index)] ?? "");
 
       return minified;
     },
@@ -152,8 +138,7 @@ function RouteComponent() {
       const isDeclaration = /^<![^-]/.test(line) || /^<\?/.test(line);
       const isSelfClosing = /\/>$/.test(line) || (!!tagName && voidTags.has(tagName));
       const hasInlineClosing = !!tagName && new RegExp(`</${tagName}>$`, "i").test(line);
-      const shouldIncreaseIndent =
-        !!tagName && !isSelfClosing && !hasInlineClosing && !isClosingTag;
+      const shouldIncreaseIndent = !!tagName && !isSelfClosing && !hasInlineClosing && !isClosingTag;
 
       if (isClosingTag) {
         indentLevel = Math.max(indentLevel - 1, 0);
@@ -169,10 +154,7 @@ function RouteComponent() {
 
     return formatted
       .join("\n")
-      .replace(
-        /___SNAPBIT_FORMAT_BLOCK_(\d+)___/g,
-        (_, index) => protectedBlocks[Number(index)] ?? "",
-      )
+      .replace(/___SNAPBIT_FORMAT_BLOCK_(\d+)___/g, (_, index) => protectedBlocks[Number(index)] ?? "")
       .trim();
   }, []);
 
@@ -272,35 +254,19 @@ function RouteComponent() {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={handleMinify}
-                  disabled={!input.trim()}
-                  className={cn(tc.btnPrimary, "px-4 py-2")}
-                >
+                <button onClick={handleMinify} disabled={!input.trim()} className={cn(tc.btnPrimary, "px-4 py-2")}>
                   <IconArrowsMinimize className="w-4 h-4" />
                   Minify
                 </button>
-                <button
-                  onClick={handleDeminify}
-                  disabled={!input.trim()}
-                  className={cn(tc.btnSecondary, "px-4 py-2")}
-                >
+                <button onClick={handleDeminify} disabled={!input.trim()} className={cn(tc.btnSecondary, "px-4 py-2")}>
                   <IconSparkles className="w-4 h-4" />
                   De-minify
                 </button>
-                <button
-                  onClick={handleDownload}
-                  disabled={!output}
-                  className={cn(tc.btnPrimary, "px-4 py-2")}
-                >
+                <button onClick={handleDownload} disabled={!output} className={cn(tc.btnPrimary, "px-4 py-2")}>
                   <IconDownload className="w-4 h-4" />
                   Download
                 </button>
-                <button
-                  onClick={handleClear}
-                  disabled={!input && !output}
-                  className={cn(tc.btnDanger, "px-4 py-2")}
-                >
+                <button onClick={handleClear} disabled={!input && !output} className={cn(tc.btnDanger, "px-4 py-2")}>
                   <IconTrash className="w-4 h-4" />
                   Clear
                 </button>
@@ -316,9 +282,7 @@ function RouteComponent() {
                     <IconCode className="w-5 h-5 text-brand-primary" />
                     Input HTML
                   </h2>
-                  <span className="text-xs text-theme-muted">
-                    {originalBytes.toLocaleString()} bytes
-                  </span>
+                  <span className="text-xs text-theme-muted">{originalBytes.toLocaleString()} bytes</span>
                 </div>
                 <textarea
                   value={input}
@@ -336,23 +300,13 @@ function RouteComponent() {
                     {outputMode === "minified" ? "Minified Output" : "De-minified Output"}
                   </h2>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-theme-muted">
-                      {outputBytes.toLocaleString()} bytes
-                    </span>
+                    <span className="text-xs text-theme-muted">{outputBytes.toLocaleString()} bytes</span>
                     <button
                       onClick={handleCopy}
                       disabled={!output}
-                      className={cn(
-                        tc.btn,
-                        "px-3 py-1.5 text-xs",
-                        copySuccess ? "theme-btn-success" : "theme-btn-secondary",
-                      )}
+                      className={cn(tc.btn, "px-3 py-1.5 text-xs", copySuccess ? "theme-btn-success" : "theme-btn-secondary")}
                     >
-                      {copySuccess ? (
-                        <IconCheck className="w-3.5 h-3.5" />
-                      ) : (
-                        <IconCopy className="w-3.5 h-3.5" />
-                      )}
+                      {copySuccess ? <IconCheck className="w-3.5 h-3.5" /> : <IconCopy className="w-3.5 h-3.5" />}
                       {copySuccess ? "Copied" : "Copy"}
                     </button>
                   </div>
@@ -371,36 +325,19 @@ function RouteComponent() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <StatCard
-                title="Original Size"
-                value={`${originalBytes.toLocaleString()} bytes`}
-                icon={<IconCode className="w-4 h-4" />}
-              />
+              <StatCard title="Original Size" value={`${originalBytes.toLocaleString()} bytes`} icon={<IconCode className="w-4 h-4" />} />
               <StatCard
                 title={outputMode === "minified" ? "Minified Size" : "De-minified Size"}
                 value={`${outputBytes.toLocaleString()} bytes`}
-                icon={
-                  outputMode === "minified" ? (
-                    <IconArrowsMinimize className="w-4 h-4" />
-                  ) : (
-                    <IconSparkles className="w-4 h-4" />
-                  )
-                }
+                icon={outputMode === "minified" ? <IconArrowsMinimize className="w-4 h-4" /> : <IconSparkles className="w-4 h-4" />}
               />
-              <StatCard
-                title="Saved"
-                value={`${savings}%`}
-                icon={<IconBolt className="w-4 h-4" />}
-                highlight
-              />
+              <StatCard title="Saved" value={`${savings}%`} icon={<IconBolt className="w-4 h-4" />} highlight />
 
               <div className="col-span-3 bg-theme-surface-muted border border-theme-border rounded-lg p-3 flex items-start gap-3">
                 <IconShieldLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                 <div className="text-sm text-theme-body">
                   <p className="font-semibold ">100% Private Processing</p>
-                  <p className="mt-1 text-theme-muted">
-                    Everything runs locally in your browser. Your HTML never leaves your device.
-                  </p>
+                  <p className="mt-1 text-theme-muted">Everything runs locally in your browser. Your HTML never leaves your device.</p>
                 </div>
               </div>
             </div>
@@ -419,26 +356,22 @@ function RouteComponent() {
             features={[
               {
                 title: "Comment Removal",
-                description:
-                  "Strip non-essential HTML comments to reduce file size before deployment.",
+                description: "Strip non-essential HTML comments to reduce file size before deployment.",
                 icon: IconTrash,
               },
               {
                 title: "Whitespace Optimization",
-                description:
-                  "Collapse redundant spacing between elements for compact, clean output.",
+                description: "Collapse redundant spacing between elements for compact, clean output.",
                 icon: IconArrowsMinimize,
               },
               {
                 title: "Readable De-minify",
-                description:
-                  "Expand compact HTML into a structured, readable format for debugging and reviews.",
+                description: "Expand compact HTML into a structured, readable format for debugging and reviews.",
                 icon: IconSparkles,
               },
               {
                 title: "Private by Default",
-                description:
-                  "All minification happens locally with no uploads, logs, or backend processing.",
+                description: "All minification happens locally with no uploads, logs, or backend processing.",
                 icon: IconShieldLock,
               },
             ]}
@@ -449,13 +382,11 @@ function RouteComponent() {
               },
               {
                 title: "Set Options",
-                description:
-                  "Toggle comment removal and whitespace collapsing based on your needs.",
+                description: "Toggle comment removal and whitespace collapsing based on your needs.",
               },
               {
                 title: "Minify or De-minify",
-                description:
-                  "Generate compact HTML for production or readable HTML for editing and debugging.",
+                description: "Generate compact HTML for production or readable HTML for editing and debugging.",
               },
               {
                 title: "Copy or Download",
@@ -466,41 +397,22 @@ function RouteComponent() {
             faqs={faqs}
           />
 
-          <RelatedTools
-            currentToolSlug="html-minifier"
-            category="Data"
-          />
+          <RelatedTools currentToolSlug="html-minifier" category="Data" />
         </main>
       </div>
     </div>
   );
 }
 
-function StatCard({
-  title,
-  value,
-  icon,
-  highlight = false,
-}: {
-  title: string;
-  value: string;
-  icon: ReactNode;
-  highlight?: boolean;
-}) {
+function StatCard({ title, value, icon, highlight = false }: { title: string; value: string; icon: ReactNode; highlight?: boolean }) {
   return (
     <div
       className={`rounded-xl border p-4 ${highlight ? "border-brand-primary/40 bg-brand-primary/10" : "border-theme-border bg-theme-surface"}`}
     >
       <div className="text-xs uppercase tracking-wide text-theme-muted mb-2">{title}</div>
       <div className="flex items-center justify-between">
-        <span
-          className={`text-lg font-bold ${highlight ? "text-brand-light" : "text-theme-heading"}`}
-        >
-          {value}
-        </span>
-        <span className={`shrink-0 ${highlight ? "text-brand-primary" : "text-theme-muted"}`}>
-          {icon}
-        </span>
+        <span className={`text-lg font-bold ${highlight ? "text-brand-light" : "text-theme-heading"}`}>{value}</span>
+        <span className={`shrink-0 ${highlight ? "text-brand-primary" : "text-theme-muted"}`}>{icon}</span>
       </div>
     </div>
   );

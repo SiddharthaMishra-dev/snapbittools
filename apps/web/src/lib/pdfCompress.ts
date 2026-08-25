@@ -2,10 +2,7 @@ import { PDFDocument } from "pdf-lib";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 
 // pdf.js worker (runs alongside the page; compression itself is async per page)
-GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url,
-).toString();
+GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
 
 export type PdfCompressPreset = "strong" | "balanced" | "high";
 
@@ -26,10 +23,7 @@ export type PdfCompressResult = {
   usedOriginal: boolean;
 };
 
-export const PDF_COMPRESS_PRESETS: Record<
-  PdfCompressPreset,
-  { label: string; description: string; quality: number; dpi: number }
-> = {
+export const PDF_COMPRESS_PRESETS: Record<PdfCompressPreset, { label: string; description: string; quality: number; dpi: number }> = {
   strong: {
     label: "Strong",
     description: "Smallest files — best for sharing & email",

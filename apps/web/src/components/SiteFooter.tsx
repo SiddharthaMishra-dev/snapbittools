@@ -65,7 +65,7 @@ export default function SiteFooter() {
         <p className="text-theme-muted text-xs">
           Crafted with care by{" "}
           <a
-            href="https://sidme.dev/"
+            href="https://www.sidme.dev/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-primary hover:text-brand-hover transition-colors"
@@ -74,7 +74,7 @@ export default function SiteFooter() {
           </a>{" "}
           •{" "}
           <a
-            href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
+            href="https://github.com/SiddharthaMishra-dev/snapbittools"
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-primary hover:text-brand-hover transition-colors"

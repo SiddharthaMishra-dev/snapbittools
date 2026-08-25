@@ -1,15 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useMemo, useCallback } from "react";
-import {
-  IconTypography,
-  IconCopy,
-  IconTrash,
-  IconCheck,
-  IconRefresh,
-  IconBolt,
-  IconLock,
-  IconSearch,
-} from "@tabler/icons-react";
+import { IconTypography, IconCopy, IconTrash, IconCheck, IconRefresh, IconBolt, IconLock, IconSearch } from "@tabler/icons-react";
 
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
@@ -104,8 +95,7 @@ const faqs = [
   },
   {
     question: "Is my data private when using this tool?",
-    answer:
-      "Absolutely. As with all SnapBit Tools, the generation happens entirely in your browser. No data is sent to any server.",
+    answer: "Absolutely. As with all SnapBit Tools, the generation happens entirely in your browser. No data is sent to any server.",
   },
   {
     question: "Does it support paragraph formatting?",
@@ -120,13 +110,7 @@ export const Route = createFileRoute("/_wrap/lorem-ipsum-generator")({
       title: "Lorem Ipsum Generator | Random Placeholder Text | SnapBit Tools",
       description:
         "Generate custom Lorem Ipsum placeholder text for your designs and layouts. Choose paragraphs, words, or sentences. 100% private and fast.",
-      keywords: [
-        "lorem ipsum generator",
-        "placeholder text",
-        "dummy text",
-        "random text",
-        "developer tools",
-      ],
+      keywords: ["lorem ipsum generator", "placeholder text", "dummy text", "random text", "developer tools"],
       url: "/lorem-ipsum-generator",
       type: "software",
       faqs,
@@ -206,9 +190,7 @@ function LoremIpsumComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Lorem <span className="text-brand-primary">Ipsum</span> Generator
           </h1>
-          <p className="text-md text-theme-body">
-            Instant placeholder text for your next big project.
-          </p>
+          <p className="text-md text-theme-body">Instant placeholder text for your next big project.</p>
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
@@ -216,9 +198,7 @@ function LoremIpsumComponent() {
             <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex flex-col">
-                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">
-                    Quantity
-                  </label>
+                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Quantity</label>
                   <input
                     type="number"
                     min="1"
@@ -230,9 +210,7 @@ function LoremIpsumComponent() {
                 </div>
 
                 <div className="flex flex-col">
-                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">
-                    Type
-                  </label>
+                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Type</label>
                   <div className="flex p-1 bg-theme-surface rounded-lg">
                     {(["paragraphs", "sentences", "words"] as const).map((t) => (
                       <button
@@ -251,10 +229,7 @@ function LoremIpsumComponent() {
               </div>
 
               <div className="flex items-center gap-3">
-                <button
-                  onClick={generateText}
-                  className={cn(tc.btnSecondary, "px-5 py-2.5")}
-                >
+                <button onClick={generateText} className={cn(tc.btnSecondary, "px-5 py-2.5")}>
                   <IconRefresh className="w-5 h-5" />
                   <span>Regenerate</span>
                 </button>
@@ -262,11 +237,7 @@ function LoremIpsumComponent() {
                 <button
                   onClick={copyToClipboard}
                   disabled={!generatedText}
-                  className={cn(
-                    tc.btn,
-                    "px-5 py-2.5",
-                    copySuccess ? "theme-btn-success" : "theme-btn-primary",
-                  )}
+                  className={cn(tc.btn, "px-5 py-2.5", copySuccess ? "theme-btn-success" : "theme-btn-primary")}
                 >
                   {copySuccess ? (
                     <>
@@ -281,11 +252,7 @@ function LoremIpsumComponent() {
                   )}
                 </button>
 
-                <button
-                  onClick={clearText}
-                  className={cn(tc.btnDanger, "p-2.5")}
-                  title="Clear"
-                >
+                <button onClick={clearText} className={cn(tc.btnDanger, "p-2.5")} title="Clear">
                   <IconTrash className="w-5 h-5" />
                 </button>
               </div>
@@ -296,10 +263,7 @@ function LoremIpsumComponent() {
             {generatedText ? (
               <div className="max-w-none">
                 {generatedText.split("\n\n").map((para, i) => (
-                  <p
-                    key={i}
-                    className="text-theme-body text-xl leading-relaxed mb-6 last:mb-0"
-                  >
+                  <p key={i} className="text-theme-body text-xl leading-relaxed mb-6 last:mb-0">
                     {para}
                   </p>
                 ))}
@@ -324,20 +288,17 @@ function LoremIpsumComponent() {
             features={[
               {
                 title: "Custom Sizes",
-                description:
-                  "Generate exactly as much text as you need, from a single word to 100 paragraphs.",
+                description: "Generate exactly as much text as you need, from a single word to 100 paragraphs.",
                 icon: IconBolt,
               },
               {
                 title: "Smart Formatting",
-                description:
-                  "Sentences are properly capitalized and punctuated, and paragraphs are spaced correctly.",
+                description: "Sentences are properly capitalized and punctuated, and paragraphs are spaced correctly.",
                 icon: IconSearch,
               },
               {
                 title: "Privacy First",
-                description:
-                  "The generation logic runs entirely in your browser. No cookies, no tracking, no server calls.",
+                description: "The generation logic runs entirely in your browser. No cookies, no tracking, no server calls.",
                 icon: IconLock,
               },
             ]}
@@ -352,23 +313,18 @@ function LoremIpsumComponent() {
               },
               {
                 title: "Copy & Use",
-                description:
-                  "Preview the text and use the Copy All button to take it to your project.",
+                description: "Preview the text and use the Copy All button to take it to your project.",
               },
               {
                 title: "Regenerate",
-                description:
-                  "Want something different? Click regenerate to create a new set of random words.",
+                description: "Want something different? Click regenerate to create a new set of random words.",
               },
             ]}
             faqs={faqs}
           />
         </div>
 
-        <RelatedTools
-          currentToolSlug="lorem-ipsum-generator"
-          category="Data"
-        />
+        <RelatedTools currentToolSlug="lorem-ipsum-generator" category="Data" />
       </div>
     </div>
   );

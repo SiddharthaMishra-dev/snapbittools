@@ -16,9 +16,7 @@ function shouldCacheUrl(url: string): boolean {
   try {
     const parsed = new URL(url);
     if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return false;
-    return CACHEABLE_HOST_HINTS.some(
-      (hint) => parsed.hostname.includes(hint) || parsed.pathname.includes(hint),
-    );
+    return CACHEABLE_HOST_HINTS.some((hint) => parsed.hostname.includes(hint) || parsed.pathname.includes(hint));
   } catch {
     return false;
   }
@@ -135,9 +133,7 @@ export async function cachedFetch(
   init: RequestInit | undefined,
   originalFetch: typeof fetch,
 ): Promise<FetchCacheResult> {
-  const url = normalizeUrl(
-    typeof input === "string" ? input : input instanceof URL ? input.href : input.url,
-  );
+  const url = normalizeUrl(typeof input === "string" ? input : input instanceof URL ? input.href : input.url);
 
   const method = (init?.method ?? (input instanceof Request ? input.method : "GET")).toUpperCase();
   if (method !== "GET" || !shouldCacheUrl(url)) {
@@ -156,7 +152,7 @@ export async function cachedFetch(
     return { response: fromIdb, fromCache: true };
   }
 
-    const networkResponse = await originalFetch(input, init);
+  const networkResponse = await originalFetch(input, init);
   if (networkResponse.ok) {
     const forCacheApi = networkResponse.clone();
     const forIdb = networkResponse.clone();
@@ -183,8 +179,7 @@ export function installModelFetchCache(scope: typeof globalThis = globalThis): v
     const { response, fromCache } = await cachedFetch(input, init, originalFetch);
 
     try {
-      const url =
-        typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+      const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
       scope.dispatchEvent(
         new CustomEvent("snapbit-bg-cache", {
           detail: { url, fromCache, status: response.status },

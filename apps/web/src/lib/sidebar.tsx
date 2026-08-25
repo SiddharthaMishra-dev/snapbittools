@@ -1,13 +1,5 @@
 import { useLocation } from "@tanstack/react-router";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
 const ROUTES_WITHOUT_SIDEBAR = ["/", "/tools", "/blogs", "/privacy-policy", "/terms", "/privacy"];
 

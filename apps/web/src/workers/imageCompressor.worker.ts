@@ -27,17 +27,7 @@ type ImageCompressorError = {
 };
 
 self.onmessage = async (event: MessageEvent<ImageCompressorRequest>) => {
-  const {
-    requestId,
-    imageData,
-    fileName,
-    quality,
-    maxWidth,
-    maxHeight,
-    originalSize,
-    mimeType,
-    preserveFormat,
-  } = event.data;
+  const { requestId, imageData, fileName, quality, maxWidth, maxHeight, originalSize, mimeType, preserveFormat } = event.data;
 
   try {
     const { blob, mimeType: outputMimeType } = await compressImageBuffer({

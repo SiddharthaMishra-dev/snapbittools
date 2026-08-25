@@ -263,16 +263,14 @@ export const Route = createFileRoute("/_wrap/compress-image-for-web-without-qual
           "@type": "WebPage",
           "@id": `${SITE}${PATH}`,
         },
-        keywords:
-          "compress image for web without quality loss, website image compression, optimize images for web, snapbittools",
+        keywords: "compress image for web without quality loss, website image compression, optimize images for web, snapbittools",
         articleSection: "Image Optimization",
         inLanguage: "en-US",
         wordCount: 1950,
         about: {
           "@type": "Thing",
           name: "Website image compression",
-          description:
-            "Techniques for reducing image file size for websites while preserving visual quality",
+          description: "Techniques for reducing image file size for websites while preserving visual quality",
         },
       },
     }),
@@ -301,16 +299,9 @@ function BlogPage() {
           </h1>
 
           <p className="text-lg text-theme-muted leading-relaxed">
-            Want to{" "}
-            <strong className="text-theme-heading font-medium">
-              compress image for web without quality loss
-            </strong>
-            ? This guide shows the exact workflow — resize correctly, pick the right format, use
-            visually lossless settings, and ship faster pages with{" "}
-            <a
-              href={`${SITE}/image-compressor`}
-              className="text-brand-primary hover:text-brand-hover hover:underline"
-            >
+            Want to <strong className="text-theme-heading font-medium">compress image for web without quality loss</strong>? This guide
+            shows the exact workflow — resize correctly, pick the right format, use visually lossless settings, and ship faster pages with{" "}
+            <a href={`${SITE}/image-compressor`} className="text-brand-primary hover:text-brand-hover hover:underline">
               SnapBit Tools
             </a>
             .
@@ -332,9 +323,7 @@ function BlogPage() {
         </header>
 
         <div className="mb-10 p-5 bg-brand-primary/10 border border-brand-primary/30 rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <p className="text-sm text-theme-body leading-relaxed">
-            Skip ahead: compress images in your browser — private, free, no upload.
-          </p>
+          <p className="text-sm text-theme-body leading-relaxed">Skip ahead: compress images in your browser — private, free, no upload.</p>
           <Link
             to="/image-compressor"
             className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-5 py-2.5 shrink-0 group")}
@@ -344,21 +333,13 @@ function BlogPage() {
           </Link>
         </div>
 
-        <nav
-          className="mb-14 p-6 bg-theme-surface/50 border border-theme-border rounded-lg"
-          aria-label="Article contents"
-        >
-          <h2 className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-4">
-            Table of Contents
-          </h2>
+        <nav className="mb-14 p-6 bg-theme-surface/50 border border-theme-border rounded-lg" aria-label="Article contents">
+          <h2 className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-4">Table of Contents</h2>
           <ol className="space-y-2.5 text-sm">
             {tocItems.map(([href, text]) => (
               <li key={href} className="flex items-center gap-1.5">
                 <IconChevronRight className="w-3.5 h-3.5 text-theme-body shrink-0" />
-                <a
-                  href={href}
-                  className="text-brand-primary hover:text-brand-hover hover:underline transition-colors"
-                >
+                <a href={href} className="text-brand-primary hover:text-brand-hover hover:underline transition-colors">
                   {text}
                 </a>
               </li>
@@ -368,30 +349,21 @@ function BlogPage() {
 
         <article className="space-y-20">
           <section id="why-compress-for-web" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Why Compress Images for Websites?
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Why Compress Images for Websites?</h2>
             <p className="text-theme-body leading-relaxed mb-4">
-              On most websites, images are the heaviest assets — often more than half of total page
-              weight. Unoptimized photos slow Largest Contentful Paint, waste mobile data, and push
-              visitors away before your content loads.
+              On most websites, images are the heaviest assets — often more than half of total page weight. Unoptimized photos slow Largest
+              Contentful Paint, waste mobile data, and push visitors away before your content loads.
             </p>
             <p className="text-theme-body leading-relaxed mb-4">
               The goal of website image compression is not “smallest file at any cost.” It is{" "}
-              <strong className="text-theme-heading">
-                the smallest file that still looks sharp on the devices your audience uses
-              </strong>
-              . That is what people mean by compress image for web without quality loss: visually
-              lossless results, not necessarily bit-identical files.
+              <strong className="text-theme-heading">the smallest file that still looks sharp on the devices your audience uses</strong>.
+              That is what people mean by compress image for web without quality loss: visually lossless results, not necessarily
+              bit-identical files.
             </p>
             <p className="text-theme-body leading-relaxed">
-              Done right, compression also supports SEO. Faster pages score better on Core Web
-              Vitals, and leaner image payloads keep hosting and CDN bills under control. If you want
-              a deeper dive into why file size matters, read{" "}
-              <Link
-                to="/reduce-your-image-size-for-free"
-                className="text-brand-primary hover:text-brand-hover hover:underline"
-              >
+              Done right, compression also supports SEO. Faster pages score better on Core Web Vitals, and leaner image payloads keep
+              hosting and CDN bills under control. If you want a deeper dive into why file size matters, read{" "}
+              <Link to="/reduce-your-image-size-for-free" className="text-brand-primary hover:text-brand-hover hover:underline">
                 why image compression matters
               </Link>
               .
@@ -406,34 +378,28 @@ function BlogPage() {
               <div className="p-5 bg-theme-surface border border-theme-border rounded-lg">
                 <h3 className="font-semibold text-theme-heading mb-2">Lossless compression</h3>
                 <p className="text-sm text-theme-muted leading-relaxed">
-                  Rebuilds the same pixels more efficiently. Perfect for logos, icons, and UI. PNG
-                  and lossless WebP fit here. Savings are real but smaller than lossy methods on
-                  photos.
+                  Rebuilds the same pixels more efficiently. Perfect for logos, icons, and UI. PNG and lossless WebP fit here. Savings are
+                  real but smaller than lossy methods on photos.
                 </p>
               </div>
               <div className="p-5 bg-theme-surface border border-theme-border rounded-lg">
                 <h3 className="font-semibold text-theme-heading mb-2">Visually lossless (lossy)</h3>
                 <p className="text-sm text-theme-muted leading-relaxed">
-                  Discards detail the human eye rarely notices at normal viewing size. JPEG and
-                  lossy WebP at 80–90% quality usually look identical to the original on a website —
-                  with dramatically smaller files.
+                  Discards detail the human eye rarely notices at normal viewing size. JPEG and lossy WebP at 80–90% quality usually look
+                  identical to the original on a website — with dramatically smaller files.
                 </p>
               </div>
             </div>
             <p className="text-theme-body leading-relaxed">
-              For web delivery, “without losing quality” almost always means{" "}
-              <em>no visible quality loss</em>. That is the standard professional sites aim for —
-              and the standard this guide uses.
+              For web delivery, “without losing quality” almost always means <em>no visible quality loss</em>. That is the standard
+              professional sites aim for — and the standard this guide uses.
             </p>
           </section>
 
           <section id="before-after" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Before &amp; After: Realistic Compression Examples
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Before &amp; After: Realistic Compression Examples</h2>
             <p className="text-theme-body leading-relaxed mb-6">
-              Typical results when you resize to display size and compress with sensible,
-              high-quality settings:
+              Typical results when you resize to display size and compress with sensible, high-quality settings:
             </p>
 
             <div className="overflow-x-auto rounded-lg border border-theme-border">
@@ -441,10 +407,7 @@ function BlogPage() {
                 <thead className="bg-theme-surface">
                   <tr className="border-b border-theme-border">
                     {["Image type", "Before", "After", "Savings", "Visual result"].map((h) => (
-                      <th
-                        key={h}
-                        className="text-left py-3 px-3 text-theme-muted font-medium text-xs uppercase tracking-wide"
-                      >
+                      <th key={h} className="text-left py-3 px-3 text-theme-muted font-medium text-xs uppercase tracking-wide">
                         {h}
                       </th>
                     ))}
@@ -456,9 +419,7 @@ function BlogPage() {
                       <td className="py-3 px-3 text-theme-heading font-medium text-xs">{row.type}</td>
                       <td className="py-3 px-3 text-theme-muted text-xs">{row.before}</td>
                       <td className="py-3 px-3 text-theme-body text-xs">{row.after}</td>
-                      <td className="py-3 px-3 text-[var(--theme-diff-added-text)] font-semibold text-xs">
-                        {row.savings}
-                      </td>
+                      <td className="py-3 px-3 text-[var(--theme-diff-added-text)] font-semibold text-xs">{row.savings}</td>
                       <td className="py-3 px-3 text-theme-muted text-xs">{row.note}</td>
                     </tr>
                   ))}
@@ -466,22 +427,15 @@ function BlogPage() {
               </table>
             </div>
             <p className="text-xs text-theme-muted mt-3">
-              Figures are representative. Your savings depend on content, noise, and how oversized
-              the original export is.
+              Figures are representative. Your savings depend on content, noise, and how oversized the original export is.
             </p>
           </section>
 
           <section id="choose-format" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Choose the Right Format for Web Images
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Choose the Right Format for Web Images</h2>
             <p className="text-theme-body leading-relaxed mb-6">
-              Format choice often saves more bytes than lowering quality. Use this quick guide, then
-              convert with the{" "}
-              <Link
-                to="/image-format-converter"
-                className="text-brand-primary hover:text-brand-hover hover:underline"
-              >
+              Format choice often saves more bytes than lowering quality. Use this quick guide, then convert with the{" "}
+              <Link to="/image-format-converter" className="text-brand-primary hover:text-brand-hover hover:underline">
                 Image Format Converter
               </Link>{" "}
               or dedicated routes like{" "}
@@ -497,13 +451,8 @@ function BlogPage() {
 
             <div className="grid sm:grid-cols-2 gap-4">
               {formatGuide.map(({ format, use, tip }) => (
-                <div
-                  key={format}
-                  className="p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg"
-                >
-                  <h3 className="font-bold text-theme-heading text-sm uppercase tracking-wider mb-2">
-                    {format}
-                  </h3>
+                <div key={format} className="p-5 bg-theme-surface-muted border border-theme-border/40 rounded-lg">
+                  <h3 className="font-bold text-theme-heading text-sm uppercase tracking-wider mb-2">{format}</h3>
                   <p className="text-xs text-brand-primary mb-2">{use}</p>
                   <p className="text-xs text-theme-muted leading-relaxed">{tip}</p>
                 </div>
@@ -511,10 +460,7 @@ function BlogPage() {
             </div>
             <p className="text-sm text-theme-muted mt-6">
               Still deciding between formats? See our{" "}
-              <Link
-                to="/best-free-image-format-converter-2026"
-                className="text-brand-primary hover:text-brand-hover hover:underline"
-              >
+              <Link to="/best-free-image-format-converter-2026" className="text-brand-primary hover:text-brand-hover hover:underline">
                 WebP vs AVIF vs JPEG comparison
               </Link>
               .
@@ -526,9 +472,8 @@ function BlogPage() {
               Step-by-Step: Compress Images for Web Without Losing Quality
             </h2>
             <p className="text-theme-body leading-relaxed mb-8">
-              Follow this sequence whenever you prepare assets for a site, store, or landing page.
-              It prioritizes dimension control first, then quality-aware compression — the order that
-              prevents both blurry results and bloated files.
+              Follow this sequence whenever you prepare assets for a site, store, or landing page. It prioritizes dimension control first,
+              then quality-aware compression — the order that prevents both blurry results and bloated files.
             </p>
 
             <div className="space-y-4 mb-10">
@@ -549,36 +494,24 @@ function BlogPage() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Link
-                to="/image-compressor"
-                className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-6 py-3 group")}
-              >
+              <Link to="/image-compressor" className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-6 py-3 group")}>
                 Compress Images Free
                 <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
-              <Link
-                to="/image-resizer"
-                className={cn(tc.btnSecondary, "inline-flex items-center gap-2 font-semibold px-6 py-3")}
-              >
+              <Link to="/image-resizer" className={cn(tc.btnSecondary, "inline-flex items-center gap-2 font-semibold px-6 py-3")}>
                 Open Image Resizer
               </Link>
             </div>
           </section>
 
           <section id="quality-settings" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Recommended Quality Settings by Image Type
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Recommended Quality Settings by Image Type</h2>
             <p className="text-theme-body leading-relaxed mb-6">
               Use these starting points in{" "}
-              <Link
-                to="/image-compressor"
-                className="text-brand-primary hover:text-brand-hover hover:underline"
-              >
+              <Link to="/image-compressor" className="text-brand-primary hover:text-brand-hover hover:underline">
                 SnapBit Image Compressor
               </Link>
-              , then nudge the slider only if the preview shows artifacts or you still miss a size
-              target.
+              , then nudge the slider only if the preview shows artifacts or you still miss a size target.
             </p>
 
             <div className="overflow-x-auto rounded-lg border border-theme-border">
@@ -586,10 +519,7 @@ function BlogPage() {
                 <thead className="bg-theme-surface">
                   <tr className="border-b border-theme-border">
                     {["Use case", "Format", "Quality", "Extra tip"].map((h) => (
-                      <th
-                        key={h}
-                        className="text-left py-3 px-3 text-theme-muted font-medium text-xs uppercase tracking-wide"
-                      >
+                      <th key={h} className="text-left py-3 px-3 text-theme-muted font-medium text-xs uppercase tracking-wide">
                         {h}
                       </th>
                     ))}
@@ -600,9 +530,7 @@ function BlogPage() {
                     <tr key={row.type} className="hover:bg-theme-surface-muted/20 transition-colors">
                       <td className="py-3 px-3 text-theme-heading font-medium text-xs">{row.type}</td>
                       <td className="py-3 px-3 text-theme-body text-xs">{row.format}</td>
-                      <td className="py-3 px-3 text-brand-primary font-semibold text-xs">
-                        {row.quality}
-                      </td>
+                      <td className="py-3 px-3 text-brand-primary font-semibold text-xs">{row.quality}</td>
                       <td className="py-3 px-3 text-theme-muted text-xs">{row.extra}</td>
                     </tr>
                   ))}
@@ -612,15 +540,10 @@ function BlogPage() {
           </section>
 
           <section id="common-mistakes" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Common Mistakes That Ruin Image Quality
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Common Mistakes That Ruin Image Quality</h2>
             <div className="space-y-3">
               {mistakes.map(({ title, fix }) => (
-                <div
-                  key={title}
-                  className="p-5 border border-theme-border rounded-lg bg-theme-surface"
-                >
+                <div key={title} className="p-5 border border-theme-border rounded-lg bg-theme-surface">
                   <h3 className="font-semibold text-theme-heading text-sm mb-1.5">{title}</h3>
                   <p className="text-sm text-theme-muted leading-relaxed">{fix}</p>
                 </div>
@@ -629,46 +552,30 @@ function BlogPage() {
           </section>
 
           <section id="workflow" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              A Complete Website Image Optimization Workflow
-            </h2>
-            <p className="text-theme-body leading-relaxed mb-6">
-              For a full page or product launch, chain SnapBit tools in this order:
-            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">A Complete Website Image Optimization Workflow</h2>
+            <p className="text-theme-body leading-relaxed mb-6">For a full page or product launch, chain SnapBit tools in this order:</p>
             <ol className="space-y-4 text-theme-body list-decimal list-inside mb-8">
               <li>
-                <Link
-                  to="/image-cropper"
-                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
-                >
+                <Link to="/image-cropper" className="text-brand-primary hover:text-brand-hover hover:underline font-medium">
                   Crop
                 </Link>{" "}
                 to the final composition (hero, square card, thumbnail).
               </li>
               <li>
-                <Link
-                  to="/image-resizer"
-                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
-                >
+                <Link to="/image-resizer" className="text-brand-primary hover:text-brand-hover hover:underline font-medium">
                   Resize
                 </Link>{" "}
                 to the largest size you will actually serve (plus 2× only if you need retina).
               </li>
               <li>
                 Convert photos to WebP with the{" "}
-                <Link
-                  to="/image-format-converter"
-                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
-                >
+                <Link to="/image-format-converter" className="text-brand-primary hover:text-brand-hover hover:underline font-medium">
                   format converter
                 </Link>{" "}
                 when helpful.
               </li>
               <li>
-                <Link
-                  to="/image-compressor"
-                  className="text-brand-primary hover:text-brand-hover hover:underline font-medium"
-                >
+                <Link to="/image-compressor" className="text-brand-primary hover:text-brand-hover hover:underline font-medium">
                   Compress
                 </Link>{" "}
                 at visually lossless quality and download a ZIP for the whole batch.
@@ -676,18 +583,13 @@ function BlogPage() {
             </ol>
             <p className="text-theme-body leading-relaxed mb-6">
               Comparing compressors? See{" "}
-              <Link
-                to="/best-image-compressor-tool-2026"
-                className="text-brand-primary hover:text-brand-hover hover:underline"
-              >
+              <Link to="/best-image-compressor-tool-2026" className="text-brand-primary hover:text-brand-hover hover:underline">
                 SnapBit vs TinyPNG, Squoosh &amp; more
               </Link>{" "}
               for a privacy- and limits-focused breakdown.
             </p>
             <div className={cn(tc.diffAdded, "p-6 border border-theme-border rounded-lg")}>
-              <h3 className="font-semibold text-[var(--theme-diff-added-text)] mb-3">
-                Why teams use SnapBit for web image compression
-              </h3>
+              <h3 className="font-semibold text-[var(--theme-diff-added-text)] mb-3">Why teams use SnapBit for web image compression</h3>
               <ul className="space-y-2 text-sm text-theme-body">
                 {[
                   "100% browser-based — no uploads to snapbittools.com",
@@ -705,9 +607,7 @@ function BlogPage() {
           </section>
 
           <section id="faqs" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-8">
-              Frequently Asked Questions
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-8">Frequently Asked Questions</h2>
             <div className="space-y-4">
               {faqs.map((faq, index) => (
                 <details
@@ -734,16 +634,9 @@ function BlogPage() {
                 <a href={SITE} className="text-brand-primary hover:underline">
                   snapbittools.com
                 </a>{" "}
-                to compress image files for the web without visible quality loss. No signup. No
-                uploads. Just faster pages.
+                to compress image files for the web without visible quality loss. No signup. No uploads. Just faster pages.
               </p>
-              <Link
-                to="/image-compressor"
-                className={cn(
-                  tc.btnPrimary,
-                  "inline-flex items-center gap-2 font-semibold px-8 py-3 group",
-                )}
-              >
+              <Link to="/image-compressor" className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-8 py-3 group")}>
                 Try SnapBit Image Compressor
                 <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>

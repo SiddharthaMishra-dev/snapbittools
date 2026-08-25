@@ -195,8 +195,7 @@ export const Route = createFileRoute("/_wrap/best-image-compressor-tool-2026")({
           "@type": "WebPage",
           "@id": `${SITE}/best-image-compressor-tool-2026`,
         },
-        keywords:
-          "best image compressor, TinyPNG alternative, compress images online, client-side compression, snapbittools",
+        keywords: "best image compressor, TinyPNG alternative, compress images online, client-side compression, snapbittools",
         articleSection: "Image Optimization",
         inLanguage: "en-US",
         wordCount: 2200,
@@ -227,13 +226,12 @@ function BlogPage() {
           </h1>
 
           <p className="text-lg text-theme-muted leading-relaxed">
-            Looking for the best free image compressor that won't upload your photos to a stranger's
-            server? We compared{" "}
+            Looking for the best free image compressor that won't upload your photos to a stranger's server? We compared{" "}
             <a href={`${SITE}/image-compressor`} className="text-brand-primary hover:text-brand-hover hover:underline">
               SnapBit Tools
             </a>
-            , TinyPNG, Squoosh, Compressor.io, iLoveIMG, and Kraken.io on privacy, batch support,
-            format coverage, and real-world compression results.
+            , TinyPNG, Squoosh, Compressor.io, iLoveIMG, and Kraken.io on privacy, batch support, format coverage, and real-world
+            compression results.
           </p>
 
           <div className="mt-6 flex items-center gap-3">
@@ -267,32 +265,25 @@ function BlogPage() {
 
         <article className="space-y-20">
           <section id="why-compress" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Why Image Compression Still Matters in 2026
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Why Image Compression Still Matters in 2026</h2>
             <p className="text-theme-body leading-relaxed mb-4">
-              Images remain the heaviest assets on most websites — often 50–70% of total page weight.
-              Every kilobyte you shave off improves Core Web Vitals, SEO rankings, mobile data usage,
-              and conversion rates. The right{" "}
-              <strong className="text-theme-heading">online image compressor</strong> should be fast,
-              free, and safe enough for client deliverables.
+              Images remain the heaviest assets on most websites — often 50–70% of total page weight. Every kilobyte you shave off improves
+              Core Web Vitals, SEO rankings, mobile data usage, and conversion rates. The right{" "}
+              <strong className="text-theme-heading">online image compressor</strong> should be fast, free, and safe enough for client
+              deliverables.
             </p>
             <p className="text-theme-body leading-relaxed">
-              In 2026, the dividing line is clear: <strong className="text-theme-heading">client-side compressors</strong>{" "}
-              (like{" "}
+              In 2026, the dividing line is clear: <strong className="text-theme-heading">client-side compressors</strong> (like{" "}
               <Link to="/image-compressor" className="text-brand-primary hover:text-brand-hover hover:underline">
                 snapbittools.com/image-compressor
               </Link>
-              ) process files in your browser, while legacy tools upload to remote servers. For
-              photographers, agencies, and developers handling NDA assets, that difference is
-              non-negotiable.
+              ) process files in your browser, while legacy tools upload to remote servers. For photographers, agencies, and developers
+              handling NDA assets, that difference is non-negotiable.
             </p>
           </section>
 
           <section id="what-to-look-for" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              What to Look For in an Image Compressor
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">What to Look For in an Image Compressor</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
                 {
@@ -321,12 +312,10 @@ function BlogPage() {
           </section>
 
           <section id="comparison" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Best Image Compressor Tools Compared
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Best Image Compressor Tools Compared</h2>
             <p className="text-theme-body leading-relaxed mb-6">
-              Side-by-side comparison of the most searched{" "}
-              <strong className="text-theme-heading">free image compressor</strong> options in 2026:
+              Side-by-side comparison of the most searched <strong className="text-theme-heading">free image compressor</strong> options in
+              2026:
             </p>
 
             <div className="overflow-x-auto rounded-lg border border-theme-border">
@@ -344,16 +333,11 @@ function BlogPage() {
                   {competitorRows.map((row) => (
                     <tr
                       key={row.tool}
-                      className={cn(
-                        "hover:bg-theme-surface-muted/20 transition-colors",
-                        row.highlight && "bg-brand-primary/5",
-                      )}
+                      className={cn("hover:bg-theme-surface-muted/20 transition-colors", row.highlight && "bg-brand-primary/5")}
                     >
                       <td className={cn("py-3 px-3 font-medium text-xs", row.highlight ? "text-brand-primary" : "text-theme-heading")}>
                         {row.tool}
-                        {row.highlight && (
-                          <span className="ml-1.5 text-[10px] uppercase tracking-wide text-brand-primary">★ Pick</span>
-                        )}
+                        {row.highlight && <span className="ml-1.5 text-[10px] uppercase tracking-wide text-brand-primary">★ Pick</span>}
                       </td>
                       <td className="py-3 px-3 text-theme-body text-xs">{row.privacy}</td>
                       <td className="py-3 px-3 text-theme-muted text-xs">{row.upload}</td>
@@ -372,16 +356,14 @@ function BlogPage() {
           </section>
 
           <section id="snapbit-review" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Why We Recommend SnapBit Tools
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Why We Recommend SnapBit Tools</h2>
             <p className="text-theme-body leading-relaxed mb-6">
               Among every tool we tested,{" "}
               <a href={`${SITE}/image-compressor`} className="text-brand-primary hover:text-brand-hover hover:underline font-medium">
                 SnapBit Tools Image Compressor
               </a>{" "}
-              is the only one that combines unlimited free batch compression, WebP/AVIF support,
-              ZIP export, and true zero-upload privacy in a single interface.
+              is the only one that combines unlimited free batch compression, WebP/AVIF support, ZIP export, and true zero-upload privacy in
+              a single interface.
             </p>
 
             <div className={cn(tc.diffAdded, "p-6 border border-theme-border rounded-lg mb-6")}>
@@ -403,17 +385,14 @@ function BlogPage() {
             </div>
 
             <p className="text-theme-body leading-relaxed">
-              <strong className="text-theme-heading">When to use a competitor instead:</strong> Squoosh
-              is excellent if you need deep codec experimentation on a single file. TinyPNG is fine
-              for a quick one-off PNG if you don't mind uploading. Kraken.io fits teams already on
-              their WordPress plugin or API.
+              <strong className="text-theme-heading">When to use a competitor instead:</strong> Squoosh is excellent if you need deep codec
+              experimentation on a single file. TinyPNG is fine for a quick one-off PNG if you don't mind uploading. Kraken.io fits teams
+              already on their WordPress plugin or API.
             </p>
           </section>
 
           <section id="how-to-use" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              How to Compress Images with SnapBit Tools
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">How to Compress Images with SnapBit Tools</h2>
             <div className="space-y-4 mb-8">
               {steps.map(({ step, title, desc }) => (
                 <div
@@ -469,8 +448,10 @@ function BlogPage() {
               <h2 className="text-lg font-bold text-theme-heading mb-3">Compress Images Free — No Upload</h2>
               <p className="text-theme-muted mb-5 text-sm max-w-md mx-auto">
                 Join thousands of developers and designers using{" "}
-                <a href={SITE} className="text-brand-primary hover:underline">snapbittools.com</a> for
-                private, unlimited image compression.
+                <a href={SITE} className="text-brand-primary hover:underline">
+                  snapbittools.com
+                </a>{" "}
+                for private, unlimited image compression.
               </p>
               <Link to="/image-compressor" className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-8 py-3 group")}>
                 Open Image Compressor

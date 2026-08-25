@@ -33,10 +33,7 @@ function BlogsPage() {
       <section className="px-4 pb-16 relative z-10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 gap-4">
           {blogPosts.map((post) => (
-            <article
-              key={post.href}
-              className="rounded-lg border border-theme-border bg-theme-card p-4 shadow-sm"
-            >
+            <article key={post.href} className="rounded-lg border border-theme-border bg-theme-card p-4 shadow-sm">
               <div className="flex flex-wrap items-center gap-2 text-xs mb-2">
                 <span className="text-theme-subtle">{post.publishedAt}</span>
                 <span className="text-theme-subtle">•</span>

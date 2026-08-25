@@ -150,16 +150,10 @@ export function ImageCompressorTool() {
 
     for (const fileObj of filesToCompress) {
       try {
-        setFiles((prev) =>
-          prev.map((f) => (f.id === fileObj.id ? { ...f, status: "compressing" } : f)),
-        );
+        setFiles((prev) => prev.map((f) => (f.id === fileObj.id ? { ...f, status: "compressing" } : f)));
         await compressImage(fileObj);
       } catch (error) {
-        setFiles((prev) =>
-          prev.map((f) =>
-            f.id === fileObj.id ? { ...f, status: "error", error: (error as Error).message } : f,
-          ),
-        );
+        setFiles((prev) => prev.map((f) => (f.id === fileObj.id ? { ...f, status: "error", error: (error as Error).message } : f)));
       }
     }
 
@@ -173,9 +167,7 @@ export function ImageCompressorTool() {
     link.href = fileObj.downloadUrl;
 
     const originalName = fileObj.name.replace(/\.[^/.]+$/, "");
-    const extension =
-      fileObj.ext ||
-      mimeTypeToExtension(fileObj.outputMimeType || (preserveFormat ? fileObj.mimeType : "image/jpeg"));
+    const extension = fileObj.ext || mimeTypeToExtension(fileObj.outputMimeType || (preserveFormat ? fileObj.mimeType : "image/jpeg"));
     link.download = `compressed_${originalName}.${extension}`;
 
     document.body.appendChild(link);
@@ -195,9 +187,7 @@ export function ImageCompressorTool() {
       const zip = new JSZip();
       for (const item of completedFiles) {
         if (item.compressedBlob) {
-          const extension =
-            item.ext ||
-            mimeTypeToExtension(item.outputMimeType || (preserveFormat ? item.mimeType : "image/jpeg"));
+          const extension = item.ext || mimeTypeToExtension(item.outputMimeType || (preserveFormat ? item.mimeType : "image/jpeg"));
           const filName = `${item.name.replace(/\.[^/.]+$/, "")}.${extension}`;
           zip.file(filName, item.compressedBlob);
         }
@@ -277,15 +267,11 @@ export function ImageCompressorTool() {
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                isDragging
-                  ? "border-brand-primary bg-brand-primary/20"
-                  : "border-gray-600 hover:border-brand-primary/40 "
+                isDragging ? "border-brand-primary bg-brand-primary/20" : "border-gray-600 hover:border-brand-primary/40 "
               }`}
             >
               <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload
-                  className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-theme-muted"} transition-colors`}
-                />
+                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-theme-muted"} transition-colors`} />
                 <div>
                   <p className="text-xl font-medium text-theme-heading mb-2">
                     {isDragging ? "Drop your images here" : "Drag & drop your images here"}
@@ -301,18 +287,10 @@ export function ImageCompressorTool() {
               </div>
             </div>
             <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
-              <IconLock className="w-4 h-4" /> Your files stay on your device. Nothing is uploaded
-              to any server.
+              <IconLock className="w-4 h-4" /> Your files stay on your device. Nothing is uploaded to any server.
             </p>
 
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              ref={fileInputRef}
-              className="hidden"
-              onChange={handleFileChange}
-            />
+            <input type="file" accept="image/*" multiple ref={fileInputRef} className="hidden" onChange={handleFileChange} />
           </>
         ) : (
           <>
@@ -325,25 +303,17 @@ export function ImageCompressorTool() {
                     onChange={(e) => setPreserveFormat(e.target.checked)}
                     className="w-4 h-4 text-brand-primary bg-theme-surface-muted border-theme-border rounded focus:ring-brand-primary"
                   />
-                  <span className="text-sm font-medium dark:text-gray-200 text-gray-800">
-                    Preserve original format
-                  </span>
+                  <span className="text-sm font-medium dark:text-gray-200 text-gray-800">Preserve original format</span>
                 </label>
                 <p className="text-xs text-theme-muted mt-1">
-                  {preserveFormat
-                    ? "Keep original file formats (PNG, JPEG, etc.)"
-                    : "Convert all images to JPEG for better compression"}
+                  {preserveFormat ? "Keep original file formats (PNG, JPEG, etc.)" : "Convert all images to JPEG for better compression"}
                 </p>
               </div>
 
               <div className="mb-4">
                 <div className="flex justify-between items-center mb-2">
-                  <label className="text-sm font-medium dark:text-gray-200 text-gray-800">
-                    Quality
-                  </label>
-                  <span className="text-sm text-brand-primary font-medium">
-                    {Math.round(quality * 100)}%
-                  </span>
+                  <label className="text-sm font-medium dark:text-gray-200 text-gray-800">Quality</label>
+                  <span className="text-sm text-brand-primary font-medium">{Math.round(quality * 100)}%</span>
                 </div>
                 <input
                   type="range"
@@ -359,8 +329,7 @@ export function ImageCompressorTool() {
                   <span>Higher quality</span>
                 </div>
                 <p className="text-xs text-theme-muted mt-2">
-                  At 100%, PNG stays lossless. Lower values reduce colors for smaller files.
-                  JPEG/WebP use quality encoding.
+                  At 100%, PNG stays lossless. Lower values reduce colors for smaller files. JPEG/WebP use quality encoding.
                 </p>
               </div>
 
@@ -390,9 +359,7 @@ export function ImageCompressorTool() {
               </div> */}
             </div>
             <div className="w-full flex justify-between items-center mb-3">
-              <h3 className="text-xl font-semibold text-theme-heading m-0">
-                Files ({files.length})
-              </h3>
+              <h3 className="text-xl font-semibold text-theme-heading m-0">Files ({files.length})</h3>
               <div className="flex">
                 {completedCount > 0 && (
                   <button
@@ -428,32 +395,21 @@ export function ImageCompressorTool() {
 
             <div className="space-y-3">
               {files.map((file) => (
-                <div
-                  key={file.id}
-                  className="flex items-center justify-between p-2 border border-gray-900 rounded-lg bg-transparent"
-                >
+                <div key={file.id} className="flex items-center justify-between p-2 border border-gray-900 rounded-lg bg-transparent">
                   <div className="mr-4 flex-shrink-0">
-                    <img
-                      src={file.preview}
-                      alt={file.name}
-                      className="w-16 object-contain rounded-md"
-                    />
+                    <img src={file.preview} alt={file.name} className="w-16 object-contain rounded-md" />
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className=" flex min-w-0 flex-col items-start gap-2 sm:flex-row sm:items-center">
-                      <p className="w-full truncate font-medium text-theme-heading sm:w-auto sm:max-w-[18rem]">
-                        {file.name}
-                      </p>
+                      <p className="w-full truncate font-medium text-theme-heading sm:w-auto sm:max-w-[18rem]">{file.name}</p>
                     </div>
                     <div className="flex items-center space-x-4  flex-wrap">
                       <span className="text-xs text-theme-muted">
                         {formatFileSize(file.originalSize)} &rarr;
                         {file.compressedSize && (
                           <>
-                            <span className="text-xs px-2 bg-green-900 text-green-300">
-                              {formatFileSize(file.compressedSize)}
-                            </span>
+                            <span className="text-xs px-2 bg-green-900 text-green-300">{formatFileSize(file.compressedSize)}</span>
                           </>
                         )}
                       </span>
@@ -463,9 +419,7 @@ export function ImageCompressorTool() {
                   </div>
 
                   <div className="flex items-center space-x-3 ml-4">
-                    {file.status === "ready" && (
-                      <span className="text-theme-muted text-sm">Ready</span>
-                    )}
+                    {file.status === "ready" && <span className="text-theme-muted text-sm">Ready</span>}
                     {file.status === "compressing" && (
                       <div className="flex items-center space-x-2">
                         <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>

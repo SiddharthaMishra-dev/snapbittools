@@ -36,9 +36,7 @@ export function Button({ children }: ButtonProps) {
         }
         style={{
           borderColor: hasMoved ? "var(--show-color)" : "transparent",
-          backgroundColor: hasMoved
-            ? "color-mix(in srgb, var(--show-color) 30%, transparent)"
-            : "transparent",
+          backgroundColor: hasMoved ? "color-mix(in srgb, var(--show-color) 30%, transparent)" : "transparent",
         }}
       >
         <motion.div

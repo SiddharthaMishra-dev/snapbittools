@@ -21,8 +21,7 @@ const faqs = [
   },
   {
     question: "Is my PDF uploaded anywhere?",
-    answer:
-      "No. Private mode processes the PDF entirely in your browser. Nothing is sent to SnapBit servers.",
+    answer: "No. Private mode processes the PDF entirely in your browser. Nothing is sent to SnapBit servers.",
   },
   {
     question: "Why didn’t my PDF get smaller?",
@@ -70,8 +69,7 @@ function RouteComponent() {
             PDF <span className="text-brand-primary">Compressor</span>
           </h1>
           <p className="text-md text-theme-body">
-            Shrink PDF file size in your browser. Private by default — your document never leaves
-            your device.
+            Shrink PDF file size in your browser. Private by default — your document never leaves your device.
           </p>
         </div>
 
@@ -90,20 +88,17 @@ function RouteComponent() {
           features={[
             {
               title: "Private by Default",
-              description:
-                "Compression runs in your browser. No account and no upload in private mode.",
+              description: "Compression runs in your browser. No account and no upload in private mode.",
               icon: IconLock,
             },
             {
               title: "Quality Controls",
-              description:
-                "Presets plus custom JPEG quality and DPI so you can balance size and clarity.",
+              description: "Presets plus custom JPEG quality and DPI so you can balance size and clarity.",
               icon: IconArrowsMinimize,
             },
             {
               title: "Honest Results",
-              description:
-                "If compression doesn’t shrink the file, we keep the original and tell you.",
+              description: "If compression doesn’t shrink the file, we keep the original and tell you.",
               icon: IconFileTypePdf,
             },
           ]}
@@ -129,10 +124,7 @@ function RouteComponent() {
         />
       </div>
 
-      <RelatedTools
-        currentToolSlug="pdf-compressor"
-        category="Images"
-      />
+      <RelatedTools currentToolSlug="pdf-compressor" category="Images" />
     </div>
   );
 }

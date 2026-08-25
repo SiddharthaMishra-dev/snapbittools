@@ -231,24 +231,26 @@ function App() {
           transition={{ duration: 0.8, delay: 0.55, ease: easeInOut }}
           className="relative mt-14 w-full max-w-5xl mx-auto"
         >
-          <div className="hero-preview-wrap pb-12">
-            <div className="rounded-2xl border border-theme-border bg-theme-surface overflow-hidden shadow-none">
-              {/* browser top bar */}
-              <div className="bg-[#f5f5f7] dark:bg-theme-surface-muted border-b border-theme-border/80 px-4 py-3 flex items-center gap-3">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-                </div>
-                <div className="flex-1 flex justify-center">
-                  <div className="bg-theme-surface border border-theme-border rounded-md px-4 py-1 text-xs text-theme-muted font-mono w-56 text-center">
-                    snapbittools.com/tools
+          <div className="hero-preview-wrap pb-8">
+            <div className="hero-preview-frame">
+              <div className="hero-preview-frame-inner">
+                {/* browser top bar */}
+                {/* <div className="bg-[#f5f5f7] dark:bg-theme-surface-muted border-b border-theme-border/80 px-4 py-3 flex items-center gap-3">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                    <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                    <div className="w-3 h-3 rounded-full bg-[#28c840]" />
                   </div>
-                </div>
-                <div className="w-12" />
-              </div>
+                  <div className="flex-1 flex justify-center">
+                    <div className="bg-theme-surface border border-theme-border rounded-md px-4 py-1 text-xs text-theme-muted font-mono w-56 text-center">
+                      snapbittools.com/tools
+                    </div>
+                  </div>
+                  <div className="w-12" />
+                </div> */}
 
-              <HeroScreenshotCanvas />
+                <HeroScreenshotCanvas />
+              </div>
             </div>
           </div>
         </motion.div>

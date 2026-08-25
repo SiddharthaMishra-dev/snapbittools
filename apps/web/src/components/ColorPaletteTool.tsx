@@ -168,9 +168,7 @@ function parseColorToHex(value: string, format: ColorFormat): string | null {
 
   if (format === "rgb") {
     const match =
-      trimmed.match(
-        /^rgba?\(\s*(\d{1,3})\s*[, ]\s*(\d{1,3})\s*[, ]\s*(\d{1,3})(?:\s*[,/]\s*[\d.]+%?)?\s*\)$/i,
-      ) ||
+      trimmed.match(/^rgba?\(\s*(\d{1,3})\s*[, ]\s*(\d{1,3})\s*[, ]\s*(\d{1,3})(?:\s*[,/]\s*[\d.]+%?)?\s*\)$/i) ||
       trimmed.match(/^(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})$/) ||
       trimmed.match(/^(\d{1,3})\s+(\d{1,3})\s+(\d{1,3})$/);
     if (!match) return null;
@@ -186,23 +184,13 @@ function parseColorToHex(value: string, format: ColorFormat): string | null {
     trimmed.match(
       /^hsla?\(\s*(\d{1,3}(?:\.\d+)?)\s*[, ]\s*(\d{1,3}(?:\.\d+)?)%?\s*[, ]\s*(\d{1,3}(?:\.\d+)?)%?(?:\s*[,/]\s*[\d.]+%?)?\s*\)$/i,
     ) ||
-    trimmed.match(
-      /^(\d{1,3}(?:\.\d+)?)\s*,\s*(\d{1,3}(?:\.\d+)?)%?\s*,\s*(\d{1,3}(?:\.\d+)?)%?$/,
-    ) ||
+    trimmed.match(/^(\d{1,3}(?:\.\d+)?)\s*,\s*(\d{1,3}(?:\.\d+)?)%?\s*,\s*(\d{1,3}(?:\.\d+)?)%?$/) ||
     trimmed.match(/^(\d{1,3}(?:\.\d+)?)\s+(\d{1,3}(?:\.\d+)?)%?\s+(\d{1,3}(?:\.\d+)?)%?$/);
   if (!match) return null;
   const h = Number(match[1]);
   const s = Number(match[2]);
   const l = Number(match[3]);
-  if (
-    [h, s, l].some((v) => Number.isNaN(v)) ||
-    h < 0 ||
-    h > 360 ||
-    s < 0 ||
-    s > 100 ||
-    l < 0 ||
-    l > 100
-  ) {
+  if ([h, s, l].some((v) => Number.isNaN(v)) || h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) {
     return null;
   }
   return normalizeHex(hslToHex(h, s, l));
@@ -293,9 +281,7 @@ function generateShades(baseHex: string, count = 7): string[] {
     }
   });
 
-  return lightnesses.map((l, i) =>
-    i === closestIdx ? base : hslToHex(h, Math.max(0, Math.min(100, s)), l),
-  );
+  return lightnesses.map((l, i) => (i === closestIdx ? base : hslToHex(h, Math.max(0, Math.min(100, s)), l)));
 }
 
 function generateContrast(baseHex: string): string[] {
@@ -356,9 +342,7 @@ function generateAnalogous(baseHex: string): string[] {
   const base = normalizeHex(baseHex);
   const { r, g, b } = hexToRgb(base);
   const { h, s, l } = rgbToHsl(r, g, b);
-  return [-60, -30, 0, 30, 60].map((offset) =>
-    offset === 0 ? base : hslToHex((h + offset + 360) % 360, s, l),
-  );
+  return [-60, -30, 0, 30, 60].map((offset) => (offset === 0 ? base : hslToHex((h + offset + 360) % 360, s, l)));
 }
 
 function generateSplitComplementary(baseHex: string): string[] {
@@ -479,14 +463,7 @@ function ColorCard({
   const whiteContrast = contrastRatio(color.hex, "#ffffff");
   const blackContrast = contrastRatio(color.hex, "#000000");
   const bestContrast = Math.max(whiteContrast, blackContrast);
-  const wcagLevel =
-    bestContrast >= 7
-      ? "AAA"
-      : bestContrast >= 4.5
-        ? "AA"
-        : bestContrast >= 3
-          ? "AA Large"
-          : "Fail";
+  const wcagLevel = bestContrast >= 7 ? "AAA" : bestContrast >= 4.5 ? "AA" : bestContrast >= 3 ? "AA Large" : "Fail";
 
   return (
     <div
@@ -498,10 +475,7 @@ function ColorCard({
       title={`Click to copy ${displayValue}`}
     >
       {/* Color index badge */}
-      <div
-        className="absolute top-3 left-3 text-xs font-bold opacity-40"
-        style={{ color: textColor }}
-      >
+      <div className="absolute top-3 left-3 text-xs font-bold opacity-40" style={{ color: textColor }}>
         {index + 1}
       </div>
 
@@ -523,10 +497,7 @@ function ColorCard({
 
       {/* Locked indicator */}
       {color.locked && (
-        <div
-          className="absolute top-3 right-3 p-1.5 rounded-lg"
-          style={{ background: `${textColor}30`, color: textColor }}
-        >
+        <div className="absolute top-3 right-3 p-1.5 rounded-lg" style={{ background: `${textColor}30`, color: textColor }}>
           <IconLock size={14} />
         </div>
       )}
@@ -538,50 +509,28 @@ function ColorCard({
         }`}
         style={{ background: `linear-gradient(to top, ${color.hex}ee, transparent)` }}
       >
-        <div
-          className="flex items-center justify-between gap-1"
-          style={{ color: textColor }}
-        >
+        <div className="flex items-center justify-between gap-1" style={{ color: textColor }}>
           <span className="text-xs font-mono font-semibold truncate">{displayValue}</span>
           <div className="flex items-center gap-1 flex-shrink-0">
-            <span
-              className="text-[10px] font-bold px-1.5 py-0.5 rounded"
-              style={{ background: `${textColor}20` }}
-            >
+            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ background: `${textColor}20` }}>
               {wcagLevel}
             </span>
-            {isCopied ? (
-              <IconCheck size={14} />
-            ) : (
-              <IconCopy
-                size={14}
-                className="opacity-70"
-              />
-            )}
+            {isCopied ? <IconCheck size={14} /> : <IconCopy size={14} className="opacity-70" />}
           </div>
         </div>
       </div>
 
       {/* Always visible hex at bottom when not hovered */}
       {!hovered && (
-        <div
-          className="absolute bottom-3 left-3 right-3"
-          style={{ color: textColor }}
-        >
+        <div className="absolute bottom-3 left-3 right-3" style={{ color: textColor }}>
           <span className="text-xs font-mono opacity-70">{color.hex.toUpperCase()}</span>
         </div>
       )}
 
       {/* Copy flash overlay */}
       {isCopied && (
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ background: `${color.hex}cc` }}
-        >
-          <div
-            className="flex flex-col items-center gap-1"
-            style={{ color: textColor }}
-          >
+        <div className="absolute inset-0 flex items-center justify-center" style={{ background: `${color.hex}cc` }}>
+          <div className="flex flex-col items-center gap-1" style={{ color: textColor }}>
             <IconCheck size={28} />
             <span className="text-xs font-semibold">Copied!</span>
           </div>
@@ -710,9 +659,7 @@ export function ColorPaletteTool() {
   };
 
   const exportCSS = () => {
-    const lines = [":root {", ...palette.map((c, i) => `  --color-${i + 1}: ${c.hex};`), "}"].join(
-      "\n",
-    );
+    const lines = [":root {", ...palette.map((c, i) => `  --color-${i + 1}: ${c.hex};`), "}"].join("\n");
     downloadText(lines, "palette.css");
     setExportOpen(false);
   };
@@ -762,9 +709,7 @@ export function ColorPaletteTool() {
         {/* Row 1: Mode selector */}
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-theme-muted uppercase tracking-wider mr-1">
-              Mode
-            </span>
+            <span className="text-xs font-semibold text-theme-muted uppercase tracking-wider mr-1">Mode</span>
             <div className="flex flex-wrap gap-1.5">
               {generalModes.map((m) => (
                 <button
@@ -772,9 +717,7 @@ export function ColorPaletteTool() {
                   onClick={() => handleModeChange(m.value)}
                   className={cn(
                     "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200",
-                    mode === m.value
-                      ? tc.toggleActive
-                      : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                    mode === m.value ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
                   )}
                 >
                   {m.label}
@@ -785,9 +728,7 @@ export function ColorPaletteTool() {
 
           {/* Color Theory group */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-theme-muted uppercase tracking-wider mr-1">
-              Theory
-            </span>
+            <span className="text-xs font-semibold text-theme-muted uppercase tracking-wider mr-1">Theory</span>
             <div className="flex flex-wrap gap-1.5">
               {theoryModes.map((m) => (
                 <button
@@ -795,9 +736,7 @@ export function ColorPaletteTool() {
                   onClick={() => handleModeChange(m.value)}
                   className={cn(
                     "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200",
-                    mode === m.value
-                      ? tc.toggleActive
-                      : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                    mode === m.value ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
                   )}
                 >
                   {m.label}
@@ -814,9 +753,7 @@ export function ColorPaletteTool() {
             <label className="text-xs font-semibold text-theme-muted flex items-center gap-1.5">
               <IconColorPicker size={13} />
               Base Color
-              {!currentMode.needsBase && (
-                <span className="text-theme-muted font-normal">(not used in random mode)</span>
-              )}
+              {!currentMode.needsBase && <span className="text-theme-muted font-normal">(not used in random mode)</span>}
             </label>
             <div className="flex items-center gap-2">
               {/* Native color picker */}
@@ -844,11 +781,7 @@ export function ColorPaletteTool() {
                     "w-full px-3 py-2 text-sm font-mono placeholder:text-theme-muted disabled:opacity-40 disabled:cursor-not-allowed",
                   )}
                 />
-                {colorInputError && (
-                  <p className="text-[var(--theme-alert-error-text)] text-[11px] mt-1">
-                    {colorInputError}
-                  </p>
-                )}
+                {colorInputError && <p className="text-[var(--theme-alert-error-text)] text-[11px] mt-1">{colorInputError}</p>}
               </div>
             </div>
           </div>
@@ -863,9 +796,7 @@ export function ColorPaletteTool() {
                   onClick={() => handleFormatChange(f)}
                   className={cn(
                     "px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200",
-                    format === f
-                      ? tc.toggleActive
-                      : cn(tc.toggleInactive, "bg-theme-surface-muted"),
+                    format === f ? tc.toggleActive : cn(tc.toggleInactive, "bg-theme-surface-muted"),
                   )}
                 >
                   {f}
@@ -878,42 +809,23 @@ export function ColorPaletteTool() {
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-theme-muted invisible">Actions</label>
             <div className="flex gap-2">
-              <button
-                onClick={() => generate()}
-                className={cn(
-                  tc.btnPrimary,
-                  "flex items-center gap-2 px-4 py-2 text-sm active:scale-95",
-                )}
-              >
+              <button onClick={() => generate()} className={cn(tc.btnPrimary, "flex items-center gap-2 px-4 py-2 text-sm active:scale-95")}>
                 <IconRefresh size={16} />
                 Generate
               </button>
 
               <button
                 onClick={copyAll}
-                className={cn(
-                  tc.btnSecondary,
-                  "flex items-center gap-2 px-3 py-2 text-sm active:scale-95",
-                )}
+                className={cn(tc.btnSecondary, "flex items-center gap-2 px-3 py-2 text-sm active:scale-95")}
                 title="Copy all colors"
               >
-                {copiedAll ? (
-                  <IconCheck
-                    size={16}
-                    className="text-[var(--theme-diff-added-text)]"
-                  />
-                ) : (
-                  <IconCopy size={16} />
-                )}
+                {copiedAll ? <IconCheck size={16} className="text-[var(--theme-diff-added-text)]" /> : <IconCopy size={16} />}
                 <span className="hidden sm:inline">Copy All</span>
               </button>
 
               <button
                 onClick={savePalette}
-                className={cn(
-                  tc.btnSecondary,
-                  "flex items-center gap-2 px-3 py-2 text-sm active:scale-95",
-                )}
+                className={cn(tc.btnSecondary, "flex items-center gap-2 px-3 py-2 text-sm active:scale-95")}
                 title="Save palette"
               >
                 <IconBookmark size={16} />
@@ -921,20 +833,14 @@ export function ColorPaletteTool() {
               </button>
 
               {/* Export dropdown */}
-              <div
-                className="relative"
-                ref={exportRef}
-              >
+              <div className="relative" ref={exportRef}>
                 <button
                   onClick={() => setExportOpen((v) => !v)}
                   className={cn(tc.btnSecondary, "flex items-center gap-1.5 px-3 py-2 text-sm")}
                 >
                   <IconDownload size={16} />
                   <span className="hidden sm:inline">Export</span>
-                  <IconChevronDown
-                    size={13}
-                    className={`transition-transform ${exportOpen ? "rotate-180" : ""}`}
-                  />
+                  <IconChevronDown size={13} className={`transition-transform ${exportOpen ? "rotate-180" : ""}`} />
                 </button>
                 {exportOpen && (
                   <div className="absolute right-0 mt-1.5 w-48 bg-theme-surface-muted border border-theme-border rounded-xl shadow-2xl z-20 overflow-hidden">
@@ -964,10 +870,7 @@ export function ColorPaletteTool() {
       </div>
 
       {/* ── Palette Display ── */}
-      <div
-        className="flex flex-col sm:flex-row gap-2 sm:gap-1 sm:rounded-2xl sm:overflow-hidden"
-        style={{ minHeight: "260px" }}
-      >
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-1 sm:rounded-2xl sm:overflow-hidden" style={{ minHeight: "260px" }}>
         {palette.map((color, i) => (
           <ColorCard
             key={color.id}
@@ -985,10 +888,7 @@ export function ColorPaletteTool() {
       <div className="bg-theme-surface border border-theme-border/60 rounded-2xl overflow-hidden">
         <div className="px-5 py-3 border-b border-theme-border/60 flex items-center justify-between">
           <span className="text-sm font-semibold text-theme-body flex items-center gap-2">
-            <IconPalette
-              size={16}
-              className="text-brand-primary"
-            />
+            <IconPalette size={16} className="text-brand-primary" />
             Color Details
           </span>
           <span className="text-xs text-theme-muted">{palette.length} colors · click to copy</span>
@@ -997,32 +897,18 @@ export function ColorPaletteTool() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-theme-border/60">
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
-                  #
-                </th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
-                  Swatch
-                </th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
-                  HEX
-                </th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
-                  RGB
-                </th>
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
-                  HSL
-                </th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">#</th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">Swatch</th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">HEX</th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">RGB</th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">HSL</th>
                 <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
                   <span className="block">On White</span>
-                  <span className="block text-theme-body normal-case font-normal tracking-normal mt-0.5">
-                    as text on white bg
-                  </span>
+                  <span className="block text-theme-body normal-case font-normal tracking-normal mt-0.5">as text on white bg</span>
                 </th>
                 <th className="text-left px-4 py-2.5 text-xs font-semibold text-theme-muted uppercase tracking-wider">
                   <span className="block">On Black</span>
-                  <span className="block text-theme-body normal-case font-normal tracking-normal mt-0.5">
-                    as text on black bg
-                  </span>
+                  <span className="block text-theme-body normal-case font-normal tracking-normal mt-0.5">as text on black bg</span>
                 </th>
               </tr>
             </thead>
@@ -1053,34 +939,19 @@ export function ColorPaletteTool() {
                   >
                     <td className="px-4 py-3 text-theme-muted font-mono text-xs">{i + 1}</td>
                     <td className="px-4 py-3">
-                      <div
-                        className="w-8 h-8 rounded-lg border border-theme-border shadow-sm"
-                        style={{ backgroundColor: c.hex }}
-                      />
+                      <div className="w-8 h-8 rounded-lg border border-theme-border shadow-sm" style={{ backgroundColor: c.hex }} />
                     </td>
-                    <td className="px-4 py-3 font-mono text-theme-heading text-xs">
-                      {c.hex.toUpperCase()}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-theme-body text-xs">
-                      {formatColor(c.hex, "rgb")}
-                    </td>
-                    <td className="px-4 py-3 font-mono text-theme-body text-xs">
-                      {formatColor(c.hex, "hsl")}
-                    </td>
+                    <td className="px-4 py-3 font-mono text-theme-heading text-xs">{c.hex.toUpperCase()}</td>
+                    <td className="px-4 py-3 font-mono text-theme-body text-xs">{formatColor(c.hex, "rgb")}</td>
+                    <td className="px-4 py-3 font-mono text-theme-body text-xs">{formatColor(c.hex, "hsl")}</td>
                     <td className="px-4 py-3 text-xs">
-                      <span
-                        title={wcagWTitle}
-                        className={`inline-flex items-center gap-1.5 font-mono`}
-                      >
+                      <span title={wcagWTitle} className={`inline-flex items-center gap-1.5 font-mono`}>
                         <span className="text-theme-body">{wContrast}:1</span>
                         <span className={wcagBadgeClass(wcagW)}>{wcagW}</span>
                       </span>
                     </td>
                     <td className="px-4 py-3 text-xs">
-                      <span
-                        title={wcagBTitle}
-                        className={`inline-flex items-center gap-1.5 font-mono`}
-                      >
+                      <span title={wcagBTitle} className={`inline-flex items-center gap-1.5 font-mono`}>
                         <span className="text-theme-body">{bContrast}:1</span>
                         <span className={wcagBadgeClass(wcagB)}>{wcagB}</span>
                       </span>
@@ -1117,53 +988,33 @@ export function ColorPaletteTool() {
             onClick={() => setShowSaved((v) => !v)}
           >
             <span className="text-sm font-semibold text-theme-body flex items-center gap-2">
-              <IconBookmarkFilled
-                size={16}
-                className="text-brand-primary"
-              />
+              <IconBookmarkFilled size={16} className="text-brand-primary" />
               Saved Palettes
               <span className="text-xs bg-brand-primary/20 text-brand-light px-2 py-0.5 rounded-full font-bold">
                 {savedPalettes.length}
               </span>
             </span>
-            <IconChevronDown
-              size={16}
-              className={`text-theme-muted transition-transform duration-200 ${showSaved ? "rotate-180" : ""}`}
-            />
+            <IconChevronDown size={16} className={`text-theme-muted transition-transform duration-200 ${showSaved ? "rotate-180" : ""}`} />
           </button>
 
           {showSaved && (
             <div className="border-t border-theme-border/60 divide-y divide-theme-border">
               {savedPalettes.map((saved, si) => (
-                <div
-                  key={si}
-                  className="px-5 py-3 flex items-center gap-3 hover:bg-theme-surface-muted/30 transition-colors"
-                >
+                <div key={si} className="px-5 py-3 flex items-center gap-3 hover:bg-theme-surface-muted/30 transition-colors">
                   <div className="flex gap-1 flex-1">
                     {saved.map((c, ci) => (
-                      <div
-                        key={ci}
-                        className="flex-1 h-9 rounded-md"
-                        style={{ backgroundColor: c.hex }}
-                        title={c.hex}
-                      />
+                      <div key={ci} className="flex-1 h-9 rounded-md" style={{ backgroundColor: c.hex }} title={c.hex} />
                     ))}
                   </div>
                   <div className="flex gap-1.5 shrink-0">
                     <button
                       onClick={() => loadPalette(saved)}
-                      className={cn(
-                        tc.btnSecondary,
-                        "px-3 py-1.5 text-xs flex items-center gap-1.5",
-                      )}
+                      className={cn(tc.btnSecondary, "px-3 py-1.5 text-xs flex items-center gap-1.5")}
                     >
                       <IconWand size={12} />
                       Load
                     </button>
-                    <button
-                      onClick={() => deleteSaved(si)}
-                      className={cn(tc.btnDanger, "p-1.5")}
-                    >
+                    <button onClick={() => deleteSaved(si)} className={cn(tc.btnDanger, "p-1.5")}>
                       <IconX size={14} />
                     </button>
                   </div>
@@ -1225,10 +1076,7 @@ function ModeExplainer({ mode }: { mode: PaletteMode }) {
   const info = MODE_DESCRIPTIONS[mode];
   return (
     <div className="bg-theme-surface-muted/40 border border-theme-border/40 rounded-xl px-5 py-4 flex gap-3 items-start">
-      <IconWand
-        size={18}
-        className="text-brand-primary mt-0.5 flex-shrink-0"
-      />
+      <IconWand size={18} className="text-brand-primary mt-0.5 flex-shrink-0" />
       <div>
         <p className="text-sm font-semibold text-theme-heading">{info.title}</p>
         <p className="text-sm text-theme-muted mt-0.5 leading-relaxed">{info.desc}</p>

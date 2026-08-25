@@ -10,12 +10,7 @@ type EncodeCandidate = {
   mimeType: string;
 };
 
-function resizeDimensions(
-  width: number,
-  height: number,
-  maxWidth: number,
-  maxHeight: number,
-): { width: number; height: number } {
+function resizeDimensions(width: number, height: number, maxWidth: number, maxHeight: number): { width: number; height: number } {
   if (width <= maxWidth && height <= maxHeight) {
     return { width, height };
   }
@@ -27,12 +22,7 @@ function resizeDimensions(
   };
 }
 
-function drawImageToCanvas(
-  image: ImageBitmap,
-  width: number,
-  height: number,
-  transparentBackground: boolean,
-): OffscreenCanvas {
+function drawImageToCanvas(image: ImageBitmap, width: number, height: number, transparentBackground: boolean): OffscreenCanvas {
   const canvas = new OffscreenCanvas(width, height);
   const ctx = canvas.getContext("2d");
 
@@ -52,11 +42,7 @@ function drawImageToCanvas(
 }
 
 /** Sample pixels to detect meaningful alpha (transparency). */
-export function hasSignificantAlpha(
-  ctx: OffscreenCanvasRenderingContext2D,
-  width: number,
-  height: number,
-): boolean {
+export function hasSignificantAlpha(ctx: OffscreenCanvasRenderingContext2D, width: number, height: number): boolean {
   const { data } = ctx.getImageData(0, 0, width, height);
   const step = Math.max(4, Math.floor((width * height) / 4096) * 4);
 
@@ -82,22 +68,14 @@ export function qualityToPngColors(quality: number): number {
 }
 
 /** Encode canvas pixels to PNG with UPNG (quantized palette when cnum > 0). */
-export function encodePngWithUpng(
-  canvas: OffscreenCanvas,
-  width: number,
-  height: number,
-  maxColors: number,
-): Blob {
+export function encodePngWithUpng(canvas: OffscreenCanvas, width: number, height: number, maxColors: number): Blob {
   const ctx = canvas.getContext("2d");
   if (!ctx) {
     throw new Error("Failed to get canvas context for PNG encoding");
   }
 
   const imageData = ctx.getImageData(0, 0, width, height);
-  const rgba = imageData.data.buffer.slice(
-    imageData.data.byteOffset,
-    imageData.data.byteOffset + imageData.data.byteLength,
-  );
+  const rgba = imageData.data.buffer.slice(imageData.data.byteOffset, imageData.data.byteOffset + imageData.data.byteLength);
 
   const pngBuffer = UPNG.encode([rgba], width, height, maxColors);
   return new Blob([pngBuffer], { type: "image/png" });
@@ -121,12 +99,7 @@ async function pickSmallest(candidates: EncodeCandidate[]): Promise<EncodeCandid
 }
 
 /** PNG compression via upng-js when preserving PNG format. */
-async function compressPngPreserve(
-  canvas: OffscreenCanvas,
-  width: number,
-  height: number,
-  quality: number,
-): Promise<EncodeCandidate> {
+async function compressPngPreserve(canvas: OffscreenCanvas, width: number, height: number, quality: number): Promise<EncodeCandidate> {
   const maxColors = qualityToPngColors(quality);
 
   // High quality / lossless: never quantize — picking a smaller paletted PNG
@@ -147,12 +120,7 @@ async function compressPngPreserve(
   };
 }
 
-async function compressWithConversion(
-  canvas: OffscreenCanvas,
-  width: number,
-  height: number,
-  quality: number,
-): Promise<EncodeCandidate> {
+async function compressWithConversion(canvas: OffscreenCanvas, width: number, height: number, quality: number): Promise<EncodeCandidate> {
   const ctx = canvas.getContext("2d");
   const hasAlpha = ctx ? hasSignificantAlpha(ctx, width, height) : false;
   const candidates: EncodeCandidate[] = [];

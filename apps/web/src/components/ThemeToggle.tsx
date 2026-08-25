@@ -18,10 +18,7 @@ export default function ThemeToggle({ className, buttonClassName }: ThemeToggleP
 
   return (
     <div
-      className={cn(
-        "inline-flex items-center gap-0.5 rounded-lg border border-theme-border bg-theme-surface p-0.5",
-        className,
-      )}
+      className={cn("inline-flex items-center gap-0.5 rounded-lg border border-theme-border bg-theme-surface p-0.5", className)}
       role="group"
       aria-label="Theme"
     >

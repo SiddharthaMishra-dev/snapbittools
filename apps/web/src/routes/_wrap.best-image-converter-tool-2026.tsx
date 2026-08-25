@@ -206,8 +206,7 @@ export const Route = createFileRoute("/_wrap/best-image-converter-tool-2026")({
           "@type": "WebPage",
           "@id": `${SITE}/best-image-converter-tool-2026`,
         },
-        keywords:
-          "best image converter, jpg to webp, png to webp, client-side conversion, snapbittools",
+        keywords: "best image converter, jpg to webp, png to webp, client-side conversion, snapbittools",
         articleSection: "Image Conversion",
         inLanguage: "en-US",
         wordCount: 2400,
@@ -238,13 +237,13 @@ function BlogPage() {
           </h1>
 
           <p className="text-lg text-theme-muted leading-relaxed">
-            Need the best free <strong className="text-theme-heading font-medium">image format converter</strong> that
-            keeps your files private? We benchmarked{" "}
+            Need the best free <strong className="text-theme-heading font-medium">image format converter</strong> that keeps your files
+            private? We benchmarked{" "}
             <a href={`${SITE}/image-format-converter`} className="text-brand-primary hover:text-brand-hover hover:underline">
               SnapBit Tools
             </a>
-            , CloudConvert, Convertio, Squoosh, iLoveIMG, and Zamzar on privacy, supported formats,
-            batch conversion, and everyday web workflows.
+            , CloudConvert, Convertio, Squoosh, iLoveIMG, and Zamzar on privacy, supported formats, batch conversion, and everyday web
+            workflows.
           </p>
 
           <div className="mt-6 flex items-center gap-3">
@@ -278,13 +277,11 @@ function BlogPage() {
 
         <article className="space-y-20">
           <section id="why-convert" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Why Image Format Conversion Matters
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Why Image Format Conversion Matters</h2>
             <p className="text-theme-body leading-relaxed mb-4">
               Serving JPEG and PNG everywhere in 2026 leaves performance on the table. Converting to{" "}
-              <strong className="text-theme-heading">WebP</strong> or <strong className="text-theme-heading">AVIF</strong>{" "}
-              cuts file sizes dramatically — often 30–50% — without visible quality loss. The right{" "}
+              <strong className="text-theme-heading">WebP</strong> or <strong className="text-theme-heading">AVIF</strong> cuts file sizes
+              dramatically — often 30–50% — without visible quality loss. The right{" "}
               <strong className="text-theme-heading">online image converter</strong> makes that switch painless.
             </p>
             <p className="text-theme-body leading-relaxed">
@@ -292,8 +289,8 @@ function BlogPage() {
               <Link to="/image-format-converter" className="text-brand-primary hover:text-brand-hover hover:underline">
                 snapbittools.com/image-format-converter
               </Link>{" "}
-              runs entirely in your browser — the same privacy model as Squoosh, but with batch
-              support, dedicated conversion routes, and integration with{" "}
+              runs entirely in your browser — the same privacy model as Squoosh, but with batch support, dedicated conversion routes, and
+              integration with{" "}
               <Link to="/image-compressor" className="text-brand-primary hover:text-brand-hover hover:underline">
                 compression tools
               </Link>
@@ -302,9 +299,7 @@ function BlogPage() {
           </section>
 
           <section id="comparison" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Best Image Converter Tools Compared
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Best Image Converter Tools Compared</h2>
             <p className="text-theme-body leading-relaxed mb-6">
               Head-to-head look at the most searched <strong className="text-theme-heading">free image converter</strong> tools:
             </p>
@@ -324,16 +319,11 @@ function BlogPage() {
                   {competitorRows.map((row) => (
                     <tr
                       key={row.tool}
-                      className={cn(
-                        "hover:bg-theme-surface-muted/20 transition-colors",
-                        row.highlight && "bg-brand-primary/5",
-                      )}
+                      className={cn("hover:bg-theme-surface-muted/20 transition-colors", row.highlight && "bg-brand-primary/5")}
                     >
                       <td className={cn("py-3 px-3 font-medium text-xs", row.highlight ? "text-brand-primary" : "text-theme-heading")}>
                         {row.tool}
-                        {row.highlight && (
-                          <span className="ml-1.5 text-[10px] uppercase tracking-wide text-brand-primary">★ Pick</span>
-                        )}
+                        {row.highlight && <span className="ml-1.5 text-[10px] uppercase tracking-wide text-brand-primary">★ Pick</span>}
                       </td>
                       <td className="py-3 px-3 text-theme-body text-xs">{row.privacy}</td>
                       <td className="py-3 px-3 text-theme-muted text-xs">{row.upload}</td>
@@ -347,21 +337,20 @@ function BlogPage() {
               </table>
             </div>
             <p className="text-xs text-theme-muted mt-3">
-              * Free-tier limits reflect public documentation as of June 2026. CloudConvert supports more exotic formats but requires server upload.
+              * Free-tier limits reflect public documentation as of June 2026. CloudConvert supports more exotic formats but requires server
+              upload.
             </p>
           </section>
 
           <section id="snapbit-review" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Why SnapBit Tools Wins for Web Use
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Why SnapBit Tools Wins for Web Use</h2>
             <p className="text-theme-body leading-relaxed mb-6">
               For developers, designers, and SEO-focused site owners,{" "}
               <a href={`${SITE}/image-format-converter`} className="text-brand-primary hover:text-brand-hover hover:underline font-medium">
                 SnapBit Tools
               </a>{" "}
-              hits the sweet spot: modern formats (WebP, AVIF), unlimited batch conversion, zero
-              upload, and dedicated routes for every common conversion pair.
+              hits the sweet spot: modern formats (WebP, AVIF), unlimited batch conversion, zero upload, and dedicated routes for every
+              common conversion pair.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
@@ -379,17 +368,17 @@ function BlogPage() {
             </div>
 
             <p className="text-theme-body leading-relaxed">
-              CloudConvert still wins for niche formats (RAW camera files, obscure archives). For
-              everyday JPG → WebP, PNG → WebP, and HEIC → JPG workflows,{" "}
-              <a href={SITE} className="text-brand-primary hover:text-brand-hover hover:underline">snapbittools.com</a>{" "}
+              CloudConvert still wins for niche formats (RAW camera files, obscure archives). For everyday JPG → WebP, PNG → WebP, and HEIC
+              → JPG workflows,{" "}
+              <a href={SITE} className="text-brand-primary hover:text-brand-hover hover:underline">
+                snapbittools.com
+              </a>{" "}
               is faster and more private.
             </p>
           </section>
 
           <section id="format-guide" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              Which Format Should You Convert To?
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">Which Format Should You Convert To?</h2>
             <div className="space-y-3">
               {[
                 {
@@ -431,9 +420,7 @@ function BlogPage() {
           </section>
 
           <section id="how-to-convert" className="scroll-mt-24">
-            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">
-              How to Convert Images with SnapBit Tools
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-theme-heading mb-5">How to Convert Images with SnapBit Tools</h2>
             <div className="space-y-4 mb-8">
               {steps.map(({ step, title, desc }) => (
                 <div
@@ -451,7 +438,10 @@ function BlogPage() {
               ))}
             </div>
 
-            <Link to="/image-format-converter" className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-6 py-3 group mb-10")}>
+            <Link
+              to="/image-format-converter"
+              className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-6 py-3 group mb-10")}
+            >
               Open Image Format Converter — Free
               <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
@@ -510,10 +500,15 @@ function BlogPage() {
               <h2 className="text-lg font-bold text-theme-heading mb-3">Convert Images Free — No Upload</h2>
               <p className="text-theme-muted mb-5 text-sm max-w-md mx-auto">
                 Use{" "}
-                <a href={SITE} className="text-brand-primary hover:underline">snapbittools.com</a>{" "}
+                <a href={SITE} className="text-brand-primary hover:underline">
+                  snapbittools.com
+                </a>{" "}
                 for private JPG, PNG, WebP, and AVIF conversion — unlimited and free.
               </p>
-              <Link to="/image-format-converter" className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-8 py-3 group")}>
+              <Link
+                to="/image-format-converter"
+                className={cn(tc.btnPrimary, "inline-flex items-center gap-2 font-semibold px-8 py-3 group")}
+              >
                 Start Converting Now
                 <IconChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>

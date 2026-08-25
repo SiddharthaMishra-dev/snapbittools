@@ -5,12 +5,7 @@
  * Generates contextual, keyword-rich links between related pages.
  */
 
-import {
-  allKeywordVariants,
-  getRelatedVariants,
-  getVariantsByParentTool,
-  type KeywordVariant,
-} from "@/data/pseo-keywords";
+import { allKeywordVariants, getRelatedVariants, getVariantsByParentTool, type KeywordVariant } from "@/data/pseo-keywords";
 import { isCanonicalizedPath } from "@/lib/seo";
 import { tools } from "@/data/tools";
 

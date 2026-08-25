@@ -119,25 +119,13 @@ function RouteComponent() {
           </div>
 
           <div className="flex items-center space-x-3">
-            <button
-              onClick={handleSwap}
-              title="Swap Inputs"
-              className={cn(tc.toggleInactive, "p-2 rounded-lg hover:text-brand-primary")}
-            >
+            <button onClick={handleSwap} title="Swap Inputs" className={cn(tc.toggleInactive, "p-2 rounded-lg hover:text-brand-primary")}>
               <IconArrowsExchange className="w-5 h-5" />
             </button>
-            <button
-              onClick={handleClear}
-              title="Clear All"
-              className={cn(tc.btnDanger, "p-2")}
-            >
+            <button onClick={handleClear} title="Clear All" className={cn(tc.btnDanger, "p-2")}>
               <IconTrash className="w-5 h-5" />
             </button>
-            <button
-              onClick={handleCopyResult}
-              disabled={diffResult.length === 0}
-              className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}
-            >
+            <button onClick={handleCopyResult} disabled={diffResult.length === 0} className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}>
               <IconCopy className="w-4 h-4" />
               <span>{copyStatus || "Copy Diff"}</span>
             </button>
@@ -256,11 +244,7 @@ function SplitView({ diff }: { diff: DiffLine[] }) {
             key={`left-${idx}`}
             className={cn(
               "flex items-start py-0.5 px-4 min-h-[24px]",
-              line.type === "removed"
-                ? tc.diffRemoved
-                : line.type === "added"
-                  ? "invisible pointer-events-none"
-                  : "text-theme-muted",
+              line.type === "removed" ? tc.diffRemoved : line.type === "added" ? "invisible pointer-events-none" : "text-theme-muted",
             )}
           >
             <span className="w-8 flex-shrink-0 text-theme-body select-none text-right mr-4 leading-6">{line.oldLineNumber || ""}</span>
@@ -276,11 +260,7 @@ function SplitView({ diff }: { diff: DiffLine[] }) {
             key={`right-${idx}`}
             className={cn(
               "flex items-start py-0.5 px-4 min-h-[24px] border-l border-theme-border",
-              line.type === "added"
-                ? tc.diffAdded
-                : line.type === "removed"
-                  ? "invisible pointer-events-none"
-                  : "text-theme-muted",
+              line.type === "added" ? tc.diffAdded : line.type === "removed" ? "invisible pointer-events-none" : "text-theme-muted",
             )}
           >
             <span className="w-8 flex-shrink-0 text-theme-body select-none text-right mr-4 leading-6">{line.newLineNumber || ""}</span>
@@ -304,11 +284,7 @@ function UnifiedView({ diff }: { diff: DiffLine[] }) {
           key={`unified-${idx}`}
           className={cn(
             "flex items-start px-4 py-0.5",
-            line.type === "added"
-              ? tc.diffAdded
-              : line.type === "removed"
-                ? tc.diffRemoved
-                : "text-theme-muted",
+            line.type === "added" ? tc.diffAdded : line.type === "removed" ? tc.diffRemoved : "text-theme-muted",
           )}
         >
           <div className="flex w-16 flex-shrink-0 select-none text-right mr-4 space-x-2 text-theme-body">

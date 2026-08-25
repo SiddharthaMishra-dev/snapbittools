@@ -22,12 +22,8 @@ export default function ClusterLinks({ heading, links }: ClusterLinksProps) {
               className="group flex items-center gap-3 p-4 rounded-lg border border-[var(--theme-related-card-border)] bg-[var(--theme-related-card-bg)] hover:bg-[var(--theme-related-card-hover-bg)] hover:border-brand-primary/50 transition-colors duration-200 no-underline"
             >
               <div className="flex-1 min-w-0">
-                <h3 className="text-base font-semibold text-theme-heading group-hover:text-brand-primary transition-colors">
-                  {link.name}
-                </h3>
-                <p className="text-xs text-theme-muted mt-1 leading-relaxed line-clamp-2">
-                  {link.description}
-                </p>
+                <h3 className="text-base font-semibold text-theme-heading group-hover:text-brand-primary transition-colors">{link.name}</h3>
+                <p className="text-xs text-theme-muted mt-1 leading-relaxed line-clamp-2">{link.description}</p>
               </div>
               <IconChevronRight className="w-5 h-5 text-theme-muted group-hover:text-brand-primary group-hover:translate-x-1 transition-transform shrink-0" />
             </Link>

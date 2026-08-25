@@ -1,20 +1,10 @@
-import {
-  IconCircleX,
-  IconCloudUpload,
-  IconDownload,
-  IconLock,
-  IconSparkles,
-} from "@tabler/icons-react";
+import { IconCircleX, IconCloudUpload, IconDownload, IconLock, IconSparkles } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
-import type {
-  BackgroundRemovalError,
-  BackgroundRemovalProgress,
-  BackgroundRemovalSuccess,
-} from "@/workers/imageBackgroundRemoval.worker";
+import type { BackgroundRemovalError, BackgroundRemovalProgress, BackgroundRemovalSuccess } from "@/workers/imageBackgroundRemoval.worker";
 import ImageBackgroundRemovalWorker from "@/workers/imageBackgroundRemoval.worker.ts?worker";
 
 type ProcessingStage = "idle" | "preparing" | "processing" | "converting" | "done" | "error";
@@ -153,11 +143,7 @@ export function ImageBackgroundRemovalTool() {
       const imageData = await sourceFile.arrayBuffer();
 
       await new Promise<void>((resolve, reject) => {
-        const handleMessage = (
-          event: MessageEvent<
-            BackgroundRemovalProgress | BackgroundRemovalSuccess | BackgroundRemovalError
-          >,
-        ) => {
+        const handleMessage = (event: MessageEvent<BackgroundRemovalProgress | BackgroundRemovalSuccess | BackgroundRemovalError>) => {
           const data = event.data;
           if (data.requestId !== requestId) return;
 
@@ -225,26 +211,15 @@ export function ImageBackgroundRemovalTool() {
             onDrop={handleDrop}
             className={cn(
               "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
-              isDragging
-                ? "border-brand-primary bg-brand-primary/20"
-                : "border-theme-border hover:border-brand-primary/40",
+              isDragging ? "border-brand-primary bg-brand-primary/20" : "border-theme-border hover:border-brand-primary/40",
             )}
           >
             <IconCloudUpload
-              className={cn(
-                "h-14 w-14 mx-auto mb-4 transition-colors",
-                isDragging ? "text-brand-primary" : "text-theme-muted",
-              )}
+              className={cn("h-14 w-14 mx-auto mb-4 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")}
             />
             <h2 className="text-2xl font-bold text-theme-heading mb-2">Upload image</h2>
-            <p className="text-theme-body mb-5">
-              Drag and drop a photo here, or choose a file to remove its background.
-            </p>
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className={cn(tc.btnPrimary, "px-6 py-3")}
-            >
+            <p className="text-theme-body mb-5">Drag and drop a photo here, or choose a file to remove its background.</p>
+            <button type="button" onClick={() => fileInputRef.current?.click()} className={cn(tc.btnPrimary, "px-6 py-3")}>
               Select Image
             </button>
             <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-theme-muted">
@@ -268,12 +243,7 @@ export function ImageBackgroundRemovalTool() {
                 <h3 className="text-lg font-semibold text-theme-heading truncate">{sourceFile.name}</h3>
                 <p className="text-sm text-theme-body">{formatBytes(sourceFile.size)}</p>
               </div>
-              <button
-                type="button"
-                onClick={clearAll}
-                disabled={isProcessing}
-                className={cn(tc.btnDanger, "px-3 py-2 text-sm shrink-0")}
-              >
+              <button type="button" onClick={clearAll} disabled={isProcessing} className={cn(tc.btnDanger, "px-3 py-2 text-sm shrink-0")}>
                 <IconCircleX className="w-4 h-4" />
                 Remove
               </button>
@@ -281,22 +251,15 @@ export function ImageBackgroundRemovalTool() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="rounded-lg border border-theme-border bg-theme-surface-muted/30 p-4">
-                <p className="text-xs font-medium uppercase tracking-wide text-theme-muted mb-3">
-                  Original
-                </p>
-                <img
-                  src={sourceUrl || ""}
-                  alt="Original preview"
-                  className="w-full h-auto max-h-96 object-contain rounded-lg"
-                />
+                <p className="text-xs font-medium uppercase tracking-wide text-theme-muted mb-3">Original</p>
+                <img src={sourceUrl || ""} alt="Original preview" className="w-full h-auto max-h-96 object-contain rounded-lg" />
               </div>
 
               <div className="rounded-lg border border-theme-border bg-theme-surface-muted/30 p-5 flex flex-col justify-center gap-5">
                 <div>
                   <h4 className="font-semibold text-theme-heading mb-1">AI background removal</h4>
                   <p className="text-sm text-theme-muted leading-relaxed">
-                    Remove the background instantly in your browser — private, free, and ready as a
-                    transparent PNG.
+                    Remove the background instantly in your browser — private, free, and ready as a transparent PNG.
                   </p>
                 </div>
 
@@ -344,13 +307,9 @@ export function ImageBackgroundRemovalTool() {
                             <p className="font-medium text-theme-heading">
                               {STAGE_COPY[stage as keyof typeof STAGE_COPY] || "Processing…"}
                             </p>
-                            <p className="text-xs text-theme-muted truncate mt-0.5">
-                              {progressLabel || "Processing your image…"}
-                            </p>
+                            <p className="text-xs text-theme-muted truncate mt-0.5">{progressLabel || "Processing your image…"}</p>
                           </div>
-                          <span className="text-sm font-semibold text-brand-primary tabular-nums">
-                            {progress}%
-                          </span>
+                          <span className="text-sm font-semibold text-brand-primary tabular-nums">{progress}%</span>
                         </div>
 
                         <div className="relative mt-4 h-2 rounded-full bg-theme-surface-muted overflow-hidden">
@@ -364,9 +323,7 @@ export function ImageBackgroundRemovalTool() {
 
                         <div className="relative mt-3 flex gap-2">
                           {STAGE_ORDER.map((s, index) => {
-                            const currentIndex = STAGE_ORDER.indexOf(
-                              stage as (typeof STAGE_ORDER)[number],
-                            );
+                            const currentIndex = STAGE_ORDER.indexOf(stage as (typeof STAGE_ORDER)[number]);
                             const active = currentIndex >= index;
                             return (
                               <div
@@ -386,9 +343,7 @@ export function ImageBackgroundRemovalTool() {
               </div>
             </div>
 
-            {error ? (
-              <p className={cn(tc.alertError, "text-sm rounded-lg px-3 py-2")}>{error}</p>
-            ) : null}
+            {error ? <p className={cn(tc.alertError, "text-sm rounded-lg px-3 py-2")}>{error}</p> : null}
 
             <AnimatePresence>
               {resultUrl ? (
@@ -400,19 +355,13 @@ export function ImageBackgroundRemovalTool() {
                 >
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
-                      <h4 className="font-semibold text-[var(--theme-diff-added-text)]">
-                        Background removed
-                      </h4>
+                      <h4 className="font-semibold text-[var(--theme-diff-added-text)]">Background removed</h4>
                       <p className="text-sm text-theme-body mt-0.5">
                         Transparent PNG
                         {resultBlob ? ` · ${formatBytes(resultBlob.size)}` : ""}
                       </p>
                     </div>
-                    <button
-                      type="button"
-                      onClick={downloadResult}
-                      className={cn(tc.btnSuccess, "px-4 py-2")}
-                    >
+                    <button type="button" onClick={downloadResult} className={cn(tc.btnSuccess, "px-4 py-2")}>
                       <IconDownload className="w-4 h-4" />
                       Download PNG
                     </button>
@@ -428,11 +377,7 @@ export function ImageBackgroundRemovalTool() {
                       backgroundColor: "#e8e8e8",
                     }}
                   >
-                    <img
-                      src={resultUrl}
-                      alt="Background removed preview"
-                      className="w-full h-auto max-h-[28rem] object-contain mx-auto"
-                    />
+                    <img src={resultUrl} alt="Background removed preview" className="w-full h-auto max-h-[28rem] object-contain mx-auto" />
                   </div>
                 </motion.div>
               ) : null}

@@ -75,8 +75,8 @@ function RouteComponent() {
             Remove <span className="text-brand-primary">Background</span>
           </h1>
           <p className="text-md text-theme-body">
-            AI-powered background removal that runs entirely in your browser. Upload a photo, get a
-            transparent PNG — no uploads, no account, free forever.
+            AI-powered background removal that runs entirely in your browser. Upload a photo, get a transparent PNG — no uploads, no
+            account, free forever.
           </p>
         </div>
 
@@ -95,20 +95,17 @@ function RouteComponent() {
           features={[
             {
               title: "AI Cutout",
-              description:
-                "Neural network segmentation isolates the subject and removes the background automatically.",
+              description: "Neural network segmentation isolates the subject and removes the background automatically.",
               icon: IconSparkles,
             },
             {
               title: "Private by Design",
-              description:
-                "Images are processed in a Web Worker on your device. Nothing is uploaded to SnapBit servers.",
+              description: "Images are processed in a Web Worker on your device. Nothing is uploaded to SnapBit servers.",
               icon: IconLock,
             },
             {
               title: "Transparent PNG",
-              description:
-                "Download a ready-to-use PNG with alpha channel for product shots, avatars, and design work.",
+              description: "Download a ready-to-use PNG with alpha channel for product shots, avatars, and design work.",
               icon: IconEraser,
             },
           ]}
@@ -119,8 +116,7 @@ function RouteComponent() {
             },
             {
               title: "Remove the background",
-              description:
-                "Click Remove Background. Watch progress while the model loads and processes in a worker.",
+              description: "Click Remove Background. Watch progress while the model loads and processes in a worker.",
             },
             {
               title: "Preview the cutout",
@@ -135,10 +131,7 @@ function RouteComponent() {
         />
       </div>
 
-      <RelatedTools
-        currentToolSlug="image-background-remover"
-        category="Images"
-      />
+      <RelatedTools currentToolSlug="image-background-remover" category="Images" />
     </div>
   );
 }

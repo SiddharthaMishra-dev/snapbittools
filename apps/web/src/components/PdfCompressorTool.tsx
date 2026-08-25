@@ -1,18 +1,7 @@
-import {
-  IconCircleX,
-  IconCloudUpload,
-  IconDownload,
-  IconLock,
-  IconFileTypePdf,
-  IconInfoCircle,
-} from "@tabler/icons-react";
+import { IconCircleX, IconCloudUpload, IconDownload, IconLock, IconFileTypePdf, IconInfoCircle } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 
-import {
-  compressPdfClient,
-  PDF_COMPRESS_PRESETS,
-  type PdfCompressPreset,
-} from "@/lib/pdfCompress";
+import { compressPdfClient, PDF_COMPRESS_PRESETS, type PdfCompressPreset } from "@/lib/pdfCompress";
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
 
@@ -70,8 +59,7 @@ export function PdfCompressorTool() {
     const first = Array.from(files)[0];
     if (!first) return;
 
-    const isPdf =
-      first.type === "application/pdf" || first.name.toLowerCase().endsWith(".pdf");
+    const isPdf = first.type === "application/pdf" || first.name.toLowerCase().endsWith(".pdf");
     if (!isPdf) {
       setError("Please upload a PDF file.");
       return;
@@ -135,11 +123,7 @@ export function PdfCompressorTool() {
       setStatus("done");
     } catch (err) {
       setStatus("error");
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Compression failed. The PDF may be encrypted or corrupted.",
-      );
+      setError(err instanceof Error ? err.message : "Compression failed. The PDF may be encrypted or corrupted.");
     }
   };
 
@@ -155,12 +139,9 @@ export function PdfCompressorTool() {
   };
 
   const savings =
-    sourceFile && outputSize > 0 && outputSize < sourceFile.size
-      ? Math.round(((sourceFile.size - outputSize) / sourceFile.size) * 100)
-      : 0;
+    sourceFile && outputSize > 0 && outputSize < sourceFile.size ? Math.round(((sourceFile.size - outputSize) / sourceFile.size) * 100) : 0;
 
-  const progressPct =
-    progress.total > 0 ? Math.round((progress.current / progress.total) * 100) : 0;
+  const progressPct = progress.total > 0 ? Math.round((progress.current / progress.total) * 100) : 0;
 
   return (
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -182,26 +163,15 @@ export function PdfCompressorTool() {
             }}
             className={cn(
               "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
-              isDragging
-                ? "border-brand-primary bg-brand-primary/20"
-                : "border-theme-border hover:border-brand-primary/40",
+              isDragging ? "border-brand-primary bg-brand-primary/20" : "border-theme-border hover:border-brand-primary/40",
             )}
           >
             <IconCloudUpload
-              className={cn(
-                "h-14 w-14 mx-auto mb-4 transition-colors",
-                isDragging ? "text-brand-primary" : "text-theme-muted",
-              )}
+              className={cn("h-14 w-14 mx-auto mb-4 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")}
             />
             <h2 className="text-2xl font-bold text-theme-heading mb-2">Upload PDF</h2>
-            <p className="text-theme-body mb-5">
-              Drag and drop a PDF here, or choose a file to compress in your browser.
-            </p>
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className={cn(tc.btnPrimary, "px-6 py-3")}
-            >
+            <p className="text-theme-body mb-5">Drag and drop a PDF here, or choose a file to compress in your browser.</p>
+            <button type="button" onClick={() => fileInputRef.current?.click()} className={cn(tc.btnPrimary, "px-6 py-3")}>
               Select PDF
             </button>
             <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-theme-muted">
@@ -226,34 +196,22 @@ export function PdfCompressorTool() {
                   <IconFileTypePdf className="w-5 h-5 text-brand-primary" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-lg font-semibold text-theme-heading truncate">
-                    {sourceFile.name}
-                  </h3>
+                  <h3 className="text-lg font-semibold text-theme-heading truncate">{sourceFile.name}</h3>
                   <p className="text-sm text-theme-body">{formatBytes(sourceFile.size)}</p>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={clearAll}
-                disabled={isCompressing}
-                className={cn(tc.btnDanger, "px-3 py-2 text-sm shrink-0")}
-              >
+              <button type="button" onClick={clearAll} disabled={isCompressing} className={cn(tc.btnDanger, "px-3 py-2 text-sm shrink-0")}>
                 <IconCircleX className="w-4 h-4" />
                 Remove
               </button>
             </div>
 
             <div className="space-y-3">
-              <p className="text-xs font-semibold text-theme-muted uppercase tracking-wider">
-                Compression preset
-              </p>
+              <p className="text-xs font-semibold text-theme-muted uppercase tracking-wider">Compression preset</p>
               <div className="grid sm:grid-cols-3 gap-2">
                 {(Object.keys(PDF_COMPRESS_PRESETS) as PdfCompressPreset[]).map((key) => {
                   const p = PDF_COMPRESS_PRESETS[key];
-                  const active =
-                    preset === key &&
-                    Math.abs(quality - p.quality) < 0.01 &&
-                    dpi === p.dpi;
+                  const active = preset === key && Math.abs(quality - p.quality) < 0.01 && dpi === p.dpi;
                   return (
                     <button
                       key={key}
@@ -268,9 +226,7 @@ export function PdfCompressorTool() {
                       )}
                     >
                       <p className="font-semibold text-theme-heading text-sm">{p.label}</p>
-                      <p className="text-xs text-theme-muted mt-1 leading-relaxed">
-                        {p.description}
-                      </p>
+                      <p className="text-xs text-theme-muted mt-1 leading-relaxed">{p.description}</p>
                     </button>
                   );
                 })}
@@ -281,9 +237,7 @@ export function PdfCompressorTool() {
               <div>
                 <div className="flex justify-between mb-2">
                   <label className="text-sm font-medium text-theme-body">JPEG quality</label>
-                  <span className="text-sm text-brand-primary font-medium">
-                    {Math.round(quality * 100)}%
-                  </span>
+                  <span className="text-sm text-brand-primary font-medium">{Math.round(quality * 100)}%</span>
                 </div>
                 <input
                   type="range"
@@ -325,8 +279,8 @@ export function PdfCompressorTool() {
             <div className="flex items-start gap-2 p-3 rounded-lg bg-theme-surface-muted/40 border border-theme-border text-xs text-theme-muted leading-relaxed">
               <IconInfoCircle className="w-4 h-4 shrink-0 mt-0.5 text-brand-primary" />
               <p>
-                Pages are rasterized and re-encoded as JPEG. Text won’t stay selectable — great for
-                scans and image-heavy PDFs. Already-optimized files may not shrink further.
+                Pages are rasterized and re-encoded as JPEG. Text won’t stay selectable — great for scans and image-heavy PDFs.
+                Already-optimized files may not shrink further.
               </p>
             </div>
 
@@ -334,9 +288,7 @@ export function PdfCompressorTool() {
             <div className="rounded-lg border border-dashed border-theme-border p-4 opacity-70">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-sm font-medium text-theme-heading">
-                    Enhanced compression (server)
-                  </p>
+                  <p className="text-sm font-medium text-theme-heading">Enhanced compression (server)</p>
                   <p className="text-xs text-theme-muted mt-0.5">
                     Coming soon — optional stronger compression with explicit upload consent.
                   </p>
@@ -374,35 +326,24 @@ export function PdfCompressorTool() {
               </div>
             ) : null}
 
-            {error ? (
-              <p className={cn(tc.alertError, "text-sm rounded-lg px-3 py-2")}>{error}</p>
-            ) : null}
+            {error ? <p className={cn(tc.alertError, "text-sm rounded-lg px-3 py-2")}>{error}</p> : null}
 
             {status === "done" && resultBlob ? (
-              <div
-                className={cn(tc.diffAdded, "rounded-lg border border-theme-border p-4 space-y-4")}
-              >
+              <div className={cn(tc.diffAdded, "rounded-lg border border-theme-border p-4 space-y-4")}>
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <h4 className="font-semibold text-[var(--theme-diff-added-text)]">
                       {usedOriginal ? "Already optimized" : "Compression complete"}
                     </h4>
                     <p className="text-sm text-theme-body mt-0.5">
-                      {pageCount} page{pageCount === 1 ? "" : "s"} · {formatBytes(sourceFile.size)} →{" "}
-                      {formatBytes(outputSize)}
+                      {pageCount} page{pageCount === 1 ? "" : "s"} · {formatBytes(sourceFile.size)} → {formatBytes(outputSize)}
                       {!usedOriginal && savings > 0 ? ` · −${savings}%` : ""}
                     </p>
                     {usedOriginal ? (
-                      <p className="text-xs text-theme-muted mt-1">
-                        Compressed output wasn’t smaller, so we kept your original file.
-                      </p>
+                      <p className="text-xs text-theme-muted mt-1">Compressed output wasn’t smaller, so we kept your original file.</p>
                     ) : null}
                   </div>
-                  <button
-                    type="button"
-                    onClick={download}
-                    className={cn(tc.btnSuccess, "px-4 py-2")}
-                  >
+                  <button type="button" onClick={download} className={cn(tc.btnSuccess, "px-4 py-2")}>
                     <IconDownload className="w-4 h-4" />
                     Download PDF
                   </button>

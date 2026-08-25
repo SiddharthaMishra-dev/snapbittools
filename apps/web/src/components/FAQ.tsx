@@ -17,16 +17,12 @@ function FAQItem({ question, answer }: FAQItemProps) {
         className="w-full py-6 flex items-center justify-between text-left group transition-all"
         aria-expanded={isOpen}
       >
-        <span className="text-sm font-semibold text-theme-muted group-hover:text-brand-primary transition-colors">
-          {question}
-        </span>
+        <span className="text-sm font-semibold text-theme-muted group-hover:text-brand-primary transition-colors">{question}</span>
         <IconChevronDown
           className={`w-5 h-5 text-theme-muted group-hover:text-brand-primary transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 pb-6" : "max-h-0"}`}
-      >
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 pb-6" : "max-h-0"}`}>
         <p className="text-theme-body leading-relaxed text-sm">{answer}</p>
       </div>
     </div>
@@ -66,31 +62,16 @@ export default function FAQ({ faqs }: FAQProps) {
   };
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="space-y-8"
-    >
-      <motion.div
-        variants={itemVariants}
-        className="flex items-center space-x-3"
-      >
+    <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-8">
+      <motion.div variants={itemVariants} className="flex items-center space-x-3">
         {/* <div className="w-10 h-10 bg-brand-dark/20 rounded-full flex items-center justify-center text-brand-primary font-bold border border-brand-primary/20">
           ?
         </div> */}
         <h2 className="text-xl font-bold text-theme-heading">Frequently Asked Questions</h2>
       </motion.div>
-      <motion.div
-        variants={itemVariants}
-        className="px-4"
-      >
+      <motion.div variants={itemVariants} className="px-4">
         {faqs.map((faq, index) => (
-          <FAQItem
-            key={index}
-            question={faq.question}
-            answer={faq.answer}
-          />
+          <FAQItem key={index} question={faq.question} answer={faq.answer} />
         ))}
       </motion.div>
     </motion.div>

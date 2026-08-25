@@ -37,8 +37,7 @@ export const Route = createFileRoute("/_wrap/json-formatter")({
   head: () =>
     getSeoMetadata({
       title: "JSON Formatter & Validator | Beautify JSON | SnapBit Tools",
-      description:
-        "Format, validate, and minify JSON strings instantly. Privacy-focused, 100% client-side, and works offline.",
+      description: "Format, validate, and minify JSON strings instantly. Privacy-focused, 100% client-side, and works offline.",
       keywords: ["json formatter", "json validator", "beautify json", "minify json", "json editor"],
       url: "/json-formatter",
       type: "software",
@@ -58,9 +57,7 @@ export function RouteComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             JSON <span className="text-brand-primary">Formatter</span>
           </h1>
-          <p className="text-md text-theme-body">
-            Format, validate & minify JSON instantly. No data sent to servers—completely private.
-          </p>
+          <p className="text-md text-theme-body">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p>
         </div>
 
         <JsonFormatterTool />
@@ -77,56 +74,43 @@ export function RouteComponent() {
           features={[
             {
               title: "Smart Formatting",
-              description:
-                "Automatic indentation and syntax highlighting make scanning complex JSON structures effortless.",
+              description: "Automatic indentation and syntax highlighting make scanning complex JSON structures effortless.",
               icon: IconBraces,
             },
             {
               title: "Instant Minification",
-              description:
-                "Strip whitespaces and newlines to reduce payload size for API calls and configuration files.",
+              description: "Strip whitespaces and newlines to reduce payload size for API calls and configuration files.",
               icon: IconArrowsMinimize,
             },
             {
               title: "CSV Export",
-              description:
-                "Convert arrays of JSON objects into CSV format instantly for spreadsheet analysis.",
+              description: "Convert arrays of JSON objects into CSV format instantly for spreadsheet analysis.",
               icon: IconDownload,
             },
           ]}
           steps={[
             {
               title: "Paste JSON",
-              description:
-                "Input your raw JSON string into the left editor panel. It can even handle single quotes!",
+              description: "Input your raw JSON string into the left editor panel. It can even handle single quotes!",
             },
             {
               title: "Auto-Validate",
-              description:
-                "The tool immediately checks for syntax errors and provides helpful debugging messages.",
+              description: "The tool immediately checks for syntax errors and provides helpful debugging messages.",
             },
             {
               title: "Apply View",
-              description:
-                'Switch between "Formatted" and "Minified" views to see your data in different contexts.',
+              description: 'Switch between "Formatted" and "Minified" views to see your data in different contexts.',
             },
             {
               title: "Export & Copy",
-              description:
-                "Copy your formatted JSON to the clipboard or download the result as a file.",
+              description: "Copy your formatted JSON to the clipboard or download the result as a file.",
             },
           ]}
           faqs={faqs}
         />
 
-        <ClusterLinks
-          heading="Also useful for"
-          links={getPillarSpokes("json-formatter")}
-        />
-        <RelatedTools
-          currentToolSlug="json-formatter"
-          category="Data"
-        />
+        <ClusterLinks heading="Also useful for" links={getPillarSpokes("json-formatter")} />
+        <RelatedTools currentToolSlug="json-formatter" category="Data" />
       </div>
     </div>
   );

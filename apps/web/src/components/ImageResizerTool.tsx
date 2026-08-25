@@ -198,10 +198,7 @@ export function ImageResizerTool() {
             <IconCloudUpload className="h-14 w-14 mx-auto text-brand-primary mb-4" />
             <h2 className="text-2xl font-bold text-theme-heading mb-2">Upload image to resize</h2>
             <p className="text-theme-body mb-5">Drag and drop your image here, or click below to choose a file.</p>
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className={cn(tc.btnPrimary, "px-6 py-3")}
-            >
+            <button onClick={() => fileInputRef.current?.click()} className={cn(tc.btnPrimary, "px-6 py-3")}>
               Select Image
             </button>
 
@@ -224,10 +221,7 @@ export function ImageResizerTool() {
                   Original size: {originalWidth} x {originalHeight}px
                 </p>
               </div>
-              <button
-                onClick={clearAll}
-                className={cn(tc.btnDanger, "px-3 py-2 text-sm")}
-              >
+              <button onClick={clearAll} className={cn(tc.btnDanger, "px-3 py-2 text-sm")}>
                 <IconCircleX className="w-4 h-4" />
                 Remove
               </button>
@@ -292,10 +286,7 @@ export function ImageResizerTool() {
               <div className={cn(tc.diffAdded, "rounded-lg border border-theme-border p-4 space-y-4")}>
                 <div className="flex items-center justify-between gap-4">
                   <h4 className="font-semibold">Resized image ready</h4>
-                  <button
-                    onClick={downloadResized}
-                    className={cn(tc.btnSuccess, "px-4 py-2")}
-                  >
+                  <button onClick={downloadResized} className={cn(tc.btnSuccess, "px-4 py-2")}>
                     <IconDownload className="w-4 h-4" />
                     Download
                   </button>

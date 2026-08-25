@@ -9,11 +9,7 @@ interface RelatedToolsProps {
   maxTools?: number;
 }
 
-export default function RelatedTools({
-  currentToolSlug,
-  category = "all",
-  maxTools = 4,
-}: RelatedToolsProps) {
+export default function RelatedTools({ currentToolSlug, category = "all", maxTools = 4 }: RelatedToolsProps) {
   let relatedTools = tools.filter((tool) => tool.slug !== currentToolSlug);
 
   if (category !== "all") {
@@ -54,12 +50,7 @@ export default function RelatedTools({
   };
 
   return (
-    <motion.section
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="mt-12 mx-auto w-full max-w-7xl"
-    >
+    <motion.section variants={containerVariants} initial="hidden" animate="visible" className="mt-12 mx-auto w-full max-w-7xl">
       <motion.div variants={itemVariants}>
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -76,15 +67,9 @@ export default function RelatedTools({
           </Link>
         </div>
 
-        <motion.div
-          variants={containerVariants}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-        >
+        <motion.div variants={containerVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {relatedTools.map((tool) => (
-            <motion.div
-              key={tool.slug}
-              variants={itemVariants}
-            >
+            <motion.div key={tool.slug} variants={itemVariants}>
               <RelatedToolCard tool={tool} />
             </motion.div>
           ))}
@@ -114,9 +99,7 @@ function RelatedToolCard({ tool }: { tool: ToolDefinition }) {
         <Icon className="w-6 h-6 text-white" />
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="text-base font-semibold text-theme-heading group-hover:text-brand-primary transition-colors">
-          {tool.name}
-        </h3>
+        <h3 className="text-base font-semibold text-theme-heading group-hover:text-brand-primary transition-colors">{tool.name}</h3>
       </div>
       <IconChevronRight className="w-5 h-5 text-theme-muted group-hover:text-brand-primary group-hover:translate-x-1 transition-all shrink-0 mt-1" />
     </Link>

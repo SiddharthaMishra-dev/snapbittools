@@ -91,13 +91,8 @@ export default function PseoPage({ variant, toolComponent: ToolComponent }: Pseo
         </section>
 
         <section className="w-full">
-          <ClusterLinks
-            heading={getClusterHeading(variant.slug)}
-            links={getSpokeClusterLinks(variant.slug)}
-          />
-          {variant.parentTool !== "tools" && (
-            <RelatedTools currentToolSlug={variant.parentTool} />
-          )}
+          <ClusterLinks heading={getClusterHeading(variant.slug)} links={getSpokeClusterLinks(variant.slug)} />
+          {variant.parentTool !== "tools" && <RelatedTools currentToolSlug={variant.parentTool} />}
         </section>
       </div>
     </div>

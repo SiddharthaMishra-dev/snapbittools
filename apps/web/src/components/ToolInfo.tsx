@@ -49,12 +49,7 @@ export default function ToolInfo({ privacyInfo, faqs }: ToolInfoProps) {
   };
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="w-full max-w-7xl mx-auto mt-2 space-y-6 pb-6"
-    >
+    <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-7xl mx-auto mt-2 space-y-6 pb-6">
       {/* FAQs */}
       {faqs && faqs.length > 0 && <FAQ faqs={faqs} />}
 

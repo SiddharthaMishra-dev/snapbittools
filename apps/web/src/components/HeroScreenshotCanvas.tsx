@@ -86,12 +86,19 @@ export function HeroScreenshotCanvas() {
       ref={containerRef}
       className="w-full"
     >
-      <canvas
-        ref={canvasRef}
-        role="img"
-        aria-label="SnapBit Tools interface preview"
-        className="block w-full"
-      />
+      <a
+        href="/tools"
+        tabIndex={0}
+        aria-label="View all SnapBit Tools"
+        className="block focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-lg transition-shadow"
+      >
+        <canvas
+          ref={canvasRef}
+          role="img"
+          aria-label="SnapBit Tools interface preview"
+          className="block w-full cursor-pointer"
+        />
+      </a>
     </div>
   );
 }

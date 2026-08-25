@@ -30,9 +30,7 @@ export default function Sidebar() {
         className={cn(
           "shrink-0 border-r border-theme-sidebar-border text-theme-sidebar-text overflow-hidden transition-all duration-300 w-64 py-4 px-2 overflow-y-auto no-scrollbar bg-theme-sidebar-bg",
           isOpen ? "ml-0" : "-ml-64",
-          isMobile
-            ? "fixed top-16 left-0 h-[calc(100vh-4rem)] z-20"
-            : "relative h-[calc(100vh-4rem)]",
+          isMobile ? "fixed top-16 left-0 h-[calc(100vh-4rem)] z-20" : "relative h-[calc(100vh-4rem)]",
         )}
       >
         <h2 className="text-theme-sidebar-heading text-sm font-semibold mb-2 px-2">Tools</h2>
@@ -43,15 +41,11 @@ export default function Sidebar() {
               to={tool.href}
               className={cn(
                 "group px-2 py-1 flex text-theme-sidebar-text shrink-0 w-full justify-start bg-transparent rounded-lg text-sm",
-                current_path === tool.href &&
-                  "bg-theme-sidebar-active text-theme-sidebar-active-text font-semibold",
+                current_path === tool.href && "bg-theme-sidebar-active text-theme-sidebar-active-text font-semibold",
               )}
               activeOptions={{ exact: true }}
             >
-              <IconLink
-                size={16}
-                className="w-0 mr-2 group-hover:w-4 transition-all duration-150"
-              />
+              <IconLink size={16} className="w-0 mr-2 group-hover:w-4 transition-all duration-150" />
               {tool.name}
             </Link>
           ))}
@@ -66,8 +60,7 @@ export default function Sidebar() {
                 to={post.href}
                 className={cn(
                   "px-1 py-1 flex text-theme-muted shrink-0 w-full justify-start bg-transparent rounded-lg text-sm mb-2",
-                  current_path === post.href &&
-                    "bg-theme-sidebar-active text-theme-sidebar-active-text font-semibold",
+                  current_path === post.href && "bg-theme-sidebar-active text-theme-sidebar-active-text font-semibold",
                 )}
                 activeOptions={{ exact: true }}
               >

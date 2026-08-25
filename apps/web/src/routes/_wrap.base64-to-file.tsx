@@ -18,13 +18,11 @@ const faqs = [
   },
   {
     question: "Do my Base64 data or files leave my device?",
-    answer:
-      "No. Everything runs in your browser only. Your Base64 input is decoded locally and never uploaded to any server.",
+    answer: "No. Everything runs in your browser only. Your Base64 input is decoded locally and never uploaded to any server.",
   },
   {
     question: "Can I decode raw Base64 without data: prefix?",
-    answer:
-      "Yes. Paste either raw Base64 or full Data URI strings. Raw Base64 works with optional manual MIME type input.",
+    answer: "Yes. Paste either raw Base64 or full Data URI strings. Raw Base64 works with optional manual MIME type input.",
   },
   {
     question: "Why does the downloaded file open incorrectly?",
@@ -246,9 +244,7 @@ function RouteComponent() {
       });
     } catch (decodeError) {
       setResult(null);
-      setError(
-        decodeError instanceof Error ? decodeError.message : "Failed to decode Base64 input.",
-      );
+      setError(decodeError instanceof Error ? decodeError.message : "Failed to decode Base64 input.");
     }
   };
 
@@ -282,35 +278,22 @@ function RouteComponent() {
         animate="visible"
         className="w-full max-w-5xl mt-6 mb-10 text-center mx-auto"
       >
-        <motion.div
-          variants={itemVariants}
-          className="text-center"
-        >
+        <motion.div variants={itemVariants} className="text-center">
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Base64 to <span className="text-brand-primary">File</span> Decoder
           </h1>
-          <p className="text-md text-theme-body">
-            Decode any Base64 string back to its original file format. 100% private in-browser.
-          </p>
+          <p className="text-md text-theme-body">Decode any Base64 string back to its original file format. 100% private in-browser.</p>
         </motion.div>
       </motion.div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="w-full max-w-5xl mx-auto mb-8"
-      >
+      <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-5xl mx-auto mb-8">
         <motion.div
           variants={itemVariants}
           className="rounded-xl shadow-lg bg-theme-surface-muted/40 border border-theme-border p-4 sm:p-6"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label
-                htmlFor="file-base-name"
-                className="block text-sm font-medium text-theme-body mb-2"
-              >
+              <label htmlFor="file-base-name" className="block text-sm font-medium text-theme-body mb-2">
                 File name
               </label>
               <input
@@ -323,10 +306,7 @@ function RouteComponent() {
               />
             </div>
             <div>
-              <label
-                htmlFor="mime-type"
-                className="block text-sm font-medium text-theme-body mb-2"
-              >
+              <label htmlFor="mime-type" className="block text-sm font-medium text-theme-body mb-2">
                 MIME type (optional)
               </label>
               <input
@@ -340,10 +320,7 @@ function RouteComponent() {
             </div>
           </div>
 
-          <label
-            htmlFor="base64-input"
-            className="block text-sm font-medium text-theme-body mb-2"
-          >
+          <label htmlFor="base64-input" className="block text-sm font-medium text-theme-body mb-2">
             Paste Base64 or Data URI
           </label>
           <textarea
@@ -400,9 +377,7 @@ function RouteComponent() {
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
               <div className="bg-theme-surface-muted/60 rounded-lg p-3 border border-theme-border">
                 <p className="text-theme-muted">Detected MIME</p>
-                <p className="text-theme-heading font-medium break-all">
-                  {result.detectedMime || "Not found in input"}
-                </p>
+                <p className="text-theme-heading font-medium break-all">{result.detectedMime || "Not found in input"}</p>
               </div>
               <div className="bg-theme-surface-muted/60 rounded-lg p-3 border border-theme-border">
                 <p className="text-theme-muted">Output MIME</p>
@@ -410,18 +385,13 @@ function RouteComponent() {
               </div>
               <div className="bg-theme-surface-muted/60 rounded-lg p-3 border border-theme-border sm:col-span-2">
                 <p className="text-theme-muted">File size</p>
-                <p className="text-theme-heading font-medium">
-                  {result.size.toLocaleString()} bytes
-                </p>
+                <p className="text-theme-heading font-medium">{result.size.toLocaleString()} bytes</p>
               </div>
             </div>
           </motion.div>
         )}
 
-        <motion.p
-          variants={itemVariants}
-          className="text-center text-theme-muted text-xs mt-4"
-        >
+        <motion.p variants={itemVariants} className="text-center text-theme-muted text-xs mt-4">
           Privacy note: decoding happens entirely in your browser. Your data is never uploaded.
         </motion.p>
       </motion.div>
@@ -439,14 +409,12 @@ function RouteComponent() {
         features={[
           {
             title: "Works for Any File Type",
-            description:
-              "Decode Base64 content into text files, images, PDFs, Office files, archives, and other binary formats.",
+            description: "Decode Base64 content into text files, images, PDFs, Office files, archives, and other binary formats.",
             icon: IconFileCode,
           },
           {
             title: "Private by Design",
-            description:
-              "All decoding happens locally in your browser. No input leaves your device.",
+            description: "All decoding happens locally in your browser. No input leaves your device.",
             icon: IconLock,
           },
           {
@@ -462,8 +430,7 @@ function RouteComponent() {
           },
           {
             title: "Set File Details",
-            description:
-              "Optionally provide MIME type and file name to ensure correct extension handling.",
+            description: "Optionally provide MIME type and file name to ensure correct extension handling.",
           },
           {
             title: "Decode",
@@ -477,10 +444,7 @@ function RouteComponent() {
         faqs={faqs}
       />
 
-      <RelatedTools
-        currentToolSlug="base64-to-file"
-        category="Data"
-      />
+      <RelatedTools currentToolSlug="base64-to-file" category="Data" />
     </div>
   );
 }

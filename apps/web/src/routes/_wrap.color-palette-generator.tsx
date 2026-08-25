@@ -35,8 +35,7 @@ const faqs = [
   },
   {
     question: "Are my saved palettes stored on a server?",
-    answer:
-      "No. Saved palettes are stored entirely in your browser's localStorage. Nothing is uploaded or sent to any server.",
+    answer: "No. Saved palettes are stored entirely in your browser's localStorage. Nothing is uploaded or sent to any server.",
   },
 ];
 
@@ -84,8 +83,7 @@ export function RouteComponent() {
             Color <span className="text-brand-primary">Palette</span> Generator
           </h1>
           <p className="text-md text-theme-body">
-            Generate harmonious color palettes using color theory. Random, shades, brand & more.
-            Export as CSS, JSON, or Tailwind.
+            Generate harmonious color palettes using color theory. Random, shades, brand & more. Export as CSS, JSON, or Tailwind.
           </p>
         </div>
 
@@ -110,20 +108,17 @@ export function RouteComponent() {
             },
             {
               title: "Privacy First",
-              description:
-                "Everything runs in your browser. Saved palettes are stored in localStorage — no data is ever uploaded.",
+              description: "Everything runs in your browser. Saved palettes are stored in localStorage — no data is ever uploaded.",
               icon: IconLock,
             },
             {
               title: "Smart Generation",
-              description:
-                "Lock individual colors before regenerating to keep favorites while refreshing the rest of the palette.",
+              description: "Lock individual colors before regenerating to keep favorites while refreshing the rest of the palette.",
               icon: IconWand,
             },
             {
               title: "Export Ready",
-              description:
-                "Download palettes as CSS custom properties, JSON with all formats, or a Tailwind config snippet.",
+              description: "Download palettes as CSS custom properties, JSON with all formats, or a Tailwind config snippet.",
               icon: IconDownload,
             },
           ]}
@@ -135,27 +130,21 @@ export function RouteComponent() {
             },
             {
               title: "Set a Base Color",
-              description:
-                "For non-random modes, pick or enter your base color using the color picker or hex input field.",
+              description: "For non-random modes, pick or enter your base color using the color picker or hex input field.",
             },
             {
               title: "Generate & Refine",
-              description:
-                "Click Generate to build the palette. Lock colors you want to keep, then generate again to refine.",
+              description: "Click Generate to build the palette. Lock colors you want to keep, then generate again to refine.",
             },
             {
               title: "Copy or Export",
-              description:
-                "Click any swatch to copy its value in your chosen format, or use Export to download the full palette.",
+              description: "Click any swatch to copy its value in your chosen format, or use Export to download the full palette.",
             },
           ]}
           faqs={faqs}
         />
 
-        <RelatedTools
-          currentToolSlug="color-palette-generator"
-          category="Images"
-        />
+        <RelatedTools currentToolSlug="color-palette-generator" category="Images" />
       </div>
     </div>
   );
