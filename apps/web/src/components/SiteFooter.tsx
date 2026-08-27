@@ -62,6 +62,20 @@ export default function SiteFooter() {
             Terms of Use
           </Link>
         </nav>
+        <div className="flex justify-center pt-1">
+          <a
+            href="https://www.producthunt.com/products/snapbit-tools/launches/snapbit-tools?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-snapbit-tools"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              alt="SnapBit Tools - Fast,Free & Private Image and Data Processing Tools. | Product Hunt"
+              width={250}
+              height={54}
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1125101&theme=light&t=1787815217178"
+            />
+          </a>
+        </div>
         <p className="text-theme-muted text-xs">
           Crafted with care by{" "}
           <a
