@@ -1341,7 +1341,7 @@ export const useCaseVariants: KeywordVariant[] = [
         "Work with private data without risk",
         "Avoid uploading files to servers",
       ],
-      helpText: "Client-side processing means your data never leaves your device. Even we can't see what you're working with.",
+      helpText: "Data never leaves your device. Even we can't see what you're working with.",
     },
     relatedVariants: ["browser-based-tools", "offline-tools", "tools-for-developers"],
     priority: 1,
