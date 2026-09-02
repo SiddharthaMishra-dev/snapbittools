@@ -226,7 +226,7 @@ function RouteComponent() {
         />
       </div>
 
-      <RelatedTools currentToolSlug="diff-checker" category="Data" />
+      <RelatedTools currentToolSlug="diff-checker" category="Utility" />
     </div>
   );
 }

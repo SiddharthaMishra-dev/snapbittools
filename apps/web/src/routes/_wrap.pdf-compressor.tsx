@@ -124,7 +124,7 @@ function RouteComponent() {
         />
       </div>
 
-      <RelatedTools currentToolSlug="pdf-compressor" category="Images" />
+      <RelatedTools currentToolSlug="pdf-compressor" category="PDF" />
     </div>
   );
 }

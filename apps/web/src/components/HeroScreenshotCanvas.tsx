@@ -3,9 +3,7 @@ import { useEffect, useRef } from "react";
 import { useTheme } from "@/lib/theme";
 
 function getPageBackground(): string {
-  return (
-    getComputedStyle(document.documentElement).getPropertyValue("--theme-page").trim() || "#ffffff"
-  );
+  return getComputedStyle(document.documentElement).getPropertyValue("--theme-page").trim() || "#ffffff";
 }
 
 function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
@@ -82,22 +80,14 @@ export function HeroScreenshotCanvas() {
   }, [theme]);
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full"
-    >
+    <div ref={containerRef} className="w-full">
       <a
         href="/tools"
         tabIndex={0}
         aria-label="View all SnapBit Tools"
         className="block focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-lg transition-shadow"
       >
-        <canvas
-          ref={canvasRef}
-          role="img"
-          aria-label="SnapBit Tools interface preview"
-          className="block w-full cursor-pointer"
-        />
+        <canvas ref={canvasRef} role="img" aria-label="SnapBit Tools interface preview" className="block w-full cursor-pointer" />
       </a>
     </div>
   );

@@ -586,7 +586,7 @@ function RouteComponent() {
             faqs={faqs}
           />
 
-          <RelatedTools currentToolSlug="bulk-file-renamer" />
+          <RelatedTools currentToolSlug="bulk-file-renamer" category="Utility" />
         </main>
       </div>
     </div>

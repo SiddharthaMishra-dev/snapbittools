@@ -274,7 +274,7 @@ function WordCounterComponent() {
           />
         </div>
 
-        <RelatedTools currentToolSlug="word-counter" category="Data" />
+        <RelatedTools currentToolSlug="word-counter" category="Utility" />
       </div>
     </div>
   );

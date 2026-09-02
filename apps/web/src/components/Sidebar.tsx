@@ -1,10 +1,10 @@
-import { tools } from "@/data/tools";
-import { cn } from "@/lib/utils";
+import { blogPosts } from "@/data/blogs";
+import { TOOL_CATEGORY_ORDER, getToolsByCategory, toolCategories } from "@/data/tools";
 import { useSidebar } from "@/lib/sidebar";
+import { cn } from "@/lib/utils";
 import { IconLink } from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { blogPosts } from "@/data/blogs";
 
 export default function Sidebar() {
   const { isOpen, isMobile, isSidebarRoute, closeSidebar } = useSidebar();
@@ -33,23 +33,38 @@ export default function Sidebar() {
           isMobile ? "fixed top-16 left-0 h-[calc(100vh-4rem)] z-20" : "relative h-[calc(100vh-4rem)]",
         )}
       >
-        <h2 className="text-theme-sidebar-heading text-sm font-semibold mb-2 px-2">Tools</h2>
-        <div className="flex flex-col items-center justify-between gap-y-2 mb-4">
-          {tools.map((tool) => (
-            <Link
-              key={tool.slug}
-              to={tool.href}
-              className={cn(
-                "group px-2 py-1 flex text-theme-sidebar-text shrink-0 w-full justify-start bg-transparent rounded-lg text-sm",
-                current_path === tool.href && "bg-theme-sidebar-active text-theme-sidebar-active-text font-semibold",
-              )}
-              activeOptions={{ exact: true }}
-            >
-              <IconLink size={16} className="w-0 mr-2 group-hover:w-4 transition-all duration-150" />
-              {tool.name}
-            </Link>
-          ))}
-        </div>
+        {TOOL_CATEGORY_ORDER.map((category) => {
+          const meta = toolCategories[category];
+          const categoryTools = getToolsByCategory(category);
+          if (categoryTools.length === 0) return null;
+
+          return (
+            <div key={category} className="mb-4">
+              <Link
+                to={meta.href}
+                className="text-theme-sidebar-heading text-sm font-semibold mb-2 px-2 no-underline hover:text-brand-primary block"
+              >
+                {meta.heading}
+              </Link>
+              <div className="flex flex-col items-center justify-between gap-y-1">
+                {categoryTools.map((tool) => (
+                  <Link
+                    key={tool.slug}
+                    to={tool.href}
+                    className={cn(
+                      "group px-2 py-1 flex text-theme-sidebar-text shrink-0 w-full justify-start bg-transparent rounded-lg text-sm",
+                      current_path === tool.href && "bg-theme-sidebar-active text-theme-sidebar-active-text font-semibold",
+                    )}
+                    activeOptions={{ exact: true }}
+                  >
+                    <IconLink size={16} className="w-0 mr-2 group-hover:w-4 transition-all duration-150" />
+                    {tool.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          );
+        })}
 
         <div className="mt-4">
           <h2 className="text-theme-sidebar-heading text-sm font-semibold mb-2 px-2">Blogs</h2>

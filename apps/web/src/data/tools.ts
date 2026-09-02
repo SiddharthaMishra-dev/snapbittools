@@ -7,6 +7,7 @@ import {
   IconDownload,
   IconEraser,
   IconFileSpreadsheet,
+  IconFileTypeJpg,
   IconFileTypePdf,
   IconNumber64Small,
   IconPhoto,
@@ -18,16 +19,80 @@ import {
 } from "@tabler/icons-react";
 import type React from "react";
 
+export type ToolCategory = "Images" | "PDF" | "Data" | "Utility";
+
 export type ToolDefinition = {
   slug: string;
   name: string;
   href: string;
   description: string;
   icon: (props: IconProps) => React.ReactNode;
-  category: "Images" | "Data";
+  category: ToolCategory;
   keywords: string[];
   isNew?: boolean;
 };
+
+export type ToolCategoryMeta = {
+  id: string;
+  href: "/image-tools" | "/pdf-tools" | "/data-tools" | "/utility-tools";
+  navLabel: string;
+  heading: string;
+  description: string;
+  seoTitle: string;
+  seoDescription: string;
+  keywords: string[];
+};
+
+export const TOOL_CATEGORY_ORDER: ToolCategory[] = ["Images", "PDF", "Data", "Utility"];
+
+export const toolCategories: Record<ToolCategory, ToolCategoryMeta> = {
+  Images: {
+    id: "images",
+    href: "/image-tools",
+    navLabel: "Images",
+    heading: "Image tools",
+    description: "Convert, compress, crop, resize, and edit images entirely in your browser.",
+    seoTitle: "Image Tools | Convert, Compress, Crop Online | SnapBit Tools",
+    seoDescription: "Free browser-based image tools. Convert formats, compress photos, crop, resize, and remove backgrounds — no uploads.",
+    keywords: ["image tools", "image converter", "image compressor", "crop image", "resize image", "remove background"],
+  },
+  PDF: {
+    id: "pdf",
+    href: "/pdf-tools",
+    navLabel: "PDF",
+    heading: "PDF tools",
+    description: "Create, convert, and compress PDFs on your device. Nothing is uploaded.",
+    seoTitle: "PDF Tools | Convert, Compress, Image to PDF | SnapBit Tools",
+    seoDescription: "Free private PDF tools in your browser. Convert PDF to JPG, compress PDFs, and merge images into PDF — no uploads.",
+    keywords: ["pdf tools", "pdf to jpg", "compress pdf", "image to pdf", "pdf converter"],
+  },
+  Data: {
+    id: "data",
+    href: "/data-tools",
+    navLabel: "Data",
+    heading: "Data tools",
+    description: "Format JSON, convert CSV and Excel, minify HTML, and decode Base64 locally.",
+    seoTitle: "Data Tools | JSON, CSV, Excel, Base64 | SnapBit Tools",
+    seoDescription:
+      "Free data tools in your browser. Format JSON, convert CSV to Excel or JSON, minify HTML, and decode Base64 — no uploads.",
+    keywords: ["json formatter", "csv to excel", "csv to json", "html minifier", "base64 decoder", "data tools"],
+  },
+  Utility: {
+    id: "utility",
+    href: "/utility-tools",
+    navLabel: "Utility",
+    heading: "Utility tools",
+    description: "Word count, diffs, lorem ipsum, bulk rename, and color palettes — all client-side.",
+    seoTitle: "Utility Tools | Word Counter, Diff, Rename | SnapBit Tools",
+    seoDescription:
+      "Free utility tools in your browser. Count words, compare text, generate lorem ipsum, rename files, and build color palettes.",
+    keywords: ["word counter", "diff checker", "lorem ipsum", "bulk rename", "color palette", "online utilities"],
+  },
+};
+
+export function getToolsByCategory(category: ToolCategory): ToolDefinition[] {
+  return tools.filter((tool) => tool.category === category);
+}
 
 export const tools: ToolDefinition[] = [
   {
@@ -150,8 +215,18 @@ export const tools: ToolDefinition[] = [
     href: "/image-to-pdf",
     description: "Combine multiple images into a single PDF instantly, all offline.",
     icon: IconFileTypePdf,
-    category: "Images",
+    category: "PDF",
     keywords: ["pdf", "merge", "images to pdf", "offline"],
+  },
+  {
+    slug: "pdf-to-jpg",
+    name: "PDF to JPG",
+    href: "/pdf-to-jpg",
+    description: "Convert PDF pages to JPG or PNG in your browser. Private, no upload.",
+    icon: IconFileTypeJpg,
+    category: "PDF",
+    keywords: ["pdf to jpg", "pdf to jpeg", "pdf to png", "pdf to image", "convert pdf to jpg", "pdf page to image"],
+    isNew: true,
   },
   {
     slug: "pdf-compressor",
@@ -159,7 +234,7 @@ export const tools: ToolDefinition[] = [
     href: "/pdf-compressor",
     description: "Shrink PDF size in your browser. Private, no upload required.",
     icon: IconFileTypePdf,
-    category: "Images",
+    category: "PDF",
     keywords: ["compress pdf", "pdf compressor", "reduce pdf size", "shrink pdf", "pdf optimizer"],
     isNew: true,
   },
@@ -169,7 +244,7 @@ export const tools: ToolDefinition[] = [
     href: "/bulk-file-renamer",
     description: "Rename multiple files at once with pattern matching like file-[1,2,3...]. Works offline with zero uploads.",
     icon: IconFiles,
-    category: "Data",
+    category: "Utility",
     keywords: ["bulk rename", "file renamer", "batch rename", "file management"],
     isNew: true,
   },
@@ -180,7 +255,7 @@ export const tools: ToolDefinition[] = [
     description:
       "Generate color palettes using color theory. Complementary, triadic, shades, brand & more. Export as CSS, JSON, or Tailwind.",
     icon: IconPalette,
-    category: "Images",
+    category: "Utility",
     keywords: [
       "color palette generator",
       "color scheme",
@@ -221,7 +296,7 @@ export const tools: ToolDefinition[] = [
     href: "/word-counter",
     description: "Count words, characters, and sentences in real-time with reading time estimation.",
     icon: IconTypography,
-    category: "Data",
+    category: "Utility",
     keywords: ["word count", "character count", "letters", "reading time"],
   },
   {
@@ -241,7 +316,7 @@ export const tools: ToolDefinition[] = [
     description:
       "Compare two text files or code snippets side-by-side. 100% private, browser-based diff tool with support for additions and deletions.",
     icon: IconSearch,
-    category: "Data",
+    category: "Utility",
     keywords: ["diff checker", "text comparison", "compare code online", "online diff tool", "file comparison"],
   },
   {
@@ -250,7 +325,7 @@ export const tools: ToolDefinition[] = [
     href: "/lorem-ipsum-generator",
     description: "Generate placeholder text with custom paragraphs, words, and sentences.",
     icon: IconTypography,
-    category: "Data",
+    category: "Utility",
     keywords: ["lorem ipsum", "placeholder text", "dummy text", "text generator"],
   },
   {

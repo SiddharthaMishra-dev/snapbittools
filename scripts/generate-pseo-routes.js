@@ -29,6 +29,7 @@ const TOOL_COMPONENT_MAP = {
   "image-cropper": "./image-cropper",
   "image-to-base64": "./image-to-base64",
   "image-to-pdf": "./image-to-pdf",
+  "pdf-to-jpg": "./pdf-to-jpg",
   "csv-xlsx-converter": "./csv-xlsx-converter",
   "csv-to-json": "./csv-to-json",
   "json-to-csv": "./json-to-csv",

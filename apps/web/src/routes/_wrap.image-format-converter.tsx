@@ -29,8 +29,7 @@ const faqs = [
   },
   {
     question: "Is there a limit on the number of conversions?",
-    answer:
-      "No, you can convert as many images as you want. There are no daily limits, and you don't even need to create an account.",
+    answer: "No, you can convert as many images as you want. There are no daily limits, and you don't even need to create an account.",
   },
   {
     question: "Is this image format converter free to use?",
@@ -139,9 +138,7 @@ export function RouteComponent() {
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Image <span className="text-brand-primary">Format</span> Converter
           </h1>
-          <p className="text-md text-theme-body">
-            Convert images between formats instantly. Batch support. No uploads—100% private.
-          </p>
+          <p className="text-md text-theme-body">Convert images between formats instantly. Batch support. No uploads—100% private.</p>
         </div>
 
         <ImageConverterTool />
@@ -159,20 +156,17 @@ export function RouteComponent() {
           features={[
             {
               title: "Batch Processing",
-              description:
-                "Convert multiple images at once and download them all as a single ZIP file, saving you valuable time.",
+              description: "Convert multiple images at once and download them all as a single ZIP file, saving you valuable time.",
               icon: IconBox,
             },
             {
               title: "Client-Side Only",
-              description:
-                "Conversions are performed entirely on your machine. Your private images never touch our servers.",
+              description: "Conversions are performed entirely on your machine. Your private images never touch our servers.",
               icon: IconLock,
             },
             {
               title: "High Compatibility",
-              description:
-                "Convert between all modern web formats including PNG, JPG, WebP, and the next-gen AVIF format.",
+              description: "Convert between all modern web formats including PNG, JPG, WebP, and the next-gen AVIF format.",
               icon: IconArrowsExchange,
             },
           ]}
@@ -183,31 +177,22 @@ export function RouteComponent() {
             },
             {
               title: "Select Target Format",
-              description:
-                "Choose your desired output format (PNG, JPEG, WebP, or AVIF) from the dropdown.",
+              description: "Choose your desired output format (PNG, JPEG, WebP, or AVIF) from the dropdown.",
             },
             {
               title: "Automatic Conversion",
-              description:
-                "The tool will instantly begin converting each image to your chosen format.",
+              description: "The tool will instantly begin converting each image to your chosen format.",
             },
             {
               title: "Download Results",
-              description:
-                "Download individual converted images or grab everything at once as a ZIP archive.",
+              description: "Download individual converted images or grab everything at once as a ZIP archive.",
             },
           ]}
           faqs={faqs}
         />
 
-        <ClusterLinks
-          heading="Also useful for"
-          links={getPillarSpokes("image-format-converter")}
-        />
-        <RelatedTools
-          currentToolSlug="image-format-converter"
-          category="Images"
-        />
+        <ClusterLinks heading="Also useful for" links={getPillarSpokes("image-format-converter")} />
+        <RelatedTools currentToolSlug="image-format-converter" category="Images" />
       </div>
     </div>
   );

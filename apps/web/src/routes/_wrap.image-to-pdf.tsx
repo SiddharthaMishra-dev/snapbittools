@@ -363,7 +363,7 @@ function RouteComponent() {
           faqs={faqs}
         />
 
-        <RelatedTools currentToolSlug="image-to-pdf" category="Images" />
+        <RelatedTools currentToolSlug="image-to-pdf" category="PDF" />
       </div>
     </div>
   );

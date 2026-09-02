@@ -1,11 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { IconChevronRight } from "@tabler/icons-react";
 import { motion, easeInOut } from "motion/react";
-import { tools, type ToolDefinition } from "@/data/tools";
+import { toolCategories, tools, type ToolCategory, type ToolDefinition } from "@/data/tools";
 
 interface RelatedToolsProps {
   currentToolSlug: string;
-  category?: "Images" | "Data" | "all";
+  category?: ToolCategory | "all";
   maxTools?: number;
 }
 
@@ -55,14 +55,14 @@ export default function RelatedTools({ currentToolSlug, category = "all", maxToo
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-theme-heading">
-              {category !== "all" ? `Other ${category} Tools` : "More Tools You Might Need"}
+              {category !== "all" ? `Other ${toolCategories[category].heading}` : "More Tools You Might Need"}
             </h2>
           </div>
           <Link
-            to="/tools"
+            to={category !== "all" ? toolCategories[category].href : "/tools"}
             className="hidden sm:inline-flex items-center gap-2 text-sm text-brand-primary font-semibold hover:text-brand-hover transition-colors"
           >
-            View all tools
+            {category !== "all" ? `View ${toolCategories[category].heading}` : "View all tools"}
             <IconChevronRight className="h-4 w-4" />
           </Link>
         </div>
@@ -76,10 +76,10 @@ export default function RelatedTools({ currentToolSlug, category = "all", maxToo
         </motion.div>
 
         <Link
-          to="/tools"
+          to={category !== "all" ? toolCategories[category].href : "/tools"}
           className="sm:hidden mt-4 inline-flex items-center gap-2 text-sm text-brand-primary font-semibold hover:text-brand-hover transition-colors"
         >
-          View all tools
+          {category !== "all" ? `View ${toolCategories[category].heading}` : "View all tools"}
           <IconChevronRight className="h-4 w-4" />
         </Link>
       </motion.div>
