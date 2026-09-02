@@ -464,11 +464,11 @@ code {
     @apply text-theme-muted hover:bg-theme-surface-muted hover:text-theme-heading;
   }
 
-  /* Hero screenshot: thick matte frame, no shadow */
+  /* Hero screenshot: thick matte frame with bg.jpg showing in the padding */
   .hero-preview-frame {
     border-radius: 28px;
     border: 1px solid #e0e0e0;
-    background: #f5f5f5;
+    background: #f5f5f5 url("/bg.jpg") center / cover no-repeat;
     padding: 14px;
     box-shadow: none;
     overflow: hidden;
@@ -484,7 +484,6 @@ code {
 
   .dark .hero-preview-frame {
     border-color: var(--theme-border-strong);
-    background: var(--theme-surface-muted);
   }
 
   .dark .hero-preview-frame-inner {
