@@ -19,9 +19,9 @@ const featuredTools = [...(jsonToCsvTool ? [jsonToCsvTool] : []), ...tools.filte
 export const Route = createFileRoute("/")({
   head: () =>
     getSeoMetadata({
-      title: "SnapBit Tools | Private & Fast Image and Data Tools",
+      title: "SnapBit Tools | Private & Fast Image, PDF & Data Tools",
       description:
-        "Private browser tools: Convert images to Base64, compress photos, format JSON, and convert CSV to Excel. 100% secure—your data never leaves your browser.",
+        "Private browser tools: Convert images to Base64, compress photos, format JSON, convert CSV to Excel, and convert PDF to images. 100% secure—your data never leaves your browser.",
       keywords: [
         "free online tools",
         "image to base64 converter",
@@ -31,6 +31,7 @@ export const Route = createFileRoute("/")({
         "csv to xlsx converter",
         "image to pdf converter",
         "json to csv converter",
+        "pdf to image converter",
         "privacy-first tools",
         "client-side processing",
         "offline image tools",
@@ -137,7 +138,7 @@ function App() {
                   </motion.span>
                 </AnimatePresence>
               </motion.span>
-              Image &amp; Data Tools.
+              Image, PDF &amp; Data Tools.
             </div>
             <span className="pointer-events-none absolute -z-10 opacity-0 font-extrabold" aria-hidden="true">
               {rotatingWords.map((word, idx) => (
