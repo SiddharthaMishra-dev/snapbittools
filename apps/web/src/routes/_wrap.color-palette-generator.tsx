@@ -144,7 +144,7 @@ export function RouteComponent() {
           faqs={faqs}
         />
 
-        <RelatedTools currentToolSlug="color-palette-generator" category="Images" />
+        <RelatedTools currentToolSlug="color-palette-generator" category="Utility" />
       </div>
     </div>
   );

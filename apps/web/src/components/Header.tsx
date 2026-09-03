@@ -1,21 +1,25 @@
 import React from "react";
 
-import { IconApps, IconArticle, IconLayoutSidebar } from "@tabler/icons-react";
-import { Link } from "@tanstack/react-router";
+import { IconApps, IconArticle, IconBraces, IconFileTypePdf, IconLayoutSidebar, IconPhoto, IconTools } from "@tabler/icons-react";
+import { Link, useLocation } from "@tanstack/react-router";
 import { motion, easeInOut } from "motion/react";
 
 import ThemeToggle from "@/components/ThemeToggle";
+import { TOOL_CATEGORY_ORDER, toolCategories } from "@/data/tools";
 import { useSidebar } from "@/lib/sidebar";
 import { cn } from "@/lib/utils";
 
-const navItems = [
-  { path: "/tools", label: "All Tools", icon: <IconApps size={18} /> },
-  { path: "/blogs", label: "Blogs", icon: <IconArticle size={18} /> },
-];
+const categoryIcons = {
+  Images: IconPhoto,
+  PDF: IconFileTypePdf,
+  Data: IconBraces,
+  Utility: IconTools,
+} as const;
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const { isOpen, isSidebarRoute, toggleSidebar } = useSidebar();
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +35,9 @@ const Header: React.FC = () => {
     : "bg-theme-nav-bg-transparent backdrop-blur-sm border-transparent";
 
   const linkCls =
-    "text-theme-nav-link hover:text-brand-primary hover:bg-theme-nav-link-hover-bg flex items-center gap-2 px-3 py-2 no-underline text-sm font-medium rounded-lg transition-all duration-200 ease-in-out";
+    "text-theme-nav-link hover:text-brand-primary hover:bg-theme-nav-link-hover-bg flex items-center gap-2 px-2.5 lg:px-3 py-2 no-underline text-sm font-medium rounded-lg transition-all duration-200 ease-in-out shrink-0";
+
+  const activeCls = "text-brand-primary bg-theme-nav-link-hover-bg";
 
   return (
     <motion.nav
@@ -45,7 +51,7 @@ const Header: React.FC = () => {
       )}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between h-16 gap-4">
+        <div className="flex items-center justify-between h-16 gap-3">
           <div className="flex items-center gap-2 shrink-0">
             {isSidebarRoute && (
               <button
@@ -65,14 +71,27 @@ const Header: React.FC = () => {
             </Link>
           </div>
 
-          <div className="flex items-center gap-1 lg:gap-2">
-            {navItems.map((item) => (
-              <Link key={item.path} to={item.path} className={linkCls}>
-                <span>{item.icon}</span>
-                <span className="hidden sm:inline">{item.label}</span>
-              </Link>
-            ))}
-            <ThemeToggle className="ml-1" />
+          <div className="flex items-center gap-0.5 lg:gap-1 min-w-0 overflow-x-auto no-scrollbar">
+            {TOOL_CATEGORY_ORDER.map((category) => {
+              const meta = toolCategories[category];
+              const Icon = categoryIcons[category];
+              const active = pathname === meta.href;
+              return (
+                <Link key={meta.href} to={meta.href} className={cn(linkCls, active && activeCls)}>
+                  <Icon size={18} />
+                  <span className="hidden md:inline">{meta.navLabel}</span>
+                </Link>
+              );
+            })}
+            <Link to="/tools" className={cn(linkCls, pathname === "/tools" && activeCls)}>
+              <IconApps size={18} />
+              <span className="hidden lg:inline">All</span>
+            </Link>
+            <Link to="/blogs" className={cn(linkCls, pathname === "/blogs" && activeCls)}>
+              <IconArticle size={18} />
+              <span className="hidden lg:inline">Blogs</span>
+            </Link>
+            <ThemeToggle className="ml-1 shrink-0" />
           </div>
         </div>
       </div>

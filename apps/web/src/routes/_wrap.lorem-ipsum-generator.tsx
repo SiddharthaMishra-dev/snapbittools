@@ -324,7 +324,7 @@ function LoremIpsumComponent() {
           />
         </div>
 
-        <RelatedTools currentToolSlug="lorem-ipsum-generator" category="Data" />
+        <RelatedTools currentToolSlug="lorem-ipsum-generator" category="Utility" />
       </div>
     </div>
   );

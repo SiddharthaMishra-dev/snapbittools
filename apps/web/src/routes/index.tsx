@@ -1,13 +1,6 @@
 import type { ReactNode } from "react";
 
-import {
-  IconArrowRight,
-  IconBolt,
-  IconBrandGithub,
-  IconCheck,
-  IconChevronRight,
-  IconLock,
-} from "@tabler/icons-react";
+import { IconArrowRight, IconBolt, IconBrandGithub, IconCheck, IconChevronRight, IconLock } from "@tabler/icons-react";
 import { Link, createFileRoute, createLink } from "@tanstack/react-router";
 import { AnimatePresence, easeInOut, motion } from "motion/react";
 
@@ -21,17 +14,14 @@ import Button from "@/components/ui/button";
 import { Button as MagneticButton } from "@/components/Magnetic-button";
 
 const jsonToCsvTool = tools.find((tool) => tool.slug === "json-to-csv");
-const featuredTools = [
-  ...(jsonToCsvTool ? [jsonToCsvTool] : []),
-  ...tools.filter((tool) => tool.slug !== "json-to-csv"),
-].slice(0, 6);
+const featuredTools = [...(jsonToCsvTool ? [jsonToCsvTool] : []), ...tools.filter((tool) => tool.slug !== "json-to-csv")].slice(0, 6);
 
 export const Route = createFileRoute("/")({
   head: () =>
     getSeoMetadata({
-      title: "SnapBit Tools | Private & Fast Image and Data Tools",
+      title: "SnapBit Tools | Private & Fast Image, PDF & Data Tools",
       description:
-        "Private browser tools: Convert images to Base64, compress photos, format JSON, and convert CSV to Excel. 100% secure—your data never leaves your browser.",
+        "Private browser tools: Convert images to Base64, compress photos, format JSON, convert CSV to Excel, and convert PDF to images. 100% secure—your data never leaves your browser.",
       keywords: [
         "free online tools",
         "image to base64 converter",
@@ -41,6 +31,7 @@ export const Route = createFileRoute("/")({
         "csv to xlsx converter",
         "image to pdf converter",
         "json to csv converter",
+        "pdf to image converter",
         "privacy-first tools",
         "client-side processing",
         "offline image tools",
@@ -96,14 +87,8 @@ function App() {
   }, [active]);
 
   return (
-    <PageShell
-      withDotGrid={false}
-      className="bg-theme-page"
-    >
-      <div
-        className="theme-dot-grid pointer-events-none fixed inset-0 z-0"
-        aria-hidden="true"
-      />
+    <PageShell withDotGrid={false} className="bg-theme-page">
+      <div className="theme-dot-grid pointer-events-none fixed inset-0 z-0" aria-hidden="true" />
 
       {/* ════════════════════════════════
           HERO
@@ -129,10 +114,7 @@ function App() {
           </motion.a>
 
           {/* Headline: one static H1 for crawlers/AT; cycling badges are decorative */}
-          <motion.div
-            variants={itemVariants}
-            className="relative"
-          >
+          <motion.div variants={itemVariants} className="relative">
             <h1 className="sr-only">Free, Private & Fast Image & Data Tools.</h1>
             <div
               aria-hidden="true"
@@ -143,10 +125,7 @@ function App() {
                 transition={{ duration: 0.45, ease: easeInOut }}
                 className="inline-flex overflow-hidden text-brand-primary bg-theme-icon-bg border border-[var(--theme-pseo-accent-border)] px-3 py-1 rounded-xl mr-2 align-middle"
               >
-                <AnimatePresence
-                  mode="wait"
-                  initial={false}
-                >
+                <AnimatePresence mode="wait" initial={false}>
                   <motion.span
                     key={rotatingWords[active]}
                     initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
@@ -159,12 +138,9 @@ function App() {
                   </motion.span>
                 </AnimatePresence>
               </motion.span>
-              Image &amp; Data Tools.
+              Image, PDF &amp; Data Tools.
             </div>
-            <span
-              className="pointer-events-none absolute -z-10 opacity-0 font-extrabold"
-              aria-hidden="true"
-            >
+            <span className="pointer-events-none absolute -z-10 opacity-0 font-extrabold" aria-hidden="true">
               {rotatingWords.map((word, idx) => (
                 <span
                   key={`measure-${word}`}
@@ -180,19 +156,13 @@ function App() {
           </motion.div>
 
           {/* Subheadline */}
-          <motion.p
-            variants={itemVariants}
-            className="text-base md:text-lg text-theme-muted max-w-2xl leading-relaxed"
-          >
-            Professional browser tools for developers and designers. Convert, compress, format, and
-            transform files — entirely on your device. No uploads. No accounts. Always free.
+          <motion.p variants={itemVariants} className="text-base md:text-lg text-theme-muted max-w-2xl leading-relaxed">
+            Professional browser tools for developers and designers. Convert, compress, format, and transform files — entirely on your
+            device. No uploads. No accounts. Always free.
           </motion.p>
 
           {/* CTA row */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center gap-3"
-          >
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-3">
             <MagneticButton>
               <ButtonLink
                 to="/tools"
@@ -210,17 +180,12 @@ function App() {
             variants={itemVariants}
             className="hidden sm:flex flex-wrap justify-center gap-x-6 gap-y-1.5 text-xs text-theme-muted font-medium pt-1"
           >
-            {["100% Browser-Based", "No File Uploads", "Complete Privacy", "Free Forever"].map(
-              (badge) => (
-                <span
-                  key={badge}
-                  className="flex items-center gap-1.5"
-                >
-                  <IconCheck className="h-3.5 w-3.5 text-green-500 shrink-0" />
-                  {badge}
-                </span>
-              ),
-            )}
+            {["100% Browser-Based", "No File Uploads", "Complete Privacy", "Free Forever"].map((badge) => (
+              <span key={badge} className="flex items-center gap-1.5">
+                <IconCheck className="h-3.5 w-3.5 text-green-500 shrink-0" />
+                {badge}
+              </span>
+            ))}
           </motion.div>
         </motion.div>
 
@@ -259,21 +224,13 @@ function App() {
       {/* ════════════════════════════════
           MAIN CONTENT  (light)
       ════════════════════════════════ */}
-      <main
-        className="flex-1 px-4 pb-16 relative z-10 bg-theme-page"
-        id="tools"
-      >
+      <main className="flex-1 px-4 pb-16 relative z-10 bg-theme-page" id="tools">
         {/* Featured tools */}
-        <section
-          className="max-w-7xl mx-auto pt-16 pb-16 fadeElement"
-          id="tools"
-        >
+        <section className="max-w-7xl mx-auto pt-16 pb-16 fadeElement" id="tools">
           <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
             <div>
               <h2 className="text-2xl font-bold text-theme-heading">Most Used Tools</h2>
-              <p className="text-sm text-theme-muted mt-1">
-                Click any tool to open it instantly — no signup needed.
-              </p>
+              <p className="text-sm text-theme-muted mt-1">Click any tool to open it instantly — no signup needed.</p>
             </div>
             <Link
               to="/tools"
@@ -299,10 +256,7 @@ function App() {
                   className="group relative flex items-start gap-4 p-5 rounded-xl border border-theme-border bg-theme-card hover:border-brand-primary/40 hover:shadow-md hover:shadow-blue-50 transition-all duration-200 no-underline"
                 >
                   <div className="w-11 h-11 rounded-lg bg-linear-to-b from-brand-primary to-brand-hover  ring-2 ring-brand-primary/80 shadow-lg flex items-center justify-center shrink-0 group-hover:bg-brand-hover transition-colors">
-                    <Icon
-                      className="text-white"
-                      size={24}
-                    />
+                    <Icon className="text-white" size={24} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -310,14 +264,10 @@ function App() {
                         {tool.name}
                       </h3>
                       {tool.isNew && (
-                        <span className="shrink-0 text-[10px] font-bold bg-brand-primary text-white px-1.5 py-0.5 rounded-full">
-                          NEW
-                        </span>
+                        <span className="shrink-0 text-[10px] font-bold bg-brand-primary text-white px-1.5 py-0.5 rounded-full">NEW</span>
                       )}
                     </div>
-                    <p className="text-xs text-theme-muted mt-0.5 leading-relaxed line-clamp-2">
-                      {tool.description}
-                    </p>
+                    <p className="text-xs text-theme-muted mt-0.5 leading-relaxed line-clamp-2">{tool.description}</p>
                     <span className="mt-2 inline-flex items-center text-xs text-brand-primary font-medium gap-0.5">
                       Try it
                       <IconChevronRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
@@ -355,9 +305,7 @@ function App() {
 
         {/* Who uses it */}
         <section className="max-w-7xl mx-auto py-16 border-t border-gray-100 fadeElement">
-          <h2 className="text-2xl font-bold text-theme-heading mb-10 text-center">
-            Built for Everyone
-          </h2>
+          <h2 className="text-2xl font-bold text-theme-heading mb-10 text-center">Built for Everyone</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               {
@@ -394,12 +342,10 @@ function App() {
 
         {/* Bottom CTA */}
         <section className="max-w-4xl mx-auto py-16 text-center border-t border-gray-100 fadeElement">
-          <h3 className="text-2xl font-bold text-theme-heading mb-3">
-            Everything you need, right in the browser
-          </h3>
+          <h3 className="text-2xl font-bold text-theme-heading mb-3">Everything you need, right in the browser</h3>
           <p className="text-theme-muted text-sm max-w-xl mx-auto mb-8 leading-relaxed">
-            From Base64 encoding to image compression, JSON formatting to spreadsheet conversion —
-            our suite covers the daily file tasks that slow developers and designers down.
+            From Base64 encoding to image compression, JSON formatting to spreadsheet conversion — our suite covers the daily file tasks
+            that slow developers and designers down.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <ButtonLink
@@ -424,15 +370,7 @@ function App() {
   );
 }
 
-function LightFeatureCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: ReactNode;
-  title: string;
-  description: string;
-}) {
+function LightFeatureCard({ icon, title, description }: { icon: ReactNode; title: string; description: string }) {
   return (
     <div className="flex flex-col gap-3 p-6 rounded-xl border border-theme-border bg-theme-card hover:border-brand-primary/30 hover:shadow-sm transition-all">
       <div className="w-9 h-9 rounded-lg bg-linear-to-b from-red-500 to-red-600 flex items-center justify-center shadow-lg ring-2 ring-red-500/80">

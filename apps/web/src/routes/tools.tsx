@@ -2,22 +2,24 @@ import { createLink, createFileRoute } from "@tanstack/react-router";
 
 import PageShell from "@/components/PageShell";
 import { ToolsListing } from "@/components/ToolsListing";
-import { getSeoMetadata } from "@/lib/seo";
 import Button from "@/components/ui/button";
+import { TOOL_CATEGORY_ORDER, toolCategories } from "@/data/tools";
+import { getSeoMetadata } from "@/lib/seo";
 
 export const Route = createFileRoute("/tools")({
   head: () =>
     getSeoMetadata({
       title: "All Tools | SnapBit Tools",
       description:
-        "Browse every SnapBit Tools utility in one place. Image converters, compressors, croppers, JSON formatter, CSV to XLSX, and more—private and client-side.",
+        "Browse every SnapBit Tools utility in one place. Image converters, PDF tools, JSON formatter, CSV to XLSX, and more—private and client-side.",
       keywords: [
         "online tools",
         "image tools",
+        "pdf tools",
+        "data tools",
+        "utility tools",
         "json formatter",
-        "csv to xlsx",
         "image compressor",
-        "image converter",
         "privacy-first tools",
         "offline tools",
       ],
@@ -37,22 +39,21 @@ export function RouteComponent() {
             <span className="text-brand-primary">SnapBit</span> Tools
           </h1>
           <p className="text-base md:text-lg text-theme-muted max-w-3xl mx-auto mb-8 leading-relaxed">
-            Browse all tools in one place. Image converters, compressors, croppers, JSON formatter, CSV to XLSX, CSV to JSON, and many more.
+            Browse all tools in one place, grouped by type: images, PDFs, data, and everyday utilities.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-3">
-            <ButtonLink
-              to="/tools"
-              hash="images"
-              className="px-6 py-2.5 bg-brand-primary text-white rounded-xl text-sm font-semibold shadow-md hover:bg-brand-hover transition-all duration-200"
-            >
-              Jump to tools
-            </ButtonLink>
-            <ButtonLink
-              to="/"
-              className="px-6 py-2.5 border border-theme-border bg-theme-surface text-theme-body rounded-xl text-sm font-semibold hover:bg-theme-surface-muted transition-colors"
-            >
-              Back to home
-            </ButtonLink>
+          <div className="flex flex-wrap justify-center gap-3">
+            {TOOL_CATEGORY_ORDER.map((category) => {
+              const meta = toolCategories[category];
+              return (
+                <ButtonLink
+                  key={category}
+                  to={meta.href}
+                  className="px-5 py-2.5 border border-theme-border bg-theme-surface text-theme-body rounded-xl text-sm font-semibold hover:bg-theme-surface-muted transition-colors"
+                >
+                  {meta.heading}
+                </ButtonLink>
+              );
+            })}
           </div>
         </div>
       </section>

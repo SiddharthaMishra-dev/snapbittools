@@ -257,6 +257,36 @@ Use it alongside Image to PDF and Image Compressor when building document workfl
     ],
   },
 
+  "pdf-to-jpg": {
+    slug: "pdf-to-jpg",
+    title: "PDF to JPG Converter - Convert PDF Pages to Images Online",
+    intro: `Convert PDF pages to JPG or PNG instantly with SnapBit’s free browser-based PDF to image converter. Each page is rendered on your device — no uploads, no account, and no watermarks. Download a single page or a ZIP of the whole document.
+
+People search “pdf to jpg” when they need one page from a form, a slide for social media, a scan to attach in chat, or images they can drop into a design tool. Cloud converters require uploading the file. SnapBit uses PDF.js in your browser: pages are drawn to a canvas at your chosen DPI, encoded as JPEG or PNG, and saved locally.
+
+Choose Web (72 DPI) for small attachments, Screen (150 DPI) for sharp display copies, or Print (300 DPI) when you need more detail. JPEG quality is adjustable for size vs. clarity. PNG is available when lossless output matters more than file size. Multi-page PDFs produce one image per page with padded filenames so they sort correctly.
+
+Use it next to Image to PDF when you need to go the other direction, or PDF Compressor when the goal is a smaller document instead of images. Everything stays on your device, including contracts, IDs, and internal reports.`,
+    benefits: [
+      "Convert PDF to JPG or PNG entirely in the browser",
+      "No uploads, no signup, no watermarks",
+      "Web, Screen, and Print DPI presets",
+      "Adjustable JPEG quality for smaller files",
+      "Per-page preview and download",
+      "ZIP download for multi-page PDFs",
+      "Password-protected files fail with a clear error — nothing is sent away",
+    ],
+    useCases: [
+      "Extracting a single form page to email or chat",
+      "Turning slides into images for social posts",
+      "Saving scanned PDF pages as JPG photos",
+      "Preparing images from a PDF for a CMS or listing",
+      "Sharing one page without sending the full document",
+      "Converting lecture notes or worksheets to images",
+      "Private conversion of sensitive paperwork",
+    ],
+  },
+
   "image-to-pdf": {
     slug: "image-to-pdf",
     title: "Image to PDF Converter - Merge Images into PDF Documents",

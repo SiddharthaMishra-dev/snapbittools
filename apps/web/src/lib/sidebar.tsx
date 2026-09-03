@@ -1,7 +1,18 @@
 import { useLocation } from "@tanstack/react-router";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-const ROUTES_WITHOUT_SIDEBAR = ["/", "/tools", "/blogs", "/privacy-policy", "/terms", "/privacy"];
+const ROUTES_WITHOUT_SIDEBAR = [
+  "/",
+  "/tools",
+  "/image-tools",
+  "/pdf-tools",
+  "/data-tools",
+  "/utility-tools",
+  "/blogs",
+  "/privacy-policy",
+  "/terms",
+  "/privacy",
+];
 
 export function isSidebarRoute(pathname: string) {
   return !ROUTES_WITHOUT_SIDEBAR.includes(pathname);
