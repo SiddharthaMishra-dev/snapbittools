@@ -170,9 +170,14 @@ export function ImageResizerTool() {
   useEffect(() => {
     return () => {
       if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+    };
+  }, [sourceUrl]);
+
+  useEffect(() => {
+    return () => {
       if (resizedUrl) URL.revokeObjectURL(resizedUrl);
     };
-  }, [sourceUrl, resizedUrl]);
+  }, [resizedUrl]);
 
   const scalePercent = originalWidth > 0 ? Math.max(1, Math.min(1000, Math.round((targetWidth / originalWidth) * 100))) : 100;
 
