@@ -1,8 +1,6 @@
 import { PDFDocument } from "pdf-lib";
-import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 
-// pdf.js worker (runs alongside the page; compression itself is async per page)
-GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
+import { loadPdfjs } from "./loadPdfjs";
 
 export type PdfCompressPreset = "strong" | "balanced" | "high";
 
@@ -76,6 +74,7 @@ export async function compressPdfClient(options: PdfCompressOptions): Promise<Pd
 
   const dataCopy = options.pdfData.slice(0);
   const originalSize = dataCopy.byteLength;
+  const { getDocument } = await loadPdfjs();
 
   const loadingTask = getDocument({
     data: dataCopy,

@@ -1,10 +1,7 @@
-import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
-
+import { loadPdfjs } from "./loadPdfjs";
 import { pageImageFileName, type PdfImageFormat } from "./pdfToImagesNames";
 
 export { pageImageFileName, pagesZipFileName, pdfBaseName, type PdfImageFormat } from "./pdfToImagesNames";
-
-GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
 
 export type PdfToImageDpiPreset = "web" | "screen" | "print";
 
@@ -111,6 +108,7 @@ export async function convertPdfToImages(options: PdfToImagesOptions, sourceFile
   throwIfAborted(options.signal);
 
   const dataCopy = options.pdfData.slice(0);
+  const { getDocument } = await loadPdfjs();
 
   try {
     const loadingTask = getDocument({
