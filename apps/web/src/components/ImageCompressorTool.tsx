@@ -1,7 +1,8 @@
-import { IconCircleX, IconCloudUpload, IconDownload, IconLock } from "@tabler/icons-react";
+import { IconCircleX, IconDownload } from "@tabler/icons-react";
 import JSZip from "jszip";
 import { useEffect, useRef, useState } from "react";
 
+import { FileDropzone } from "@/components/FileDropzone";
 import { mimeTypeToExtension } from "@/lib/imageCompress";
 import ImageCompressorWorker from "../workers/imageCompressor.worker.ts?worker";
 
@@ -28,37 +29,13 @@ export function ImageCompressorTool() {
   // High defaults so images are not silently downscaled (dimension controls are hidden).
   const [maxWidth, setMaxWidth] = useState(16384);
   const [maxHeight, setMaxHeight] = useState(16384);
-  const [isDragging, setIsDragging] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
   const [preserveFormat, setPreserveFormat] = useState(true);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const workerRef = useRef<Worker | null>(null);
   const [isDownloadingZip, setIsDownloadingZip] = useState(false);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = Array.from(e.target.files || []);
-    processFiles(selectedFiles);
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const droppedFiles = Array.from(e.dataTransfer.files);
-    processFiles(droppedFiles);
-  };
-
-  const processFiles = (selectedFiles: File[]) => {
-    const imageFiles = selectedFiles.filter((file) => file.type.startsWith("image/"));
+  const processFiles = (selectedFiles: FileList | File[]) => {
+    const imageFiles = Array.from(selectedFiles).filter((file) => file.type.startsWith("image/"));
 
     if (imageFiles.length === 0) {
       alert("Please select valid image files");
@@ -225,9 +202,6 @@ export function ImageCompressorTool() {
       }
     });
     setFiles([]);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
   };
 
   useEffect(() => {
@@ -261,37 +235,14 @@ export function ImageCompressorTool() {
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
       <div className="rounded-xl shadow-lg px-0 py-4 sm:p-8  w-full max-w-5xl">
         {files.length === 0 ? (
-          <>
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                isDragging ? "border-brand-primary bg-brand-primary/20" : "border-gray-600 hover:border-brand-primary/40 "
-              }`}
-            >
-              <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-theme-muted"} transition-colors`} />
-                <div>
-                  <p className="text-xl font-medium text-theme-heading mb-2">
-                    {isDragging ? "Drop your images here" : "Drag & drop your images here"}
-                  </p>
-                  <p className="text-theme-muted mb-4">or</p>
-                  <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg active:scale-[0.98]"
-                  >
-                    Choose Files
-                  </button>
-                </div>
-              </div>
-            </div>
-            <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
-              <IconLock className="w-4 h-4" /> Your files stay on your device. Nothing is uploaded to any server.
-            </p>
-
-            <input type="file" accept="image/*" multiple ref={fileInputRef} className="hidden" onChange={handleFileChange} />
-          </>
+          <FileDropzone
+            title="Upload images"
+            description="Drag and drop photos here, or choose files to compress."
+            buttonLabel="Select Images"
+            accept="image/*"
+            multiple
+            onFiles={processFiles}
+          />
         ) : (
           <>
             <div className="py-10">

@@ -99,7 +99,7 @@ export function getSeoMetadata(config: SeoMetadata) {
 
   scripts.push({
     type: "application/ld+json",
-    children: JSON.stringify(mainSchema),
+    children: stringifyJsonLd(mainSchema),
   });
 
   if (faqs && faqs.length > 0) {
@@ -117,7 +117,7 @@ export function getSeoMetadata(config: SeoMetadata) {
     };
     scripts.push({
       type: "application/ld+json",
-      children: JSON.stringify(faqSchema),
+      children: stringifyJsonLd(faqSchema),
     });
   }
 
@@ -134,14 +134,14 @@ export function getSeoMetadata(config: SeoMetadata) {
     };
     scripts.push({
       type: "application/ld+json",
-      children: JSON.stringify(breadcrumbSchema),
+      children: stringifyJsonLd(breadcrumbSchema),
     });
   }
 
   if (schema) {
     scripts.push({
       type: "application/ld+json",
-      children: JSON.stringify(schema),
+      children: stringifyJsonLd(schema),
     });
   }
 
@@ -150,6 +150,11 @@ export function getSeoMetadata(config: SeoMetadata) {
     links: [{ rel: "canonical", href: canonicalHref }],
     scripts,
   };
+}
+
+/** Escape `<` so JSON-LD inside `<script>` cannot be parsed as HTML tags. */
+function stringifyJsonLd(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
 }
 
 export function getOrganizationSchema() {

@@ -2,7 +2,6 @@ import React from "react";
 
 import { IconApps, IconArticle, IconBraces, IconFileTypePdf, IconLayoutSidebar, IconPhoto, IconTools } from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { motion, easeInOut } from "motion/react";
 
 import ThemeToggle from "@/components/ThemeToggle";
 import { TOOL_CATEGORY_ORDER, toolCategories } from "@/data/tools";
@@ -40,10 +39,7 @@ const Header: React.FC = () => {
   const activeCls = "text-brand-primary bg-theme-nav-link-hover-bg";
 
   return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: easeInOut, delay: 0.2 }}
+    <nav
       className={cn(
         "w-full mx-auto rounded-lg fixed top-2 left-0 right-0 z-50 transition-all duration-300 border-b",
         navBg,
@@ -95,7 +91,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 

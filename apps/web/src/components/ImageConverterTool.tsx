@@ -1,6 +1,7 @@
-import { IconCircleX, IconCloudUpload, IconDownload } from "@tabler/icons-react";
+import { IconCircleX, IconDownload } from "@tabler/icons-react";
 import JSZip from "jszip";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { FileDropzone } from "@/components/FileDropzone";
 import { ConversionItem } from "@/types/ImageTypes";
 import ImageConverterWorker from "../workers/imageConverter.worker.ts?worker";
 
@@ -11,11 +12,9 @@ interface ExtendedConversionItem extends ConversionItem {
 }
 
 export function ImageConverterTool() {
-  const uploadRef = useRef<HTMLInputElement>(null);
   const workerRef = useRef<Worker | null>(null);
   const [selectedFormat, setSelectedFormat] = useState("png");
   const [conversions, setConversions] = useState<ExtendedConversionItem[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
   const [isConverting, setIsConverting] = useState(false);
   const [isDownloadingZip, setIsDownloadingZip] = useState(false);
 
@@ -47,32 +46,6 @@ export function ImageConverterTool() {
 
     setConversions(newConversions);
   }, []);
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      processFiles(files);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      processFiles(files);
-    }
-  };
 
   const convertImage = async (item: ExtendedConversionItem): Promise<void> => {
     return new Promise((resolve, reject) => {
@@ -207,9 +180,6 @@ export function ImageConverterTool() {
       }
     });
     setConversions([]);
-    if (uploadRef.current) {
-      uploadRef.current.value = "";
-    }
   };
 
   useEffect(() => {
@@ -248,38 +218,14 @@ export function ImageConverterTool() {
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto ">
       <div className="bg-transparent rounded-xl shadow-lg px-0 py-4 sm:p-8 mb-6 w-full">
         {conversions.length === 0 ? (
-          <>
-            {/* Upload Area */}
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                isDragging ? "border-brand-primary bg-brand-primary/20" : "border-gray-600 hover:border-brand-primary/40 "
-              }`}
-            >
-              <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-brand-primary" : "text-theme-muted"} transition-colors`} />
-                <div>
-                  <p className="text-xl font-medium text-theme-heading mb-2">
-                    {isDragging ? "Drop your images here" : "Drag & drop your images here"}
-                  </p>
-                  <p className="text-theme-muted mb-4">or</p>
-                  <button
-                    onClick={() => uploadRef.current?.click()}
-                    className="text-sm px-3 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
-                  >
-                    Choose Files
-                  </button>
-                </div>
-              </div>
-            </div>
-            <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
-              🔒 Your files stay on your device. Nothing is uploaded to any server.
-            </p>
-
-            <input type="file" accept="image/*" ref={uploadRef} className="hidden" multiple onChange={handleFileUpload} />
-          </>
+          <FileDropzone
+            title="Upload images"
+            description="Drag and drop photos here, or choose files to convert."
+            buttonLabel="Select Images"
+            accept="image/*"
+            multiple
+            onFiles={processFiles}
+          />
         ) : (
           <>
             <div className="">

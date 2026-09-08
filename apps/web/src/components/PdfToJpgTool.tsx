@@ -1,7 +1,8 @@
-import { IconCircleX, IconCloudUpload, IconDownload, IconFileTypePdf, IconInfoCircle, IconLock } from "@tabler/icons-react";
+import { IconCircleX, IconDownload, IconFileTypePdf, IconInfoCircle } from "@tabler/icons-react";
 import JSZip from "jszip";
 import { useEffect, useRef, useState } from "react";
 
+import { FileDropzone } from "@/components/FileDropzone";
 import {
   convertPdfToImages,
   pagesZipFileName,
@@ -35,10 +36,8 @@ function downloadBlob(blob: Blob, fileName: string) {
 type PagePreview = PdfPageImage & { previewUrl: string };
 
 export function PdfToJpgTool() {
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
   const pagesRef = useRef<PagePreview[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -75,7 +74,6 @@ export function PdfToJpgTool() {
     setStatus("idle");
     setError(null);
     setIsZipping(false);
-    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const processFiles = (files: FileList | File[]) => {
@@ -205,47 +203,13 @@ export function PdfToJpgTool() {
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
       <div className="rounded-xl shadow-lg px-0 py-4 sm:p-8 w-full max-w-5xl border border-theme-border bg-theme-surface">
         {!sourceFile ? (
-          <div
-            onDragOver={(e) => {
-              e.preventDefault();
-              setIsDragging(true);
-            }}
-            onDragLeave={(e) => {
-              e.preventDefault();
-              setIsDragging(false);
-            }}
-            onDrop={(e) => {
-              e.preventDefault();
-              setIsDragging(false);
-              processFiles(e.dataTransfer.files);
-            }}
-            className={cn(
-              "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
-              isDragging ? "border-brand-primary bg-brand-primary/20" : "border-theme-border hover:border-brand-primary/40",
-            )}
-          >
-            <IconCloudUpload
-              className={cn("h-14 w-14 mx-auto mb-4 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")}
-            />
-            <h2 className="text-2xl font-bold text-theme-heading mb-2">Upload PDF</h2>
-            <p className="text-theme-body mb-5">Drag and drop a PDF here, or choose a file to convert to JPG in your browser.</p>
-            <button type="button" onClick={() => fileInputRef.current?.click()} className={cn(tc.btnPrimary, "px-6 py-3")}>
-              Select PDF
-            </button>
-            <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-theme-muted">
-              <IconLock className="w-3.5 h-3.5" />
-              Private mode — processed on your device. Nothing is uploaded.
-            </p>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="application/pdf,.pdf"
-              className="hidden"
-              onChange={(e) => {
-                if (e.target.files) processFiles(e.target.files);
-              }}
-            />
-          </div>
+          <FileDropzone
+            title="Upload PDF"
+            description="Drag and drop a PDF here, or choose a file to convert to JPG in your browser."
+            buttonLabel="Select PDF"
+            accept="application/pdf,.pdf"
+            onFiles={processFiles}
+          />
         ) : (
           <div className="space-y-6">
             <div className="flex items-start justify-between gap-4 rounded-lg border border-theme-border bg-theme-surface-muted/30 p-4">

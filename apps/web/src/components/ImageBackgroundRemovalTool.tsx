@@ -1,7 +1,8 @@
-import { IconCircleX, IconCloudUpload, IconDownload, IconLock, IconSparkles } from "@tabler/icons-react";
+import { IconCircleX, IconDownload, IconSparkles } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
+import { FileDropzone } from "@/components/FileDropzone";
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
 import type { BackgroundRemovalError, BackgroundRemovalProgress, BackgroundRemovalSuccess } from "@/workers/imageBackgroundRemoval.worker";
@@ -55,11 +56,9 @@ const STAGE_COPY: Record<"preparing" | "processing" | "converting", string> = {
 const STAGE_ORDER = ["preparing", "processing", "converting"] as const;
 
 export function ImageBackgroundRemovalTool() {
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const workerRef = useRef<Worker | null>(null);
   const requestIdRef = useRef(0);
 
-  const [isDragging, setIsDragging] = useState(false);
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [sourceUrl, setSourceUrl] = useState<string | null>(null);
   const [resultBlob, setResultBlob] = useState<Blob | null>(null);
@@ -101,7 +100,6 @@ export function ImageBackgroundRemovalTool() {
     setSourceUrl(null);
     setStage("idle");
     setError(null);
-    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const processFiles = (files: FileList | File[]) => {
@@ -119,12 +117,6 @@ export function ImageBackgroundRemovalTool() {
     const nextUrl = URL.createObjectURL(first);
     setSourceFile(first);
     setSourceUrl(nextUrl);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    processFiles(e.dataTransfer.files);
   };
 
   const removeBackground = async () => {
@@ -199,43 +191,13 @@ export function ImageBackgroundRemovalTool() {
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
       <div className="rounded-xl shadow-lg px-0 py-4 sm:p-8 w-full max-w-5xl border border-theme-border bg-theme-surface">
         {!sourceFile ? (
-          <div
-            onDragOver={(e) => {
-              e.preventDefault();
-              setIsDragging(true);
-            }}
-            onDragLeave={(e) => {
-              e.preventDefault();
-              setIsDragging(false);
-            }}
-            onDrop={handleDrop}
-            className={cn(
-              "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
-              isDragging ? "border-brand-primary bg-brand-primary/20" : "border-theme-border hover:border-brand-primary/40",
-            )}
-          >
-            <IconCloudUpload
-              className={cn("h-14 w-14 mx-auto mb-4 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")}
-            />
-            <h2 className="text-2xl font-bold text-theme-heading mb-2">Upload image</h2>
-            <p className="text-theme-body mb-5">Drag and drop a photo here, or choose a file to remove its background.</p>
-            <button type="button" onClick={() => fileInputRef.current?.click()} className={cn(tc.btnPrimary, "px-6 py-3")}>
-              Select Image
-            </button>
-            <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-theme-muted">
-              <IconLock className="w-3.5 h-3.5" />
-              Processed in your browser. Nothing is uploaded to a server.
-            </p>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => {
-                if (e.target.files) processFiles(e.target.files);
-              }}
-            />
-          </div>
+          <FileDropzone
+            title="Upload image"
+            description="Drag and drop a photo here, or choose a file to remove its background."
+            buttonLabel="Select Image"
+            accept="image/*"
+            onFiles={processFiles}
+          />
         ) : (
           <div className="space-y-6">
             <div className="flex items-start justify-between gap-4 rounded-lg border border-theme-border bg-theme-surface-muted/30 p-4">
@@ -345,43 +307,36 @@ export function ImageBackgroundRemovalTool() {
 
             {error ? <p className={cn(tc.alertError, "text-sm rounded-lg px-3 py-2")}>{error}</p> : null}
 
-            <AnimatePresence>
-              {resultUrl ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className={cn(tc.diffAdded, "rounded-lg border border-theme-border p-4 space-y-4")}
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div>
-                      <h4 className="font-semibold text-[var(--theme-diff-added-text)]">Background removed</h4>
-                      <p className="text-sm text-theme-body mt-0.5">
-                        Transparent PNG
-                        {resultBlob ? ` · ${formatBytes(resultBlob.size)}` : ""}
-                      </p>
-                    </div>
-                    <button type="button" onClick={downloadResult} className={cn(tc.btnSuccess, "px-4 py-2")}>
-                      <IconDownload className="w-4 h-4" />
-                      Download PNG
-                    </button>
+            {resultUrl ? (
+              <div className={cn(tc.diffAdded, "rounded-lg border border-theme-border p-4 space-y-4")}>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <h4 className="font-semibold text-[var(--theme-diff-added-text)]">Background removed</h4>
+                    <p className="text-sm text-theme-body mt-0.5">
+                      Transparent PNG
+                      {resultBlob ? ` · ${formatBytes(resultBlob.size)}` : ""}
+                    </p>
                   </div>
+                  <button type="button" onClick={downloadResult} className={cn(tc.btnSuccess, "px-4 py-2")}>
+                    <IconDownload className="w-4 h-4" />
+                    Download PNG
+                  </button>
+                </div>
 
-                  <div
-                    className="rounded-lg border border-theme-border overflow-hidden"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(45deg, #c4c4c4 25%, transparent 25%), linear-gradient(-45deg, #c4c4c4 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #c4c4c4 75%), linear-gradient(-45deg, transparent 75%, #c4c4c4 75%)",
-                      backgroundSize: "20px 20px",
-                      backgroundPosition: "0 0, 0 10px, 10px -10px, -10px 0px",
-                      backgroundColor: "#e8e8e8",
-                    }}
-                  >
-                    <img src={resultUrl} alt="Background removed preview" className="w-full h-auto max-h-[28rem] object-contain mx-auto" />
-                  </div>
-                </motion.div>
-              ) : null}
-            </AnimatePresence>
+                <div
+                  className="rounded-lg border border-theme-border overflow-hidden"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(45deg, #c4c4c4 25%, transparent 25%), linear-gradient(-45deg, #c4c4c4 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #c4c4c4 75%), linear-gradient(-45deg, transparent 75%, #c4c4c4 75%)",
+                    backgroundSize: "20px 20px",
+                    backgroundPosition: "0 0, 0 10px, 10px -10px, -10px 0px",
+                    backgroundColor: "#e8e8e8",
+                  }}
+                >
+                  <img src={resultUrl} alt="Background removed preview" className="w-full h-auto max-h-[28rem] object-contain mx-auto" />
+                </div>
+              </div>
+            ) : null}
           </div>
         )}
       </div>

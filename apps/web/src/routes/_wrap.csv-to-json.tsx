@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useCallback, useRef, useEffect } from "react";
-import { IconCheck, IconCopy, IconDownload, IconBraces, IconTrash, IconAlertCircle, IconTable, IconUpload } from "@tabler/icons-react";
+import { IconCheck, IconCopy, IconDownload, IconBraces, IconTrash, IconAlertCircle, IconTable } from "@tabler/icons-react";
+import { FileDropzone } from "@/components/FileDropzone";
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
@@ -61,7 +62,6 @@ function RouteComponent() {
   const MAX_UPLOAD_SIZE_MB = 5;
   const MAX_UPLOAD_BYTES = MAX_UPLOAD_SIZE_MB * 1024 * 1024;
 
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const workerRef = useRef<Worker | null>(null);
   const requestIdRef = useRef(0);
   const [input, setInput] = useState("");
@@ -83,15 +83,14 @@ function RouteComponent() {
   };
 
   const handleFileUpload = useCallback(
-    async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
+    async (files: FileList | File[]) => {
+      const file = Array.from(files)[0];
       if (!file) return;
 
       if (file.size > MAX_UPLOAD_BYTES) {
         setError(
           `File is too large (${(file.size / (1024 * 1024)).toFixed(2)} MB). Maximum supported upload size is ${MAX_UPLOAD_SIZE_MB} MB to keep the page responsive.`,
         );
-        event.target.value = "";
         return;
       }
 
@@ -101,8 +100,6 @@ function RouteComponent() {
         setError(null);
       } catch {
         setError("Failed to read CSV file. Please try another file.");
-      } finally {
-        event.target.value = "";
       }
     },
     [MAX_UPLOAD_BYTES, MAX_UPLOAD_SIZE_MB],
@@ -202,15 +199,18 @@ function RouteComponent() {
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto">
+          <div className="rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full border border-theme-border bg-theme-surface">
+            <FileDropzone
+              title="Upload CSV"
+              description="Drag and drop a CSV file here, or choose a file. You can also paste CSV below."
+              buttonLabel="Select CSV"
+              accept=".csv,text/csv"
+              onFiles={handleFileUpload}
+            />
+          </div>
+
           <div className="bg-transparent rounded-xl shadow-lg p-4 mb-6">
             <div className="flex flex-wrap gap-3 justify-center items-center">
-              <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleFileUpload} className="hidden" />
-
-              <button onClick={() => fileInputRef.current?.click()} className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}>
-                <IconUpload className="w-4 h-4" />
-                <span>Upload CSV</span>
-              </button>
-
               <button onClick={loadSampleData} className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}>
                 <IconTable className="w-4 h-4" />
                 <span>Sample CSV</span>

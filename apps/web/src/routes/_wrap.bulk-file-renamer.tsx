@@ -1,5 +1,4 @@
 import {
-  IconCloudUpload,
   IconDownload,
   IconCheck,
   IconX,
@@ -11,9 +10,9 @@ import {
   IconSearch as IconSearchIcon,
 } from "@tabler/icons-react";
 import JSZip from "jszip";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, easeInOut } from "motion/react";
+import { FileDropzone } from "@/components/FileDropzone";
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
@@ -72,7 +71,6 @@ interface FileRenameMapping {
 }
 
 function RouteComponent() {
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<File[]>([]);
   const [renamePattern, setRenamePattern] = useState("file-[1]");
   const [patternType, setPatternType] = useState<"sequential" | "custom" | "findreplace" | "prefix-suffix">("sequential");
@@ -81,7 +79,6 @@ function RouteComponent() {
   const [prefix, setPrefix] = useState("");
   const [suffix, setSuffix] = useState("");
   const [preview, setPreview] = useState<FileRenameMapping[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
   const generateRenamedFilename = useCallback(
@@ -186,21 +183,6 @@ function RouteComponent() {
     }
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = () => {
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    handleFileChange(e.dataTransfer.files);
-  };
-
   const handlePatternChange = useCallback(
     (newPattern: string) => {
       setRenamePattern(newPattern);
@@ -276,9 +258,6 @@ function RouteComponent() {
     setReplaceText("");
     setPrefix("");
     setSuffix("");
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
   };
 
   return (
@@ -294,39 +273,19 @@ function RouteComponent() {
 
         <main className="flex-1 px-4 relative z-10">
           <section className="max-w-7xl mx-auto mb-12 rounded-2xl border border-theme-border bg-theme-surface-muted/20 p-8 backdrop-blur-sm">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: easeInOut }}
-              className="space-y-8"
-            >
+            <div className="space-y-8">
               {/* File Upload */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <IconCloudUpload className="w-5 h-5 text-brand-primary" />
-                  <label className="text-lg font-semibold text-theme-heading">Upload Files to Rename</label>
-                </div>
-                <div
-                  onClick={() => fileInputRef.current?.click()}
-                  onDragOver={handleDragOver}
-                  onDragLeave={handleDragLeave}
-                  onDrop={handleDrop}
-                  className={cn(
-                    "border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors",
-                    isDragging
-                      ? "border-brand-primary bg-brand-primary/10"
-                      : "border-theme-border hover:border-brand-primary/50 hover:bg-theme-surface-muted",
-                  )}
-                >
-                  <input ref={fileInputRef} type="file" multiple onChange={(e) => handleFileChange(e.target.files)} className="hidden" />
-                  <div className="space-y-2">
-                    <p className="text-theme-body font-medium">Drag files here or click to select</p>
-                    <p className="text-sm text-theme-muted">
-                      {files.length > 0 ? `${files.length} file(s) selected` : "Select multiple files to rename"}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <FileDropzone
+                title="Upload files"
+                description={
+                  files.length > 0
+                    ? `${files.length} file(s) selected. Drop more files here to replace the current set.`
+                    : "Drag and drop files here, or choose files to rename."
+                }
+                buttonLabel="Select Files"
+                multiple
+                onFiles={handleFileChange}
+              />
 
               {/* Pattern Type Selection */}
               <div className="space-y-4">
@@ -534,7 +493,7 @@ function RouteComponent() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </section>
 
           <ToolContentDisplay

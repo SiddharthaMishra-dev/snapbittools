@@ -1,7 +1,7 @@
-import { IconBolt, IconCheck, IconCloudUpload, IconCopy, IconFileCode, IconLock } from "@tabler/icons-react";
-import { useCallback, useRef, useState } from "react";
+import { IconBolt, IconCheck, IconCopy, IconFileCode, IconLock } from "@tabler/icons-react";
+import { useCallback, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, easeInOut } from "motion/react";
+import { FileDropzone } from "@/components/FileDropzone";
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
@@ -64,8 +64,6 @@ export const Route = createFileRoute("/_wrap/image-to-base64")({
 });
 
 function RouteComponent() {
-  const imageRef = useRef<HTMLInputElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
   const [base64Result, setBase64Result] = useState<string>("");
   const [copySuccess, setCopySuccess] = useState(false);
 
@@ -84,32 +82,13 @@ function RouteComponent() {
     reader.readAsDataURL(file);
   }, []);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      processFile(file);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-
-    const files = e.dataTransfer.files;
-    if (files[0]) {
-      processFile(files[0]);
-    }
-  };
+  const processFiles = useCallback(
+    (files: FileList | File[]) => {
+      const first = Array.from(files)[0];
+      if (first) processFile(first);
+    },
+    [processFile],
+  );
 
   const copyToClipboard = async () => {
     try {
@@ -121,114 +100,32 @@ function RouteComponent() {
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-        duration: 0.6,
-        ease: easeInOut,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: easeInOut,
-      },
-    },
-  };
-
-  const resultVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: easeInOut,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.95,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
   return (
     <div className="min-h-screen bg-theme-page theme-page-gradient  py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="w-full max-w-5xl mt-6  mb-12 text-center mx-auto"
-        >
-          <motion.div variants={itemVariants} className="text-center">
+        <div className="w-full max-w-5xl mt-6  mb-12 text-center mx-auto">
+          <div className="text-center">
             <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
               Image to <span className="text-brand-primary">Base64</span> Converter
             </h1>
             <p className="text-md text-theme-muted">Convert images to Base64 instantly. 100% private—no uploads, ever.</p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto"
-        >
-          <motion.div variants={itemVariants} className="rounded-xl shadow-lg  mb-6">
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              className={`border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300 ${
-                isDragging ? "border-blue-500 bg-blue-900/20" : "border-gray-600 hover:border-blue-400 "
-              }`}
-            >
-              <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload className={`w-16 h-16 ${isDragging ? "text-blue-500" : "text-theme-muted"} transition-colors`} />
-                <div>
-                  <p className="text-xl font-medium text-theme-muted mb-2">
-                    {isDragging ? "Drop your image here" : "Drag & drop your image here"}
-                  </p>
-                  <p className="text-theme-muted mb-4">or</p>
-                  <button
-                    onClick={() => imageRef.current?.click()}
-                    className="text-sm px-3 py-2 bg-blue-700 text-blue-100 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium shadow-md hover:shadow-lg"
-                  >
-                    Select Image
-                  </button>
-                </div>
-              </div>
-            </div>
-            <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1 p-2">
-              🔒 Your files stay on your device. Nothing is uploaded to any server.
-            </p>
-
-            <input type="file" accept="image/*" ref={imageRef} className="hidden" onChange={handleFileChange} />
-          </motion.div>
+        <div className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto">
+          <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+            <FileDropzone
+              title="Upload image"
+              description="Drag and drop a photo here, or choose a file to convert to Base64."
+              buttonLabel="Select Image"
+              accept="image/*"
+              onFiles={processFiles}
+            />
+          </div>
 
           {base64Result && (
-            <motion.div
-              variants={resultVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="bg-theme-surface-muted w-full max-w-4xl rounded-xl shadow-lg p-6"
-            >
+            <div className="bg-theme-surface-muted w-full max-w-4xl rounded-xl shadow-lg p-6">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-semibold text-theme-heading">Base64 Data URI</h3>
                 <button
@@ -258,15 +155,15 @@ function RouteComponent() {
                 placeholder="Base64 data will appear here..."
               />
               <p className="text-sm text-theme-muted mt-2">Data size: {new Blob([base64Result]).size.toLocaleString()} bytes</p>
-            </motion.div>
+            </div>
           )}
 
-          <motion.div variants={itemVariants} className="text-center mt-2">
+          <div className="text-center mt-2">
             <p className="text-theme-muted text-xs">
               <sup>*</sup>All major formats supported: JPG, PNG, GIF, SVG, WebP & more.
             </p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         <ToolContentDisplay
           title={toolContent["image-to-base64"].title}

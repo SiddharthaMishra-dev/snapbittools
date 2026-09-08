@@ -1,6 +1,5 @@
 import { IconChevronDown } from "@tabler/icons-react";
 import { useState } from "react";
-import { motion, easeInOut } from "motion/react";
 
 interface FAQItemProps {
   question: string;
@@ -36,44 +35,16 @@ interface FAQProps {
 export default function FAQ({ faqs }: FAQProps) {
   if (!faqs || faqs.length === 0) return null;
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-        duration: 0.6,
-        ease: easeInOut,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: easeInOut,
-      },
-    },
-  };
-
   return (
-    <motion.div variants={containerVariants} initial={false} animate="visible" className="space-y-8">
-      <motion.div variants={itemVariants} className="flex items-center space-x-3">
-        {/* <div className="w-10 h-10 bg-brand-dark/20 rounded-full flex items-center justify-center text-brand-primary font-bold border border-brand-primary/20">
-          ?
-        </div> */}
+    <div className="space-y-8">
+      <div className="flex items-center space-x-3">
         <h2 className="text-xl font-bold text-theme-heading">Frequently Asked Questions</h2>
-      </motion.div>
-      <motion.div variants={itemVariants} className="px-4">
+      </div>
+      <div className="px-4">
         {faqs.map((faq, index) => (
           <FAQItem key={index} question={faq.question} answer={faq.answer} />
         ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

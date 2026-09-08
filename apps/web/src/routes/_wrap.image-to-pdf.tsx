@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { IconArrowsSort, IconCloudUpload, IconFileTypePdf, IconLock, IconTrash, IconX } from "@tabler/icons-react";
+import { IconArrowsSort, IconFileTypePdf, IconLock, IconTrash, IconX } from "@tabler/icons-react";
 import { jsPDF } from "jspdf";
 import { Reorder } from "motion/react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { FileDropzone } from "@/components/FileDropzone";
 import ToolInfo from "../components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
@@ -108,9 +109,7 @@ const processImageForPdf = async (file: ImageItem): Promise<{ dataUrl: string; w
 
 function RouteComponent() {
   const [files, setFiles] = useState<ImageItem[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
-  const uploadRef = useRef<HTMLInputElement>(null);
 
   const processFiles = useCallback((fileList: FileList | File[]) => {
     const newFiles = Array.from(fileList)
@@ -131,30 +130,6 @@ function RouteComponent() {
     };
   }, [files]);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      processFiles(event.target.files);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    if (e.dataTransfer.files) {
-      processFiles(e.dataTransfer.files);
-    }
-  };
-
   const handleRemoveFile = (id: string) => {
     setFiles((prev) => {
       const newFiles = prev.filter((file) => file.id !== id);
@@ -169,9 +144,6 @@ function RouteComponent() {
   const handleClearAll = () => {
     files.forEach((file) => URL.revokeObjectURL(file.preview));
     setFiles([]);
-    if (uploadRef.current) {
-      uploadRef.current.value = "";
-    }
   };
 
   const handleConvertToPdf = async () => {
@@ -226,32 +198,15 @@ function RouteComponent() {
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
           <div className="backdrop-blur-sm rounded-xl w-full p-6 shadow-xl border border-theme-border bg-theme-surface">
             {/* Upload Area */}
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              className={cn(
-                "border-3 border-dashed rounded-xl p-8 text-center transition-all duration-300 mb-6",
-                isDragging ? "border-brand-primary bg-brand-primary/20" : "border-theme-border hover:border-brand-primary/40",
-              )}
-            >
-              <div className="flex flex-col items-center space-y-4">
-                <IconCloudUpload className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")} />
-                <div>
-                  <p className="text-xl font-medium text-theme-heading mb-2">
-                    {isDragging ? "Drop images here" : "Drag & drop images here"}
-                  </p>
-                  <p className="text-theme-muted mb-4 text-sm">Supports JPG, PNG, WebP, etc.</p>
-                  <button
-                    onClick={() => uploadRef.current?.click()}
-                    className={cn(tc.btnPrimary, "px-6 py-2.5 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5")}
-                  >
-                    Select Images
-                  </button>
-                </div>
-              </div>
-              <input type="file" multiple accept="image/*" ref={uploadRef} className="hidden" onChange={handleFileChange} />
-            </div>
+            <FileDropzone
+              title="Upload images"
+              description="Drag and drop photos here, or choose files to merge into a PDF."
+              buttonLabel="Select Images"
+              accept="image/*"
+              multiple
+              onFiles={processFiles}
+              className="mb-6"
+            />
 
             {/* Controls & List */}
             {files.length > 0 && (

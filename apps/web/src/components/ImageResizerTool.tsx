@@ -1,11 +1,10 @@
-import { IconCircleX, IconCloudUpload, IconDownload, IconRefresh } from "@tabler/icons-react";
-import { useEffect, useRef, useState } from "react";
+import { IconCircleX, IconDownload, IconRefresh } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
+import { FileDropzone } from "@/components/FileDropzone";
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
 
 export function ImageResizerTool() {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [sourceUrl, setSourceUrl] = useState<string | null>(null);
   const [originalWidth, setOriginalWidth] = useState(0);
@@ -61,12 +60,6 @@ export function ImageResizerTool() {
     }
 
     loadImageMeta(first);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    processFiles(e.dataTransfer.files);
   };
 
   const handleWidthChange = (value: number) => {
@@ -161,10 +154,6 @@ export function ImageResizerTool() {
     setResizedBlob(null);
     setResizedUrl(null);
     setError(null);
-
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
   };
 
   useEffect(() => {
@@ -185,38 +174,13 @@ export function ImageResizerTool() {
     <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
       <div className="rounded-xl shadow-lg px-0 py-4 sm:p-8 w-full max-w-5xl border border-theme-border bg-theme-surface">
         {!sourceFile ? (
-          <div
-            onDragOver={(e) => {
-              e.preventDefault();
-              setIsDragging(true);
-            }}
-            onDragLeave={(e) => {
-              e.preventDefault();
-              setIsDragging(false);
-            }}
-            onDrop={handleDrop}
-            className={cn(
-              "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
-              isDragging ? "border-brand-primary bg-brand-primary/20" : "border-theme-border hover:border-brand-primary/40",
-            )}
-          >
-            <IconCloudUpload className="h-14 w-14 mx-auto text-brand-primary mb-4" />
-            <h2 className="text-2xl font-bold text-theme-heading mb-2">Upload image to resize</h2>
-            <p className="text-theme-body mb-5">Drag and drop your image here, or click below to choose a file.</p>
-            <button onClick={() => fileInputRef.current?.click()} className={cn(tc.btnPrimary, "px-6 py-3")}>
-              Select Image
-            </button>
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => {
-                if (e.target.files) processFiles(e.target.files);
-              }}
-            />
-          </div>
+          <FileDropzone
+            title="Upload image"
+            description="Drag and drop a photo here, or choose a file to resize."
+            buttonLabel="Select Image"
+            accept="image/*"
+            onFiles={processFiles}
+          />
         ) : (
           <div className="space-y-6">
             <div className="flex items-start justify-between gap-4 rounded-lg border border-theme-border bg-theme-surface-muted/30 p-4">

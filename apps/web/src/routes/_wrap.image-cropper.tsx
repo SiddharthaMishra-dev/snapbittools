@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState, useEffect } from "react";
 import {
-  IconCloudUpload,
   IconDownload,
   IconRotateClockwise,
   IconFlipHorizontal,
@@ -10,6 +9,7 @@ import {
   IconLock,
   IconArrowsMaximize,
 } from "@tabler/icons-react";
+import { FileDropzone } from "@/components/FileDropzone";
 import ToolInfo from "@/components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
@@ -79,7 +79,6 @@ interface CropArea {
 
 function RouteComponent() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isCrop, setIsCrop] = useState(false);
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [cropArea, setCropArea] = useState<CropArea>({ x: 0, y: 0, width: 200, height: 200 });
@@ -92,57 +91,27 @@ function RouteComponent() {
   const [isUploading, setIsUploading] = useState(false);
   const [scale, setScale] = useState(1);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      setIsUploading(true);
-      const img = new Image();
-      img.onload = () => {
-        setImage(img);
-
-        const initialSize = Math.min(img.width, img.height, 300);
-        setCropArea({
-          x: (img.width - initialSize) / 2,
-          y: (img.height - initialSize) / 2,
-          width: initialSize,
-          height: initialSize,
-        });
-        setIsUploading(false);
-      };
-      img.src = URL.createObjectURL(file);
-    }
+  const loadImageFromFile = (file: File) => {
+    if (!file.type.startsWith("image/")) return;
+    setIsUploading(true);
+    const img = new Image();
+    img.onload = () => {
+      setImage(img);
+      const initialSize = Math.min(img.width, img.height, 300);
+      setCropArea({
+        x: (img.width - initialSize) / 2,
+        y: (img.height - initialSize) / 2,
+        width: initialSize,
+        height: initialSize,
+      });
+      setIsUploading(false);
+    };
+    img.src = URL.createObjectURL(file);
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith("image/")) {
-      setIsUploading(true);
-      const img = new Image();
-      img.onload = () => {
-        setImage(img);
-        const initialSize = Math.min(img.width, img.height, 300);
-        setCropArea({
-          x: (img.width - initialSize) / 2,
-          y: (img.height - initialSize) / 2,
-          width: initialSize,
-          height: initialSize,
-        });
-        setIsUploading(false);
-      };
-      img.src = URL.createObjectURL(file);
-    }
+  const processFiles = (files: FileList | File[]) => {
+    const first = Array.from(files)[0];
+    if (first) loadImageFromFile(first);
   };
 
   const handleCropVisible = () => {
@@ -459,9 +428,6 @@ function RouteComponent() {
     setFlipHorizontal(false);
     setFlipVertical(false);
     setIsCrop(false);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
   };
 
   return (
@@ -478,41 +444,14 @@ function RouteComponent() {
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
           <div className="rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface">
             {!image ? (
-              <>
-                <div
-                  onDragOver={handleDragOver}
-                  onDragLeave={handleDragLeave}
-                  onDrop={handleDrop}
-                  className={cn(
-                    "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
-                    isDragging ? "border-brand-primary bg-brand-primary/20" : "border-theme-border hover:border-brand-primary/40",
-                  )}
-                >
-                  <div className="flex flex-col items-center space-y-4">
-                    <IconCloudUpload
-                      className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")}
-                    />
-                    <div>
-                      <p className="text-xl font-medium text-theme-heading mb-2">
-                        {isDragging ? "Drop your image here" : "Drag & drop your image here"}
-                      </p>
-                      <p className="text-theme-muted mb-4">or</p>
-                      <button
-                        onClick={() => fileInputRef.current?.click()}
-                        disabled={isUploading}
-                        className={cn(tc.btnPrimary, "text-sm px-3 py-2 shadow-md hover:shadow-lg")}
-                      >
-                        {isUploading ? "Loading..." : "Choose Image"}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
-                  🔒 Your files stay on your device. Nothing is uploaded to any server.
-                </p>
-
-                <input type="file" accept="image/*" ref={fileInputRef} className="hidden" onChange={handleFileUpload} />
-              </>
+              <FileDropzone
+                title="Upload image"
+                description="Drag and drop a photo here, or choose a file to crop."
+                buttonLabel={isUploading ? "Loading..." : "Select Image"}
+                accept="image/*"
+                disabled={isUploading}
+                onFiles={processFiles}
+              />
             ) : (
               <>
                 <div className="mb-6">

@@ -1,15 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  IconCircleX,
-  IconCloudUpload,
-  IconDownload,
-  IconFileSpreadsheet,
-  IconLock,
-  IconArrowsExchange,
-  IconFileText,
-} from "@tabler/icons-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { IconCircleX, IconDownload, IconFileSpreadsheet, IconLock, IconArrowsExchange, IconFileText } from "@tabler/icons-react";
+import { useCallback, useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+import { FileDropzone } from "@/components/FileDropzone";
 import ToolInfo from "../components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
@@ -69,9 +62,7 @@ interface ConversionItem {
 }
 
 function RouteComponent() {
-  const uploadRef = useRef<HTMLInputElement>(null);
   const [conversions, setConversions] = useState<ConversionItem[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
   const [isConverting, setIsConverting] = useState(false);
 
   const processFiles = useCallback((files: FileList | File[]) => {
@@ -103,32 +94,6 @@ function RouteComponent() {
 
     setConversions((prev) => [...prev, ...newConversions]);
   }, []);
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      processFiles(files);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      processFiles(files);
-    }
-  };
 
   const convertFile = async (item: ConversionItem): Promise<void> => {
     return new Promise((resolve, reject) => {
@@ -230,9 +195,6 @@ function RouteComponent() {
       }
     });
     setConversions([]);
-    if (uploadRef.current) {
-      uploadRef.current.value = "";
-    }
   };
 
   useEffect(() => {
@@ -256,46 +218,14 @@ function RouteComponent() {
         <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
           <div className="rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface">
             {conversions.length === 0 ? (
-              <>
-                <div
-                  onDragOver={handleDragOver}
-                  onDragLeave={handleDragLeave}
-                  onDrop={handleDrop}
-                  className={cn(
-                    "border-3 border-dashed rounded-lg p-12 text-center transition-all duration-300",
-                    isDragging ? "border-brand-primary bg-brand-primary/20" : "border-theme-border hover:border-brand-primary/40",
-                  )}
-                >
-                  <div className="flex flex-col items-center space-y-4">
-                    <IconCloudUpload
-                      className={cn("w-16 h-16 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")}
-                    />
-                    <div>
-                      <p className="text-xl font-medium text-theme-heading mb-2">
-                        {isDragging ? "Drop your files here" : "Drag & drop CSV or XLSX files here"}
-                      </p>
-                      <p className="text-theme-muted mb-4">or</p>
-                      <button
-                        onClick={() => uploadRef.current?.click()}
-                        className={cn(tc.btnPrimary, "text-sm px-3 py-2 shadow-md hover:shadow-lg")}
-                      >
-                        Choose Files
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-center text-theme-muted text-xs mt-3 flex items-center justify-center gap-1">
-                  🔒 Your files stay on your device. Nothing is uploaded to any server.
-                </p>
-                <input
-                  type="file"
-                  accept=".csv, .xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                  ref={uploadRef}
-                  className="hidden"
-                  multiple
-                  onChange={handleFileUpload}
-                />
-              </>
+              <FileDropzone
+                title="Upload files"
+                description="Drag and drop CSV or XLSX files here, or choose files to convert."
+                buttonLabel="Select Files"
+                accept=".csv,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                multiple
+                onFiles={processFiles}
+              />
             ) : (
               <>
                 <div className="w-full flex justify-between items-center mb-3">

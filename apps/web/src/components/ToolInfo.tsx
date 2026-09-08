@@ -1,5 +1,4 @@
 import { IconLock } from "@tabler/icons-react";
-import { motion, easeInOut } from "motion/react";
 import FAQ from "./FAQ";
 
 interface Feature {
@@ -23,41 +22,11 @@ interface ToolInfoProps {
 }
 
 export default function ToolInfo({ privacyInfo, faqs }: ToolInfoProps) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-        duration: 0.6,
-        ease: easeInOut,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: easeInOut,
-      },
-    },
-  };
-
   return (
-    <motion.div variants={containerVariants} initial={false} animate="visible" className="w-full max-w-7xl mx-auto mt-2 space-y-6 pb-6">
-      {/* FAQs */}
+    <div className="w-full max-w-7xl mx-auto mt-2 space-y-6 pb-6">
       {faqs && faqs.length > 0 && <FAQ faqs={faqs} />}
 
-      {/* Privacy & Security */}
-      <motion.div
-        variants={itemVariants}
-        className="flex flex-col md:flex-row items-center justify-between gap-8 p-4 bg-brand-light/10 dark:bg-brand-dark/10 border border-brand-dark/10 rounded-lg"
-      >
+      <div className="flex flex-col md:flex-row items-center justify-between gap-8 p-4 bg-brand-light/10 dark:bg-brand-dark/10 border border-brand-dark/10 rounded-lg">
         <div className="flex items-start space-x-4">
           <div className="mt-1">
             <IconLock className="text-brand-primary w-8 h-8" />
@@ -71,11 +40,11 @@ export default function ToolInfo({ privacyInfo, faqs }: ToolInfoProps) {
           </div>
         </div>
         <div className="flex-shrink-0">
-          <div className="px-6 py-3 bg-linear-to-b from-brand-primary to-brand-hover  ring-2 ring-brand-primary/80 shadow-lg text-white rounded-full text-sm font-semibold border border-brand-dark/10">
+          <div className="px-6 py-3 bg-linear-to-b from-brand-primary to-brand-hover ring-2 ring-brand-primary/80 shadow-lg text-white rounded-full text-sm font-semibold border border-brand-dark/10">
             Privacy Guaranteed
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

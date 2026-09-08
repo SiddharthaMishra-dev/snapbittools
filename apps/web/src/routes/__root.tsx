@@ -90,7 +90,7 @@ export const Route = createRootRoute({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(getOrganizationSchema()),
+        children: JSON.stringify(getOrganizationSchema()).replace(/</g, "\\u003c"),
       },
     ],
   }),

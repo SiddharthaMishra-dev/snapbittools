@@ -30,7 +30,7 @@ const faqs = [
     answer: "By default, yes. You can turn comment removal on or off at any time before minifying.",
   },
   {
-    question: "Will it break <script>, <style>, or <pre> blocks?",
+    question: "Will it break script, style, or pre blocks?",
     answer: "No. The tool preserves content inside script, style, pre, and textarea blocks while minifying the surrounding HTML.",
   },
   {
@@ -230,53 +230,56 @@ function RouteComponent() {
         </div>
 
         <main className="flex-1 max-w-7xl w-full mx-auto space-y-6">
-          <section className="rounded-2xl border border-theme-border bg-theme-surface-muted/20 p-4 sm:p-6 backdrop-blur-sm">
-            <div className="flex flex-wrap items-center gap-3 justify-center sm:justify-between">
-              <div className="flex flex-wrap gap-3">
-                <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
-                  <input
-                    type="checkbox"
-                    checked={removeComments}
-                    onChange={(e) => setRemoveComments(e.target.checked)}
-                    className="accent-brand-primary"
-                  />
-                  Remove comments
-                </label>
-                <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
-                  <input
-                    type="checkbox"
-                    checked={collapseWhitespace}
-                    onChange={(e) => setCollapseWhitespace(e.target.checked)}
-                    className="accent-brand-primary"
-                  />
-                  Collapse whitespace
-                </label>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                <button onClick={handleMinify} disabled={!input.trim()} className={cn(tc.btnPrimary, "px-4 py-2")}>
-                  <IconArrowsMinimize className="w-4 h-4" />
-                  Minify
-                </button>
-                <button onClick={handleDeminify} disabled={!input.trim()} className={cn(tc.btnSecondary, "px-4 py-2")}>
-                  <IconSparkles className="w-4 h-4" />
-                  De-minify
-                </button>
-                <button onClick={handleDownload} disabled={!output} className={cn(tc.btnPrimary, "px-4 py-2")}>
-                  <IconDownload className="w-4 h-4" />
-                  Download
-                </button>
-                <button onClick={handleClear} disabled={!input && !output} className={cn(tc.btnDanger, "px-4 py-2")}>
-                  <IconTrash className="w-4 h-4" />
-                  Clear
-                </button>
-              </div>
+          <section className="rounded-xl shadow-lg p-4">
+            <div className="flex flex-wrap gap-3 justify-center">
+              <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
+                <input
+                  type="checkbox"
+                  checked={removeComments}
+                  onChange={(e) => setRemoveComments(e.target.checked)}
+                  className="accent-brand-primary"
+                />
+                Remove comments
+              </label>
+              <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
+                <input
+                  type="checkbox"
+                  checked={collapseWhitespace}
+                  onChange={(e) => setCollapseWhitespace(e.target.checked)}
+                  className="accent-brand-primary"
+                />
+                Collapse whitespace
+              </label>
+              <button type="button" onClick={handleMinify} className={cn(tc.btnPrimary, "px-4 py-2")}>
+                <IconArrowsMinimize className="w-4 h-4" />
+                Minify
+              </button>
+              <button type="button" onClick={handleDeminify} className={cn(tc.btnSecondary, "px-4 py-2")}>
+                <IconSparkles className="w-4 h-4" />
+                De-minify
+              </button>
+              <button type="button" onClick={handleDownload} className={cn(tc.btnPrimary, "px-4 py-2")}>
+                <IconDownload className="w-4 h-4" />
+                Download
+              </button>
+              <button
+                type="button"
+                onClick={handleCopy}
+                className={cn(tc.btn, "px-4 py-2", copySuccess ? "theme-btn-success" : "theme-btn-secondary")}
+              >
+                {copySuccess ? <IconCheck className="w-4 h-4" /> : <IconCopy className="w-4 h-4" />}
+                {copySuccess ? "Copied" : "Copy"}
+              </button>
+              <button type="button" onClick={handleClear} className={cn(tc.btnDanger, "px-4 py-2")}>
+                <IconTrash className="w-4 h-4" />
+                Clear
+              </button>
             </div>
           </section>
 
           <section className="grid grid-cols-1 gap-6">
-            <div className="lg:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-2">
-              <div className="rounded-xl ">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="rounded-xl">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-lg font-semibold text-theme-heading flex items-center gap-2">
                     <IconCode className="w-5 h-5 text-brand-primary" />
@@ -288,37 +291,24 @@ function RouteComponent() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Paste your HTML markup here..."
-                  className={cn(tc.field, "w-full min-h-[260px] p-4 font-mono text-sm resize-y")}
+                  className={cn(tc.field, "w-full h-96 p-4 font-mono text-sm resize-y")}
                   spellCheck={false}
                 />
               </div>
 
-              <div className="rounded-xl ">
+              <div className="rounded-xl">
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <h2 className="text-lg font-semibold text-theme-heading flex items-center gap-2">
                     <IconSparkles className="w-5 h-5 text-brand-primary" />
                     {outputMode === "minified" ? "Minified Output" : "De-minified Output"}
                   </h2>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-theme-muted">{outputBytes.toLocaleString()} bytes</span>
-                    <button
-                      onClick={handleCopy}
-                      disabled={!output}
-                      className={cn(tc.btn, "px-3 py-1.5 text-xs", copySuccess ? "theme-btn-success" : "theme-btn-secondary")}
-                    >
-                      {copySuccess ? <IconCheck className="w-3.5 h-3.5" /> : <IconCopy className="w-3.5 h-3.5" />}
-                      {copySuccess ? "Copied" : "Copy"}
-                    </button>
-                  </div>
+                  <span className="text-xs text-theme-muted">{outputBytes.toLocaleString()} bytes</span>
                 </div>
                 <textarea
                   value={output}
                   readOnly
                   placeholder="Processed HTML output will appear here..."
-                  className={cn(
-                    tc.field,
-                    "w-full min-h-[260px] p-4 font-mono text-sm resize-y bg-theme-code-bg text-theme-code-text focus:ring-0",
-                  )}
+                  className={cn(tc.field, "w-full h-96 p-4 font-mono text-sm resize-y bg-theme-code-bg text-theme-code-text focus:ring-0")}
                   spellCheck={false}
                 />
               </div>

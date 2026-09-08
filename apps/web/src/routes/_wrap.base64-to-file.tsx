@@ -1,9 +1,6 @@
-import { IconBolt, IconCheck, IconDownload, IconFileCode, IconLock } from "@tabler/icons-react";
+import { IconBolt, IconDownload, IconFileCode, IconLock } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, easeInOut } from "motion/react";
 import React, { useMemo, useState } from "react";
-
-import Breadcrumbs from "@/components/Breadcrumbs";
 import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import ToolInfo from "@/components/ToolInfo";
@@ -167,43 +164,6 @@ function RouteComponent() {
   const [result, setResult] = useState<DecodedResult | null>(null);
   const [error, setError] = useState("");
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-        duration: 0.6,
-        ease: easeInOut,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: easeInOut,
-      },
-    },
-  };
-
-  const resultVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.4,
-        ease: easeInOut,
-      },
-    },
-  };
-
   const clearResultUrl = React.useCallback(() => {
     if (result?.url) {
       URL.revokeObjectURL(result.url);
@@ -272,25 +232,17 @@ function RouteComponent() {
 
   return (
     <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="w-full max-w-5xl mt-6 mb-10 text-center mx-auto"
-      >
-        <motion.div variants={itemVariants} className="text-center">
+      <div className="w-full max-w-5xl mt-6 mb-10 text-center mx-auto">
+        <div className="text-center">
           <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Base64 to <span className="text-brand-primary">File</span> Decoder
           </h1>
           <p className="text-md text-theme-body">Decode any Base64 string back to its original file format. 100% private in-browser.</p>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
-      <motion.div variants={containerVariants} initial="hidden" animate="visible" className="w-full max-w-5xl mx-auto mb-8">
-        <motion.div
-          variants={itemVariants}
-          className="rounded-xl shadow-lg bg-theme-surface-muted/40 border border-theme-border p-4 sm:p-6"
-        >
+      <div className="w-full max-w-5xl mx-auto mb-8">
+        <div className="rounded-xl shadow-lg bg-theme-surface-muted/40 border border-theme-border p-4 sm:p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
               <label htmlFor="file-base-name" className="block text-sm font-medium text-theme-body mb-2">
@@ -350,15 +302,10 @@ function RouteComponent() {
               Clear
             </button>
           </div>
-        </motion.div>
+        </div>
 
         {result && (
-          <motion.div
-            variants={resultVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-6 bg-theme-surface rounded-xl shadow-lg p-6 border border-theme-border"
-          >
+          <div className="mt-6 bg-theme-surface rounded-xl shadow-lg p-6 border border-theme-border">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <h3 className="text-xl font-semibold text-theme-heading">Decoded file is ready</h3>
@@ -388,13 +335,13 @@ function RouteComponent() {
                 <p className="text-theme-heading font-medium">{result.size.toLocaleString()} bytes</p>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
 
-        <motion.p variants={itemVariants} className="text-center text-theme-muted text-xs mt-4">
+        <p className="text-center text-theme-muted text-xs mt-4">
           Privacy note: decoding happens entirely in your browser. Your data is never uploaded.
-        </motion.p>
-      </motion.div>
+        </p>
+      </div>
 
       <ToolContentDisplay
         title={toolContent["base64-to-file"].title}
