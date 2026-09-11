@@ -288,7 +288,7 @@ export function ImageConverterTool() {
                 <div key={item.id} className="flex items-center justify-between p-2 border border-gray-900 rounded-lg bg-transparent">
                   {/* Preview Image */}
                   <div className="mr-4 flex-shrink-0">
-                    <img src={item.preview} alt={item.name} className="w-16  object-contain rounded-md" />
+                    <img src={item.preview} alt={item.name} width={64} height={64} className="w-16 h-16 object-contain rounded-md" />
                   </div>
 
                   {/* File Info */}

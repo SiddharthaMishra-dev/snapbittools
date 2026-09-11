@@ -9,6 +9,8 @@ const HERO_SCREENSHOTS = [
   { src: "/markups/4.png", alt: "Utility tools preview" },
 ] as const;
 
+const HERO_FRAME = { width: 1349, height: 547 } as const;
+
 const SLIDE_MS = 5000;
 const FADE_SECONDS = 0.7;
 
@@ -38,12 +40,21 @@ export function HeroScreenshotCanvas() {
         aria-label="View all SnapBit Tools"
         className="block focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-lg"
       >
-        <img src={HERO_SCREENSHOTS[0].src} alt="" aria-hidden="true" className="block w-full invisible" />
+        <img
+          src={HERO_SCREENSHOTS[0].src}
+          alt=""
+          aria-hidden="true"
+          width={HERO_FRAME.width}
+          height={HERO_FRAME.height}
+          className="block w-full invisible"
+        />
         <AnimatePresence initial={false}>
           <motion.img
             key={slide.src}
             src={slide.src}
             alt={slide.alt}
+            width={HERO_FRAME.width}
+            height={HERO_FRAME.height}
             initial={{ opacity: 0, filter: "blur(14px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, filter: "blur(14px)" }}

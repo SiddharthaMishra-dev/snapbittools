@@ -348,7 +348,7 @@ export function ImageCompressorTool() {
               {files.map((file) => (
                 <div key={file.id} className="flex items-center justify-between p-2 border border-gray-900 rounded-lg bg-transparent">
                   <div className="mr-4 flex-shrink-0">
-                    <img src={file.preview} alt={file.name} className="w-16 object-contain rounded-md" />
+                    <img src={file.preview} alt={file.name} width={64} height={64} className="w-16 h-16 object-contain rounded-md" />
                   </div>
 
                   <div className="flex-1 min-w-0">

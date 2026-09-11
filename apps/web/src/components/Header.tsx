@@ -62,7 +62,7 @@ const Header: React.FC = () => {
             )}
 
             <Link to="/" className="flex items-center gap-2 no-underline">
-              <img src="/logo192.png" alt="SnapBit Tools" className="w-7 h-7" />
+              <img src="/logo192.png" alt="SnapBit Tools" width={28} height={28} className="w-7 h-7" />
               <span className="text-sm font-bold text-theme-heading hidden sm:inline">SnapBit Tools</span>
             </Link>
           </div>

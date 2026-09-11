@@ -250,7 +250,7 @@ function RouteComponent() {
                         </div>
 
                         <div className="w-12 h-12 bg-theme-surface rounded overflow-hidden flex-shrink-0 border border-theme-border">
-                          <img src={file.preview} alt="" className="w-full h-full object-cover" />
+                          <img src={file.preview} alt={file.name} width={48} height={48} className="w-full h-full object-cover" />
                         </div>
 
                         <div className="flex-1 min-w-0">

@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
     getSeoMetadata({
       title: "SnapBit Tools | Private & Fast Image, PDF & Data Tools",
       description:
-        "Private browser tools: Convert images to Base64, compress photos, format JSON, convert CSV to Excel, and convert PDF to images. 100% secure—your data never leaves your browser.",
+        "Private in-browser tools for image compression, PDF to JPG, JSON formatting, and CSV to Excel. Your files never leave the browser.",
       keywords: [
         "free online tools",
         "image to base64 converter",
@@ -72,19 +72,20 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const measureLongestWord = React.useCallback(() => {
+    const widths = wordMeasureRefs.current.map((el) => el?.offsetWidth ?? 0);
+    const longest = Math.max(0, ...widths);
+    if (longest > 0) setWordWidth(longest);
+  }, []);
+
   React.useLayoutEffect(() => {
-    const el = wordMeasureRefs.current[active];
-    if (el) setWordWidth(el.offsetWidth);
-  }, [active]);
+    measureLongestWord();
+  }, [measureLongestWord]);
 
   React.useEffect(() => {
-    const onResize = () => {
-      const el = wordMeasureRefs.current[active];
-      if (el) setWordWidth(el.offsetWidth);
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [active]);
+    window.addEventListener("resize", measureLongestWord);
+    return () => window.removeEventListener("resize", measureLongestWord);
+  }, [measureLongestWord]);
 
   return (
     <PageShell withDotGrid={false} className="bg-theme-page">
@@ -123,7 +124,7 @@ function App() {
               <motion.span
                 animate={{ width: wordWidth ? wordWidth + widthSafetyBuffer : "auto" }}
                 transition={{ duration: 0.45, ease: easeInOut }}
-                className="inline-flex overflow-hidden text-brand-primary bg-theme-icon-bg border border-[var(--theme-pseo-accent-border)] px-3 py-1 rounded-xl mr-2 align-middle"
+                className="inline-flex min-w-[7.5rem] overflow-hidden text-brand-primary bg-theme-icon-bg border border-[var(--theme-pseo-accent-border)] px-3 py-1 rounded-xl mr-2 align-middle justify-center"
               >
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.span
