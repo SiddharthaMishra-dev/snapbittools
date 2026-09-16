@@ -47,6 +47,10 @@ function PrivacyPolicyPage() {
             that browser.
           </li>
           <li>
+            <strong>Recent tool searches</strong> — the last few queries from the tool search dialog (⌘K / Ctrl+K) stay in{" "}
+            <code>localStorage</code> on that browser so you can reuse them.
+          </li>
+          <li>
             <strong>Background-removal model cache</strong> — the Image Background Remover downloads a machine-learning model from the
             img.ly / staticimgly.com CDN on first use, then caches it in IndexedDB and Cache Storage on your device so later runs are
             faster. That download is a model file, not your photo.
@@ -80,9 +84,10 @@ function PrivacyPolicyPage() {
       <section>
         <h2>Cookies and similar technologies</h2>
         <p>
-          SnapBit Tools does not set a first-party cookie wall. Theme and saved palettes use <code>localStorage</code>, not cookies. Google
-          Analytics may set or read cookies or similar identifiers according to Google&apos;s configuration. You can block Analytics with a
-          browser extension, tracking protection, or by disabling cookies for third-party domains.
+          SnapBit Tools does not set a first-party cookie wall. Theme, saved palettes, and recent tool searches use{" "}
+          <code>localStorage</code>, not cookies. Google Analytics may set or read cookies or similar identifiers according to Google&apos;s
+          configuration. You can block Analytics with a browser extension, tracking protection, or by disabling cookies for third-party
+          domains.
         </p>
       </section>
 

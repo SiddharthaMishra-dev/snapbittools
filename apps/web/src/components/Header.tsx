@@ -4,6 +4,7 @@ import { IconApps, IconArticle, IconBraces, IconFileTypePdf, IconLayoutSidebar, 
 import { Link, useLocation } from "@tanstack/react-router";
 
 import ThemeToggle from "@/components/ThemeToggle";
+import { ToolSearch } from "@/components/ToolSearch";
 import { TOOL_CATEGORY_ORDER, toolCategories } from "@/data/tools";
 import { useSidebar } from "@/lib/sidebar";
 import { cn } from "@/lib/utils";
@@ -67,27 +68,32 @@ const Header: React.FC = () => {
             </Link>
           </div>
 
-          <div className="flex items-center gap-0.5 lg:gap-1 min-w-0 overflow-x-auto no-scrollbar">
-            {TOOL_CATEGORY_ORDER.map((category) => {
-              const meta = toolCategories[category];
-              const Icon = categoryIcons[category];
-              const active = pathname === meta.href;
-              return (
-                <Link key={meta.href} to={meta.href} className={cn(linkCls, active && activeCls)}>
-                  <Icon size={18} />
-                  <span className="hidden md:inline">{meta.navLabel}</span>
-                </Link>
-              );
-            })}
-            <Link to="/tools" className={cn(linkCls, pathname === "/tools" && activeCls)}>
-              <IconApps size={18} />
-              <span className="hidden lg:inline">All</span>
-            </Link>
-            <Link to="/blogs" className={cn(linkCls, pathname === "/blogs" && activeCls)}>
-              <IconArticle size={18} />
-              <span className="hidden lg:inline">Blogs</span>
-            </Link>
-            <ThemeToggle className="ml-1 shrink-0" />
+          <div className="flex items-center min-w-0 gap-1">
+            <div className="flex items-center gap-0.5 lg:gap-1 min-w-0 overflow-x-auto no-scrollbar">
+              {TOOL_CATEGORY_ORDER.map((category) => {
+                const meta = toolCategories[category];
+                const Icon = categoryIcons[category];
+                const active = pathname === meta.href;
+                return (
+                  <Link key={meta.href} to={meta.href} className={cn(linkCls, active && activeCls)}>
+                    <Icon size={18} />
+                    <span className="hidden md:inline">{meta.navLabel}</span>
+                  </Link>
+                );
+              })}
+              <Link to="/tools" className={cn(linkCls, pathname === "/tools" && activeCls)}>
+                <IconApps size={18} />
+                <span className="hidden lg:inline">All</span>
+              </Link>
+              <Link to="/blogs" className={cn(linkCls, pathname === "/blogs" && activeCls)}>
+                <IconArticle size={18} />
+                <span className="hidden lg:inline">Blogs</span>
+              </Link>
+            </div>
+            <div className="flex items-center gap-1 shrink-0">
+              <ToolSearch />
+              <ThemeToggle className="ml-0.5" />
+            </div>
           </div>
         </div>
       </div>
