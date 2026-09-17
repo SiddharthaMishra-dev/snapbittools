@@ -71,11 +71,18 @@ export function ToolSearch() {
         onClick={() => setOpen(true)}
         aria-label={`Search tools (${shortcutLabel(isMac)})`}
         title={`Search tools (${shortcutLabel(isMac)})`}
-        className="text-theme-nav-link hover:text-brand-primary hover:bg-theme-nav-link-hover-bg inline-flex items-center gap-2 px-2.5 py-2 rounded-lg transition-all duration-200 shrink-0"
+        aria-expanded={open}
+        className={cn(
+          "inline-flex items-center gap-2 px-2.5 py-2 rounded-lg shrink-0 border text-brand-primary transition-colors duration-200",
+          "bg-brand-primary/10 border-brand-primary/20 dark:bg-brand-primary/20 dark:border-brand-primary/35",
+          "hover:bg-brand-primary/15 hover:border-brand-primary/30 dark:hover:bg-brand-primary/25",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary",
+          open && "bg-brand-primary/20 border-brand-primary/40 dark:bg-brand-primary/30",
+        )}
       >
         <IconSearch size={18} stroke={1.75} />
         <span className="hidden xl:inline text-sm font-medium">Search</span>
-        <kbd className="hidden md:inline-flex items-center rounded-md border border-theme-border bg-theme-surface-muted px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-theme-muted">
+        <kbd className="hidden md:inline-flex items-center rounded-md border border-brand-primary/20 bg-brand-primary/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-brand-primary">
           {shortcutLabel(isMac)}
         </kbd>
       </button>
