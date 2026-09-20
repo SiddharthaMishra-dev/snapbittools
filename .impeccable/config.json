@@ -1,0 +1,15 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": ["apps/web/src/data/toolContent.ts"],
+        "createdAt": "2026-09-20T15:56:58.723Z",
+        "reason": "Agent: existing SEO copy documents the HTML img tag in prose; it is not a rendered image."
+      }
+    ]
+  }
+}

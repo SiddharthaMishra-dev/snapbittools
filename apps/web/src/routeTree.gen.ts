@@ -33,6 +33,7 @@ import { Route as WrapPrivacyFirstToolsRouteImport } from './routes/_wrap.privac
 import { Route as WrapPngToWebpRouteImport } from './routes/_wrap.png-to-webp'
 import { Route as WrapPngToJpgRouteImport } from './routes/_wrap.png-to-jpg'
 import { Route as WrapPdfToJpgRouteImport } from './routes/_wrap.pdf-to-jpg'
+import { Route as WrapPdfExtractImagesRouteImport } from './routes/_wrap.pdf-extract-images'
 import { Route as WrapPdfCompressorRouteImport } from './routes/_wrap.pdf-compressor'
 import { Route as WrapOptimizeImagesForWebsiteRouteImport } from './routes/_wrap.optimize-images-for-website'
 import { Route as WrapLoremIpsumGeneratorRouteImport } from './routes/_wrap.lorem-ipsum-generator'
@@ -191,6 +192,11 @@ const WrapPngToJpgRoute = WrapPngToJpgRouteImport.update({
 const WrapPdfToJpgRoute = WrapPdfToJpgRouteImport.update({
   id: '/pdf-to-jpg',
   path: '/pdf-to-jpg',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapPdfExtractImagesRoute = WrapPdfExtractImagesRouteImport.update({
+  id: '/pdf-extract-images',
+  path: '/pdf-extract-images',
   getParentRoute: () => WrapRoute,
 } as any)
 const WrapPdfCompressorRoute = WrapPdfCompressorRouteImport.update({
@@ -451,6 +457,7 @@ export interface FileRoutesByFullPath {
   '/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
   '/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
   '/pdf-compressor': typeof WrapPdfCompressorRoute
+  '/pdf-extract-images': typeof WrapPdfExtractImagesRoute
   '/pdf-to-jpg': typeof WrapPdfToJpgRoute
   '/png-to-jpg': typeof WrapPngToJpgRoute
   '/png-to-webp': typeof WrapPngToWebpRoute
@@ -515,6 +522,7 @@ export interface FileRoutesByTo {
   '/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
   '/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
   '/pdf-compressor': typeof WrapPdfCompressorRoute
+  '/pdf-extract-images': typeof WrapPdfExtractImagesRoute
   '/pdf-to-jpg': typeof WrapPdfToJpgRoute
   '/png-to-jpg': typeof WrapPngToJpgRoute
   '/png-to-webp': typeof WrapPngToWebpRoute
@@ -581,6 +589,7 @@ export interface FileRoutesById {
   '/_wrap/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
   '/_wrap/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
   '/_wrap/pdf-compressor': typeof WrapPdfCompressorRoute
+  '/_wrap/pdf-extract-images': typeof WrapPdfExtractImagesRoute
   '/_wrap/pdf-to-jpg': typeof WrapPdfToJpgRoute
   '/_wrap/png-to-jpg': typeof WrapPngToJpgRoute
   '/_wrap/png-to-webp': typeof WrapPngToWebpRoute
@@ -647,6 +656,7 @@ export interface FileRouteTypes {
     | '/lorem-ipsum-generator'
     | '/optimize-images-for-website'
     | '/pdf-compressor'
+    | '/pdf-extract-images'
     | '/pdf-to-jpg'
     | '/png-to-jpg'
     | '/png-to-webp'
@@ -711,6 +721,7 @@ export interface FileRouteTypes {
     | '/lorem-ipsum-generator'
     | '/optimize-images-for-website'
     | '/pdf-compressor'
+    | '/pdf-extract-images'
     | '/pdf-to-jpg'
     | '/png-to-jpg'
     | '/png-to-webp'
@@ -776,6 +787,7 @@ export interface FileRouteTypes {
     | '/_wrap/lorem-ipsum-generator'
     | '/_wrap/optimize-images-for-website'
     | '/_wrap/pdf-compressor'
+    | '/_wrap/pdf-extract-images'
     | '/_wrap/pdf-to-jpg'
     | '/_wrap/png-to-jpg'
     | '/_wrap/png-to-webp'
@@ -973,6 +985,13 @@ declare module '@tanstack/react-router' {
       path: '/pdf-to-jpg'
       fullPath: '/pdf-to-jpg'
       preLoaderRoute: typeof WrapPdfToJpgRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/pdf-extract-images': {
+      id: '/_wrap/pdf-extract-images'
+      path: '/pdf-extract-images'
+      fullPath: '/pdf-extract-images'
+      preLoaderRoute: typeof WrapPdfExtractImagesRouteImport
       parentRoute: typeof WrapRoute
     }
     '/_wrap/pdf-compressor': {
@@ -1291,6 +1310,7 @@ interface WrapRouteChildren {
   WrapLoremIpsumGeneratorRoute: typeof WrapLoremIpsumGeneratorRoute
   WrapOptimizeImagesForWebsiteRoute: typeof WrapOptimizeImagesForWebsiteRoute
   WrapPdfCompressorRoute: typeof WrapPdfCompressorRoute
+  WrapPdfExtractImagesRoute: typeof WrapPdfExtractImagesRoute
   WrapPdfToJpgRoute: typeof WrapPdfToJpgRoute
   WrapPngToJpgRoute: typeof WrapPngToJpgRoute
   WrapPngToWebpRoute: typeof WrapPngToWebpRoute
@@ -1347,6 +1367,7 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapLoremIpsumGeneratorRoute: WrapLoremIpsumGeneratorRoute,
   WrapOptimizeImagesForWebsiteRoute: WrapOptimizeImagesForWebsiteRoute,
   WrapPdfCompressorRoute: WrapPdfCompressorRoute,
+  WrapPdfExtractImagesRoute: WrapPdfExtractImagesRoute,
   WrapPdfToJpgRoute: WrapPdfToJpgRoute,
   WrapPngToJpgRoute: WrapPngToJpgRoute,
   WrapPngToWebpRoute: WrapPngToWebpRoute,

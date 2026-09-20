@@ -287,6 +287,36 @@ Use it next to Image to PDF when you need to go the other direction, or PDF Comp
     ],
   },
 
+  "pdf-extract-images": {
+    slug: "pdf-extract-images",
+    title: "Extract Images from PDF - Download Photos as a ZIP",
+    intro: `Extract photos from a PDF and download them as a ZIP with SnapBit’s private PDF image extractor. The file is scanned in your browser — no uploads, no account, and no watermarks. You see how many photos were found before you download.
+
+People look for “extract images from PDF” when a brochure, catalog, or slide deck has pictures they want as separate files. Rasterizing every page (PDF to JPG) captures text and layout too. This tool pulls the embedded image objects themselves: product photos, scans, logos, and figures stored inside the PDF.
+
+Each page is inspected with PDF.js. Duplicate objects (the same logo on twenty pages) are saved once. Tiny decorative tiles under 16×16 pixels are skipped so the ZIP is photos, not bullets. Results are PNG files packed into a ZIP named after your PDF. Download the archive or save a single photo from the preview grid.
+
+Use it next to PDF to JPG when you need a picture of the whole page, Image to PDF when you want to go the other way, or PDF Compressor when the goal is a smaller document. Everything stays on your device, including catalogs, contracts, and internal reports.`,
+    benefits: [
+      "Extract embedded photos entirely in the browser",
+      "See how many photos were found before downloading",
+      "ZIP download of every photo as PNG",
+      "Per-photo preview and single-file download",
+      "Skips tiny decorative images and duplicate objects",
+      "No uploads, no signup, no watermarks",
+      "Password-protected files fail with a clear error — nothing is sent away",
+    ],
+    useCases: [
+      "Saving product photos from a PDF catalog",
+      "Pulling figures out of a report or whitepaper",
+      "Collecting images from a slide deck",
+      "Archiving scans stored inside a PDF",
+      "Grabbing logos or photos for a design file",
+      "Downloading pictures without screenshotting each page",
+      "Private extraction from sensitive documents",
+    ],
+  },
+
   "image-to-pdf": {
     slug: "image-to-pdf",
     title: "Image to PDF Converter - Merge Images into PDF Documents",
