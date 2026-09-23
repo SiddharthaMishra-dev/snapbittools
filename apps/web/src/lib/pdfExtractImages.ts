@@ -1,11 +1,11 @@
-import { pdfBaseName } from "./pdfToImagesNames";
+import { extractEmbeddedPdfImages, MIN_EXTRACT_EDGE } from "./pdfEmbeddedImages";
 import { loadPdfjs } from "./loadPdfjs";
+import { pdfBaseName } from "./pdfToImagesNames";
 
-export { pdfBaseName };
+export { pdfBaseName, MIN_EXTRACT_EDGE };
 
-export const MIN_EXTRACT_EDGE = 16;
 const MAX_CANVAS_EDGE = 4096;
-const OBJ_WAIT_MS = 500;
+const OBJ_WAIT_MS = 12000;
 
 export type ExtractedPdfImage = {
   id: string;
@@ -31,8 +31,9 @@ type PdfjsImage = {
   width?: number;
   height?: number;
   kind?: number;
-  data?: ArrayBufferView | null;
+  data?: ArrayBufferView | string | null;
   bitmap?: ImageBitmap | ImageData | HTMLCanvasElement | OffscreenCanvas | null;
+  ref?: string;
 };
 
 function throwIfAborted(signal?: AbortSignal) {
@@ -59,29 +60,41 @@ function friendlyPdfError(err: unknown): Error {
   return err instanceof Error ? err : new Error("Failed to extract images. The PDF may be encrypted or corrupted.");
 }
 
-export function extractedImageFileName(pdfName: string, index: number, total: number): string {
+export function extractedImageFileName(pdfName: string, index: number, total: number, ext: "png" | "jpg" | "jp2" = "png"): string {
   const base = pdfBaseName(pdfName);
   const pad = Math.max(2, String(Math.max(total, 1)).length);
-  return `${base}-photo-${String(index).padStart(pad, "0")}.png`;
+  return `${base}-photo-${String(index).padStart(pad, "0")}.${ext}`;
 }
 
 export function extractedImagesZipFileName(pdfName: string): string {
   return `${pdfBaseName(pdfName)}-photos.zip`;
 }
 
-function waitForObj(objs: { get: (id: string, callback?: (data: unknown) => void) => unknown }, id: string): Promise<unknown> {
-  return new Promise((resolve) => {
-    const timer = window.setTimeout(() => resolve(null), OBJ_WAIT_MS);
-    try {
-      objs.get(id, (data: unknown) => {
-        window.clearTimeout(timer);
-        resolve(data ?? null);
-      });
-    } catch {
-      window.clearTimeout(timer);
-      resolve(null);
+type PdfObjectStore = {
+  has: (id: string) => boolean;
+  get: (id: string, callback?: (data: unknown) => void) => unknown;
+};
+
+async function resolveStoredImage(
+  pageObjs: PdfObjectStore,
+  commonObjs: PdfObjectStore,
+  id: string,
+  signal?: AbortSignal,
+): Promise<PdfjsImage | null> {
+  const deadline = Date.now() + OBJ_WAIT_MS;
+  while (Date.now() <= deadline) {
+    throwIfAborted(signal);
+    if (pageObjs.has(id)) {
+      const data = pageObjs.get(id);
+      return isPdfjsImage(data) ? data : null;
     }
-  });
+    if (commonObjs.has(id)) {
+      const data = commonObjs.get(id);
+      return isPdfjsImage(data) ? data : null;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 30));
+  }
+  return null;
 }
 
 function toUint8(data: ArrayBufferView): Uint8Array {
@@ -201,10 +214,12 @@ async function pdfImageToPng(
     if (!tmpCtx) return null;
     tmpCtx.putImageData(bitmap, 0, 0);
     ctx.drawImage(tmp, 0, 0, width, height);
-  } else if (img.data) {
+  } else if (img.data && typeof img.data !== "string" && ArrayBuffer.isView(img.data)) {
     const rgba = imageDataToRgba(img.data, nativeWidth, nativeHeight, img.kind, kinds);
     if (!rgba) return null;
-    const imageData = new ImageData(rgba, nativeWidth, nativeHeight);
+    const pixels = new Uint8ClampedArray(new ArrayBuffer(rgba.byteLength));
+    pixels.set(rgba);
+    const imageData = new ImageData(pixels, nativeWidth, nativeHeight);
     if (width === nativeWidth && height === nativeHeight) {
       ctx.putImageData(imageData, 0, 0);
     } else {
@@ -229,19 +244,89 @@ async function pdfImageToPng(
 function isPdfjsImage(value: unknown): value is PdfjsImage {
   if (!value || typeof value !== "object") return false;
   const img = value as PdfjsImage;
-  return Boolean(img.bitmap || img.data);
+  if (img.bitmap) return true;
+  return Boolean(img.data && typeof img.data === "object" && ArrayBuffer.isView(img.data));
+}
+
+function imageObjectRef(img: PdfjsImage): string | undefined {
+  return typeof img.ref === "string" && img.ref.length > 0 ? img.ref : undefined;
+}
+
+function blobExtension(blob: Blob): "png" | "jpg" | "jp2" {
+  if (blob.type === "image/jpeg") return "jpg";
+  if (blob.type === "image/jp2") return "jp2";
+  return "png";
+}
+
+type ImageCandidate = { kind: "id"; id: string } | { kind: "inline"; id: string; image: PdfjsImage };
+
+function candidatesFromArgs(args: unknown[] | undefined, pageNumber: number, opIndex: number): ImageCandidate[] {
+  if (!args?.length) return [];
+  const out: ImageCandidate[] = [];
+
+  const push = (value: unknown, suffix: string) => {
+    if (typeof value === "string") {
+      out.push({ kind: "id", id: value });
+      return;
+    }
+    if (!value || typeof value !== "object") return;
+    const record = value as { data?: unknown; bitmap?: unknown };
+    if (typeof record.data === "string" && !record.bitmap) {
+      out.push({ kind: "id", id: record.data });
+      return;
+    }
+    if (isPdfjsImage(value)) {
+      out.push({ kind: "inline", id: `inline-p${pageNumber}-${opIndex}${suffix}`, image: value });
+    }
+  };
+
+  const first = args[0];
+  if (Array.isArray(first)) {
+    first.forEach((item, index) => push(item, `-${index}`));
+    return out;
+  }
+  push(first, "");
+  return out;
 }
 
 /**
- * Pull embedded image XObjects out of a PDF (not a screenshot of each page).
+ * Pull embedded photos out of a PDF (not a screenshot of each page).
+ * Image XObjects are read from the file first — including ones inside forms,
+ * patterns, and annotations — then PDF.js fills anything that walk could not decode.
  */
 export async function extractPdfImages(options: ExtractPdfImagesOptions, sourceFileName = "document.pdf"): Promise<ExtractPdfImagesResult> {
   throwIfAborted(options.signal);
 
+  let embeddedImages: ExtractedPdfImage[] = [];
+  let undecodedRefs = new Set<string>();
+  let pagesWithImages = new Set<number>();
+  try {
+    const embedded = await extractEmbeddedPdfImages(options.pdfData);
+    embeddedImages = embedded.images.map((image) => ({
+      id: image.id,
+      pageNumber: image.pageNumber,
+      blob: image.blob,
+      width: image.width,
+      height: image.height,
+      fileName: "",
+    }));
+    undecodedRefs = embedded.undecodedRefs;
+    pagesWithImages = embedded.pagesWithImages;
+  } catch {
+    embeddedImages = [];
+  }
+
   const dataCopy = options.pdfData.slice(0);
   const pdfjs = await loadPdfjs();
   const { getDocument, OPS, ImageKind } = pdfjs;
-  const imageOps = new Set([OPS.paintImageXObject, OPS.paintInlineImageXObject, OPS.paintImageXObjectRepeat]);
+  const imageOps = new Set([
+    OPS.paintImageXObject,
+    OPS.paintInlineImageXObject,
+    OPS.paintImageXObjectRepeat,
+    OPS.paintImageMaskXObject,
+    OPS.paintImageMaskXObjectGroup,
+    OPS.paintImageMaskXObjectRepeat,
+  ]);
 
   try {
     const loadingTask = getDocument({
@@ -256,41 +341,44 @@ export async function extractPdfImages(options: ExtractPdfImagesOptions, sourceF
       throw new Error("This PDF has no pages to scan.");
     }
 
-    const seen = new Set<string>();
-    const images: ExtractedPdfImage[] = [];
+    const images = [...embeddedImages];
+    const savedIds = new Set(images.map((image) => image.id));
+    const resolveEveryPaintedImage = embeddedImages.length === 0 || undecodedRefs.size > 0;
 
     for (let pageNum = 1; pageNum <= pageCount; pageNum++) {
       throwIfAborted(options.signal);
 
       const page = await pdf.getPage(pageNum);
       const ops = await page.getOperatorList();
+      const pageNeedsResolve = resolveEveryPaintedImage || !pagesWithImages.has(pageNum);
+      const pending: ImageCandidate[] = [];
 
       for (let i = 0; i < ops.fnArray.length; i++) {
-        throwIfAborted(options.signal);
         if (!imageOps.has(ops.fnArray[i])) continue;
+        pending.push(...candidatesFromArgs(ops.argsArray[i], pageNum, i));
+      }
 
-        const arg = ops.argsArray[i]?.[0];
-        let img: PdfjsImage | null = null;
-        let objectId: string;
+      const resolved = await Promise.all(
+        pending.map(async (candidate) => {
+          if (candidate.kind === "inline") return candidate;
+          if (!pageNeedsResolve || savedIds.has(candidate.id)) return null;
+          const image = await resolveStoredImage(page.objs, page.commonObjs, candidate.id, options.signal);
+          return image ? { ...candidate, image } : null;
+        }),
+      );
 
-        if (typeof arg === "string") {
-          objectId = arg;
-          if (seen.has(objectId)) continue;
-          const resolved = (await waitForObj(page.objs, arg)) ?? (await waitForObj(page.commonObjs, arg));
-          if (!isPdfjsImage(resolved)) continue;
-          img = resolved;
-        } else if (isPdfjsImage(arg)) {
-          objectId = `inline-p${pageNum}-${i}`;
-          if (seen.has(objectId)) continue;
-          img = arg;
-        } else {
-          continue;
-        }
+      for (const candidate of resolved) {
+        if (!candidate || !("image" in candidate) || !candidate.image) continue;
+        const ref = imageObjectRef(candidate.image);
+        const objectId = ref ?? candidate.id;
+        if (savedIds.has(objectId)) continue;
+        if (ref && savedIds.has(ref) && !undecodedRefs.has(ref)) continue;
 
-        const png = await pdfImageToPng(img, ImageKind);
+        const png = await pdfImageToPng(candidate.image, ImageKind);
         if (!png) continue;
 
-        seen.add(objectId);
+        savedIds.add(objectId);
+        if (ref) savedIds.add(ref);
         images.push({
           id: objectId,
           pageNumber: pageNum,
@@ -307,7 +395,7 @@ export async function extractPdfImages(options: ExtractPdfImagesOptions, sourceF
 
     const named = images.map((image, index) => ({
       ...image,
-      fileName: extractedImageFileName(sourceFileName, index + 1, images.length),
+      fileName: extractedImageFileName(sourceFileName, index + 1, images.length, blobExtension(image.blob)),
     }));
 
     return { images: named, pageCount };

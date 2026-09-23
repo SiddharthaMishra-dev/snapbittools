@@ -178,8 +178,8 @@ export function PdfExtractImagesTool() {
             <div className="flex items-start gap-2 p-3 rounded-lg bg-theme-surface-muted/40 border border-theme-border text-xs text-theme-muted leading-relaxed">
               <IconInfoCircle className="w-4 h-4 shrink-0 mt-0.5 text-brand-primary" />
               <p>
-                This pulls photos that are already stored in the PDF — logos, scans, and pictures — not a screenshot of each page. Tiny
-                decorative images are skipped. For a picture of every page, use{" "}
+                This pulls photos that are already stored in the PDF — logos, scans, and pictures — not a screenshot of each page. JPEG
+                photos are kept as the original files. The same picture on several pages is saved once. For a picture of every page, use{" "}
                 <Link to="/pdf-to-jpg" className="text-brand-primary font-medium no-underline hover:underline">
                   PDF to JPG
                 </Link>
@@ -215,9 +215,7 @@ export function PdfExtractImagesTool() {
                       {photoCount} {photoLabel} extracted
                     </h4>
                     <p className="text-sm text-theme-body mt-0.5">
-                      {photoCount > 0
-                        ? `${formatBytes(totalOutputBytes)} PNG · ready as a ZIP`
-                        : "No embedded photos were found in this PDF."}
+                      {photoCount > 0 ? `${formatBytes(totalOutputBytes)} · ready as a ZIP` : "No embedded photos were found in this PDF."}
                     </p>
                   </div>
                   {photoCount > 0 ? (

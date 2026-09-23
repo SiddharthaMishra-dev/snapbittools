@@ -294,13 +294,13 @@ Use it next to Image to PDF when you need to go the other direction, or PDF Comp
 
 People look for “extract images from PDF” when a brochure, catalog, or slide deck has pictures they want as separate files. Rasterizing every page (PDF to JPG) captures text and layout too. This tool pulls the embedded image objects themselves: product photos, scans, logos, and figures stored inside the PDF.
 
-Each page is inspected with PDF.js. Duplicate objects (the same logo on twenty pages) are saved once. Tiny decorative tiles under 16×16 pixels are skipped so the ZIP is photos, not bullets. Results are PNG files packed into a ZIP named after your PDF. Download the archive or save a single photo from the preview grid.
+Each page’s image resources are read directly, including pictures nested in forms, annotations, and soft masks. JPEG photos are saved as the original JPEG. Other images are saved as PNG. The same picture reused on several pages is saved once. Images smaller than 2×2 pixels are skipped. Download the archive or save a single photo from the preview grid.
 
 Use it next to PDF to JPG when you need a picture of the whole page, Image to PDF when you want to go the other way, or PDF Compressor when the goal is a smaller document. Everything stays on your device, including catalogs, contracts, and internal reports.`,
     benefits: [
       "Extract embedded photos entirely in the browser",
       "See how many photos were found before downloading",
-      "ZIP download of every photo as PNG",
+      "ZIP download, with JPEG photos kept as the original JPEG",
       "Per-photo preview and single-file download",
       "Skips tiny decorative images and duplicate objects",
       "No uploads, no signup, no watermarks",

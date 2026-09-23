@@ -21,7 +21,7 @@ const faqs = [
   {
     question: "Why were some images skipped?",
     answer:
-      "Tiny decorative images under 16×16 pixels are ignored so you get photos, not bullets or background tiles. The same picture reused on several pages is only saved once.",
+      "Images smaller than 2×2 pixels are skipped. The same picture reused on several pages is saved once. Photos inside forms, annotations, and masks are included, and JPEG photos are saved as the original JPEG.",
   },
   {
     question: "What if no photos are found?",
@@ -30,7 +30,8 @@ const faqs = [
   },
   {
     question: "What format are the photos?",
-    answer: "Each extracted photo is saved as a PNG inside a ZIP named after your PDF. You can also download photos one at a time.",
+    answer:
+      "Each extracted photo is saved inside a ZIP named after your PDF. JPEG photos stay JPEG. Other images are saved as PNG. You can also download photos one at a time.",
   },
 ];
 
@@ -98,7 +99,7 @@ function RouteComponent() {
             },
             {
               title: "ZIP download",
-              description: "Download every photo in one ZIP, or save individual PNGs from the grid.",
+              description: "Download every photo in one ZIP. JPEG photos stay JPEG; other images are saved as PNG.",
               icon: IconFileZip,
             },
           ]}
@@ -109,7 +110,8 @@ function RouteComponent() {
             },
             {
               title: "Wait for the scan",
-              description: "Each page is checked for embedded photos. Duplicates and tiny icons are skipped.",
+              description:
+                "Each page is checked for embedded photos, including pictures inside forms and annotations. Duplicates are saved once.",
             },
             {
               title: "Review the count",
@@ -117,7 +119,7 @@ function RouteComponent() {
             },
             {
               title: "Download the ZIP",
-              description: "Save all photos in one archive, or download a single PNG.",
+              description: "Save all photos in one archive, or download a single image.",
             },
           ]}
           faqs={faqs}
