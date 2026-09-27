@@ -9,6 +9,7 @@ import {
   IconFileSpreadsheet,
   IconFileTypeJpg,
   IconFileTypePdf,
+  IconPhotoDown,
   IconNumber64Small,
   IconPhoto,
   IconSearch,
@@ -63,8 +64,9 @@ export const toolCategories: Record<ToolCategory, ToolCategoryMeta> = {
     heading: "PDF tools",
     description: "Create, convert, and compress PDFs on your device. Nothing is uploaded.",
     seoTitle: "PDF Tools | Convert, Compress, Image to PDF | SnapBit Tools",
-    seoDescription: "Free private PDF tools in your browser. Convert PDF to JPG, compress PDFs, and merge images into PDF — no uploads.",
-    keywords: ["pdf tools", "pdf to jpg", "compress pdf", "image to pdf", "pdf converter"],
+    seoDescription:
+      "Free private PDF tools in your browser. Convert PDF to JPG, extract photos, compress PDFs, and merge images into PDF — no uploads.",
+    keywords: ["pdf tools", "pdf to jpg", "extract images from pdf", "compress pdf", "image to pdf", "pdf converter"],
   },
   Data: {
     id: "data",
@@ -226,6 +228,23 @@ export const tools: ToolDefinition[] = [
     icon: IconFileTypeJpg,
     category: "PDF",
     keywords: ["pdf to jpg", "pdf to jpeg", "pdf to png", "pdf to image", "convert pdf to jpg", "pdf page to image"],
+    isNew: true,
+  },
+  {
+    slug: "pdf-extract-images",
+    name: "PDF Image Extractor",
+    href: "/pdf-extract-images",
+    description: "Extract photos from a PDF and download them as a ZIP. Private, no upload.",
+    icon: IconPhotoDown,
+    category: "PDF",
+    keywords: [
+      "extract images from pdf",
+      "pdf extract photos",
+      "pdf image extractor",
+      "download images from pdf",
+      "pdf to zip",
+      "save pdf pictures",
+    ],
     isNew: true,
   },
   {
