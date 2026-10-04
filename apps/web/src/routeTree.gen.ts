@@ -8,1335 +8,1321 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as UtilityToolsRouteImport } from './routes/utility-tools'
-import { Route as ToolsForDevelopersRouteImport } from './routes/tools-for-developers'
-import { Route as ToolsRouteImport } from './routes/tools'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PdfToolsRouteImport } from './routes/pdf-tools'
-import { Route as ImageToolsRouteImport } from './routes/image-tools'
-import { Route as DataToolsRouteImport } from './routes/data-tools'
-import { Route as BlogsRouteImport } from './routes/blogs'
-import { Route as WrapRouteImport } from './routes/_wrap'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as WrapWordCounterRouteImport } from './routes/_wrap.word-counter'
-import { Route as WrapWebpToPngRouteImport } from './routes/_wrap.webp-to-png'
-import { Route as WrapWebpToJpgRouteImport } from './routes/_wrap.webp-to-jpg'
-import { Route as WrapValidateJsonOnlineRouteImport } from './routes/_wrap.validate-json-online'
-import { Route as WrapReduceYourImageSizeForFreeRouteImport } from './routes/_wrap.reduce-your-image-size-for-free'
-import { Route as WrapReducePngSizeRouteImport } from './routes/_wrap.reduce-png-size'
-import { Route as WrapReduceJpgSizeRouteImport } from './routes/_wrap.reduce-jpg-size'
-import { Route as WrapReduceImageFileSizeRouteImport } from './routes/_wrap.reduce-image-file-size'
-import { Route as WrapPrivacyFirstToolsRouteImport } from './routes/_wrap.privacy-first-tools'
-import { Route as WrapPngToWebpRouteImport } from './routes/_wrap.png-to-webp'
-import { Route as WrapPngToJpgRouteImport } from './routes/_wrap.png-to-jpg'
-import { Route as WrapPdfToJpgRouteImport } from './routes/_wrap.pdf-to-jpg'
-import { Route as WrapPdfExtractImagesRouteImport } from './routes/_wrap.pdf-extract-images'
-import { Route as WrapPdfCompressorRouteImport } from './routes/_wrap.pdf-compressor'
-import { Route as WrapOptimizeImagesForWebsiteRouteImport } from './routes/_wrap.optimize-images-for-website'
-import { Route as WrapLoremIpsumGeneratorRouteImport } from './routes/_wrap.lorem-ipsum-generator'
-import { Route as WrapJsonValidatorRouteImport } from './routes/_wrap.json-validator'
-import { Route as WrapJsonToCsvRouteImport } from './routes/_wrap.json-to-csv'
-import { Route as WrapJsonPrettyPrintRouteImport } from './routes/_wrap.json-pretty-print'
-import { Route as WrapJsonMinifierRouteImport } from './routes/_wrap.json-minifier'
-import { Route as WrapJsonFormatterRouteImport } from './routes/_wrap.json-formatter'
-import { Route as WrapJsonBeautifierRouteImport } from './routes/_wrap.json-beautifier'
-import { Route as WrapJpgToWebpRouteImport } from './routes/_wrap.jpg-to-webp'
-import { Route as WrapJpgToPngRouteImport } from './routes/_wrap.jpg-to-png'
-import { Route as WrapImageToPdfRouteImport } from './routes/_wrap.image-to-pdf'
-import { Route as WrapImageToBase64RouteImport } from './routes/_wrap.image-to-base64'
-import { Route as WrapImageResizerRouteImport } from './routes/_wrap.image-resizer'
-import { Route as WrapImageFormatConverterRouteImport } from './routes/_wrap.image-format-converter'
-import { Route as WrapImageCropperRouteImport } from './routes/_wrap.image-cropper'
-import { Route as WrapImageCompressorRouteImport } from './routes/_wrap.image-compressor'
-import { Route as WrapImageBackgroundRemoverRouteImport } from './routes/_wrap.image-background-remover'
-import { Route as WrapHtmlMinifierRouteImport } from './routes/_wrap.html-minifier'
-import { Route as WrapHeicToJpgRouteImport } from './routes/_wrap.heic-to-jpg'
-import { Route as WrapFormatJsonOnlineRouteImport } from './routes/_wrap.format-json-online'
-import { Route as WrapDiffCheckerRouteImport } from './routes/_wrap.diff-checker'
-import { Route as WrapCsvXlsxConverterRouteImport } from './routes/_wrap.csv-xlsx-converter'
-import { Route as WrapCsvToJsonRouteImport } from './routes/_wrap.csv-to-json'
-import { Route as WrapCompressPngOnlineRouteImport } from './routes/_wrap.compress-png-online'
-import { Route as WrapCompressJpegOnlineRouteImport } from './routes/_wrap.compress-jpeg-online'
-import { Route as WrapCompressImageTo50kbRouteImport } from './routes/_wrap.compress-image-to-50kb'
-import { Route as WrapCompressImageTo200kbRouteImport } from './routes/_wrap.compress-image-to-200kb'
-import { Route as WrapCompressImageTo100kbRouteImport } from './routes/_wrap.compress-image-to-100kb'
-import { Route as WrapCompressImageOnlineRouteImport } from './routes/_wrap.compress-image-online'
-import { Route as WrapCompressImageForWebWithoutQualityLossRouteImport } from './routes/_wrap.compress-image-for-web-without-quality-loss'
-import { Route as WrapCompressImageForWebRouteImport } from './routes/_wrap.compress-image-for-web'
-import { Route as WrapColorPaletteGeneratorRouteImport } from './routes/_wrap.color-palette-generator'
-import { Route as WrapBulkFileRenamerRouteImport } from './routes/_wrap.bulk-file-renamer'
-import { Route as WrapBrowserBasedUtilitiesRouteImport } from './routes/_wrap.browser-based-utilities'
-import { Route as WrapBestImageConverterTool2026RouteImport } from './routes/_wrap.best-image-converter-tool-2026'
-import { Route as WrapBestImageCompressorTool2026RouteImport } from './routes/_wrap.best-image-compressor-tool-2026'
-import { Route as WrapBestFreeImageFormatConverter2026RouteImport } from './routes/_wrap.best-free-image-format-converter-2026'
-import { Route as WrapBase64ToFileRouteImport } from './routes/_wrap.base64-to-file'
+import { Route as rootRouteImport } from "./routes/__root";
+import { Route as UtilityToolsRouteImport } from "./routes/utility-tools";
+import { Route as ToolsForDevelopersRouteImport } from "./routes/tools-for-developers";
+import { Route as ToolsRouteImport } from "./routes/tools";
+import { Route as TermsRouteImport } from "./routes/terms";
+import { Route as PrivacyPolicyRouteImport } from "./routes/privacy-policy";
+import { Route as PrivacyRouteImport } from "./routes/privacy";
+import { Route as PdfToolsRouteImport } from "./routes/pdf-tools";
+import { Route as ImageToolsRouteImport } from "./routes/image-tools";
+import { Route as DataToolsRouteImport } from "./routes/data-tools";
+import { Route as BlogsRouteImport } from "./routes/blogs";
+import { Route as WrapRouteImport } from "./routes/_wrap";
+import { Route as IndexRouteImport } from "./routes/index";
+import { Route as WrapWordCounterRouteImport } from "./routes/_wrap.word-counter";
+import { Route as WrapWebpToPngRouteImport } from "./routes/_wrap.webp-to-png";
+import { Route as WrapWebpToJpgRouteImport } from "./routes/_wrap.webp-to-jpg";
+import { Route as WrapValidateJsonOnlineRouteImport } from "./routes/_wrap.validate-json-online";
+import { Route as WrapReduceYourImageSizeForFreeRouteImport } from "./routes/_wrap.reduce-your-image-size-for-free";
+import { Route as WrapReducePngSizeRouteImport } from "./routes/_wrap.reduce-png-size";
+import { Route as WrapReduceJpgSizeRouteImport } from "./routes/_wrap.reduce-jpg-size";
+import { Route as WrapReduceImageFileSizeRouteImport } from "./routes/_wrap.reduce-image-file-size";
+import { Route as WrapPrivacyFirstToolsRouteImport } from "./routes/_wrap.privacy-first-tools";
+import { Route as WrapPngToWebpRouteImport } from "./routes/_wrap.png-to-webp";
+import { Route as WrapPngToJpgRouteImport } from "./routes/_wrap.png-to-jpg";
+import { Route as WrapPdfToJpgRouteImport } from "./routes/_wrap.pdf-to-jpg";
+import { Route as WrapPdfExtractImagesRouteImport } from "./routes/_wrap.pdf-extract-images";
+import { Route as WrapPdfCompressorRouteImport } from "./routes/_wrap.pdf-compressor";
+import { Route as WrapOptimizeImagesForWebsiteRouteImport } from "./routes/_wrap.optimize-images-for-website";
+import { Route as WrapLoremIpsumGeneratorRouteImport } from "./routes/_wrap.lorem-ipsum-generator";
+import { Route as WrapJsonValidatorRouteImport } from "./routes/_wrap.json-validator";
+import { Route as WrapJsonToCsvRouteImport } from "./routes/_wrap.json-to-csv";
+import { Route as WrapJsonPrettyPrintRouteImport } from "./routes/_wrap.json-pretty-print";
+import { Route as WrapJsonMinifierRouteImport } from "./routes/_wrap.json-minifier";
+import { Route as WrapJsonFormatterRouteImport } from "./routes/_wrap.json-formatter";
+import { Route as WrapJsonBeautifierRouteImport } from "./routes/_wrap.json-beautifier";
+import { Route as WrapJpgToWebpRouteImport } from "./routes/_wrap.jpg-to-webp";
+import { Route as WrapJpgToPngRouteImport } from "./routes/_wrap.jpg-to-png";
+import { Route as WrapImageToPdfRouteImport } from "./routes/_wrap.image-to-pdf";
+import { Route as WrapImageToBase64RouteImport } from "./routes/_wrap.image-to-base64";
+import { Route as WrapImageResizerRouteImport } from "./routes/_wrap.image-resizer";
+import { Route as WrapImageFormatConverterRouteImport } from "./routes/_wrap.image-format-converter";
+import { Route as WrapImageCropperRouteImport } from "./routes/_wrap.image-cropper";
+import { Route as WrapImageCompressorRouteImport } from "./routes/_wrap.image-compressor";
+import { Route as WrapImageBackgroundRemoverRouteImport } from "./routes/_wrap.image-background-remover";
+import { Route as WrapHtmlMinifierRouteImport } from "./routes/_wrap.html-minifier";
+import { Route as WrapHeicToJpgRouteImport } from "./routes/_wrap.heic-to-jpg";
+import { Route as WrapFormatJsonOnlineRouteImport } from "./routes/_wrap.format-json-online";
+import { Route as WrapDiffCheckerRouteImport } from "./routes/_wrap.diff-checker";
+import { Route as WrapCsvXlsxConverterRouteImport } from "./routes/_wrap.csv-xlsx-converter";
+import { Route as WrapCsvToJsonRouteImport } from "./routes/_wrap.csv-to-json";
+import { Route as WrapCompressPngOnlineRouteImport } from "./routes/_wrap.compress-png-online";
+import { Route as WrapCompressJpegOnlineRouteImport } from "./routes/_wrap.compress-jpeg-online";
+import { Route as WrapCompressImageTo50kbRouteImport } from "./routes/_wrap.compress-image-to-50kb";
+import { Route as WrapCompressImageTo200kbRouteImport } from "./routes/_wrap.compress-image-to-200kb";
+import { Route as WrapCompressImageTo100kbRouteImport } from "./routes/_wrap.compress-image-to-100kb";
+import { Route as WrapCompressImageOnlineRouteImport } from "./routes/_wrap.compress-image-online";
+import { Route as WrapCompressImageForWebWithoutQualityLossRouteImport } from "./routes/_wrap.compress-image-for-web-without-quality-loss";
+import { Route as WrapCompressImageForWebRouteImport } from "./routes/_wrap.compress-image-for-web";
+import { Route as WrapColorPaletteGeneratorRouteImport } from "./routes/_wrap.color-palette-generator";
+import { Route as WrapBulkFileRenamerRouteImport } from "./routes/_wrap.bulk-file-renamer";
+import { Route as WrapBrowserBasedUtilitiesRouteImport } from "./routes/_wrap.browser-based-utilities";
+import { Route as WrapBestImageConverterTool2026RouteImport } from "./routes/_wrap.best-image-converter-tool-2026";
+import { Route as WrapBestImageCompressorTool2026RouteImport } from "./routes/_wrap.best-image-compressor-tool-2026";
+import { Route as WrapBestFreeImageFormatConverter2026RouteImport } from "./routes/_wrap.best-free-image-format-converter-2026";
+import { Route as WrapBase64ToFileRouteImport } from "./routes/_wrap.base64-to-file";
 
 const UtilityToolsRoute = UtilityToolsRouteImport.update({
-  id: '/utility-tools',
-  path: '/utility-tools',
+  id: "/utility-tools",
+  path: "/utility-tools",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ToolsForDevelopersRoute = ToolsForDevelopersRouteImport.update({
-  id: '/tools-for-developers',
-  path: '/tools-for-developers',
+  id: "/tools-for-developers",
+  path: "/tools-for-developers",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ToolsRoute = ToolsRouteImport.update({
-  id: '/tools',
-  path: '/tools',
+  id: "/tools",
+  path: "/tools",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
+  id: "/terms",
+  path: "/terms",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
+  id: "/privacy-policy",
+  path: "/privacy-policy",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
+  id: "/privacy",
+  path: "/privacy",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const PdfToolsRoute = PdfToolsRouteImport.update({
-  id: '/pdf-tools',
-  path: '/pdf-tools',
+  id: "/pdf-tools",
+  path: "/pdf-tools",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ImageToolsRoute = ImageToolsRouteImport.update({
-  id: '/image-tools',
-  path: '/image-tools',
+  id: "/image-tools",
+  path: "/image-tools",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const DataToolsRoute = DataToolsRouteImport.update({
-  id: '/data-tools',
-  path: '/data-tools',
+  id: "/data-tools",
+  path: "/data-tools",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const BlogsRoute = BlogsRouteImport.update({
-  id: '/blogs',
-  path: '/blogs',
+  id: "/blogs",
+  path: "/blogs",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const WrapRoute = WrapRouteImport.update({
-  id: '/_wrap',
+  id: "/_wrap",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const WrapWordCounterRoute = WrapWordCounterRouteImport.update({
-  id: '/word-counter',
-  path: '/word-counter',
+  id: "/word-counter",
+  path: "/word-counter",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapWebpToPngRoute = WrapWebpToPngRouteImport.update({
-  id: '/webp-to-png',
-  path: '/webp-to-png',
+  id: "/webp-to-png",
+  path: "/webp-to-png",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapWebpToJpgRoute = WrapWebpToJpgRouteImport.update({
-  id: '/webp-to-jpg',
-  path: '/webp-to-jpg',
+  id: "/webp-to-jpg",
+  path: "/webp-to-jpg",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapValidateJsonOnlineRoute = WrapValidateJsonOnlineRouteImport.update({
-  id: '/validate-json-online',
-  path: '/validate-json-online',
+  id: "/validate-json-online",
+  path: "/validate-json-online",
   getParentRoute: () => WrapRoute,
-} as any)
-const WrapReduceYourImageSizeForFreeRoute =
-  WrapReduceYourImageSizeForFreeRouteImport.update({
-    id: '/reduce-your-image-size-for-free',
-    path: '/reduce-your-image-size-for-free',
-    getParentRoute: () => WrapRoute,
-  } as any)
+} as any);
+const WrapReduceYourImageSizeForFreeRoute = WrapReduceYourImageSizeForFreeRouteImport.update({
+  id: "/reduce-your-image-size-for-free",
+  path: "/reduce-your-image-size-for-free",
+  getParentRoute: () => WrapRoute,
+} as any);
 const WrapReducePngSizeRoute = WrapReducePngSizeRouteImport.update({
-  id: '/reduce-png-size',
-  path: '/reduce-png-size',
+  id: "/reduce-png-size",
+  path: "/reduce-png-size",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapReduceJpgSizeRoute = WrapReduceJpgSizeRouteImport.update({
-  id: '/reduce-jpg-size',
-  path: '/reduce-jpg-size',
+  id: "/reduce-jpg-size",
+  path: "/reduce-jpg-size",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapReduceImageFileSizeRoute = WrapReduceImageFileSizeRouteImport.update({
-  id: '/reduce-image-file-size',
-  path: '/reduce-image-file-size',
+  id: "/reduce-image-file-size",
+  path: "/reduce-image-file-size",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapPrivacyFirstToolsRoute = WrapPrivacyFirstToolsRouteImport.update({
-  id: '/privacy-first-tools',
-  path: '/privacy-first-tools',
+  id: "/privacy-first-tools",
+  path: "/privacy-first-tools",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapPngToWebpRoute = WrapPngToWebpRouteImport.update({
-  id: '/png-to-webp',
-  path: '/png-to-webp',
+  id: "/png-to-webp",
+  path: "/png-to-webp",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapPngToJpgRoute = WrapPngToJpgRouteImport.update({
-  id: '/png-to-jpg',
-  path: '/png-to-jpg',
+  id: "/png-to-jpg",
+  path: "/png-to-jpg",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapPdfToJpgRoute = WrapPdfToJpgRouteImport.update({
-  id: '/pdf-to-jpg',
-  path: '/pdf-to-jpg',
+  id: "/pdf-to-jpg",
+  path: "/pdf-to-jpg",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapPdfExtractImagesRoute = WrapPdfExtractImagesRouteImport.update({
-  id: '/pdf-extract-images',
-  path: '/pdf-extract-images',
+  id: "/pdf-extract-images",
+  path: "/pdf-extract-images",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapPdfCompressorRoute = WrapPdfCompressorRouteImport.update({
-  id: '/pdf-compressor',
-  path: '/pdf-compressor',
+  id: "/pdf-compressor",
+  path: "/pdf-compressor",
   getParentRoute: () => WrapRoute,
-} as any)
-const WrapOptimizeImagesForWebsiteRoute =
-  WrapOptimizeImagesForWebsiteRouteImport.update({
-    id: '/optimize-images-for-website',
-    path: '/optimize-images-for-website',
-    getParentRoute: () => WrapRoute,
-  } as any)
+} as any);
+const WrapOptimizeImagesForWebsiteRoute = WrapOptimizeImagesForWebsiteRouteImport.update({
+  id: "/optimize-images-for-website",
+  path: "/optimize-images-for-website",
+  getParentRoute: () => WrapRoute,
+} as any);
 const WrapLoremIpsumGeneratorRoute = WrapLoremIpsumGeneratorRouteImport.update({
-  id: '/lorem-ipsum-generator',
-  path: '/lorem-ipsum-generator',
+  id: "/lorem-ipsum-generator",
+  path: "/lorem-ipsum-generator",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapJsonValidatorRoute = WrapJsonValidatorRouteImport.update({
-  id: '/json-validator',
-  path: '/json-validator',
+  id: "/json-validator",
+  path: "/json-validator",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapJsonToCsvRoute = WrapJsonToCsvRouteImport.update({
-  id: '/json-to-csv',
-  path: '/json-to-csv',
+  id: "/json-to-csv",
+  path: "/json-to-csv",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapJsonPrettyPrintRoute = WrapJsonPrettyPrintRouteImport.update({
-  id: '/json-pretty-print',
-  path: '/json-pretty-print',
+  id: "/json-pretty-print",
+  path: "/json-pretty-print",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapJsonMinifierRoute = WrapJsonMinifierRouteImport.update({
-  id: '/json-minifier',
-  path: '/json-minifier',
+  id: "/json-minifier",
+  path: "/json-minifier",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapJsonFormatterRoute = WrapJsonFormatterRouteImport.update({
-  id: '/json-formatter',
-  path: '/json-formatter',
+  id: "/json-formatter",
+  path: "/json-formatter",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapJsonBeautifierRoute = WrapJsonBeautifierRouteImport.update({
-  id: '/json-beautifier',
-  path: '/json-beautifier',
+  id: "/json-beautifier",
+  path: "/json-beautifier",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapJpgToWebpRoute = WrapJpgToWebpRouteImport.update({
-  id: '/jpg-to-webp',
-  path: '/jpg-to-webp',
+  id: "/jpg-to-webp",
+  path: "/jpg-to-webp",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapJpgToPngRoute = WrapJpgToPngRouteImport.update({
-  id: '/jpg-to-png',
-  path: '/jpg-to-png',
+  id: "/jpg-to-png",
+  path: "/jpg-to-png",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapImageToPdfRoute = WrapImageToPdfRouteImport.update({
-  id: '/image-to-pdf',
-  path: '/image-to-pdf',
+  id: "/image-to-pdf",
+  path: "/image-to-pdf",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapImageToBase64Route = WrapImageToBase64RouteImport.update({
-  id: '/image-to-base64',
-  path: '/image-to-base64',
+  id: "/image-to-base64",
+  path: "/image-to-base64",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapImageResizerRoute = WrapImageResizerRouteImport.update({
-  id: '/image-resizer',
-  path: '/image-resizer',
+  id: "/image-resizer",
+  path: "/image-resizer",
   getParentRoute: () => WrapRoute,
-} as any)
-const WrapImageFormatConverterRoute =
-  WrapImageFormatConverterRouteImport.update({
-    id: '/image-format-converter',
-    path: '/image-format-converter',
-    getParentRoute: () => WrapRoute,
-  } as any)
+} as any);
+const WrapImageFormatConverterRoute = WrapImageFormatConverterRouteImport.update({
+  id: "/image-format-converter",
+  path: "/image-format-converter",
+  getParentRoute: () => WrapRoute,
+} as any);
 const WrapImageCropperRoute = WrapImageCropperRouteImport.update({
-  id: '/image-cropper',
-  path: '/image-cropper',
+  id: "/image-cropper",
+  path: "/image-cropper",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapImageCompressorRoute = WrapImageCompressorRouteImport.update({
-  id: '/image-compressor',
-  path: '/image-compressor',
+  id: "/image-compressor",
+  path: "/image-compressor",
   getParentRoute: () => WrapRoute,
-} as any)
-const WrapImageBackgroundRemoverRoute =
-  WrapImageBackgroundRemoverRouteImport.update({
-    id: '/image-background-remover',
-    path: '/image-background-remover',
-    getParentRoute: () => WrapRoute,
-  } as any)
+} as any);
+const WrapImageBackgroundRemoverRoute = WrapImageBackgroundRemoverRouteImport.update({
+  id: "/image-background-remover",
+  path: "/image-background-remover",
+  getParentRoute: () => WrapRoute,
+} as any);
 const WrapHtmlMinifierRoute = WrapHtmlMinifierRouteImport.update({
-  id: '/html-minifier',
-  path: '/html-minifier',
+  id: "/html-minifier",
+  path: "/html-minifier",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapHeicToJpgRoute = WrapHeicToJpgRouteImport.update({
-  id: '/heic-to-jpg',
-  path: '/heic-to-jpg',
+  id: "/heic-to-jpg",
+  path: "/heic-to-jpg",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapFormatJsonOnlineRoute = WrapFormatJsonOnlineRouteImport.update({
-  id: '/format-json-online',
-  path: '/format-json-online',
+  id: "/format-json-online",
+  path: "/format-json-online",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapDiffCheckerRoute = WrapDiffCheckerRouteImport.update({
-  id: '/diff-checker',
-  path: '/diff-checker',
+  id: "/diff-checker",
+  path: "/diff-checker",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapCsvXlsxConverterRoute = WrapCsvXlsxConverterRouteImport.update({
-  id: '/csv-xlsx-converter',
-  path: '/csv-xlsx-converter',
+  id: "/csv-xlsx-converter",
+  path: "/csv-xlsx-converter",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapCsvToJsonRoute = WrapCsvToJsonRouteImport.update({
-  id: '/csv-to-json',
-  path: '/csv-to-json',
+  id: "/csv-to-json",
+  path: "/csv-to-json",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapCompressPngOnlineRoute = WrapCompressPngOnlineRouteImport.update({
-  id: '/compress-png-online',
-  path: '/compress-png-online',
+  id: "/compress-png-online",
+  path: "/compress-png-online",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapCompressJpegOnlineRoute = WrapCompressJpegOnlineRouteImport.update({
-  id: '/compress-jpeg-online',
-  path: '/compress-jpeg-online',
+  id: "/compress-jpeg-online",
+  path: "/compress-jpeg-online",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 const WrapCompressImageTo50kbRoute = WrapCompressImageTo50kbRouteImport.update({
-  id: '/compress-image-to-50kb',
-  path: '/compress-image-to-50kb',
+  id: "/compress-image-to-50kb",
+  path: "/compress-image-to-50kb",
   getParentRoute: () => WrapRoute,
-} as any)
-const WrapCompressImageTo200kbRoute =
-  WrapCompressImageTo200kbRouteImport.update({
-    id: '/compress-image-to-200kb',
-    path: '/compress-image-to-200kb',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapCompressImageTo100kbRoute =
-  WrapCompressImageTo100kbRouteImport.update({
-    id: '/compress-image-to-100kb',
-    path: '/compress-image-to-100kb',
-    getParentRoute: () => WrapRoute,
-  } as any)
+} as any);
+const WrapCompressImageTo200kbRoute = WrapCompressImageTo200kbRouteImport.update({
+  id: "/compress-image-to-200kb",
+  path: "/compress-image-to-200kb",
+  getParentRoute: () => WrapRoute,
+} as any);
+const WrapCompressImageTo100kbRoute = WrapCompressImageTo100kbRouteImport.update({
+  id: "/compress-image-to-100kb",
+  path: "/compress-image-to-100kb",
+  getParentRoute: () => WrapRoute,
+} as any);
 const WrapCompressImageOnlineRoute = WrapCompressImageOnlineRouteImport.update({
-  id: '/compress-image-online',
-  path: '/compress-image-online',
+  id: "/compress-image-online",
+  path: "/compress-image-online",
   getParentRoute: () => WrapRoute,
-} as any)
-const WrapCompressImageForWebWithoutQualityLossRoute =
-  WrapCompressImageForWebWithoutQualityLossRouteImport.update({
-    id: '/compress-image-for-web-without-quality-loss',
-    path: '/compress-image-for-web-without-quality-loss',
-    getParentRoute: () => WrapRoute,
-  } as any)
+} as any);
+const WrapCompressImageForWebWithoutQualityLossRoute = WrapCompressImageForWebWithoutQualityLossRouteImport.update({
+  id: "/compress-image-for-web-without-quality-loss",
+  path: "/compress-image-for-web-without-quality-loss",
+  getParentRoute: () => WrapRoute,
+} as any);
 const WrapCompressImageForWebRoute = WrapCompressImageForWebRouteImport.update({
-  id: '/compress-image-for-web',
-  path: '/compress-image-for-web',
+  id: "/compress-image-for-web",
+  path: "/compress-image-for-web",
   getParentRoute: () => WrapRoute,
-} as any)
-const WrapColorPaletteGeneratorRoute =
-  WrapColorPaletteGeneratorRouteImport.update({
-    id: '/color-palette-generator',
-    path: '/color-palette-generator',
-    getParentRoute: () => WrapRoute,
-  } as any)
+} as any);
+const WrapColorPaletteGeneratorRoute = WrapColorPaletteGeneratorRouteImport.update({
+  id: "/color-palette-generator",
+  path: "/color-palette-generator",
+  getParentRoute: () => WrapRoute,
+} as any);
 const WrapBulkFileRenamerRoute = WrapBulkFileRenamerRouteImport.update({
-  id: '/bulk-file-renamer',
-  path: '/bulk-file-renamer',
+  id: "/bulk-file-renamer",
+  path: "/bulk-file-renamer",
   getParentRoute: () => WrapRoute,
-} as any)
-const WrapBrowserBasedUtilitiesRoute =
-  WrapBrowserBasedUtilitiesRouteImport.update({
-    id: '/browser-based-utilities',
-    path: '/browser-based-utilities',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapBestImageConverterTool2026Route =
-  WrapBestImageConverterTool2026RouteImport.update({
-    id: '/best-image-converter-tool-2026',
-    path: '/best-image-converter-tool-2026',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapBestImageCompressorTool2026Route =
-  WrapBestImageCompressorTool2026RouteImport.update({
-    id: '/best-image-compressor-tool-2026',
-    path: '/best-image-compressor-tool-2026',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapBestFreeImageFormatConverter2026Route =
-  WrapBestFreeImageFormatConverter2026RouteImport.update({
-    id: '/best-free-image-format-converter-2026',
-    path: '/best-free-image-format-converter-2026',
-    getParentRoute: () => WrapRoute,
-  } as any)
+} as any);
+const WrapBrowserBasedUtilitiesRoute = WrapBrowserBasedUtilitiesRouteImport.update({
+  id: "/browser-based-utilities",
+  path: "/browser-based-utilities",
+  getParentRoute: () => WrapRoute,
+} as any);
+const WrapBestImageConverterTool2026Route = WrapBestImageConverterTool2026RouteImport.update({
+  id: "/best-image-converter-tool-2026",
+  path: "/best-image-converter-tool-2026",
+  getParentRoute: () => WrapRoute,
+} as any);
+const WrapBestImageCompressorTool2026Route = WrapBestImageCompressorTool2026RouteImport.update({
+  id: "/best-image-compressor-tool-2026",
+  path: "/best-image-compressor-tool-2026",
+  getParentRoute: () => WrapRoute,
+} as any);
+const WrapBestFreeImageFormatConverter2026Route = WrapBestFreeImageFormatConverter2026RouteImport.update({
+  id: "/best-free-image-format-converter-2026",
+  path: "/best-free-image-format-converter-2026",
+  getParentRoute: () => WrapRoute,
+} as any);
 const WrapBase64ToFileRoute = WrapBase64ToFileRouteImport.update({
-  id: '/base64-to-file',
-  path: '/base64-to-file',
+  id: "/base64-to-file",
+  path: "/base64-to-file",
   getParentRoute: () => WrapRoute,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/blogs': typeof BlogsRoute
-  '/data-tools': typeof DataToolsRoute
-  '/image-tools': typeof ImageToolsRoute
-  '/pdf-tools': typeof PdfToolsRoute
-  '/privacy': typeof PrivacyRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
-  '/terms': typeof TermsRoute
-  '/tools': typeof ToolsRoute
-  '/tools-for-developers': typeof ToolsForDevelopersRoute
-  '/utility-tools': typeof UtilityToolsRoute
-  '/base64-to-file': typeof WrapBase64ToFileRoute
-  '/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
-  '/best-image-compressor-tool-2026': typeof WrapBestImageCompressorTool2026Route
-  '/best-image-converter-tool-2026': typeof WrapBestImageConverterTool2026Route
-  '/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
-  '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
-  '/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
-  '/compress-image-for-web': typeof WrapCompressImageForWebRoute
-  '/compress-image-for-web-without-quality-loss': typeof WrapCompressImageForWebWithoutQualityLossRoute
-  '/compress-image-online': typeof WrapCompressImageOnlineRoute
-  '/compress-image-to-100kb': typeof WrapCompressImageTo100kbRoute
-  '/compress-image-to-200kb': typeof WrapCompressImageTo200kbRoute
-  '/compress-image-to-50kb': typeof WrapCompressImageTo50kbRoute
-  '/compress-jpeg-online': typeof WrapCompressJpegOnlineRoute
-  '/compress-png-online': typeof WrapCompressPngOnlineRoute
-  '/csv-to-json': typeof WrapCsvToJsonRoute
-  '/csv-xlsx-converter': typeof WrapCsvXlsxConverterRoute
-  '/diff-checker': typeof WrapDiffCheckerRoute
-  '/format-json-online': typeof WrapFormatJsonOnlineRoute
-  '/heic-to-jpg': typeof WrapHeicToJpgRoute
-  '/html-minifier': typeof WrapHtmlMinifierRoute
-  '/image-background-remover': typeof WrapImageBackgroundRemoverRoute
-  '/image-compressor': typeof WrapImageCompressorRoute
-  '/image-cropper': typeof WrapImageCropperRoute
-  '/image-format-converter': typeof WrapImageFormatConverterRoute
-  '/image-resizer': typeof WrapImageResizerRoute
-  '/image-to-base64': typeof WrapImageToBase64Route
-  '/image-to-pdf': typeof WrapImageToPdfRoute
-  '/jpg-to-png': typeof WrapJpgToPngRoute
-  '/jpg-to-webp': typeof WrapJpgToWebpRoute
-  '/json-beautifier': typeof WrapJsonBeautifierRoute
-  '/json-formatter': typeof WrapJsonFormatterRoute
-  '/json-minifier': typeof WrapJsonMinifierRoute
-  '/json-pretty-print': typeof WrapJsonPrettyPrintRoute
-  '/json-to-csv': typeof WrapJsonToCsvRoute
-  '/json-validator': typeof WrapJsonValidatorRoute
-  '/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
-  '/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
-  '/pdf-compressor': typeof WrapPdfCompressorRoute
-  '/pdf-extract-images': typeof WrapPdfExtractImagesRoute
-  '/pdf-to-jpg': typeof WrapPdfToJpgRoute
-  '/png-to-jpg': typeof WrapPngToJpgRoute
-  '/png-to-webp': typeof WrapPngToWebpRoute
-  '/privacy-first-tools': typeof WrapPrivacyFirstToolsRoute
-  '/reduce-image-file-size': typeof WrapReduceImageFileSizeRoute
-  '/reduce-jpg-size': typeof WrapReduceJpgSizeRoute
-  '/reduce-png-size': typeof WrapReducePngSizeRoute
-  '/reduce-your-image-size-for-free': typeof WrapReduceYourImageSizeForFreeRoute
-  '/validate-json-online': typeof WrapValidateJsonOnlineRoute
-  '/webp-to-jpg': typeof WrapWebpToJpgRoute
-  '/webp-to-png': typeof WrapWebpToPngRoute
-  '/word-counter': typeof WrapWordCounterRoute
+  "/": typeof IndexRoute;
+  "/blogs": typeof BlogsRoute;
+  "/data-tools": typeof DataToolsRoute;
+  "/image-tools": typeof ImageToolsRoute;
+  "/pdf-tools": typeof PdfToolsRoute;
+  "/privacy": typeof PrivacyRoute;
+  "/privacy-policy": typeof PrivacyPolicyRoute;
+  "/terms": typeof TermsRoute;
+  "/tools": typeof ToolsRoute;
+  "/tools-for-developers": typeof ToolsForDevelopersRoute;
+  "/utility-tools": typeof UtilityToolsRoute;
+  "/base64-to-file": typeof WrapBase64ToFileRoute;
+  "/best-free-image-format-converter-2026": typeof WrapBestFreeImageFormatConverter2026Route;
+  "/best-image-compressor-tool-2026": typeof WrapBestImageCompressorTool2026Route;
+  "/best-image-converter-tool-2026": typeof WrapBestImageConverterTool2026Route;
+  "/browser-based-utilities": typeof WrapBrowserBasedUtilitiesRoute;
+  "/bulk-file-renamer": typeof WrapBulkFileRenamerRoute;
+  "/color-palette-generator": typeof WrapColorPaletteGeneratorRoute;
+  "/compress-image-for-web": typeof WrapCompressImageForWebRoute;
+  "/compress-image-for-web-without-quality-loss": typeof WrapCompressImageForWebWithoutQualityLossRoute;
+  "/compress-image-online": typeof WrapCompressImageOnlineRoute;
+  "/compress-image-to-100kb": typeof WrapCompressImageTo100kbRoute;
+  "/compress-image-to-200kb": typeof WrapCompressImageTo200kbRoute;
+  "/compress-image-to-50kb": typeof WrapCompressImageTo50kbRoute;
+  "/compress-jpeg-online": typeof WrapCompressJpegOnlineRoute;
+  "/compress-png-online": typeof WrapCompressPngOnlineRoute;
+  "/csv-to-json": typeof WrapCsvToJsonRoute;
+  "/csv-xlsx-converter": typeof WrapCsvXlsxConverterRoute;
+  "/diff-checker": typeof WrapDiffCheckerRoute;
+  "/format-json-online": typeof WrapFormatJsonOnlineRoute;
+  "/heic-to-jpg": typeof WrapHeicToJpgRoute;
+  "/html-minifier": typeof WrapHtmlMinifierRoute;
+  "/image-background-remover": typeof WrapImageBackgroundRemoverRoute;
+  "/image-compressor": typeof WrapImageCompressorRoute;
+  "/image-cropper": typeof WrapImageCropperRoute;
+  "/image-format-converter": typeof WrapImageFormatConverterRoute;
+  "/image-resizer": typeof WrapImageResizerRoute;
+  "/image-to-base64": typeof WrapImageToBase64Route;
+  "/image-to-pdf": typeof WrapImageToPdfRoute;
+  "/jpg-to-png": typeof WrapJpgToPngRoute;
+  "/jpg-to-webp": typeof WrapJpgToWebpRoute;
+  "/json-beautifier": typeof WrapJsonBeautifierRoute;
+  "/json-formatter": typeof WrapJsonFormatterRoute;
+  "/json-minifier": typeof WrapJsonMinifierRoute;
+  "/json-pretty-print": typeof WrapJsonPrettyPrintRoute;
+  "/json-to-csv": typeof WrapJsonToCsvRoute;
+  "/json-validator": typeof WrapJsonValidatorRoute;
+  "/lorem-ipsum-generator": typeof WrapLoremIpsumGeneratorRoute;
+  "/optimize-images-for-website": typeof WrapOptimizeImagesForWebsiteRoute;
+  "/pdf-compressor": typeof WrapPdfCompressorRoute;
+  "/pdf-extract-images": typeof WrapPdfExtractImagesRoute;
+  "/pdf-to-jpg": typeof WrapPdfToJpgRoute;
+  "/png-to-jpg": typeof WrapPngToJpgRoute;
+  "/png-to-webp": typeof WrapPngToWebpRoute;
+  "/privacy-first-tools": typeof WrapPrivacyFirstToolsRoute;
+  "/reduce-image-file-size": typeof WrapReduceImageFileSizeRoute;
+  "/reduce-jpg-size": typeof WrapReduceJpgSizeRoute;
+  "/reduce-png-size": typeof WrapReducePngSizeRoute;
+  "/reduce-your-image-size-for-free": typeof WrapReduceYourImageSizeForFreeRoute;
+  "/validate-json-online": typeof WrapValidateJsonOnlineRoute;
+  "/webp-to-jpg": typeof WrapWebpToJpgRoute;
+  "/webp-to-png": typeof WrapWebpToPngRoute;
+  "/word-counter": typeof WrapWordCounterRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/blogs': typeof BlogsRoute
-  '/data-tools': typeof DataToolsRoute
-  '/image-tools': typeof ImageToolsRoute
-  '/pdf-tools': typeof PdfToolsRoute
-  '/privacy': typeof PrivacyRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
-  '/terms': typeof TermsRoute
-  '/tools': typeof ToolsRoute
-  '/tools-for-developers': typeof ToolsForDevelopersRoute
-  '/utility-tools': typeof UtilityToolsRoute
-  '/base64-to-file': typeof WrapBase64ToFileRoute
-  '/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
-  '/best-image-compressor-tool-2026': typeof WrapBestImageCompressorTool2026Route
-  '/best-image-converter-tool-2026': typeof WrapBestImageConverterTool2026Route
-  '/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
-  '/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
-  '/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
-  '/compress-image-for-web': typeof WrapCompressImageForWebRoute
-  '/compress-image-for-web-without-quality-loss': typeof WrapCompressImageForWebWithoutQualityLossRoute
-  '/compress-image-online': typeof WrapCompressImageOnlineRoute
-  '/compress-image-to-100kb': typeof WrapCompressImageTo100kbRoute
-  '/compress-image-to-200kb': typeof WrapCompressImageTo200kbRoute
-  '/compress-image-to-50kb': typeof WrapCompressImageTo50kbRoute
-  '/compress-jpeg-online': typeof WrapCompressJpegOnlineRoute
-  '/compress-png-online': typeof WrapCompressPngOnlineRoute
-  '/csv-to-json': typeof WrapCsvToJsonRoute
-  '/csv-xlsx-converter': typeof WrapCsvXlsxConverterRoute
-  '/diff-checker': typeof WrapDiffCheckerRoute
-  '/format-json-online': typeof WrapFormatJsonOnlineRoute
-  '/heic-to-jpg': typeof WrapHeicToJpgRoute
-  '/html-minifier': typeof WrapHtmlMinifierRoute
-  '/image-background-remover': typeof WrapImageBackgroundRemoverRoute
-  '/image-compressor': typeof WrapImageCompressorRoute
-  '/image-cropper': typeof WrapImageCropperRoute
-  '/image-format-converter': typeof WrapImageFormatConverterRoute
-  '/image-resizer': typeof WrapImageResizerRoute
-  '/image-to-base64': typeof WrapImageToBase64Route
-  '/image-to-pdf': typeof WrapImageToPdfRoute
-  '/jpg-to-png': typeof WrapJpgToPngRoute
-  '/jpg-to-webp': typeof WrapJpgToWebpRoute
-  '/json-beautifier': typeof WrapJsonBeautifierRoute
-  '/json-formatter': typeof WrapJsonFormatterRoute
-  '/json-minifier': typeof WrapJsonMinifierRoute
-  '/json-pretty-print': typeof WrapJsonPrettyPrintRoute
-  '/json-to-csv': typeof WrapJsonToCsvRoute
-  '/json-validator': typeof WrapJsonValidatorRoute
-  '/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
-  '/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
-  '/pdf-compressor': typeof WrapPdfCompressorRoute
-  '/pdf-extract-images': typeof WrapPdfExtractImagesRoute
-  '/pdf-to-jpg': typeof WrapPdfToJpgRoute
-  '/png-to-jpg': typeof WrapPngToJpgRoute
-  '/png-to-webp': typeof WrapPngToWebpRoute
-  '/privacy-first-tools': typeof WrapPrivacyFirstToolsRoute
-  '/reduce-image-file-size': typeof WrapReduceImageFileSizeRoute
-  '/reduce-jpg-size': typeof WrapReduceJpgSizeRoute
-  '/reduce-png-size': typeof WrapReducePngSizeRoute
-  '/reduce-your-image-size-for-free': typeof WrapReduceYourImageSizeForFreeRoute
-  '/validate-json-online': typeof WrapValidateJsonOnlineRoute
-  '/webp-to-jpg': typeof WrapWebpToJpgRoute
-  '/webp-to-png': typeof WrapWebpToPngRoute
-  '/word-counter': typeof WrapWordCounterRoute
+  "/": typeof IndexRoute;
+  "/blogs": typeof BlogsRoute;
+  "/data-tools": typeof DataToolsRoute;
+  "/image-tools": typeof ImageToolsRoute;
+  "/pdf-tools": typeof PdfToolsRoute;
+  "/privacy": typeof PrivacyRoute;
+  "/privacy-policy": typeof PrivacyPolicyRoute;
+  "/terms": typeof TermsRoute;
+  "/tools": typeof ToolsRoute;
+  "/tools-for-developers": typeof ToolsForDevelopersRoute;
+  "/utility-tools": typeof UtilityToolsRoute;
+  "/base64-to-file": typeof WrapBase64ToFileRoute;
+  "/best-free-image-format-converter-2026": typeof WrapBestFreeImageFormatConverter2026Route;
+  "/best-image-compressor-tool-2026": typeof WrapBestImageCompressorTool2026Route;
+  "/best-image-converter-tool-2026": typeof WrapBestImageConverterTool2026Route;
+  "/browser-based-utilities": typeof WrapBrowserBasedUtilitiesRoute;
+  "/bulk-file-renamer": typeof WrapBulkFileRenamerRoute;
+  "/color-palette-generator": typeof WrapColorPaletteGeneratorRoute;
+  "/compress-image-for-web": typeof WrapCompressImageForWebRoute;
+  "/compress-image-for-web-without-quality-loss": typeof WrapCompressImageForWebWithoutQualityLossRoute;
+  "/compress-image-online": typeof WrapCompressImageOnlineRoute;
+  "/compress-image-to-100kb": typeof WrapCompressImageTo100kbRoute;
+  "/compress-image-to-200kb": typeof WrapCompressImageTo200kbRoute;
+  "/compress-image-to-50kb": typeof WrapCompressImageTo50kbRoute;
+  "/compress-jpeg-online": typeof WrapCompressJpegOnlineRoute;
+  "/compress-png-online": typeof WrapCompressPngOnlineRoute;
+  "/csv-to-json": typeof WrapCsvToJsonRoute;
+  "/csv-xlsx-converter": typeof WrapCsvXlsxConverterRoute;
+  "/diff-checker": typeof WrapDiffCheckerRoute;
+  "/format-json-online": typeof WrapFormatJsonOnlineRoute;
+  "/heic-to-jpg": typeof WrapHeicToJpgRoute;
+  "/html-minifier": typeof WrapHtmlMinifierRoute;
+  "/image-background-remover": typeof WrapImageBackgroundRemoverRoute;
+  "/image-compressor": typeof WrapImageCompressorRoute;
+  "/image-cropper": typeof WrapImageCropperRoute;
+  "/image-format-converter": typeof WrapImageFormatConverterRoute;
+  "/image-resizer": typeof WrapImageResizerRoute;
+  "/image-to-base64": typeof WrapImageToBase64Route;
+  "/image-to-pdf": typeof WrapImageToPdfRoute;
+  "/jpg-to-png": typeof WrapJpgToPngRoute;
+  "/jpg-to-webp": typeof WrapJpgToWebpRoute;
+  "/json-beautifier": typeof WrapJsonBeautifierRoute;
+  "/json-formatter": typeof WrapJsonFormatterRoute;
+  "/json-minifier": typeof WrapJsonMinifierRoute;
+  "/json-pretty-print": typeof WrapJsonPrettyPrintRoute;
+  "/json-to-csv": typeof WrapJsonToCsvRoute;
+  "/json-validator": typeof WrapJsonValidatorRoute;
+  "/lorem-ipsum-generator": typeof WrapLoremIpsumGeneratorRoute;
+  "/optimize-images-for-website": typeof WrapOptimizeImagesForWebsiteRoute;
+  "/pdf-compressor": typeof WrapPdfCompressorRoute;
+  "/pdf-extract-images": typeof WrapPdfExtractImagesRoute;
+  "/pdf-to-jpg": typeof WrapPdfToJpgRoute;
+  "/png-to-jpg": typeof WrapPngToJpgRoute;
+  "/png-to-webp": typeof WrapPngToWebpRoute;
+  "/privacy-first-tools": typeof WrapPrivacyFirstToolsRoute;
+  "/reduce-image-file-size": typeof WrapReduceImageFileSizeRoute;
+  "/reduce-jpg-size": typeof WrapReduceJpgSizeRoute;
+  "/reduce-png-size": typeof WrapReducePngSizeRoute;
+  "/reduce-your-image-size-for-free": typeof WrapReduceYourImageSizeForFreeRoute;
+  "/validate-json-online": typeof WrapValidateJsonOnlineRoute;
+  "/webp-to-jpg": typeof WrapWebpToJpgRoute;
+  "/webp-to-png": typeof WrapWebpToPngRoute;
+  "/word-counter": typeof WrapWordCounterRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/_wrap': typeof WrapRouteWithChildren
-  '/blogs': typeof BlogsRoute
-  '/data-tools': typeof DataToolsRoute
-  '/image-tools': typeof ImageToolsRoute
-  '/pdf-tools': typeof PdfToolsRoute
-  '/privacy': typeof PrivacyRoute
-  '/privacy-policy': typeof PrivacyPolicyRoute
-  '/terms': typeof TermsRoute
-  '/tools': typeof ToolsRoute
-  '/tools-for-developers': typeof ToolsForDevelopersRoute
-  '/utility-tools': typeof UtilityToolsRoute
-  '/_wrap/base64-to-file': typeof WrapBase64ToFileRoute
-  '/_wrap/best-free-image-format-converter-2026': typeof WrapBestFreeImageFormatConverter2026Route
-  '/_wrap/best-image-compressor-tool-2026': typeof WrapBestImageCompressorTool2026Route
-  '/_wrap/best-image-converter-tool-2026': typeof WrapBestImageConverterTool2026Route
-  '/_wrap/browser-based-utilities': typeof WrapBrowserBasedUtilitiesRoute
-  '/_wrap/bulk-file-renamer': typeof WrapBulkFileRenamerRoute
-  '/_wrap/color-palette-generator': typeof WrapColorPaletteGeneratorRoute
-  '/_wrap/compress-image-for-web': typeof WrapCompressImageForWebRoute
-  '/_wrap/compress-image-for-web-without-quality-loss': typeof WrapCompressImageForWebWithoutQualityLossRoute
-  '/_wrap/compress-image-online': typeof WrapCompressImageOnlineRoute
-  '/_wrap/compress-image-to-100kb': typeof WrapCompressImageTo100kbRoute
-  '/_wrap/compress-image-to-200kb': typeof WrapCompressImageTo200kbRoute
-  '/_wrap/compress-image-to-50kb': typeof WrapCompressImageTo50kbRoute
-  '/_wrap/compress-jpeg-online': typeof WrapCompressJpegOnlineRoute
-  '/_wrap/compress-png-online': typeof WrapCompressPngOnlineRoute
-  '/_wrap/csv-to-json': typeof WrapCsvToJsonRoute
-  '/_wrap/csv-xlsx-converter': typeof WrapCsvXlsxConverterRoute
-  '/_wrap/diff-checker': typeof WrapDiffCheckerRoute
-  '/_wrap/format-json-online': typeof WrapFormatJsonOnlineRoute
-  '/_wrap/heic-to-jpg': typeof WrapHeicToJpgRoute
-  '/_wrap/html-minifier': typeof WrapHtmlMinifierRoute
-  '/_wrap/image-background-remover': typeof WrapImageBackgroundRemoverRoute
-  '/_wrap/image-compressor': typeof WrapImageCompressorRoute
-  '/_wrap/image-cropper': typeof WrapImageCropperRoute
-  '/_wrap/image-format-converter': typeof WrapImageFormatConverterRoute
-  '/_wrap/image-resizer': typeof WrapImageResizerRoute
-  '/_wrap/image-to-base64': typeof WrapImageToBase64Route
-  '/_wrap/image-to-pdf': typeof WrapImageToPdfRoute
-  '/_wrap/jpg-to-png': typeof WrapJpgToPngRoute
-  '/_wrap/jpg-to-webp': typeof WrapJpgToWebpRoute
-  '/_wrap/json-beautifier': typeof WrapJsonBeautifierRoute
-  '/_wrap/json-formatter': typeof WrapJsonFormatterRoute
-  '/_wrap/json-minifier': typeof WrapJsonMinifierRoute
-  '/_wrap/json-pretty-print': typeof WrapJsonPrettyPrintRoute
-  '/_wrap/json-to-csv': typeof WrapJsonToCsvRoute
-  '/_wrap/json-validator': typeof WrapJsonValidatorRoute
-  '/_wrap/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
-  '/_wrap/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
-  '/_wrap/pdf-compressor': typeof WrapPdfCompressorRoute
-  '/_wrap/pdf-extract-images': typeof WrapPdfExtractImagesRoute
-  '/_wrap/pdf-to-jpg': typeof WrapPdfToJpgRoute
-  '/_wrap/png-to-jpg': typeof WrapPngToJpgRoute
-  '/_wrap/png-to-webp': typeof WrapPngToWebpRoute
-  '/_wrap/privacy-first-tools': typeof WrapPrivacyFirstToolsRoute
-  '/_wrap/reduce-image-file-size': typeof WrapReduceImageFileSizeRoute
-  '/_wrap/reduce-jpg-size': typeof WrapReduceJpgSizeRoute
-  '/_wrap/reduce-png-size': typeof WrapReducePngSizeRoute
-  '/_wrap/reduce-your-image-size-for-free': typeof WrapReduceYourImageSizeForFreeRoute
-  '/_wrap/validate-json-online': typeof WrapValidateJsonOnlineRoute
-  '/_wrap/webp-to-jpg': typeof WrapWebpToJpgRoute
-  '/_wrap/webp-to-png': typeof WrapWebpToPngRoute
-  '/_wrap/word-counter': typeof WrapWordCounterRoute
+  __root__: typeof rootRouteImport;
+  "/": typeof IndexRoute;
+  "/_wrap": typeof WrapRouteWithChildren;
+  "/blogs": typeof BlogsRoute;
+  "/data-tools": typeof DataToolsRoute;
+  "/image-tools": typeof ImageToolsRoute;
+  "/pdf-tools": typeof PdfToolsRoute;
+  "/privacy": typeof PrivacyRoute;
+  "/privacy-policy": typeof PrivacyPolicyRoute;
+  "/terms": typeof TermsRoute;
+  "/tools": typeof ToolsRoute;
+  "/tools-for-developers": typeof ToolsForDevelopersRoute;
+  "/utility-tools": typeof UtilityToolsRoute;
+  "/_wrap/base64-to-file": typeof WrapBase64ToFileRoute;
+  "/_wrap/best-free-image-format-converter-2026": typeof WrapBestFreeImageFormatConverter2026Route;
+  "/_wrap/best-image-compressor-tool-2026": typeof WrapBestImageCompressorTool2026Route;
+  "/_wrap/best-image-converter-tool-2026": typeof WrapBestImageConverterTool2026Route;
+  "/_wrap/browser-based-utilities": typeof WrapBrowserBasedUtilitiesRoute;
+  "/_wrap/bulk-file-renamer": typeof WrapBulkFileRenamerRoute;
+  "/_wrap/color-palette-generator": typeof WrapColorPaletteGeneratorRoute;
+  "/_wrap/compress-image-for-web": typeof WrapCompressImageForWebRoute;
+  "/_wrap/compress-image-for-web-without-quality-loss": typeof WrapCompressImageForWebWithoutQualityLossRoute;
+  "/_wrap/compress-image-online": typeof WrapCompressImageOnlineRoute;
+  "/_wrap/compress-image-to-100kb": typeof WrapCompressImageTo100kbRoute;
+  "/_wrap/compress-image-to-200kb": typeof WrapCompressImageTo200kbRoute;
+  "/_wrap/compress-image-to-50kb": typeof WrapCompressImageTo50kbRoute;
+  "/_wrap/compress-jpeg-online": typeof WrapCompressJpegOnlineRoute;
+  "/_wrap/compress-png-online": typeof WrapCompressPngOnlineRoute;
+  "/_wrap/csv-to-json": typeof WrapCsvToJsonRoute;
+  "/_wrap/csv-xlsx-converter": typeof WrapCsvXlsxConverterRoute;
+  "/_wrap/diff-checker": typeof WrapDiffCheckerRoute;
+  "/_wrap/format-json-online": typeof WrapFormatJsonOnlineRoute;
+  "/_wrap/heic-to-jpg": typeof WrapHeicToJpgRoute;
+  "/_wrap/html-minifier": typeof WrapHtmlMinifierRoute;
+  "/_wrap/image-background-remover": typeof WrapImageBackgroundRemoverRoute;
+  "/_wrap/image-compressor": typeof WrapImageCompressorRoute;
+  "/_wrap/image-cropper": typeof WrapImageCropperRoute;
+  "/_wrap/image-format-converter": typeof WrapImageFormatConverterRoute;
+  "/_wrap/image-resizer": typeof WrapImageResizerRoute;
+  "/_wrap/image-to-base64": typeof WrapImageToBase64Route;
+  "/_wrap/image-to-pdf": typeof WrapImageToPdfRoute;
+  "/_wrap/jpg-to-png": typeof WrapJpgToPngRoute;
+  "/_wrap/jpg-to-webp": typeof WrapJpgToWebpRoute;
+  "/_wrap/json-beautifier": typeof WrapJsonBeautifierRoute;
+  "/_wrap/json-formatter": typeof WrapJsonFormatterRoute;
+  "/_wrap/json-minifier": typeof WrapJsonMinifierRoute;
+  "/_wrap/json-pretty-print": typeof WrapJsonPrettyPrintRoute;
+  "/_wrap/json-to-csv": typeof WrapJsonToCsvRoute;
+  "/_wrap/json-validator": typeof WrapJsonValidatorRoute;
+  "/_wrap/lorem-ipsum-generator": typeof WrapLoremIpsumGeneratorRoute;
+  "/_wrap/optimize-images-for-website": typeof WrapOptimizeImagesForWebsiteRoute;
+  "/_wrap/pdf-compressor": typeof WrapPdfCompressorRoute;
+  "/_wrap/pdf-extract-images": typeof WrapPdfExtractImagesRoute;
+  "/_wrap/pdf-to-jpg": typeof WrapPdfToJpgRoute;
+  "/_wrap/png-to-jpg": typeof WrapPngToJpgRoute;
+  "/_wrap/png-to-webp": typeof WrapPngToWebpRoute;
+  "/_wrap/privacy-first-tools": typeof WrapPrivacyFirstToolsRoute;
+  "/_wrap/reduce-image-file-size": typeof WrapReduceImageFileSizeRoute;
+  "/_wrap/reduce-jpg-size": typeof WrapReduceJpgSizeRoute;
+  "/_wrap/reduce-png-size": typeof WrapReducePngSizeRoute;
+  "/_wrap/reduce-your-image-size-for-free": typeof WrapReduceYourImageSizeForFreeRoute;
+  "/_wrap/validate-json-online": typeof WrapValidateJsonOnlineRoute;
+  "/_wrap/webp-to-jpg": typeof WrapWebpToJpgRoute;
+  "/_wrap/webp-to-png": typeof WrapWebpToPngRoute;
+  "/_wrap/word-counter": typeof WrapWordCounterRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-    | '/blogs'
-    | '/data-tools'
-    | '/image-tools'
-    | '/pdf-tools'
-    | '/privacy'
-    | '/privacy-policy'
-    | '/terms'
-    | '/tools'
-    | '/tools-for-developers'
-    | '/utility-tools'
-    | '/base64-to-file'
-    | '/best-free-image-format-converter-2026'
-    | '/best-image-compressor-tool-2026'
-    | '/best-image-converter-tool-2026'
-    | '/browser-based-utilities'
-    | '/bulk-file-renamer'
-    | '/color-palette-generator'
-    | '/compress-image-for-web'
-    | '/compress-image-for-web-without-quality-loss'
-    | '/compress-image-online'
-    | '/compress-image-to-100kb'
-    | '/compress-image-to-200kb'
-    | '/compress-image-to-50kb'
-    | '/compress-jpeg-online'
-    | '/compress-png-online'
-    | '/csv-to-json'
-    | '/csv-xlsx-converter'
-    | '/diff-checker'
-    | '/format-json-online'
-    | '/heic-to-jpg'
-    | '/html-minifier'
-    | '/image-background-remover'
-    | '/image-compressor'
-    | '/image-cropper'
-    | '/image-format-converter'
-    | '/image-resizer'
-    | '/image-to-base64'
-    | '/image-to-pdf'
-    | '/jpg-to-png'
-    | '/jpg-to-webp'
-    | '/json-beautifier'
-    | '/json-formatter'
-    | '/json-minifier'
-    | '/json-pretty-print'
-    | '/json-to-csv'
-    | '/json-validator'
-    | '/lorem-ipsum-generator'
-    | '/optimize-images-for-website'
-    | '/pdf-compressor'
-    | '/pdf-extract-images'
-    | '/pdf-to-jpg'
-    | '/png-to-jpg'
-    | '/png-to-webp'
-    | '/privacy-first-tools'
-    | '/reduce-image-file-size'
-    | '/reduce-jpg-size'
-    | '/reduce-png-size'
-    | '/reduce-your-image-size-for-free'
-    | '/validate-json-online'
-    | '/webp-to-jpg'
-    | '/webp-to-png'
-    | '/word-counter'
-  fileRoutesByTo: FileRoutesByTo
+    | "/"
+    | "/blogs"
+    | "/data-tools"
+    | "/image-tools"
+    | "/pdf-tools"
+    | "/privacy"
+    | "/privacy-policy"
+    | "/terms"
+    | "/tools"
+    | "/tools-for-developers"
+    | "/utility-tools"
+    | "/base64-to-file"
+    | "/best-free-image-format-converter-2026"
+    | "/best-image-compressor-tool-2026"
+    | "/best-image-converter-tool-2026"
+    | "/browser-based-utilities"
+    | "/bulk-file-renamer"
+    | "/color-palette-generator"
+    | "/compress-image-for-web"
+    | "/compress-image-for-web-without-quality-loss"
+    | "/compress-image-online"
+    | "/compress-image-to-100kb"
+    | "/compress-image-to-200kb"
+    | "/compress-image-to-50kb"
+    | "/compress-jpeg-online"
+    | "/compress-png-online"
+    | "/csv-to-json"
+    | "/csv-xlsx-converter"
+    | "/diff-checker"
+    | "/format-json-online"
+    | "/heic-to-jpg"
+    | "/html-minifier"
+    | "/image-background-remover"
+    | "/image-compressor"
+    | "/image-cropper"
+    | "/image-format-converter"
+    | "/image-resizer"
+    | "/image-to-base64"
+    | "/image-to-pdf"
+    | "/jpg-to-png"
+    | "/jpg-to-webp"
+    | "/json-beautifier"
+    | "/json-formatter"
+    | "/json-minifier"
+    | "/json-pretty-print"
+    | "/json-to-csv"
+    | "/json-validator"
+    | "/lorem-ipsum-generator"
+    | "/optimize-images-for-website"
+    | "/pdf-compressor"
+    | "/pdf-extract-images"
+    | "/pdf-to-jpg"
+    | "/png-to-jpg"
+    | "/png-to-webp"
+    | "/privacy-first-tools"
+    | "/reduce-image-file-size"
+    | "/reduce-jpg-size"
+    | "/reduce-png-size"
+    | "/reduce-your-image-size-for-free"
+    | "/validate-json-online"
+    | "/webp-to-jpg"
+    | "/webp-to-png"
+    | "/word-counter";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/'
-    | '/blogs'
-    | '/data-tools'
-    | '/image-tools'
-    | '/pdf-tools'
-    | '/privacy'
-    | '/privacy-policy'
-    | '/terms'
-    | '/tools'
-    | '/tools-for-developers'
-    | '/utility-tools'
-    | '/base64-to-file'
-    | '/best-free-image-format-converter-2026'
-    | '/best-image-compressor-tool-2026'
-    | '/best-image-converter-tool-2026'
-    | '/browser-based-utilities'
-    | '/bulk-file-renamer'
-    | '/color-palette-generator'
-    | '/compress-image-for-web'
-    | '/compress-image-for-web-without-quality-loss'
-    | '/compress-image-online'
-    | '/compress-image-to-100kb'
-    | '/compress-image-to-200kb'
-    | '/compress-image-to-50kb'
-    | '/compress-jpeg-online'
-    | '/compress-png-online'
-    | '/csv-to-json'
-    | '/csv-xlsx-converter'
-    | '/diff-checker'
-    | '/format-json-online'
-    | '/heic-to-jpg'
-    | '/html-minifier'
-    | '/image-background-remover'
-    | '/image-compressor'
-    | '/image-cropper'
-    | '/image-format-converter'
-    | '/image-resizer'
-    | '/image-to-base64'
-    | '/image-to-pdf'
-    | '/jpg-to-png'
-    | '/jpg-to-webp'
-    | '/json-beautifier'
-    | '/json-formatter'
-    | '/json-minifier'
-    | '/json-pretty-print'
-    | '/json-to-csv'
-    | '/json-validator'
-    | '/lorem-ipsum-generator'
-    | '/optimize-images-for-website'
-    | '/pdf-compressor'
-    | '/pdf-extract-images'
-    | '/pdf-to-jpg'
-    | '/png-to-jpg'
-    | '/png-to-webp'
-    | '/privacy-first-tools'
-    | '/reduce-image-file-size'
-    | '/reduce-jpg-size'
-    | '/reduce-png-size'
-    | '/reduce-your-image-size-for-free'
-    | '/validate-json-online'
-    | '/webp-to-jpg'
-    | '/webp-to-png'
-    | '/word-counter'
+    | "/"
+    | "/blogs"
+    | "/data-tools"
+    | "/image-tools"
+    | "/pdf-tools"
+    | "/privacy"
+    | "/privacy-policy"
+    | "/terms"
+    | "/tools"
+    | "/tools-for-developers"
+    | "/utility-tools"
+    | "/base64-to-file"
+    | "/best-free-image-format-converter-2026"
+    | "/best-image-compressor-tool-2026"
+    | "/best-image-converter-tool-2026"
+    | "/browser-based-utilities"
+    | "/bulk-file-renamer"
+    | "/color-palette-generator"
+    | "/compress-image-for-web"
+    | "/compress-image-for-web-without-quality-loss"
+    | "/compress-image-online"
+    | "/compress-image-to-100kb"
+    | "/compress-image-to-200kb"
+    | "/compress-image-to-50kb"
+    | "/compress-jpeg-online"
+    | "/compress-png-online"
+    | "/csv-to-json"
+    | "/csv-xlsx-converter"
+    | "/diff-checker"
+    | "/format-json-online"
+    | "/heic-to-jpg"
+    | "/html-minifier"
+    | "/image-background-remover"
+    | "/image-compressor"
+    | "/image-cropper"
+    | "/image-format-converter"
+    | "/image-resizer"
+    | "/image-to-base64"
+    | "/image-to-pdf"
+    | "/jpg-to-png"
+    | "/jpg-to-webp"
+    | "/json-beautifier"
+    | "/json-formatter"
+    | "/json-minifier"
+    | "/json-pretty-print"
+    | "/json-to-csv"
+    | "/json-validator"
+    | "/lorem-ipsum-generator"
+    | "/optimize-images-for-website"
+    | "/pdf-compressor"
+    | "/pdf-extract-images"
+    | "/pdf-to-jpg"
+    | "/png-to-jpg"
+    | "/png-to-webp"
+    | "/privacy-first-tools"
+    | "/reduce-image-file-size"
+    | "/reduce-jpg-size"
+    | "/reduce-png-size"
+    | "/reduce-your-image-size-for-free"
+    | "/validate-json-online"
+    | "/webp-to-jpg"
+    | "/webp-to-png"
+    | "/word-counter";
   id:
-    | '__root__'
-    | '/'
-    | '/_wrap'
-    | '/blogs'
-    | '/data-tools'
-    | '/image-tools'
-    | '/pdf-tools'
-    | '/privacy'
-    | '/privacy-policy'
-    | '/terms'
-    | '/tools'
-    | '/tools-for-developers'
-    | '/utility-tools'
-    | '/_wrap/base64-to-file'
-    | '/_wrap/best-free-image-format-converter-2026'
-    | '/_wrap/best-image-compressor-tool-2026'
-    | '/_wrap/best-image-converter-tool-2026'
-    | '/_wrap/browser-based-utilities'
-    | '/_wrap/bulk-file-renamer'
-    | '/_wrap/color-palette-generator'
-    | '/_wrap/compress-image-for-web'
-    | '/_wrap/compress-image-for-web-without-quality-loss'
-    | '/_wrap/compress-image-online'
-    | '/_wrap/compress-image-to-100kb'
-    | '/_wrap/compress-image-to-200kb'
-    | '/_wrap/compress-image-to-50kb'
-    | '/_wrap/compress-jpeg-online'
-    | '/_wrap/compress-png-online'
-    | '/_wrap/csv-to-json'
-    | '/_wrap/csv-xlsx-converter'
-    | '/_wrap/diff-checker'
-    | '/_wrap/format-json-online'
-    | '/_wrap/heic-to-jpg'
-    | '/_wrap/html-minifier'
-    | '/_wrap/image-background-remover'
-    | '/_wrap/image-compressor'
-    | '/_wrap/image-cropper'
-    | '/_wrap/image-format-converter'
-    | '/_wrap/image-resizer'
-    | '/_wrap/image-to-base64'
-    | '/_wrap/image-to-pdf'
-    | '/_wrap/jpg-to-png'
-    | '/_wrap/jpg-to-webp'
-    | '/_wrap/json-beautifier'
-    | '/_wrap/json-formatter'
-    | '/_wrap/json-minifier'
-    | '/_wrap/json-pretty-print'
-    | '/_wrap/json-to-csv'
-    | '/_wrap/json-validator'
-    | '/_wrap/lorem-ipsum-generator'
-    | '/_wrap/optimize-images-for-website'
-    | '/_wrap/pdf-compressor'
-    | '/_wrap/pdf-extract-images'
-    | '/_wrap/pdf-to-jpg'
-    | '/_wrap/png-to-jpg'
-    | '/_wrap/png-to-webp'
-    | '/_wrap/privacy-first-tools'
-    | '/_wrap/reduce-image-file-size'
-    | '/_wrap/reduce-jpg-size'
-    | '/_wrap/reduce-png-size'
-    | '/_wrap/reduce-your-image-size-for-free'
-    | '/_wrap/validate-json-online'
-    | '/_wrap/webp-to-jpg'
-    | '/_wrap/webp-to-png'
-    | '/_wrap/word-counter'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/"
+    | "/_wrap"
+    | "/blogs"
+    | "/data-tools"
+    | "/image-tools"
+    | "/pdf-tools"
+    | "/privacy"
+    | "/privacy-policy"
+    | "/terms"
+    | "/tools"
+    | "/tools-for-developers"
+    | "/utility-tools"
+    | "/_wrap/base64-to-file"
+    | "/_wrap/best-free-image-format-converter-2026"
+    | "/_wrap/best-image-compressor-tool-2026"
+    | "/_wrap/best-image-converter-tool-2026"
+    | "/_wrap/browser-based-utilities"
+    | "/_wrap/bulk-file-renamer"
+    | "/_wrap/color-palette-generator"
+    | "/_wrap/compress-image-for-web"
+    | "/_wrap/compress-image-for-web-without-quality-loss"
+    | "/_wrap/compress-image-online"
+    | "/_wrap/compress-image-to-100kb"
+    | "/_wrap/compress-image-to-200kb"
+    | "/_wrap/compress-image-to-50kb"
+    | "/_wrap/compress-jpeg-online"
+    | "/_wrap/compress-png-online"
+    | "/_wrap/csv-to-json"
+    | "/_wrap/csv-xlsx-converter"
+    | "/_wrap/diff-checker"
+    | "/_wrap/format-json-online"
+    | "/_wrap/heic-to-jpg"
+    | "/_wrap/html-minifier"
+    | "/_wrap/image-background-remover"
+    | "/_wrap/image-compressor"
+    | "/_wrap/image-cropper"
+    | "/_wrap/image-format-converter"
+    | "/_wrap/image-resizer"
+    | "/_wrap/image-to-base64"
+    | "/_wrap/image-to-pdf"
+    | "/_wrap/jpg-to-png"
+    | "/_wrap/jpg-to-webp"
+    | "/_wrap/json-beautifier"
+    | "/_wrap/json-formatter"
+    | "/_wrap/json-minifier"
+    | "/_wrap/json-pretty-print"
+    | "/_wrap/json-to-csv"
+    | "/_wrap/json-validator"
+    | "/_wrap/lorem-ipsum-generator"
+    | "/_wrap/optimize-images-for-website"
+    | "/_wrap/pdf-compressor"
+    | "/_wrap/pdf-extract-images"
+    | "/_wrap/pdf-to-jpg"
+    | "/_wrap/png-to-jpg"
+    | "/_wrap/png-to-webp"
+    | "/_wrap/privacy-first-tools"
+    | "/_wrap/reduce-image-file-size"
+    | "/_wrap/reduce-jpg-size"
+    | "/_wrap/reduce-png-size"
+    | "/_wrap/reduce-your-image-size-for-free"
+    | "/_wrap/validate-json-online"
+    | "/_wrap/webp-to-jpg"
+    | "/_wrap/webp-to-png"
+    | "/_wrap/word-counter";
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  WrapRoute: typeof WrapRouteWithChildren
-  BlogsRoute: typeof BlogsRoute
-  DataToolsRoute: typeof DataToolsRoute
-  ImageToolsRoute: typeof ImageToolsRoute
-  PdfToolsRoute: typeof PdfToolsRoute
-  PrivacyRoute: typeof PrivacyRoute
-  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
-  TermsRoute: typeof TermsRoute
-  ToolsRoute: typeof ToolsRoute
-  ToolsForDevelopersRoute: typeof ToolsForDevelopersRoute
-  UtilityToolsRoute: typeof UtilityToolsRoute
+  IndexRoute: typeof IndexRoute;
+  WrapRoute: typeof WrapRouteWithChildren;
+  BlogsRoute: typeof BlogsRoute;
+  DataToolsRoute: typeof DataToolsRoute;
+  ImageToolsRoute: typeof ImageToolsRoute;
+  PdfToolsRoute: typeof PdfToolsRoute;
+  PrivacyRoute: typeof PrivacyRoute;
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute;
+  TermsRoute: typeof TermsRoute;
+  ToolsRoute: typeof ToolsRoute;
+  ToolsForDevelopersRoute: typeof ToolsForDevelopersRoute;
+  UtilityToolsRoute: typeof UtilityToolsRoute;
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/utility-tools': {
-      id: '/utility-tools'
-      path: '/utility-tools'
-      fullPath: '/utility-tools'
-      preLoaderRoute: typeof UtilityToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tools-for-developers': {
-      id: '/tools-for-developers'
-      path: '/tools-for-developers'
-      fullPath: '/tools-for-developers'
-      preLoaderRoute: typeof ToolsForDevelopersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tools': {
-      id: '/tools'
-      path: '/tools'
-      fullPath: '/tools'
-      preLoaderRoute: typeof ToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pdf-tools': {
-      id: '/pdf-tools'
-      path: '/pdf-tools'
-      fullPath: '/pdf-tools'
-      preLoaderRoute: typeof PdfToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/image-tools': {
-      id: '/image-tools'
-      path: '/image-tools'
-      fullPath: '/image-tools'
-      preLoaderRoute: typeof ImageToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/data-tools': {
-      id: '/data-tools'
-      path: '/data-tools'
-      fullPath: '/data-tools'
-      preLoaderRoute: typeof DataToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blogs': {
-      id: '/blogs'
-      path: '/blogs'
-      fullPath: '/blogs'
-      preLoaderRoute: typeof BlogsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_wrap': {
-      id: '/_wrap'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof WrapRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_wrap/word-counter': {
-      id: '/_wrap/word-counter'
-      path: '/word-counter'
-      fullPath: '/word-counter'
-      preLoaderRoute: typeof WrapWordCounterRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/webp-to-png': {
-      id: '/_wrap/webp-to-png'
-      path: '/webp-to-png'
-      fullPath: '/webp-to-png'
-      preLoaderRoute: typeof WrapWebpToPngRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/webp-to-jpg': {
-      id: '/_wrap/webp-to-jpg'
-      path: '/webp-to-jpg'
-      fullPath: '/webp-to-jpg'
-      preLoaderRoute: typeof WrapWebpToJpgRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/validate-json-online': {
-      id: '/_wrap/validate-json-online'
-      path: '/validate-json-online'
-      fullPath: '/validate-json-online'
-      preLoaderRoute: typeof WrapValidateJsonOnlineRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/reduce-your-image-size-for-free': {
-      id: '/_wrap/reduce-your-image-size-for-free'
-      path: '/reduce-your-image-size-for-free'
-      fullPath: '/reduce-your-image-size-for-free'
-      preLoaderRoute: typeof WrapReduceYourImageSizeForFreeRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/reduce-png-size': {
-      id: '/_wrap/reduce-png-size'
-      path: '/reduce-png-size'
-      fullPath: '/reduce-png-size'
-      preLoaderRoute: typeof WrapReducePngSizeRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/reduce-jpg-size': {
-      id: '/_wrap/reduce-jpg-size'
-      path: '/reduce-jpg-size'
-      fullPath: '/reduce-jpg-size'
-      preLoaderRoute: typeof WrapReduceJpgSizeRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/reduce-image-file-size': {
-      id: '/_wrap/reduce-image-file-size'
-      path: '/reduce-image-file-size'
-      fullPath: '/reduce-image-file-size'
-      preLoaderRoute: typeof WrapReduceImageFileSizeRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/privacy-first-tools': {
-      id: '/_wrap/privacy-first-tools'
-      path: '/privacy-first-tools'
-      fullPath: '/privacy-first-tools'
-      preLoaderRoute: typeof WrapPrivacyFirstToolsRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/png-to-webp': {
-      id: '/_wrap/png-to-webp'
-      path: '/png-to-webp'
-      fullPath: '/png-to-webp'
-      preLoaderRoute: typeof WrapPngToWebpRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/png-to-jpg': {
-      id: '/_wrap/png-to-jpg'
-      path: '/png-to-jpg'
-      fullPath: '/png-to-jpg'
-      preLoaderRoute: typeof WrapPngToJpgRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/pdf-to-jpg': {
-      id: '/_wrap/pdf-to-jpg'
-      path: '/pdf-to-jpg'
-      fullPath: '/pdf-to-jpg'
-      preLoaderRoute: typeof WrapPdfToJpgRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/pdf-extract-images': {
-      id: '/_wrap/pdf-extract-images'
-      path: '/pdf-extract-images'
-      fullPath: '/pdf-extract-images'
-      preLoaderRoute: typeof WrapPdfExtractImagesRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/pdf-compressor': {
-      id: '/_wrap/pdf-compressor'
-      path: '/pdf-compressor'
-      fullPath: '/pdf-compressor'
-      preLoaderRoute: typeof WrapPdfCompressorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/optimize-images-for-website': {
-      id: '/_wrap/optimize-images-for-website'
-      path: '/optimize-images-for-website'
-      fullPath: '/optimize-images-for-website'
-      preLoaderRoute: typeof WrapOptimizeImagesForWebsiteRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/lorem-ipsum-generator': {
-      id: '/_wrap/lorem-ipsum-generator'
-      path: '/lorem-ipsum-generator'
-      fullPath: '/lorem-ipsum-generator'
-      preLoaderRoute: typeof WrapLoremIpsumGeneratorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-validator': {
-      id: '/_wrap/json-validator'
-      path: '/json-validator'
-      fullPath: '/json-validator'
-      preLoaderRoute: typeof WrapJsonValidatorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-to-csv': {
-      id: '/_wrap/json-to-csv'
-      path: '/json-to-csv'
-      fullPath: '/json-to-csv'
-      preLoaderRoute: typeof WrapJsonToCsvRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-pretty-print': {
-      id: '/_wrap/json-pretty-print'
-      path: '/json-pretty-print'
-      fullPath: '/json-pretty-print'
-      preLoaderRoute: typeof WrapJsonPrettyPrintRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-minifier': {
-      id: '/_wrap/json-minifier'
-      path: '/json-minifier'
-      fullPath: '/json-minifier'
-      preLoaderRoute: typeof WrapJsonMinifierRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-formatter': {
-      id: '/_wrap/json-formatter'
-      path: '/json-formatter'
-      fullPath: '/json-formatter'
-      preLoaderRoute: typeof WrapJsonFormatterRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-beautifier': {
-      id: '/_wrap/json-beautifier'
-      path: '/json-beautifier'
-      fullPath: '/json-beautifier'
-      preLoaderRoute: typeof WrapJsonBeautifierRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/jpg-to-webp': {
-      id: '/_wrap/jpg-to-webp'
-      path: '/jpg-to-webp'
-      fullPath: '/jpg-to-webp'
-      preLoaderRoute: typeof WrapJpgToWebpRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/jpg-to-png': {
-      id: '/_wrap/jpg-to-png'
-      path: '/jpg-to-png'
-      fullPath: '/jpg-to-png'
-      preLoaderRoute: typeof WrapJpgToPngRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-to-pdf': {
-      id: '/_wrap/image-to-pdf'
-      path: '/image-to-pdf'
-      fullPath: '/image-to-pdf'
-      preLoaderRoute: typeof WrapImageToPdfRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-to-base64': {
-      id: '/_wrap/image-to-base64'
-      path: '/image-to-base64'
-      fullPath: '/image-to-base64'
-      preLoaderRoute: typeof WrapImageToBase64RouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-resizer': {
-      id: '/_wrap/image-resizer'
-      path: '/image-resizer'
-      fullPath: '/image-resizer'
-      preLoaderRoute: typeof WrapImageResizerRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-format-converter': {
-      id: '/_wrap/image-format-converter'
-      path: '/image-format-converter'
-      fullPath: '/image-format-converter'
-      preLoaderRoute: typeof WrapImageFormatConverterRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-cropper': {
-      id: '/_wrap/image-cropper'
-      path: '/image-cropper'
-      fullPath: '/image-cropper'
-      preLoaderRoute: typeof WrapImageCropperRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-compressor': {
-      id: '/_wrap/image-compressor'
-      path: '/image-compressor'
-      fullPath: '/image-compressor'
-      preLoaderRoute: typeof WrapImageCompressorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-background-remover': {
-      id: '/_wrap/image-background-remover'
-      path: '/image-background-remover'
-      fullPath: '/image-background-remover'
-      preLoaderRoute: typeof WrapImageBackgroundRemoverRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/html-minifier': {
-      id: '/_wrap/html-minifier'
-      path: '/html-minifier'
-      fullPath: '/html-minifier'
-      preLoaderRoute: typeof WrapHtmlMinifierRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/heic-to-jpg': {
-      id: '/_wrap/heic-to-jpg'
-      path: '/heic-to-jpg'
-      fullPath: '/heic-to-jpg'
-      preLoaderRoute: typeof WrapHeicToJpgRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/format-json-online': {
-      id: '/_wrap/format-json-online'
-      path: '/format-json-online'
-      fullPath: '/format-json-online'
-      preLoaderRoute: typeof WrapFormatJsonOnlineRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/diff-checker': {
-      id: '/_wrap/diff-checker'
-      path: '/diff-checker'
-      fullPath: '/diff-checker'
-      preLoaderRoute: typeof WrapDiffCheckerRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/csv-xlsx-converter': {
-      id: '/_wrap/csv-xlsx-converter'
-      path: '/csv-xlsx-converter'
-      fullPath: '/csv-xlsx-converter'
-      preLoaderRoute: typeof WrapCsvXlsxConverterRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/csv-to-json': {
-      id: '/_wrap/csv-to-json'
-      path: '/csv-to-json'
-      fullPath: '/csv-to-json'
-      preLoaderRoute: typeof WrapCsvToJsonRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-png-online': {
-      id: '/_wrap/compress-png-online'
-      path: '/compress-png-online'
-      fullPath: '/compress-png-online'
-      preLoaderRoute: typeof WrapCompressPngOnlineRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-jpeg-online': {
-      id: '/_wrap/compress-jpeg-online'
-      path: '/compress-jpeg-online'
-      fullPath: '/compress-jpeg-online'
-      preLoaderRoute: typeof WrapCompressJpegOnlineRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-to-50kb': {
-      id: '/_wrap/compress-image-to-50kb'
-      path: '/compress-image-to-50kb'
-      fullPath: '/compress-image-to-50kb'
-      preLoaderRoute: typeof WrapCompressImageTo50kbRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-to-200kb': {
-      id: '/_wrap/compress-image-to-200kb'
-      path: '/compress-image-to-200kb'
-      fullPath: '/compress-image-to-200kb'
-      preLoaderRoute: typeof WrapCompressImageTo200kbRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-to-100kb': {
-      id: '/_wrap/compress-image-to-100kb'
-      path: '/compress-image-to-100kb'
-      fullPath: '/compress-image-to-100kb'
-      preLoaderRoute: typeof WrapCompressImageTo100kbRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-online': {
-      id: '/_wrap/compress-image-online'
-      path: '/compress-image-online'
-      fullPath: '/compress-image-online'
-      preLoaderRoute: typeof WrapCompressImageOnlineRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-for-web-without-quality-loss': {
-      id: '/_wrap/compress-image-for-web-without-quality-loss'
-      path: '/compress-image-for-web-without-quality-loss'
-      fullPath: '/compress-image-for-web-without-quality-loss'
-      preLoaderRoute: typeof WrapCompressImageForWebWithoutQualityLossRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-for-web': {
-      id: '/_wrap/compress-image-for-web'
-      path: '/compress-image-for-web'
-      fullPath: '/compress-image-for-web'
-      preLoaderRoute: typeof WrapCompressImageForWebRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/color-palette-generator': {
-      id: '/_wrap/color-palette-generator'
-      path: '/color-palette-generator'
-      fullPath: '/color-palette-generator'
-      preLoaderRoute: typeof WrapColorPaletteGeneratorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/bulk-file-renamer': {
-      id: '/_wrap/bulk-file-renamer'
-      path: '/bulk-file-renamer'
-      fullPath: '/bulk-file-renamer'
-      preLoaderRoute: typeof WrapBulkFileRenamerRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/browser-based-utilities': {
-      id: '/_wrap/browser-based-utilities'
-      path: '/browser-based-utilities'
-      fullPath: '/browser-based-utilities'
-      preLoaderRoute: typeof WrapBrowserBasedUtilitiesRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/best-image-converter-tool-2026': {
-      id: '/_wrap/best-image-converter-tool-2026'
-      path: '/best-image-converter-tool-2026'
-      fullPath: '/best-image-converter-tool-2026'
-      preLoaderRoute: typeof WrapBestImageConverterTool2026RouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/best-image-compressor-tool-2026': {
-      id: '/_wrap/best-image-compressor-tool-2026'
-      path: '/best-image-compressor-tool-2026'
-      fullPath: '/best-image-compressor-tool-2026'
-      preLoaderRoute: typeof WrapBestImageCompressorTool2026RouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/best-free-image-format-converter-2026': {
-      id: '/_wrap/best-free-image-format-converter-2026'
-      path: '/best-free-image-format-converter-2026'
-      fullPath: '/best-free-image-format-converter-2026'
-      preLoaderRoute: typeof WrapBestFreeImageFormatConverter2026RouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/base64-to-file': {
-      id: '/_wrap/base64-to-file'
-      path: '/base64-to-file'
-      fullPath: '/base64-to-file'
-      preLoaderRoute: typeof WrapBase64ToFileRouteImport
-      parentRoute: typeof WrapRoute
-    }
+    "/utility-tools": {
+      id: "/utility-tools";
+      path: "/utility-tools";
+      fullPath: "/utility-tools";
+      preLoaderRoute: typeof UtilityToolsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/tools-for-developers": {
+      id: "/tools-for-developers";
+      path: "/tools-for-developers";
+      fullPath: "/tools-for-developers";
+      preLoaderRoute: typeof ToolsForDevelopersRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/tools": {
+      id: "/tools";
+      path: "/tools";
+      fullPath: "/tools";
+      preLoaderRoute: typeof ToolsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/terms": {
+      id: "/terms";
+      path: "/terms";
+      fullPath: "/terms";
+      preLoaderRoute: typeof TermsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/privacy-policy": {
+      id: "/privacy-policy";
+      path: "/privacy-policy";
+      fullPath: "/privacy-policy";
+      preLoaderRoute: typeof PrivacyPolicyRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/privacy": {
+      id: "/privacy";
+      path: "/privacy";
+      fullPath: "/privacy";
+      preLoaderRoute: typeof PrivacyRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/pdf-tools": {
+      id: "/pdf-tools";
+      path: "/pdf-tools";
+      fullPath: "/pdf-tools";
+      preLoaderRoute: typeof PdfToolsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/image-tools": {
+      id: "/image-tools";
+      path: "/image-tools";
+      fullPath: "/image-tools";
+      preLoaderRoute: typeof ImageToolsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/data-tools": {
+      id: "/data-tools";
+      path: "/data-tools";
+      fullPath: "/data-tools";
+      preLoaderRoute: typeof DataToolsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/blogs": {
+      id: "/blogs";
+      path: "/blogs";
+      fullPath: "/blogs";
+      preLoaderRoute: typeof BlogsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_wrap": {
+      id: "/_wrap";
+      path: "";
+      fullPath: "/";
+      preLoaderRoute: typeof WrapRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_wrap/word-counter": {
+      id: "/_wrap/word-counter";
+      path: "/word-counter";
+      fullPath: "/word-counter";
+      preLoaderRoute: typeof WrapWordCounterRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/webp-to-png": {
+      id: "/_wrap/webp-to-png";
+      path: "/webp-to-png";
+      fullPath: "/webp-to-png";
+      preLoaderRoute: typeof WrapWebpToPngRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/webp-to-jpg": {
+      id: "/_wrap/webp-to-jpg";
+      path: "/webp-to-jpg";
+      fullPath: "/webp-to-jpg";
+      preLoaderRoute: typeof WrapWebpToJpgRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/validate-json-online": {
+      id: "/_wrap/validate-json-online";
+      path: "/validate-json-online";
+      fullPath: "/validate-json-online";
+      preLoaderRoute: typeof WrapValidateJsonOnlineRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/reduce-your-image-size-for-free": {
+      id: "/_wrap/reduce-your-image-size-for-free";
+      path: "/reduce-your-image-size-for-free";
+      fullPath: "/reduce-your-image-size-for-free";
+      preLoaderRoute: typeof WrapReduceYourImageSizeForFreeRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/reduce-png-size": {
+      id: "/_wrap/reduce-png-size";
+      path: "/reduce-png-size";
+      fullPath: "/reduce-png-size";
+      preLoaderRoute: typeof WrapReducePngSizeRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/reduce-jpg-size": {
+      id: "/_wrap/reduce-jpg-size";
+      path: "/reduce-jpg-size";
+      fullPath: "/reduce-jpg-size";
+      preLoaderRoute: typeof WrapReduceJpgSizeRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/reduce-image-file-size": {
+      id: "/_wrap/reduce-image-file-size";
+      path: "/reduce-image-file-size";
+      fullPath: "/reduce-image-file-size";
+      preLoaderRoute: typeof WrapReduceImageFileSizeRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/privacy-first-tools": {
+      id: "/_wrap/privacy-first-tools";
+      path: "/privacy-first-tools";
+      fullPath: "/privacy-first-tools";
+      preLoaderRoute: typeof WrapPrivacyFirstToolsRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/png-to-webp": {
+      id: "/_wrap/png-to-webp";
+      path: "/png-to-webp";
+      fullPath: "/png-to-webp";
+      preLoaderRoute: typeof WrapPngToWebpRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/png-to-jpg": {
+      id: "/_wrap/png-to-jpg";
+      path: "/png-to-jpg";
+      fullPath: "/png-to-jpg";
+      preLoaderRoute: typeof WrapPngToJpgRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/pdf-to-jpg": {
+      id: "/_wrap/pdf-to-jpg";
+      path: "/pdf-to-jpg";
+      fullPath: "/pdf-to-jpg";
+      preLoaderRoute: typeof WrapPdfToJpgRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/pdf-extract-images": {
+      id: "/_wrap/pdf-extract-images";
+      path: "/pdf-extract-images";
+      fullPath: "/pdf-extract-images";
+      preLoaderRoute: typeof WrapPdfExtractImagesRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/pdf-compressor": {
+      id: "/_wrap/pdf-compressor";
+      path: "/pdf-compressor";
+      fullPath: "/pdf-compressor";
+      preLoaderRoute: typeof WrapPdfCompressorRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/optimize-images-for-website": {
+      id: "/_wrap/optimize-images-for-website";
+      path: "/optimize-images-for-website";
+      fullPath: "/optimize-images-for-website";
+      preLoaderRoute: typeof WrapOptimizeImagesForWebsiteRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/lorem-ipsum-generator": {
+      id: "/_wrap/lorem-ipsum-generator";
+      path: "/lorem-ipsum-generator";
+      fullPath: "/lorem-ipsum-generator";
+      preLoaderRoute: typeof WrapLoremIpsumGeneratorRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/json-validator": {
+      id: "/_wrap/json-validator";
+      path: "/json-validator";
+      fullPath: "/json-validator";
+      preLoaderRoute: typeof WrapJsonValidatorRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/json-to-csv": {
+      id: "/_wrap/json-to-csv";
+      path: "/json-to-csv";
+      fullPath: "/json-to-csv";
+      preLoaderRoute: typeof WrapJsonToCsvRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/json-pretty-print": {
+      id: "/_wrap/json-pretty-print";
+      path: "/json-pretty-print";
+      fullPath: "/json-pretty-print";
+      preLoaderRoute: typeof WrapJsonPrettyPrintRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/json-minifier": {
+      id: "/_wrap/json-minifier";
+      path: "/json-minifier";
+      fullPath: "/json-minifier";
+      preLoaderRoute: typeof WrapJsonMinifierRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/json-formatter": {
+      id: "/_wrap/json-formatter";
+      path: "/json-formatter";
+      fullPath: "/json-formatter";
+      preLoaderRoute: typeof WrapJsonFormatterRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/json-beautifier": {
+      id: "/_wrap/json-beautifier";
+      path: "/json-beautifier";
+      fullPath: "/json-beautifier";
+      preLoaderRoute: typeof WrapJsonBeautifierRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/jpg-to-webp": {
+      id: "/_wrap/jpg-to-webp";
+      path: "/jpg-to-webp";
+      fullPath: "/jpg-to-webp";
+      preLoaderRoute: typeof WrapJpgToWebpRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/jpg-to-png": {
+      id: "/_wrap/jpg-to-png";
+      path: "/jpg-to-png";
+      fullPath: "/jpg-to-png";
+      preLoaderRoute: typeof WrapJpgToPngRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/image-to-pdf": {
+      id: "/_wrap/image-to-pdf";
+      path: "/image-to-pdf";
+      fullPath: "/image-to-pdf";
+      preLoaderRoute: typeof WrapImageToPdfRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/image-to-base64": {
+      id: "/_wrap/image-to-base64";
+      path: "/image-to-base64";
+      fullPath: "/image-to-base64";
+      preLoaderRoute: typeof WrapImageToBase64RouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/image-resizer": {
+      id: "/_wrap/image-resizer";
+      path: "/image-resizer";
+      fullPath: "/image-resizer";
+      preLoaderRoute: typeof WrapImageResizerRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/image-format-converter": {
+      id: "/_wrap/image-format-converter";
+      path: "/image-format-converter";
+      fullPath: "/image-format-converter";
+      preLoaderRoute: typeof WrapImageFormatConverterRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/image-cropper": {
+      id: "/_wrap/image-cropper";
+      path: "/image-cropper";
+      fullPath: "/image-cropper";
+      preLoaderRoute: typeof WrapImageCropperRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/image-compressor": {
+      id: "/_wrap/image-compressor";
+      path: "/image-compressor";
+      fullPath: "/image-compressor";
+      preLoaderRoute: typeof WrapImageCompressorRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/image-background-remover": {
+      id: "/_wrap/image-background-remover";
+      path: "/image-background-remover";
+      fullPath: "/image-background-remover";
+      preLoaderRoute: typeof WrapImageBackgroundRemoverRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/html-minifier": {
+      id: "/_wrap/html-minifier";
+      path: "/html-minifier";
+      fullPath: "/html-minifier";
+      preLoaderRoute: typeof WrapHtmlMinifierRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/heic-to-jpg": {
+      id: "/_wrap/heic-to-jpg";
+      path: "/heic-to-jpg";
+      fullPath: "/heic-to-jpg";
+      preLoaderRoute: typeof WrapHeicToJpgRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/format-json-online": {
+      id: "/_wrap/format-json-online";
+      path: "/format-json-online";
+      fullPath: "/format-json-online";
+      preLoaderRoute: typeof WrapFormatJsonOnlineRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/diff-checker": {
+      id: "/_wrap/diff-checker";
+      path: "/diff-checker";
+      fullPath: "/diff-checker";
+      preLoaderRoute: typeof WrapDiffCheckerRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/csv-xlsx-converter": {
+      id: "/_wrap/csv-xlsx-converter";
+      path: "/csv-xlsx-converter";
+      fullPath: "/csv-xlsx-converter";
+      preLoaderRoute: typeof WrapCsvXlsxConverterRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/csv-to-json": {
+      id: "/_wrap/csv-to-json";
+      path: "/csv-to-json";
+      fullPath: "/csv-to-json";
+      preLoaderRoute: typeof WrapCsvToJsonRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/compress-png-online": {
+      id: "/_wrap/compress-png-online";
+      path: "/compress-png-online";
+      fullPath: "/compress-png-online";
+      preLoaderRoute: typeof WrapCompressPngOnlineRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/compress-jpeg-online": {
+      id: "/_wrap/compress-jpeg-online";
+      path: "/compress-jpeg-online";
+      fullPath: "/compress-jpeg-online";
+      preLoaderRoute: typeof WrapCompressJpegOnlineRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/compress-image-to-50kb": {
+      id: "/_wrap/compress-image-to-50kb";
+      path: "/compress-image-to-50kb";
+      fullPath: "/compress-image-to-50kb";
+      preLoaderRoute: typeof WrapCompressImageTo50kbRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/compress-image-to-200kb": {
+      id: "/_wrap/compress-image-to-200kb";
+      path: "/compress-image-to-200kb";
+      fullPath: "/compress-image-to-200kb";
+      preLoaderRoute: typeof WrapCompressImageTo200kbRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/compress-image-to-100kb": {
+      id: "/_wrap/compress-image-to-100kb";
+      path: "/compress-image-to-100kb";
+      fullPath: "/compress-image-to-100kb";
+      preLoaderRoute: typeof WrapCompressImageTo100kbRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/compress-image-online": {
+      id: "/_wrap/compress-image-online";
+      path: "/compress-image-online";
+      fullPath: "/compress-image-online";
+      preLoaderRoute: typeof WrapCompressImageOnlineRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/compress-image-for-web-without-quality-loss": {
+      id: "/_wrap/compress-image-for-web-without-quality-loss";
+      path: "/compress-image-for-web-without-quality-loss";
+      fullPath: "/compress-image-for-web-without-quality-loss";
+      preLoaderRoute: typeof WrapCompressImageForWebWithoutQualityLossRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/compress-image-for-web": {
+      id: "/_wrap/compress-image-for-web";
+      path: "/compress-image-for-web";
+      fullPath: "/compress-image-for-web";
+      preLoaderRoute: typeof WrapCompressImageForWebRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/color-palette-generator": {
+      id: "/_wrap/color-palette-generator";
+      path: "/color-palette-generator";
+      fullPath: "/color-palette-generator";
+      preLoaderRoute: typeof WrapColorPaletteGeneratorRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/bulk-file-renamer": {
+      id: "/_wrap/bulk-file-renamer";
+      path: "/bulk-file-renamer";
+      fullPath: "/bulk-file-renamer";
+      preLoaderRoute: typeof WrapBulkFileRenamerRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/browser-based-utilities": {
+      id: "/_wrap/browser-based-utilities";
+      path: "/browser-based-utilities";
+      fullPath: "/browser-based-utilities";
+      preLoaderRoute: typeof WrapBrowserBasedUtilitiesRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/best-image-converter-tool-2026": {
+      id: "/_wrap/best-image-converter-tool-2026";
+      path: "/best-image-converter-tool-2026";
+      fullPath: "/best-image-converter-tool-2026";
+      preLoaderRoute: typeof WrapBestImageConverterTool2026RouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/best-image-compressor-tool-2026": {
+      id: "/_wrap/best-image-compressor-tool-2026";
+      path: "/best-image-compressor-tool-2026";
+      fullPath: "/best-image-compressor-tool-2026";
+      preLoaderRoute: typeof WrapBestImageCompressorTool2026RouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/best-free-image-format-converter-2026": {
+      id: "/_wrap/best-free-image-format-converter-2026";
+      path: "/best-free-image-format-converter-2026";
+      fullPath: "/best-free-image-format-converter-2026";
+      preLoaderRoute: typeof WrapBestFreeImageFormatConverter2026RouteImport;
+      parentRoute: typeof WrapRoute;
+    };
+    "/_wrap/base64-to-file": {
+      id: "/_wrap/base64-to-file";
+      path: "/base64-to-file";
+      fullPath: "/base64-to-file";
+      preLoaderRoute: typeof WrapBase64ToFileRouteImport;
+      parentRoute: typeof WrapRoute;
+    };
   }
 }
 
 interface WrapRouteChildren {
-  WrapBase64ToFileRoute: typeof WrapBase64ToFileRoute
-  WrapBestFreeImageFormatConverter2026Route: typeof WrapBestFreeImageFormatConverter2026Route
-  WrapBestImageCompressorTool2026Route: typeof WrapBestImageCompressorTool2026Route
-  WrapBestImageConverterTool2026Route: typeof WrapBestImageConverterTool2026Route
-  WrapBrowserBasedUtilitiesRoute: typeof WrapBrowserBasedUtilitiesRoute
-  WrapBulkFileRenamerRoute: typeof WrapBulkFileRenamerRoute
-  WrapColorPaletteGeneratorRoute: typeof WrapColorPaletteGeneratorRoute
-  WrapCompressImageForWebRoute: typeof WrapCompressImageForWebRoute
-  WrapCompressImageForWebWithoutQualityLossRoute: typeof WrapCompressImageForWebWithoutQualityLossRoute
-  WrapCompressImageOnlineRoute: typeof WrapCompressImageOnlineRoute
-  WrapCompressImageTo100kbRoute: typeof WrapCompressImageTo100kbRoute
-  WrapCompressImageTo200kbRoute: typeof WrapCompressImageTo200kbRoute
-  WrapCompressImageTo50kbRoute: typeof WrapCompressImageTo50kbRoute
-  WrapCompressJpegOnlineRoute: typeof WrapCompressJpegOnlineRoute
-  WrapCompressPngOnlineRoute: typeof WrapCompressPngOnlineRoute
-  WrapCsvToJsonRoute: typeof WrapCsvToJsonRoute
-  WrapCsvXlsxConverterRoute: typeof WrapCsvXlsxConverterRoute
-  WrapDiffCheckerRoute: typeof WrapDiffCheckerRoute
-  WrapFormatJsonOnlineRoute: typeof WrapFormatJsonOnlineRoute
-  WrapHeicToJpgRoute: typeof WrapHeicToJpgRoute
-  WrapHtmlMinifierRoute: typeof WrapHtmlMinifierRoute
-  WrapImageBackgroundRemoverRoute: typeof WrapImageBackgroundRemoverRoute
-  WrapImageCompressorRoute: typeof WrapImageCompressorRoute
-  WrapImageCropperRoute: typeof WrapImageCropperRoute
-  WrapImageFormatConverterRoute: typeof WrapImageFormatConverterRoute
-  WrapImageResizerRoute: typeof WrapImageResizerRoute
-  WrapImageToBase64Route: typeof WrapImageToBase64Route
-  WrapImageToPdfRoute: typeof WrapImageToPdfRoute
-  WrapJpgToPngRoute: typeof WrapJpgToPngRoute
-  WrapJpgToWebpRoute: typeof WrapJpgToWebpRoute
-  WrapJsonBeautifierRoute: typeof WrapJsonBeautifierRoute
-  WrapJsonFormatterRoute: typeof WrapJsonFormatterRoute
-  WrapJsonMinifierRoute: typeof WrapJsonMinifierRoute
-  WrapJsonPrettyPrintRoute: typeof WrapJsonPrettyPrintRoute
-  WrapJsonToCsvRoute: typeof WrapJsonToCsvRoute
-  WrapJsonValidatorRoute: typeof WrapJsonValidatorRoute
-  WrapLoremIpsumGeneratorRoute: typeof WrapLoremIpsumGeneratorRoute
-  WrapOptimizeImagesForWebsiteRoute: typeof WrapOptimizeImagesForWebsiteRoute
-  WrapPdfCompressorRoute: typeof WrapPdfCompressorRoute
-  WrapPdfExtractImagesRoute: typeof WrapPdfExtractImagesRoute
-  WrapPdfToJpgRoute: typeof WrapPdfToJpgRoute
-  WrapPngToJpgRoute: typeof WrapPngToJpgRoute
-  WrapPngToWebpRoute: typeof WrapPngToWebpRoute
-  WrapPrivacyFirstToolsRoute: typeof WrapPrivacyFirstToolsRoute
-  WrapReduceImageFileSizeRoute: typeof WrapReduceImageFileSizeRoute
-  WrapReduceJpgSizeRoute: typeof WrapReduceJpgSizeRoute
-  WrapReducePngSizeRoute: typeof WrapReducePngSizeRoute
-  WrapReduceYourImageSizeForFreeRoute: typeof WrapReduceYourImageSizeForFreeRoute
-  WrapValidateJsonOnlineRoute: typeof WrapValidateJsonOnlineRoute
-  WrapWebpToJpgRoute: typeof WrapWebpToJpgRoute
-  WrapWebpToPngRoute: typeof WrapWebpToPngRoute
-  WrapWordCounterRoute: typeof WrapWordCounterRoute
+  WrapBase64ToFileRoute: typeof WrapBase64ToFileRoute;
+  WrapBestFreeImageFormatConverter2026Route: typeof WrapBestFreeImageFormatConverter2026Route;
+  WrapBestImageCompressorTool2026Route: typeof WrapBestImageCompressorTool2026Route;
+  WrapBestImageConverterTool2026Route: typeof WrapBestImageConverterTool2026Route;
+  WrapBrowserBasedUtilitiesRoute: typeof WrapBrowserBasedUtilitiesRoute;
+  WrapBulkFileRenamerRoute: typeof WrapBulkFileRenamerRoute;
+  WrapColorPaletteGeneratorRoute: typeof WrapColorPaletteGeneratorRoute;
+  WrapCompressImageForWebRoute: typeof WrapCompressImageForWebRoute;
+  WrapCompressImageForWebWithoutQualityLossRoute: typeof WrapCompressImageForWebWithoutQualityLossRoute;
+  WrapCompressImageOnlineRoute: typeof WrapCompressImageOnlineRoute;
+  WrapCompressImageTo100kbRoute: typeof WrapCompressImageTo100kbRoute;
+  WrapCompressImageTo200kbRoute: typeof WrapCompressImageTo200kbRoute;
+  WrapCompressImageTo50kbRoute: typeof WrapCompressImageTo50kbRoute;
+  WrapCompressJpegOnlineRoute: typeof WrapCompressJpegOnlineRoute;
+  WrapCompressPngOnlineRoute: typeof WrapCompressPngOnlineRoute;
+  WrapCsvToJsonRoute: typeof WrapCsvToJsonRoute;
+  WrapCsvXlsxConverterRoute: typeof WrapCsvXlsxConverterRoute;
+  WrapDiffCheckerRoute: typeof WrapDiffCheckerRoute;
+  WrapFormatJsonOnlineRoute: typeof WrapFormatJsonOnlineRoute;
+  WrapHeicToJpgRoute: typeof WrapHeicToJpgRoute;
+  WrapHtmlMinifierRoute: typeof WrapHtmlMinifierRoute;
+  WrapImageBackgroundRemoverRoute: typeof WrapImageBackgroundRemoverRoute;
+  WrapImageCompressorRoute: typeof WrapImageCompressorRoute;
+  WrapImageCropperRoute: typeof WrapImageCropperRoute;
+  WrapImageFormatConverterRoute: typeof WrapImageFormatConverterRoute;
+  WrapImageResizerRoute: typeof WrapImageResizerRoute;
+  WrapImageToBase64Route: typeof WrapImageToBase64Route;
+  WrapImageToPdfRoute: typeof WrapImageToPdfRoute;
+  WrapJpgToPngRoute: typeof WrapJpgToPngRoute;
+  WrapJpgToWebpRoute: typeof WrapJpgToWebpRoute;
+  WrapJsonBeautifierRoute: typeof WrapJsonBeautifierRoute;
+  WrapJsonFormatterRoute: typeof WrapJsonFormatterRoute;
+  WrapJsonMinifierRoute: typeof WrapJsonMinifierRoute;
+  WrapJsonPrettyPrintRoute: typeof WrapJsonPrettyPrintRoute;
+  WrapJsonToCsvRoute: typeof WrapJsonToCsvRoute;
+  WrapJsonValidatorRoute: typeof WrapJsonValidatorRoute;
+  WrapLoremIpsumGeneratorRoute: typeof WrapLoremIpsumGeneratorRoute;
+  WrapOptimizeImagesForWebsiteRoute: typeof WrapOptimizeImagesForWebsiteRoute;
+  WrapPdfCompressorRoute: typeof WrapPdfCompressorRoute;
+  WrapPdfExtractImagesRoute: typeof WrapPdfExtractImagesRoute;
+  WrapPdfToJpgRoute: typeof WrapPdfToJpgRoute;
+  WrapPngToJpgRoute: typeof WrapPngToJpgRoute;
+  WrapPngToWebpRoute: typeof WrapPngToWebpRoute;
+  WrapPrivacyFirstToolsRoute: typeof WrapPrivacyFirstToolsRoute;
+  WrapReduceImageFileSizeRoute: typeof WrapReduceImageFileSizeRoute;
+  WrapReduceJpgSizeRoute: typeof WrapReduceJpgSizeRoute;
+  WrapReducePngSizeRoute: typeof WrapReducePngSizeRoute;
+  WrapReduceYourImageSizeForFreeRoute: typeof WrapReduceYourImageSizeForFreeRoute;
+  WrapValidateJsonOnlineRoute: typeof WrapValidateJsonOnlineRoute;
+  WrapWebpToJpgRoute: typeof WrapWebpToJpgRoute;
+  WrapWebpToPngRoute: typeof WrapWebpToPngRoute;
+  WrapWordCounterRoute: typeof WrapWordCounterRoute;
 }
 
 const WrapRouteChildren: WrapRouteChildren = {
   WrapBase64ToFileRoute: WrapBase64ToFileRoute,
-  WrapBestFreeImageFormatConverter2026Route:
-    WrapBestFreeImageFormatConverter2026Route,
+  WrapBestFreeImageFormatConverter2026Route: WrapBestFreeImageFormatConverter2026Route,
   WrapBestImageCompressorTool2026Route: WrapBestImageCompressorTool2026Route,
   WrapBestImageConverterTool2026Route: WrapBestImageConverterTool2026Route,
   WrapBrowserBasedUtilitiesRoute: WrapBrowserBasedUtilitiesRoute,
   WrapBulkFileRenamerRoute: WrapBulkFileRenamerRoute,
   WrapColorPaletteGeneratorRoute: WrapColorPaletteGeneratorRoute,
   WrapCompressImageForWebRoute: WrapCompressImageForWebRoute,
-  WrapCompressImageForWebWithoutQualityLossRoute:
-    WrapCompressImageForWebWithoutQualityLossRoute,
+  WrapCompressImageForWebWithoutQualityLossRoute: WrapCompressImageForWebWithoutQualityLossRoute,
   WrapCompressImageOnlineRoute: WrapCompressImageOnlineRoute,
   WrapCompressImageTo100kbRoute: WrapCompressImageTo100kbRoute,
   WrapCompressImageTo200kbRoute: WrapCompressImageTo200kbRoute,
@@ -1380,9 +1366,9 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapWebpToJpgRoute: WrapWebpToJpgRoute,
   WrapWebpToPngRoute: WrapWebpToPngRoute,
   WrapWordCounterRoute: WrapWordCounterRoute,
-}
+};
 
-const WrapRouteWithChildren = WrapRoute._addFileChildren(WrapRouteChildren)
+const WrapRouteWithChildren = WrapRoute._addFileChildren(WrapRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -1397,16 +1383,14 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsRoute: ToolsRoute,
   ToolsForDevelopersRoute: ToolsForDevelopersRoute,
   UtilityToolsRoute: UtilityToolsRoute,
-}
-export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+};
+export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
+import type { getRouter } from "./router.tsx";
+import type { createStart } from "@tanstack/react-start";
+declare module "@tanstack/react-start" {
   interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
+    ssr: true;
+    router: Awaited<ReturnType<typeof getRouter>>;
   }
 }
