@@ -15,6 +15,7 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { getSeoMetadata } from "@/lib/seo";
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
@@ -417,6 +418,7 @@ function RouteComponent() {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
+        reportProcessedFiles("image-cropper", 1);
       }
     });
   };

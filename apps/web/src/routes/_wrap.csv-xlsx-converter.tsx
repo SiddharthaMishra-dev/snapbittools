@@ -8,6 +8,7 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { getSeoMetadata } from "@/lib/seo";
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
@@ -165,16 +166,19 @@ function RouteComponent() {
     if (itemsToConvert.length === 0) return;
 
     setIsConverting(true);
+    let completed = 0;
     for (const item of itemsToConvert) {
       try {
         setConversions((prev) => prev.map((conv) => (conv.id === item.id ? { ...conv, status: "converting" } : conv)));
         await convertFile(item);
+        completed += 1;
       } catch (error) {
         setConversions((prev) =>
           prev.map((conv) => (conv.id === item.id ? { ...conv, status: "error", error: (error as Error).message } : conv)),
         );
       }
     }
+    reportProcessedFiles("csv-xlsx-converter", completed);
     setIsConverting(false);
   };
 

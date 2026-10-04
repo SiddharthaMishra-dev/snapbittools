@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { FileDropzone } from "@/components/FileDropzone";
 import { extractPdfImages, extractedImagesZipFileName, type ExtractedPdfImage } from "@/lib/pdfExtractImages";
 import { themeClasses as tc } from "@/lib/theme-classes";
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { cn } from "@/lib/utils";
 
 type Status = "idle" | "extracting" | "done" | "error";
@@ -97,6 +98,7 @@ export function PdfExtractImagesTool() {
         })),
       );
       setStatus("done");
+      reportProcessedFiles("pdf-extract-images", 1);
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") {
         return;

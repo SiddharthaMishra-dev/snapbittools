@@ -8,6 +8,7 @@ import ToolInfo from "../components/ToolInfo";
 import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 
 interface ImageItem {
   id: string;
@@ -176,6 +177,7 @@ function RouteComponent() {
       }
 
       doc.save("converted-images.pdf");
+      reportProcessedFiles("image-to-pdf", files.length);
     } catch (error) {
       console.error("Error generating PDF:", error);
       alert("Failed to generate PDF. Please try again.");
