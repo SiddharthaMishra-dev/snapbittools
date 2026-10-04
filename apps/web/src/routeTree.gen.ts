@@ -9,114 +9,78 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as UtilityToolsRouteImport } from './routes/utility-tools'
-import { Route as ToolsForDevelopersRouteImport } from './routes/tools-for-developers'
-import { Route as ToolsRouteImport } from './routes/tools'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PdfToolsRouteImport } from './routes/pdf-tools'
-import { Route as ImageToolsRouteImport } from './routes/image-tools'
-import { Route as DataToolsRouteImport } from './routes/data-tools'
-import { Route as BlogsRouteImport } from './routes/blogs'
-import { Route as WrapRouteImport } from './routes/_wrap'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as WrapWordCounterRouteImport } from './routes/_wrap.word-counter'
-import { Route as WrapWebpToPngRouteImport } from './routes/_wrap.webp-to-png'
-import { Route as WrapWebpToJpgRouteImport } from './routes/_wrap.webp-to-jpg'
-import { Route as WrapValidateJsonOnlineRouteImport } from './routes/_wrap.validate-json-online'
-import { Route as WrapReduceYourImageSizeForFreeRouteImport } from './routes/_wrap.reduce-your-image-size-for-free'
-import { Route as WrapReducePngSizeRouteImport } from './routes/_wrap.reduce-png-size'
-import { Route as WrapReduceJpgSizeRouteImport } from './routes/_wrap.reduce-jpg-size'
-import { Route as WrapReduceImageFileSizeRouteImport } from './routes/_wrap.reduce-image-file-size'
-import { Route as WrapPrivacyFirstToolsRouteImport } from './routes/_wrap.privacy-first-tools'
-import { Route as WrapPngToWebpRouteImport } from './routes/_wrap.png-to-webp'
-import { Route as WrapPngToJpgRouteImport } from './routes/_wrap.png-to-jpg'
-import { Route as WrapPdfToJpgRouteImport } from './routes/_wrap.pdf-to-jpg'
-import { Route as WrapPdfExtractImagesRouteImport } from './routes/_wrap.pdf-extract-images'
-import { Route as WrapPdfCompressorRouteImport } from './routes/_wrap.pdf-compressor'
-import { Route as WrapOptimizeImagesForWebsiteRouteImport } from './routes/_wrap.optimize-images-for-website'
-import { Route as WrapLoremIpsumGeneratorRouteImport } from './routes/_wrap.lorem-ipsum-generator'
-import { Route as WrapJsonValidatorRouteImport } from './routes/_wrap.json-validator'
-import { Route as WrapJsonToCsvRouteImport } from './routes/_wrap.json-to-csv'
-import { Route as WrapJsonPrettyPrintRouteImport } from './routes/_wrap.json-pretty-print'
-import { Route as WrapJsonMinifierRouteImport } from './routes/_wrap.json-minifier'
-import { Route as WrapJsonFormatterRouteImport } from './routes/_wrap.json-formatter'
-import { Route as WrapJsonBeautifierRouteImport } from './routes/_wrap.json-beautifier'
-import { Route as WrapJpgToWebpRouteImport } from './routes/_wrap.jpg-to-webp'
-import { Route as WrapJpgToPngRouteImport } from './routes/_wrap.jpg-to-png'
-import { Route as WrapImageToPdfRouteImport } from './routes/_wrap.image-to-pdf'
-import { Route as WrapImageToBase64RouteImport } from './routes/_wrap.image-to-base64'
-import { Route as WrapImageResizerRouteImport } from './routes/_wrap.image-resizer'
-import { Route as WrapImageFormatConverterRouteImport } from './routes/_wrap.image-format-converter'
-import { Route as WrapImageCropperRouteImport } from './routes/_wrap.image-cropper'
-import { Route as WrapImageCompressorRouteImport } from './routes/_wrap.image-compressor'
-import { Route as WrapImageBackgroundRemoverRouteImport } from './routes/_wrap.image-background-remover'
-import { Route as WrapHtmlMinifierRouteImport } from './routes/_wrap.html-minifier'
-import { Route as WrapHeicToJpgRouteImport } from './routes/_wrap.heic-to-jpg'
-import { Route as WrapFormatJsonOnlineRouteImport } from './routes/_wrap.format-json-online'
-import { Route as WrapDiffCheckerRouteImport } from './routes/_wrap.diff-checker'
-import { Route as WrapCsvXlsxConverterRouteImport } from './routes/_wrap.csv-xlsx-converter'
-import { Route as WrapCsvToJsonRouteImport } from './routes/_wrap.csv-to-json'
-import { Route as WrapCompressPngOnlineRouteImport } from './routes/_wrap.compress-png-online'
-import { Route as WrapCompressJpegOnlineRouteImport } from './routes/_wrap.compress-jpeg-online'
-import { Route as WrapCompressImageTo50kbRouteImport } from './routes/_wrap.compress-image-to-50kb'
-import { Route as WrapCompressImageTo200kbRouteImport } from './routes/_wrap.compress-image-to-200kb'
-import { Route as WrapCompressImageTo100kbRouteImport } from './routes/_wrap.compress-image-to-100kb'
-import { Route as WrapCompressImageOnlineRouteImport } from './routes/_wrap.compress-image-online'
-import { Route as WrapCompressImageForWebWithoutQualityLossRouteImport } from './routes/_wrap.compress-image-for-web-without-quality-loss'
-import { Route as WrapCompressImageForWebRouteImport } from './routes/_wrap.compress-image-for-web'
-import { Route as WrapColorPaletteGeneratorRouteImport } from './routes/_wrap.color-palette-generator'
-import { Route as WrapBulkFileRenamerRouteImport } from './routes/_wrap.bulk-file-renamer'
-import { Route as WrapBrowserBasedUtilitiesRouteImport } from './routes/_wrap.browser-based-utilities'
-import { Route as WrapBestImageConverterTool2026RouteImport } from './routes/_wrap.best-image-converter-tool-2026'
-import { Route as WrapBestImageCompressorTool2026RouteImport } from './routes/_wrap.best-image-compressor-tool-2026'
-import { Route as WrapBestFreeImageFormatConverter2026RouteImport } from './routes/_wrap.best-free-image-format-converter-2026'
+import { Route as WrapRouteImport } from './routes/_wrap'
+import { Route as BlogsRouteImport } from './routes/blogs'
+import { Route as DataToolsRouteImport } from './routes/data-tools'
+import { Route as ImageToolsRouteImport } from './routes/image-tools'
+import { Route as PdfToolsRouteImport } from './routes/pdf-tools'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as ToolsForDevelopersRouteImport } from './routes/tools-for-developers'
+import { Route as UtilityToolsRouteImport } from './routes/utility-tools'
 import { Route as WrapBase64ToFileRouteImport } from './routes/_wrap.base64-to-file'
+import { Route as WrapBestFreeImageFormatConverter2026RouteImport } from './routes/_wrap.best-free-image-format-converter-2026'
+import { Route as WrapBestImageCompressorTool2026RouteImport } from './routes/_wrap.best-image-compressor-tool-2026'
+import { Route as WrapBestImageConverterTool2026RouteImport } from './routes/_wrap.best-image-converter-tool-2026'
+import { Route as WrapBrowserBasedUtilitiesRouteImport } from './routes/_wrap.browser-based-utilities'
+import { Route as WrapBulkFileRenamerRouteImport } from './routes/_wrap.bulk-file-renamer'
+import { Route as WrapColorPaletteGeneratorRouteImport } from './routes/_wrap.color-palette-generator'
+import { Route as WrapCompressImageForWebRouteImport } from './routes/_wrap.compress-image-for-web'
+import { Route as WrapCompressImageForWebWithoutQualityLossRouteImport } from './routes/_wrap.compress-image-for-web-without-quality-loss'
+import { Route as WrapCompressImageOnlineRouteImport } from './routes/_wrap.compress-image-online'
+import { Route as WrapCompressImageTo100kbRouteImport } from './routes/_wrap.compress-image-to-100kb'
+import { Route as WrapCompressImageTo200kbRouteImport } from './routes/_wrap.compress-image-to-200kb'
+import { Route as WrapCompressImageTo50kbRouteImport } from './routes/_wrap.compress-image-to-50kb'
+import { Route as WrapCompressJpegOnlineRouteImport } from './routes/_wrap.compress-jpeg-online'
+import { Route as WrapCompressPngOnlineRouteImport } from './routes/_wrap.compress-png-online'
+import { Route as WrapCsvToJsonRouteImport } from './routes/_wrap.csv-to-json'
+import { Route as WrapCsvXlsxConverterRouteImport } from './routes/_wrap.csv-xlsx-converter'
+import { Route as WrapDiffCheckerRouteImport } from './routes/_wrap.diff-checker'
+import { Route as WrapFormatJsonOnlineRouteImport } from './routes/_wrap.format-json-online'
+import { Route as WrapHeicToJpgRouteImport } from './routes/_wrap.heic-to-jpg'
+import { Route as WrapHtmlMinifierRouteImport } from './routes/_wrap.html-minifier'
+import { Route as WrapImageBackgroundRemoverRouteImport } from './routes/_wrap.image-background-remover'
+import { Route as WrapImageCompressorRouteImport } from './routes/_wrap.image-compressor'
+import { Route as WrapImageCropperRouteImport } from './routes/_wrap.image-cropper'
+import { Route as WrapImageFormatConverterRouteImport } from './routes/_wrap.image-format-converter'
+import { Route as WrapImageResizerRouteImport } from './routes/_wrap.image-resizer'
+import { Route as WrapImageToBase64RouteImport } from './routes/_wrap.image-to-base64'
+import { Route as WrapImageToPdfRouteImport } from './routes/_wrap.image-to-pdf'
+import { Route as WrapJpgToPngRouteImport } from './routes/_wrap.jpg-to-png'
+import { Route as WrapJpgToWebpRouteImport } from './routes/_wrap.jpg-to-webp'
+import { Route as WrapJsonBeautifierRouteImport } from './routes/_wrap.json-beautifier'
+import { Route as WrapJsonFormatterRouteImport } from './routes/_wrap.json-formatter'
+import { Route as WrapJsonMinifierRouteImport } from './routes/_wrap.json-minifier'
+import { Route as WrapJsonPrettyPrintRouteImport } from './routes/_wrap.json-pretty-print'
+import { Route as WrapJsonToCsvRouteImport } from './routes/_wrap.json-to-csv'
+import { Route as WrapJsonValidatorRouteImport } from './routes/_wrap.json-validator'
+import { Route as WrapLoremIpsumGeneratorRouteImport } from './routes/_wrap.lorem-ipsum-generator'
+import { Route as WrapOptimizeImagesForWebsiteRouteImport } from './routes/_wrap.optimize-images-for-website'
+import { Route as WrapPdfCompressorRouteImport } from './routes/_wrap.pdf-compressor'
+import { Route as WrapPdfExtractImagesRouteImport } from './routes/_wrap.pdf-extract-images'
+import { Route as WrapPdfToJpgRouteImport } from './routes/_wrap.pdf-to-jpg'
+import { Route as WrapPngToJpgRouteImport } from './routes/_wrap.png-to-jpg'
+import { Route as WrapPngToWebpRouteImport } from './routes/_wrap.png-to-webp'
+import { Route as WrapPrivacyFirstToolsRouteImport } from './routes/_wrap.privacy-first-tools'
+import { Route as WrapReduceImageFileSizeRouteImport } from './routes/_wrap.reduce-image-file-size'
+import { Route as WrapReduceJpgSizeRouteImport } from './routes/_wrap.reduce-jpg-size'
+import { Route as WrapReducePngSizeRouteImport } from './routes/_wrap.reduce-png-size'
+import { Route as WrapReduceYourImageSizeForFreeRouteImport } from './routes/_wrap.reduce-your-image-size-for-free'
+import { Route as WrapValidateJsonOnlineRouteImport } from './routes/_wrap.validate-json-online'
+import { Route as WrapWebpToJpgRouteImport } from './routes/_wrap.webp-to-jpg'
+import { Route as WrapWebpToPngRouteImport } from './routes/_wrap.webp-to-png'
+import { Route as WrapWordCounterRouteImport } from './routes/_wrap.word-counter'
 
-const UtilityToolsRoute = UtilityToolsRouteImport.update({
-  id: '/utility-tools',
-  path: '/utility-tools',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ToolsForDevelopersRoute = ToolsForDevelopersRouteImport.update({
-  id: '/tools-for-developers',
-  path: '/tools-for-developers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ToolsRoute = ToolsRouteImport.update({
-  id: '/tools',
-  path: '/tools',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PdfToolsRoute = PdfToolsRouteImport.update({
-  id: '/pdf-tools',
-  path: '/pdf-tools',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ImageToolsRoute = ImageToolsRouteImport.update({
-  id: '/image-tools',
-  path: '/image-tools',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DataToolsRoute = DataToolsRouteImport.update({
-  id: '/data-tools',
-  path: '/data-tools',
+const WrapRoute = WrapRouteImport.update({
+  id: '/_wrap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogsRoute = BlogsRouteImport.update({
@@ -124,268 +88,60 @@ const BlogsRoute = BlogsRouteImport.update({
   path: '/blogs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WrapRoute = WrapRouteImport.update({
-  id: '/_wrap',
+const DataToolsRoute = DataToolsRouteImport.update({
+  id: '/data-tools',
+  path: '/data-tools',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ImageToolsRoute = ImageToolsRouteImport.update({
+  id: '/image-tools',
+  path: '/image-tools',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WrapWordCounterRoute = WrapWordCounterRouteImport.update({
-  id: '/word-counter',
-  path: '/word-counter',
+const PdfToolsRoute = PdfToolsRouteImport.update({
+  id: '/pdf-tools',
+  path: '/pdf-tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsForDevelopersRoute = ToolsForDevelopersRouteImport.update({
+  id: '/tools-for-developers',
+  path: '/tools-for-developers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UtilityToolsRoute = UtilityToolsRouteImport.update({
+  id: '/utility-tools',
+  path: '/utility-tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WrapBase64ToFileRoute = WrapBase64ToFileRouteImport.update({
+  id: '/base64-to-file',
+  path: '/base64-to-file',
   getParentRoute: () => WrapRoute,
 } as any)
-const WrapWebpToPngRoute = WrapWebpToPngRouteImport.update({
-  id: '/webp-to-png',
-  path: '/webp-to-png',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapWebpToJpgRoute = WrapWebpToJpgRouteImport.update({
-  id: '/webp-to-jpg',
-  path: '/webp-to-jpg',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapValidateJsonOnlineRoute = WrapValidateJsonOnlineRouteImport.update({
-  id: '/validate-json-online',
-  path: '/validate-json-online',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapReduceYourImageSizeForFreeRoute =
-  WrapReduceYourImageSizeForFreeRouteImport.update({
-    id: '/reduce-your-image-size-for-free',
-    path: '/reduce-your-image-size-for-free',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapReducePngSizeRoute = WrapReducePngSizeRouteImport.update({
-  id: '/reduce-png-size',
-  path: '/reduce-png-size',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapReduceJpgSizeRoute = WrapReduceJpgSizeRouteImport.update({
-  id: '/reduce-jpg-size',
-  path: '/reduce-jpg-size',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapReduceImageFileSizeRoute = WrapReduceImageFileSizeRouteImport.update({
-  id: '/reduce-image-file-size',
-  path: '/reduce-image-file-size',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapPrivacyFirstToolsRoute = WrapPrivacyFirstToolsRouteImport.update({
-  id: '/privacy-first-tools',
-  path: '/privacy-first-tools',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapPngToWebpRoute = WrapPngToWebpRouteImport.update({
-  id: '/png-to-webp',
-  path: '/png-to-webp',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapPngToJpgRoute = WrapPngToJpgRouteImport.update({
-  id: '/png-to-jpg',
-  path: '/png-to-jpg',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapPdfToJpgRoute = WrapPdfToJpgRouteImport.update({
-  id: '/pdf-to-jpg',
-  path: '/pdf-to-jpg',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapPdfExtractImagesRoute = WrapPdfExtractImagesRouteImport.update({
-  id: '/pdf-extract-images',
-  path: '/pdf-extract-images',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapPdfCompressorRoute = WrapPdfCompressorRouteImport.update({
-  id: '/pdf-compressor',
-  path: '/pdf-compressor',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapOptimizeImagesForWebsiteRoute =
-  WrapOptimizeImagesForWebsiteRouteImport.update({
-    id: '/optimize-images-for-website',
-    path: '/optimize-images-for-website',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapLoremIpsumGeneratorRoute = WrapLoremIpsumGeneratorRouteImport.update({
-  id: '/lorem-ipsum-generator',
-  path: '/lorem-ipsum-generator',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapJsonValidatorRoute = WrapJsonValidatorRouteImport.update({
-  id: '/json-validator',
-  path: '/json-validator',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapJsonToCsvRoute = WrapJsonToCsvRouteImport.update({
-  id: '/json-to-csv',
-  path: '/json-to-csv',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapJsonPrettyPrintRoute = WrapJsonPrettyPrintRouteImport.update({
-  id: '/json-pretty-print',
-  path: '/json-pretty-print',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapJsonMinifierRoute = WrapJsonMinifierRouteImport.update({
-  id: '/json-minifier',
-  path: '/json-minifier',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapJsonFormatterRoute = WrapJsonFormatterRouteImport.update({
-  id: '/json-formatter',
-  path: '/json-formatter',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapJsonBeautifierRoute = WrapJsonBeautifierRouteImport.update({
-  id: '/json-beautifier',
-  path: '/json-beautifier',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapJpgToWebpRoute = WrapJpgToWebpRouteImport.update({
-  id: '/jpg-to-webp',
-  path: '/jpg-to-webp',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapJpgToPngRoute = WrapJpgToPngRouteImport.update({
-  id: '/jpg-to-png',
-  path: '/jpg-to-png',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapImageToPdfRoute = WrapImageToPdfRouteImport.update({
-  id: '/image-to-pdf',
-  path: '/image-to-pdf',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapImageToBase64Route = WrapImageToBase64RouteImport.update({
-  id: '/image-to-base64',
-  path: '/image-to-base64',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapImageResizerRoute = WrapImageResizerRouteImport.update({
-  id: '/image-resizer',
-  path: '/image-resizer',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapImageFormatConverterRoute =
-  WrapImageFormatConverterRouteImport.update({
-    id: '/image-format-converter',
-    path: '/image-format-converter',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapImageCropperRoute = WrapImageCropperRouteImport.update({
-  id: '/image-cropper',
-  path: '/image-cropper',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapImageCompressorRoute = WrapImageCompressorRouteImport.update({
-  id: '/image-compressor',
-  path: '/image-compressor',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapImageBackgroundRemoverRoute =
-  WrapImageBackgroundRemoverRouteImport.update({
-    id: '/image-background-remover',
-    path: '/image-background-remover',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapHtmlMinifierRoute = WrapHtmlMinifierRouteImport.update({
-  id: '/html-minifier',
-  path: '/html-minifier',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapHeicToJpgRoute = WrapHeicToJpgRouteImport.update({
-  id: '/heic-to-jpg',
-  path: '/heic-to-jpg',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapFormatJsonOnlineRoute = WrapFormatJsonOnlineRouteImport.update({
-  id: '/format-json-online',
-  path: '/format-json-online',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapDiffCheckerRoute = WrapDiffCheckerRouteImport.update({
-  id: '/diff-checker',
-  path: '/diff-checker',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapCsvXlsxConverterRoute = WrapCsvXlsxConverterRouteImport.update({
-  id: '/csv-xlsx-converter',
-  path: '/csv-xlsx-converter',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapCsvToJsonRoute = WrapCsvToJsonRouteImport.update({
-  id: '/csv-to-json',
-  path: '/csv-to-json',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapCompressPngOnlineRoute = WrapCompressPngOnlineRouteImport.update({
-  id: '/compress-png-online',
-  path: '/compress-png-online',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapCompressJpegOnlineRoute = WrapCompressJpegOnlineRouteImport.update({
-  id: '/compress-jpeg-online',
-  path: '/compress-jpeg-online',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapCompressImageTo50kbRoute = WrapCompressImageTo50kbRouteImport.update({
-  id: '/compress-image-to-50kb',
-  path: '/compress-image-to-50kb',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapCompressImageTo200kbRoute =
-  WrapCompressImageTo200kbRouteImport.update({
-    id: '/compress-image-to-200kb',
-    path: '/compress-image-to-200kb',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapCompressImageTo100kbRoute =
-  WrapCompressImageTo100kbRouteImport.update({
-    id: '/compress-image-to-100kb',
-    path: '/compress-image-to-100kb',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapCompressImageOnlineRoute = WrapCompressImageOnlineRouteImport.update({
-  id: '/compress-image-online',
-  path: '/compress-image-online',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapCompressImageForWebWithoutQualityLossRoute =
-  WrapCompressImageForWebWithoutQualityLossRouteImport.update({
-    id: '/compress-image-for-web-without-quality-loss',
-    path: '/compress-image-for-web-without-quality-loss',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapCompressImageForWebRoute = WrapCompressImageForWebRouteImport.update({
-  id: '/compress-image-for-web',
-  path: '/compress-image-for-web',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapColorPaletteGeneratorRoute =
-  WrapColorPaletteGeneratorRouteImport.update({
-    id: '/color-palette-generator',
-    path: '/color-palette-generator',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapBulkFileRenamerRoute = WrapBulkFileRenamerRouteImport.update({
-  id: '/bulk-file-renamer',
-  path: '/bulk-file-renamer',
-  getParentRoute: () => WrapRoute,
-} as any)
-const WrapBrowserBasedUtilitiesRoute =
-  WrapBrowserBasedUtilitiesRouteImport.update({
-    id: '/browser-based-utilities',
-    path: '/browser-based-utilities',
-    getParentRoute: () => WrapRoute,
-  } as any)
-const WrapBestImageConverterTool2026Route =
-  WrapBestImageConverterTool2026RouteImport.update({
-    id: '/best-image-converter-tool-2026',
-    path: '/best-image-converter-tool-2026',
+const WrapBestFreeImageFormatConverter2026Route =
+  WrapBestFreeImageFormatConverter2026RouteImport.update({
+    id: '/best-free-image-format-converter-2026',
+    path: '/best-free-image-format-converter-2026',
     getParentRoute: () => WrapRoute,
   } as any)
 const WrapBestImageCompressorTool2026Route =
@@ -394,15 +150,259 @@ const WrapBestImageCompressorTool2026Route =
     path: '/best-image-compressor-tool-2026',
     getParentRoute: () => WrapRoute,
   } as any)
-const WrapBestFreeImageFormatConverter2026Route =
-  WrapBestFreeImageFormatConverter2026RouteImport.update({
-    id: '/best-free-image-format-converter-2026',
-    path: '/best-free-image-format-converter-2026',
+const WrapBestImageConverterTool2026Route =
+  WrapBestImageConverterTool2026RouteImport.update({
+    id: '/best-image-converter-tool-2026',
+    path: '/best-image-converter-tool-2026',
     getParentRoute: () => WrapRoute,
   } as any)
-const WrapBase64ToFileRoute = WrapBase64ToFileRouteImport.update({
-  id: '/base64-to-file',
-  path: '/base64-to-file',
+const WrapBrowserBasedUtilitiesRoute =
+  WrapBrowserBasedUtilitiesRouteImport.update({
+    id: '/browser-based-utilities',
+    path: '/browser-based-utilities',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapBulkFileRenamerRoute = WrapBulkFileRenamerRouteImport.update({
+  id: '/bulk-file-renamer',
+  path: '/bulk-file-renamer',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapColorPaletteGeneratorRoute =
+  WrapColorPaletteGeneratorRouteImport.update({
+    id: '/color-palette-generator',
+    path: '/color-palette-generator',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapCompressImageForWebRoute = WrapCompressImageForWebRouteImport.update({
+  id: '/compress-image-for-web',
+  path: '/compress-image-for-web',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapCompressImageForWebWithoutQualityLossRoute =
+  WrapCompressImageForWebWithoutQualityLossRouteImport.update({
+    id: '/compress-image-for-web-without-quality-loss',
+    path: '/compress-image-for-web-without-quality-loss',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapCompressImageOnlineRoute = WrapCompressImageOnlineRouteImport.update({
+  id: '/compress-image-online',
+  path: '/compress-image-online',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapCompressImageTo100kbRoute =
+  WrapCompressImageTo100kbRouteImport.update({
+    id: '/compress-image-to-100kb',
+    path: '/compress-image-to-100kb',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapCompressImageTo200kbRoute =
+  WrapCompressImageTo200kbRouteImport.update({
+    id: '/compress-image-to-200kb',
+    path: '/compress-image-to-200kb',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapCompressImageTo50kbRoute = WrapCompressImageTo50kbRouteImport.update({
+  id: '/compress-image-to-50kb',
+  path: '/compress-image-to-50kb',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapCompressJpegOnlineRoute = WrapCompressJpegOnlineRouteImport.update({
+  id: '/compress-jpeg-online',
+  path: '/compress-jpeg-online',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapCompressPngOnlineRoute = WrapCompressPngOnlineRouteImport.update({
+  id: '/compress-png-online',
+  path: '/compress-png-online',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapCsvToJsonRoute = WrapCsvToJsonRouteImport.update({
+  id: '/csv-to-json',
+  path: '/csv-to-json',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapCsvXlsxConverterRoute = WrapCsvXlsxConverterRouteImport.update({
+  id: '/csv-xlsx-converter',
+  path: '/csv-xlsx-converter',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapDiffCheckerRoute = WrapDiffCheckerRouteImport.update({
+  id: '/diff-checker',
+  path: '/diff-checker',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapFormatJsonOnlineRoute = WrapFormatJsonOnlineRouteImport.update({
+  id: '/format-json-online',
+  path: '/format-json-online',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapHeicToJpgRoute = WrapHeicToJpgRouteImport.update({
+  id: '/heic-to-jpg',
+  path: '/heic-to-jpg',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapHtmlMinifierRoute = WrapHtmlMinifierRouteImport.update({
+  id: '/html-minifier',
+  path: '/html-minifier',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapImageBackgroundRemoverRoute =
+  WrapImageBackgroundRemoverRouteImport.update({
+    id: '/image-background-remover',
+    path: '/image-background-remover',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapImageCompressorRoute = WrapImageCompressorRouteImport.update({
+  id: '/image-compressor',
+  path: '/image-compressor',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapImageCropperRoute = WrapImageCropperRouteImport.update({
+  id: '/image-cropper',
+  path: '/image-cropper',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapImageFormatConverterRoute =
+  WrapImageFormatConverterRouteImport.update({
+    id: '/image-format-converter',
+    path: '/image-format-converter',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapImageResizerRoute = WrapImageResizerRouteImport.update({
+  id: '/image-resizer',
+  path: '/image-resizer',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapImageToBase64Route = WrapImageToBase64RouteImport.update({
+  id: '/image-to-base64',
+  path: '/image-to-base64',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapImageToPdfRoute = WrapImageToPdfRouteImport.update({
+  id: '/image-to-pdf',
+  path: '/image-to-pdf',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapJpgToPngRoute = WrapJpgToPngRouteImport.update({
+  id: '/jpg-to-png',
+  path: '/jpg-to-png',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapJpgToWebpRoute = WrapJpgToWebpRouteImport.update({
+  id: '/jpg-to-webp',
+  path: '/jpg-to-webp',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapJsonBeautifierRoute = WrapJsonBeautifierRouteImport.update({
+  id: '/json-beautifier',
+  path: '/json-beautifier',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapJsonFormatterRoute = WrapJsonFormatterRouteImport.update({
+  id: '/json-formatter',
+  path: '/json-formatter',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapJsonMinifierRoute = WrapJsonMinifierRouteImport.update({
+  id: '/json-minifier',
+  path: '/json-minifier',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapJsonPrettyPrintRoute = WrapJsonPrettyPrintRouteImport.update({
+  id: '/json-pretty-print',
+  path: '/json-pretty-print',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapJsonToCsvRoute = WrapJsonToCsvRouteImport.update({
+  id: '/json-to-csv',
+  path: '/json-to-csv',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapJsonValidatorRoute = WrapJsonValidatorRouteImport.update({
+  id: '/json-validator',
+  path: '/json-validator',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapLoremIpsumGeneratorRoute = WrapLoremIpsumGeneratorRouteImport.update({
+  id: '/lorem-ipsum-generator',
+  path: '/lorem-ipsum-generator',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapOptimizeImagesForWebsiteRoute =
+  WrapOptimizeImagesForWebsiteRouteImport.update({
+    id: '/optimize-images-for-website',
+    path: '/optimize-images-for-website',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapPdfCompressorRoute = WrapPdfCompressorRouteImport.update({
+  id: '/pdf-compressor',
+  path: '/pdf-compressor',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapPdfExtractImagesRoute = WrapPdfExtractImagesRouteImport.update({
+  id: '/pdf-extract-images',
+  path: '/pdf-extract-images',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapPdfToJpgRoute = WrapPdfToJpgRouteImport.update({
+  id: '/pdf-to-jpg',
+  path: '/pdf-to-jpg',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapPngToJpgRoute = WrapPngToJpgRouteImport.update({
+  id: '/png-to-jpg',
+  path: '/png-to-jpg',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapPngToWebpRoute = WrapPngToWebpRouteImport.update({
+  id: '/png-to-webp',
+  path: '/png-to-webp',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapPrivacyFirstToolsRoute = WrapPrivacyFirstToolsRouteImport.update({
+  id: '/privacy-first-tools',
+  path: '/privacy-first-tools',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapReduceImageFileSizeRoute = WrapReduceImageFileSizeRouteImport.update({
+  id: '/reduce-image-file-size',
+  path: '/reduce-image-file-size',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapReduceJpgSizeRoute = WrapReduceJpgSizeRouteImport.update({
+  id: '/reduce-jpg-size',
+  path: '/reduce-jpg-size',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapReducePngSizeRoute = WrapReducePngSizeRouteImport.update({
+  id: '/reduce-png-size',
+  path: '/reduce-png-size',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapReduceYourImageSizeForFreeRoute =
+  WrapReduceYourImageSizeForFreeRouteImport.update({
+    id: '/reduce-your-image-size-for-free',
+    path: '/reduce-your-image-size-for-free',
+    getParentRoute: () => WrapRoute,
+  } as any)
+const WrapValidateJsonOnlineRoute = WrapValidateJsonOnlineRouteImport.update({
+  id: '/validate-json-online',
+  path: '/validate-json-online',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapWebpToJpgRoute = WrapWebpToJpgRouteImport.update({
+  id: '/webp-to-jpg',
+  path: '/webp-to-jpg',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapWebpToPngRoute = WrapWebpToPngRouteImport.update({
+  id: '/webp-to-png',
+  path: '/webp-to-png',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapWordCounterRoute = WrapWordCounterRouteImport.update({
+  id: '/word-counter',
+  path: '/word-counter',
   getParentRoute: () => WrapRoute,
 } as any)
 
@@ -819,74 +819,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/utility-tools': {
-      id: '/utility-tools'
-      path: '/utility-tools'
-      fullPath: '/utility-tools'
-      preLoaderRoute: typeof UtilityToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tools-for-developers': {
-      id: '/tools-for-developers'
-      path: '/tools-for-developers'
-      fullPath: '/tools-for-developers'
-      preLoaderRoute: typeof ToolsForDevelopersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tools': {
-      id: '/tools'
-      path: '/tools'
-      fullPath: '/tools'
-      preLoaderRoute: typeof ToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pdf-tools': {
-      id: '/pdf-tools'
-      path: '/pdf-tools'
-      fullPath: '/pdf-tools'
-      preLoaderRoute: typeof PdfToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/image-tools': {
-      id: '/image-tools'
-      path: '/image-tools'
-      fullPath: '/image-tools'
-      preLoaderRoute: typeof ImageToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/data-tools': {
-      id: '/data-tools'
-      path: '/data-tools'
-      fullPath: '/data-tools'
-      preLoaderRoute: typeof DataToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blogs': {
-      id: '/blogs'
-      path: '/blogs'
-      fullPath: '/blogs'
-      preLoaderRoute: typeof BlogsRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_wrap': {
@@ -896,361 +833,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/blogs': {
+      id: '/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof BlogsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_wrap/word-counter': {
-      id: '/_wrap/word-counter'
-      path: '/word-counter'
-      fullPath: '/word-counter'
-      preLoaderRoute: typeof WrapWordCounterRouteImport
-      parentRoute: typeof WrapRoute
+    '/data-tools': {
+      id: '/data-tools'
+      path: '/data-tools'
+      fullPath: '/data-tools'
+      preLoaderRoute: typeof DataToolsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wrap/webp-to-png': {
-      id: '/_wrap/webp-to-png'
-      path: '/webp-to-png'
-      fullPath: '/webp-to-png'
-      preLoaderRoute: typeof WrapWebpToPngRouteImport
-      parentRoute: typeof WrapRoute
+    '/image-tools': {
+      id: '/image-tools'
+      path: '/image-tools'
+      fullPath: '/image-tools'
+      preLoaderRoute: typeof ImageToolsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wrap/webp-to-jpg': {
-      id: '/_wrap/webp-to-jpg'
-      path: '/webp-to-jpg'
-      fullPath: '/webp-to-jpg'
-      preLoaderRoute: typeof WrapWebpToJpgRouteImport
-      parentRoute: typeof WrapRoute
+    '/pdf-tools': {
+      id: '/pdf-tools'
+      path: '/pdf-tools'
+      fullPath: '/pdf-tools'
+      preLoaderRoute: typeof PdfToolsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wrap/validate-json-online': {
-      id: '/_wrap/validate-json-online'
-      path: '/validate-json-online'
-      fullPath: '/validate-json-online'
-      preLoaderRoute: typeof WrapValidateJsonOnlineRouteImport
-      parentRoute: typeof WrapRoute
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wrap/reduce-your-image-size-for-free': {
-      id: '/_wrap/reduce-your-image-size-for-free'
-      path: '/reduce-your-image-size-for-free'
-      fullPath: '/reduce-your-image-size-for-free'
-      preLoaderRoute: typeof WrapReduceYourImageSizeForFreeRouteImport
-      parentRoute: typeof WrapRoute
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wrap/reduce-png-size': {
-      id: '/_wrap/reduce-png-size'
-      path: '/reduce-png-size'
-      fullPath: '/reduce-png-size'
-      preLoaderRoute: typeof WrapReducePngSizeRouteImport
-      parentRoute: typeof WrapRoute
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wrap/reduce-jpg-size': {
-      id: '/_wrap/reduce-jpg-size'
-      path: '/reduce-jpg-size'
-      fullPath: '/reduce-jpg-size'
-      preLoaderRoute: typeof WrapReduceJpgSizeRouteImport
-      parentRoute: typeof WrapRoute
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wrap/reduce-image-file-size': {
-      id: '/_wrap/reduce-image-file-size'
-      path: '/reduce-image-file-size'
-      fullPath: '/reduce-image-file-size'
-      preLoaderRoute: typeof WrapReduceImageFileSizeRouteImport
-      parentRoute: typeof WrapRoute
+    '/tools-for-developers': {
+      id: '/tools-for-developers'
+      path: '/tools-for-developers'
+      fullPath: '/tools-for-developers'
+      preLoaderRoute: typeof ToolsForDevelopersRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wrap/privacy-first-tools': {
-      id: '/_wrap/privacy-first-tools'
-      path: '/privacy-first-tools'
-      fullPath: '/privacy-first-tools'
-      preLoaderRoute: typeof WrapPrivacyFirstToolsRouteImport
-      parentRoute: typeof WrapRoute
+    '/utility-tools': {
+      id: '/utility-tools'
+      path: '/utility-tools'
+      fullPath: '/utility-tools'
+      preLoaderRoute: typeof UtilityToolsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wrap/png-to-webp': {
-      id: '/_wrap/png-to-webp'
-      path: '/png-to-webp'
-      fullPath: '/png-to-webp'
-      preLoaderRoute: typeof WrapPngToWebpRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/png-to-jpg': {
-      id: '/_wrap/png-to-jpg'
-      path: '/png-to-jpg'
-      fullPath: '/png-to-jpg'
-      preLoaderRoute: typeof WrapPngToJpgRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/pdf-to-jpg': {
-      id: '/_wrap/pdf-to-jpg'
-      path: '/pdf-to-jpg'
-      fullPath: '/pdf-to-jpg'
-      preLoaderRoute: typeof WrapPdfToJpgRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/pdf-extract-images': {
-      id: '/_wrap/pdf-extract-images'
-      path: '/pdf-extract-images'
-      fullPath: '/pdf-extract-images'
-      preLoaderRoute: typeof WrapPdfExtractImagesRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/pdf-compressor': {
-      id: '/_wrap/pdf-compressor'
-      path: '/pdf-compressor'
-      fullPath: '/pdf-compressor'
-      preLoaderRoute: typeof WrapPdfCompressorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/optimize-images-for-website': {
-      id: '/_wrap/optimize-images-for-website'
-      path: '/optimize-images-for-website'
-      fullPath: '/optimize-images-for-website'
-      preLoaderRoute: typeof WrapOptimizeImagesForWebsiteRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/lorem-ipsum-generator': {
-      id: '/_wrap/lorem-ipsum-generator'
-      path: '/lorem-ipsum-generator'
-      fullPath: '/lorem-ipsum-generator'
-      preLoaderRoute: typeof WrapLoremIpsumGeneratorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-validator': {
-      id: '/_wrap/json-validator'
-      path: '/json-validator'
-      fullPath: '/json-validator'
-      preLoaderRoute: typeof WrapJsonValidatorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-to-csv': {
-      id: '/_wrap/json-to-csv'
-      path: '/json-to-csv'
-      fullPath: '/json-to-csv'
-      preLoaderRoute: typeof WrapJsonToCsvRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-pretty-print': {
-      id: '/_wrap/json-pretty-print'
-      path: '/json-pretty-print'
-      fullPath: '/json-pretty-print'
-      preLoaderRoute: typeof WrapJsonPrettyPrintRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-minifier': {
-      id: '/_wrap/json-minifier'
-      path: '/json-minifier'
-      fullPath: '/json-minifier'
-      preLoaderRoute: typeof WrapJsonMinifierRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-formatter': {
-      id: '/_wrap/json-formatter'
-      path: '/json-formatter'
-      fullPath: '/json-formatter'
-      preLoaderRoute: typeof WrapJsonFormatterRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/json-beautifier': {
-      id: '/_wrap/json-beautifier'
-      path: '/json-beautifier'
-      fullPath: '/json-beautifier'
-      preLoaderRoute: typeof WrapJsonBeautifierRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/jpg-to-webp': {
-      id: '/_wrap/jpg-to-webp'
-      path: '/jpg-to-webp'
-      fullPath: '/jpg-to-webp'
-      preLoaderRoute: typeof WrapJpgToWebpRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/jpg-to-png': {
-      id: '/_wrap/jpg-to-png'
-      path: '/jpg-to-png'
-      fullPath: '/jpg-to-png'
-      preLoaderRoute: typeof WrapJpgToPngRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-to-pdf': {
-      id: '/_wrap/image-to-pdf'
-      path: '/image-to-pdf'
-      fullPath: '/image-to-pdf'
-      preLoaderRoute: typeof WrapImageToPdfRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-to-base64': {
-      id: '/_wrap/image-to-base64'
-      path: '/image-to-base64'
-      fullPath: '/image-to-base64'
-      preLoaderRoute: typeof WrapImageToBase64RouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-resizer': {
-      id: '/_wrap/image-resizer'
-      path: '/image-resizer'
-      fullPath: '/image-resizer'
-      preLoaderRoute: typeof WrapImageResizerRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-format-converter': {
-      id: '/_wrap/image-format-converter'
-      path: '/image-format-converter'
-      fullPath: '/image-format-converter'
-      preLoaderRoute: typeof WrapImageFormatConverterRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-cropper': {
-      id: '/_wrap/image-cropper'
-      path: '/image-cropper'
-      fullPath: '/image-cropper'
-      preLoaderRoute: typeof WrapImageCropperRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-compressor': {
-      id: '/_wrap/image-compressor'
-      path: '/image-compressor'
-      fullPath: '/image-compressor'
-      preLoaderRoute: typeof WrapImageCompressorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/image-background-remover': {
-      id: '/_wrap/image-background-remover'
-      path: '/image-background-remover'
-      fullPath: '/image-background-remover'
-      preLoaderRoute: typeof WrapImageBackgroundRemoverRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/html-minifier': {
-      id: '/_wrap/html-minifier'
-      path: '/html-minifier'
-      fullPath: '/html-minifier'
-      preLoaderRoute: typeof WrapHtmlMinifierRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/heic-to-jpg': {
-      id: '/_wrap/heic-to-jpg'
-      path: '/heic-to-jpg'
-      fullPath: '/heic-to-jpg'
-      preLoaderRoute: typeof WrapHeicToJpgRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/format-json-online': {
-      id: '/_wrap/format-json-online'
-      path: '/format-json-online'
-      fullPath: '/format-json-online'
-      preLoaderRoute: typeof WrapFormatJsonOnlineRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/diff-checker': {
-      id: '/_wrap/diff-checker'
-      path: '/diff-checker'
-      fullPath: '/diff-checker'
-      preLoaderRoute: typeof WrapDiffCheckerRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/csv-xlsx-converter': {
-      id: '/_wrap/csv-xlsx-converter'
-      path: '/csv-xlsx-converter'
-      fullPath: '/csv-xlsx-converter'
-      preLoaderRoute: typeof WrapCsvXlsxConverterRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/csv-to-json': {
-      id: '/_wrap/csv-to-json'
-      path: '/csv-to-json'
-      fullPath: '/csv-to-json'
-      preLoaderRoute: typeof WrapCsvToJsonRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-png-online': {
-      id: '/_wrap/compress-png-online'
-      path: '/compress-png-online'
-      fullPath: '/compress-png-online'
-      preLoaderRoute: typeof WrapCompressPngOnlineRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-jpeg-online': {
-      id: '/_wrap/compress-jpeg-online'
-      path: '/compress-jpeg-online'
-      fullPath: '/compress-jpeg-online'
-      preLoaderRoute: typeof WrapCompressJpegOnlineRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-to-50kb': {
-      id: '/_wrap/compress-image-to-50kb'
-      path: '/compress-image-to-50kb'
-      fullPath: '/compress-image-to-50kb'
-      preLoaderRoute: typeof WrapCompressImageTo50kbRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-to-200kb': {
-      id: '/_wrap/compress-image-to-200kb'
-      path: '/compress-image-to-200kb'
-      fullPath: '/compress-image-to-200kb'
-      preLoaderRoute: typeof WrapCompressImageTo200kbRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-to-100kb': {
-      id: '/_wrap/compress-image-to-100kb'
-      path: '/compress-image-to-100kb'
-      fullPath: '/compress-image-to-100kb'
-      preLoaderRoute: typeof WrapCompressImageTo100kbRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-online': {
-      id: '/_wrap/compress-image-online'
-      path: '/compress-image-online'
-      fullPath: '/compress-image-online'
-      preLoaderRoute: typeof WrapCompressImageOnlineRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-for-web-without-quality-loss': {
-      id: '/_wrap/compress-image-for-web-without-quality-loss'
-      path: '/compress-image-for-web-without-quality-loss'
-      fullPath: '/compress-image-for-web-without-quality-loss'
-      preLoaderRoute: typeof WrapCompressImageForWebWithoutQualityLossRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/compress-image-for-web': {
-      id: '/_wrap/compress-image-for-web'
-      path: '/compress-image-for-web'
-      fullPath: '/compress-image-for-web'
-      preLoaderRoute: typeof WrapCompressImageForWebRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/color-palette-generator': {
-      id: '/_wrap/color-palette-generator'
-      path: '/color-palette-generator'
-      fullPath: '/color-palette-generator'
-      preLoaderRoute: typeof WrapColorPaletteGeneratorRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/bulk-file-renamer': {
-      id: '/_wrap/bulk-file-renamer'
-      path: '/bulk-file-renamer'
-      fullPath: '/bulk-file-renamer'
-      preLoaderRoute: typeof WrapBulkFileRenamerRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/browser-based-utilities': {
-      id: '/_wrap/browser-based-utilities'
-      path: '/browser-based-utilities'
-      fullPath: '/browser-based-utilities'
-      preLoaderRoute: typeof WrapBrowserBasedUtilitiesRouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/best-image-converter-tool-2026': {
-      id: '/_wrap/best-image-converter-tool-2026'
-      path: '/best-image-converter-tool-2026'
-      fullPath: '/best-image-converter-tool-2026'
-      preLoaderRoute: typeof WrapBestImageConverterTool2026RouteImport
-      parentRoute: typeof WrapRoute
-    }
-    '/_wrap/best-image-compressor-tool-2026': {
-      id: '/_wrap/best-image-compressor-tool-2026'
-      path: '/best-image-compressor-tool-2026'
-      fullPath: '/best-image-compressor-tool-2026'
-      preLoaderRoute: typeof WrapBestImageCompressorTool2026RouteImport
+    '/_wrap/base64-to-file': {
+      id: '/_wrap/base64-to-file'
+      path: '/base64-to-file'
+      fullPath: '/base64-to-file'
+      preLoaderRoute: typeof WrapBase64ToFileRouteImport
       parentRoute: typeof WrapRoute
     }
     '/_wrap/best-free-image-format-converter-2026': {
@@ -1260,11 +917,354 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapBestFreeImageFormatConverter2026RouteImport
       parentRoute: typeof WrapRoute
     }
-    '/_wrap/base64-to-file': {
-      id: '/_wrap/base64-to-file'
-      path: '/base64-to-file'
-      fullPath: '/base64-to-file'
-      preLoaderRoute: typeof WrapBase64ToFileRouteImport
+    '/_wrap/best-image-compressor-tool-2026': {
+      id: '/_wrap/best-image-compressor-tool-2026'
+      path: '/best-image-compressor-tool-2026'
+      fullPath: '/best-image-compressor-tool-2026'
+      preLoaderRoute: typeof WrapBestImageCompressorTool2026RouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/best-image-converter-tool-2026': {
+      id: '/_wrap/best-image-converter-tool-2026'
+      path: '/best-image-converter-tool-2026'
+      fullPath: '/best-image-converter-tool-2026'
+      preLoaderRoute: typeof WrapBestImageConverterTool2026RouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/browser-based-utilities': {
+      id: '/_wrap/browser-based-utilities'
+      path: '/browser-based-utilities'
+      fullPath: '/browser-based-utilities'
+      preLoaderRoute: typeof WrapBrowserBasedUtilitiesRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/bulk-file-renamer': {
+      id: '/_wrap/bulk-file-renamer'
+      path: '/bulk-file-renamer'
+      fullPath: '/bulk-file-renamer'
+      preLoaderRoute: typeof WrapBulkFileRenamerRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/color-palette-generator': {
+      id: '/_wrap/color-palette-generator'
+      path: '/color-palette-generator'
+      fullPath: '/color-palette-generator'
+      preLoaderRoute: typeof WrapColorPaletteGeneratorRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/compress-image-for-web': {
+      id: '/_wrap/compress-image-for-web'
+      path: '/compress-image-for-web'
+      fullPath: '/compress-image-for-web'
+      preLoaderRoute: typeof WrapCompressImageForWebRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/compress-image-for-web-without-quality-loss': {
+      id: '/_wrap/compress-image-for-web-without-quality-loss'
+      path: '/compress-image-for-web-without-quality-loss'
+      fullPath: '/compress-image-for-web-without-quality-loss'
+      preLoaderRoute: typeof WrapCompressImageForWebWithoutQualityLossRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/compress-image-online': {
+      id: '/_wrap/compress-image-online'
+      path: '/compress-image-online'
+      fullPath: '/compress-image-online'
+      preLoaderRoute: typeof WrapCompressImageOnlineRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/compress-image-to-100kb': {
+      id: '/_wrap/compress-image-to-100kb'
+      path: '/compress-image-to-100kb'
+      fullPath: '/compress-image-to-100kb'
+      preLoaderRoute: typeof WrapCompressImageTo100kbRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/compress-image-to-200kb': {
+      id: '/_wrap/compress-image-to-200kb'
+      path: '/compress-image-to-200kb'
+      fullPath: '/compress-image-to-200kb'
+      preLoaderRoute: typeof WrapCompressImageTo200kbRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/compress-image-to-50kb': {
+      id: '/_wrap/compress-image-to-50kb'
+      path: '/compress-image-to-50kb'
+      fullPath: '/compress-image-to-50kb'
+      preLoaderRoute: typeof WrapCompressImageTo50kbRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/compress-jpeg-online': {
+      id: '/_wrap/compress-jpeg-online'
+      path: '/compress-jpeg-online'
+      fullPath: '/compress-jpeg-online'
+      preLoaderRoute: typeof WrapCompressJpegOnlineRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/compress-png-online': {
+      id: '/_wrap/compress-png-online'
+      path: '/compress-png-online'
+      fullPath: '/compress-png-online'
+      preLoaderRoute: typeof WrapCompressPngOnlineRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/csv-to-json': {
+      id: '/_wrap/csv-to-json'
+      path: '/csv-to-json'
+      fullPath: '/csv-to-json'
+      preLoaderRoute: typeof WrapCsvToJsonRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/csv-xlsx-converter': {
+      id: '/_wrap/csv-xlsx-converter'
+      path: '/csv-xlsx-converter'
+      fullPath: '/csv-xlsx-converter'
+      preLoaderRoute: typeof WrapCsvXlsxConverterRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/diff-checker': {
+      id: '/_wrap/diff-checker'
+      path: '/diff-checker'
+      fullPath: '/diff-checker'
+      preLoaderRoute: typeof WrapDiffCheckerRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/format-json-online': {
+      id: '/_wrap/format-json-online'
+      path: '/format-json-online'
+      fullPath: '/format-json-online'
+      preLoaderRoute: typeof WrapFormatJsonOnlineRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/heic-to-jpg': {
+      id: '/_wrap/heic-to-jpg'
+      path: '/heic-to-jpg'
+      fullPath: '/heic-to-jpg'
+      preLoaderRoute: typeof WrapHeicToJpgRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/html-minifier': {
+      id: '/_wrap/html-minifier'
+      path: '/html-minifier'
+      fullPath: '/html-minifier'
+      preLoaderRoute: typeof WrapHtmlMinifierRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/image-background-remover': {
+      id: '/_wrap/image-background-remover'
+      path: '/image-background-remover'
+      fullPath: '/image-background-remover'
+      preLoaderRoute: typeof WrapImageBackgroundRemoverRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/image-compressor': {
+      id: '/_wrap/image-compressor'
+      path: '/image-compressor'
+      fullPath: '/image-compressor'
+      preLoaderRoute: typeof WrapImageCompressorRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/image-cropper': {
+      id: '/_wrap/image-cropper'
+      path: '/image-cropper'
+      fullPath: '/image-cropper'
+      preLoaderRoute: typeof WrapImageCropperRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/image-format-converter': {
+      id: '/_wrap/image-format-converter'
+      path: '/image-format-converter'
+      fullPath: '/image-format-converter'
+      preLoaderRoute: typeof WrapImageFormatConverterRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/image-resizer': {
+      id: '/_wrap/image-resizer'
+      path: '/image-resizer'
+      fullPath: '/image-resizer'
+      preLoaderRoute: typeof WrapImageResizerRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/image-to-base64': {
+      id: '/_wrap/image-to-base64'
+      path: '/image-to-base64'
+      fullPath: '/image-to-base64'
+      preLoaderRoute: typeof WrapImageToBase64RouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/image-to-pdf': {
+      id: '/_wrap/image-to-pdf'
+      path: '/image-to-pdf'
+      fullPath: '/image-to-pdf'
+      preLoaderRoute: typeof WrapImageToPdfRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/jpg-to-png': {
+      id: '/_wrap/jpg-to-png'
+      path: '/jpg-to-png'
+      fullPath: '/jpg-to-png'
+      preLoaderRoute: typeof WrapJpgToPngRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/jpg-to-webp': {
+      id: '/_wrap/jpg-to-webp'
+      path: '/jpg-to-webp'
+      fullPath: '/jpg-to-webp'
+      preLoaderRoute: typeof WrapJpgToWebpRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/json-beautifier': {
+      id: '/_wrap/json-beautifier'
+      path: '/json-beautifier'
+      fullPath: '/json-beautifier'
+      preLoaderRoute: typeof WrapJsonBeautifierRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/json-formatter': {
+      id: '/_wrap/json-formatter'
+      path: '/json-formatter'
+      fullPath: '/json-formatter'
+      preLoaderRoute: typeof WrapJsonFormatterRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/json-minifier': {
+      id: '/_wrap/json-minifier'
+      path: '/json-minifier'
+      fullPath: '/json-minifier'
+      preLoaderRoute: typeof WrapJsonMinifierRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/json-pretty-print': {
+      id: '/_wrap/json-pretty-print'
+      path: '/json-pretty-print'
+      fullPath: '/json-pretty-print'
+      preLoaderRoute: typeof WrapJsonPrettyPrintRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/json-to-csv': {
+      id: '/_wrap/json-to-csv'
+      path: '/json-to-csv'
+      fullPath: '/json-to-csv'
+      preLoaderRoute: typeof WrapJsonToCsvRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/json-validator': {
+      id: '/_wrap/json-validator'
+      path: '/json-validator'
+      fullPath: '/json-validator'
+      preLoaderRoute: typeof WrapJsonValidatorRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/lorem-ipsum-generator': {
+      id: '/_wrap/lorem-ipsum-generator'
+      path: '/lorem-ipsum-generator'
+      fullPath: '/lorem-ipsum-generator'
+      preLoaderRoute: typeof WrapLoremIpsumGeneratorRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/optimize-images-for-website': {
+      id: '/_wrap/optimize-images-for-website'
+      path: '/optimize-images-for-website'
+      fullPath: '/optimize-images-for-website'
+      preLoaderRoute: typeof WrapOptimizeImagesForWebsiteRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/pdf-compressor': {
+      id: '/_wrap/pdf-compressor'
+      path: '/pdf-compressor'
+      fullPath: '/pdf-compressor'
+      preLoaderRoute: typeof WrapPdfCompressorRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/pdf-extract-images': {
+      id: '/_wrap/pdf-extract-images'
+      path: '/pdf-extract-images'
+      fullPath: '/pdf-extract-images'
+      preLoaderRoute: typeof WrapPdfExtractImagesRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/pdf-to-jpg': {
+      id: '/_wrap/pdf-to-jpg'
+      path: '/pdf-to-jpg'
+      fullPath: '/pdf-to-jpg'
+      preLoaderRoute: typeof WrapPdfToJpgRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/png-to-jpg': {
+      id: '/_wrap/png-to-jpg'
+      path: '/png-to-jpg'
+      fullPath: '/png-to-jpg'
+      preLoaderRoute: typeof WrapPngToJpgRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/png-to-webp': {
+      id: '/_wrap/png-to-webp'
+      path: '/png-to-webp'
+      fullPath: '/png-to-webp'
+      preLoaderRoute: typeof WrapPngToWebpRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/privacy-first-tools': {
+      id: '/_wrap/privacy-first-tools'
+      path: '/privacy-first-tools'
+      fullPath: '/privacy-first-tools'
+      preLoaderRoute: typeof WrapPrivacyFirstToolsRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/reduce-image-file-size': {
+      id: '/_wrap/reduce-image-file-size'
+      path: '/reduce-image-file-size'
+      fullPath: '/reduce-image-file-size'
+      preLoaderRoute: typeof WrapReduceImageFileSizeRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/reduce-jpg-size': {
+      id: '/_wrap/reduce-jpg-size'
+      path: '/reduce-jpg-size'
+      fullPath: '/reduce-jpg-size'
+      preLoaderRoute: typeof WrapReduceJpgSizeRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/reduce-png-size': {
+      id: '/_wrap/reduce-png-size'
+      path: '/reduce-png-size'
+      fullPath: '/reduce-png-size'
+      preLoaderRoute: typeof WrapReducePngSizeRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/reduce-your-image-size-for-free': {
+      id: '/_wrap/reduce-your-image-size-for-free'
+      path: '/reduce-your-image-size-for-free'
+      fullPath: '/reduce-your-image-size-for-free'
+      preLoaderRoute: typeof WrapReduceYourImageSizeForFreeRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/validate-json-online': {
+      id: '/_wrap/validate-json-online'
+      path: '/validate-json-online'
+      fullPath: '/validate-json-online'
+      preLoaderRoute: typeof WrapValidateJsonOnlineRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/webp-to-jpg': {
+      id: '/_wrap/webp-to-jpg'
+      path: '/webp-to-jpg'
+      fullPath: '/webp-to-jpg'
+      preLoaderRoute: typeof WrapWebpToJpgRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/webp-to-png': {
+      id: '/_wrap/webp-to-png'
+      path: '/webp-to-png'
+      fullPath: '/webp-to-png'
+      preLoaderRoute: typeof WrapWebpToPngRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/word-counter': {
+      id: '/_wrap/word-counter'
+      path: '/word-counter'
+      fullPath: '/word-counter'
+      preLoaderRoute: typeof WrapWordCounterRouteImport
       parentRoute: typeof WrapRoute
     }
   }
