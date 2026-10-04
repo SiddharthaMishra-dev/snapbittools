@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FileDropzone } from "@/components/FileDropzone";
 import { compressPdfClient, PDF_COMPRESS_PRESETS, type PdfCompressPreset } from "@/lib/pdfCompress";
 import { themeClasses as tc } from "@/lib/theme-classes";
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { cn } from "@/lib/utils";
 
 type Status = "idle" | "ready" | "compressing" | "done" | "error";
@@ -119,6 +120,7 @@ export function PdfCompressorTool() {
       setUsedOriginal(result.usedOriginal);
       setPageCount(result.pageCount);
       setStatus("done");
+      reportProcessedFiles("pdf-compressor", 1);
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Compression failed. The PDF may be encrypted or corrupted.");

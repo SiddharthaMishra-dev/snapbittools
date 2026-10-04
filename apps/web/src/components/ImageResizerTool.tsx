@@ -2,6 +2,7 @@ import { IconCircleX, IconDownload, IconRefresh } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { FileDropzone } from "@/components/FileDropzone";
 import { themeClasses as tc } from "@/lib/theme-classes";
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { cn } from "@/lib/utils";
 
 export function ImageResizerTool() {
@@ -120,6 +121,7 @@ export function ImageResizerTool() {
       const outputUrl = URL.createObjectURL(outputBlob);
       setResizedBlob(outputBlob);
       setResizedUrl(outputUrl);
+      reportProcessedFiles("image-resizer", 1);
     } catch (err) {
       setError((err as Error).message || "Resize failed");
     } finally {

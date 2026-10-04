@@ -2,6 +2,7 @@ import { IconCircleX, IconDownload } from "@tabler/icons-react";
 import JSZip from "jszip";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FileDropzone } from "@/components/FileDropzone";
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { ConversionItem } from "@/types/ImageTypes";
 import ImageConverterWorker from "../workers/imageConverter.worker.ts?worker";
 
@@ -103,10 +104,12 @@ export function ImageConverterTool() {
     if (itemsToConvert.length === 0) return;
 
     setIsConverting(true);
+    let completed = 0;
     for (const item of itemsToConvert) {
       try {
         setConversions((prev) => prev.map((conv) => (conv.id === item.id ? { ...conv, status: "converting" as const } : conv)));
         await convertImage(item);
+        completed += 1;
       } catch (error) {
         setConversions((prev) =>
           prev.map((conv) => (conv.id === item.id ? { ...conv, status: "error", error: (error as Error).message } : conv)),
@@ -114,6 +117,7 @@ export function ImageConverterTool() {
       }
     }
 
+    reportProcessedFiles("image-format-converter", completed);
     setIsConverting(false);
   };
 

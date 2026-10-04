@@ -7,6 +7,7 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { getSeoMetadata } from "@/lib/seo";
 
 const faqs = [
@@ -78,6 +79,7 @@ function RouteComponent() {
       const result = reader.result as string;
       setBase64Result(result);
       setCopySuccess(false);
+      reportProcessedFiles("image-to-base64", 1);
     };
     reader.readAsDataURL(file);
   }, []);

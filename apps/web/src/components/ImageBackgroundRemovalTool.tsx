@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { FileDropzone } from "@/components/FileDropzone";
 import { themeClasses as tc } from "@/lib/theme-classes";
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { cn } from "@/lib/utils";
 import type { BackgroundRemovalError, BackgroundRemovalProgress, BackgroundRemovalSuccess } from "@/workers/imageBackgroundRemoval.worker";
 import ImageBackgroundRemovalWorker from "@/workers/imageBackgroundRemoval.worker.ts?worker";
@@ -159,6 +160,7 @@ export function ImageBackgroundRemovalTool() {
           setResultUrl(url);
           setProgress(100);
           setStage("done");
+          reportProcessedFiles("image-background-remover", 1);
           resolve();
         };
 

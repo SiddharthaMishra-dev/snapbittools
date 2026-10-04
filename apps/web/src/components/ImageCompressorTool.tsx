@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { FileDropzone } from "@/components/FileDropzone";
 import { mimeTypeToExtension } from "@/lib/imageCompress";
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import ImageCompressorWorker from "../workers/imageCompressor.worker.ts?worker";
 
 interface CompressedFile {
@@ -124,16 +125,19 @@ export function ImageCompressorTool() {
     if (filesToCompress.length === 0) return;
 
     setIsCompressing(true);
+    let completed = 0;
 
     for (const fileObj of filesToCompress) {
       try {
         setFiles((prev) => prev.map((f) => (f.id === fileObj.id ? { ...f, status: "compressing" } : f)));
         await compressImage(fileObj);
+        completed += 1;
       } catch (error) {
         setFiles((prev) => prev.map((f) => (f.id === fileObj.id ? { ...f, status: "error", error: (error as Error).message } : f)));
       }
     }
 
+    reportProcessedFiles("image-compressor", completed);
     setIsCompressing(false);
   };
 

@@ -18,6 +18,7 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { getSeoMetadata } from "@/lib/seo";
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
@@ -215,15 +216,17 @@ function RouteComponent() {
 
       zip.file("RENAME_SUMMARY.txt", renameSummary);
 
-      // Add renamed files with their new names
+      let renamed = 0;
       validMappings.forEach((mapping) => {
         const originalFile = files.find((f) => f.name === mapping.originalName);
         if (originalFile) {
           zip.file(mapping.newName, originalFile);
+          renamed += 1;
         }
       });
 
       const blob = await zip.generateAsync({ type: "blob" });
+      reportProcessedFiles("bulk-file-renamer", renamed);
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;

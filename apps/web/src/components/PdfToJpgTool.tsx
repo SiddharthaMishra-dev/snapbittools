@@ -12,6 +12,7 @@ import {
   type PdfToImageDpiPreset,
 } from "@/lib/pdfToImages";
 import { themeClasses as tc } from "@/lib/theme-classes";
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { cn } from "@/lib/utils";
 
 type Status = "idle" | "ready" | "converting" | "done" | "error";
@@ -161,6 +162,7 @@ export function PdfToJpgTool() {
         })),
       );
       setStatus("done");
+      reportProcessedFiles("pdf-to-jpg", 1);
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") {
         return;

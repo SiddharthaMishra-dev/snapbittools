@@ -5,6 +5,7 @@ import RelatedTools from "@/components/RelatedTools";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import ToolInfo from "@/components/ToolInfo";
 import { toolContent } from "@/data/toolContent";
+import { reportProcessedFiles } from "@/lib/reportProcessed";
 import { getSeoMetadata } from "@/lib/seo";
 
 const faqs = [
@@ -202,6 +203,7 @@ function RouteComponent() {
         size: bytes.byteLength,
         url,
       });
+      reportProcessedFiles("base64-to-file", 1);
     } catch (decodeError) {
       setResult(null);
       setError(decodeError instanceof Error ? decodeError.message : "Failed to decode Base64 input.");

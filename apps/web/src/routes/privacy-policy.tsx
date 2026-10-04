@@ -17,7 +17,7 @@ export const Route = createFileRoute("/privacy-policy")({
 
 function PrivacyPolicyPage() {
   return (
-    <LegalPage title="Privacy Policy" updated="16 August 2026">
+    <LegalPage title="Privacy Policy" updated="4 October 2026">
       <p>
         SnapBit Tools (<a href="https://snapbittools.com">snapbittools.com</a>) is operated by Siddhartha Mishra. This policy explains what
         happens when you use the site. The core product promise is simple:{" "}
@@ -70,6 +70,10 @@ function PrivacyPolicyPage() {
             <strong>Google Analytics 4</strong> — on the production site only, we load GA4 (measurement ID <code>G-REM5Q61CZV</code>) to
             understand aggregate traffic: page path, approximate location, device, and browser. Analytics does not receive your uploaded
             files or the contents of JSON/CSV you paste into a tool. Development builds do not initialize Analytics.
+          </li>
+          <li>
+            <strong>Processed-file count</strong> — after a tool finishes, the browser sends the tool name and how many files finished.
+            Names, sizes, and file contents are not included. The homepage reads the combined total.
           </li>
         </ul>
         <p>

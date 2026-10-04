@@ -7,6 +7,7 @@ import { AnimatePresence, easeInOut, motion } from "motion/react";
 import { tools } from "@/data/tools";
 
 import PageShell from "@/components/PageShell";
+import { ProcessedCount } from "@/components/ProcessedCount";
 import { HeroScreenshotCanvas } from "@/components/HeroScreenshotCanvas";
 import { getSeoMetadata } from "@/lib/seo";
 import React from "react";
@@ -174,6 +175,10 @@ function App() {
                 <IconChevronRight className="h-4 w-4" />
               </ButtonLink>
             </MagneticButton>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <ProcessedCount />
           </motion.div>
 
           {/* Trust badges */}
