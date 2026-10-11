@@ -52,27 +52,30 @@ const config = defineConfig({
       routeRules: {
         "/privacy": { redirect: { to: "/privacy-policy", status: 301 } },
       },
-      hooks: {
-        // Register after the preset's compiled hook so config.json already exists.
-        "build:before"(nitroApp) {
-          nitroApp.hooks.hook("compiled", async () => {
-            const { readFile, writeFile } = await import("node:fs/promises");
-            const { resolve } = await import("node:path");
-            const configPath = resolve(nitroApp.options.output.dir, "config.json");
-            const config = JSON.parse(await readFile(configPath, "utf8")) as {
-              routes?: Array<{ src?: string; headers?: { Location?: string } }>;
-            };
-            let changed = false;
-            for (const route of config.routes ?? []) {
-              if (route.src === "/privacy" && route.headers?.Location === "/privacy-policy") {
-                route.src = "^/privacy$";
-                changed = true;
+      // A config `hooks` object replaces the Vercel preset hook that fills in `{format}`.
+      // A module appends instead, so the preset entry still resolves.
+      modules: [
+        {
+          setup(nitroApp) {
+            nitroApp.hooks.hook("compiled", async () => {
+              const { readFile, writeFile } = await import("node:fs/promises");
+              const { resolve } = await import("node:path");
+              const configPath = resolve(nitroApp.options.output.dir, "config.json");
+              const config = JSON.parse(await readFile(configPath, "utf8")) as {
+                routes?: Array<{ src?: string; headers?: { Location?: string } }>;
+              };
+              let changed = false;
+              for (const route of config.routes ?? []) {
+                if (route.src === "/privacy" && route.headers?.Location === "/privacy-policy") {
+                  route.src = "^/privacy$";
+                  changed = true;
+                }
               }
-            }
-            if (changed) await writeFile(configPath, JSON.stringify(config, null, 2));
-          });
+              if (changed) await writeFile(configPath, JSON.stringify(config, null, 2));
+            });
+          },
         },
-      },
+      ],
     }),
     viteReact(),
   ],
