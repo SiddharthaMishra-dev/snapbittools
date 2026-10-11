@@ -98,10 +98,10 @@ export const Route = createFileRoute("/_wrap/reduce-your-image-size-for-free")({
           url: "https://snapbittools.com",
           logo: {
             "@type": "ImageObject",
-            url: "https://snapbittools.com/logo.png",
+            url: "https://snapbittools.com/logo512.png",
           },
         },
-        image: "https://snapbittools.com/screenshot.png",
+        image: "https://snapbittools.com/og.png",
         mainEntityOfPage: {
           "@type": "WebPage",
           "@id": "https://snapbittools.com/reduce-your-image-size-for-free",

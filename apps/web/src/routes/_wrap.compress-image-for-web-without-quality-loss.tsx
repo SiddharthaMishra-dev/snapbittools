@@ -256,9 +256,9 @@ export const Route = createFileRoute("/_wrap/compress-image-for-web-without-qual
           "@type": "Organization",
           name: "SnapBit Tools",
           url: SITE,
-          logo: { "@type": "ImageObject", url: `${SITE}/logo.png` },
+          logo: { "@type": "ImageObject", url: `${SITE}/logo512.png` },
         },
-        image: `${SITE}/screenshot.png`,
+        image: `${SITE}/og.png`,
         mainEntityOfPage: {
           "@type": "WebPage",
           "@id": `${SITE}${PATH}`,

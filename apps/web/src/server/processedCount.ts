@@ -9,7 +9,7 @@ export const getProcessedCount = createServerFn({ method: "GET" }).handler(async
 });
 
 export const reportProcessed = createServerFn({ method: "POST" })
-  .inputValidator(parseProcessedReport)
+  .validator(parseProcessedReport)
   .handler(async ({ data }): Promise<ProcessedCountSnapshot> => {
     const { recordProcessedCount } = await import("./processedCountStore");
     const now = Date.now();

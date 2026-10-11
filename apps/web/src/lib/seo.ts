@@ -17,9 +17,16 @@ export type SeoMetadata = {
   canonicalUrl?: string;
 };
 
+export const SITE_ORIGIN = "https://snapbittools.com";
+/** Square mark that actually exists in /public. There is no logo.png. */
+export const SITE_LOGO_URL = `${SITE_ORIGIN}/logo512.png`;
+/** 1200×630 social card. og.png is the same frame as a 1.3 MB PNG; crawlers get this JPEG. */
+export const SITE_SOCIAL_IMAGE_URL = `${SITE_ORIGIN}/og.png`;
+
 /**
  * Near-duplicate pSEO landers. Keep the URLs live for users, but tell crawlers
  * to treat the pillar as the indexable version until copy is unique.
+ * These paths, plus /privacy, are omitted from sitemap.xml in vite.config.ts.
  */
 export const CANONICAL_TARGETS: Record<string, string> = {
   "/compress-image-online": "/image-compressor",
@@ -43,7 +50,7 @@ export function getSeoMetadata(config: SeoMetadata) {
     description,
     keywords,
     url,
-    image = "https://snapbittools.com/screenshot.png",
+    image = SITE_SOCIAL_IMAGE_URL,
     type = "website",
     faqs,
     breadcrumbs,
@@ -51,7 +58,7 @@ export function getSeoMetadata(config: SeoMetadata) {
     canonicalUrl,
   } = config;
 
-  const baseUrl = "https://snapbittools.com";
+  const baseUrl = SITE_ORIGIN;
   const fullUrl = url.startsWith("http") ? url : `${baseUrl}${url}`;
   const canonicalPath = canonicalUrl ?? CANONICAL_TARGETS[url] ?? url;
   const canonicalHref = canonicalPath.startsWith("http") ? canonicalPath : `${baseUrl}${canonicalPath}`;
@@ -64,6 +71,9 @@ export function getSeoMetadata(config: SeoMetadata) {
     { property: "og:description", content: description },
     { property: "og:url", content: fullUrl },
     { property: "og:image", content: image },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
+    { property: "og:image:alt", content: "SnapBit Tools" },
     { property: "og:type", content: type === "software" ? "website" : type },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
@@ -162,14 +172,14 @@ export function getOrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "SnapBit Tools",
-    url: "https://snapbittools.com",
-    logo: "https://snapbittools.com/logo.png",
+    url: SITE_ORIGIN,
+    logo: SITE_LOGO_URL,
     description: "Free, private, and fast browser-based utility tools for developers, designers, and content creators",
     sameAs: ["https://github.com/SiddharthaMishra-dev/snapbittools"],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "General",
-      url: "https://snapbittools.com",
+      url: SITE_ORIGIN,
     },
     areaServed: "Worldwide",
     availableLanguage: "English",

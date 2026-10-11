@@ -57,6 +57,18 @@ export const Route = createRootRoute({
         content: "https://snapbittools.com/og.png",
       },
       {
+        property: "og:image:width",
+        content: "1200",
+      },
+      {
+        property: "og:image:height",
+        content: "630",
+      },
+      {
+        property: "og:image:alt",
+        content: "SnapBit Tools",
+      },
+      {
         name: "twitter:card",
         content: "summary_large_image",
       },

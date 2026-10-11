@@ -199,9 +199,9 @@ export const Route = createFileRoute("/_wrap/best-image-converter-tool-2026")({
           "@type": "Organization",
           name: "SnapBit Tools",
           url: SITE,
-          logo: { "@type": "ImageObject", url: `${SITE}/logo.png` },
+          logo: { "@type": "ImageObject", url: `${SITE}/logo512.png` },
         },
-        image: `${SITE}/screenshot.png`,
+        image: `${SITE}/og.png`,
         mainEntityOfPage: {
           "@type": "WebPage",
           "@id": `${SITE}/best-image-converter-tool-2026`,
