@@ -108,10 +108,8 @@ function RouteComponent() {
         {/* <Breadcrumbs /> */}
         <div className="w-full max-w-5xl mt-6  mb-12 text-center mx-auto">
           <div className="text-center">
-            <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
-              Image to <span className="text-brand-primary">Base64</span> Converter
-            </h1>
-            <p className="text-md text-theme-muted">Convert images to Base64 instantly. 100% private—no uploads, ever.</p>
+            <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Image to Base64 Converter</h1>
+            {/* <p className="text-md text-theme-muted">Convert images to Base64 instantly. 100% private—no uploads, ever.</p> */}
           </div>
         </div>
 

@@ -187,10 +187,8 @@ function LoremIpsumComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
-            Lorem <span className="text-brand-primary">Ipsum</span> Generator
-          </h1>
-          <p className="text-md text-theme-body">Instant placeholder text for your next big project.</p>
+          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Lorem Ipsum Generator</h1>
+          {/* <p className="text-md text-theme-body">Instant placeholder text for your next big project.</p> */}
         </div>
 
         <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">

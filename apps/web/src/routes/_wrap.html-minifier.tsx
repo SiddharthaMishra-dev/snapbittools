@@ -221,12 +221,10 @@ function RouteComponent() {
         {/* <Breadcrumbs /> */}
 
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
-            HTML <span className="text-brand-primary">Minifier</span>
-          </h1>
-          <p className="text-md text-theme-body">
+          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">HTML Minifier</h1>
+          {/* <p className="text-md text-theme-body">
             Minify HTML instantly by removing comments and unnecessary spaces in a private workflow.
-          </p>
+          </p> */}
         </div>
 
         <main className="flex-1 max-w-7xl w-full mx-auto space-y-6">

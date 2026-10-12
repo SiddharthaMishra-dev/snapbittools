@@ -5,7 +5,6 @@ import ReactGA from "react-ga4";
 
 import Header from "../components/Header";
 import { getOrganizationSchema } from "../lib/seo";
-import { SidebarProvider } from "../lib/sidebar";
 import { ThemeProvider, themeInitScript } from "../lib/theme";
 
 import appCss from "../styles.css?url";
@@ -159,10 +158,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ThemeProvider>
-          <SidebarProvider>
-            <Header />
-            {children}
-          </SidebarProvider>
+          <Header />
+          {children}
         </ThemeProvider>
         <TanStackDevtools
           config={{

@@ -54,10 +54,8 @@ export function RouteComponent() {
 
         {/* Header */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
-            JSON <span className="text-brand-primary">Formatter</span>
-          </h1>
-          <p className="text-md text-theme-body">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p>
+          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">JSON Formatter</h1>
+          {/* <p className="text-md text-theme-body">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p> */}
         </div>
 
         <JsonFormatterTool />

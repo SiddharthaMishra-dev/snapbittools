@@ -85,12 +85,10 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-3">
-            Diff <span className="text-brand-primary">Checker</span>
-          </h1>
-          <p className="text-md text-theme-body max-w-2xl mx-auto">
+          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Diff Checker</h1>
+          {/* <p className="text-md text-theme-body max-w-2xl mx-auto">
             Pinpoint changes between two text versions instantly. Private, secure, and processing entirely in your browser.
-          </p>
+          </p> */}
         </div>
 
         {/* Action Bar */}

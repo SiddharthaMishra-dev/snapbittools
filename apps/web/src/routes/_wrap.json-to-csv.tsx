@@ -226,10 +226,8 @@ function RouteComponent() {
         {/* <Breadcrumbs /> */}
         {/* Header */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
-            JSON to <span className="text-brand-primary">CSV</span> Converter
-          </h1>
-          <p className="text-md text-theme-body">Transform JSON data into CSV content securely in your browser.</p>
+          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">JSON to CSV Converter</h1>
+          {/* <p className="text-md text-theme-body">Transform JSON data into CSV content securely in your browser.</p> */}
         </div>
 
         {/* Main Content */}

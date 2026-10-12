@@ -20,7 +20,6 @@ interface ImageItem {
 import { getSeoMetadata } from "@/lib/seo";
 import { themeClasses as tc } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
-import Breadcrumbs from "@/components/Breadcrumbs";
 
 const faqs = [
   {
@@ -191,10 +190,10 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
-            Image to <span className="text-brand-primary">PDF</span>
+          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">
+            Image to PDF
           </h1>
-          <p className="text-md text-theme-body">Convert images to PDF instantly. Reorder, resize & compress. 100% private—no uploads.</p>
+          {/* <p className="text-md text-theme-body">Convert images to PDF instantly. Reorder, resize & compress. 100% private—no uploads.</p> */}
         </div>
 
         <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
@@ -208,7 +207,7 @@ function RouteComponent() {
               multiple
               onFiles={processFiles}
               className="mb-6"
-            />
+          />
 
             {/* Controls & List */}
             {files.length > 0 && (

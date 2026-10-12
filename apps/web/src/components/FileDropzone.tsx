@@ -63,7 +63,7 @@ export function FileDropzone({
       <IconCloudUpload className={cn("h-14 w-14 mx-auto mb-4 transition-colors", isDragging ? "text-brand-primary" : "text-theme-muted")} />
       <h2 className="text-2xl font-bold text-theme-heading mb-2">{title}</h2>
       <p className="text-theme-body mb-5">{description}</p>
-      <button type="button" onClick={() => inputRef.current?.click()} disabled={disabled} className={cn(tc.btnPrimary, "px-6 py-3")}>
+      <button type="button" onClick={() => inputRef.current?.click()} disabled={disabled} className={cn(tc.btnPrimary, "px-12 py-4 text-xl")}>
         {buttonLabel}
       </button>
       <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-theme-muted">

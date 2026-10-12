@@ -236,10 +236,8 @@ function RouteComponent() {
     <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
       <div className="w-full max-w-5xl mt-6 mb-10 text-center mx-auto">
         <div className="text-center">
-          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
-            Base64 to <span className="text-brand-primary">File</span> Decoder
-          </h1>
-          <p className="text-md text-theme-body">Decode any Base64 string back to its original file format. 100% private in-browser.</p>
+          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Base64 to File Decoder</h1>
+          {/* <p className="text-md text-theme-body">Decode any Base64 string back to its original file format. 100% private in-browser.</p> */}
         </div>
       </div>
 

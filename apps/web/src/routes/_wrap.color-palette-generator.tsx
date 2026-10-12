@@ -79,12 +79,10 @@ export function RouteComponent() {
     <div className="min-h-screen py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         <div className="text-center my-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
-            Color <span className="text-brand-primary">Palette</span> Generator
-          </h1>
-          <p className="text-md text-theme-body">
+          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Color Palette Generator</h1>
+          {/* <p className="text-md text-theme-body">
             Generate harmonious color palettes using color theory. Random, shades, brand & more. Export as CSS, JSON, or Tailwind.
-          </p>
+          </p> */}
         </div>
 
         <ColorPaletteTool />
