@@ -190,7 +190,7 @@ function RouteComponent() {
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
         <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-theme-heading mb-2">
             Image to PDF
           </h1>
           {/* <p className="text-md text-theme-body">Convert images to PDF instantly. Reorder, resize & compress. 100% private—no uploads.</p> */}
@@ -205,7 +205,7 @@ function RouteComponent() {
               buttonLabel="Select Images"
               accept="image/*"
               multiple
-              onFiles={processFiles}
+              onFiles={processFiles} 
               className="mb-6"
           />
 

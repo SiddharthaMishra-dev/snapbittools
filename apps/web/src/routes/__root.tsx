@@ -8,7 +8,8 @@ import { getOrganizationSchema } from "../lib/seo";
 import { ThemeProvider, themeInitScript } from "../lib/theme";
 
 import appCss from "../styles.css?url";
-import googleSansLatin from "@fontsource-variable/google-sans/files/google-sans-latin-wght-normal.woff2?url";
+import geistLatin from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import { useEffect } from "react";
 
 export const Route = createRootRoute({
@@ -122,7 +123,14 @@ export const Route = createRootRoute({
       },
       {
         rel: "preload",
-        href: googleSansLatin,
+        href: geistLatin,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: interLatin,
         as: "font",
         type: "font/woff2",
         crossOrigin: "anonymous",

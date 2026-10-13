@@ -118,9 +118,9 @@ function App() {
           {/* Headline: one static H1 for crawlers/AT; cycling badges are decorative */}
           <motion.div variants={itemVariants} className="relative">
             <h1 className="sr-only">Free, Private & Fast Image & Data Tools.</h1>
-            <div
+            <h1
               aria-hidden="true"
-              className="text-4xl md:text-4xl lg:text-4xl font-extrabold text-theme-heading leading-[1.08] tracking-tight"
+              className="text-4xl md:text-4xl lg:text-4xl font-bold text-theme-heading leading-[1.08] tracking-tighter"
             >
               <motion.span
                 animate={{ width: wordWidth ? wordWidth + widthSafetyBuffer : "auto" }}
@@ -141,7 +141,7 @@ function App() {
                 </AnimatePresence>
               </motion.span>
               Image, PDF &amp; Data Tools.
-            </div>
+            </h1>
             <span className="pointer-events-none absolute -z-10 opacity-0 font-extrabold" aria-hidden="true">
               {rotatingWords.map((word, idx) => (
                 <span

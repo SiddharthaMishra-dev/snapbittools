@@ -1,11 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@fontsource-variable/google-sans";
+@import "@fontsource-variable/geist/wght.css";
+@import "@fontsource-variable/inter/wght.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: "Google Sans Variable", sans-serif;
+  --font-sans: "Geist Variable", sans-serif;
+  --font-heading: "Inter Variable", sans-serif;
   --color-brand-primary: var(--brand-primary);
   --color-brand-hover: var(--brand-hover);
   --color-brand-light: var(--brand-light);
@@ -347,7 +349,15 @@ code {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-theme-page text-theme-heading;
+    @apply bg-theme-page text-theme-heading font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
   }
 }
 
