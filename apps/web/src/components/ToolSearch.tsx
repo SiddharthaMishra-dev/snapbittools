@@ -82,7 +82,7 @@ export function ToolSearch() {
       >
         <IconSearch size={18} stroke={1.75} />
         <span className="hidden xl:inline text-sm font-medium">Search</span>
-        <kbd className="hidden md:inline-flex items-center rounded-md border border-brand-primary/20 bg-brand-primary/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-brand-primary">
+        <kbd className="hidden lg:inline-flex items-center rounded-md border border-brand-primary/20 bg-brand-primary/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-brand-primary">
           {shortcutLabel(isMac)}
         </kbd>
       </button>

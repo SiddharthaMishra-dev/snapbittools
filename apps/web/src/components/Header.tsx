@@ -1,7 +1,18 @@
 import React from "react";
 
-import { IconApps, IconArticle, IconBraces, IconFileTypePdf, IconPhoto, IconTools } from "@tabler/icons-react";
+import {
+  IconApps,
+  IconArticle,
+  IconBraces,
+  IconChevronDown,
+  IconFileTypePdf,
+  IconMenu2,
+  IconPhoto,
+  IconTools,
+  IconX,
+} from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
+import { easeInOut, motion } from "motion/react";
 
 import ThemeToggle from "@/components/ThemeToggle";
 import { ToolSearch } from "@/components/ToolSearch";
@@ -44,7 +55,6 @@ function CategoryMenu({
   const categoryTools = getToolsByCategory(category);
   const Icon = categoryIcons[category];
   const active = pathname === meta.href || categoryTools.some((tool) => pathname === tool.href);
-  const alignRight = category === "Data" || category === "Utility";
 
   return (
     <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
@@ -53,20 +63,13 @@ function CategoryMenu({
         className={cn(linkCls, (active || open) && activeCls)}
         aria-expanded={open}
         aria-haspopup="true"
-        onClick={(event) => {
-          if (window.matchMedia("(hover: none)").matches) {
-            event.preventDefault();
-            if (open) onClose();
-            else onOpen();
-          }
-        }}
       >
         <Icon size={18} />
-        <span className="hidden md:inline">{meta.navLabel}</span>
+        <span>{meta.navLabel}</span>
       </Link>
       {open && (
-        <div className={cn("absolute top-full z-50 pt-2", alignRight ? "right-0" : "left-0")}>
-          <ul className="min-w-56 rounded-xl border border-theme-border bg-theme-surface py-1.5 shadow-xl">
+        <div className="absolute top-full left-1/2 z-50 w-56 -translate-x-1/2 pt-2">
+          <ul className="rounded-xl border border-theme-border bg-theme-surface py-1.5 shadow-xl">
             {categoryTools.map((tool) => {
               const ToolIcon = tool.icon;
               const current = pathname === tool.href;
@@ -96,30 +99,39 @@ function CategoryMenu({
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [openCategory, setOpenCategory] = React.useState<ToolCategory | null>(null);
-  const menuRef = React.useRef<HTMLDivElement>(null);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileCategory, setMobileCategory] = React.useState<ToolCategory | null>(null);
+  const headerRef = React.useRef<HTMLElement>(null);
   const { pathname } = useLocation();
+  const [playHomeIntro] = React.useState(() => pathname === "/");
 
   React.useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 0);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   React.useEffect(() => {
     setOpenCategory(null);
+    setMobileOpen(false);
+    setMobileCategory(null);
   }, [pathname]);
 
   React.useEffect(() => {
-    if (!openCategory) return;
+    if (!openCategory && !mobileOpen) return;
 
     const onPointerDown = (event: PointerEvent) => {
-      if (!menuRef.current?.contains(event.target as Node)) setOpenCategory(null);
+      if (!headerRef.current?.contains(event.target as Node)) {
+        setOpenCategory(null);
+        setMobileOpen(false);
+      }
     };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpenCategory(null);
+      if (event.key === "Escape") {
+        setOpenCategory(null);
+        setMobileOpen(false);
+      }
     };
 
     document.addEventListener("pointerdown", onPointerDown);
@@ -128,57 +140,152 @@ const Header: React.FC = () => {
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [openCategory]);
+  }, [openCategory, mobileOpen]);
 
-  const navBg = isScrolled
-    ? "bg-theme-nav-bg backdrop-blur-md border-theme-nav-border shadow-sm"
-    : "bg-theme-nav-bg-transparent backdrop-blur-sm border-transparent";
+  React.useEffect(() => {
+    if (!mobileOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [mobileOpen]);
 
   return (
-    <nav
-      className={cn(
-        "w-full mx-auto rounded-lg fixed top-2 left-0 right-0 z-50 transition-all duration-300 border-b",
-        navBg,
-      )}
+    <motion.header
+      ref={headerRef}
+      className="fixed inset-x-0 top-0 z-50 bg-gray-200 dark:bg-theme-nav-bg"
+      initial={playHomeIntro ? { opacity: 0 } : false}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: easeInOut }}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between h-16 gap-3">
-          <div className="flex items-center gap-2 shrink-0">
-            <Link to="/" className="flex items-center gap-2 no-underline">
-              <img src="/logo192.png" alt="SnapBit Tools" width={28} height={28} className="w-7 h-7" />
-              <span className="text-sm font-bold text-theme-heading hidden sm:inline">SnapBit Tools</span>
-            </Link>
-          </div>
+      <div
+        className={cn(
+          "grid h-16 grid-cols-[1fr_auto] items-center gap-3 border-b bg-theme-nav-bg px-4 backdrop-blur-md transition-colors md:px-6 lg:grid-cols-[1fr_auto_1fr]",
+          isScrolled ? "border-theme-nav-border" : "border-transparent",
+        )}
+      >
+        <Link to="/" className="col-start-1 flex w-fit items-center gap-2 justify-self-start whitespace-nowrap no-underline">
+          <img src="/logo192.png" alt="" width={28} height={28} className="h-7 w-7" />
+          <span className="text-sm font-bold text-theme-heading">SnapBit Tools</span>
+        </Link>
 
-          <div className="flex items-center min-w-0 gap-1">
-            <div ref={menuRef} className="flex items-center gap-0.5 lg:gap-1 min-w-0">
-              {TOOL_CATEGORY_ORDER.map((category) => (
-                <CategoryMenu
-                  key={category}
-                  category={category}
-                  pathname={pathname}
-                  open={openCategory === category}
-                  onOpen={() => setOpenCategory(category)}
-                  onClose={() => setOpenCategory((current) => (current === category ? null : current))}
-                />
-              ))}
-              <Link to="/tools" className={cn(linkCls, pathname === "/tools" && activeCls)}>
-                <IconApps size={18} />
-                <span className="hidden lg:inline">All</span>
-              </Link>
-              <Link to="/blogs" className={cn(linkCls, pathname === "/blogs" && activeCls)}>
-                <IconArticle size={18} />
-                <span className="hidden lg:inline">Blogs</span>
-              </Link>
-            </div>
-            <div className="flex items-center gap-1 shrink-0">
-              <ToolSearch />
-              <ThemeToggle className="ml-0.5" />
-            </div>
-          </div>
+        <nav aria-label="Tools" className="hidden items-center gap-0.5 lg:col-start-2 lg:flex">
+          {TOOL_CATEGORY_ORDER.map((category) => (
+            <CategoryMenu
+              key={category}
+              category={category}
+              pathname={pathname}
+              open={openCategory === category}
+              onOpen={() => setOpenCategory(category)}
+              onClose={() => setOpenCategory((current) => (current === category ? null : current))}
+            />
+          ))}
+          <Link to="/tools" className={cn(linkCls, pathname === "/tools" && activeCls)}>
+            <IconApps size={18} />
+            <span>All</span>
+          </Link>
+          <Link to="/blogs" className={cn(linkCls, pathname === "/blogs" && activeCls)}>
+            <IconArticle size={18} />
+            <span>Blogs</span>
+          </Link>
+        </nav>
+
+        <div className="col-start-2 flex items-center justify-self-end gap-1.5 lg:col-start-3">
+          <ToolSearch />
+          <ThemeToggle className="ml-0.5 hidden lg:inline-flex" />
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-theme-heading hover:bg-theme-nav-link-hover-bg lg:hidden"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((open) => !open)}
+          >
+            {mobileOpen ? <IconX size={22} /> : <IconMenu2 size={22} />}
+          </button>
         </div>
       </div>
-    </nav>
+
+      {mobileOpen && (
+        <nav
+          id="mobile-nav"
+          aria-label="Tools"
+          className="absolute inset-x-0 top-16 max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-theme-border bg-theme-nav-bg px-4 py-3 shadow-lg lg:hidden"
+        >
+          <ul className="space-y-1">
+            {TOOL_CATEGORY_ORDER.map((category) => {
+              const meta = toolCategories[category];
+              const categoryTools = getToolsByCategory(category);
+              const Icon = categoryIcons[category];
+              const expanded = mobileCategory === category;
+              const active = pathname === meta.href || categoryTools.some((tool) => pathname === tool.href);
+              return (
+                <li key={category}>
+                  <button
+                    type="button"
+                    className={cn(
+                      "flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-theme-nav-link",
+                      (active || expanded) && activeCls,
+                    )}
+                    aria-expanded={expanded}
+                    onClick={() => setMobileCategory((current) => (current === category ? null : category))}
+                  >
+                    <Icon size={18} />
+                    <span className="flex-1">{meta.navLabel}</span>
+                    <IconChevronDown size={16} className={cn("transition-transform", expanded && "rotate-180")} />
+                  </button>
+                  {expanded && (
+                    <ul className="mb-1 ml-3 space-y-0.5 border-l border-theme-border pl-2">
+                      {categoryTools.map((tool) => {
+                        const ToolIcon = tool.icon;
+                        const current = pathname === tool.href;
+                        return (
+                          <li key={tool.slug}>
+                            <Link
+                              to={tool.href}
+                              className={cn(
+                                "flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm text-theme-body no-underline hover:bg-theme-surface-muted",
+                                current && "bg-[#dbeafe] font-medium text-[#1d4ed8] dark:bg-[#1e3a8a]/40 dark:text-[#bfdbfe]",
+                              )}
+                              aria-current={current ? "page" : undefined}
+                            >
+                              <ToolIcon size={18} stroke={1.75} className={cn("shrink-0", categoryIconColor[category])} />
+                              <span>{tool.name}</span>
+                            </Link>
+                          </li>
+                        );
+                      })}
+                      <li>
+                        <Link to={meta.href} className="block rounded-md px-2.5 py-2 text-sm font-medium text-brand-primary no-underline">
+                          All {meta.navLabel.toLowerCase()} tools
+                        </Link>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
+            <li>
+              <Link to="/tools" className={cn(linkCls, "px-3 py-2.5", pathname === "/tools" && activeCls)}>
+                <IconApps size={18} />
+                All tools
+              </Link>
+            </li>
+            <li>
+              <Link to="/blogs" className={cn(linkCls, "px-3 py-2.5", pathname === "/blogs" && activeCls)}>
+                <IconArticle size={18} />
+                Blogs
+              </Link>
+            </li>
+          </ul>
+          <div className="mt-3 flex items-center justify-between border-t border-theme-border px-3 pt-3">
+            <span className="text-sm font-medium text-theme-heading">Theme</span>
+            <ThemeToggle />
+          </div>
+        </nav>
+      )}
+    </motion.header>
   );
 };
 

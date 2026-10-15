@@ -55,11 +55,14 @@ function App() {
   const [active, setActive] = React.useState(0);
   const [wordWidth, setWordWidth] = React.useState<number | null>(null);
 
+  const heroStart = 0.16;
+  const heroStagger = 0.12;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.15, duration: 0.5, ease: easeInOut },
+      transition: { staggerChildren: heroStagger, delayChildren: heroStart, duration: 0.5, ease: easeInOut },
     },
   };
 
@@ -197,9 +200,9 @@ function App() {
 
         {/* ── App screenshot with frame ── */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.55, ease: easeInOut }}
+          transition={{ duration: 0.55, delay: heroStart + heroStagger * 6, ease: easeInOut }}
           className="relative mt-14 w-full max-w-5xl mx-auto"
         >
           <div className="hero-preview-wrap pb-8">
@@ -247,12 +250,7 @@ function App() {
             </Link>
           </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {featuredTools.map((tool) => {
               const Icon = tool.icon;
               return (
@@ -282,7 +280,7 @@ function App() {
                 </Link>
               );
             })}
-          </motion.div>
+          </div>
         </section>
 
         {/* Why SnapBit */}
