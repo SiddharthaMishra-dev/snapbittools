@@ -33,6 +33,13 @@ const categoryIconColor: Record<ToolCategory, string> = {
   Utility: "text-[#059669]",
 };
 
+const categoryIconTile: Record<ToolCategory, string> = {
+  Images: "bg-[#2563eb] shadow-[0_3px_8px_rgba(37,99,235,0.45)]",
+  PDF: "bg-[#e11d48] shadow-[0_3px_8px_rgba(225,29,72,0.4)]",
+  Data: "bg-[#7c3aed] shadow-[0_3px_8px_rgba(124,58,237,0.4)]",
+  Utility: "bg-[#059669] shadow-[0_3px_8px_rgba(5,150,105,0.4)]",
+};
+
 const linkCls =
   "text-theme-nav-link hover:text-brand-primary hover:bg-theme-nav-link-hover-bg flex items-center gap-2 px-2.5 lg:px-3 py-2 no-underline text-sm font-medium rounded-lg transition-all duration-200 ease-in-out shrink-0";
 
@@ -68,8 +75,8 @@ function CategoryMenu({
         <span>{meta.navLabel}</span>
       </Link>
       {open && (
-        <div className="absolute top-full left-1/2 z-50 w-56 -translate-x-1/2 pt-2">
-          <ul className="rounded-xl border border-theme-border bg-theme-surface py-1.5 shadow-xl">
+        <div className="absolute top-full left-1/2 z-50 w-72 -translate-x-1/2 pt-2">
+          <ul className="rounded-xl border border-theme-border bg-theme-surface py-2 shadow-xl">
             {categoryTools.map((tool) => {
               const ToolIcon = tool.icon;
               const current = pathname === tool.href;
@@ -78,12 +85,19 @@ function CategoryMenu({
                   <Link
                     to={tool.href}
                     className={cn(
-                      "mx-1.5 flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm text-theme-body no-underline hover:bg-theme-surface-muted",
+                      "mx-2 flex items-center gap-3 rounded-lg px-3 py-2.5 text-base text-theme-body no-underline hover:bg-theme-surface-muted",
                       current && "bg-[#dbeafe] font-medium text-[#1d4ed8] dark:bg-[#1e3a8a]/40 dark:text-[#bfdbfe]",
                     )}
                     aria-current={current ? "page" : undefined}
                   >
-                    <ToolIcon size={18} stroke={1.75} className={cn("shrink-0", categoryIconColor[category])} />
+                    <span
+                      className={cn(
+                        "flex size-9 shrink-0 items-center justify-center rounded-lg text-white",
+                        categoryIconTile[category],
+                      )}
+                    >
+                      <ToolIcon size={20} stroke={1.75} />
+                    </span>
                     <span>{tool.name}</span>
                   </Link>
                 </li>
