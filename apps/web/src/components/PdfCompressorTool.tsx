@@ -144,8 +144,8 @@ export function PdfCompressorTool() {
   const progressPct = progress.total > 0 ? Math.round((progress.current / progress.total) * 100) : 0;
 
   return (
-    <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-      <div className="rounded-xl shadow-lg px-0 py-4 sm:p-8 w-full max-w-5xl border border-theme-border bg-theme-surface">
+    <div className="w-full max-w-5xl flex-1 flex flex-col items-center mx-auto">
+      <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
         {!sourceFile ? (
           <FileDropzone
             title="Upload PDF"

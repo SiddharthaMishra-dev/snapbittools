@@ -654,4 +654,88 @@ Every palette includes full WCAG 2.1 contrast ratio analysis. The color detail t
       "Generating shades for hover, active, and disabled states",
     ],
   },
+
+  "merge-pdf": {
+    slug: "merge-pdf",
+    title: "Merge PDF - Combine PDF Files Online Without Uploading",
+    intro: `Merge PDF files free in your browser with SnapBit. Add two or more documents, drag them into the order you want, and download one PDF. Pages are copied on your device, so the file is never uploaded.
+
+People combine PDFs when a report, a signed form, and a scan need to travel as a single attachment. Most merge sites ask you to upload those files first. SnapBit reads each PDF locally, copies the pages in the order you set, and builds a new document in memory. Selectable text and embedded images stay in the result instead of being flattened into pictures.
+
+Use it when the source files are already PDFs. If you are starting from photos, Image to PDF builds a document from images. Split PDF and Reorder PDF handle the opposite job: breaking one file apart or dropping pages you do not need.
+
+Password-protected PDFs cannot be merged until the password is removed. Very large files depend on the memory available in your browser, and the page list shows a count for each file before you start.`,
+    benefits: [
+      "Merge PDFs entirely in the browser — no uploads",
+      "Drag files to set the page order",
+      "Copies real PDF pages, so text stays selectable",
+      "Shows each file’s page count before merging",
+      "Free, with no account required",
+      "Built for private documents that should stay on your device",
+    ],
+    useCases: [
+      "Combining a cover letter and a resume into one PDF",
+      "Joining scanned chapters into a single document",
+      "Attaching invoices and receipts as one file",
+      "Merging signed forms with supporting pages",
+      "Building one handout from several exported PDFs",
+      "Preparing a packet without sending files to a server",
+    ],
+  },
+
+  "split-pdf": {
+    slug: "split-pdf",
+    title: "Split PDF - Separate PDF Pages Online Without Uploading",
+    intro: `Split a PDF free in your browser. Save every page as its own PDF, or cut the document into two files after a page you choose. SnapBit downloads a ZIP and never uploads the original.
+
+A long PDF is awkward when you only need one form, one slide, or the pages before a signature block. Cloud splitters require the whole file first. SnapBit copies the pages you asked for into new PDFs on your device, then packs them into a ZIP so you can save them in one step.
+
+Choose “every page” when each page should stand alone. Choose “two PDFs” when the file should break once — for example, pages 1–3 in the first file and the rest in the second. The slider sets the last page that stays in part 1.
+
+The new files are copies of the original pages, so text remains selectable. A one-page PDF has nothing to split. Password-protected files need the password removed first. To drop some pages and keep the rest in one PDF, use Reorder PDF instead.`,
+    benefits: [
+      "Split a PDF in the browser — no uploads",
+      "Download one PDF per page in a ZIP",
+      "Or cut the file into two PDFs after any page",
+      "Keeps selectable text and original page content",
+      "Free, with no account required",
+      "Useful when only part of a document should be shared",
+    ],
+    useCases: [
+      "Sending a single form page from a longer packet",
+      "Separating slides that were exported as one PDF",
+      "Splitting a scan into files before and after a signature",
+      "Extracting each page of a booklet into its own PDF",
+      "Breaking a report so each section can be filed separately",
+      "Sharing part of a document without uploading it",
+    ],
+  },
+
+  "reorder-pdf": {
+    slug: "reorder-pdf",
+    title: "Reorder PDF Pages - Rearrange and Delete Pages Without Uploading",
+    intro: `Reorder and delete PDF pages free in your browser. SnapBit shows a preview of each page so you can drag them into a new order, remove pages you do not need, and download one PDF. The original file stays on your device.
+
+Page order is often wrong after a scan, or a packet includes a blank sheet and a page that should not be shared. Uploading that file to rearrange it is unnecessary. SnapBit draws small previews locally, then copies the pages you kept — in the order on screen — into a new PDF. The previews are only a guide. The download is still the original page content, so text stays selectable.
+
+Arrows next to each page move it earlier or later when dragging is awkward, including on a phone. Delete removes a page from the result. Reset puts the original order back until you download or choose another file. At least one page has to remain.
+
+Password-protected PDFs are not supported. To combine several files, use Merge PDF. To save every page as a separate file, use Split PDF.`,
+    benefits: [
+      "Reorder and delete PDF pages in the browser — no uploads",
+      "Drag previews or move pages with arrows",
+      "Delete pages you do not want in the download",
+      "Reset restores the original order before you save",
+      "Copies real pages, so text stays selectable",
+      "Free, with no account required",
+    ],
+    useCases: [
+      "Fixing the page order of a scanned document",
+      "Removing a blank or duplicate page before sending",
+      "Dropping a confidential page from a packet",
+      "Moving a signature page to the front",
+      "Keeping a few pages from a long export as one PDF",
+      "Rearranging a handout without a desktop PDF editor",
+    ],
+  },
 };

@@ -7,10 +7,9 @@ const POLL_MS = 20_000;
 const STEP_MS = 700;
 const FLIP_MS = 600;
 
-export function ProcessedCount() {
-  const [snapshot, setSnapshot] = useState<ProcessedCountSnapshot | null>(null);
-  const [shown, setShown] = useState<number | null>(null);
-  const [ready, setReady] = useState(false);
+export function ProcessedCount({ initial }: { initial: ProcessedCountSnapshot }) {
+  const [snapshot, setSnapshot] = useState(initial);
+  const [shown, setShown] = useState(initial.total);
 
   useEffect(() => {
     let cancelled = false;
@@ -20,14 +19,11 @@ export function ProcessedCount() {
         const next = await getProcessedCount();
         if (cancelled) return;
         setSnapshot(next);
-        setShown((current) => current ?? next.total);
-        setReady(true);
       } catch {
-        // Keep the last total if a later refresh fails. Hide the line until the first read succeeds.
+        // Keep the number already on screen if a later refresh fails.
       }
     };
 
-    void load();
     const id = window.setInterval(() => void load(), POLL_MS);
     return () => {
       cancelled = true;
@@ -41,7 +37,6 @@ export function ProcessedCount() {
     const target = snapshot.total;
     const id = window.setInterval(() => {
       setShown((current) => {
-        if (current === null) return target;
         if (current < target) return current + 1;
         if (current > target) return target;
         return current;
@@ -50,8 +45,6 @@ export function ProcessedCount() {
 
     return () => window.clearInterval(id);
   }, [snapshot]);
-
-  if (!ready || shown === null) return null;
 
   const formatted = shown.toLocaleString("en-US");
   const label = `${formatted} files processed`;

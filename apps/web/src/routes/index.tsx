@@ -10,6 +10,8 @@ import PageShell from "@/components/PageShell";
 import { ProcessedCount } from "@/components/ProcessedCount";
 import { HeroScreenshotCanvas } from "@/components/HeroScreenshotCanvas";
 import { getSeoMetadata } from "@/lib/seo";
+import { toSnapshot } from "@/lib/processedCount";
+import { getProcessedCount } from "@/server/processedCount";
 import React from "react";
 import Button from "@/components/ui/button";
 import { Button as MagneticButton } from "@/components/Magnetic-button";
@@ -18,6 +20,13 @@ const jsonToCsvTool = tools.find((tool) => tool.slug === "json-to-csv");
 const featuredTools = [...(jsonToCsvTool ? [jsonToCsvTool] : []), ...tools.filter((tool) => tool.slug !== "json-to-csv")].slice(0, 6);
 
 export const Route = createFileRoute("/")({
+  loader: async () => {
+    try {
+      return { processedCount: await getProcessedCount() };
+    } catch {
+      return { processedCount: toSnapshot({ total: 0, samples: [] }, Date.now()) };
+    }
+  },
   head: () =>
     getSeoMetadata({
       title: "SnapBit Tools | Private & Fast Image, PDF & Data Tools",
@@ -47,6 +56,7 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
+  const { processedCount } = Route.useLoaderData();
   const ButtonLink = createLink(Button);
   const rotatingWords = ["Free", "Private", "Fast"];
   const widthSafetyBuffer = 24;
@@ -181,7 +191,7 @@ function App() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <ProcessedCount />
+            <ProcessedCount initial={processedCount} />
           </motion.div>
 
           {/* Trust badges */}

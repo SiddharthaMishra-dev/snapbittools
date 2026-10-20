@@ -103,17 +103,19 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-page theme-page-gradient  py-2 px-4 flex flex-col items-center">
+    <div className="bg-theme-page theme-page-gradient  py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
         {/* <Breadcrumbs /> */}
+        <div className="min-h-screen flex flex-col items-center justify-center">
+
         <div className="w-full max-w-5xl mt-6  mb-12 text-center mx-auto">
           <div className="text-center">
-            <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Image to Base64 Converter</h1>
+            <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">Image to Base64 Converter</h1>
             {/* <p className="text-md text-theme-muted">Convert images to Base64 instantly. 100% private—no uploads, ever.</p> */}
           </div>
         </div>
 
-        <div className="w-full max-w-5xl flex-1 flex flex-col items-center justify-center mx-auto">
+        <div className="w-full max-w-5xl flex-1 flex flex-col items-center  mx-auto">
           <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
             <FileDropzone
               title="Upload image"
@@ -163,6 +165,7 @@ function RouteComponent() {
               <sup>*</sup>All major formats supported: JPG, PNG, GIF, SVG, WebP & more.
             </p>
           </div>
+        </div>          
         </div>
 
         <ToolContentDisplay

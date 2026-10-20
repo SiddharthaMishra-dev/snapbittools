@@ -186,91 +186,94 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col items-center">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">
-          Images to PDF
-          </h1>
-          {/* <p className="text-md text-theme-body">Convert images to PDF instantly. Reorder, resize & compress. 100% private—no uploads.</p> */}
-        </div>
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">Images to PDF</h1>
+              {/* <p className="text-md text-theme-body">Convert images to PDF instantly. Reorder, resize & compress. 100% private—no uploads.</p> */}
+            </div>
+          </div>
 
-        <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-          <div className="backdrop-blur-sm rounded-xl w-full p-6 shadow-xl border border-theme-border bg-theme-surface">
-            {/* Upload Area */}
-            <FileDropzone
-              title="Upload images"
-              description="Drag and drop photos here, or choose files to merge into a PDF."
-              buttonLabel="Select Images"
-              accept="image/*"
-              multiple
-              onFiles={processFiles} 
-              className="mb-6"
-          />
+          <div className="w-full max-w-5xl flex-1 flex flex-col items-center mx-auto">
+            <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+              {/* Upload Area */}
+              <FileDropzone
+                title="Upload images"
+                description="Drag and drop photos here, or choose files to merge into a PDF."
+                buttonLabel="Select Images"
+                accept="image/*"
+                multiple
+                onFiles={processFiles}
+                className="mb-6"
+              />
 
-            {/* Controls & List */}
-            {files.length > 0 && (
-              <div className="space-y-6">
-                <div className="flex justify-between items-center bg-theme-surface/50 p-4 rounded-lg border border-theme-border">
-                  <span className="text-theme-body font-medium">{files.length} pages ready</span>
-                  <div className="flex gap-3">
-                    <button onClick={handleClearAll} className={cn(tc.btnDanger, "px-4 py-2 text-sm")}>
-                      <IconTrash className="w-4 h-4" />
-                      Clear All
-                    </button>
-                    <button onClick={handleConvertToPdf} disabled={isGenerating} className={cn(tc.btnPrimary, "px-6 py-2 shadow-md")}>
-                      {isGenerating ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          Generating...
-                        </>
-                      ) : (
-                        <>
-                          <IconFileTypePdf className="w-5 h-5" />
-                          Convert to PDF
-                        </>
-                      )}
-                    </button>
+              {/* Controls & List */}
+              {files.length > 0 && (
+                <div className="space-y-6">
+                  <div className="flex justify-between items-center bg-theme-surface/50 p-4 rounded-lg border border-theme-border">
+                    <span className="text-theme-body font-medium">{files.length} pages ready</span>
+                    <div className="flex gap-3">
+                      <button onClick={handleClearAll} className={cn(tc.btnDanger, "px-4 py-2 text-sm")}>
+                        <IconTrash className="w-4 h-4" />
+                        Clear All
+                      </button>
+                      <button onClick={handleConvertToPdf} disabled={isGenerating} className={cn(tc.btnPrimary, "px-6 py-2 shadow-md")}>
+                        {isGenerating ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            Generating...
+                          </>
+                        ) : (
+                          <>
+                            <IconFileTypePdf className="w-5 h-5" />
+                            Convert to PDF
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="bg-theme-surface/30 rounded-xl p-4 border border-theme-border">
+                    <p className="text-theme-muted text-xs mb-3 text-center uppercase tracking-wider font-semibold">
+                      Drag to Reorder Pages
+                    </p>
+                    <Reorder.Group axis="y" values={files} onReorder={setFiles} className="space-y-2">
+                      {files.map((file) => (
+                        <Reorder.Item
+                          key={file.id}
+                          value={file}
+                          className="bg-theme-surface rounded-lg border border-theme-border p-3 flex items-center gap-4 cursor-grab active:cursor-grabbing shadow-sm hover:shadow-md transition-shadow"
+                        >
+                          <div className="w-6 flex flex-col items-center justify-center gap-1 text-theme-muted">
+                            <div className="w-1 h-1 rounded-full bg-current"></div>
+                            <div className="w-1 h-1 rounded-full bg-current"></div>
+                            <div className="w-1 h-1 rounded-full bg-current"></div>
+                          </div>
+
+                          <div className="w-12 h-12 bg-theme-surface rounded overflow-hidden flex-shrink-0 border border-theme-border">
+                            <img src={file.preview} alt={file.name} width={48} height={48} className="w-full h-full object-cover" />
+                          </div>
+
+                          <div className="flex-1 min-w-0">
+                            <p className="text-theme-heading text-sm font-medium truncate">{file.name}</p>
+                            <p className="text-theme-muted text-xs text-nowrap mt-0.5">{(file.file.size / 1024).toFixed(1)} KB</p>
+                          </div>
+
+                          <button onClick={() => handleRemoveFile(file.id)} className={cn(tc.btnDanger, "p-2 rounded-full")}>
+                            <IconX className="w-5 h-5" />
+                          </button>
+                        </Reorder.Item>
+                      ))}
+                    </Reorder.Group>
                   </div>
                 </div>
-
-                <div className="bg-theme-surface/30 rounded-xl p-4 border border-theme-border">
-                  <p className="text-theme-muted text-xs mb-3 text-center uppercase tracking-wider font-semibold">Drag to Reorder Pages</p>
-                  <Reorder.Group axis="y" values={files} onReorder={setFiles} className="space-y-2">
-                    {files.map((file) => (
-                      <Reorder.Item
-                        key={file.id}
-                        value={file}
-                        className="bg-theme-surface rounded-lg border border-theme-border p-3 flex items-center gap-4 cursor-grab active:cursor-grabbing shadow-sm hover:shadow-md transition-shadow"
-                      >
-                        <div className="w-6 flex flex-col items-center justify-center gap-1 text-theme-muted">
-                          <div className="w-1 h-1 rounded-full bg-current"></div>
-                          <div className="w-1 h-1 rounded-full bg-current"></div>
-                          <div className="w-1 h-1 rounded-full bg-current"></div>
-                        </div>
-
-                        <div className="w-12 h-12 bg-theme-surface rounded overflow-hidden flex-shrink-0 border border-theme-border">
-                          <img src={file.preview} alt={file.name} width={48} height={48} className="w-full h-full object-cover" />
-                        </div>
-
-                        <div className="flex-1 min-w-0">
-                          <p className="text-theme-heading text-sm font-medium truncate">{file.name}</p>
-                          <p className="text-theme-muted text-xs text-nowrap mt-0.5">{(file.file.size / 1024).toFixed(1)} KB</p>
-                        </div>
-
-                        <button onClick={() => handleRemoveFile(file.id)} className={cn(tc.btnDanger, "p-2 rounded-full")}>
-                          <IconX className="w-5 h-5" />
-                        </button>
-                      </Reorder.Item>
-                    ))}
-                  </Reorder.Group>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-
         <ToolContentDisplay
           title={toolContent["image-to-pdf"].title}
           intro={toolContent["image-to-pdf"].intro}

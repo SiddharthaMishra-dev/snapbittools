@@ -221,133 +221,138 @@ function RouteComponent() {
   }, [csvOutput]);
 
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        {/* Header */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">JSON to CSV Converter</h1>
-          {/* <p className="text-md text-theme-body">Transform JSON data into CSV content securely in your browser.</p> */}
-        </div>
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          {/* Header */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">
+                JSON to CSV Converter
+              </h1>
+              {/* <p className="text-md text-theme-body">Transform JSON data into CSV content securely in your browser.</p> */}
+            </div>
+          </div>
 
-        {/* Main Content */}
-        <div className="flex-1 max-w-9xl w-full mx-auto">
-          {/* Toolbar */}
-          <div className=" rounded-xl shadow-lg p-4 mb-6">
-            <div className="flex flex-wrap gap-3 justify-center items-center">
-              <button
-                onClick={loadSampleData}
-                className="inline-flex items-center gap-2 px-4 py-2 dark:bg-gray-700 bg-gray-200 text-theme-heading rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
-              >
-                <IconTable className="w-4 h-4" />
-                <span>Sample Data</span>
-              </button>
-              <div className="h-6 w-px dark:bg-gray-600 bg-gray-300 mx-2 hidden sm:block"></div>
+          {/* Main Content */}
+          <div className="w-full max-w-5xl mx-auto">
+            {/* Toolbar */}
+            <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+              <div className="flex flex-wrap gap-3 justify-center items-center">
+                <button
+                  onClick={loadSampleData}
+                  className="inline-flex items-center gap-2 px-4 py-2 dark:bg-gray-700 bg-gray-200 text-theme-heading rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 font-medium text-sm"
+                >
+                  <IconTable className="w-4 h-4" />
+                  <span>Sample Data</span>
+                </button>
+                <div className="h-6 w-px dark:bg-gray-600 bg-gray-300 mx-2 hidden sm:block"></div>
 
-              <label className="flex items-center space-x-2 text-gray-200 text-sm cursor-pointer select-none dark:bg-gray-700/50 bg-gray-300/50 px-3 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                <input
-                  type="checkbox"
-                  checked={flatten}
-                  onChange={(e) => setFlatten(e.target.checked)}
-                  className="rounded border-gray-600 text-brand-primary focus:ring-offset-0 focus:ring-brand-primary bg-gray-700"
+                <label className="flex items-center space-x-2 text-gray-200 text-sm cursor-pointer select-none dark:bg-gray-700/50 bg-gray-300/50 px-3 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                  <input
+                    type="checkbox"
+                    checked={flatten}
+                    onChange={(e) => setFlatten(e.target.checked)}
+                    className="rounded border-gray-600 text-brand-primary focus:ring-offset-0 focus:ring-brand-primary bg-gray-700"
+                  />
+                  <span className="dark:text-gray-200 text-gray-800">Flatten nested objects</span>
+                </label>
+
+                <button
+                  onClick={downloadCSV}
+                  disabled={!csvOutput}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
+                >
+                  <IconDownload className="w-4 h-4" />
+                  <span>Download CSV</span>
+                </button>
+
+                <button
+                  onClick={copyToClipboard}
+                  disabled={!csvOutput}
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+                    copySuccess
+                      ? "bg-green-800 text-green-200"
+                      : "dark:bg-gray-700 bg-gray-300 text-theme-heading hover:bg-gray-600 dark:hover:bg-gray-600"
+                  }`}
+                >
+                  {copySuccess ? (
+                    <>
+                      <IconCheck className="w-4 h-4" />
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <IconCopy className="w-4 h-4" />
+                      <span>Copy CSV</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={() => {
+                    setInput("");
+                    setError(null);
+                  }}
+                  disabled={!input}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-900/50 text-red-200 rounded-lg hover:bg-red-800/70 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <IconTrash className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-900/30 border border-red-700 rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
+                <IconAlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                <div className="text-red-300">
+                  <p className="font-medium">Parse Error</p>
+                  <p className="text-sm opacity-80">{error}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Editor Panels */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
+              {/* Input Panel */}
+              <div className=" rounded-xl shadow-lg flex flex-col h-full border border-theme-border overflow-hidden">
+                <div className="px-4 py-3  border-b border-theme-border flex justify-between items-center">
+                  <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Input JSON</h3>
+                  {input && <span className="text-xs text-theme-muted">{(new Blob([input]).size / 1024).toFixed(2)} KB</span>}
+                </div>
+                <textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder='Paste JSON array here, e.g. [{"name": "Neo", "role": "One"}]'
+                  className={`flex-1 w-full p-4 bg-theme-surface/50 text-theme-heading font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0 ${
+                    error ? "bg-red-900/10" : ""
+                  }`}
+                  spellCheck={false}
                 />
-                <span className="dark:text-gray-200 text-gray-800">Flatten nested objects</span>
-              </label>
+              </div>
 
-              <button
-                onClick={downloadCSV}
-                disabled={!csvOutput}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
-              >
-                <IconDownload className="w-4 h-4" />
-                <span>Download CSV</span>
-              </button>
-
-              <button
-                onClick={copyToClipboard}
-                disabled={!csvOutput}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
-                  copySuccess
-                    ? "bg-green-800 text-green-200"
-                    : "dark:bg-gray-700 bg-gray-300 text-theme-heading hover:bg-gray-600 dark:hover:bg-gray-600"
-                }`}
-              >
-                {copySuccess ? (
-                  <>
-                    <IconCheck className="w-4 h-4" />
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <IconCopy className="w-4 h-4" />
-                    <span>Copy CSV</span>
-                  </>
-                )}
-              </button>
-
-              <button
-                onClick={() => {
-                  setInput("");
-                  setError(null);
-                }}
-                disabled={!input}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-red-900/50 text-red-200 rounded-lg hover:bg-red-800/70 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <IconTrash className="w-4 h-4" />
-              </button>
+              {/* Output Panel */}
+              <div className=" rounded-xl shadow-lg flex flex-col h-full border border-theme-border overflow-hidden">
+                <div className="px-4 py-3  border-b border-theme-border flex justify-between items-center">
+                  <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Output CSV</h3>
+                  {stats.rows > 0 && (
+                    <span className="text-xs text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-full">
+                      {stats.rows} rows • {stats.columns} cols
+                    </span>
+                  )}
+                </div>
+                <textarea
+                  readOnly
+                  value={csvOutput}
+                  placeholder="CSV output will appear here..."
+                  className="flex-1 w-full p-4 bg-theme-surface/50 text-green-400 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0"
+                  spellCheck={false}
+                />
+              </div>
             </div>
           </div>
-
-          {/* Error Message */}
-          {error && (
-            <div className="bg-red-900/30 border border-red-700 rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
-              <IconAlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-              <div className="text-red-300">
-                <p className="font-medium">Parse Error</p>
-                <p className="text-sm opacity-80">{error}</p>
-              </div>
-            </div>
-          )}
-
-          {/* Editor Panels */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
-            {/* Input Panel */}
-            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-theme-border overflow-hidden">
-              <div className="px-4 py-3  border-b border-theme-border flex justify-between items-center">
-                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Input JSON</h3>
-                {input && <span className="text-xs text-theme-muted">{(new Blob([input]).size / 1024).toFixed(2)} KB</span>}
-              </div>
-              <textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder='Paste JSON array here, e.g. [{"name": "Neo", "role": "One"}]'
-                className={`flex-1 w-full p-4 bg-theme-surface/50 text-theme-heading font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0 ${
-                  error ? "bg-red-900/10" : ""
-                }`}
-                spellCheck={false}
-              />
-            </div>
-
-            {/* Output Panel */}
-            <div className=" rounded-xl shadow-lg flex flex-col h-full border border-theme-border overflow-hidden">
-              <div className="px-4 py-3  border-b border-theme-border flex justify-between items-center">
-                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Output CSV</h3>
-                {stats.rows > 0 && (
-                  <span className="text-xs text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-full">
-                    {stats.rows} rows • {stats.columns} cols
-                  </span>
-                )}
-              </div>
-              <textarea
-                readOnly
-                value={csvOutput}
-                placeholder="CSV output will appear here..."
-                className="flex-1 w-full p-4 bg-theme-surface/50 text-green-400 font-mono text-sm resize-none focus:outline-none focus:ring-0 border-0"
-                spellCheck={false}
-              />
-            </div>
-          </div>
-
           <ToolContentDisplay
             title={toolContent["json-to-csv"].title}
             intro={toolContent["json-to-csv"].intro}

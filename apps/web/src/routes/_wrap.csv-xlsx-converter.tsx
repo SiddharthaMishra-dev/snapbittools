@@ -209,81 +209,84 @@ function RouteComponent() {
   }, [conversions, isConverting]);
 
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col items-center">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">CSV ↔ XLSX Converter</h1>
-          {/* <p className="text-md text-theme-body">Convert between CSV and Excel instantly. No uploads—100% private.</p> */}
-        </div>
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">CSV ↔ XLSX Converter</h1>
+              {/* <p className="text-md text-theme-body">Convert between CSV and Excel instantly. No uploads—100% private.</p> */}
+            </div>
+          </div>
 
-        <div className="w-full max-w-6xl flex-1 flex flex-col items-center justify-center mx-auto">
-          <div className="rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface">
-            {conversions.length === 0 ? (
-              <FileDropzone
-                title="Upload files"
-                description="Drag and drop CSV or XLSX files here, or choose files to convert."
-                buttonLabel="Select Files"
-                accept=".csv,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                multiple
-                onFiles={processFiles}
-              />
-            ) : (
-              <>
-                <div className="w-full flex justify-between items-center mb-3">
-                  <h3 className="text-xl font-semibold text-theme-heading mb-4">Files ({conversions.length})</h3>
-                  <button onClick={clearAll} className={cn(tc.btnDanger, "px-4 py-2")}>
-                    Clear All
-                  </button>
-                </div>
+          <div className="w-full max-w-6xl flex-1 flex flex-col items-center  mx-auto">
+            <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+              {conversions.length === 0 ? (
+                <FileDropzone
+                  title="Upload files"
+                  description="Drag and drop CSV or XLSX files here, or choose files to convert."
+                  buttonLabel="Select Files"
+                  accept=".csv,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  multiple
+                  onFiles={processFiles}
+                />
+              ) : (
+                <>
+                  <div className="w-full flex justify-between items-center mb-3">
+                    <h3 className="text-xl font-semibold text-theme-heading mb-4">Files ({conversions.length})</h3>
+                    <button onClick={clearAll} className={cn(tc.btnDanger, "px-4 py-2")}>
+                      Clear All
+                    </button>
+                  </div>
 
-                <div className="space-y-3">
-                  {conversions.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex items-center justify-between p-4 border border-theme-border rounded-lg bg-theme-surface-muted"
-                    >
-                      <div className="mr-4 shrink-0">
-                        {item.originalFormat === "CSV" ? (
-                          <IconFileText className="w-10 h-10 text-brand-primary" />
-                        ) : (
-                          <IconFileSpreadsheet className="w-10 h-10 text-brand-primary" />
-                        )}
-                      </div>
-
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center space-x-2 mb-1">
-                          <p className="font-medium text-theme-heading truncate">{item.name}</p>
-                          <span className="text-xs px-2 py-1 bg-theme-icon-bg text-theme-body rounded">
-                            {item.originalFormat} → {item.targetFormat.toUpperCase()}
-                          </span>
+                  <div className="space-y-3">
+                    {conversions.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex items-center justify-between p-4 border border-theme-border rounded-lg bg-theme-surface-muted"
+                      >
+                        <div className="mr-4 shrink-0">
+                          {item.originalFormat === "CSV" ? (
+                            <IconFileText className="w-10 h-10 text-brand-primary" />
+                          ) : (
+                            <IconFileSpreadsheet className="w-10 h-10 text-brand-primary" />
+                          )}
                         </div>
-                        {item.error && <p className="text-xs text-[var(--theme-alert-error-text)] mt-1">{item.error}</p>}
-                      </div>
 
-                      <div className="flex items-center space-x-3 ml-4">
-                        {item.status === "pending" && <span className="text-theme-muted text-sm">Pending</span>}
-                        {item.status === "converting" && (
-                          <div className="flex items-center space-x-2">
-                            <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
-                            <span className="text-brand-primary text-sm">Converting...</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center space-x-2 mb-1">
+                            <p className="font-medium text-theme-heading truncate">{item.name}</p>
+                            <span className="text-xs px-2 py-1 bg-theme-icon-bg text-theme-body rounded">
+                              {item.originalFormat} → {item.targetFormat.toUpperCase()}
+                            </span>
                           </div>
-                        )}
-                        {item.status === "completed" && (
-                          <button onClick={() => downloadFile(item)} className={cn(tc.btnSuccess, "px-3 py-1 text-sm")}>
-                            <IconDownload className="w-4 h-4" />
-                          </button>
-                        )}
-                        {item.status === "error" && <IconCircleX className="w-4 h-4 text-[var(--theme-alert-error-icon)]" />}
+                          {item.error && <p className="text-xs text-[var(--theme-alert-error-text)] mt-1">{item.error}</p>}
+                        </div>
+
+                        <div className="flex items-center space-x-3 ml-4">
+                          {item.status === "pending" && <span className="text-theme-muted text-sm">Pending</span>}
+                          {item.status === "converting" && (
+                            <div className="flex items-center space-x-2">
+                              <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
+                              <span className="text-brand-primary text-sm">Converting...</span>
+                            </div>
+                          )}
+                          {item.status === "completed" && (
+                            <button onClick={() => downloadFile(item)} className={cn(tc.btnSuccess, "px-3 py-1 text-sm")}>
+                              <IconDownload className="w-4 h-4" />
+                            </button>
+                          )}
+                          {item.status === "error" && <IconCircleX className="w-4 h-4 text-[var(--theme-alert-error-icon)]" />}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
-
         <ToolContentDisplay
           title={toolContent["csv-xlsx-converter"].title}
           intro={toolContent["csv-xlsx-converter"].intro}

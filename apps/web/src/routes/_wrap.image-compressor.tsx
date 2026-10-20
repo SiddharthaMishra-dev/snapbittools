@@ -69,19 +69,22 @@ export const Route = createFileRoute("/_wrap/image-compressor")({
 
 export function RouteComponent() {
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col items-center">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Compress Images</h1>
-          {/* <p className="text-md text-theme-body">
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">Compress Images</h1>
+              {/* <p className="text-md text-theme-body">
             Compress JPG, PNG, WebP and AVIF images for free. Reduce file size up to 80% while preserving quality. 100% client-side—your
             files never leave.
           </p> */}
+            </div>
+          </div>
+
+          <ImageCompressorTool />
         </div>
-
-        <ImageCompressorTool />
-
         <ToolContentDisplay
           title={toolContent["image-compressor"].title}
           intro={toolContent["image-compressor"].intro}

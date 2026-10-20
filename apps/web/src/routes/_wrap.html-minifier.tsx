@@ -216,177 +216,184 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
 
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">HTML Minifier</h1>
-          {/* <p className="text-md text-theme-body">
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">HTML Minifier</h1>
+              {/* <p className="text-md text-theme-body">
             Minify HTML instantly by removing comments and unnecessary spaces in a private workflow.
           </p> */}
+            </div>
+          </div>
+
+          <main className="w-full max-w-5xl mx-auto space-y-6">
+            <section className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+              <div className="flex flex-wrap gap-3 justify-center">
+                <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
+                  <input
+                    type="checkbox"
+                    checked={removeComments}
+                    onChange={(e) => setRemoveComments(e.target.checked)}
+                    className="accent-brand-primary"
+                  />
+                  Remove comments
+                </label>
+                <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
+                  <input
+                    type="checkbox"
+                    checked={collapseWhitespace}
+                    onChange={(e) => setCollapseWhitespace(e.target.checked)}
+                    className="accent-brand-primary"
+                  />
+                  Collapse whitespace
+                </label>
+                <button type="button" onClick={handleMinify} className={cn(tc.btnPrimary, "px-4 py-2")}>
+                  <IconArrowsMinimize className="w-4 h-4" />
+                  Minify
+                </button>
+                <button type="button" onClick={handleDeminify} className={cn(tc.btnSecondary, "px-4 py-2")}>
+                  <IconSparkles className="w-4 h-4" />
+                  De-minify
+                </button>
+                <button type="button" onClick={handleDownload} className={cn(tc.btnPrimary, "px-4 py-2")}>
+                  <IconDownload className="w-4 h-4" />
+                  Download
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className={cn(tc.btn, "px-4 py-2", copySuccess ? "theme-btn-success" : "theme-btn-secondary")}
+                >
+                  {copySuccess ? <IconCheck className="w-4 h-4" /> : <IconCopy className="w-4 h-4" />}
+                  {copySuccess ? "Copied" : "Copy"}
+                </button>
+                <button type="button" onClick={handleClear} className={cn(tc.btnDanger, "px-4 py-2")}>
+                  <IconTrash className="w-4 h-4" />
+                  Clear
+                </button>
+              </div>
+            </section>
+
+            <section className="grid grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="rounded-xl">
+                  <div className="flex items-center justify-between mb-3">
+                    <h2 className="text-lg font-semibold text-theme-heading flex items-center gap-2">
+                      <IconCode className="w-5 h-5 text-brand-primary" />
+                      Input HTML
+                    </h2>
+                    <span className="text-xs text-theme-muted">{originalBytes.toLocaleString()} bytes</span>
+                  </div>
+                  <textarea
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Paste your HTML markup here..."
+                    className={cn(tc.field, "w-full h-96 p-4 font-mono text-sm resize-y")}
+                    spellCheck={false}
+                  />
+                </div>
+
+                <div className="rounded-xl">
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <h2 className="text-lg font-semibold text-theme-heading flex items-center gap-2">
+                      <IconSparkles className="w-5 h-5 text-brand-primary" />
+                      {outputMode === "minified" ? "Minified Output" : "De-minified Output"}
+                    </h2>
+                    <span className="text-xs text-theme-muted">{outputBytes.toLocaleString()} bytes</span>
+                  </div>
+                  <textarea
+                    value={output}
+                    readOnly
+                    placeholder="Processed HTML output will appear here..."
+                    className={cn(
+                      tc.field,
+                      "w-full h-96 p-4 font-mono text-sm resize-y bg-theme-code-bg text-theme-code-text focus:ring-0",
+                    )}
+                    spellCheck={false}
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <StatCard title="Original Size" value={`${originalBytes.toLocaleString()} bytes`} icon={<IconCode className="w-4 h-4" />} />
+                <StatCard
+                  title={outputMode === "minified" ? "Minified Size" : "De-minified Size"}
+                  value={`${outputBytes.toLocaleString()} bytes`}
+                  icon={outputMode === "minified" ? <IconArrowsMinimize className="w-4 h-4" /> : <IconSparkles className="w-4 h-4" />}
+                />
+                <StatCard title="Saved" value={`${savings}%`} icon={<IconBolt className="w-4 h-4" />} highlight />
+
+                <div className="col-span-3 bg-theme-surface-muted border border-theme-border rounded-lg p-3 flex items-start gap-3">
+                  <IconShieldLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
+                  <div className="text-sm text-theme-body">
+                    <p className="font-semibold ">100% Private Processing</p>
+                    <p className="mt-1 text-theme-muted">Everything runs locally in your browser. Your HTML never leaves your device.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
         </div>
 
-        <main className="flex-1 max-w-7xl w-full mx-auto space-y-6">
-          <section className="rounded-xl shadow-lg p-4">
-            <div className="flex flex-wrap gap-3 justify-center">
-              <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
-                <input
-                  type="checkbox"
-                  checked={removeComments}
-                  onChange={(e) => setRemoveComments(e.target.checked)}
-                  className="accent-brand-primary"
-                />
-                Remove comments
-              </label>
-              <label className="inline-flex items-center gap-2 text-sm text-theme-body bg-theme-surface-muted border border-theme-border rounded-lg px-3 py-2">
-                <input
-                  type="checkbox"
-                  checked={collapseWhitespace}
-                  onChange={(e) => setCollapseWhitespace(e.target.checked)}
-                  className="accent-brand-primary"
-                />
-                Collapse whitespace
-              </label>
-              <button type="button" onClick={handleMinify} className={cn(tc.btnPrimary, "px-4 py-2")}>
-                <IconArrowsMinimize className="w-4 h-4" />
-                Minify
-              </button>
-              <button type="button" onClick={handleDeminify} className={cn(tc.btnSecondary, "px-4 py-2")}>
-                <IconSparkles className="w-4 h-4" />
-                De-minify
-              </button>
-              <button type="button" onClick={handleDownload} className={cn(tc.btnPrimary, "px-4 py-2")}>
-                <IconDownload className="w-4 h-4" />
-                Download
-              </button>
-              <button
-                type="button"
-                onClick={handleCopy}
-                className={cn(tc.btn, "px-4 py-2", copySuccess ? "theme-btn-success" : "theme-btn-secondary")}
-              >
-                {copySuccess ? <IconCheck className="w-4 h-4" /> : <IconCopy className="w-4 h-4" />}
-                {copySuccess ? "Copied" : "Copy"}
-              </button>
-              <button type="button" onClick={handleClear} className={cn(tc.btnDanger, "px-4 py-2")}>
-                <IconTrash className="w-4 h-4" />
-                Clear
-              </button>
-            </div>
-          </section>
+        <ToolContentDisplay
+          title={toolContent["html-minifier"].title}
+          intro={toolContent["html-minifier"].intro}
+          benefits={toolContent["html-minifier"].benefits}
+          useCases={toolContent["html-minifier"].useCases}
+        />
 
-          <section className="grid grid-cols-1 gap-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="rounded-xl">
-                <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-lg font-semibold text-theme-heading flex items-center gap-2">
-                    <IconCode className="w-5 h-5 text-brand-primary" />
-                    Input HTML
-                  </h2>
-                  <span className="text-xs text-theme-muted">{originalBytes.toLocaleString()} bytes</span>
-                </div>
-                <textarea
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Paste your HTML markup here..."
-                  className={cn(tc.field, "w-full h-96 p-4 font-mono text-sm resize-y")}
-                  spellCheck={false}
-                />
-              </div>
+        <ToolInfo
+          title="HTML Minification for Faster Delivery"
+          description="Reduce HTML payload size and clean up markup for production without leaving your browser. Great for landing pages, templates, static sites, and email markup workflows."
+          features={[
+            {
+              title: "Comment Removal",
+              description: "Strip non-essential HTML comments to reduce file size before deployment.",
+              icon: IconTrash,
+            },
+            {
+              title: "Whitespace Optimization",
+              description: "Collapse redundant spacing between elements for compact, clean output.",
+              icon: IconArrowsMinimize,
+            },
+            {
+              title: "Readable De-minify",
+              description: "Expand compact HTML into a structured, readable format for debugging and reviews.",
+              icon: IconSparkles,
+            },
+            {
+              title: "Private by Default",
+              description: "All minification happens locally with no uploads, logs, or backend processing.",
+              icon: IconShieldLock,
+            },
+          ]}
+          steps={[
+            {
+              title: "Paste HTML",
+              description: "Add your raw HTML code into the input panel.",
+            },
+            {
+              title: "Set Options",
+              description: "Toggle comment removal and whitespace collapsing based on your needs.",
+            },
+            {
+              title: "Minify or De-minify",
+              description: "Generate compact HTML for production or readable HTML for editing and debugging.",
+            },
+            {
+              title: "Copy or Download",
+              description: "Copy the minified result or download a production-ready .html file.",
+            },
+          ]}
+          privacyInfo="All HTML processing is fully client-side. Nothing is uploaded or stored."
+          faqs={faqs}
+        />
 
-              <div className="rounded-xl">
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <h2 className="text-lg font-semibold text-theme-heading flex items-center gap-2">
-                    <IconSparkles className="w-5 h-5 text-brand-primary" />
-                    {outputMode === "minified" ? "Minified Output" : "De-minified Output"}
-                  </h2>
-                  <span className="text-xs text-theme-muted">{outputBytes.toLocaleString()} bytes</span>
-                </div>
-                <textarea
-                  value={output}
-                  readOnly
-                  placeholder="Processed HTML output will appear here..."
-                  className={cn(tc.field, "w-full h-96 p-4 font-mono text-sm resize-y bg-theme-code-bg text-theme-code-text focus:ring-0")}
-                  spellCheck={false}
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <StatCard title="Original Size" value={`${originalBytes.toLocaleString()} bytes`} icon={<IconCode className="w-4 h-4" />} />
-              <StatCard
-                title={outputMode === "minified" ? "Minified Size" : "De-minified Size"}
-                value={`${outputBytes.toLocaleString()} bytes`}
-                icon={outputMode === "minified" ? <IconArrowsMinimize className="w-4 h-4" /> : <IconSparkles className="w-4 h-4" />}
-              />
-              <StatCard title="Saved" value={`${savings}%`} icon={<IconBolt className="w-4 h-4" />} highlight />
-
-              <div className="col-span-3 bg-theme-surface-muted border border-theme-border rounded-lg p-3 flex items-start gap-3">
-                <IconShieldLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
-                <div className="text-sm text-theme-body">
-                  <p className="font-semibold ">100% Private Processing</p>
-                  <p className="mt-1 text-theme-muted">Everything runs locally in your browser. Your HTML never leaves your device.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <ToolContentDisplay
-            title={toolContent["html-minifier"].title}
-            intro={toolContent["html-minifier"].intro}
-            benefits={toolContent["html-minifier"].benefits}
-            useCases={toolContent["html-minifier"].useCases}
-          />
-
-          <ToolInfo
-            title="HTML Minification for Faster Delivery"
-            description="Reduce HTML payload size and clean up markup for production without leaving your browser. Great for landing pages, templates, static sites, and email markup workflows."
-            features={[
-              {
-                title: "Comment Removal",
-                description: "Strip non-essential HTML comments to reduce file size before deployment.",
-                icon: IconTrash,
-              },
-              {
-                title: "Whitespace Optimization",
-                description: "Collapse redundant spacing between elements for compact, clean output.",
-                icon: IconArrowsMinimize,
-              },
-              {
-                title: "Readable De-minify",
-                description: "Expand compact HTML into a structured, readable format for debugging and reviews.",
-                icon: IconSparkles,
-              },
-              {
-                title: "Private by Default",
-                description: "All minification happens locally with no uploads, logs, or backend processing.",
-                icon: IconShieldLock,
-              },
-            ]}
-            steps={[
-              {
-                title: "Paste HTML",
-                description: "Add your raw HTML code into the input panel.",
-              },
-              {
-                title: "Set Options",
-                description: "Toggle comment removal and whitespace collapsing based on your needs.",
-              },
-              {
-                title: "Minify or De-minify",
-                description: "Generate compact HTML for production or readable HTML for editing and debugging.",
-              },
-              {
-                title: "Copy or Download",
-                description: "Copy the minified result or download a production-ready .html file.",
-              },
-            ]}
-            privacyInfo="All HTML processing is fully client-side. Nothing is uploaded or stored."
-            faqs={faqs}
-          />
-
-          <RelatedTools currentToolSlug="html-minifier" category="Data" />
-        </main>
+        <RelatedTools currentToolSlug="html-minifier" category="Data" />
       </div>
     </div>
   );

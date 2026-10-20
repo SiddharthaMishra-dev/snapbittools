@@ -264,290 +264,294 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Bulk File Renamer</h1>
-          {/* <p className="text-md text-theme-body">Rename bulk files securely in your browser.</p> */}
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">Bulk File Renamer</h1>
+              {/* <p className="text-md text-theme-body">Rename bulk files securely in your browser.</p> */}
+            </div>
+          </div>
+
+          <main className="w-full max-w-5xl mx-auto">
+            <section className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+              <div className="space-y-8">
+                {/* File Upload */}
+                <FileDropzone
+                  title="Upload files"
+                  description={
+                    files.length > 0
+                      ? `${files.length} file(s) selected. Drop more files here to replace the current set.`
+                      : "Drag and drop files here, or choose files to rename."
+                  }
+                  buttonLabel="Select Files"
+                  multiple
+                  onFiles={handleFileChange}
+                />
+
+                {/* Pattern Type Selection */}
+                <div className="space-y-4">
+                  <label className="text-lg font-semibold text-theme-heading">Rename Pattern Type</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {[
+                      { id: "sequential", label: "Sequential (1, 2, 3...)" },
+                      { id: "custom", label: "Custom Range (1, 2, 4...)" },
+                      { id: "findreplace", label: "Find & Replace" },
+                      { id: "prefix-suffix", label: "Prefix & Suffix" },
+                    ].map((type) => (
+                      <button
+                        key={type.id}
+                        onClick={() => handlePatternTypeChange(type.id as any)}
+                        className={cn(
+                          "p-3 rounded-lg font-medium transition-colors border border-theme-border",
+                          patternType === type.id ? tc.toggleActive : tc.toggleInactive,
+                        )}
+                      >
+                        {type.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {patternType === "sequential" && (
+                  <div className="space-y-4">
+                    <label className="text-lg font-semibold text-theme-heading">Pattern Template</label>
+                    <p className="text-sm text-theme-muted">
+                      Use [1] for starting number, e.g., "photo-[1]" becomes "photo-1", "photo-2", etc.
+                    </p>
+                    <input
+                      type="text"
+                      value={renamePattern}
+                      onChange={(e) => handlePatternChange(e.target.value)}
+                      placeholder="e.g., file-[1] or photo_[1]"
+                      className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
+                    />
+                  </div>
+                )}
+
+                {patternType === "custom" && (
+                  <div className="space-y-4">
+                    <label className="text-lg font-semibold text-theme-heading">Custom Sequence Pattern</label>
+                    <p className="text-sm text-theme-muted">e.g., "file-[1,2,4,10,15]" renames files with your custom sequence</p>
+                    <input
+                      type="text"
+                      value={renamePattern}
+                      onChange={(e) => handlePatternChange(e.target.value)}
+                      placeholder="e.g., photo-[1,2,4,5,10]"
+                      className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
+                    />
+                  </div>
+                )}
+
+                {patternType === "findreplace" && (
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-theme-heading mb-2">Find</label>
+                        <input
+                          type="text"
+                          value={findText}
+                          onChange={(e) => {
+                            const newFindText = e.target.value;
+                            setFindText(newFindText);
+                            updatePreview(files, undefined, newFindText, replaceText);
+                          }}
+                          placeholder="Text to find"
+                          className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-theme-heading mb-2">Replace With</label>
+                        <input
+                          type="text"
+                          value={replaceText}
+                          onChange={(e) => {
+                            const newReplaceText = e.target.value;
+                            setReplaceText(newReplaceText);
+                            updatePreview(files, undefined, findText, newReplaceText);
+                          }}
+                          placeholder="Replace with text"
+                          className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {patternType === "prefix-suffix" && (
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-theme-heading mb-2">Prefix</label>
+                        <input
+                          type="text"
+                          value={prefix}
+                          onChange={(e) => {
+                            const newPrefix = e.target.value;
+                            setPrefix(newPrefix);
+                            updatePreview(files, undefined, undefined, undefined, newPrefix, suffix);
+                          }}
+                          placeholder="Add to beginning"
+                          className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-theme-heading mb-2">Suffix</label>
+                        <input
+                          type="text"
+                          value={suffix}
+                          onChange={(e) => {
+                            const newSuffix = e.target.value;
+                            setSuffix(newSuffix);
+                            updatePreview(files, undefined, undefined, undefined, prefix, newSuffix);
+                          }}
+                          placeholder="Add to end"
+                          className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Preview */}
+                {preview.length > 0 && (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <IconCheck className="w-5 h-5 text-brand-primary" />
+                        <label className="text-lg font-semibold text-theme-heading">Preview</label>
+                      </div>
+                      <span className="text-sm text-theme-muted">{preview.length} file(s)</span>
+                    </div>
+                    <div className="bg-theme-surface-muted rounded-lg border border-theme-border max-h-96 overflow-y-auto">
+                      <table className="w-full text-sm">
+                        <thead className="sticky top-0 bg-theme-surface-muted">
+                          <tr className="border-b border-theme-border">
+                            <th className="px-4 py-3 text-left text-theme-body font-medium">Original Name</th>
+                            <th className="px-4 py-3 text-left text-theme-body font-medium">New Name</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-theme-border">
+                          {preview.map((mapping, index) => (
+                            <tr key={index} className="hover:bg-theme-surface">
+                              <td className="px-4 py-3 text-theme-body">{mapping.originalName}</td>
+                              <td className="px-4 py-3">
+                                {mapping.isConflict ? (
+                                  <span className="flex items-center gap-2 text-[var(--theme-alert-error-text)]">
+                                    <IconX className="w-4 h-4" />
+                                    {mapping.newName} (conflict)
+                                  </span>
+                                ) : (
+                                  <span className="text-brand-primary font-medium flex items-center gap-2">
+                                    <IconCheck className="w-4 h-4" />
+                                    {mapping.newName}
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Conflict Warning */}
+                    {preview.some((m) => m.isConflict) && (
+                      <div className={cn(tc.alertError, "rounded-lg p-4")}>
+                        <p className="text-sm font-medium">
+                          ⚠️ Warning: Some files have naming conflicts. They are marked above and won't be included in the ZIP download.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {preview.length > 0 && (
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      onClick={copyPreviewToClipboard}
+                      className={cn(tc.btn, "px-6 py-3 active:scale-[0.97]", copySuccess ? "theme-btn-success" : "theme-btn-primary")}
+                    >
+                      <IconCopy className="w-4 h-4" />
+                      {copySuccess ? "Copied!" : "Copy Preview"}
+                    </button>
+                    <button onClick={downloadFilesAsZip} className={cn(tc.btnPrimary, "px-6 py-3 active:scale-[0.97]")}>
+                      <IconDownload className="w-4 h-4" />
+                      Download ZIP
+                    </button>
+                    <button onClick={resetForm} className={cn(tc.btnSecondary, "px-6 py-3 active:scale-[0.97]")}>
+                      <IconRefresh className="w-4 h-4" />
+                      Reset
+                    </button>
+                  </div>
+                )}
+
+                <div className="bg-theme-surface-muted border border-theme-border rounded-lg p-4 flex items-start gap-3">
+                  <IconLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
+                  <div className="text-sm text-theme-body">
+                    <p className="font-medium">100% Private & Secure</p>
+                    <p className="mt-1">
+                      All file renaming happens locally in your browser. Your files never leave your device, and the tool never uploads any
+                      data to servers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
         </div>
 
-        <main className="flex-1 px-4 relative z-10">
-          <section className="max-w-7xl mx-auto mb-12 rounded-2xl border border-theme-border bg-theme-surface-muted/20 p-8 backdrop-blur-sm">
-            <div className="space-y-8">
-              {/* File Upload */}
-              <FileDropzone
-                title="Upload files"
-                description={
-                  files.length > 0
-                    ? `${files.length} file(s) selected. Drop more files here to replace the current set.`
-                    : "Drag and drop files here, or choose files to rename."
-                }
-                buttonLabel="Select Files"
-                multiple
-                onFiles={handleFileChange}
-              />
+        <ToolContentDisplay
+          title={toolContent["bulk-file-renamer"].title}
+          intro={toolContent["bulk-file-renamer"].intro}
+          benefits={toolContent["bulk-file-renamer"].benefits}
+          useCases={toolContent["bulk-file-renamer"].useCases}
+        />
 
-              {/* Pattern Type Selection */}
-              <div className="space-y-4">
-                <label className="text-lg font-semibold text-theme-heading">Rename Pattern Type</label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {[
-                    { id: "sequential", label: "Sequential (1, 2, 3...)" },
-                    { id: "custom", label: "Custom Range (1, 2, 4...)" },
-                    { id: "findreplace", label: "Find & Replace" },
-                    { id: "prefix-suffix", label: "Prefix & Suffix" },
-                  ].map((type) => (
-                    <button
-                      key={type.id}
-                      onClick={() => handlePatternTypeChange(type.id as any)}
-                      className={cn(
-                        "p-3 rounded-lg font-medium transition-colors border border-theme-border",
-                        patternType === type.id ? tc.toggleActive : tc.toggleInactive,
-                      )}
-                    >
-                      {type.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
+        <ToolInfo
+          title="Bulk File Renaming Made Simple"
+          description="Professional file renaming capabilities without complex software"
+          features={[
+            {
+              title: "Sequential Numbering",
+              description: "Automatically number files in sequence (file-1, file-2, file-3...)",
+              icon: IconNumbers,
+            },
+            {
+              title: "Custom Ranges",
+              description: "Use custom number sequences like [1,2,4,10,15,...]",
+              icon: IconListNumbers,
+            },
+            {
+              title: "Find & Replace",
+              description: "Replace text patterns throughout filenames",
+              icon: IconSearchIcon,
+            },
+          ]}
+          steps={[
+            {
+              title: "Upload Files",
+              description: "Drag and drop files or click to select from your computer",
+            },
+            {
+              title: "Choose Pattern",
+              description: "Select a naming pattern type (sequential, custom, find-replace, prefix-suffix)",
+            },
+            {
+              title: "Preview Changes",
+              description: "Review all renamed filenames before applying the changes",
+            },
+            {
+              title: "Download ZIP",
+              description: "Download your files in a ZIP archive with their new names applied",
+            },
+          ]}
+          privacyInfo="This tool processes all files entirely in your browser. No files are uploaded to any server, and your data never leaves your device."
+          faqs={faqs}
+        />
 
-              {patternType === "sequential" && (
-                <div className="space-y-4">
-                  <label className="text-lg font-semibold text-theme-heading">Pattern Template</label>
-                  <p className="text-sm text-theme-muted">
-                    Use [1] for starting number, e.g., "photo-[1]" becomes "photo-1", "photo-2", etc.
-                  </p>
-                  <input
-                    type="text"
-                    value={renamePattern}
-                    onChange={(e) => handlePatternChange(e.target.value)}
-                    placeholder="e.g., file-[1] or photo_[1]"
-                    className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
-                  />
-                </div>
-              )}
-
-              {patternType === "custom" && (
-                <div className="space-y-4">
-                  <label className="text-lg font-semibold text-theme-heading">Custom Sequence Pattern</label>
-                  <p className="text-sm text-theme-muted">e.g., "file-[1,2,4,10,15]" renames files with your custom sequence</p>
-                  <input
-                    type="text"
-                    value={renamePattern}
-                    onChange={(e) => handlePatternChange(e.target.value)}
-                    placeholder="e.g., photo-[1,2,4,5,10]"
-                    className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
-                  />
-                </div>
-              )}
-
-              {patternType === "findreplace" && (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-theme-heading mb-2">Find</label>
-                      <input
-                        type="text"
-                        value={findText}
-                        onChange={(e) => {
-                          const newFindText = e.target.value;
-                          setFindText(newFindText);
-                          updatePreview(files, undefined, newFindText, replaceText);
-                        }}
-                        placeholder="Text to find"
-                        className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-theme-heading mb-2">Replace With</label>
-                      <input
-                        type="text"
-                        value={replaceText}
-                        onChange={(e) => {
-                          const newReplaceText = e.target.value;
-                          setReplaceText(newReplaceText);
-                          updatePreview(files, undefined, findText, newReplaceText);
-                        }}
-                        placeholder="Replace with text"
-                        className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {patternType === "prefix-suffix" && (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-theme-heading mb-2">Prefix</label>
-                      <input
-                        type="text"
-                        value={prefix}
-                        onChange={(e) => {
-                          const newPrefix = e.target.value;
-                          setPrefix(newPrefix);
-                          updatePreview(files, undefined, undefined, undefined, newPrefix, suffix);
-                        }}
-                        placeholder="Add to beginning"
-                        className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-theme-heading mb-2">Suffix</label>
-                      <input
-                        type="text"
-                        value={suffix}
-                        onChange={(e) => {
-                          const newSuffix = e.target.value;
-                          setSuffix(newSuffix);
-                          updatePreview(files, undefined, undefined, undefined, prefix, newSuffix);
-                        }}
-                        placeholder="Add to end"
-                        className={cn(tc.field, "w-full px-4 py-3 placeholder:text-theme-muted")}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Preview */}
-              {preview.length > 0 && (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <IconCheck className="w-5 h-5 text-brand-primary" />
-                      <label className="text-lg font-semibold text-theme-heading">Preview</label>
-                    </div>
-                    <span className="text-sm text-theme-muted">{preview.length} file(s)</span>
-                  </div>
-                  <div className="bg-theme-surface-muted rounded-lg border border-theme-border max-h-96 overflow-y-auto">
-                    <table className="w-full text-sm">
-                      <thead className="sticky top-0 bg-theme-surface-muted">
-                        <tr className="border-b border-theme-border">
-                          <th className="px-4 py-3 text-left text-theme-body font-medium">Original Name</th>
-                          <th className="px-4 py-3 text-left text-theme-body font-medium">New Name</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-theme-border">
-                        {preview.map((mapping, index) => (
-                          <tr key={index} className="hover:bg-theme-surface">
-                            <td className="px-4 py-3 text-theme-body">{mapping.originalName}</td>
-                            <td className="px-4 py-3">
-                              {mapping.isConflict ? (
-                                <span className="flex items-center gap-2 text-[var(--theme-alert-error-text)]">
-                                  <IconX className="w-4 h-4" />
-                                  {mapping.newName} (conflict)
-                                </span>
-                              ) : (
-                                <span className="text-brand-primary font-medium flex items-center gap-2">
-                                  <IconCheck className="w-4 h-4" />
-                                  {mapping.newName}
-                                </span>
-                              )}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* Conflict Warning */}
-                  {preview.some((m) => m.isConflict) && (
-                    <div className={cn(tc.alertError, "rounded-lg p-4")}>
-                      <p className="text-sm font-medium">
-                        ⚠️ Warning: Some files have naming conflicts. They are marked above and won't be included in the ZIP download.
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {preview.length > 0 && (
-                <div className="flex flex-wrap gap-3">
-                  <button
-                    onClick={copyPreviewToClipboard}
-                    className={cn(tc.btn, "px-6 py-3 active:scale-[0.97]", copySuccess ? "theme-btn-success" : "theme-btn-primary")}
-                  >
-                    <IconCopy className="w-4 h-4" />
-                    {copySuccess ? "Copied!" : "Copy Preview"}
-                  </button>
-                  <button onClick={downloadFilesAsZip} className={cn(tc.btnPrimary, "px-6 py-3 active:scale-[0.97]")}>
-                    <IconDownload className="w-4 h-4" />
-                    Download ZIP
-                  </button>
-                  <button onClick={resetForm} className={cn(tc.btnSecondary, "px-6 py-3 active:scale-[0.97]")}>
-                    <IconRefresh className="w-4 h-4" />
-                    Reset
-                  </button>
-                </div>
-              )}
-
-              <div className="bg-theme-surface-muted border border-theme-border rounded-lg p-4 flex items-start gap-3">
-                <IconLock className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
-                <div className="text-sm text-theme-body">
-                  <p className="font-medium">100% Private & Secure</p>
-                  <p className="mt-1">
-                    All file renaming happens locally in your browser. Your files never leave your device, and the tool never uploads any
-                    data to servers.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <ToolContentDisplay
-            title={toolContent["bulk-file-renamer"].title}
-            intro={toolContent["bulk-file-renamer"].intro}
-            benefits={toolContent["bulk-file-renamer"].benefits}
-            useCases={toolContent["bulk-file-renamer"].useCases}
-          />
-
-          <ToolInfo
-            title="Bulk File Renaming Made Simple"
-            description="Professional file renaming capabilities without complex software"
-            features={[
-              {
-                title: "Sequential Numbering",
-                description: "Automatically number files in sequence (file-1, file-2, file-3...)",
-                icon: IconNumbers,
-              },
-              {
-                title: "Custom Ranges",
-                description: "Use custom number sequences like [1,2,4,10,15,...]",
-                icon: IconListNumbers,
-              },
-              {
-                title: "Find & Replace",
-                description: "Replace text patterns throughout filenames",
-                icon: IconSearchIcon,
-              },
-            ]}
-            steps={[
-              {
-                title: "Upload Files",
-                description: "Drag and drop files or click to select from your computer",
-              },
-              {
-                title: "Choose Pattern",
-                description: "Select a naming pattern type (sequential, custom, find-replace, prefix-suffix)",
-              },
-              {
-                title: "Preview Changes",
-                description: "Review all renamed filenames before applying the changes",
-              },
-              {
-                title: "Download ZIP",
-                description: "Download your files in a ZIP archive with their new names applied",
-              },
-            ]}
-            privacyInfo="This tool processes all files entirely in your browser. No files are uploaded to any server, and your data never leaves your device."
-            faqs={faqs}
-          />
-
-          <RelatedTools currentToolSlug="bulk-file-renamer" category="Utility" />
-        </main>
+        <RelatedTools currentToolSlug="bulk-file-renamer" category="Utility" />
       </div>
     </div>
   );

@@ -47,18 +47,21 @@ export const Route = createFileRoute("/_wrap/image-resizer")({
 
 export function RouteComponent() {
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col items-center">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Image Resizer</h1>
-          {/* <p className="text-md text-theme-body">
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">Image Resizer</h1>
+              {/* <p className="text-md text-theme-body">
             Upload an image, choose width, and resize instantly with automatic aspect ratio lock. Private, fast, and fully browser-based.
           </p> */}
+            </div>
+          </div>
+
+          <ImageResizerTool />
         </div>
-
-        <ImageResizerTool />
-
         <ToolContentDisplay
           title={toolContent["image-resizer"].title}
           intro={toolContent["image-resizer"].intro}

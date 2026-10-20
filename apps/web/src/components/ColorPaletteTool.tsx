@@ -703,9 +703,9 @@ export function ColorPaletteTool() {
   const theoryModes = MODES.filter((m) => m.group === "Color Theory");
 
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-5">
+    <div className="w-full max-w-5xl mx-auto space-y-5">
       {/* ── Controls ── */}
-      <div className="bg-theme-surface border border-theme-border/60 rounded-2xl p-5 space-y-5">
+      <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8 space-y-5">
         {/* Row 1: Mode selector */}
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">

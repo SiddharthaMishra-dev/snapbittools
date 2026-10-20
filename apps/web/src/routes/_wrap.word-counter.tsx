@@ -117,109 +117,113 @@ function WordCounterComponent() {
   };
 
   return (
-    <div className="min-h-screen py-2 pb-8 px-4 flex flex-col font-sans">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Word Counter</h1>
-          {/* <p className="text-md text-theme-body">Analyze your text instantly. Count words, characters, sentences and more.</p> */}
-        </div>
-
-        <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
-          <div className=" rounded-xl shadow-lg p-4">
-            <div className="flex flex-wrap gap-3 justify-center">
-              <button
-                onClick={() => transformText("upper")}
-                disabled={!text}
-                className={cn(tc.btnSecondary, "px-4 py-2")}
-                title="UPPERCASE"
-              >
-                <IconLetterCaseUpper className="w-5 h-5" />
-                <span className="hidden sm:inline">UPPERCASE</span>
-              </button>
-              <button
-                onClick={() => transformText("lower")}
-                disabled={!text}
-                className={cn(tc.btnSecondary, "px-4 py-2")}
-                title="lowercase"
-              >
-                <IconLetterCaseLower className="w-5 h-5" />
-                <span className="hidden sm:inline">lowercase</span>
-              </button>
-              <button
-                onClick={() => transformText("title")}
-                disabled={!text}
-                className={cn(tc.btnSecondary, "px-4 py-2")}
-                title="Title Case"
-              >
-                <IconLetterCase className="w-5 h-5" />
-                <span className="hidden sm:inline">Title Case</span>
-              </button>
-
-              <div className="flex-grow md:flex-grow-0" />
-
-              <button
-                onClick={copyToClipboard}
-                disabled={!text}
-                className={cn(tc.btn, "px-4 py-2", copySuccess ? "theme-btn-success" : "theme-btn-primary")}
-              >
-                {copySuccess ? (
-                  <>
-                    <IconCheck className="w-5 h-5" />
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <IconCopy className="w-5 h-5" />
-                    <span>Copy Text</span>
-                  </>
-                )}
-              </button>
-
-              <button onClick={clearText} disabled={!text} className={cn(tc.btnDanger, "px-4 py-2")}>
-                <IconTrash className="w-5 h-5" />
-                <span>Clear</span>
-              </button>
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">Word Counter</h1>
+              {/* <p className="text-md text-theme-body">Analyze your text instantly. Count words, characters, sentences and more.</p> */}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div className="lg:col-span-3">
-              <div className=" rounded-lg shadow-lg  h-full flex flex-col">
-                <textarea
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  placeholder="Start typing or paste your content here..."
-                  className={cn(tc.field, "w-full flex-grow min-h-[400px] p-4 resize-none font-sans text-lg leading-relaxed")}
-                  spellCheck={true}
-                />
+          <div className="w-full max-w-5xl mx-auto space-y-6">
+            <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+              <div className="flex flex-wrap gap-3 justify-center">
+                <button
+                  onClick={() => transformText("upper")}
+                  disabled={!text}
+                  className={cn(tc.btnSecondary, "px-4 py-2")}
+                  title="UPPERCASE"
+                >
+                  <IconLetterCaseUpper className="w-5 h-5" />
+                  <span className="hidden sm:inline">UPPERCASE</span>
+                </button>
+                <button
+                  onClick={() => transformText("lower")}
+                  disabled={!text}
+                  className={cn(tc.btnSecondary, "px-4 py-2")}
+                  title="lowercase"
+                >
+                  <IconLetterCaseLower className="w-5 h-5" />
+                  <span className="hidden sm:inline">lowercase</span>
+                </button>
+                <button
+                  onClick={() => transformText("title")}
+                  disabled={!text}
+                  className={cn(tc.btnSecondary, "px-4 py-2")}
+                  title="Title Case"
+                >
+                  <IconLetterCase className="w-5 h-5" />
+                  <span className="hidden sm:inline">Title Case</span>
+                </button>
+
+                <div className="flex-grow md:flex-grow-0" />
+
+                <button
+                  onClick={copyToClipboard}
+                  disabled={!text}
+                  className={cn(tc.btn, "px-4 py-2", copySuccess ? "theme-btn-success" : "theme-btn-primary")}
+                >
+                  {copySuccess ? (
+                    <>
+                      <IconCheck className="w-5 h-5" />
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <IconCopy className="w-5 h-5" />
+                      <span>Copy Text</span>
+                    </>
+                  )}
+                </button>
+
+                <button onClick={clearText} disabled={!text} className={cn(tc.btnDanger, "px-4 py-2")}>
+                  <IconTrash className="w-5 h-5" />
+                  <span>Clear</span>
+                </button>
               </div>
             </div>
 
-            <div className="lg:col-span-1 space-y-6">
-              <div className=" rounded-lg shadow-lg p-6 border border-theme-border">
-                <h3 className="text-lg font-semibold text-theme-heading mb-6 flex items-center gap-2 border-b border-theme-border pb-2">
-                  <IconHash className="w-5 h-5 text-brand-primary" />
-                  Live Statistics
-                </h3>
-
-                <div className="space-y-4">
-                  <StatItem label="Words" value={stats.words} icon={<IconTypography className="w-4 h-4" />} />
-                  <StatItem label="Characters" value={stats.charactersTotal} icon={<IconLetterCase className="w-4 h-4" />} />
-                  <StatItem label="Excl. Spaces" value={stats.charactersNoSpaces} icon={<IconLetterCase className="w-4 h-4" />} />
-                  <StatItem label="Sentences" value={stats.sentences} icon={<IconFileText className="w-4 h-4" />} />
-                  <StatItem label="Paragraphs" value={stats.paragraphs} icon={<IconFileText className="w-4 h-4" />} />
-                  <div className="pt-4 border-t border-theme-border mt-4">
-                    <StatItem label="Reading Time" value={`${stats.readingTime} min`} icon={<IconClock className="w-4 h-4" />} />
-                  </div>
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              <div className="lg:col-span-3">
+                <div className=" rounded-lg shadow-lg  h-full flex flex-col">
+                  <textarea
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder="Start typing or paste your content here..."
+                    className={cn(tc.field, "w-full flex-grow min-h-[400px] p-4 resize-none font-sans text-lg leading-relaxed")}
+                    spellCheck={true}
+                  />
                 </div>
               </div>
 
-              <div className="bg-brand-primary/10 rounded-lg p-6 border border-brand-primary/20">
-                <p className="text-sm text-brand-light font-medium italic">
-                  "Words are, in my not-so-humble opinion, our most inexhaustible source of magic."
-                </p>
-                <p className="text-xs text-theme-muted mt-2 text-right">— Albus Dumbledore</p>
+              <div className="lg:col-span-1 space-y-6">
+                <div className=" rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+                  <h3 className="text-lg font-semibold text-theme-heading mb-6 flex items-center gap-2 border-b border-theme-border pb-2">
+                    <IconHash className="w-5 h-5 text-brand-primary" />
+                    Live Statistics
+                  </h3>
+
+                  <div className="space-y-4">
+                    <StatItem label="Words" value={stats.words} icon={<IconTypography className="w-4 h-4" />} />
+                    <StatItem label="Characters" value={stats.charactersTotal} icon={<IconLetterCase className="w-4 h-4" />} />
+                    <StatItem label="Excl. Spaces" value={stats.charactersNoSpaces} icon={<IconLetterCase className="w-4 h-4" />} />
+                    <StatItem label="Sentences" value={stats.sentences} icon={<IconFileText className="w-4 h-4" />} />
+                    <StatItem label="Paragraphs" value={stats.paragraphs} icon={<IconFileText className="w-4 h-4" />} />
+                    <div className="pt-4 border-t border-theme-border mt-4">
+                      <StatItem label="Reading Time" value={`${stats.readingTime} min`} icon={<IconClock className="w-4 h-4" />} />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-brand-primary/10 rounded-lg p-6 border border-brand-primary/20">
+                  <p className="text-sm text-brand-light font-medium italic">
+                    "Words are, in my not-so-humble opinion, our most inexhaustible source of magic."
+                  </p>
+                  <p className="text-xs text-theme-muted mt-2 text-right">— Albus Dumbledore</p>
+                </div>
               </div>
             </div>
           </div>

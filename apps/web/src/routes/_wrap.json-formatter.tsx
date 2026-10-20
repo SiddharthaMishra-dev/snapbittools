@@ -48,18 +48,21 @@ export const Route = createFileRoute("/_wrap/json-formatter")({
 
 export function RouteComponent() {
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
 
-        {/* Header */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">JSON Formatter</h1>
-          {/* <p className="text-md text-theme-body">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p> */}
+          {/* Header */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">JSON Formatter</h1>
+              {/* <p className="text-md text-theme-body">Format, validate & minify JSON instantly. No data sent to servers—completely private.</p> */}
+            </div>
+          </div>
+
+          <JsonFormatterTool />
         </div>
-
-        <JsonFormatterTool />
-
         <ToolContentDisplay
           title={toolContent["json-formatter"].title}
           intro={toolContent["json-formatter"].intro}

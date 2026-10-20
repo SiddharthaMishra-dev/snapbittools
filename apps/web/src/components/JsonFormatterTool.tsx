@@ -261,7 +261,7 @@ export function JsonFormatterTool() {
   );
 
   const renderEditorPanels = (isInModal: boolean) => (
-    <div className="grid grid-cols-1 lg:grid-cols-2 sm:gap-0 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 sm:gap-0 gap-6 w-full">
       <div className="rounded-xl shadow-lg p-0 sm:p-6">
         <h3 className="text-xl font-semibold text-theme-heading mb-4">Input</h3>
         <textarea
@@ -402,9 +402,9 @@ export function JsonFormatterTool() {
   };
 
   return (
-    <div className="flex-1 max-w-7xl w-full mx-auto">
+    <div className="w-full max-w-5xl mx-auto flex-1 flex flex-col items-center">
       {/* Toolbar */}
-      <div className=" rounded-xl shadow-lg p-4 mb-6">
+      <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
         <div className="flex flex-wrap gap-3 justify-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-theme-surface-muted border border-theme-border text-theme-heading rounded-lg">
             <span className="text-sm font-medium">Quotes:</span>

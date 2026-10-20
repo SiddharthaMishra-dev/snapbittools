@@ -58,6 +58,7 @@ import { Route as WrapJsonPrettyPrintRouteImport } from './routes/_wrap.json-pre
 import { Route as WrapJsonToCsvRouteImport } from './routes/_wrap.json-to-csv'
 import { Route as WrapJsonValidatorRouteImport } from './routes/_wrap.json-validator'
 import { Route as WrapLoremIpsumGeneratorRouteImport } from './routes/_wrap.lorem-ipsum-generator'
+import { Route as WrapMergePdfRouteImport } from './routes/_wrap.merge-pdf'
 import { Route as WrapOptimizeImagesForWebsiteRouteImport } from './routes/_wrap.optimize-images-for-website'
 import { Route as WrapPdfCompressorRouteImport } from './routes/_wrap.pdf-compressor'
 import { Route as WrapPdfExtractImagesRouteImport } from './routes/_wrap.pdf-extract-images'
@@ -69,6 +70,8 @@ import { Route as WrapReduceImageFileSizeRouteImport } from './routes/_wrap.redu
 import { Route as WrapReduceJpgSizeRouteImport } from './routes/_wrap.reduce-jpg-size'
 import { Route as WrapReducePngSizeRouteImport } from './routes/_wrap.reduce-png-size'
 import { Route as WrapReduceYourImageSizeForFreeRouteImport } from './routes/_wrap.reduce-your-image-size-for-free'
+import { Route as WrapReorderPdfRouteImport } from './routes/_wrap.reorder-pdf'
+import { Route as WrapSplitPdfRouteImport } from './routes/_wrap.split-pdf'
 import { Route as WrapValidateJsonOnlineRouteImport } from './routes/_wrap.validate-json-online'
 import { Route as WrapWebpToJpgRouteImport } from './routes/_wrap.webp-to-jpg'
 import { Route as WrapWebpToPngRouteImport } from './routes/_wrap.webp-to-png'
@@ -328,6 +331,11 @@ const WrapLoremIpsumGeneratorRoute = WrapLoremIpsumGeneratorRouteImport.update({
   path: '/lorem-ipsum-generator',
   getParentRoute: () => WrapRoute,
 } as any)
+const WrapMergePdfRoute = WrapMergePdfRouteImport.update({
+  id: '/merge-pdf',
+  path: '/merge-pdf',
+  getParentRoute: () => WrapRoute,
+} as any)
 const WrapOptimizeImagesForWebsiteRoute =
   WrapOptimizeImagesForWebsiteRouteImport.update({
     id: '/optimize-images-for-website',
@@ -385,6 +393,16 @@ const WrapReduceYourImageSizeForFreeRoute =
     path: '/reduce-your-image-size-for-free',
     getParentRoute: () => WrapRoute,
   } as any)
+const WrapReorderPdfRoute = WrapReorderPdfRouteImport.update({
+  id: '/reorder-pdf',
+  path: '/reorder-pdf',
+  getParentRoute: () => WrapRoute,
+} as any)
+const WrapSplitPdfRoute = WrapSplitPdfRouteImport.update({
+  id: '/split-pdf',
+  path: '/split-pdf',
+  getParentRoute: () => WrapRoute,
+} as any)
 const WrapValidateJsonOnlineRoute = WrapValidateJsonOnlineRouteImport.update({
   id: '/validate-json-online',
   path: '/validate-json-online',
@@ -455,6 +473,7 @@ export interface FileRoutesByFullPath {
   '/json-to-csv': typeof WrapJsonToCsvRoute
   '/json-validator': typeof WrapJsonValidatorRoute
   '/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
+  '/merge-pdf': typeof WrapMergePdfRoute
   '/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
   '/pdf-compressor': typeof WrapPdfCompressorRoute
   '/pdf-extract-images': typeof WrapPdfExtractImagesRoute
@@ -466,6 +485,8 @@ export interface FileRoutesByFullPath {
   '/reduce-jpg-size': typeof WrapReduceJpgSizeRoute
   '/reduce-png-size': typeof WrapReducePngSizeRoute
   '/reduce-your-image-size-for-free': typeof WrapReduceYourImageSizeForFreeRoute
+  '/reorder-pdf': typeof WrapReorderPdfRoute
+  '/split-pdf': typeof WrapSplitPdfRoute
   '/validate-json-online': typeof WrapValidateJsonOnlineRoute
   '/webp-to-jpg': typeof WrapWebpToJpgRoute
   '/webp-to-png': typeof WrapWebpToPngRoute
@@ -520,6 +541,7 @@ export interface FileRoutesByTo {
   '/json-to-csv': typeof WrapJsonToCsvRoute
   '/json-validator': typeof WrapJsonValidatorRoute
   '/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
+  '/merge-pdf': typeof WrapMergePdfRoute
   '/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
   '/pdf-compressor': typeof WrapPdfCompressorRoute
   '/pdf-extract-images': typeof WrapPdfExtractImagesRoute
@@ -531,6 +553,8 @@ export interface FileRoutesByTo {
   '/reduce-jpg-size': typeof WrapReduceJpgSizeRoute
   '/reduce-png-size': typeof WrapReducePngSizeRoute
   '/reduce-your-image-size-for-free': typeof WrapReduceYourImageSizeForFreeRoute
+  '/reorder-pdf': typeof WrapReorderPdfRoute
+  '/split-pdf': typeof WrapSplitPdfRoute
   '/validate-json-online': typeof WrapValidateJsonOnlineRoute
   '/webp-to-jpg': typeof WrapWebpToJpgRoute
   '/webp-to-png': typeof WrapWebpToPngRoute
@@ -587,6 +611,7 @@ export interface FileRoutesById {
   '/_wrap/json-to-csv': typeof WrapJsonToCsvRoute
   '/_wrap/json-validator': typeof WrapJsonValidatorRoute
   '/_wrap/lorem-ipsum-generator': typeof WrapLoremIpsumGeneratorRoute
+  '/_wrap/merge-pdf': typeof WrapMergePdfRoute
   '/_wrap/optimize-images-for-website': typeof WrapOptimizeImagesForWebsiteRoute
   '/_wrap/pdf-compressor': typeof WrapPdfCompressorRoute
   '/_wrap/pdf-extract-images': typeof WrapPdfExtractImagesRoute
@@ -598,6 +623,8 @@ export interface FileRoutesById {
   '/_wrap/reduce-jpg-size': typeof WrapReduceJpgSizeRoute
   '/_wrap/reduce-png-size': typeof WrapReducePngSizeRoute
   '/_wrap/reduce-your-image-size-for-free': typeof WrapReduceYourImageSizeForFreeRoute
+  '/_wrap/reorder-pdf': typeof WrapReorderPdfRoute
+  '/_wrap/split-pdf': typeof WrapSplitPdfRoute
   '/_wrap/validate-json-online': typeof WrapValidateJsonOnlineRoute
   '/_wrap/webp-to-jpg': typeof WrapWebpToJpgRoute
   '/_wrap/webp-to-png': typeof WrapWebpToPngRoute
@@ -654,6 +681,7 @@ export interface FileRouteTypes {
     | '/json-to-csv'
     | '/json-validator'
     | '/lorem-ipsum-generator'
+    | '/merge-pdf'
     | '/optimize-images-for-website'
     | '/pdf-compressor'
     | '/pdf-extract-images'
@@ -665,6 +693,8 @@ export interface FileRouteTypes {
     | '/reduce-jpg-size'
     | '/reduce-png-size'
     | '/reduce-your-image-size-for-free'
+    | '/reorder-pdf'
+    | '/split-pdf'
     | '/validate-json-online'
     | '/webp-to-jpg'
     | '/webp-to-png'
@@ -719,6 +749,7 @@ export interface FileRouteTypes {
     | '/json-to-csv'
     | '/json-validator'
     | '/lorem-ipsum-generator'
+    | '/merge-pdf'
     | '/optimize-images-for-website'
     | '/pdf-compressor'
     | '/pdf-extract-images'
@@ -730,6 +761,8 @@ export interface FileRouteTypes {
     | '/reduce-jpg-size'
     | '/reduce-png-size'
     | '/reduce-your-image-size-for-free'
+    | '/reorder-pdf'
+    | '/split-pdf'
     | '/validate-json-online'
     | '/webp-to-jpg'
     | '/webp-to-png'
@@ -785,6 +818,7 @@ export interface FileRouteTypes {
     | '/_wrap/json-to-csv'
     | '/_wrap/json-validator'
     | '/_wrap/lorem-ipsum-generator'
+    | '/_wrap/merge-pdf'
     | '/_wrap/optimize-images-for-website'
     | '/_wrap/pdf-compressor'
     | '/_wrap/pdf-extract-images'
@@ -796,6 +830,8 @@ export interface FileRouteTypes {
     | '/_wrap/reduce-jpg-size'
     | '/_wrap/reduce-png-size'
     | '/_wrap/reduce-your-image-size-for-free'
+    | '/_wrap/reorder-pdf'
+    | '/_wrap/split-pdf'
     | '/_wrap/validate-json-online'
     | '/_wrap/webp-to-jpg'
     | '/_wrap/webp-to-png'
@@ -1162,6 +1198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapLoremIpsumGeneratorRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/merge-pdf': {
+      id: '/_wrap/merge-pdf'
+      path: '/merge-pdf'
+      fullPath: '/merge-pdf'
+      preLoaderRoute: typeof WrapMergePdfRouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/optimize-images-for-website': {
       id: '/_wrap/optimize-images-for-website'
       path: '/optimize-images-for-website'
@@ -1239,6 +1282,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapReduceYourImageSizeForFreeRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/reorder-pdf': {
+      id: '/_wrap/reorder-pdf'
+      path: '/reorder-pdf'
+      fullPath: '/reorder-pdf'
+      preLoaderRoute: typeof WrapReorderPdfRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/split-pdf': {
+      id: '/_wrap/split-pdf'
+      path: '/split-pdf'
+      fullPath: '/split-pdf'
+      preLoaderRoute: typeof WrapSplitPdfRouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/validate-json-online': {
       id: '/_wrap/validate-json-online'
       path: '/validate-json-online'
@@ -1308,6 +1365,7 @@ interface WrapRouteChildren {
   WrapJsonToCsvRoute: typeof WrapJsonToCsvRoute
   WrapJsonValidatorRoute: typeof WrapJsonValidatorRoute
   WrapLoremIpsumGeneratorRoute: typeof WrapLoremIpsumGeneratorRoute
+  WrapMergePdfRoute: typeof WrapMergePdfRoute
   WrapOptimizeImagesForWebsiteRoute: typeof WrapOptimizeImagesForWebsiteRoute
   WrapPdfCompressorRoute: typeof WrapPdfCompressorRoute
   WrapPdfExtractImagesRoute: typeof WrapPdfExtractImagesRoute
@@ -1319,6 +1377,8 @@ interface WrapRouteChildren {
   WrapReduceJpgSizeRoute: typeof WrapReduceJpgSizeRoute
   WrapReducePngSizeRoute: typeof WrapReducePngSizeRoute
   WrapReduceYourImageSizeForFreeRoute: typeof WrapReduceYourImageSizeForFreeRoute
+  WrapReorderPdfRoute: typeof WrapReorderPdfRoute
+  WrapSplitPdfRoute: typeof WrapSplitPdfRoute
   WrapValidateJsonOnlineRoute: typeof WrapValidateJsonOnlineRoute
   WrapWebpToJpgRoute: typeof WrapWebpToJpgRoute
   WrapWebpToPngRoute: typeof WrapWebpToPngRoute
@@ -1365,6 +1425,7 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapJsonToCsvRoute: WrapJsonToCsvRoute,
   WrapJsonValidatorRoute: WrapJsonValidatorRoute,
   WrapLoremIpsumGeneratorRoute: WrapLoremIpsumGeneratorRoute,
+  WrapMergePdfRoute: WrapMergePdfRoute,
   WrapOptimizeImagesForWebsiteRoute: WrapOptimizeImagesForWebsiteRoute,
   WrapPdfCompressorRoute: WrapPdfCompressorRoute,
   WrapPdfExtractImagesRoute: WrapPdfExtractImagesRoute,
@@ -1376,6 +1437,8 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapReduceJpgSizeRoute: WrapReduceJpgSizeRoute,
   WrapReducePngSizeRoute: WrapReducePngSizeRoute,
   WrapReduceYourImageSizeForFreeRoute: WrapReduceYourImageSizeForFreeRoute,
+  WrapReorderPdfRoute: WrapReorderPdfRoute,
+  WrapSplitPdfRoute: WrapSplitPdfRoute,
   WrapValidateJsonOnlineRoute: WrapValidateJsonOnlineRoute,
   WrapWebpToJpgRoute: WrapWebpToJpgRoute,
   WrapWebpToPngRoute: WrapWebpToPngRoute,

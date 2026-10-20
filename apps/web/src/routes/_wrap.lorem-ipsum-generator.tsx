@@ -183,95 +183,101 @@ function LoremIpsumComponent() {
   };
 
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col font-sans">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Lorem Ipsum Generator</h1>
-          {/* <p className="text-md text-theme-body">Instant placeholder text for your next big project.</p> */}
-        </div>
-
-        <div className="flex-1 max-w-7xl w-full mx-auto space-y-6">
-          <div className="rounded-lg shadow-lg p-6 border border-theme-border">
-            <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
-              <div className="flex flex-wrap items-center gap-4">
-                <div className="flex flex-col">
-                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Quantity</label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="100"
-                    value={count}
-                    onChange={(e) => setCount(parseInt(e.target.value) || 1)}
-                    className={cn(tc.field, "w-24 px-3 py-2")}
-                  />
-                </div>
-
-                <div className="flex flex-col">
-                  <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Type</label>
-                  <div className="flex p-1 bg-theme-surface rounded-lg">
-                    {(["paragraphs", "sentences", "words"] as const).map((t) => (
-                      <button
-                        key={t}
-                        onClick={() => setType(t)}
-                        className={cn(
-                          "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
-                          type === t ? tc.toggleActive : tc.toggleInactive,
-                        )}
-                      >
-                        {t.charAt(0).toUpperCase() + t.slice(1)}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <button onClick={generateText} className={cn(tc.btnSecondary, "px-5 py-2.5")}>
-                  <IconRefresh className="w-5 h-5" />
-                  <span>Regenerate</span>
-                </button>
-
-                <button
-                  onClick={copyToClipboard}
-                  disabled={!generatedText}
-                  className={cn(tc.btn, "px-5 py-2.5", copySuccess ? "theme-btn-success" : "theme-btn-primary")}
-                >
-                  {copySuccess ? (
-                    <>
-                      <IconCheck className="w-5 h-5" />
-                      <span>Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <IconCopy className="w-5 h-5" />
-                      <span>Copy All</span>
-                    </>
-                  )}
-                </button>
-
-                <button onClick={clearText} className={cn(tc.btnDanger, "p-2.5")} title="Clear">
-                  <IconTrash className="w-5 h-5" />
-                </button>
-              </div>
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">
+                Lorem Ipsum Generator
+              </h1>
+              {/* <p className="text-md text-theme-body">Instant placeholder text for your next big project.</p> */}
             </div>
           </div>
 
-          <div className="bg-theme-surface rounded-lg shadow-lg p-8 border border-theme-border min-h-[400px]">
-            {generatedText ? (
-              <div className="max-w-none">
-                {generatedText.split("\n\n").map((para, i) => (
-                  <p key={i} className="text-theme-body text-xl leading-relaxed mb-6 last:mb-0">
-                    {para}
-                  </p>
-                ))}
+          <div className="w-full max-w-5xl mx-auto space-y-6">
+            <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+              <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
+                <div className="flex flex-wrap items-center gap-4">
+                  <div className="flex flex-col">
+                    <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Quantity</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="100"
+                      value={count}
+                      onChange={(e) => setCount(parseInt(e.target.value) || 1)}
+                      className={cn(tc.field, "w-24 px-3 py-2")}
+                    />
+                  </div>
+
+                  <div className="flex flex-col">
+                    <label className="text-xs font-semibold text-theme-muted uppercase tracking-wider mb-2">Type</label>
+                    <div className="flex p-1 bg-theme-surface rounded-lg">
+                      {(["paragraphs", "sentences", "words"] as const).map((t) => (
+                        <button
+                          key={t}
+                          onClick={() => setType(t)}
+                          className={cn(
+                            "px-4 py-1.5 rounded-md text-sm font-medium transition-all",
+                            type === t ? tc.toggleActive : tc.toggleInactive,
+                          )}
+                        >
+                          {t.charAt(0).toUpperCase() + t.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button onClick={generateText} className={cn(tc.btnSecondary, "px-5 py-2.5")}>
+                    <IconRefresh className="w-5 h-5" />
+                    <span>Regenerate</span>
+                  </button>
+
+                  <button
+                    onClick={copyToClipboard}
+                    disabled={!generatedText}
+                    className={cn(tc.btn, "px-5 py-2.5", copySuccess ? "theme-btn-success" : "theme-btn-primary")}
+                  >
+                    {copySuccess ? (
+                      <>
+                        <IconCheck className="w-5 h-5" />
+                        <span>Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <IconCopy className="w-5 h-5" />
+                        <span>Copy All</span>
+                      </>
+                    )}
+                  </button>
+
+                  <button onClick={clearText} className={cn(tc.btnDanger, "p-2.5")} title="Clear">
+                    <IconTrash className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
-            ) : (
-              <div className="h-full flex flex-col items-center justify-center text-theme-muted py-20">
-                <IconTypography className="w-16 h-16 opacity-10 mb-4" />
-                <p>Generate some magic text above...</p>
-              </div>
-            )}
+            </div>
+
+            <div className="bg-theme-surface rounded-lg shadow-lg p-8 border border-theme-border min-h-[400px]">
+              {generatedText ? (
+                <div className="max-w-none">
+                  {generatedText.split("\n\n").map((para, i) => (
+                    <p key={i} className="text-theme-body text-xl leading-relaxed mb-6 last:mb-0">
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              ) : (
+                <div className="h-full flex flex-col items-center justify-center text-theme-muted py-20">
+                  <IconTypography className="w-16 h-16 opacity-10 mb-4" />
+                  <p>Generate some magic text above...</p>
+                </div>
+              )}
+            </div>
           </div>
           <ToolContentDisplay
             title={toolContent["lorem-ipsum-generator"].title}

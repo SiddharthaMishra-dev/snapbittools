@@ -188,141 +188,144 @@ function RouteComponent() {
   }, [jsonOutput]);
 
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">CSV to JSON</h1>
-          {/* <p className="text-md text-theme-body">Transform CSV data into JSON format securely in your browser.</p> */}
-        </div>
-
-        <div className="flex-1 max-w-7xl w-full mx-auto">
-          <div className="rounded-xl shadow-lg p-4 sm:p-8 mb-6 w-full border border-theme-border bg-theme-surface">
-            <FileDropzone
-              title="Upload CSV"
-              description="Drag and drop a CSV file here, or choose a file. You can also paste CSV below."
-              buttonLabel="Select CSV"
-              accept=".csv,text/csv"
-              onFiles={handleFileUpload}
-            />
-          </div>
-
-          <div className="bg-transparent rounded-xl shadow-lg p-4 mb-6">
-            <div className="flex flex-wrap gap-3 justify-center items-center">
-              <button onClick={loadSampleData} className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}>
-                <IconTable className="w-4 h-4" />
-                <span>Sample CSV</span>
-              </button>
-              <div className="h-6 w-px bg-theme-border mx-2 hidden sm:block" />
-
-              <label className="flex items-center space-x-2 text-theme-body text-sm cursor-pointer select-none bg-theme-surface-muted border border-theme-border px-3 py-2 rounded-lg hover:bg-theme-surface transition">
-                <input
-                  type="checkbox"
-                  checked={hasHeader}
-                  onChange={(e) => setHasHeader(e.target.checked)}
-                  className="rounded border-theme-border text-brand-primary focus:ring-brand-primary bg-theme-input-bg"
-                />
-                <span>First row as header</span>
-              </label>
-
-              <label className="flex items-center space-x-2 text-theme-body text-sm cursor-pointer select-none bg-theme-surface-muted border border-theme-border px-3 py-2 rounded-lg hover:bg-theme-surface transition">
-                <input
-                  type="checkbox"
-                  checked={sanitizeJson}
-                  onChange={(e) => setSanitizeJson(e.target.checked)}
-                  className="rounded border-theme-border text-brand-primary focus:ring-brand-primary bg-theme-input-bg"
-                />
-                <span>Sanitize JSON strings</span>
-              </label>
-
-              <button onClick={downloadJSON} disabled={!jsonOutput} className={cn(tc.btnPrimary, "px-4 py-2 ml-auto")}>
-                <IconDownload className="w-4 h-4" />
-                <span>Download JSON</span>
-              </button>
-
-              <button
-                onClick={copyToClipboard}
-                disabled={!jsonOutput}
-                className={cn(tc.btn, "px-4 py-2", copySuccess ? "theme-btn-success" : "theme-btn-secondary")}
-              >
-                {copySuccess ? (
-                  <>
-                    <IconCheck className="w-4 h-4" />
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <IconCopy className="w-4 h-4" />
-                    <span>Copy JSON</span>
-                  </>
-                )}
-              </button>
-
-              <button
-                onClick={() => {
-                  setInput("");
-                  setError(null);
-                }}
-                disabled={!input}
-                className={cn(tc.btnDanger, "px-4 py-2")}
-              >
-                <IconTrash className="w-4 h-4" />
-              </button>
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">CSV to JSON</h1>
+              {/* <p className="text-md text-theme-body">Transform CSV data into JSON format securely in your browser.</p> */}
             </div>
           </div>
 
-          {error && (
-            <div className={cn(tc.alertError, "rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2")}>
-              <IconAlertCircle className="w-5 h-5 text-[var(--theme-alert-error-icon)] flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-medium">Parse Error</p>
-                <p className="text-sm opacity-80">{error}</p>
-              </div>
-            </div>
-          )}
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
-            <div className="rounded-xl shadow-lg flex flex-col h-full border border-theme-border bg-theme-surface overflow-hidden">
-              <div className="px-4 py-3 border-b border-theme-border flex justify-between items-center bg-theme-surface-muted">
-                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Input CSV</h3>
-                {input && <span className="text-xs text-theme-muted">{(new Blob([input]).size / 1024).toFixed(2)} KB</span>}
-              </div>
-              <textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Paste CSV content here..."
-                className={cn(
-                  tc.field,
-                  "flex-1 w-full p-4 font-mono text-sm resize-none focus:ring-0 border-0 rounded-none",
-                  error && "bg-[var(--theme-alert-error-bg)]",
-                )}
-                spellCheck={false}
+          <div className="w-full max-w-5xl mx-auto">
+            <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+              <FileDropzone
+                title="Upload CSV"
+                description="Drag and drop a CSV file here, or choose a file. You can also paste CSV below."
+                buttonLabel="Select CSV"
+                accept=".csv,text/csv"
+                onFiles={handleFileUpload}
               />
             </div>
 
-            <div className="rounded-xl shadow-lg flex flex-col h-full border border-theme-border bg-theme-surface overflow-hidden">
-              <div className="px-4 py-3 border-b border-theme-border flex justify-between items-center bg-theme-surface-muted">
-                <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Output JSON</h3>
-                {stats.rows > 0 && (
-                  <span className="text-xs text-brand-primary bg-theme-icon-bg px-2 py-0.5 rounded-full">
-                    {stats.rows} objects • {stats.columns} fields
-                  </span>
-                )}
-                {isProcessing && <span className="text-xs text-theme-muted">Processing...</span>}
+            <div className="bg-transparent rounded-xl shadow-lg p-4 mb-6">
+              <div className="flex flex-wrap gap-3 justify-center items-center">
+                <button onClick={loadSampleData} className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}>
+                  <IconTable className="w-4 h-4" />
+                  <span>Sample CSV</span>
+                </button>
+                <div className="h-6 w-px bg-theme-border mx-2 hidden sm:block" />
+
+                <label className="flex items-center space-x-2 text-theme-body text-sm cursor-pointer select-none bg-theme-surface-muted border border-theme-border px-3 py-2 rounded-lg hover:bg-theme-surface transition">
+                  <input
+                    type="checkbox"
+                    checked={hasHeader}
+                    onChange={(e) => setHasHeader(e.target.checked)}
+                    className="rounded border-theme-border text-brand-primary focus:ring-brand-primary bg-theme-input-bg"
+                  />
+                  <span>First row as header</span>
+                </label>
+
+                <label className="flex items-center space-x-2 text-theme-body text-sm cursor-pointer select-none bg-theme-surface-muted border border-theme-border px-3 py-2 rounded-lg hover:bg-theme-surface transition">
+                  <input
+                    type="checkbox"
+                    checked={sanitizeJson}
+                    onChange={(e) => setSanitizeJson(e.target.checked)}
+                    className="rounded border-theme-border text-brand-primary focus:ring-brand-primary bg-theme-input-bg"
+                  />
+                  <span>Sanitize JSON strings</span>
+                </label>
+
+                <button onClick={downloadJSON} disabled={!jsonOutput} className={cn(tc.btnPrimary, "px-4 py-2 ml-auto")}>
+                  <IconDownload className="w-4 h-4" />
+                  <span>Download JSON</span>
+                </button>
+
+                <button
+                  onClick={copyToClipboard}
+                  disabled={!jsonOutput}
+                  className={cn(tc.btn, "px-4 py-2", copySuccess ? "theme-btn-success" : "theme-btn-secondary")}
+                >
+                  {copySuccess ? (
+                    <>
+                      <IconCheck className="w-4 h-4" />
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <IconCopy className="w-4 h-4" />
+                      <span>Copy JSON</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={() => {
+                    setInput("");
+                    setError(null);
+                  }}
+                  disabled={!input}
+                  className={cn(tc.btnDanger, "px-4 py-2")}
+                >
+                  <IconTrash className="w-4 h-4" />
+                </button>
               </div>
-              <textarea
-                readOnly
-                value={jsonOutput}
-                placeholder="JSON output will appear here..."
-                className={cn(
-                  tc.field,
-                  "flex-1 w-full p-4 font-mono text-sm resize-none focus:ring-0 border-0 rounded-none bg-theme-code-bg text-theme-code-text",
-                )}
-                spellCheck={false}
-              />
+            </div>
+
+            {error && (
+              <div className={cn(tc.alertError, "rounded-xl p-4 mb-6 flex items-start gap-3 animate-in fade-in slide-in-from-top-2")}>
+                <IconAlertCircle className="w-5 h-5 text-[var(--theme-alert-error-icon)] flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-medium">Parse Error</p>
+                  <p className="text-sm opacity-80">{error}</p>
+                </div>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
+              <div className="rounded-xl shadow-lg flex flex-col h-full border border-theme-border bg-theme-surface overflow-hidden">
+                <div className="px-4 py-3 border-b border-theme-border flex justify-between items-center bg-theme-surface-muted">
+                  <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Input CSV</h3>
+                  {input && <span className="text-xs text-theme-muted">{(new Blob([input]).size / 1024).toFixed(2)} KB</span>}
+                </div>
+                <textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Paste CSV content here..."
+                  className={cn(
+                    tc.field,
+                    "flex-1 w-full p-4 font-mono text-sm resize-none focus:ring-0 border-0 rounded-none",
+                    error && "bg-[var(--theme-alert-error-bg)]",
+                  )}
+                  spellCheck={false}
+                />
+              </div>
+
+              <div className="rounded-xl shadow-lg flex flex-col h-full border border-theme-border bg-theme-surface overflow-hidden">
+                <div className="px-4 py-3 border-b border-theme-border flex justify-between items-center bg-theme-surface-muted">
+                  <h3 className="text-sm font-semibold text-theme-body uppercase tracking-wider">Output JSON</h3>
+                  {stats.rows > 0 && (
+                    <span className="text-xs text-brand-primary bg-theme-icon-bg px-2 py-0.5 rounded-full">
+                      {stats.rows} objects • {stats.columns} fields
+                    </span>
+                  )}
+                  {isProcessing && <span className="text-xs text-theme-muted">Processing...</span>}
+                </div>
+                <textarea
+                  readOnly
+                  value={jsonOutput}
+                  placeholder="JSON output will appear here..."
+                  className={cn(
+                    tc.field,
+                    "flex-1 w-full p-4 font-mono text-sm resize-none focus:ring-0 border-0 rounded-none bg-theme-code-bg text-theme-code-text",
+                  )}
+                  spellCheck={false}
+                />
+              </div>
             </div>
           </div>
-
           <ToolContentDisplay
             title={toolContent["csv-to-json"].title}
             intro={toolContent["csv-to-json"].intro}

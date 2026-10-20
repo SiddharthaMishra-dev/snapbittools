@@ -81,100 +81,105 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col items-center">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Diff Checker</h1>
-          {/* <p className="text-md text-theme-body max-w-2xl mx-auto">
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl flex-1 flex flex-col items-center  mx-auto">
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">Diff Checker</h1>
+              {/* <p className="text-md text-theme-body max-w-2xl mx-auto">
             Pinpoint changes between two text versions instantly. Private, secure, and processing entirely in your browser.
           </p> */}
-        </div>
+            </div>
+          </div>
 
-        {/* Action Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6  p-4 rounded-lg border border-theme-border">
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => setViewMode("split")}
-              className={cn(
-                "flex items-center space-x-2 px-4 py-2 rounded-lg transition-all",
-                viewMode === "split" ? tc.toggleActive : tc.toggleInactive,
+          {/* Action Bar */}
+          <div className="rounded-xl shadow-lg mb-6 w-full flex items-center justify-center md:justify-between flex-wrap gap-4 max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setViewMode("split")}
+                className={cn(
+                  "flex items-center space-x-2 px-4 py-2 rounded-lg transition-all",
+                  viewMode === "split" ? tc.toggleActive : tc.toggleInactive,
+                )}
+              >
+                <IconColumns className="w-4 h-4" />
+                <span className="text-sm font-medium">Split View</span>
+              </button>
+              <button
+                onClick={() => setViewMode("unified")}
+                className={cn(
+                  "flex items-center space-x-2 px-4 py-2 rounded-lg transition-all",
+                  viewMode === "unified" ? tc.toggleActive : tc.toggleInactive,
+                )}
+              >
+                <IconLayoutList className="w-4 h-4" />
+                <span className="text-sm font-medium">Unified View</span>
+              </button>
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <button onClick={handleSwap} title="Swap Inputs" className={cn(tc.toggleInactive, "p-2 rounded-lg hover:text-brand-primary")}>
+                <IconArrowsExchange className="w-5 h-5" />
+              </button>
+              <button onClick={handleClear} title="Clear All" className={cn(tc.btnDanger, "p-2")}>
+                <IconTrash className="w-5 h-5" />
+              </button>
+              <button onClick={handleCopyResult} disabled={diffResult.length === 0} className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}>
+                <IconCopy className="w-4 h-4" />
+                <span>{copyStatus || "Copy Diff"}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Input Areas */}
+          <div className="grid w-full max-w-5xl grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-theme-muted ml-1 uppercase tracking-wider">Original Text (Old)</label>
+              <textarea
+                placeholder="Paste your original text here..."
+                className={cn(tc.field, "w-full h-64 p-4 font-mono text-sm leading-relaxed")}
+                value={oldText}
+                onChange={(e) => setOldText(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-theme-muted ml-1 uppercase tracking-wider">Changed Text (New)</label>
+              <textarea
+                placeholder="Paste your modified text here..."
+                className={cn(tc.field, "w-full h-64 p-4 font-mono text-sm leading-relaxed")}
+                value={newText}
+                onChange={(e) => setNewText(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Diff Visualization */}
+          <div className="rounded-xl shadow-lg mb-12 w-full max-w-5xl border border-theme-border bg-theme-surface overflow-hidden">
+            <div className="bg-theme-surface-muted/50 px-6 py-3 border-b border-theme-border flex items-center justify-between">
+              <h2 className="text-sm font-semibold text-theme-muted uppercase tracking-widest">Comparison Results</h2>
+              {diffResult.length > 0 && (
+                <div className="flex items-center space-x-4 text-xs">
+                  <span className="flex items-center space-x-1">
+                    <span className="w-2 h-2 rounded-full bg-green-500/50"></span>
+                    <span className="text-theme-muted">{diffResult.filter((l) => l.type === "added").length} added</span>
+                  </span>
+                  <span className="flex items-center space-x-1">
+                    <span className="w-2 h-2 rounded-full bg-red-500/50"></span>
+                    <span className="text-theme-muted">{diffResult.filter((l) => l.type === "removed").length} removed</span>
+                  </span>
+                </div>
               )}
-            >
-              <IconColumns className="w-4 h-4" />
-              <span className="text-sm font-medium">Split View</span>
-            </button>
-            <button
-              onClick={() => setViewMode("unified")}
-              className={cn(
-                "flex items-center space-x-2 px-4 py-2 rounded-lg transition-all",
-                viewMode === "unified" ? tc.toggleActive : tc.toggleInactive,
-              )}
-            >
-              <IconLayoutList className="w-4 h-4" />
-              <span className="text-sm font-medium">Unified View</span>
-            </button>
-          </div>
+            </div>
 
-          <div className="flex items-center space-x-3">
-            <button onClick={handleSwap} title="Swap Inputs" className={cn(tc.toggleInactive, "p-2 rounded-lg hover:text-brand-primary")}>
-              <IconArrowsExchange className="w-5 h-5" />
-            </button>
-            <button onClick={handleClear} title="Clear All" className={cn(tc.btnDanger, "p-2")}>
-              <IconTrash className="w-5 h-5" />
-            </button>
-            <button onClick={handleCopyResult} disabled={diffResult.length === 0} className={cn(tc.btnSecondary, "px-4 py-2 text-sm")}>
-              <IconCopy className="w-4 h-4" />
-              <span>{copyStatus || "Copy Diff"}</span>
-            </button>
+            <div className="overflow-x-auto">
+              {viewMode === "split" ? <SplitView diff={diffResult} /> : <UnifiedView diff={diffResult} />}
+            </div>
+          </div>
           </div>
         </div>
-
-        {/* Input Areas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-theme-muted ml-1 uppercase tracking-wider">Original Text (Old)</label>
-            <textarea
-              placeholder="Paste your original text here..."
-              className={cn(tc.field, "w-full h-64 p-4 font-mono text-sm leading-relaxed")}
-              value={oldText}
-              onChange={(e) => setOldText(e.target.value)}
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-theme-muted ml-1 uppercase tracking-wider">Changed Text (New)</label>
-            <textarea
-              placeholder="Paste your modified text here..."
-              className={cn(tc.field, "w-full h-64 p-4 font-mono text-sm leading-relaxed")}
-              value={newText}
-              onChange={(e) => setNewText(e.target.value)}
-            />
-          </div>
-        </div>
-
-        {/* Diff Visualization */}
-        <div className="bg-theme-surface rounded-2xl border border-theme-border overflow-hidden shadow-2xl mb-12">
-          <div className="bg-theme-surface-muted/50 px-6 py-3 border-b border-theme-border flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-theme-muted uppercase tracking-widest">Comparison Results</h2>
-            {diffResult.length > 0 && (
-              <div className="flex items-center space-x-4 text-xs">
-                <span className="flex items-center space-x-1">
-                  <span className="w-2 h-2 rounded-full bg-green-500/50"></span>
-                  <span className="text-theme-muted">{diffResult.filter((l) => l.type === "added").length} added</span>
-                </span>
-                <span className="flex items-center space-x-1">
-                  <span className="w-2 h-2 rounded-full bg-red-500/50"></span>
-                  <span className="text-theme-muted">{diffResult.filter((l) => l.type === "removed").length} removed</span>
-                </span>
-              </div>
-            )}
-          </div>
-
-          <div className="overflow-x-auto">
-            {viewMode === "split" ? <SplitView diff={diffResult} /> : <UnifiedView diff={diffResult} />}
-          </div>
-        </div>
-
         <ToolContentDisplay
           title={toolContent["diff-checker"].title}
           intro={toolContent["diff-checker"].intro}

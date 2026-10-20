@@ -433,151 +433,155 @@ function RouteComponent() {
   };
 
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col items-center">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        {/* <Breadcrumbs /> */}
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Image Cropper</h1>
-          {/* <p className="text-md text-theme-body">Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.</p> */}
-        </div>
-
-        <div className="w-full max-w-7xl flex-1 flex flex-col items-center justify-center mx-auto">
-          <div className="rounded-xl shadow-lg p-8 mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface">
-            {!image ? (
-              <FileDropzone
-                title="Upload image"
-                description="Drag and drop a photo here, or choose a file to crop."
-                buttonLabel={isUploading ? "Loading..." : "Select Image"}
-                accept="image/*"
-                disabled={isUploading}
-                onFiles={processFiles}
-              />
-            ) : (
-              <>
-                <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-theme-heading mb-4">Crop Controls</h3>
-
-                  <div className="flex flex-wrap items-center gap-4 mb-4">
-                    <button onClick={() => setRotation((prev) => (prev + 90) % 360)} className={cn(tc.btnSecondary, "px-3 py-2")}>
-                      <IconRotateClockwise className="w-4 h-4" />
-                      <span>Rotate</span>
-                    </button>
-
-                    <button
-                      onClick={() => setFlipHorizontal(!flipHorizontal)}
-                      className={cn(tc.btn, "px-3 py-2", flipHorizontal ? tc.toggleActive : "theme-btn-secondary")}
-                    >
-                      <IconFlipHorizontal className="w-4 h-4" />
-                      <span>Flip H</span>
-                    </button>
-
-                    <button
-                      onClick={() => setFlipVertical(!flipVertical)}
-                      className={cn(tc.btn, "px-3 py-2", flipVertical ? tc.toggleActive : "theme-btn-secondary")}
-                    >
-                      <IconFlipVertical className="w-4 h-4" />
-                      <span>Flip V</span>
-                    </button>
-                    <button
-                      onClick={handleCropVisible}
-                      className={cn(tc.btn, "px-3 py-2", isCrop ? tc.toggleActive : "theme-btn-secondary")}
-                    >
-                      <IconCrop className="w-4 h-4" />
-                      <span>{isCrop ? "Hide Crop" : "Show Crop"}</span>
-                    </button>
-                  </div>
-
-                  {isCrop && (
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                      <div>
-                        <label className="block text-theme-body mb-1">X Position</label>
-                        <input
-                          type="number"
-                          value={Math.round(cropArea.x)}
-                          onChange={(e) =>
-                            setCropArea({
-                              ...cropArea,
-                              x: Math.max(0, parseInt(e.target.value) || 0),
-                            })
-                          }
-                          className={cn(tc.field, "w-full px-2 py-1 text-sm")}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-theme-body mb-1">Y Position</label>
-                        <input
-                          type="number"
-                          value={Math.round(cropArea.y)}
-                          onChange={(e) =>
-                            setCropArea({
-                              ...cropArea,
-                              y: Math.max(0, parseInt(e.target.value) || 0),
-                            })
-                          }
-                          className={cn(tc.field, "w-full px-2 py-1 text-sm")}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-theme-body mb-1">Width</label>
-                        <input
-                          type="number"
-                          value={Math.round(cropArea.width)}
-                          onChange={(e) =>
-                            setCropArea({
-                              ...cropArea,
-                              width: Math.max(20, parseInt(e.target.value) || 20),
-                            })
-                          }
-                          className={cn(tc.field, "w-full px-2 py-1 text-sm")}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-theme-body mb-1">Height</label>
-                        <input
-                          type="number"
-                          value={Math.round(cropArea.height)}
-                          onChange={(e) =>
-                            setCropArea({
-                              ...cropArea,
-                              height: Math.max(20, parseInt(e.target.value) || 20),
-                            })
-                          }
-                          className={cn(tc.field, "w-full px-2 py-1 text-sm")}
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="mb-6 flex justify-center">
-                  <canvas
-                    ref={canvasRef}
-                    onMouseDown={handleMouseDown}
-                    onMouseMove={handleMouseMove}
-                    onMouseUp={handleMouseUp}
-                    onMouseLeave={handleMouseUp}
-                    className="border-2 border-theme-border rounded-lg cursor-default bg-theme-surface-muted"
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <button onClick={resetImage} className={cn(tc.btnDanger, "px-4 py-2")}>
-                    Clear Image
-                  </button>
-
-                  <button
-                    onClick={downloadCroppedImage}
-                    disabled={!isCrop}
-                    className={cn(tc.btnSuccess, "px-6 py-2 shadow-md hover:shadow-lg")}
-                  >
-                    <IconDownload className="w-4 h-4" />
-                    <span>Download Cropped Image</span>
-                  </button>
-                </div>
-              </>
-            )}
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          {/* <Breadcrumbs /> */}
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">Image Cropper</h1>
+              {/* <p className="text-md text-theme-body">Crop, resize, rotate & flip with precision. 100% private—nothing leaves your browser.</p> */}
+            </div>
           </div>
 
-          <ToolContentDisplay
+          <div className="w-full max-w-5xl flex-1 flex flex-col items-center mx-auto">
+            <div className="rounded-xl shadow-lg mb-6 w-full max-w-5xl border border-theme-border bg-theme-surface px-0 py-4 sm:p-8">
+              {!image ? (
+                <FileDropzone
+                  title="Upload image"
+                  description="Drag and drop a photo here, or choose a file to crop."
+                  buttonLabel={isUploading ? "Loading..." : "Select Image"}
+                  accept="image/*"
+                  disabled={isUploading}
+                  onFiles={processFiles}
+                />
+              ) : (
+                <>
+                  <div className="mb-6">
+                    <h3 className="text-lg font-semibold text-theme-heading mb-4">Crop Controls</h3>
+
+                    <div className="flex flex-wrap items-center gap-4 mb-4">
+                      <button onClick={() => setRotation((prev) => (prev + 90) % 360)} className={cn(tc.btnSecondary, "px-3 py-2")}>
+                        <IconRotateClockwise className="w-4 h-4" />
+                        <span>Rotate</span>
+                      </button>
+
+                      <button
+                        onClick={() => setFlipHorizontal(!flipHorizontal)}
+                        className={cn(tc.btn, "px-3 py-2", flipHorizontal ? tc.toggleActive : "theme-btn-secondary")}
+                      >
+                        <IconFlipHorizontal className="w-4 h-4" />
+                        <span>Flip H</span>
+                      </button>
+
+                      <button
+                        onClick={() => setFlipVertical(!flipVertical)}
+                        className={cn(tc.btn, "px-3 py-2", flipVertical ? tc.toggleActive : "theme-btn-secondary")}
+                      >
+                        <IconFlipVertical className="w-4 h-4" />
+                        <span>Flip V</span>
+                      </button>
+                      <button
+                        onClick={handleCropVisible}
+                        className={cn(tc.btn, "px-3 py-2", isCrop ? tc.toggleActive : "theme-btn-secondary")}
+                      >
+                        <IconCrop className="w-4 h-4" />
+                        <span>{isCrop ? "Hide Crop" : "Show Crop"}</span>
+                      </button>
+                    </div>
+
+                    {isCrop && (
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div>
+                          <label className="block text-theme-body mb-1">X Position</label>
+                          <input
+                            type="number"
+                            value={Math.round(cropArea.x)}
+                            onChange={(e) =>
+                              setCropArea({
+                                ...cropArea,
+                                x: Math.max(0, parseInt(e.target.value) || 0),
+                              })
+                            }
+                            className={cn(tc.field, "w-full px-2 py-1 text-sm")}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-theme-body mb-1">Y Position</label>
+                          <input
+                            type="number"
+                            value={Math.round(cropArea.y)}
+                            onChange={(e) =>
+                              setCropArea({
+                                ...cropArea,
+                                y: Math.max(0, parseInt(e.target.value) || 0),
+                              })
+                            }
+                            className={cn(tc.field, "w-full px-2 py-1 text-sm")}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-theme-body mb-1">Width</label>
+                          <input
+                            type="number"
+                            value={Math.round(cropArea.width)}
+                            onChange={(e) =>
+                              setCropArea({
+                                ...cropArea,
+                                width: Math.max(20, parseInt(e.target.value) || 20),
+                              })
+                            }
+                            className={cn(tc.field, "w-full px-2 py-1 text-sm")}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-theme-body mb-1">Height</label>
+                          <input
+                            type="number"
+                            value={Math.round(cropArea.height)}
+                            onChange={(e) =>
+                              setCropArea({
+                                ...cropArea,
+                                height: Math.max(20, parseInt(e.target.value) || 20),
+                              })
+                            }
+                            className={cn(tc.field, "w-full px-2 py-1 text-sm")}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mb-6 flex justify-center">
+                    <canvas
+                      ref={canvasRef}
+                      onMouseDown={handleMouseDown}
+                      onMouseMove={handleMouseMove}
+                      onMouseUp={handleMouseUp}
+                      onMouseLeave={handleMouseUp}
+                      className="border-2 border-theme-border rounded-lg cursor-default bg-theme-surface-muted"
+                    />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <button onClick={resetImage} className={cn(tc.btnDanger, "px-4 py-2")}>
+                      Clear Image
+                    </button>
+
+                    <button
+                      onClick={downloadCroppedImage}
+                      disabled={!isCrop}
+                      className={cn(tc.btnSuccess, "px-6 py-2 shadow-md hover:shadow-lg")}
+                    >
+                      <IconDownload className="w-4 h-4" />
+                      <span>Download Cropped Image</span>
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+        <ToolContentDisplay
             title={toolContent["image-cropper"].title}
             intro={toolContent["image-cropper"].intro}
             benefits={toolContent["image-cropper"].benefits}
@@ -624,8 +628,6 @@ function RouteComponent() {
             ]}
             faqs={faqs}
           />
-        </div>
-
         <RelatedTools currentToolSlug="image-cropper" category="Images" />
       </div>
     </div>

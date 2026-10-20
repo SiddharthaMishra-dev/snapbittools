@@ -68,18 +68,21 @@ export const Route = createFileRoute("/_wrap/image-background-remover")({
 
 function RouteComponent() {
   return (
-    <div className="min-h-screen py-2 px-4 flex flex-col items-center">
+    <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        <div className="text-center mt-6 mb-8 max-w-5xl mx-auto">
-          <h1 className="text-2xl sm:text-5xl font-black text-theme-heading mb-2">Remove Background</h1>
-          {/* <p className="text-md text-theme-body">
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
+            <div className="text-center">
+              <h1 className="text-2xl sm:text-5xl font-bold text-theme-heading mb-2 tracking-tight text-shadow-sm">Remove Background</h1>
+              {/* <p className="text-md text-theme-body">
             AI-powered background removal that runs entirely in your browser. Upload a photo, get a transparent PNG — no uploads, no
             account, free forever.
           </p> */}
+            </div>
+          </div>
+
+          <ImageBackgroundRemovalTool />
         </div>
-
-        <ImageBackgroundRemovalTool />
-
         <ToolContentDisplay
           title={toolContent["image-background-remover"].title}
           intro={toolContent["image-background-remover"].intro}
