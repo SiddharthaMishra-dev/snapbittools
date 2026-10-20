@@ -161,6 +161,9 @@ function getRedis(url: string): Promise<CounterRedis> {
   if (!redisConnecting) {
     const created = createCounterClient(url);
     created.on("error", () => {});
+    // The homepage loader opens this client during prerender. A referenced
+    // socket keeps `vite build` from exiting after the sitemap is written.
+    created.unref();
     redisConnecting = created
       .connect()
       .then(() => {

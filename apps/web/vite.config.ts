@@ -7,7 +7,7 @@ import { fileURLToPath, URL } from "url";
 import { nitro } from "nitro/vite";
 
 import tailwindcss from "@tailwindcss/vite";
-import { CANONICAL_TARGETS } from "./src/lib/seo";
+import { CANONICAL_TARGETS } from "./src/lib/seo.ts";
 
 /** Paths that stay reachable but must not be advertised in sitemap.xml. */
 const SITEMAP_EXCLUDED_PATHS = [...Object.keys(CANONICAL_TARGETS), "/privacy"];
