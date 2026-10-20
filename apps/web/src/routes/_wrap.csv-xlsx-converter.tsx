@@ -273,7 +273,7 @@ function RouteComponent() {
                             </div>
                           )}
                           {item.status === "completed" && (
-                            <button onClick={() => downloadFile(item)} className={cn(tc.btnSuccess, "px-3 py-1 text-sm")}>
+                            <button onClick={() => downloadFile(item)} aria-label="Download" className={cn(tc.btnSuccess, "px-3 py-1 text-sm")}>
                               <IconDownload className="w-4 h-4" />
                             </button>
                           )}

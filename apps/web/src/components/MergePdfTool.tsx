@@ -156,7 +156,7 @@ export function MergePdfTool() {
                   <IconCircleX className="w-4 h-4" />
                   Clear
                 </button>
-                <button type="button" onClick={merge} disabled={!canMerge} className={cn(tc.btnPrimary, "px-6 py-2 shadow-md")}>
+                <button type="button" onClick={merge} disabled={!canMerge} data-ga-download className={cn(tc.btnPrimary, "px-6 py-2 shadow-md")}>
                   {merging ? (
                     <>
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

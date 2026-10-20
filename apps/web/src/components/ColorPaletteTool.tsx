@@ -852,6 +852,7 @@ export function ColorPaletteTool() {
                       <button
                         key={opt.label}
                         onClick={opt.action}
+                        data-ga-download
                         className="
                           w-full text-left px-4 py-2.5 text-sm flex items-center justify-between transition-colors
                           text-theme-body hover:bg-theme-surface-elevated hover:text-theme-heading

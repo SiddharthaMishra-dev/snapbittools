@@ -220,7 +220,7 @@ function RouteComponent() {
                         <IconTrash className="w-4 h-4" />
                         Clear All
                       </button>
-                      <button onClick={handleConvertToPdf} disabled={isGenerating} className={cn(tc.btnPrimary, "px-6 py-2 shadow-md")}>
+                      <button onClick={handleConvertToPdf} disabled={isGenerating} data-ga-download className={cn(tc.btnPrimary, "px-6 py-2 shadow-md")}>
                         {isGenerating ? (
                           <>
                             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

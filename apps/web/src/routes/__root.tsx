@@ -1,7 +1,8 @@
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import { HeadContent, Scripts, createRootRoute, useRouterState } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import ReactGA from "react-ga4";
+
+import { trackPageView } from "../lib/analytics";
 
 import Header from "../components/Header";
 import { getOrganizationSchema } from "../lib/seo";
@@ -152,11 +153,23 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const page = useRouterState({
+    select: (state) => {
+      let title = "";
+      for (const match of state.matches) {
+        for (const meta of match.meta ?? []) {
+          if (meta && "title" in meta && typeof meta.title === "string") title = meta.title;
+        }
+      }
+      return { href: state.location.href, title };
+    },
+  });
+
   useEffect(() => {
-    if (import.meta.env.DEV) return;
-    ReactGA.initialize("G-REM5Q61CZV");
-    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
-  }, []);
+    const view = page;
+    const id = window.setTimeout(() => trackPageView(view.href, view.title), 50);
+    return () => window.clearTimeout(id);
+  }, [page.href, page.title]);
 
   return (
     <html lang="en" suppressHydrationWarning>
