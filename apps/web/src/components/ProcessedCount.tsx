@@ -24,6 +24,7 @@ export function ProcessedCount({ initial }: { initial: ProcessedCountSnapshot })
       }
     };
 
+    void load();
     const id = window.setInterval(() => void load(), POLL_MS);
     return () => {
       cancelled = true;
@@ -37,9 +38,11 @@ export function ProcessedCount({ initial }: { initial: ProcessedCountSnapshot })
     const target = snapshot.total;
     const id = window.setInterval(() => {
       setShown((current) => {
-        if (current < target) return current + 1;
-        if (current > target) return target;
-        return current;
+        if (current === target) return current;
+        // A refresh can paint the last build's total before Redis answers.
+        // Jump to the stored total instead of ticking through the gap.
+        if (Math.abs(target - current) > 1) return target;
+        return current < target ? current + 1 : target;
       });
     }, STEP_MS);
 

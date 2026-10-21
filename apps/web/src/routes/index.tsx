@@ -27,6 +27,9 @@ export const Route = createFileRoute("/")({
       return { processedCount: toSnapshot({ total: 0, samples: [] }, Date.now()) };
     }
   },
+  headers: () => ({
+    "cache-control": "private, no-cache",
+  }),
   head: () =>
     getSeoMetadata({
       title: "SnapBit Tools | Private & Fast Image, PDF & Data Tools",

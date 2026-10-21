@@ -12,6 +12,11 @@ import { CANONICAL_TARGETS } from "./src/lib/seo.ts";
 /** Paths that stay reachable but must not be advertised in sitemap.xml. */
 const SITEMAP_EXCLUDED_PATHS = [...Object.keys(CANONICAL_TARGETS), "/privacy"];
 
+function prerenderPath(path: string) {
+  const trimmed = path.replace(/\/+$/, "");
+  return trimmed === "" ? "/" : trimmed;
+}
+
 const config = defineConfig({
   resolve: {
     alias: {
@@ -31,16 +36,23 @@ const config = defineConfig({
     }),
     tailwindcss(),
     tanstackStart({
-      pages: SITEMAP_EXCLUDED_PATHS.map((path) => ({
-        path,
-        sitemap: { exclude: true },
-      })),
+      pages: [
+        ...SITEMAP_EXCLUDED_PATHS.map((path) => ({
+          path,
+          sitemap: { exclude: true },
+        })),
+        // The file counter is read from Redis. A static homepage would keep the
+        // count from the last build until the next deploy.
+        { path: "/", prerender: { enabled: false } },
+      ],
       prerender: {
         enabled: true,
         crawlLinks: true,
-        // Prerender follows the 301 and writes the policy HTML at /privacy,
-        // which Vercel then serves as 200. Leave it to the server redirect.
-        filter: (page) => page.path.replace(/\/+$/, "") !== "/privacy",
+        // /privacy would follow the 301 and ship as 200. / is rendered per request.
+        filter: (page) => {
+          const path = prerenderPath(page.path);
+          return path !== "/privacy" && path !== "/";
+        },
       },
       sitemap: {
         enabled: true,
