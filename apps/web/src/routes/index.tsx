@@ -32,9 +32,9 @@ export const Route = createFileRoute("/")({
   }),
   head: () =>
     getSeoMetadata({
-      title: "SnapBit Tools | Private & Fast Image, PDF & Data Tools",
+      title: "Free Private Image, PDF & Data Tools | SnapBit Tools",
       description:
-        "Private in-browser tools for image compression, PDF to JPG, JSON formatting, and CSV to Excel. Your files never leave the browser.",
+        "Convert, compress, and edit images, PDFs, and data files entirely in your browser. No uploads, no accounts. Fast, free, and private tools for developers and creators.",
       keywords: [
         "free online tools",
         "image to base64 converter",

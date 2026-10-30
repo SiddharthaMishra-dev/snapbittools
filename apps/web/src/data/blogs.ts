@@ -1,5 +1,14 @@
 export const blogPosts = [
   {
+    title: "How to Remove Background from Images Without Uploading (Private Method)",
+    description:
+      "Remove background from images without uploading. A private background remover and free AI background remover in the browser, with a transparent PNG download.",
+    href: "/remove-background-from-images-without-uploading",
+    category: "Image Editing",
+    publishedAt: "October 30, 2026",
+    readTime: "8 min read",
+  },
+  {
     title: "How to Compress Images for Website Without Losing Quality (Step-by-Step)",
     description:
       "Compress image for web without quality loss — step-by-step resize, format, and quality settings with before/after examples and SnapBit’s free compressor.",

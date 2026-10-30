@@ -38,9 +38,9 @@ const faqs = [
 export const Route = createFileRoute("/_wrap/pdf-compressor")({
   head: () =>
     getSeoMetadata({
-      title: "PDF Compressor - Compress PDF Online Free (No Upload)",
+      title: "Free PDF Compressor – Reduce Size in Browser",
       description:
-        "Compress PDF files free in your browser. Shrink image-heavy PDFs with quality and DPI controls. 100% private — no uploads, no signup.",
+        "Compress PDF files in your browser without uploading. Shrink file size while keeping quality. Fast, free, and private.",
       keywords: [
         "pdf compressor",
         "compress pdf online",

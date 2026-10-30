@@ -70,6 +70,7 @@ import { Route as WrapReduceImageFileSizeRouteImport } from './routes/_wrap.redu
 import { Route as WrapReduceJpgSizeRouteImport } from './routes/_wrap.reduce-jpg-size'
 import { Route as WrapReducePngSizeRouteImport } from './routes/_wrap.reduce-png-size'
 import { Route as WrapReduceYourImageSizeForFreeRouteImport } from './routes/_wrap.reduce-your-image-size-for-free'
+import { Route as WrapRemoveBackgroundFromImagesWithoutUploadingRouteImport } from './routes/_wrap.remove-background-from-images-without-uploading'
 import { Route as WrapReorderPdfRouteImport } from './routes/_wrap.reorder-pdf'
 import { Route as WrapSplitPdfRouteImport } from './routes/_wrap.split-pdf'
 import { Route as WrapValidateJsonOnlineRouteImport } from './routes/_wrap.validate-json-online'
@@ -393,6 +394,12 @@ const WrapReduceYourImageSizeForFreeRoute =
     path: '/reduce-your-image-size-for-free',
     getParentRoute: () => WrapRoute,
   } as any)
+const WrapRemoveBackgroundFromImagesWithoutUploadingRoute =
+  WrapRemoveBackgroundFromImagesWithoutUploadingRouteImport.update({
+    id: '/remove-background-from-images-without-uploading',
+    path: '/remove-background-from-images-without-uploading',
+    getParentRoute: () => WrapRoute,
+  } as any)
 const WrapReorderPdfRoute = WrapReorderPdfRouteImport.update({
   id: '/reorder-pdf',
   path: '/reorder-pdf',
@@ -485,6 +492,7 @@ export interface FileRoutesByFullPath {
   '/reduce-jpg-size': typeof WrapReduceJpgSizeRoute
   '/reduce-png-size': typeof WrapReducePngSizeRoute
   '/reduce-your-image-size-for-free': typeof WrapReduceYourImageSizeForFreeRoute
+  '/remove-background-from-images-without-uploading': typeof WrapRemoveBackgroundFromImagesWithoutUploadingRoute
   '/reorder-pdf': typeof WrapReorderPdfRoute
   '/split-pdf': typeof WrapSplitPdfRoute
   '/validate-json-online': typeof WrapValidateJsonOnlineRoute
@@ -553,6 +561,7 @@ export interface FileRoutesByTo {
   '/reduce-jpg-size': typeof WrapReduceJpgSizeRoute
   '/reduce-png-size': typeof WrapReducePngSizeRoute
   '/reduce-your-image-size-for-free': typeof WrapReduceYourImageSizeForFreeRoute
+  '/remove-background-from-images-without-uploading': typeof WrapRemoveBackgroundFromImagesWithoutUploadingRoute
   '/reorder-pdf': typeof WrapReorderPdfRoute
   '/split-pdf': typeof WrapSplitPdfRoute
   '/validate-json-online': typeof WrapValidateJsonOnlineRoute
@@ -623,6 +632,7 @@ export interface FileRoutesById {
   '/_wrap/reduce-jpg-size': typeof WrapReduceJpgSizeRoute
   '/_wrap/reduce-png-size': typeof WrapReducePngSizeRoute
   '/_wrap/reduce-your-image-size-for-free': typeof WrapReduceYourImageSizeForFreeRoute
+  '/_wrap/remove-background-from-images-without-uploading': typeof WrapRemoveBackgroundFromImagesWithoutUploadingRoute
   '/_wrap/reorder-pdf': typeof WrapReorderPdfRoute
   '/_wrap/split-pdf': typeof WrapSplitPdfRoute
   '/_wrap/validate-json-online': typeof WrapValidateJsonOnlineRoute
@@ -693,6 +703,7 @@ export interface FileRouteTypes {
     | '/reduce-jpg-size'
     | '/reduce-png-size'
     | '/reduce-your-image-size-for-free'
+    | '/remove-background-from-images-without-uploading'
     | '/reorder-pdf'
     | '/split-pdf'
     | '/validate-json-online'
@@ -761,6 +772,7 @@ export interface FileRouteTypes {
     | '/reduce-jpg-size'
     | '/reduce-png-size'
     | '/reduce-your-image-size-for-free'
+    | '/remove-background-from-images-without-uploading'
     | '/reorder-pdf'
     | '/split-pdf'
     | '/validate-json-online'
@@ -830,6 +842,7 @@ export interface FileRouteTypes {
     | '/_wrap/reduce-jpg-size'
     | '/_wrap/reduce-png-size'
     | '/_wrap/reduce-your-image-size-for-free'
+    | '/_wrap/remove-background-from-images-without-uploading'
     | '/_wrap/reorder-pdf'
     | '/_wrap/split-pdf'
     | '/_wrap/validate-json-online'
@@ -1282,6 +1295,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapReduceYourImageSizeForFreeRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/remove-background-from-images-without-uploading': {
+      id: '/_wrap/remove-background-from-images-without-uploading'
+      path: '/remove-background-from-images-without-uploading'
+      fullPath: '/remove-background-from-images-without-uploading'
+      preLoaderRoute: typeof WrapRemoveBackgroundFromImagesWithoutUploadingRouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/reorder-pdf': {
       id: '/_wrap/reorder-pdf'
       path: '/reorder-pdf'
@@ -1377,6 +1397,7 @@ interface WrapRouteChildren {
   WrapReduceJpgSizeRoute: typeof WrapReduceJpgSizeRoute
   WrapReducePngSizeRoute: typeof WrapReducePngSizeRoute
   WrapReduceYourImageSizeForFreeRoute: typeof WrapReduceYourImageSizeForFreeRoute
+  WrapRemoveBackgroundFromImagesWithoutUploadingRoute: typeof WrapRemoveBackgroundFromImagesWithoutUploadingRoute
   WrapReorderPdfRoute: typeof WrapReorderPdfRoute
   WrapSplitPdfRoute: typeof WrapSplitPdfRoute
   WrapValidateJsonOnlineRoute: typeof WrapValidateJsonOnlineRoute
@@ -1437,6 +1458,8 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapReduceJpgSizeRoute: WrapReduceJpgSizeRoute,
   WrapReducePngSizeRoute: WrapReducePngSizeRoute,
   WrapReduceYourImageSizeForFreeRoute: WrapReduceYourImageSizeForFreeRoute,
+  WrapRemoveBackgroundFromImagesWithoutUploadingRoute:
+    WrapRemoveBackgroundFromImagesWithoutUploadingRoute,
   WrapReorderPdfRoute: WrapReorderPdfRoute,
   WrapSplitPdfRoute: WrapSplitPdfRoute,
   WrapValidateJsonOnlineRoute: WrapValidateJsonOnlineRoute,

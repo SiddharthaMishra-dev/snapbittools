@@ -36,9 +36,9 @@ const faqs = [
 export const Route = createFileRoute("/_wrap/image-compressor")({
   head: () =>
     getSeoMetadata({
-      title: "Compress Images Online - Free Online Tool",
+      title: "Free Image Compressor – Reduce Size Without Upload",
       description:
-        "Compress JPG, PNG, WebP and AVIF images for free. Shrink image file sizes by up to 80% without losing quality. 100% private, client-side, and free.",
+        "Compress JPG, PNG, and WebP images in your browser without uploading. Shrink file size while keeping quality. Fast, free, and private.",
       keywords: [
         "compress png",
         "compress jpeg",

@@ -39,9 +39,9 @@ const faqs = [
 export const Route = createFileRoute("/_wrap/image-background-remover")({
   head: () =>
     getSeoMetadata({
-      title: "Remove Image Background Online Free - AI Background Remover",
+      title: "Free Background Remover – No Upload, Private AI",
       description:
-        "Remove image backgrounds free in your browser with AI. No uploads, no signup. Transparent PNG download powered by @imgly/background-removal. Private and client-side.",
+        "Remove image backgrounds with AI entirely in your browser. No uploads, no accounts. Get clean transparent cutouts instantly and privately.",
       keywords: [
         "remove background from image",
         "image background remover",

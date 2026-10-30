@@ -9,9 +9,9 @@ import { getSeoMetadata } from "@/lib/seo";
 export const Route = createFileRoute("/tools")({
   head: () =>
     getSeoMetadata({
-      title: "All Tools | SnapBit Tools",
+      title: "All Free Tools – Image, PDF & Data | SnapBit",
       description:
-        "Browse every SnapBit Tools utility in one place. Image converters, PDF tools, JSON formatter, CSV to XLSX, and more—private and client-side.",
+        "Browse free browser-based tools for images, PDFs, JSON, CSV, and more. No uploads, no accounts. Private, fast, and always free.",
       keywords: [
         "online tools",
         "image tools",

@@ -7,7 +7,6 @@ import { getPillarSpokes } from "@/lib/internal-linking";
 import ToolContentDisplay from "@/components/ToolContentDisplay";
 import { toolContent } from "@/data/toolContent";
 import { getSeoMetadata } from "@/lib/seo";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { JsonFormatterTool } from "@/components/JsonFormatterTool";
 
 const faqs = [
@@ -36,8 +35,8 @@ const faqs = [
 export const Route = createFileRoute("/_wrap/json-formatter")({
   head: () =>
     getSeoMetadata({
-      title: "JSON Formatter & Validator | Beautify JSON | SnapBit Tools",
-      description: "Format, validate, and minify JSON strings instantly. Privacy-focused, 100% client-side, and works offline.",
+      title: "Free JSON Formatter & Validator – No Upload",
+      description: "Format, beautify, validate, and minify JSON in your browser. No uploads, no accounts. Fast and private JSON tools for developers.",
       keywords: ["json formatter", "json validator", "beautify json", "minify json", "json editor"],
       url: "/json-formatter",
       type: "software",

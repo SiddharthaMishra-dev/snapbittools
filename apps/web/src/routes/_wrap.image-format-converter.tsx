@@ -86,9 +86,9 @@ const faqs = [
 export const Route = createFileRoute("/_wrap/image-format-converter")({
   head: () =>
     getSeoMetadata({
-      title: "Image Format Converter | PNG, JPG, WebP, AVIF | SnapBit Tools",
+      title: "Free Image Format Converter – PNG, JPG, WebP, AVIF",
       description:
-        "Convert images between PNG, JPEG, WebP, and AVIF formats instantly. Supports batch processing and ZIP downloads. 100% private and client-side.",
+        "Convert images between PNG, JPG, WebP, AVIF, and more in your browser. Batch support, no uploads, and complete privacy. Free and unlimited.",
       keywords: [
         "convert image format online",
         "image converter no upload / private image converter",

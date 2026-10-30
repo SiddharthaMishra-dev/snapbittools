@@ -42,9 +42,9 @@ const faqs = [
 export const Route = createFileRoute("/_wrap/color-palette-generator")({
   head: () =>
     getSeoMetadata({
-      title: "Color Palette Generator | HEX, RGB, HSL | SnapBit Tools",
+      title: "Free Color Palette Generator – No Upload",
       description:
-        "Generate beautiful color palettes instantly. Random, shades, contrast, brand, and color theory modes (complementary, triadic, analogous). Export as CSS, JSON, or Tailwind. 100% free and private.",
+        "Generate complementary, triadic, and brand color palettes in your browser. Export as CSS, JSON, or Tailwind. Free and private.",
       keywords: [
         "color palette generator",
         "color scheme generator",

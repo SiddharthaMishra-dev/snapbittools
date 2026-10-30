@@ -65,10 +65,10 @@ export const toolCategories: Record<ToolCategory, ToolCategoryMeta> = {
     href: "/pdf-tools",
     navLabel: "PDF",
     heading: "PDF tools",
-    description: "Merge, split, reorder, convert, and compress PDFs on your device. Nothing is uploaded.",
-    seoTitle: "PDF Tools | Merge, Split, Reorder, Compress | SnapBit Tools",
+    description: "Merge, split, reorder, compress, and convert PDFs in your browser. No uploads required. Fast, private, and completely free PDF tools.",
+    seoTitle: "Free PDF Tools – Merge, Split & Compress Offline",
     seoDescription:
-      "Free private PDF tools in your browser. Merge and split PDFs, reorder or delete pages, convert PDF to JPG, extract photos, compress PDFs, and turn images into PDF — no uploads.",
+      "Merge, split, reorder, compress, and convert PDFs in your browser. No uploads required. Fast, private, and completely free PDF tools.",
     keywords: [
       "pdf tools",
       "merge pdf",
