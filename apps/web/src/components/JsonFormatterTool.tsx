@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect, type ReactNode } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef, type ChangeEvent, type DragEvent, type ReactNode } from "react";
 import { themeClasses } from "@/lib/theme-classes";
 import { cn } from "@/lib/utils";
 import {
@@ -14,6 +14,7 @@ import {
   IconChevronRight,
   IconChevronDown,
   IconX,
+  IconFileUpload,
 } from "@tabler/icons-react";
 
 type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
@@ -36,6 +37,7 @@ export function JsonFormatterTool() {
   const [useSingleQuotes, setUseSingleQuotes] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [collapsedPaths, setCollapsedPaths] = useState<Set<string>>(new Set());
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { formattedJson, minifiedJson, parsedData } = useMemo(() => {
     if (!input.trim()) {
@@ -267,7 +269,9 @@ export function JsonFormatterTool() {
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder='Paste your JSON here, e.g., {"name": "John", "age": 30}'
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={handleDrop}
+          placeholder='Paste your JSON here or drop a .json file, e.g., {"name": "John", "age": 30}'
           className={cn(
             "w-full p-4 border rounded-lg bg-theme-input-bg text-theme-heading font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-brand-primary",
             isInModal ? "min-h-[40vh] h-auto" : "h-96",
@@ -379,6 +383,29 @@ export function JsonFormatterTool() {
     URL.revokeObjectURL(url);
   }, [parsedData]);
 
+  // Load JSON from a local file
+  const loadFile = useCallback(async (file: File | undefined) => {
+    if (!file) return;
+    try {
+      const text = await file.text();
+      setInput(text);
+      setCollapsedPaths(new Set());
+    } catch (err) {
+      setError(`Failed to read file: ${(err as Error).message}`);
+    }
+  }, []);
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    loadFile(e.target.files?.[0]);
+    e.target.value = "";
+  };
+
+  const handleDrop = (e: DragEvent<HTMLTextAreaElement>) => {
+    if (e.dataTransfer.files.length === 0) return;
+    e.preventDefault();
+    loadFile(e.dataTransfer.files[0]);
+  };
+
   // Clear input
   const clearInput = () => {
     setInput("");
@@ -415,6 +442,18 @@ export function JsonFormatterTool() {
               '
             </button>
           </div>
+
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json,.txt,application/json,text/plain"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <button type="button" onClick={() => fileInputRef.current?.click()} className={cn(toolBtnBase, toolBtnMd, "theme-btn-secondary")}>
+            <IconFileUpload className="w-4 h-4" />
+            <span>Load File</span>
+          </button>
 
           <button
             type="button"
