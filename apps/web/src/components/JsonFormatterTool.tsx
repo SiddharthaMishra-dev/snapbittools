@@ -29,6 +29,22 @@ function toggleBtnClass(active: boolean, size: "sm" | "xs" = "sm") {
   return cn(toolBtnBase, size === "xs" ? toolBtnXs : toolBtnSm, active ? "theme-btn-primary" : "theme-btn-secondary");
 }
 
+function isAcceptedTextFile(file: File): boolean {
+  const name = file.name.toLowerCase();
+  if (name.endsWith(".json") || name.endsWith(".txt")) return true;
+  const type = file.type.toLowerCase();
+  return type === "application/json" || type === "text/plain";
+}
+
+function stripByteOrderMark(text: string): string {
+  return text.charCodeAt(0) === 0xfeff ? text.slice(1) : text;
+}
+
+function skippedFilesNotice(loadedName: string, skippedCount: number): string {
+  const noun = skippedCount === 1 ? "file was" : "files were";
+  return `Loaded ${loadedName}. Only one .json or .txt file is used, so ${skippedCount} other ${noun} skipped.`;
+}
+
 export function JsonFormatterTool() {
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -37,10 +53,14 @@ export function JsonFormatterTool() {
   const [useSingleQuotes, setUseSingleQuotes] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [collapsedPaths, setCollapsedPaths] = useState<Set<string>>(new Set());
+  const [fileReadError, setFileReadError] = useState<string | null>(null);
+  const [loadNotice, setLoadNotice] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const loadRequestRef = useRef(0);
 
   const { formattedJson, minifiedJson, parsedData } = useMemo(() => {
     if (!input.trim()) {
+      setError(null);
       return { formattedJson: "", minifiedJson: "", parsedData: null as JsonValue | null };
     }
 
@@ -268,14 +288,19 @@ export function JsonFormatterTool() {
         <h3 className="text-xl font-semibold text-theme-heading mb-4">Input</h3>
         <textarea
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            loadRequestRef.current += 1;
+            setInput(e.target.value);
+            setFileReadError(null);
+            setLoadNotice(null);
+          }}
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
           placeholder='Paste your JSON here or drop a .json file, e.g., {"name": "John", "age": 30}'
           className={cn(
             "w-full p-4 border rounded-lg bg-theme-input-bg text-theme-heading font-mono text-sm resize-y focus:outline-none focus:ring-2 focus:ring-brand-primary",
             isInModal ? "min-h-[40vh] h-auto" : "h-96",
-            error ? "border-red-500" : "border-theme-border",
+            error || fileReadError ? "border-red-500" : "border-theme-border",
           )}
           spellCheck={false}
         />
@@ -383,38 +408,67 @@ export function JsonFormatterTool() {
     URL.revokeObjectURL(url);
   }, [parsedData]);
 
-  // Load JSON from a local file
-  const loadFile = useCallback(async (file: File | undefined) => {
-    if (!file) return;
+  // Load JSON from a local file. Nothing is uploaded.
+  const loadFile = useCallback(async (file: File, notice: string | null = null) => {
+    const requestId = ++loadRequestRef.current;
+    if (!isAcceptedTextFile(file)) {
+      setLoadNotice(null);
+      setFileReadError("Only .json and .txt files can be loaded.");
+      return;
+    }
+
     try {
-      const text = await file.text();
+      const text = stripByteOrderMark(await file.text());
+      if (requestId !== loadRequestRef.current) return;
+      setFileReadError(null);
+      setLoadNotice(notice);
       setInput(text);
       setCollapsedPaths(new Set());
+      if (!text.trim()) setError(null);
     } catch (err) {
-      setError(`Failed to read file: ${(err as Error).message}`);
+      if (requestId !== loadRequestRef.current) return;
+      setLoadNotice(null);
+      const message = err instanceof Error && err.message ? err.message : "The file could not be read.";
+      setFileReadError(message);
     }
   }, []);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    loadFile(e.target.files?.[0]);
+    const file = e.target.files?.[0];
     e.target.value = "";
+    if (file) void loadFile(file);
   };
 
   const handleDrop = (e: DragEvent<HTMLTextAreaElement>) => {
-    if (e.dataTransfer.files.length === 0) return;
+    const files = Array.from(e.dataTransfer.files);
+    if (files.length === 0) return;
     e.preventDefault();
-    loadFile(e.dataTransfer.files[0]);
+
+    const accepted = files.filter(isAcceptedTextFile);
+    if (accepted.length === 0) {
+      loadRequestRef.current += 1;
+      setLoadNotice(null);
+      setFileReadError("Only .json and .txt files can be loaded.");
+      return;
+    }
+
+    const notice = files.length > 1 ? skippedFilesNotice(accepted[0].name, files.length - 1) : null;
+    void loadFile(accepted[0], notice);
   };
 
   // Clear input
   const clearInput = () => {
+    loadRequestRef.current += 1;
     setInput("");
     setError(null);
+    setFileReadError(null);
+    setLoadNotice(null);
   };
 
   // Apply formatting to input
   const formatInput = () => {
     if (formattedJson) {
+      loadRequestRef.current += 1;
       setInput(formattedJson);
       setActiveView("formatted");
     }
@@ -423,10 +477,34 @@ export function JsonFormatterTool() {
   // Apply minification to input
   const minifyInput = () => {
     if (minifiedJson) {
+      loadRequestRef.current += 1;
       setInput(minifiedJson);
       setActiveView("minified");
     }
   };
+
+  const renderStatus = () => (
+    <>
+      {fileReadError ? (
+        <div className="dark:bg-red-900/30 bg-red-50/30 border border-red-700 rounded-xl p-4 mb-6 flex items-start gap-3 w-full">
+          <IconAlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+          <div className="dark:text-red-300 text-red-500">
+            <p className="font-medium">Couldn't read file</p>
+            <p className="text-sm opacity-80">{fileReadError}</p>
+          </div>
+        </div>
+      ) : error ? (
+        <div className="dark:bg-red-900/30 bg-red-50/30 border border-red-700 rounded-xl p-4 mb-6 flex items-start gap-3 w-full">
+          <IconAlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+          <div className="dark:text-red-300 text-red-500">
+            <p className="font-medium">Invalid JSON</p>
+            <p className="text-sm opacity-80">{error}</p>
+          </div>
+        </div>
+      ) : null}
+      {loadNotice && <p className="text-sm text-theme-muted mb-6 w-full">{loadNotice}</p>}
+    </>
+  );
 
   return (
     <div className="w-full max-w-5xl mx-auto flex-1 flex flex-col items-center">
@@ -511,16 +589,7 @@ export function JsonFormatterTool() {
         </div>
       </div>
 
-      {/* Error Message */}
-      {error && (
-        <div className="dark:bg-red-900/30 bg-red-50/30 border border-red-700 rounded-xl p-4 mb-6 flex items-start gap-3">
-          <IconAlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
-          <div className="dark:text-red-300 text-red-500">
-            <p className="font-medium">Invalid JSON</p>
-            <p className="text-sm opacity-80">{error}</p>
-          </div>
-        </div>
-      )}
+      {renderStatus()}
 
       {renderEditorPanels(false)}
 
@@ -530,6 +599,15 @@ export function JsonFormatterTool() {
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg sm:text-xl font-semibold text-theme-heading">JSON Formatter - Fullscreen</h2>
               <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className={cn(toolBtnBase, "px-3 py-2", "theme-btn-secondary")}
+                  aria-label="Load file"
+                >
+                  <IconFileUpload className="w-4 h-4" />
+                  <span className="hidden sm:inline">Load File</span>
+                </button>
                 <button
                   type="button"
                   onClick={() => setIsFullscreen(false)}
@@ -548,6 +626,7 @@ export function JsonFormatterTool() {
                 </button>
               </div>
             </div>
+            {renderStatus()}
             {renderEditorPanels(true)}
           </div>
         </div>
