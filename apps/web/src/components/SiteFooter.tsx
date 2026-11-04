@@ -8,7 +8,14 @@ export default function SiteFooter() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 grid gap-10 md:grid-cols-[minmax(0,1.3fr)_repeat(3,minmax(0,1fr))]">
           <div className="space-y-3">
             <Link to="/" className="inline-flex items-center gap-2 no-underline">
-              <img src="/logo192.png" alt="" width={28} height={28} className="w-7 h-7" />
+              <img
+                src="/logo-56.webp"
+                srcSet="/logo-28.webp 1x, /logo-56.webp 2x"
+                alt=""
+                width={28}
+                height={28}
+                className="w-7 h-7"
+              />
               <span className="text-sm font-bold text-theme-heading">SnapBit Tools</span>
             </Link>
             <p className="text-sm text-theme-muted max-w-xs">Files stay in the browser.</p>

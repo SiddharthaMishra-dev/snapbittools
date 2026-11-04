@@ -8,7 +8,7 @@ import { tools } from "@/data/tools";
 
 import PageShell from "@/components/PageShell";
 import { ProcessedCount } from "@/components/ProcessedCount";
-import { HeroScreenshotCanvas } from "@/components/HeroScreenshotCanvas";
+import { HERO_IMAGE_SIZES, HERO_LCP_IMAGE, HERO_LCP_SRCSET, HeroScreenshotCanvas } from "@/components/HeroScreenshotCanvas";
 import { getSeoMetadata } from "@/lib/seo";
 import { toSnapshot } from "@/lib/processedCount";
 import { getProcessedCount } from "@/server/processedCount";
@@ -30,8 +30,8 @@ export const Route = createFileRoute("/")({
   headers: () => ({
     "cache-control": "private, no-cache",
   }),
-  head: () =>
-    getSeoMetadata({
+  head: () => {
+    const seo = getSeoMetadata({
       title: "Free Private Image, PDF & Data Tools | SnapBit Tools",
       description:
         "Convert, compress, and edit images, PDFs, and data files entirely in your browser. No uploads, no accounts. Fast, free, and private tools for developers and creators.",
@@ -54,7 +54,22 @@ export const Route = createFileRoute("/")({
         "secure online tools",
       ],
       url: "/",
-    }),
+    });
+    return {
+      ...seo,
+      links: [
+        {
+          rel: "preload",
+          as: "image",
+          href: HERO_LCP_IMAGE,
+          imageSrcSet: HERO_LCP_SRCSET,
+          imageSizes: HERO_IMAGE_SIZES,
+          fetchPriority: "high",
+        },
+        ...(seo.links ?? []),
+      ],
+    };
+  },
   component: App,
 });
 
@@ -67,22 +82,6 @@ function App() {
 
   const [active, setActive] = React.useState(0);
   const [wordWidth, setWordWidth] = React.useState<number | null>(null);
-
-  const heroStart = 0.16;
-  const heroStagger = 0.12;
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: heroStagger, delayChildren: heroStart, duration: 0.5, ease: easeInOut },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 16 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeInOut } },
-  };
 
   React.useEffect(() => {
     const interval = setInterval(() => setActive((p) => (p + 1) % 3), 4000);
@@ -112,15 +111,9 @@ function App() {
           HERO
       ════════════════════════════════ */}
       <section className="relative z-10 pt-28 pb-0 px-4 flex flex-col items-center text-center bg-theme-page">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl mx-auto space-y-6 flex flex-col items-center"
-        >
+        <div className="max-w-4xl mx-auto space-y-6 flex flex-col items-center">
           {/* Open-source pill */}
-          <motion.a
-            variants={itemVariants}
+          <a
             href="https://github.com/SiddharthaMishra-dev/js-dev-tools"
             target="_blank"
             rel="noopener noreferrer"
@@ -129,10 +122,10 @@ function App() {
             <IconBrandGithub className="h-3.5 w-3.5 text-theme-muted" />
             100% Open Source · Star on GitHub
             <IconArrowRight className="h-3 w-3 text-brand-primary" />
-          </motion.a>
+          </a>
 
           {/* Headline: one static H1 for crawlers/AT; cycling badges are decorative */}
-          <motion.div variants={itemVariants} className="relative">
+          <div className="relative">
             <h1 className="sr-only">Free, Private & Fast Image & Data Tools.</h1>
             <h1
               aria-hidden="true"
@@ -171,16 +164,16 @@ function App() {
                 </span>
               ))}
             </span>
-          </motion.div>
+          </div>
 
           {/* Subheadline */}
-          <motion.p variants={itemVariants} className="text-base md:text-lg text-theme-muted max-w-2xl leading-relaxed">
+          <p className="text-base md:text-lg text-theme-muted max-w-2xl leading-relaxed">
             Professional browser tools for developers and designers. Convert, compress, format, and transform files — entirely on your
             device. No uploads. No accounts. Always free.
-          </motion.p>
+          </p>
 
           {/* CTA row */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <MagneticButton>
               <ButtonLink
                 to="/tools"
@@ -191,35 +184,25 @@ function App() {
                 <IconChevronRight className="h-4 w-4" />
               </ButtonLink>
             </MagneticButton>
-          </motion.div>
+          </div>
 
-          <motion.div variants={itemVariants}>
-            <ProcessedCount initial={processedCount} />
-          </motion.div>
+          <ProcessedCount initial={processedCount} />
 
           {/* Trust badges */}
-          <motion.div
-            variants={itemVariants}
-            className="hidden sm:flex flex-wrap justify-center gap-x-6 gap-y-1.5 text-xs text-theme-muted font-medium pt-1"
-          >
+          <div className="hidden sm:flex flex-wrap justify-center gap-x-6 gap-y-1.5 text-xs text-theme-muted font-medium pt-1">
             {["100% Browser-Based", "No File Uploads", "Complete Privacy", "Free Forever"].map((badge) => (
               <span key={badge} className="flex items-center gap-1.5">
                 <IconCheck className="h-3.5 w-3.5 text-green-500 shrink-0" />
                 {badge}
               </span>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* ── App screenshot with frame ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: heroStart + heroStagger * 6, ease: easeInOut }}
-          className="relative mt-14 w-full max-w-5xl mx-auto"
-        >
+        <div className="relative mt-14 w-full max-w-5xl mx-auto">
           <div className="hero-preview-wrap pb-8">
-            <div className="hero-preview-frame">
+            <div className="hero-preview-frame" >
               <div className="hero-preview-frame-inner">
                 {/* browser top bar */}
                 {/* <div className="bg-[#f5f5f7] dark:bg-theme-surface-muted border-b border-theme-border/80 px-4 py-3 flex items-center gap-3">
@@ -240,7 +223,7 @@ function App() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* ════════════════════════════════

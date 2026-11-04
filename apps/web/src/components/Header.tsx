@@ -180,7 +180,14 @@ const Header: React.FC = () => {
         )}
       >
         <Link to="/" className="col-start-1 flex w-fit items-center gap-2 justify-self-start whitespace-nowrap no-underline">
-          <img src="/logo192.png" alt="" width={28} height={28} className="h-7 w-7" />
+          <img
+            src="/logo-56.webp"
+            srcSet="/logo-28.webp 1x, /logo-56.webp 2x"
+            alt=""
+            width={28}
+            height={28}
+            className="h-7 w-7"
+          />
           <span className="text-sm font-bold text-theme-heading">SnapBit Tools</span>
         </Link>
 

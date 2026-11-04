@@ -29,6 +29,7 @@ const config = defineConfig({
   optimizeDeps: {
     exclude: ["@imgly/background-removal", "onnxruntime-web"],
   },
+
   plugins: [
     devtools(),
     viteTsConfigPaths({
@@ -36,6 +37,11 @@ const config = defineConfig({
     }),
     tailwindcss(),
     tanstackStart({
+      server: {
+        build: {
+          inlineCss: true,
+        },
+      },
       pages: [
         ...SITEMAP_EXCLUDED_PATHS.map((path) => ({
           path,

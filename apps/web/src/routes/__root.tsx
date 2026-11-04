@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import { getOrganizationSchema } from "../lib/seo";
 import { ThemeProvider, themeInitScript } from "../lib/theme";
 
-import appCss from "../styles.css?url";
+import appCss from "../styles.css?inline";
 import geistLatin from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
 import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import { useEffect } from "react";
@@ -136,10 +136,6 @@ export const Route = createRootRoute({
         type: "font/woff2",
         crossOrigin: "anonymous",
       },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
     ],
     scripts: [
       {
@@ -175,6 +171,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <link rel="preload" as="image" href="/bg.jpg" fetchPriority="high" />
+        <style dangerouslySetInnerHTML={{ __html: appCss.replace(/<\/style/gi, "<\\/style") }} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
