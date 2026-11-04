@@ -1,5 +1,14 @@
 export const blogPosts = [
   {
+    title: "Free PDF Tools That Work Offline: Merge, Split & Compress Without Upload",
+    description:
+      "Merge, split, and compress PDFs in the browser with no upload. A private workflow for combining files, extracting pages, and reducing PDF size.",
+    href: "/free-pdf-tools-offline-merge-split-compress",
+    category: "PDF Tools",
+    publishedAt: "November 4, 2026",
+    readTime: "14 min read",
+  },
+  {
     title: "How to Remove Background from Images Without Uploading (Private Method)",
     description:
       "Remove background from images without uploading. A private background remover and free AI background remover in the browser, with a transparent PNG download.",

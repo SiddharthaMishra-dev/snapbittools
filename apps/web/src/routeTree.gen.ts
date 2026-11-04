@@ -40,6 +40,7 @@ import { Route as WrapCsvToJsonRouteImport } from './routes/_wrap.csv-to-json'
 import { Route as WrapCsvXlsxConverterRouteImport } from './routes/_wrap.csv-xlsx-converter'
 import { Route as WrapDiffCheckerRouteImport } from './routes/_wrap.diff-checker'
 import { Route as WrapFormatJsonOnlineRouteImport } from './routes/_wrap.format-json-online'
+import { Route as WrapFreePdfToolsOfflineMergeSplitCompressRouteImport } from './routes/_wrap.free-pdf-tools-offline-merge-split-compress'
 import { Route as WrapHeicToJpgRouteImport } from './routes/_wrap.heic-to-jpg'
 import { Route as WrapHtmlMinifierRouteImport } from './routes/_wrap.html-minifier'
 import { Route as WrapImageBackgroundRemoverRouteImport } from './routes/_wrap.image-background-remover'
@@ -240,6 +241,12 @@ const WrapFormatJsonOnlineRoute = WrapFormatJsonOnlineRouteImport.update({
   path: '/format-json-online',
   getParentRoute: () => WrapRoute,
 } as any)
+const WrapFreePdfToolsOfflineMergeSplitCompressRoute =
+  WrapFreePdfToolsOfflineMergeSplitCompressRouteImport.update({
+    id: '/free-pdf-tools-offline-merge-split-compress',
+    path: '/free-pdf-tools-offline-merge-split-compress',
+    getParentRoute: () => WrapRoute,
+  } as any)
 const WrapHeicToJpgRoute = WrapHeicToJpgRouteImport.update({
   id: '/heic-to-jpg',
   path: '/heic-to-jpg',
@@ -462,6 +469,7 @@ export interface FileRoutesByFullPath {
   '/csv-xlsx-converter': typeof WrapCsvXlsxConverterRoute
   '/diff-checker': typeof WrapDiffCheckerRoute
   '/format-json-online': typeof WrapFormatJsonOnlineRoute
+  '/free-pdf-tools-offline-merge-split-compress': typeof WrapFreePdfToolsOfflineMergeSplitCompressRoute
   '/heic-to-jpg': typeof WrapHeicToJpgRoute
   '/html-minifier': typeof WrapHtmlMinifierRoute
   '/image-background-remover': typeof WrapImageBackgroundRemoverRoute
@@ -531,6 +539,7 @@ export interface FileRoutesByTo {
   '/csv-xlsx-converter': typeof WrapCsvXlsxConverterRoute
   '/diff-checker': typeof WrapDiffCheckerRoute
   '/format-json-online': typeof WrapFormatJsonOnlineRoute
+  '/free-pdf-tools-offline-merge-split-compress': typeof WrapFreePdfToolsOfflineMergeSplitCompressRoute
   '/heic-to-jpg': typeof WrapHeicToJpgRoute
   '/html-minifier': typeof WrapHtmlMinifierRoute
   '/image-background-remover': typeof WrapImageBackgroundRemoverRoute
@@ -602,6 +611,7 @@ export interface FileRoutesById {
   '/_wrap/csv-xlsx-converter': typeof WrapCsvXlsxConverterRoute
   '/_wrap/diff-checker': typeof WrapDiffCheckerRoute
   '/_wrap/format-json-online': typeof WrapFormatJsonOnlineRoute
+  '/_wrap/free-pdf-tools-offline-merge-split-compress': typeof WrapFreePdfToolsOfflineMergeSplitCompressRoute
   '/_wrap/heic-to-jpg': typeof WrapHeicToJpgRoute
   '/_wrap/html-minifier': typeof WrapHtmlMinifierRoute
   '/_wrap/image-background-remover': typeof WrapImageBackgroundRemoverRoute
@@ -673,6 +683,7 @@ export interface FileRouteTypes {
     | '/csv-xlsx-converter'
     | '/diff-checker'
     | '/format-json-online'
+    | '/free-pdf-tools-offline-merge-split-compress'
     | '/heic-to-jpg'
     | '/html-minifier'
     | '/image-background-remover'
@@ -742,6 +753,7 @@ export interface FileRouteTypes {
     | '/csv-xlsx-converter'
     | '/diff-checker'
     | '/format-json-online'
+    | '/free-pdf-tools-offline-merge-split-compress'
     | '/heic-to-jpg'
     | '/html-minifier'
     | '/image-background-remover'
@@ -812,6 +824,7 @@ export interface FileRouteTypes {
     | '/_wrap/csv-xlsx-converter'
     | '/_wrap/diff-checker'
     | '/_wrap/format-json-online'
+    | '/_wrap/free-pdf-tools-offline-merge-split-compress'
     | '/_wrap/heic-to-jpg'
     | '/_wrap/html-minifier'
     | '/_wrap/image-background-remover'
@@ -1083,6 +1096,13 @@ declare module '@tanstack/react-router' {
       path: '/format-json-online'
       fullPath: '/format-json-online'
       preLoaderRoute: typeof WrapFormatJsonOnlineRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/free-pdf-tools-offline-merge-split-compress': {
+      id: '/_wrap/free-pdf-tools-offline-merge-split-compress'
+      path: '/free-pdf-tools-offline-merge-split-compress'
+      fullPath: '/free-pdf-tools-offline-merge-split-compress'
+      preLoaderRoute: typeof WrapFreePdfToolsOfflineMergeSplitCompressRouteImport
       parentRoute: typeof WrapRoute
     }
     '/_wrap/heic-to-jpg': {
@@ -1367,6 +1387,7 @@ interface WrapRouteChildren {
   WrapCsvXlsxConverterRoute: typeof WrapCsvXlsxConverterRoute
   WrapDiffCheckerRoute: typeof WrapDiffCheckerRoute
   WrapFormatJsonOnlineRoute: typeof WrapFormatJsonOnlineRoute
+  WrapFreePdfToolsOfflineMergeSplitCompressRoute: typeof WrapFreePdfToolsOfflineMergeSplitCompressRoute
   WrapHeicToJpgRoute: typeof WrapHeicToJpgRoute
   WrapHtmlMinifierRoute: typeof WrapHtmlMinifierRoute
   WrapImageBackgroundRemoverRoute: typeof WrapImageBackgroundRemoverRoute
@@ -1428,6 +1449,8 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapCsvXlsxConverterRoute: WrapCsvXlsxConverterRoute,
   WrapDiffCheckerRoute: WrapDiffCheckerRoute,
   WrapFormatJsonOnlineRoute: WrapFormatJsonOnlineRoute,
+  WrapFreePdfToolsOfflineMergeSplitCompressRoute:
+    WrapFreePdfToolsOfflineMergeSplitCompressRoute,
   WrapHeicToJpgRoute: WrapHeicToJpgRoute,
   WrapHtmlMinifierRoute: WrapHtmlMinifierRoute,
   WrapImageBackgroundRemoverRoute: WrapImageBackgroundRemoverRoute,
