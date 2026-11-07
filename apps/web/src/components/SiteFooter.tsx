@@ -19,19 +19,44 @@ export default function SiteFooter() {
               <span className="text-sm font-bold text-theme-heading">SnapBit Tools</span>
             </Link>
             <p className="text-sm text-theme-muted max-w-xs">Files stay in the browser.</p>
-            <a
-              href="https://www.producthunt.com/products/snapbit-tools/launches/snapbit-tools?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-snapbit-tools"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block"
-            >
-              <img
-                alt="SnapBit Tools on Product Hunt"
-                width={200}
-                height={43}
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1125101&theme=light&t=1787815217178"
-              />
-            </a>
+            <div className="flex flex-col items-start gap-2">
+              <a
+                href="https://www.producthunt.com/products/snapbit-tools/launches/snapbit-tools?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-snapbit-tools"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <img
+                  alt="SnapBit Tools on Product Hunt"
+                  width={200}
+                  height={43}
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1125101&theme=light&t=1787815217178"
+                />
+              </a>
+              <a href="https://smollaunch.com" target="_blank" rel="noopener" className="inline-block">
+                <img
+                  src="https://smollaunch.com/badges/featured.svg"
+                  alt="SnapBit Tools — Featured on Smol Launch"
+                  loading="lazy"
+                  width={250}
+                  height={60}
+                />
+              </a>
+              <a
+                href="https://huzzler.so/products/yoFbI7E5dP/snapbittools-com?utm_source=huzzler_product_website&utm_medium=badge&utm_campaign=free_listing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <img
+                  alt="Huzzler Embed Badge"
+                  src="https://huzzler.so/assets/images/embeddable-badges/featured.png"
+                  width={159}
+                  height={55}
+                  loading="lazy"
+                />
+              </a>
+            </div>
           </div>
 
           <div>
