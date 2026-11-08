@@ -87,7 +87,7 @@ export default function SiteFooter() {
               </Link>
             </h2>
             <ul className="space-y-2 text-sm">
-              {blogPosts.map((post) => (
+              {blogPosts.slice(0, 3).map((post) => (
                 <li key={post.href}>
                   <Link to={post.href} className="text-theme-muted hover:text-brand-primary no-underline line-clamp-2">
                     {post.title}
@@ -95,6 +95,9 @@ export default function SiteFooter() {
                 </li>
               ))}
             </ul>
+            <Link to="/blogs" className="inline-block mt-3 text-sm font-semibold text-brand-primary hover:text-brand-hover no-underline">
+              View more
+            </Link>
           </div>
 
           <div>
