@@ -41,6 +41,7 @@ import { Route as WrapCsvXlsxConverterRouteImport } from './routes/_wrap.csv-xls
 import { Route as WrapDiffCheckerRouteImport } from './routes/_wrap.diff-checker'
 import { Route as WrapFormatJsonOnlineRouteImport } from './routes/_wrap.format-json-online'
 import { Route as WrapFreePdfToolsOfflineMergeSplitCompressRouteImport } from './routes/_wrap.free-pdf-tools-offline-merge-split-compress'
+import { Route as WrapHashGeneratorRouteImport } from './routes/_wrap.hash-generator'
 import { Route as WrapHeicToJpgRouteImport } from './routes/_wrap.heic-to-jpg'
 import { Route as WrapHtmlMinifierRouteImport } from './routes/_wrap.html-minifier'
 import { Route as WrapImageBackgroundRemoverRouteImport } from './routes/_wrap.image-background-remover'
@@ -247,6 +248,11 @@ const WrapFreePdfToolsOfflineMergeSplitCompressRoute =
     path: '/free-pdf-tools-offline-merge-split-compress',
     getParentRoute: () => WrapRoute,
   } as any)
+const WrapHashGeneratorRoute = WrapHashGeneratorRouteImport.update({
+  id: '/hash-generator',
+  path: '/hash-generator',
+  getParentRoute: () => WrapRoute,
+} as any)
 const WrapHeicToJpgRoute = WrapHeicToJpgRouteImport.update({
   id: '/heic-to-jpg',
   path: '/heic-to-jpg',
@@ -470,6 +476,7 @@ export interface FileRoutesByFullPath {
   '/diff-checker': typeof WrapDiffCheckerRoute
   '/format-json-online': typeof WrapFormatJsonOnlineRoute
   '/free-pdf-tools-offline-merge-split-compress': typeof WrapFreePdfToolsOfflineMergeSplitCompressRoute
+  '/hash-generator': typeof WrapHashGeneratorRoute
   '/heic-to-jpg': typeof WrapHeicToJpgRoute
   '/html-minifier': typeof WrapHtmlMinifierRoute
   '/image-background-remover': typeof WrapImageBackgroundRemoverRoute
@@ -540,6 +547,7 @@ export interface FileRoutesByTo {
   '/diff-checker': typeof WrapDiffCheckerRoute
   '/format-json-online': typeof WrapFormatJsonOnlineRoute
   '/free-pdf-tools-offline-merge-split-compress': typeof WrapFreePdfToolsOfflineMergeSplitCompressRoute
+  '/hash-generator': typeof WrapHashGeneratorRoute
   '/heic-to-jpg': typeof WrapHeicToJpgRoute
   '/html-minifier': typeof WrapHtmlMinifierRoute
   '/image-background-remover': typeof WrapImageBackgroundRemoverRoute
@@ -612,6 +620,7 @@ export interface FileRoutesById {
   '/_wrap/diff-checker': typeof WrapDiffCheckerRoute
   '/_wrap/format-json-online': typeof WrapFormatJsonOnlineRoute
   '/_wrap/free-pdf-tools-offline-merge-split-compress': typeof WrapFreePdfToolsOfflineMergeSplitCompressRoute
+  '/_wrap/hash-generator': typeof WrapHashGeneratorRoute
   '/_wrap/heic-to-jpg': typeof WrapHeicToJpgRoute
   '/_wrap/html-minifier': typeof WrapHtmlMinifierRoute
   '/_wrap/image-background-remover': typeof WrapImageBackgroundRemoverRoute
@@ -684,6 +693,7 @@ export interface FileRouteTypes {
     | '/diff-checker'
     | '/format-json-online'
     | '/free-pdf-tools-offline-merge-split-compress'
+    | '/hash-generator'
     | '/heic-to-jpg'
     | '/html-minifier'
     | '/image-background-remover'
@@ -754,6 +764,7 @@ export interface FileRouteTypes {
     | '/diff-checker'
     | '/format-json-online'
     | '/free-pdf-tools-offline-merge-split-compress'
+    | '/hash-generator'
     | '/heic-to-jpg'
     | '/html-minifier'
     | '/image-background-remover'
@@ -825,6 +836,7 @@ export interface FileRouteTypes {
     | '/_wrap/diff-checker'
     | '/_wrap/format-json-online'
     | '/_wrap/free-pdf-tools-offline-merge-split-compress'
+    | '/_wrap/hash-generator'
     | '/_wrap/heic-to-jpg'
     | '/_wrap/html-minifier'
     | '/_wrap/image-background-remover'
@@ -1103,6 +1115,13 @@ declare module '@tanstack/react-router' {
       path: '/free-pdf-tools-offline-merge-split-compress'
       fullPath: '/free-pdf-tools-offline-merge-split-compress'
       preLoaderRoute: typeof WrapFreePdfToolsOfflineMergeSplitCompressRouteImport
+      parentRoute: typeof WrapRoute
+    }
+    '/_wrap/hash-generator': {
+      id: '/_wrap/hash-generator'
+      path: '/hash-generator'
+      fullPath: '/hash-generator'
+      preLoaderRoute: typeof WrapHashGeneratorRouteImport
       parentRoute: typeof WrapRoute
     }
     '/_wrap/heic-to-jpg': {
@@ -1388,6 +1407,7 @@ interface WrapRouteChildren {
   WrapDiffCheckerRoute: typeof WrapDiffCheckerRoute
   WrapFormatJsonOnlineRoute: typeof WrapFormatJsonOnlineRoute
   WrapFreePdfToolsOfflineMergeSplitCompressRoute: typeof WrapFreePdfToolsOfflineMergeSplitCompressRoute
+  WrapHashGeneratorRoute: typeof WrapHashGeneratorRoute
   WrapHeicToJpgRoute: typeof WrapHeicToJpgRoute
   WrapHtmlMinifierRoute: typeof WrapHtmlMinifierRoute
   WrapImageBackgroundRemoverRoute: typeof WrapImageBackgroundRemoverRoute
@@ -1451,6 +1471,7 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapFormatJsonOnlineRoute: WrapFormatJsonOnlineRoute,
   WrapFreePdfToolsOfflineMergeSplitCompressRoute:
     WrapFreePdfToolsOfflineMergeSplitCompressRoute,
+  WrapHashGeneratorRoute: WrapHashGeneratorRoute,
   WrapHeicToJpgRoute: WrapHeicToJpgRoute,
   WrapHtmlMinifierRoute: WrapHtmlMinifierRoute,
   WrapImageBackgroundRemoverRoute: WrapImageBackgroundRemoverRoute,

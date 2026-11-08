@@ -595,6 +595,36 @@ The tool supports multiple naming patterns: sequential numbering (file-1, file-2
     ],
   },
 
+  "hash-generator": {
+    slug: "hash-generator",
+    title: "Hash Generator - SHA-256 Checksum for Text and Files",
+    intro: `Generate SHA-256, SHA-384, SHA-512, and SHA-1 checksums in your browser. Paste text or choose a file, and SnapBit hashes it on your device. Nothing is uploaded, and you do not need an account.
+
+A checksum is a short fingerprint of exact bytes. If one character, or one bit in a file, changes, the hash changes. Developers use that to confirm a download matches the publisher's SHA-256, to compare two builds, or to see whether a config file is still the copy they expect. The same check is useful for a snippet of text: a license key file, a token you do not want to send to a website, or a script you just edited.
+
+SnapBit uses the Web Crypto digest built into the browser. SHA-256 is the one to copy when a project publishes a checksum. SHA-384 and SHA-512 are longer digests from the same family. SHA-1 is included because older docs still print it, not because it is a good choice for new work. This page does not compute MD5, and it is not a password hasher. Password storage needs a slow algorithm such as scrypt or Argon2, which is a different job from a checksum.
+
+Text is hashed as the exact UTF-8 characters in the box. A trailing newline changes the result. The command echo hello | sha256sum hashes the word hello plus a newline, so it will not match a paste of hello with nothing after it. File mode hashes the raw bytes of the file you choose, which is what sha256sum prints for that file. The tool reads the file in the tab. Clearing the file switches the checksums back to the text box.
+
+Paste an expected checksum under the results to check a match. Spaces and a trailing filename, the way sha256sum prints them, are ignored. The comparison uses the lowercase hex digest. You can copy each line. Very large files depend on the memory in your browser, because the whole file is read locally before it is hashed.`,
+    benefits: [
+      "SHA-256, SHA-384, SHA-512, and SHA-1 in the browser",
+      "Hash pasted text or the raw bytes of a file",
+      "No upload, no account, and no server copy of the input",
+      "Compare a published checksum, including sha256sum output",
+      "Copy any digest in one click",
+      "Checksums only — not a password hash",
+    ],
+    useCases: [
+      "Checking a download against a published SHA-256",
+      "Confirming a script or config file has not changed",
+      "Hashing a secret snippet without pasting it into another site",
+      "Comparing two local builds by their checksum",
+      "Matching sha256sum output for a file on disk",
+      "Looking up SHA-1 when an older document still uses it",
+    ],
+  },
+
   "html-minifier": {
     slug: "html-minifier",
     title: "HTML Minifier - Minify HTML Code Online",
