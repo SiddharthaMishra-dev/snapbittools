@@ -271,7 +271,7 @@ function RouteComponent() {
   return (
     <div className="bg-theme-page theme-page-gradient py-2 px-4 flex flex-col items-center">
       <div className="w-full max-w-7xl flex-1 flex flex-col mx-auto">
-        <div className="min-h-screen flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
           {/* <Breadcrumbs /> */}
           <div className="w-full max-w-5xl mt-6 mb-12 text-center mx-auto">
             <div className="text-center">
