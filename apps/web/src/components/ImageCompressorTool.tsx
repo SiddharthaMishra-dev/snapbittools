@@ -1,4 +1,4 @@
-import { IconCircleX, IconDownload } from "@tabler/icons-react";
+import { IconChevronDown, IconCircleX, IconDownload } from "@tabler/icons-react";
 import JSZip from "jszip";
 import { useEffect, useRef, useState } from "react";
 
@@ -26,12 +26,13 @@ interface CompressedFile {
 
 export function ImageCompressorTool() {
   const [files, setFiles] = useState<CompressedFile[]>([]);
-  const [quality, setQuality] = useState(0.9);
+  const [quality, setQuality] = useState(0.8);
   // High defaults so images are not silently downscaled (dimension controls are hidden).
   const [maxWidth, setMaxWidth] = useState(16384);
   const [maxHeight, setMaxHeight] = useState(16384);
   const [isCompressing, setIsCompressing] = useState(false);
-  const [preserveFormat, setPreserveFormat] = useState(true);
+  const [preserveFormat, setPreserveFormat] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const workerRef = useRef<Worker | null>(null);
   const [isDownloadingZip, setIsDownloadingZip] = useState(false);
 
@@ -249,44 +250,59 @@ export function ImageCompressorTool() {
           />
         ) : (
           <>
-            <div className="py-10">
-              <div className="mb-4">
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={preserveFormat}
-                    onChange={(e) => setPreserveFormat(e.target.checked)}
-                    className="w-4 h-4 text-brand-primary bg-theme-surface-muted border-theme-border rounded focus:ring-brand-primary"
-                  />
-                  <span className="text-sm font-medium dark:text-gray-200 text-gray-800">Preserve original format</span>
-                </label>
-                <p className="text-xs text-theme-muted mt-1">
-                  {preserveFormat ? "Keep original file formats (PNG, JPEG, etc.)" : "Convert all images to JPEG for better compression"}
-                </p>
-              </div>
+            <div className="py-6">
+              <button
+                type="button"
+                onClick={() => setShowAdvanced((v) => !v)}
+                aria-expanded={showAdvanced}
+                aria-controls="image-compressor-advanced"
+                className="flex items-center gap-2 text-sm font-medium text-theme-heading hover:text-brand-primary transition-colors"
+              >
+                <IconChevronDown className={`w-4 h-4 transition-transform duration-200 ${showAdvanced ? "rotate-180" : ""}`} />
+                Advanced settings
+              </button>
 
-              <div className="mb-4">
-                <div className="flex justify-between items-center mb-2">
-                  <label className="text-sm font-medium dark:text-gray-200 text-gray-800">Quality</label>
-                  <span className="text-sm text-brand-primary font-medium">{Math.round(quality * 100)}%</span>
+              {showAdvanced && (
+                <div id="image-compressor-advanced" className="mt-4">
+                  <div className="mb-4">
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={preserveFormat}
+                        onChange={(e) => setPreserveFormat(e.target.checked)}
+                        className="w-4 h-4 text-brand-primary bg-theme-surface-muted border-theme-border rounded focus:ring-brand-primary"
+                      />
+                      <span className="text-sm font-medium dark:text-gray-200 text-gray-800">Preserve original format</span>
+                    </label>
+                    <p className="text-xs text-theme-muted mt-1">
+                      {preserveFormat ? "Keep original file formats (PNG, JPEG, etc.)" : "Convert all images to JPEG for better compression"}
+                    </p>
+                  </div>
+
+                  <div className="mb-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="text-sm font-medium dark:text-gray-200 text-gray-800">Quality</label>
+                      <span className="text-sm text-brand-primary font-medium">{Math.round(quality * 100)}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="0.1"
+                      max="1"
+                      step="0.05"
+                      value={quality}
+                      onChange={(e) => setQuality(parseFloat(e.target.value))}
+                      className="w-full h-2 bg-theme-surface-muted rounded-lg appearance-none cursor-pointer slider"
+                    />
+                    <div className="flex justify-between text-xs text-theme-muted mt-1">
+                      <span>Smaller file</span>
+                      <span>Higher quality</span>
+                    </div>
+                    <p className="text-xs text-theme-muted mt-2">
+                      At 100%, PNG stays lossless. Lower values reduce colors for smaller files. JPEG/WebP use quality encoding.
+                    </p>
+                  </div>
                 </div>
-                <input
-                  type="range"
-                  min="0.1"
-                  max="1"
-                  step="0.05"
-                  value={quality}
-                  onChange={(e) => setQuality(parseFloat(e.target.value))}
-                  className="w-full h-2 bg-theme-surface-muted rounded-lg appearance-none cursor-pointer slider"
-                />
-                <div className="flex justify-between text-xs text-theme-muted mt-1">
-                  <span>Smaller file</span>
-                  <span>Higher quality</span>
-                </div>
-                <p className="text-xs text-theme-muted mt-2">
-                  At 100%, PNG stays lossless. Lower values reduce colors for smaller files. JPEG/WebP use quality encoding.
-                </p>
-              </div>
+              )}
 
               {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
