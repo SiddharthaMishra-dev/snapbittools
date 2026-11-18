@@ -106,6 +106,36 @@ Whether you're a web developer optimizing images for faster loading times, a des
     ],
   },
 
+  "image-to-text": {
+    slug: "image-to-text",
+    title: "Free Image to Text (OCR) - Extract Text from Images Privately",
+    intro: `Extract text from photos, scans, and screenshots for free with SnapBit's Image to Text tool. Drop or paste an image and get editable text in reading order, with every line boxed on the image and scored for confidence. Nothing is uploaded: the OCR runs on your device.
+
+Most online OCR services send your image to a remote server. That is a poor fit for receipts, contracts, ID documents, and internal screenshots. This tool runs Mirage, an open-source 51M-parameter vision model from Cactus Compute, on the Cactus WebAssembly engine inside a Web Worker in your browser. The model (about 21 MB) downloads once from Hugging Face and is cached, so later runs work offline.
+
+Mirage does more than read text. Switch to Describe & detect to get a scene summary, a list of objects with bounding boxes, segmentation masks and attributes such as colour and shape, and the relations between them, in seven languages. Use Ask questions to fill a small form about the image: choose between labels you supply, count things within a range, or read a short field, each with its probabilities.
+
+Mirage reads Latin-script text, which covers English, German, French, Spanish, Italian, Dutch, Polish, and many other languages. Clear printed text gives the best results. Small, blurry, or stylised text can be misread, so you can edit the result before copying it.`,
+    benefits: [
+      "OCR that runs entirely in your browser, with no uploads",
+      "Paste screenshots straight from the clipboard",
+      "Editable text in reading order, ready to copy or save as TXT",
+      "Line-by-line confidence scores and boxes on the image",
+      "Scene description, object detection, and segmentation masks",
+      "Ask questions about an image and get answers with probabilities",
+      "Works offline after the one-time 21 MB model download",
+    ],
+    useCases: [
+      "Copying text from screenshots, slides, and error dialogs",
+      "Digitising receipts and printed notes without a cloud service",
+      "Reading text from photos of signs, labels, and packaging",
+      "Pulling quotes from scanned pages and book photos",
+      "Describing images and generating alt text drafts",
+      "Sorting images by type, such as receipt, letter, or photo",
+      "Privacy-sensitive OCR for documents that must stay on your device",
+    ],
+  },
+
   "image-background-remover": {
     slug: "image-background-remover",
     title: "Free AI Image Background Remover - Transparent PNG Online",

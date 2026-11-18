@@ -51,6 +51,7 @@ import { Route as WrapImageFormatConverterRouteImport } from './routes/_wrap.ima
 import { Route as WrapImageResizerRouteImport } from './routes/_wrap.image-resizer'
 import { Route as WrapImageToBase64RouteImport } from './routes/_wrap.image-to-base64'
 import { Route as WrapImageToPdfRouteImport } from './routes/_wrap.image-to-pdf'
+import { Route as WrapImageToTextRouteImport } from './routes/_wrap.image-to-text'
 import { Route as WrapJpgToPngRouteImport } from './routes/_wrap.jpg-to-png'
 import { Route as WrapJpgToWebpRouteImport } from './routes/_wrap.jpg-to-webp'
 import { Route as WrapJsonBeautifierRouteImport } from './routes/_wrap.json-beautifier'
@@ -300,6 +301,11 @@ const WrapImageToPdfRoute = WrapImageToPdfRouteImport.update({
   path: '/image-to-pdf',
   getParentRoute: () => WrapRoute,
 } as any)
+const WrapImageToTextRoute = WrapImageToTextRouteImport.update({
+  id: '/image-to-text',
+  path: '/image-to-text',
+  getParentRoute: () => WrapRoute,
+} as any)
 const WrapJpgToPngRoute = WrapJpgToPngRouteImport.update({
   id: '/jpg-to-png',
   path: '/jpg-to-png',
@@ -486,6 +492,7 @@ export interface FileRoutesByFullPath {
   '/image-resizer': typeof WrapImageResizerRoute
   '/image-to-base64': typeof WrapImageToBase64Route
   '/image-to-pdf': typeof WrapImageToPdfRoute
+  '/image-to-text': typeof WrapImageToTextRoute
   '/jpg-to-png': typeof WrapJpgToPngRoute
   '/jpg-to-webp': typeof WrapJpgToWebpRoute
   '/json-beautifier': typeof WrapJsonBeautifierRoute
@@ -557,6 +564,7 @@ export interface FileRoutesByTo {
   '/image-resizer': typeof WrapImageResizerRoute
   '/image-to-base64': typeof WrapImageToBase64Route
   '/image-to-pdf': typeof WrapImageToPdfRoute
+  '/image-to-text': typeof WrapImageToTextRoute
   '/jpg-to-png': typeof WrapJpgToPngRoute
   '/jpg-to-webp': typeof WrapJpgToWebpRoute
   '/json-beautifier': typeof WrapJsonBeautifierRoute
@@ -630,6 +638,7 @@ export interface FileRoutesById {
   '/_wrap/image-resizer': typeof WrapImageResizerRoute
   '/_wrap/image-to-base64': typeof WrapImageToBase64Route
   '/_wrap/image-to-pdf': typeof WrapImageToPdfRoute
+  '/_wrap/image-to-text': typeof WrapImageToTextRoute
   '/_wrap/jpg-to-png': typeof WrapJpgToPngRoute
   '/_wrap/jpg-to-webp': typeof WrapJpgToWebpRoute
   '/_wrap/json-beautifier': typeof WrapJsonBeautifierRoute
@@ -703,6 +712,7 @@ export interface FileRouteTypes {
     | '/image-resizer'
     | '/image-to-base64'
     | '/image-to-pdf'
+    | '/image-to-text'
     | '/jpg-to-png'
     | '/jpg-to-webp'
     | '/json-beautifier'
@@ -774,6 +784,7 @@ export interface FileRouteTypes {
     | '/image-resizer'
     | '/image-to-base64'
     | '/image-to-pdf'
+    | '/image-to-text'
     | '/jpg-to-png'
     | '/jpg-to-webp'
     | '/json-beautifier'
@@ -846,6 +857,7 @@ export interface FileRouteTypes {
     | '/_wrap/image-resizer'
     | '/_wrap/image-to-base64'
     | '/_wrap/image-to-pdf'
+    | '/_wrap/image-to-text'
     | '/_wrap/jpg-to-png'
     | '/_wrap/jpg-to-webp'
     | '/_wrap/json-beautifier'
@@ -1187,6 +1199,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapImageToPdfRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/image-to-text': {
+      id: '/_wrap/image-to-text'
+      path: '/image-to-text'
+      fullPath: '/image-to-text'
+      preLoaderRoute: typeof WrapImageToTextRouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/jpg-to-png': {
       id: '/_wrap/jpg-to-png'
       path: '/jpg-to-png'
@@ -1417,6 +1436,7 @@ interface WrapRouteChildren {
   WrapImageResizerRoute: typeof WrapImageResizerRoute
   WrapImageToBase64Route: typeof WrapImageToBase64Route
   WrapImageToPdfRoute: typeof WrapImageToPdfRoute
+  WrapImageToTextRoute: typeof WrapImageToTextRoute
   WrapJpgToPngRoute: typeof WrapJpgToPngRoute
   WrapJpgToWebpRoute: typeof WrapJpgToWebpRoute
   WrapJsonBeautifierRoute: typeof WrapJsonBeautifierRoute
@@ -1481,6 +1501,7 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapImageResizerRoute: WrapImageResizerRoute,
   WrapImageToBase64Route: WrapImageToBase64Route,
   WrapImageToPdfRoute: WrapImageToPdfRoute,
+  WrapImageToTextRoute: WrapImageToTextRoute,
   WrapJpgToPngRoute: WrapJpgToPngRoute,
   WrapJpgToWebpRoute: WrapJpgToWebpRoute,
   WrapJsonBeautifierRoute: WrapJsonBeautifierRoute,
