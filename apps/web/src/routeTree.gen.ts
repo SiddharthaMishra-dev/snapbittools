@@ -66,6 +66,7 @@ import { Route as WrapOptimizeImagesForWebsiteRouteImport } from './routes/_wrap
 import { Route as WrapPdfCompressorRouteImport } from './routes/_wrap.pdf-compressor'
 import { Route as WrapPdfExtractImagesRouteImport } from './routes/_wrap.pdf-extract-images'
 import { Route as WrapPdfToJpgRouteImport } from './routes/_wrap.pdf-to-jpg'
+import { Route as WrapPdfToJpgWithoutUploadRouteImport } from './routes/_wrap.pdf-to-jpg-without-upload'
 import { Route as WrapPngToJpgRouteImport } from './routes/_wrap.png-to-jpg'
 import { Route as WrapPngToWebpRouteImport } from './routes/_wrap.png-to-webp'
 import { Route as WrapPrivacyFirstToolsRouteImport } from './routes/_wrap.privacy-first-tools'
@@ -377,6 +378,12 @@ const WrapPdfToJpgRoute = WrapPdfToJpgRouteImport.update({
   path: '/pdf-to-jpg',
   getParentRoute: () => WrapRoute,
 } as any)
+const WrapPdfToJpgWithoutUploadRoute =
+  WrapPdfToJpgWithoutUploadRouteImport.update({
+    id: '/pdf-to-jpg-without-upload',
+    path: '/pdf-to-jpg-without-upload',
+    getParentRoute: () => WrapRoute,
+  } as any)
 const WrapPngToJpgRoute = WrapPngToJpgRouteImport.update({
   id: '/png-to-jpg',
   path: '/png-to-jpg',
@@ -507,6 +514,7 @@ export interface FileRoutesByFullPath {
   '/pdf-compressor': typeof WrapPdfCompressorRoute
   '/pdf-extract-images': typeof WrapPdfExtractImagesRoute
   '/pdf-to-jpg': typeof WrapPdfToJpgRoute
+  '/pdf-to-jpg-without-upload': typeof WrapPdfToJpgWithoutUploadRoute
   '/png-to-jpg': typeof WrapPngToJpgRoute
   '/png-to-webp': typeof WrapPngToWebpRoute
   '/privacy-first-tools': typeof WrapPrivacyFirstToolsRoute
@@ -579,6 +587,7 @@ export interface FileRoutesByTo {
   '/pdf-compressor': typeof WrapPdfCompressorRoute
   '/pdf-extract-images': typeof WrapPdfExtractImagesRoute
   '/pdf-to-jpg': typeof WrapPdfToJpgRoute
+  '/pdf-to-jpg-without-upload': typeof WrapPdfToJpgWithoutUploadRoute
   '/png-to-jpg': typeof WrapPngToJpgRoute
   '/png-to-webp': typeof WrapPngToWebpRoute
   '/privacy-first-tools': typeof WrapPrivacyFirstToolsRoute
@@ -653,6 +662,7 @@ export interface FileRoutesById {
   '/_wrap/pdf-compressor': typeof WrapPdfCompressorRoute
   '/_wrap/pdf-extract-images': typeof WrapPdfExtractImagesRoute
   '/_wrap/pdf-to-jpg': typeof WrapPdfToJpgRoute
+  '/_wrap/pdf-to-jpg-without-upload': typeof WrapPdfToJpgWithoutUploadRoute
   '/_wrap/png-to-jpg': typeof WrapPngToJpgRoute
   '/_wrap/png-to-webp': typeof WrapPngToWebpRoute
   '/_wrap/privacy-first-tools': typeof WrapPrivacyFirstToolsRoute
@@ -727,6 +737,7 @@ export interface FileRouteTypes {
     | '/pdf-compressor'
     | '/pdf-extract-images'
     | '/pdf-to-jpg'
+    | '/pdf-to-jpg-without-upload'
     | '/png-to-jpg'
     | '/png-to-webp'
     | '/privacy-first-tools'
@@ -799,6 +810,7 @@ export interface FileRouteTypes {
     | '/pdf-compressor'
     | '/pdf-extract-images'
     | '/pdf-to-jpg'
+    | '/pdf-to-jpg-without-upload'
     | '/png-to-jpg'
     | '/png-to-webp'
     | '/privacy-first-tools'
@@ -872,6 +884,7 @@ export interface FileRouteTypes {
     | '/_wrap/pdf-compressor'
     | '/_wrap/pdf-extract-images'
     | '/_wrap/pdf-to-jpg'
+    | '/_wrap/pdf-to-jpg-without-upload'
     | '/_wrap/png-to-jpg'
     | '/_wrap/png-to-webp'
     | '/_wrap/privacy-first-tools'
@@ -1304,6 +1317,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WrapPdfToJpgRouteImport
       parentRoute: typeof WrapRoute
     }
+    '/_wrap/pdf-to-jpg-without-upload': {
+      id: '/_wrap/pdf-to-jpg-without-upload'
+      path: '/pdf-to-jpg-without-upload'
+      fullPath: '/pdf-to-jpg-without-upload'
+      preLoaderRoute: typeof WrapPdfToJpgWithoutUploadRouteImport
+      parentRoute: typeof WrapRoute
+    }
     '/_wrap/png-to-jpg': {
       id: '/_wrap/png-to-jpg'
       path: '/png-to-jpg'
@@ -1451,6 +1471,7 @@ interface WrapRouteChildren {
   WrapPdfCompressorRoute: typeof WrapPdfCompressorRoute
   WrapPdfExtractImagesRoute: typeof WrapPdfExtractImagesRoute
   WrapPdfToJpgRoute: typeof WrapPdfToJpgRoute
+  WrapPdfToJpgWithoutUploadRoute: typeof WrapPdfToJpgWithoutUploadRoute
   WrapPngToJpgRoute: typeof WrapPngToJpgRoute
   WrapPngToWebpRoute: typeof WrapPngToWebpRoute
   WrapPrivacyFirstToolsRoute: typeof WrapPrivacyFirstToolsRoute
@@ -1516,6 +1537,7 @@ const WrapRouteChildren: WrapRouteChildren = {
   WrapPdfCompressorRoute: WrapPdfCompressorRoute,
   WrapPdfExtractImagesRoute: WrapPdfExtractImagesRoute,
   WrapPdfToJpgRoute: WrapPdfToJpgRoute,
+  WrapPdfToJpgWithoutUploadRoute: WrapPdfToJpgWithoutUploadRoute,
   WrapPngToJpgRoute: WrapPngToJpgRoute,
   WrapPngToWebpRoute: WrapPngToWebpRoute,
   WrapPrivacyFirstToolsRoute: WrapPrivacyFirstToolsRoute,

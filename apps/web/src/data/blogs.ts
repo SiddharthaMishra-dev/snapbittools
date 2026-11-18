@@ -1,5 +1,14 @@
 export const blogPosts = [
   {
+    title: "PDF to JPG Without Upload: Convert Pages Privately in Your Browser (2026)",
+    description:
+      "Convert PDF to JPG without uploading. Turn PDF pages into JPG or PNG images privately in your browser, with no account, no watermark, and no server.",
+    href: "/pdf-to-jpg-without-upload",
+    category: "PDF Tools",
+    publishedAt: "November 18, 2026",
+    readTime: "8 min read",
+  },
+  {
     title: "Free PDF Tools That Work Offline: Merge, Split & Compress Without Upload",
     description:
       "Merge, split, and compress PDFs in the browser with no upload. A private workflow for combining files, extracting pages, and reducing PDF size.",
