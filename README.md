@@ -36,6 +36,7 @@ All tools run in the browser. Nothing is uploaded.
 - [Background Remover](https://snapbittools.com/image-background-remover) — Remove image backgrounds with AI. Private, browser-only cutouts.
 - [Image Cropper](https://snapbittools.com/image-cropper) — Crop, rotate, and resize images with pixel-perfect previews.
 - [Image Resizer](https://snapbittools.com/image-resizer) — Resize images instantly while keeping the original aspect ratio.
+- [Image to Text (OCR)](https://snapbittools.com/image-to-text) — Extract text from images and screenshots with the on-device Mirage vision model. Also describes scenes, detects objects, and answers simple questions about an image.
 
 ### PDF
 
